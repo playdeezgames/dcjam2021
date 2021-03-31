@@ -11,6 +11,7 @@ namespace game
 	Border GetRightSide();
 	void TurnLeft();
 	void TurnRight();
+	void MoveAhead();
 
 	void Start();
 }

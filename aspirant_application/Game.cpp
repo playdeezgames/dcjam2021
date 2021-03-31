@@ -79,6 +79,29 @@ namespace game
 			(maze::Direction::NORTH);
 	}
 
+	void MoveAhead()
+	{
+		if (GetAhead() == Border::DOOR)
+		{
+			switch (avatarFacing)
+			{
+			case maze::Direction::NORTH:
+				avatarRow--;
+				break;
+			case maze::Direction::EAST:
+				avatarColumn++;
+				break;
+			case maze::Direction::SOUTH:
+				avatarRow++;
+				break;
+			case maze::Direction::WEST:
+				avatarColumn--;
+				break;
+			}
+		}
+	}
+
+
 	void Start()
 	{
 		nsBorders.reserve(NS_BORDER_COUNT);

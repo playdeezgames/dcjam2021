@@ -26,6 +26,9 @@ namespace state::InPlay
 		case ::Command::RIGHT:
 			game::TurnRight();
 			break;
+		case ::Command::UP:
+			game::MoveAhead();
+			break;
 		}
 	}
 
