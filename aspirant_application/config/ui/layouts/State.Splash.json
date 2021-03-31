@@ -1,0 +1,35 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Splash",
+        "color": "White",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Cyan",
+        "text": "<NOUN> of SPLORR!!",
+        "x": 320,
+        "y": 172,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "font5x7",
+        "color": "Gray",
+        "text": "A Production of TheGrumpyGameDev",
+        "x": 320,
+        "y": 340,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 1,
+        "drop-shadow-y": 1
+    }
+]

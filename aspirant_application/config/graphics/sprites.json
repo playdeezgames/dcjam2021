@@ -1,0 +1,2704 @@
+{
+    "Character20": {
+        "texture": "font",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character21": {
+        "texture": "font",
+        "x": 16,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character22": {
+        "texture": "font",
+        "x": 32,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character23": {
+        "texture": "font",
+        "x": 48,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character24": {
+        "texture": "font",
+        "x": 64,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character25": {
+        "texture": "font",
+        "x": 80,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character26": {
+        "texture": "font",
+        "x": 96,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character27": {
+        "texture": "font",
+        "x": 112,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character28": {
+        "texture": "font",
+        "x": 128,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character29": {
+        "texture": "font",
+        "x": 144,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character2A": {
+        "texture": "font",
+        "x": 160,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character2B": {
+        "texture": "font",
+        "x": 176,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character2C": {
+        "texture": "font",
+        "x": 192,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character2D": {
+        "texture": "font",
+        "x": 208,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character2E": {
+        "texture": "font",
+        "x": 224,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character2F": {
+        "texture": "font",
+        "x": 240,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "Character30": {
+        "texture": "font",
+        "x": 0,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character31": {
+        "texture": "font",
+        "x": 16,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character32": {
+        "texture": "font",
+        "x": 32,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character33": {
+        "texture": "font",
+        "x": 48,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character34": {
+        "texture": "font",
+        "x": 64,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character35": {
+        "texture": "font",
+        "x": 80,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character36": {
+        "texture": "font",
+        "x": 96,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character37": {
+        "texture": "font",
+        "x": 112,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character38": {
+        "texture": "font",
+        "x": 128,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character39": {
+        "texture": "font",
+        "x": 144,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character3A": {
+        "texture": "font",
+        "x": 160,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character3B": {
+        "texture": "font",
+        "x": 176,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character3C": {
+        "texture": "font",
+        "x": 192,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character3D": {
+        "texture": "font",
+        "x": 208,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character3E": {
+        "texture": "font",
+        "x": 224,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character3F": {
+        "texture": "font",
+        "x": 240,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "Character40": {
+        "texture": "font",
+        "x": 0,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character41": {
+        "texture": "font",
+        "x": 16,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character42": {
+        "texture": "font",
+        "x": 32,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character43": {
+        "texture": "font",
+        "x": 48,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character44": {
+        "texture": "font",
+        "x": 64,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character45": {
+        "texture": "font",
+        "x": 80,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character46": {
+        "texture": "font",
+        "x": 96,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character47": {
+        "texture": "font",
+        "x": 112,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character48": {
+        "texture": "font",
+        "x": 128,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character49": {
+        "texture": "font",
+        "x": 144,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character4A": {
+        "texture": "font",
+        "x": 160,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character4B": {
+        "texture": "font",
+        "x": 176,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character4C": {
+        "texture": "font",
+        "x": 192,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character4D": {
+        "texture": "font",
+        "x": 208,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character4E": {
+        "texture": "font",
+        "x": 224,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character4F": {
+        "texture": "font",
+        "x": 240,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "Character50": {
+        "texture": "font",
+        "x": 0,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character51": {
+        "texture": "font",
+        "x": 16,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character52": {
+        "texture": "font",
+        "x": 32,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character53": {
+        "texture": "font",
+        "x": 48,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character54": {
+        "texture": "font",
+        "x": 64,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character55": {
+        "texture": "font",
+        "x": 80,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character56": {
+        "texture": "font",
+        "x": 96,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character57": {
+        "texture": "font",
+        "x": 112,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character58": {
+        "texture": "font",
+        "x": 128,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character59": {
+        "texture": "font",
+        "x": 144,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character5A": {
+        "texture": "font",
+        "x": 160,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character5B": {
+        "texture": "font",
+        "x": 176,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character5C": {
+        "texture": "font",
+        "x": 192,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character5D": {
+        "texture": "font",
+        "x": 208,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character5E": {
+        "texture": "font",
+        "x": 224,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character5F": {
+        "texture": "font",
+        "x": 240,
+        "y": 48,
+        "width": 16,
+        "height": 16
+    },
+    "Character60": {
+        "texture": "font",
+        "x": 0,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character61": {
+        "texture": "font",
+        "x": 16,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character62": {
+        "texture": "font",
+        "x": 32,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character63": {
+        "texture": "font",
+        "x": 48,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character64": {
+        "texture": "font",
+        "x": 64,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character65": {
+        "texture": "font",
+        "x": 80,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character66": {
+        "texture": "font",
+        "x": 96,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character67": {
+        "texture": "font",
+        "x": 112,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character68": {
+        "texture": "font",
+        "x": 128,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character69": {
+        "texture": "font",
+        "x": 144,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character6A": {
+        "texture": "font",
+        "x": 160,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character6B": {
+        "texture": "font",
+        "x": 176,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character6C": {
+        "texture": "font",
+        "x": 192,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character6D": {
+        "texture": "font",
+        "x": 208,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character6E": {
+        "texture": "font",
+        "x": 224,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character6F": {
+        "texture": "font",
+        "x": 240,
+        "y": 64,
+        "width": 16,
+        "height": 16
+    },
+    "Character70": {
+        "texture": "font",
+        "x": 0,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character71": {
+        "texture": "font",
+        "x": 16,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character72": {
+        "texture": "font",
+        "x": 32,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character73": {
+        "texture": "font",
+        "x": 48,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character74": {
+        "texture": "font",
+        "x": 64,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character75": {
+        "texture": "font",
+        "x": 80,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character76": {
+        "texture": "font",
+        "x": 96,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character77": {
+        "texture": "font",
+        "x": 112,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character78": {
+        "texture": "font",
+        "x": 128,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character79": {
+        "texture": "font",
+        "x": 144,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character7A": {
+        "texture": "font",
+        "x": 160,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character7B": {
+        "texture": "font",
+        "x": 176,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character7C": {
+        "texture": "font",
+        "x": 192,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character7D": {
+        "texture": "font",
+        "x": 208,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character7E": {
+        "texture": "font",
+        "x": 224,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Character7F": {
+        "texture": "font",
+        "x": 240,
+        "y": 80,
+        "width": 16,
+        "height": 16
+    },
+    "Font35_20": {
+        "texture": "font35",
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_21": {
+        "texture": "font35",
+        "x": 4,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_22": {
+        "texture": "font35",
+        "x": 8,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_23": {
+        "texture": "font35",
+        "x": 12,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_24": {
+        "texture": "font35",
+        "x": 16,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_25": {
+        "texture": "font35",
+        "x": 20,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_26": {
+        "texture": "font35",
+        "x": 24,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_27": {
+        "texture": "font35",
+        "x": 28,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_28": {
+        "texture": "font35",
+        "x": 32,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_29": {
+        "texture": "font35",
+        "x": 36,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_2A": {
+        "texture": "font35",
+        "x": 40,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_2B": {
+        "texture": "font35",
+        "x": 44,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_2C": {
+        "texture": "font35",
+        "x": 48,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_2D": {
+        "texture": "font35",
+        "x": 52,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_2E": {
+        "texture": "font35",
+        "x": 56,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_2F": {
+        "texture": "font35",
+        "x": 60,
+        "y": 0,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_30": {
+        "texture": "font35",
+        "x": 0,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_31": {
+        "texture": "font35",
+        "x": 4,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_32": {
+        "texture": "font35",
+        "x": 8,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_33": {
+        "texture": "font35",
+        "x": 12,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_34": {
+        "texture": "font35",
+        "x": 16,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_35": {
+        "texture": "font35",
+        "x": 20,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_36": {
+        "texture": "font35",
+        "x": 24,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_37": {
+        "texture": "font35",
+        "x": 28,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_38": {
+        "texture": "font35",
+        "x": 32,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_39": {
+        "texture": "font35",
+        "x": 36,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_3A": {
+        "texture": "font35",
+        "x": 40,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_3B": {
+        "texture": "font35",
+        "x": 44,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_3C": {
+        "texture": "font35",
+        "x": 48,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_3D": {
+        "texture": "font35",
+        "x": 52,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_3E": {
+        "texture": "font35",
+        "x": 56,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_3F": {
+        "texture": "font35",
+        "x": 60,
+        "y": 6,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_40": {
+        "texture": "font35",
+        "x": 0,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_41": {
+        "texture": "font35",
+        "x": 4,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_42": {
+        "texture": "font35",
+        "x": 8,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_43": {
+        "texture": "font35",
+        "x": 12,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_44": {
+        "texture": "font35",
+        "x": 16,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_45": {
+        "texture": "font35",
+        "x": 20,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_46": {
+        "texture": "font35",
+        "x": 24,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_47": {
+        "texture": "font35",
+        "x": 28,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_48": {
+        "texture": "font35",
+        "x": 32,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_49": {
+        "texture": "font35",
+        "x": 36,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_4A": {
+        "texture": "font35",
+        "x": 40,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_4B": {
+        "texture": "font35",
+        "x": 44,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_4C": {
+        "texture": "font35",
+        "x": 48,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_4D": {
+        "texture": "font35",
+        "x": 52,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_4E": {
+        "texture": "font35",
+        "x": 56,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_4F": {
+        "texture": "font35",
+        "x": 60,
+        "y": 12,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_50": {
+        "texture": "font35",
+        "x": 0,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_51": {
+        "texture": "font35",
+        "x": 4,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_52": {
+        "texture": "font35",
+        "x": 8,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_53": {
+        "texture": "font35",
+        "x": 12,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_54": {
+        "texture": "font35",
+        "x": 16,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_55": {
+        "texture": "font35",
+        "x": 20,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_56": {
+        "texture": "font35",
+        "x": 24,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_57": {
+        "texture": "font35",
+        "x": 28,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_58": {
+        "texture": "font35",
+        "x": 32,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_59": {
+        "texture": "font35",
+        "x": 36,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_5A": {
+        "texture": "font35",
+        "x": 40,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_5B": {
+        "texture": "font35",
+        "x": 44,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_5C": {
+        "texture": "font35",
+        "x": 48,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_5D": {
+        "texture": "font35",
+        "x": 52,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_5E": {
+        "texture": "font35",
+        "x": 56,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_5F": {
+        "texture": "font35",
+        "x": 60,
+        "y": 18,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_60": {
+        "texture": "font35",
+        "x": 0,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_61": {
+        "texture": "font35",
+        "x": 4,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_62": {
+        "texture": "font35",
+        "x": 8,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_63": {
+        "texture": "font35",
+        "x": 12,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_64": {
+        "texture": "font35",
+        "x": 16,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_65": {
+        "texture": "font35",
+        "x": 20,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_66": {
+        "texture": "font35",
+        "x": 24,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_67": {
+        "texture": "font35",
+        "x": 28,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_68": {
+        "texture": "font35",
+        "x": 32,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_69": {
+        "texture": "font35",
+        "x": 36,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_6A": {
+        "texture": "font35",
+        "x": 40,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_6B": {
+        "texture": "font35",
+        "x": 44,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_6C": {
+        "texture": "font35",
+        "x": 48,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_6D": {
+        "texture": "font35",
+        "x": 52,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_6E": {
+        "texture": "font35",
+        "x": 56,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_6F": {
+        "texture": "font35",
+        "x": 60,
+        "y": 24,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_70": {
+        "texture": "font35",
+        "x": 0,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_71": {
+        "texture": "font35",
+        "x": 4,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_72": {
+        "texture": "font35",
+        "x": 8,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_73": {
+        "texture": "font35",
+        "x": 12,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_74": {
+        "texture": "font35",
+        "x": 16,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_75": {
+        "texture": "font35",
+        "x": 20,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_76": {
+        "texture": "font35",
+        "x": 24,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_77": {
+        "texture": "font35",
+        "x": 28,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_78": {
+        "texture": "font35",
+        "x": 32,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_79": {
+        "texture": "font35",
+        "x": 36,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_7A": {
+        "texture": "font35",
+        "x": 40,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_7B": {
+        "texture": "font35",
+        "x": 44,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_7C": {
+        "texture": "font35",
+        "x": 48,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_7D": {
+        "texture": "font35",
+        "x": 52,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_7E": {
+        "texture": "font35",
+        "x": 56,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font35_7F": {
+        "texture": "font35",
+        "x": 60,
+        "y": 30,
+        "width": 4,
+        "height": 6
+    },
+    "Font46_20": {
+        "texture": "font46",
+        "x": 0,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_21": {
+        "texture": "font46",
+        "x": 5,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_22": {
+        "texture": "font46",
+        "x": 10,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_23": {
+        "texture": "font46",
+        "x": 15,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_24": {
+        "texture": "font46",
+        "x": 20,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_25": {
+        "texture": "font46",
+        "x": 25,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_26": {
+        "texture": "font46",
+        "x": 30,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_27": {
+        "texture": "font46",
+        "x": 35,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_28": {
+        "texture": "font46",
+        "x": 40,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_29": {
+        "texture": "font46",
+        "x": 45,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_2A": {
+        "texture": "font46",
+        "x": 50,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_2B": {
+        "texture": "font46",
+        "x": 55,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_2C": {
+        "texture": "font46",
+        "x": 60,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_2D": {
+        "texture": "font46",
+        "x": 65,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_2E": {
+        "texture": "font46",
+        "x": 70,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_2F": {
+        "texture": "font46",
+        "x": 75,
+        "y": 0,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_30": {
+        "texture": "font46",
+        "x": 0,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_31": {
+        "texture": "font46",
+        "x": 5,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_32": {
+        "texture": "font46",
+        "x": 10,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_33": {
+        "texture": "font46",
+        "x": 15,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_34": {
+        "texture": "font46",
+        "x": 20,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_35": {
+        "texture": "font46",
+        "x": 25,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_36": {
+        "texture": "font46",
+        "x": 30,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_37": {
+        "texture": "font46",
+        "x": 35,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_38": {
+        "texture": "font46",
+        "x": 40,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_39": {
+        "texture": "font46",
+        "x": 45,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_3A": {
+        "texture": "font46",
+        "x": 50,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_3B": {
+        "texture": "font46",
+        "x": 55,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_3C": {
+        "texture": "font46",
+        "x": 60,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_3D": {
+        "texture": "font46",
+        "x": 65,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_3E": {
+        "texture": "font46",
+        "x": 70,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_3F": {
+        "texture": "font46",
+        "x": 75,
+        "y": 7,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_40": {
+        "texture": "font46",
+        "x": 0,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_41": {
+        "texture": "font46",
+        "x": 5,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_42": {
+        "texture": "font46",
+        "x": 10,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_43": {
+        "texture": "font46",
+        "x": 15,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_44": {
+        "texture": "font46",
+        "x": 20,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_45": {
+        "texture": "font46",
+        "x": 25,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_46": {
+        "texture": "font46",
+        "x": 30,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_47": {
+        "texture": "font46",
+        "x": 35,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_48": {
+        "texture": "font46",
+        "x": 40,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_49": {
+        "texture": "font46",
+        "x": 45,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_4A": {
+        "texture": "font46",
+        "x": 50,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_4B": {
+        "texture": "font46",
+        "x": 55,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_4C": {
+        "texture": "font46",
+        "x": 60,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_4D": {
+        "texture": "font46",
+        "x": 65,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_4E": {
+        "texture": "font46",
+        "x": 70,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_4F": {
+        "texture": "font46",
+        "x": 75,
+        "y": 14,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_50": {
+        "texture": "font46",
+        "x": 0,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_51": {
+        "texture": "font46",
+        "x": 5,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_52": {
+        "texture": "font46",
+        "x": 10,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_53": {
+        "texture": "font46",
+        "x": 15,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_54": {
+        "texture": "font46",
+        "x": 20,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_55": {
+        "texture": "font46",
+        "x": 25,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_56": {
+        "texture": "font46",
+        "x": 30,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_57": {
+        "texture": "font46",
+        "x": 35,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_58": {
+        "texture": "font46",
+        "x": 40,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_59": {
+        "texture": "font46",
+        "x": 45,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_5A": {
+        "texture": "font46",
+        "x": 50,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_5B": {
+        "texture": "font46",
+        "x": 55,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_5C": {
+        "texture": "font46",
+        "x": 60,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_5D": {
+        "texture": "font46",
+        "x": 65,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_5E": {
+        "texture": "font46",
+        "x": 70,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_5F": {
+        "texture": "font46",
+        "x": 75,
+        "y": 21,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_60": {
+        "texture": "font46",
+        "x": 0,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_61": {
+        "texture": "font46",
+        "x": 5,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_62": {
+        "texture": "font46",
+        "x": 10,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_63": {
+        "texture": "font46",
+        "x": 15,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_64": {
+        "texture": "font46",
+        "x": 20,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_65": {
+        "texture": "font46",
+        "x": 25,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_66": {
+        "texture": "font46",
+        "x": 30,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_67": {
+        "texture": "font46",
+        "x": 35,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_68": {
+        "texture": "font46",
+        "x": 40,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_69": {
+        "texture": "font46",
+        "x": 45,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_6A": {
+        "texture": "font46",
+        "x": 50,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_6B": {
+        "texture": "font46",
+        "x": 55,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_6C": {
+        "texture": "font46",
+        "x": 60,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_6D": {
+        "texture": "font46",
+        "x": 65,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_6E": {
+        "texture": "font46",
+        "x": 70,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_6F": {
+        "texture": "font46",
+        "x": 75,
+        "y": 28,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_70": {
+        "texture": "font46",
+        "x": 0,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_71": {
+        "texture": "font46",
+        "x": 5,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_72": {
+        "texture": "font46",
+        "x": 10,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_73": {
+        "texture": "font46",
+        "x": 15,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_74": {
+        "texture": "font46",
+        "x": 20,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_75": {
+        "texture": "font46",
+        "x": 25,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_76": {
+        "texture": "font46",
+        "x": 30,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_77": {
+        "texture": "font46",
+        "x": 35,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_78": {
+        "texture": "font46",
+        "x": 40,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_79": {
+        "texture": "font46",
+        "x": 45,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_7A": {
+        "texture": "font46",
+        "x": 50,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_7B": {
+        "texture": "font46",
+        "x": 55,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_7C": {
+        "texture": "font46",
+        "x": 60,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_7D": {
+        "texture": "font46",
+        "x": 65,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_7E": {
+        "texture": "font46",
+        "x": 70,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font46_7F": {
+        "texture": "font46",
+        "x": 75,
+        "y": 35,
+        "width": 5,
+        "height": 7
+    },
+    "Font57_20": {
+        "texture": "font57",
+        "x": 0,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_21": {
+        "texture": "font57",
+        "x": 6,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_22": {
+        "texture": "font57",
+        "x": 12,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_23": {
+        "texture": "font57",
+        "x": 18,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_24": {
+        "texture": "font57",
+        "x": 24,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_25": {
+        "texture": "font57",
+        "x": 30,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_26": {
+        "texture": "font57",
+        "x": 36,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_27": {
+        "texture": "font57",
+        "x": 42,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_28": {
+        "texture": "font57",
+        "x": 48,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_29": {
+        "texture": "font57",
+        "x": 54,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_2A": {
+        "texture": "font57",
+        "x": 60,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_2B": {
+        "texture": "font57",
+        "x": 66,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_2C": {
+        "texture": "font57",
+        "x": 72,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_2D": {
+        "texture": "font57",
+        "x": 78,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_2E": {
+        "texture": "font57",
+        "x": 84,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_2F": {
+        "texture": "font57",
+        "x": 90,
+        "y": 0,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_30": {
+        "texture": "font57",
+        "x": 0,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_31": {
+        "texture": "font57",
+        "x": 6,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_32": {
+        "texture": "font57",
+        "x": 12,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_33": {
+        "texture": "font57",
+        "x": 18,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_34": {
+        "texture": "font57",
+        "x": 24,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_35": {
+        "texture": "font57",
+        "x": 30,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_36": {
+        "texture": "font57",
+        "x": 36,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_37": {
+        "texture": "font57",
+        "x": 42,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_38": {
+        "texture": "font57",
+        "x": 48,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_39": {
+        "texture": "font57",
+        "x": 54,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_3A": {
+        "texture": "font57",
+        "x": 60,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_3B": {
+        "texture": "font57",
+        "x": 66,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_3C": {
+        "texture": "font57",
+        "x": 72,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_3D": {
+        "texture": "font57",
+        "x": 78,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_3E": {
+        "texture": "font57",
+        "x": 84,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_3F": {
+        "texture": "font57",
+        "x": 90,
+        "y": 8,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_40": {
+        "texture": "font57",
+        "x": 0,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_41": {
+        "texture": "font57",
+        "x": 6,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_42": {
+        "texture": "font57",
+        "x": 12,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_43": {
+        "texture": "font57",
+        "x": 18,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_44": {
+        "texture": "font57",
+        "x": 24,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_45": {
+        "texture": "font57",
+        "x": 30,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_46": {
+        "texture": "font57",
+        "x": 36,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_47": {
+        "texture": "font57",
+        "x": 42,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_48": {
+        "texture": "font57",
+        "x": 48,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_49": {
+        "texture": "font57",
+        "x": 54,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_4A": {
+        "texture": "font57",
+        "x": 60,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_4B": {
+        "texture": "font57",
+        "x": 66,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_4C": {
+        "texture": "font57",
+        "x": 72,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_4D": {
+        "texture": "font57",
+        "x": 78,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_4E": {
+        "texture": "font57",
+        "x": 84,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_4F": {
+        "texture": "font57",
+        "x": 90,
+        "y": 16,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_50": {
+        "texture": "font57",
+        "x": 0,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_51": {
+        "texture": "font57",
+        "x": 6,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_52": {
+        "texture": "font57",
+        "x": 12,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_53": {
+        "texture": "font57",
+        "x": 18,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_54": {
+        "texture": "font57",
+        "x": 24,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_55": {
+        "texture": "font57",
+        "x": 30,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_56": {
+        "texture": "font57",
+        "x": 36,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_57": {
+        "texture": "font57",
+        "x": 42,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_58": {
+        "texture": "font57",
+        "x": 48,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_59": {
+        "texture": "font57",
+        "x": 54,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_5A": {
+        "texture": "font57",
+        "x": 60,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_5B": {
+        "texture": "font57",
+        "x": 66,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_5C": {
+        "texture": "font57",
+        "x": 72,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_5D": {
+        "texture": "font57",
+        "x": 78,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_5E": {
+        "texture": "font57",
+        "x": 84,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_5F": {
+        "texture": "font57",
+        "x": 90,
+        "y": 24,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_60": {
+        "texture": "font57",
+        "x": 0,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_61": {
+        "texture": "font57",
+        "x": 6,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_62": {
+        "texture": "font57",
+        "x": 12,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_63": {
+        "texture": "font57",
+        "x": 18,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_64": {
+        "texture": "font57",
+        "x": 24,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_65": {
+        "texture": "font57",
+        "x": 30,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_66": {
+        "texture": "font57",
+        "x": 36,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_67": {
+        "texture": "font57",
+        "x": 42,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_68": {
+        "texture": "font57",
+        "x": 48,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_69": {
+        "texture": "font57",
+        "x": 54,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_6A": {
+        "texture": "font57",
+        "x": 60,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_6B": {
+        "texture": "font57",
+        "x": 66,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_6C": {
+        "texture": "font57",
+        "x": 72,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_6D": {
+        "texture": "font57",
+        "x": 78,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_6E": {
+        "texture": "font57",
+        "x": 84,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_6F": {
+        "texture": "font57",
+        "x": 90,
+        "y": 32,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_70": {
+        "texture": "font57",
+        "x": 0,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_71": {
+        "texture": "font57",
+        "x": 6,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_72": {
+        "texture": "font57",
+        "x": 12,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_73": {
+        "texture": "font57",
+        "x": 18,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_74": {
+        "texture": "font57",
+        "x": 24,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_75": {
+        "texture": "font57",
+        "x": 30,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_76": {
+        "texture": "font57",
+        "x": 36,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_77": {
+        "texture": "font57",
+        "x": 42,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_78": {
+        "texture": "font57",
+        "x": 48,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_79": {
+        "texture": "font57",
+        "x": 54,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_7A": {
+        "texture": "font57",
+        "x": 60,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_7B": {
+        "texture": "font57",
+        "x": 66,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_7C": {
+        "texture": "font57",
+        "x": 72,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_7D": {
+        "texture": "font57",
+        "x": 78,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_7E": {
+        "texture": "font57",
+        "x": 84,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Font57_7F": {
+        "texture": "font57",
+        "x": 90,
+        "y": 40,
+        "width": 6,
+        "height": 8
+    },
+    "Splash": {
+        "texture": "splash",
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 360
+    },
+    "Background": {
+        "texture": "background",
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 360
+    }
+}

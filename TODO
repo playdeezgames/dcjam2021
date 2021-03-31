@@ -1,0 +1,33 @@
+At Start of Jam:
+  ✔ make new git repo @done(21-03-31 06:32)
+  ☐ make itch game page stub
+  ☐ Pick a name
+    ravager
+    plunderer
+    maurauder
+    pillager
+    looter
+    raider
+    freebooter
+To Complete Required Features for Jam:
+  ☐ "Essentially modeless" with a fixed 3D perspective.
+    (The game must have first-person exploration at all times. Exceptions are point to point overworld map movement (fast travel), combat screens or town screens.)
+  ☐ An initially unknown explorable map. 
+    (The game must have explorable locations. It doesn't have to be a dungeon in the traditional sense. It can be urban environments, outdoors, spaceship interiors, planetary surfaces etc. Whichever environment the game has it must be viewed and explored in first-person.)
+  ☐ Entities occupy the entire tile, and only one tile at a time.
+    (The game must have instant step movement on a grid. Smooth transition between grid squares is allowed. Half-steps or dividing the square into smaller squares is not accepted.)
+  ☐ The grid is 2D/3D made from squares/cubes. 
+    (The game must have 90 degree turns in the cardinal directions, North, East, South, West. Smooth transition between 90 degree angles is allowed. Mouse-look is also allowed. Games which let you turn 90 degrees up and down are also allowed.)
+  ☐ First Person POV.
+    (The game must have a player controlled character (or party of characters), or the abstraction of a character or persona.)
+  ☐ Resource management and vital statistics.
+    (The game must at the very least have some basic stats. (Minimum a single health/power bar))
+  ☐ Failure end state.
+    (The game must have a death/perish condition, or some other end-of-game mechanic.)
+  ☐ A way of replenishing resources and vital statistics.
+    (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)
+  ☐ Decisions by which risking resources can gain other resources.
+    (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)
+  ☐ No offensive themes
+     (Any theme is allowed, but keep it decent and safe for work)
+

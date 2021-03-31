@@ -1,0 +1,8 @@
+{
+    "State.Splash": "config/ui/layouts/State.Splash.json",
+    "State.MainMenu": "config/ui/layouts/State.MainMenu.json",
+    "State.About": "config/ui/layouts/State.About.json",
+    "State.ConfirmQuit": "config/ui/layouts/State.ConfirmQuit.json",
+    "State.Options": "config/ui/layouts/State.Options.json",
+    "State.Start": "config/ui/layouts/State.Start.json"
+}
