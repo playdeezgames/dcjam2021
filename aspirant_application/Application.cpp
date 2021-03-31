@@ -20,6 +20,7 @@
 #include "Application.MouseButtonDown.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.UIState.h"
+#include "Game.h"
 namespace state::About { void Start(); }
 namespace state::ConfirmQuit { void Start(); }
 namespace state::MainMenu { void Start(); }
@@ -122,7 +123,8 @@ namespace common::Application
 		state::ConfirmQuit::Start,
 		state::Options::Start,
 		state::Start::Start,
-		state::InPlay::Start
+		state::InPlay::Start,
+		game::Start
 	};
 
 	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)
