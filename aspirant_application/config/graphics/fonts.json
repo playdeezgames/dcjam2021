@@ -1,0 +1,6 @@
+{
+    "default": "config/graphics/fonts/default.json",
+    "font3x5": "config/graphics/fonts/font3x5.json",
+    "font4x6": "config/graphics/fonts/font4x6.json",
+    "font5x7": "config/graphics/fonts/font5x7.json"
+}

@@ -1,0 +1,66 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "LightGreen",
+        "text": "==OPTIONS==",
+        "x": 320,
+        "y": 0,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Menu",
+        "menu-id": "Options",
+        "index": 3,
+        "font": "default",
+        "colors": {
+            "active": "Cyan",
+            "inactive": "Gray"
+        },
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2,
+        "menu-items": [
+            {
+                "menu-item-id": "Mute",
+                "text": "<mute state>",
+                "x": 320,
+                "y": 32,
+                "value": 0
+            },
+            {
+                "menu-item-id": "SfxVolume",
+                "text": "<sfx volume>",
+                "x": 320,
+                "y": 48,
+                "value": 1
+            },
+            {
+                "menu-item-id": "MuxVolume",
+                "text": "<mux volume>",
+                "x": 320,
+                "y": 64,
+                "value": 2
+            },
+            {
+                "text": "Back",
+                "x": 320,
+                "y": 80,
+                "value": 3
+            }
+        ]
+    }
+]

@@ -1,0 +1,98 @@
+{
+    "Black": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 255
+    },
+    "Blue": {
+        "red": 0,
+        "green": 0,
+        "blue": 170,
+        "alpha": 255
+    },
+    "Green": {
+        "red": 0,
+        "green": 170,
+        "blue": 0,
+        "alpha": 255
+    },
+    "Cyan": {
+        "red": 0,
+        "green": 170,
+        "blue": 170,
+        "alpha": 255
+    },
+    "Red": {
+        "red": 170,
+        "green": 0,
+        "blue": 0,
+        "alpha": 255
+    },
+    "Magenta": {
+        "red": 170,
+        "green": 0,
+        "blue": 170,
+        "alpha": 255
+    },
+    "Brown": {
+        "red": 170,
+        "green": 85,
+        "blue": 0,
+        "alpha": 255
+    },
+    "Gray": {
+        "red": 170,
+        "green": 170,
+        "blue": 170,
+        "alpha": 255
+    },
+    "DarkGray": {
+        "red": 85,
+        "green": 85,
+        "blue": 85,
+        "alpha": 255
+    },
+    "LightBlue": {
+        "red": 85,
+        "green": 85,
+        "blue": 255,
+        "alpha": 255
+    },
+    "LightGreen": {
+        "red": 85,
+        "green": 255,
+        "blue": 85,
+        "alpha": 255
+    },
+    "LightCyan": {
+        "red": 85,
+        "green": 255,
+        "blue": 255,
+        "alpha": 255
+    },
+    "LightRed": {
+        "red": 255,
+        "green": 85,
+        "blue": 85,
+        "alpha": 255
+    },
+    "LightMagenta": {
+        "red": 255,
+        "green": 85,
+        "blue": 255,
+        "alpha": 255
+    },
+    "Yellow": {
+        "red": 255,
+        "green": 255,
+        "blue": 85,
+        "alpha": 255
+    },
+    "White": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "alpha": 255
+    }
+}

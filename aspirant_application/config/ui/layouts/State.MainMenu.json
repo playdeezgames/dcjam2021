@@ -1,0 +1,63 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "LightGreen",
+        "text": "==MAIN MENU==",
+        "x": 320,
+        "y": 0,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Menu",
+        "menu-id": "Main",
+        "index": 0,
+        "font": "default",
+        "colors": {
+            "active": "Cyan",
+            "inactive": "Gray"
+        },
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2,
+        "menu-items": [
+            {
+                "text": "Start",
+                "x": 320,
+                "y": 32,
+                "value": 0
+            },
+            {
+                "text": "About",
+                "x": 320,
+                "y": 48,
+                "value": 1
+            },
+            {
+                "text": "Options",
+                "x": 320,
+                "y": 64,
+                "value": 2
+            },
+            {
+                "text": "Quit",
+                "x": 320,
+                "y": 80,
+                "value": 3
+            }
+        ]
+    }
+]
