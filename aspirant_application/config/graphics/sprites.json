@@ -2700,5 +2700,47 @@
         "y": 0,
         "width": 640,
         "height": 360
+    },
+    "LeftWall": {
+        "texture": "all_closed",
+        "x": 76,
+        "y": 76,
+        "width": 52,
+        "height": 360
+    },
+    "RightWall": {
+        "texture": "all_closed",
+        "x": 384,
+        "y": 76,
+        "width": 52,
+        "height": 360
+    },
+    "AheadWall": {
+        "texture": "all_closed",
+        "x": 128,
+        "y": 76,
+        "width": 256,
+        "height": 360
+    },
+    "LeftDoor": {
+        "texture": "all_open",
+        "x": 76,
+        "y": 76,
+        "width": 52,
+        "height": 360
+    },
+    "RightDoor": {
+        "texture": "all_open",
+        "x": 384,
+        "y": 76,
+        "width": 52,
+        "height": 360
+    },
+    "AheadDoor": {
+        "texture": "all_open",
+        "x": 128,
+        "y": 76,
+        "width": 256,
+        "height": 360
     }
 }

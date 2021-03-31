@@ -10,8 +10,7 @@ namespace state::Start
 
 	enum class StartGameItem
 	{
-		EDITOR,
-		PLAY,
+		NEW_GAME,
 		BACK
 	};
 
@@ -19,6 +18,9 @@ namespace state::Start
 	{
 		switch ((StartGameItem)graphics::Menus::Read(LAYOUT_NAME, MENU_ID).value())
 		{
+		case StartGameItem::NEW_GAME:
+			::application::UIState::Write(::UIState::IN_PLAY);
+			break;
 		case StartGameItem::BACK:
 			::application::UIState::Write(::UIState::MAIN_MENU);
 			break;

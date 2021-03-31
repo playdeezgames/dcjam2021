@@ -183,6 +183,7 @@
     <ClCompile Include="Graphics.Layout.cpp" />
     <ClCompile Include="Graphics.Layouts.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="State.InPlay.cpp" />
     <ClCompile Include="State.MainMenu.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="State.Options.cpp" />

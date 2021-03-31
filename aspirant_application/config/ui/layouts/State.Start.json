@@ -35,10 +35,16 @@
         "drop-shadow-y": 2,
         "menu-items": [
             {
-                "text": "Back",
+                "text": "New Game",
                 "x": 320,
                 "y": 32,
-                "value": 2
+                "value": 0
+            },
+            {
+                "text": "Back",
+                "x": 320,
+                "y": 48,
+                "value": 1
             }
         ]
     }

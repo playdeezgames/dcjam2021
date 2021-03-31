@@ -1,0 +1,30 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Image",
+        "sprite": "LeftWall",
+        "color": "White",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Image",
+        "sprite": "AheadWall",
+        "color": "White",
+        "x": 52,
+        "y": 0
+    },
+    {
+        "type": "Image",
+        "sprite": "RightWall",
+        "color": "White",
+        "x": 308,
+        "y": 0
+    }
+]
