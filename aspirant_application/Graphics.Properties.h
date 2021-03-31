@@ -14,6 +14,7 @@ namespace graphics::Properties
 	const std::string FONT = "font";
 	const std::string GREEN = "green";
 	const std::string HORIZONTAL_ALIGNMENT = "horizontal-alignment";
+	const std::string IMAGE_ID = "image-id";
 	const std::string INACTIVE = "inactive";
 	const std::string INDEX = "index";
 	const std::string MENU_ID = "menu-id";

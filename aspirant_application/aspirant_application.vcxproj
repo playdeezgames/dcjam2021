@@ -166,6 +166,7 @@
     <ClCompile Include="Application.TextInput.cpp" />
     <ClCompile Include="Application.UIState.cpp" />
     <ClCompile Include="Application.Update.cpp" />
+    <ClCompile Include="Graphics.Images.cpp" />
     <ClCompile Include="Graphics.Menu.cpp" />
     <ClCompile Include="Graphics.MenuItems.cpp" />
     <ClCompile Include="Graphics.Menus.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Application.UIState.h" />
     <ClInclude Include="Application.Update.h" />
     <ClInclude Include="Common.Properties.h" />
+    <ClInclude Include="Graphics.Images.h" />
     <ClInclude Include="Graphics.MenuItems.h" />
     <ClInclude Include="Graphics.Menus.h" />
     <ClInclude Include="Graphics.Properties.h" />

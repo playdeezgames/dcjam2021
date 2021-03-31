@@ -8,6 +8,7 @@
     },
     {
         "type": "Image",
+        "image-id": "LeftSide",
         "sprite": "LeftWall",
         "color": "White",
         "x": 0,
@@ -15,6 +16,7 @@
     },
     {
         "type": "Image",
+        "image-id": "Ahead",
         "sprite": "AheadWall",
         "color": "White",
         "x": 52,
@@ -22,6 +24,7 @@
     },
     {
         "type": "Image",
+        "image-id": "RightSide",
         "sprite": "RightWall",
         "color": "White",
         "x": 308,
