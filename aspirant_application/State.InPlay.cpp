@@ -20,6 +20,7 @@ namespace state::InPlay
 		case ::Command::BACK:
 		case ::Command::RED:
 			application::UIState::Write(::UIState::MAIN_MENU);
+			break;
 		case ::Command::LEFT:
 			game::TurnLeft();
 			break;
