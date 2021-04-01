@@ -32,4 +32,9 @@ namespace common
 	{
 		return XY<TDimension>(first.GetX() + second.GetX(), first.GetY() + second.GetY());
 	}
+	template<typename TDimension>
+	bool operator==(const XY<TDimension>& first, const XY<TDimension>& second)
+	{
+		return first.GetX() == second.GetX() && first.GetY() == second.GetY();
+	}
 }

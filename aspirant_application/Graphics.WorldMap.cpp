@@ -5,6 +5,7 @@
 #include "Graphics.Properties.h"
 #include "Graphics.Sprites.h"
 #include <map>
+#include "Game.Avatar.h"
 namespace graphics::WorldMap 
 { 
 	const std::string MAP_CELL_BASE = "MapCellBase";
@@ -12,6 +13,10 @@ namespace graphics::WorldMap
 	const std::string MAP_CELL_EAST_WALL = "MapCellEastWall";
 	const std::string MAP_CELL_SOUTH_WALL = "MapCellSouthWall";
 	const std::string MAP_CELL_WEST_WALL = "MapCellWestWall";
+	const std::string AVATAR_NORTH = "AvatarNorth";
+	const std::string AVATAR_EAST = "AvatarEast";
+	const std::string AVATAR_SOUTH = "AvatarSouth";
+	const std::string AVATAR_WEST = "AvatarWest";
 
 	static std::map<maze::Direction, std::string> wallSprites =
 	{
@@ -19,6 +24,14 @@ namespace graphics::WorldMap
 		{maze::Direction::EAST, MAP_CELL_EAST_WALL},
 		{maze::Direction::SOUTH, MAP_CELL_SOUTH_WALL},
 		{maze::Direction::WEST, MAP_CELL_WEST_WALL}
+	};
+
+	static std::map<maze::Direction, std::string> avatarSprites =
+	{
+		{maze::Direction::NORTH, AVATAR_NORTH},
+		{maze::Direction::EAST, AVATAR_EAST},
+		{maze::Direction::SOUTH, AVATAR_SOUTH},
+		{maze::Direction::WEST, AVATAR_WEST}
 	};
 
 	static void DrawWall(SDL_Renderer* renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
@@ -35,6 +48,7 @@ namespace graphics::WorldMap
 		int y = model[common::Properties::Y];
 		int cellWidth = model[graphics::Properties::CELL_WIDTH];
 		int cellHeight = model[graphics::Properties::CELL_WIDTH];
+		auto avatarPosition = game::Avatar::GetPosition();
 
 		auto worldSize = game::World::GetSize();
 		for (size_t column = 0; column < worldSize.GetX(); ++column)
@@ -49,6 +63,11 @@ namespace graphics::WorldMap
 				DrawWall(renderer, cell, plot, maze::Direction::EAST);
 				DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
 				DrawWall(renderer, cell, plot, maze::Direction::WEST);
+
+				if (cell == avatarPosition)
+				{
+					graphics::Sprites::Read(avatarSprites[game::Avatar::GetFacing()]).value().Draw(renderer, plot);
+				}
 			}
 		}
 	}

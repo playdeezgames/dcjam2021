@@ -2784,5 +2784,33 @@
         "height": 14,
         "offset-x": 15,
         "offset-y": 1
+    },
+    "AvatarNorth": {
+        "texture": "world",
+        "x": 0,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "AvatarEast": {
+        "texture": "world",
+        "x": 16,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "AvatarSouth": {
+        "texture": "world",
+        "x": 32,
+        "y": 16,
+        "width": 16,
+        "height": 16
+    },
+    "AvatarWest": {
+        "texture": "world",
+        "x": 48,
+        "y": 16,
+        "width": 16,
+        "height": 16
     }
 }
