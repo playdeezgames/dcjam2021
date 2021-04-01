@@ -1,24 +1,66 @@
 At Start of Jam:
   ✔ make new git repo @done(21-03-31 06:32)
   ☐ make itch game page stub
-  ☐ Pick a name
+  ✔ Pick a name @done(21-03-31 19:38)
     ravager
     plunderer
-    maurauder
+    marauder
     pillager
     looter
     raider
-    freebooter
+    *freebooter*
+Enhance The Maze:
+  ☐ locked doors
+    this leads to keys as an item
+    are they pickable?
+  ☐ secret/hidden doors
+    how do we search for them?
+  ☐ false doors
+  ☐ trapped doors
+    can we detect and disarm these traps?
+  ☐ instadeath rooms
+    because fairness is overrated
+  ☐ different wall materials
+  ☐ different floor materials
+  ☐ different ceiling materials
+  ☐ different lighting conditions
+    this leads to torches, lanterns, etc
+  ☐ stairs/ladders/holes up and down
+Vital Statistics:
+  ☐ health
+    leads to health potions
+    can die from wounds
+  ☐ hunger
+    leads to food
+    can starve, i.e. lose health
+  ☐ attack strength
+    leads to weapons
+  ☐ defense strength
+    leads to armor
+  ☐ perception?
+    to detect traps, secret doors, etc
+  ☐ dexterity
+    for disarming traps
+Items:
+  ☐ keys
+  ☐ torches
+  ☐ weapons
+  ☐ armor
+  ☐ food
+  ☐ lock picks
+Containers:
+  ☐ chest
+    might be trapped!
 To Complete Required Features for Jam:
   ✔ "Essentially modeless" with a fixed 3D perspective. @done(21-03-31 18:57)
     (The game must have first-person exploration at all times. Exceptions are point to point overworld map movement (fast travel), combat screens or town screens.)
-  ☐ An initially unknown explorable map. 
+  ☐ An initially unknown explorable map. (i.e. a map of the dungeon level) 
     (The game must have explorable locations. It doesn't have to be a dungeon in the traditional sense. It can be urban environments, outdoors, spaceship interiors, planetary surfaces etc. Whichever environment the game has it must be viewed and explored in first-person.)
   ☐ Entities occupy the entire tile, and only one tile at a time.
     (The game must have instant step movement on a grid. Smooth transition between grid squares is allowed. Half-steps or dividing the square into smaller squares is not accepted.)
-  ☐ The grid is 2D/3D made from squares/cubes. 
+  ✔ The grid is 2D/3D made from squares/cubes. @done(21-03-31 19:33)
     (The game must have 90 degree turns in the cardinal directions, North, East, South, West. Smooth transition between 90 degree angles is allowed. Mouse-look is also allowed. Games which let you turn 90 degrees up and down are also allowed.)
-  ☐ First Person POV.
+  ✔ First Person POV. @done(21-03-31 19:34)
     (The game must have a player controlled character (or party of characters), or the abstraction of a character or persona.)
   ☐ Resource management and vital statistics.
     (The game must at the very least have some basic stats. (Minimum a single health/power bar))
