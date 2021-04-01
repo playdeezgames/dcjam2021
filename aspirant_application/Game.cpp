@@ -15,6 +15,15 @@ namespace game
 	size_t avatarColumn = 0;
 	size_t avatarRow = 0;
 	maze::Direction avatarFacing = maze::Direction::EAST;
+	maze::Direction GetFacing()
+	{
+		return avatarFacing;
+	}
+	common::XY<size_t> GetPosition()
+	{
+		return { avatarColumn, avatarRow };
+	}
+
 
 	Border GetLeftSide()
 	{

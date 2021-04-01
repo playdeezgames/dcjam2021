@@ -29,5 +29,33 @@
         "color": "White",
         "x": 308,
         "y": 0
+    },
+    {
+        "type": "Text",
+        "text-id" : "Direction",
+        "font": "default",
+        "color": "Cyan",
+        "text": "<direction>",
+        "x": 360,
+        "y": 0,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "text-id" : "Position",
+        "font": "default",
+        "color": "Cyan",
+        "text": "<position>",
+        "x": 360,
+        "y": 32,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
     }
 ]

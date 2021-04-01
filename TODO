@@ -10,7 +10,7 @@ At Start of Jam:
     raider
     freebooter
 To Complete Required Features for Jam:
-  ☐ "Essentially modeless" with a fixed 3D perspective.
+  ✔ "Essentially modeless" with a fixed 3D perspective. @done(21-03-31 18:57)
     (The game must have first-person exploration at all times. Exceptions are point to point overworld map movement (fast travel), combat screens or town screens.)
   ☐ An initially unknown explorable map. 
     (The game must have explorable locations. It doesn't have to be a dungeon in the traditional sense. It can be urban environments, outdoors, spaceship interiors, planetary surfaces etc. Whichever environment the game has it must be viewed and explored in first-person.)
