@@ -1,10 +1,24 @@
 #include "Game.Avatar.h"
 #include "Game.World.h"
+#include <vector>
 namespace game::Avatar
 {
 	size_t avatarColumn = 0;
 	size_t avatarRow = 0;
 	maze::Direction avatarFacing = maze::Direction::EAST;
+
+	static std::vector<std::vector<size_t>> explored;
+
+	static void SetExplored()
+	{
+		explored[avatarColumn][avatarRow]++;
+	}
+
+	bool IsExplored(const common::XY<size_t>& cell)
+	{
+		return explored[cell.GetX()][cell.GetY()]>0;
+	}
+
 
 	maze::Direction GetFacing()
 	{
@@ -54,5 +68,26 @@ namespace game::Avatar
 				break;
 			}
 		}
+		SetExplored();
 	}
+
+	void Start()
+	{
+		explored.clear();
+		auto worldSize = game::World::GetSize();
+		while (explored.size() < worldSize.GetX())
+		{
+			explored.push_back(std::vector<size_t>());
+			auto& column = explored.back();
+			while (column.size() < worldSize.GetY())
+			{
+				column.push_back(0);
+			}
+		}
+
+		avatarColumn = 0;
+		avatarRow = 0;
+		SetExplored();
+	}
+
 }

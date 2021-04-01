@@ -56,17 +56,20 @@ namespace graphics::WorldMap
 			for (size_t row = 0; row < worldSize.GetY(); ++row)
 			{
 				auto cell = common::XY<size_t>(column, row);
-				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
-
-				graphics::Sprites::Read(MAP_CELL_BASE).value().Draw(renderer, plot);
-				DrawWall(renderer, cell, plot, maze::Direction::NORTH);
-				DrawWall(renderer, cell, plot, maze::Direction::EAST);
-				DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
-				DrawWall(renderer, cell, plot, maze::Direction::WEST);
-
-				if (cell == avatarPosition)
+				if (game::Avatar::IsExplored(cell))
 				{
-					graphics::Sprites::Read(avatarSprites[game::Avatar::GetFacing()]).value().Draw(renderer, plot);
+					auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
+
+					graphics::Sprites::Read(MAP_CELL_BASE).value().Draw(renderer, plot);
+					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
+					DrawWall(renderer, cell, plot, maze::Direction::EAST);
+					DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
+					DrawWall(renderer, cell, plot, maze::Direction::WEST);
+
+					if (cell == avatarPosition)
+					{
+						graphics::Sprites::Read(avatarSprites[game::Avatar::GetFacing()]).value().Draw(renderer, plot);
+					}
 				}
 			}
 		}

@@ -4,8 +4,8 @@
 #include "Maze.h"
 namespace game::World
 {
-	const size_t COLUMNS = 6;
-	const size_t ROWS = 8;
+	const size_t COLUMNS = 16;
+	const size_t ROWS = 16;
 	const size_t NS_BORDER_COUNT = ROWS * COLUMNS + COLUMNS;
 	const size_t NS_BORDER_STRIDE = COLUMNS;
 	const size_t EW_BORDER_COUNT = ROWS * COLUMNS + ROWS;

@@ -8,4 +8,5 @@ namespace game::Avatar
 	void MoveAhead();
 	maze::Direction GetFacing();
 	common::XY<size_t> GetPosition();
+	bool IsExplored(const common::XY<size_t>&);
 }

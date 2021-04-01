@@ -26,6 +26,9 @@ Enhance The Maze:
   ☐ different lighting conditions
     this leads to torches, lanterns, etc
   ☐ stairs/ladders/holes up and down
+Controls:
+  ☐ move back
+  ☐ mouse based controls for moving and turning
 Vital Statistics:
   ☐ health
     leads to health potions
@@ -54,9 +57,9 @@ Containers:
 To Complete Required Features for Jam:
   ✔ "Essentially modeless" with a fixed 3D perspective. @done(21-03-31 18:57)
     (The game must have first-person exploration at all times. Exceptions are point to point overworld map movement (fast travel), combat screens or town screens.)
-  ☐ An initially unknown explorable map. (i.e. a map of the dungeon level) 
+  ✔ An initially unknown explorable map. (i.e. a map of the dungeon level) @done(21-04-01 05:53)
     (The game must have explorable locations. It doesn't have to be a dungeon in the traditional sense. It can be urban environments, outdoors, spaceship interiors, planetary surfaces etc. Whichever environment the game has it must be viewed and explored in first-person.)
-  ☐ Entities occupy the entire tile, and only one tile at a time.
+  ✔ Entities occupy the entire tile, and only one tile at a time. @done(21-04-01 05:53)
     (The game must have instant step movement on a grid. Smooth transition between grid squares is allowed. Half-steps or dividing the square into smaller squares is not accepted.)
   ✔ The grid is 2D/3D made from squares/cubes. @done(21-03-31 19:33)
     (The game must have 90 degree turns in the cardinal directions, North, East, South, West. Smooth transition between 90 degree angles is allowed. Mouse-look is also allowed. Games which let you turn 90 degrees up and down are also allowed.)
