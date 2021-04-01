@@ -57,5 +57,12 @@
         "drop-shadow-color": "Black",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type":"WorldMap",
+        "x":360,
+        "y":0,
+        "cell-width": 16,
+        "cell-height": 16
     }
 ]

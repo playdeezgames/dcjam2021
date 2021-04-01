@@ -5,6 +5,8 @@ namespace graphics::Properties
 	const std::string ACTIVE = "active";
 	const std::string ALPHA = "alpha";
 	const std::string BLUE = "blue";
+	const std::string CELL_HEIGHT = "cell-height";
+	const std::string CELL_WIDTH = "cell-width";
 	const std::string COLOR = "color";
 	const std::string COLORS = "colors";
 	const std::string DROP_SHADOW = "drop-shadow";

@@ -6,5 +6,6 @@
     "font57" : "assets/images/fonts/Font5x7.png",
     "background": "assets/images/background.png",
     "all_open": "assets/images/all_open.png",
-    "all_closed": "assets/images/all_closed.png"
+    "all_closed": "assets/images/all_closed.png",
+    "world": "assets/images/world.png"
 }

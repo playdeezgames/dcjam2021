@@ -11,8 +11,28 @@ namespace game::World
 	const size_t EW_BORDER_COUNT = ROWS * COLUMNS + ROWS;
 	const size_t EW_BORDER_STRIDE = COLUMNS + 1;
 
+	common::XY<size_t> GetSize()
+	{
+		return common::XY<size_t>(COLUMNS, ROWS);
+	}
+
 	static std::vector<Border> nsBorders;
 	static std::vector<Border> ewBorders;
+
+	Border GetBorder(const common::XY<size_t>& position, const maze::Direction& direction)
+	{
+		switch (direction)
+		{
+		case maze::Direction::NORTH:
+			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE];
+		case maze::Direction::EAST:
+			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1];
+		case maze::Direction::SOUTH:
+			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE + NS_BORDER_STRIDE];
+		default:
+			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE];
+		}
+	}
 
 	Border GetLeftSide()
 	{

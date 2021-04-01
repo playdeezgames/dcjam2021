@@ -1,4 +1,6 @@
 #pragma once
+#include "Common.XY.h"
+#include "Maze.Direction.h"
 namespace game::World
 {
 	enum class Border
@@ -9,4 +11,7 @@ namespace game::World
 	Border GetLeftSide();
 	Border GetAhead();
 	Border GetRightSide();
+
+	common::XY<size_t> GetSize();
+	Border GetBorder(const common::XY<size_t>&, const maze::Direction &);
 }
