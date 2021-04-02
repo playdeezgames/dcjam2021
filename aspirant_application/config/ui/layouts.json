@@ -6,5 +6,6 @@
     "State.Options": "config/ui/layouts/State.Options.json",
     "State.Start": "config/ui/layouts/State.Start.json",
     "State.InPlay.MiniMap": "config/ui/layouts/State.InPlay.MiniMap.json",
-    "State.LeavePlay" :"config/ui/layouts/State.LeavePlay.json"
+    "State.LeavePlay": "config/ui/layouts/State.LeavePlay.json",
+    "Sublayout.POV": "config/ui/layouts/Sublayout.POV.json"
 }

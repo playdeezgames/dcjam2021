@@ -176,6 +176,7 @@
     <ClCompile Include="Graphics.Menu.cpp" />
     <ClCompile Include="Graphics.MenuItems.cpp" />
     <ClCompile Include="Graphics.Menus.cpp" />
+    <ClCompile Include="Graphics.Sublayout.cpp" />
     <ClCompile Include="Graphics.Texts.cpp" />
     <ClCompile Include="Graphics.WorldMap.cpp" />
     <ClCompile Include="Maze.cpp" />

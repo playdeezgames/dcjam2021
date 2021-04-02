@@ -23,6 +23,7 @@ namespace state::in_play::MiniMap
 	const std::string HUNGER_TEXT_ID = "Hunger";
 	const std::string FOOD_IMAGE_ID = "Food";
 	const std::string POTION_IMAGE_ID = "Potion";
+	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
 
 	static std::map<game::World::Border, std::string> leftSides =
 	{
@@ -103,26 +104,26 @@ namespace state::in_play::MiniMap
 		::graphics::Texts::SetText(LAYOUT_NAME, HUNGER_TEXT_ID, ss.str());
 	}
 
-	static void UpdatePOV()
-	{
-		::graphics::Images::SetSprite(LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetLeftSide()]);
-		::graphics::Images::SetSprite(LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetAhead()]);
-		::graphics::Images::SetSprite(LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetRightSide()]);
-		auto position = game::Avatar::GetPosition();
-		::graphics::Images::SetVisible(LAYOUT_NAME, FOOD_IMAGE_ID, game::Items::IsPresent(game::Item::FOOD, position));
-		::graphics::Images::SetVisible(LAYOUT_NAME, POTION_IMAGE_ID, game::Items::IsPresent(game::Item::POTION, position));
-	}
-
 	static void UpdateDirection()
 	{
 		auto facing = game::Avatar::GetFacing();
-		::graphics::Texts::SetText(LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
+		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
+	}
+
+	static void UpdatePOV()
+	{
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetLeftSide()]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetAhead()]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetRightSide()]);
+		auto position = game::Avatar::GetPosition();
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::Items::IsPresent(game::Item::FOOD, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::Items::IsPresent(game::Item::POTION, position));
+		UpdateDirection();
 	}
 
 	static void OnUpdate(const Uint32& ticks)
 	{
 		UpdatePOV();
-		UpdateDirection();
 		UpdateHealth();
 		UpdateHunger();
 	}
