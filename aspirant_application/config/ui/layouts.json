@@ -5,5 +5,6 @@
     "State.ConfirmQuit": "config/ui/layouts/State.ConfirmQuit.json",
     "State.Options": "config/ui/layouts/State.Options.json",
     "State.Start": "config/ui/layouts/State.Start.json",
-    "State.InPlay": "config/ui/layouts/State.InPlay.json"
+    "State.InPlay": "config/ui/layouts/State.InPlay.json",
+    "State.LeavePlay" :"config/ui/layouts/State.LeavePlay.json"
 }

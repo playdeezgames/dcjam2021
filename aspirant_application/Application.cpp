@@ -28,6 +28,7 @@ namespace state::Options { void Start(); }
 namespace state::Splash { void Start(); }
 namespace state::Start { void Start(); }
 namespace state::InPlay { void Start(); }
+namespace state::LeavePlay { void Start(); }
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(const SDL_Keycode& code)
@@ -124,7 +125,8 @@ namespace common::Application
 		state::Options::Start,
 		state::Start::Start,
 		state::InPlay::Start,
-		game::Start
+		game::Start,
+		state::LeavePlay::Start
 	};
 
 	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)

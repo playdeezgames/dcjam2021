@@ -49,7 +49,7 @@ namespace state::InPlay
 		{
 		case ::Command::BACK:
 		case ::Command::RED:
-			application::UIState::Write(::UIState::MAIN_MENU);
+			application::UIState::Write(::UIState::LEAVE_PLAY);
 			break;
 		case ::Command::LEFT:
 			game::Avatar::TurnLeft();
