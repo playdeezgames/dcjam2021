@@ -7,19 +7,78 @@
         "y": 0
     },
     {
-        "type":"Layout",
-        "name":"Sublayout.POV"
+        "type": "Layout",
+        "name": "Sublayout.POV"
     },
     {
-        "type":"WorldMap",
-        "x":372,
-        "y":28,
+        "type": "Text",
+        "font": "default",
+        "color": "LightCyan",
+        "text": "Map",
+        "x": 380,
+        "y": 0,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Cyan",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Flr",
+        "x": 444,
+        "y": 0,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Inv",
+        "x": 508,
+        "y": 0,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Sta",
+        "x": 572,
+        "y": 0,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Image",
+        "sprite": "Map",
+        "color": "White",
+        "x": 360,
+        "y": 16
+    },
+    {
+        "type": "WorldMap",
+        "x": 388,
+        "y": 60,
         "cell-width": 16,
         "cell-height": 16
     },
     {
         "type": "Text",
-        "text-id" : "Hunger",
+        "text-id": "Hunger",
         "font": "default",
         "color": "Magenta",
         "text": "<hunger>",
@@ -33,7 +92,7 @@
     },
     {
         "type": "Text",
-        "text-id" : "Health",
+        "text-id": "Health",
         "font": "default",
         "color": "Red",
         "text": "<health>",

@@ -2833,5 +2833,12 @@
         "y": 0,
         "width": 32,
         "height": 32
+    },
+    "Map":{
+        "texture": "map",
+        "x": 0,
+        "y": 0,
+        "width": 280,
+        "height": 280
     }
 }

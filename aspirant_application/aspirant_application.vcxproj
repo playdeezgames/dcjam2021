@@ -208,6 +208,7 @@
     <ClCompile Include="Graphics.Text.cpp" />
     <ClCompile Include="Graphics.Textures.cpp" />
     <ClCompile Include="Common.Utility.cpp" />
+    <ClCompile Include="Sublayout.POV.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.Command.h" />

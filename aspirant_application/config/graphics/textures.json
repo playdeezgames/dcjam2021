@@ -8,5 +8,6 @@
     "all_open": "assets/images/all_open.png",
     "all_closed": "assets/images/all_closed.png",
     "world": "assets/images/world.png",
-    "items": "assets/images/items.png"
+    "items": "assets/images/items.png",
+    "map": "assets/images/treasure-map.png"
 }
