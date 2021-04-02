@@ -37,7 +37,6 @@ namespace Application
 		switch (code)
 		{
 		case SDLK_UP:
-			
 			return std::make_optional(::Command::UP);
 		case SDLK_DOWN:
 			return std::make_optional(::Command::DOWN);
@@ -47,7 +46,7 @@ namespace Application
 			return std::make_optional(::Command::RIGHT);
 		case SDLK_SPACE:
 			return std::make_optional(::Command::GREEN);
-		case SDLK_RETURN:
+		case SDLK_F2:
 			return std::make_optional(::Command::START);
 		case SDLK_ESCAPE:
 			return std::make_optional(::Command::RED);
@@ -59,7 +58,7 @@ namespace Application
 			return std::make_optional(::Command::BACK);
 		case SDLK_TAB:
 			return std::make_optional(::Command::YELLOW);
-		case SDLK_z:
+		case SDLK_RETURN:
 			return std::make_optional(::Command::BLUE);
 		default:
 			return std::nullopt;
