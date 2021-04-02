@@ -71,6 +71,15 @@ namespace game::Avatar
 		SetExplored();
 	}
 
+	void MoveBack()
+	{
+		TurnRight();
+		TurnRight();
+		MoveAhead();
+		TurnRight();
+		TurnRight();
+	}
+
 	void Start()
 	{
 		explored.clear();

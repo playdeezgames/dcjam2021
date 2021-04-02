@@ -28,7 +28,8 @@ Enhance The Maze:
   ☐ stairs/ladders/holes up and down
 Controls:
   ☐ move back
-  ☐ mouse based controls for moving and turning
+  ☐ mouse based controls for moving and turning(stretch)
+  ☐ remappable keys(default WASD + Arrows)
 Vital Statistics:
   ☐ health
     leads to health potions

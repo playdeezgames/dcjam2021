@@ -57,6 +57,9 @@ namespace state::InPlay
 		case ::Command::UP:
 			game::Avatar::MoveAhead();
 			break;
+		case ::Command::DOWN:
+			game::Avatar::MoveBack();
+			break;
 		}
 	}
 
