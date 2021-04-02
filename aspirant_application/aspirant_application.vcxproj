@@ -89,6 +89,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>E:\lib\SDL2_image-2.0.5\include;E:\lib\SDL2_mixer-2.0.4\include;E:\lib\SDL2-2.0.14\include;$(IncludePath)</IncludePath>
     <LibraryPath>E:\lib\SDL2-2.0.14\lib\x64;E:\lib\SDL2_mixer-2.0.4\lib\x64;E:\lib\SDL2_image-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <TargetName>Freebooter</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

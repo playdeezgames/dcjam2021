@@ -67,12 +67,12 @@ To Complete Required Features for Jam:
     (The game must have a player controlled character (or party of characters), or the abstraction of a character or persona.)
   ☐ Resource management and vital statistics.
     (The game must at the very least have some basic stats. (Minimum a single health/power bar))
-  ☐ Failure end state.
+  ☐ Failure end state. @started(21-04-02 03:47)
     (The game must have a death/perish condition, or some other end-of-game mechanic.)
   ☐ A way of replenishing resources and vital statistics.
     (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)
   ☐ Decisions by which risking resources can gain other resources.
     (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)
-  ☐ No offensive themes
+  ✔ No offensive themes @done(21-04-01 07:08)
      (Any theme is allowed, but keep it decent and safe for work)
 

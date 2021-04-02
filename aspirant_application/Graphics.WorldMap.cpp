@@ -13,6 +13,7 @@ namespace graphics::WorldMap
 	const std::string MAP_CELL_EAST_WALL = "MapCellEastWall";
 	const std::string MAP_CELL_SOUTH_WALL = "MapCellSouthWall";
 	const std::string MAP_CELL_WEST_WALL = "MapCellWestWall";
+	const std::string MAP_CELL_UNEXPLORED = "MapCellUnexplored";
 	const std::string AVATAR_NORTH = "AvatarNorth";
 	const std::string AVATAR_EAST = "AvatarEast";
 	const std::string AVATAR_SOUTH = "AvatarSouth";
@@ -56,9 +57,9 @@ namespace graphics::WorldMap
 			for (size_t row = 0; row < worldSize.GetY(); ++row)
 			{
 				auto cell = common::XY<size_t>(column, row);
+				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
 				if (game::Avatar::IsExplored(cell))
 				{
-					auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
 
 					graphics::Sprites::Read(MAP_CELL_BASE).value().Draw(renderer, plot);
 					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
@@ -70,6 +71,10 @@ namespace graphics::WorldMap
 					{
 						graphics::Sprites::Read(avatarSprites[game::Avatar::GetFacing()]).value().Draw(renderer, plot);
 					}
+				}
+				else
+				{
+					graphics::Sprites::Read(MAP_CELL_UNEXPLORED).value().Draw(renderer, plot);
 				}
 			}
 		}

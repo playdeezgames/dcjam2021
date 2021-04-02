@@ -9,12 +9,11 @@ namespace maze
 		SOUTH,
 		WEST
 	};
-	class MazeDirectionHelper
+	namespace Directions
 	{
-	public:
-		static Direction GetOpposite(Direction);
-		static const std::vector<Direction>& GetAll();
-		static int GetNextColumn(int, int, Direction);
-		static int GetNextRow(int, int, Direction);
-	};
+		int NextColumn(int, int, Direction);
+		int NextRow(int, int, Direction);
+		const std::vector<Direction>& All();
+		Direction Opposite(Direction);
+	}
 }

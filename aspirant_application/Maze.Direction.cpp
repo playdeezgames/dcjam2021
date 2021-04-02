@@ -2,19 +2,22 @@
 #include <string>
 namespace maze
 {
-	std::vector<Direction> allDirections;
-	const std::vector<Direction>& MazeDirectionHelper::GetAll()
+	std::vector<Direction> allDirections = 
 	{
-		if (allDirections.empty())
-		{
-			allDirections.push_back(Direction::NORTH);
-			allDirections.push_back(Direction::EAST);
-			allDirections.push_back(Direction::SOUTH);
-			allDirections.push_back(Direction::WEST);
-		}
+		Direction::NORTH,
+		Direction::EAST,
+		Direction::SOUTH,
+		Direction::WEST
+	};
+
+	const std::vector<Direction>& Directions::All()
+	{
 		return allDirections;
 	}
-	Direction MazeDirectionHelper::GetOpposite(Direction direction)
+
+
+
+	Direction Directions::Opposite(Direction direction)
 	{
 		switch (direction)
 		{
@@ -31,7 +34,7 @@ namespace maze
 		}
 	}
 
-	int MazeDirectionHelper::GetNextColumn(int column, int row, Direction direction)
+	int Directions::NextColumn(int column, int row, Direction direction)
 	{
 		switch (direction)
 		{
@@ -48,7 +51,7 @@ namespace maze
 		}
 	}
 
-	int MazeDirectionHelper::GetNextRow(int column, int row, Direction direction)
+	int Directions::NextRow(int column, int row, Direction direction)
 	{
 		switch (direction)
 		{

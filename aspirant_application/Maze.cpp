@@ -38,12 +38,12 @@ namespace maze
 	void Maze::InitializeCell(int column, int row)
 	{
 		Cell* cell = GetCell(column, row);
-		for (auto direction : MazeDirectionHelper::GetAll())
+		for (auto direction : Directions::All())
 		{
 			if (!cell->GetNeighbor(direction))
 			{
-				int nextColumn = MazeDirectionHelper::GetNextColumn(column, row, direction);
-				int nextRow = MazeDirectionHelper::GetNextRow(column, row, direction);
+				int nextColumn = Directions::NextColumn(column, row, direction);
+				int nextRow = Directions::NextRow(column, row, direction);
 				if (nextColumn >= 0 && nextColumn < columns && nextRow >= 0 && nextRow < rows)
 				{
 					Cell* neighbor = GetCell(nextColumn, nextRow);
@@ -51,13 +51,12 @@ namespace maze
 					doors.push_back(door);
 					cell->SetNeighbor(direction, neighbor);
 					cell->SetDoor(direction, door);
-					neighbor->SetNeighbor(MazeDirectionHelper::GetOpposite(direction), cell);
-					neighbor->SetDoor(MazeDirectionHelper::GetOpposite(direction), door);
+					neighbor->SetNeighbor(Directions::Opposite(direction), cell);
+					neighbor->SetDoor(Directions::Opposite(direction), door);
 				}
 			}
 		}
 	}
-
 
 	Maze::~Maze()
 	{
@@ -106,7 +105,7 @@ namespace maze
 		Cell* cell = cells[common::RNG::FromRange(0, (int)cells.size())];
 		outside.erase(cell);
 		inside.insert(cell);
-		for (auto direction : MazeDirectionHelper::GetAll())
+		for (auto direction : Directions::All())
 		{
 			auto neighbor = cell->GetNeighbor(direction);
 			if (neighbor)
@@ -122,7 +121,7 @@ namespace maze
 			frontier[index] = frontier[frontier.size() - 1];
 			frontier.pop_back();
 			std::vector<Direction> candidates;
-			for (auto direction : MazeDirectionHelper::GetAll())
+			for (auto direction : Directions::All())
 			{
 				auto neighbor = cell->GetNeighbor(direction);
 				if (neighbor)
@@ -136,7 +135,7 @@ namespace maze
 			Direction direction = candidates[common::RNG::FromRange(0, (int)candidates.size())];
 			*(cell->GetDoor(direction).value()) = Door::OPEN;
 			inside.insert(cell);
-			for (auto direction : MazeDirectionHelper::GetAll())
+			for (auto direction : Directions::All())
 			{
 				auto neighbor = cell->GetNeighbor(direction);
 				if (neighbor)
