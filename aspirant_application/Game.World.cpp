@@ -82,7 +82,7 @@ namespace game::World
 		}
 	}
 
-	void Start()
+	void Reset()
 	{
 		nsBorders.reserve(NS_BORDER_COUNT);
 		while (nsBorders.size() < NS_BORDER_COUNT)
@@ -119,5 +119,10 @@ namespace game::World
 				}
 			}
 		}
+	}
+
+	void Start()
+	{
+		Reset();
 	}
 }

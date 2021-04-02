@@ -66,9 +66,9 @@ To Complete Required Features for Jam:
     (The game must have 90 degree turns in the cardinal directions, North, East, South, West. Smooth transition between 90 degree angles is allowed. Mouse-look is also allowed. Games which let you turn 90 degrees up and down are also allowed.)
   ✔ First Person POV. @done(21-03-31 19:34)
     (The game must have a player controlled character (or party of characters), or the abstraction of a character or persona.)
-  ☐ Resource management and vital statistics.
+  ✔ Resource management and vital statistics. @done(21-04-02 04:43)
     (The game must at the very least have some basic stats. (Minimum a single health/power bar))
-  ☐ Failure end state. @started(21-04-02 03:47)
+  ✔ Failure end state. @started(21-04-02 03:47) @done(21-04-02 04:43) @lasted(56m56s)
     (The game must have a death/perish condition, or some other end-of-game mechanic.)
   ☐ A way of replenishing resources and vital statistics.
     (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)

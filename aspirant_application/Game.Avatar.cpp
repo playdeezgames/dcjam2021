@@ -1,8 +1,11 @@
 #include "Game.Avatar.h"
 #include "Game.World.h"
+#include "Game.Avatar.Statistics.h"
 #include <vector>
 namespace game::Avatar
 {
+	const int HUNGER_RATE = 1;
+
 	size_t avatarColumn = 0;
 	size_t avatarRow = 0;
 	maze::Direction avatarFacing = maze::Direction::EAST;
@@ -16,7 +19,7 @@ namespace game::Avatar
 
 	bool IsExplored(const common::XY<size_t>& cell)
 	{
-		return explored[cell.GetX()][cell.GetY()]>0;
+		return explored[cell.GetX()][cell.GetY()] > 0;
 	}
 
 
@@ -32,43 +35,61 @@ namespace game::Avatar
 
 	void TurnLeft()
 	{
-		avatarFacing =
-			(avatarFacing == maze::Direction::NORTH) ? (maze::Direction::WEST) :
-			(avatarFacing == maze::Direction::EAST) ? (maze::Direction::NORTH) :
-			(avatarFacing == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
-			(maze::Direction::SOUTH);
+		if (!game::avatar::Statistics::IsDead())
+		{
+			avatarFacing =
+				(avatarFacing == maze::Direction::NORTH) ? (maze::Direction::WEST) :
+				(avatarFacing == maze::Direction::EAST) ? (maze::Direction::NORTH) :
+				(avatarFacing == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
+				(maze::Direction::SOUTH);
+		}
 	}
 
 	void TurnRight()
 	{
-		avatarFacing =
-			(avatarFacing == maze::Direction::NORTH) ? (maze::Direction::EAST) :
-			(avatarFacing == maze::Direction::EAST) ? (maze::Direction::SOUTH) :
-			(avatarFacing == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
-			(maze::Direction::NORTH);
+		if (!game::avatar::Statistics::IsDead())
+		{
+			avatarFacing =
+				(avatarFacing == maze::Direction::NORTH) ? (maze::Direction::EAST) :
+				(avatarFacing == maze::Direction::EAST) ? (maze::Direction::SOUTH) :
+				(avatarFacing == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
+				(maze::Direction::NORTH);
+		}
 	}
 
 	void MoveAhead()
 	{
-		if (game::World::GetAhead() == game::World::Border::DOOR)
+		if (!game::avatar::Statistics::IsDead())
 		{
-			switch (avatarFacing)
+			if (game::World::GetAhead() == game::World::Border::DOOR)
 			{
-			case maze::Direction::NORTH:
-				avatarRow--;
-				break;
-			case maze::Direction::EAST:
-				avatarColumn++;
-				break;
-			case maze::Direction::SOUTH:
-				avatarRow++;
-				break;
-			case maze::Direction::WEST:
-				avatarColumn--;
-				break;
+				switch (avatarFacing)
+				{
+				case maze::Direction::NORTH:
+					avatarRow--;
+					break;
+				case maze::Direction::EAST:
+					avatarColumn++;
+					break;
+				case maze::Direction::SOUTH:
+					avatarRow++;
+					break;
+				case maze::Direction::WEST:
+					avatarColumn--;
+					break;
+				}
+			}
+			SetExplored();
+			//do hunger!
+			if (avatar::Statistics::IsStarving())
+			{
+				avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
+			}
+			else
+			{
+				avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
 			}
 		}
-		SetExplored();
 	}
 
 	void MoveBack()

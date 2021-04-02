@@ -149,6 +149,9 @@
     <ClCompile Include="Graphics.WorldMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.Avatar.Statistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">
@@ -269,6 +272,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.Avatar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.Avatar.Statistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.Avatar.Statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
