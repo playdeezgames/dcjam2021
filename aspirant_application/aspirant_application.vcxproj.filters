@@ -173,6 +173,12 @@
     <ClCompile Include="State.InPlay.FloorInventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="State.InPlay.AvatarInventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State.InPlay.AvatarStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">

@@ -7,6 +7,8 @@
     "State.Start": "config/ui/layouts/State.Start.json",
     "State.InPlay.MiniMap": "config/ui/layouts/State.InPlay.MiniMap.json",
     "State.InPlay.FloorInventory": "config/ui/layouts/State.InPlay.FloorInventory.json",
+    "State.InPlay.AvatarInventory": "config/ui/layouts/State.InPlay.AvatarInventory.json",
+    "State.InPlay.AvatarStatus": "config/ui/layouts/State.InPlay.AvatarStatus.json",
     "State.LeavePlay": "config/ui/layouts/State.LeavePlay.json",
     "Sublayout.POV": "config/ui/layouts/Sublayout.POV.json"
 }

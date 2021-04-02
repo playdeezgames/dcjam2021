@@ -38,7 +38,11 @@ namespace state::in_play::MiniMap
 			game::Avatar::MoveBack();
 			break;
 		case ::Command::NEXT:
+		case ::Command::YELLOW:
 			application::UIState::Write(::UIState::IN_PLAY_FLOOR);
+			break;
+		case ::Command::PREVIOUS:
+			application::UIState::Write(::UIState::IN_PLAY_STATUS);
 			break;
 		}
 	}
