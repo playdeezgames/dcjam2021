@@ -114,9 +114,6 @@ namespace game::Avatar
 				column.push_back(0);
 			}
 		}
-
-		avatarColumn = 0;
-		avatarRow = 0;
 		SetExplored();
 	}
 }

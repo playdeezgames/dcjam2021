@@ -2,6 +2,12 @@
 #include <vector>
 #include "Game.Avatar.h"
 #include "Maze.h"
+#include "Common.RNG.h"
+namespace game::Avatar
+{
+	extern size_t avatarColumn;
+	extern size_t avatarRow;
+}
 namespace game::World
 {
 	const size_t COLUMNS = 16;
@@ -121,5 +127,11 @@ namespace game::World
 				}
 			}
 		}
+
+		do
+		{
+			::game::Avatar::avatarColumn = (size_t)common::RNG::FromRange(0, COLUMNS);
+			::game::Avatar::avatarRow = (size_t)common::RNG::FromRange(0, ROWS);
+		} while (maze.GetCell((int)::game::Avatar::avatarColumn, (int)::game::Avatar::avatarRow)->IsDeadEnd());
 	}
 }
