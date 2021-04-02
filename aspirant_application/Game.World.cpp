@@ -85,12 +85,14 @@ namespace game::World
 	void Reset()
 	{
 		nsBorders.reserve(NS_BORDER_COUNT);
+		nsBorders.clear();
 		while (nsBorders.size() < NS_BORDER_COUNT)
 		{
 			nsBorders.push_back(Border::WALL);
 		}
 
 		ewBorders.reserve(EW_BORDER_COUNT);
+		ewBorders.clear();
 		while (ewBorders.size() < EW_BORDER_COUNT)
 		{
 			ewBorders.push_back(Border::WALL);
@@ -119,10 +121,5 @@ namespace game::World
 				}
 			}
 		}
-	}
-
-	void Start()
-	{
-		Reset();
 	}
 }

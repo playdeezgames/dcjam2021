@@ -101,7 +101,7 @@ namespace game::Avatar
 		TurnRight();
 	}
 
-	void Start()
+	void Reset()
 	{
 		explored.clear();
 		auto worldSize = game::World::GetSize();
@@ -119,5 +119,4 @@ namespace game::Avatar
 		avatarRow = 0;
 		SetExplored();
 	}
-
 }

@@ -3,6 +3,7 @@
 #include "Application.Command.h"
 #include "Application.UIState.h"
 #include "Graphics.Menus.h"
+#include "Game.h"
 namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";
@@ -19,6 +20,7 @@ namespace state::Start
 		switch ((StartGameItem)graphics::Menus::Read(LAYOUT_NAME, MENU_ID).value())
 		{
 		case StartGameItem::NEW_GAME:
+			game::Reset();
 			::application::UIState::Write(::UIState::IN_PLAY);
 			break;
 		case StartGameItem::BACK:

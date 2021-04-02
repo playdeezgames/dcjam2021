@@ -2,4 +2,5 @@
 namespace game
 {
 	void Start();
+	void Reset();
 }

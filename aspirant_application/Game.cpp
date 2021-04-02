@@ -1,13 +1,18 @@
 #include "Game.h"
-namespace game::World { void Start(); }
-namespace game::Avatar { void Start(); }
-namespace game::avatar::Statistics { void Start(); }
+namespace game::World { void Reset(); }
+namespace game::Avatar { void Reset(); }
+namespace game::avatar::Statistics { void Reset(); }
 namespace game
 {
+	void Reset()
+	{
+		game::World::Reset();
+		game::Avatar::Reset();
+		game::avatar::Statistics::Reset();
+	}
+
 	void Start()
 	{
-		game::World::Start();
-		game::Avatar::Start();
-		game::avatar::Statistics::Start();
+		Reset();
 	}
 }

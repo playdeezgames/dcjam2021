@@ -4,8 +4,8 @@ namespace game::avatar::Statistics
 {
 	const std::map<::game::avatar::Statistic, int> maximums =
 	{
-		{::game::avatar::Statistic::HEALTH, 10},
-		{::game::avatar::Statistic::HUNGER, 10}
+		{::game::avatar::Statistic::HEALTH, 100},
+		{::game::avatar::Statistic::HUNGER, 100}
 	};
 
 	const std::map<::game::avatar::Statistic, int> minimums =
@@ -44,11 +44,6 @@ namespace game::avatar::Statistics
 	void Reset()
 	{
 		current = maximums;
-	}
-
-	void Start()
-	{
-		Reset();
 	}
 
 	bool IsStarving()
