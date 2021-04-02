@@ -21,6 +21,8 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.UIState.h"
 #include "Game.h"
+#include "Common.Utility.h"
+#include "Application.Keyboard.h"
 namespace state::About { void Start(); }
 namespace state::ConfirmQuit { void Start(); }
 namespace state::MainMenu { void Start(); }
@@ -32,42 +34,43 @@ namespace state::LeavePlay { void Start(); }
 namespace sublayout::POV { void Start(); }
 namespace Application
 {
-	static std::optional<::Command> KeyCodeToCommand(const SDL_Keycode& code)
+	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
 	{
-		switch (code)
-		{
-		case SDLK_UP:
-			return std::make_optional(::Command::UP);
-		case SDLK_DOWN:
-			return std::make_optional(::Command::DOWN);
-		case SDLK_LEFT:
-			return std::make_optional(::Command::LEFT);
-		case SDLK_RIGHT:
-			return std::make_optional(::Command::RIGHT);
-		case SDLK_SPACE:
-			return std::make_optional(::Command::GREEN);
-		case SDLK_F2:
-			return std::make_optional(::Command::START);
-		case SDLK_ESCAPE:
-			return std::make_optional(::Command::RED);
-		case SDLK_COMMA:
-			return std::make_optional(::Command::PREVIOUS);
-		case SDLK_PERIOD:
-			return std::make_optional(::Command::NEXT);
-		case SDLK_BACKSPACE:
-			return std::make_optional(::Command::BACK);
-		case SDLK_TAB:
-			return std::make_optional(::Command::YELLOW);
-		case SDLK_RETURN:
-			return std::make_optional(::Command::BLUE);
-		default:
-			return std::nullopt;
-		}
+		return application::Keyboard::ToCommand(code);
+		//switch (code)
+		//{
+		//case SDLK_UP:
+		//	return std::make_optional(::Command::UP);
+		//case SDLK_DOWN:
+		//	return std::make_optional(::Command::DOWN);
+		//case SDLK_LEFT:
+		//	return std::make_optional(::Command::LEFT);
+		//case SDLK_RIGHT:
+		//	return std::make_optional(::Command::RIGHT);
+		//case SDLK_SPACE:
+		//	return std::make_optional(::Command::GREEN);
+		//case SDLK_F2:
+		//	return std::make_optional(::Command::START);
+		//case SDLK_ESCAPE:
+		//	return std::make_optional(::Command::RED);
+		//case SDLK_COMMA:
+		//	return std::make_optional(::Command::PREVIOUS);
+		//case SDLK_PERIOD:
+		//	return std::make_optional(::Command::NEXT);
+		//case SDLK_BACKSPACE:
+		//	return std::make_optional(::Command::BACK);
+		//case SDLK_TAB:
+		//	return std::make_optional(::Command::YELLOW);
+		//case SDLK_RETURN:
+		//	return std::make_optional(::Command::BLUE);
+		//default:
+		//	return std::nullopt;
+		//}
 	}
 
 	static void HandleKeyDown(const SDL_KeyboardEvent& evt)
 	{
-		auto command = KeyCodeToCommand(evt.keysym.sym);
+		auto command = application::Keyboard::ToCommand((SDL_KeyCode)evt.keysym.sym);
 		if (command)
 		{
 			application::Command::Handle(command.value());
@@ -107,14 +110,10 @@ namespace common::Application
 	const std::string COLOR = "config/graphics/colors.json";
 	const std::string FONTS = "config/graphics/fonts.json";
 	const std::string LAYOUTS = "config/ui/layouts.json";
-	const std::string STRINGS = "config/data/strings.json";
-	const std::string INTS = "config/data/ints.json";
-	const std::string FLAGS = "config/data/flags.json";
 	const std::string OPTIONS = "config/options.json";
 	const std::string SFX = "config/audio/sfx.json";
 	const std::string MUX = "config/audio/mux.json";
-	const std::string DESCRIPTORS = "config/game/descriptors.json";
-	const std::string SCENARIOS = "scenarios/scenarios.json";
+	const std::string KEYBOARD = "config/keyboard.json";
 
 	static std::vector<void(*)()> starters = 
 	{
@@ -139,6 +138,7 @@ namespace common::Application
 		graphics::Layouts::Start(LAYOUTS);
 		common::Sounds::Start(SFX, MUX);
 		Options::Start(OPTIONS);
+		application::Keyboard::Start(KEYBOARD);
 
 		for (auto starter : starters)
 		{

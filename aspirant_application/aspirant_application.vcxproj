@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.Command.cpp" />
+    <ClCompile Include="Application.Keyboard.cpp" />
     <ClCompile Include="Application.MouseButtonDown.cpp" />
     <ClCompile Include="Application.MouseButtonUp.cpp" />
     <ClCompile Include="Application.MouseMotion.cpp" />
@@ -213,6 +214,7 @@
   <ItemGroup>
     <ClInclude Include="Application.Command.h" />
     <ClInclude Include="Application.Handlers.h" />
+    <ClInclude Include="Application.Keyboard.h" />
     <ClInclude Include="Application.MouseButtonDown.h" />
     <ClInclude Include="Application.MouseButtonUp.h" />
     <ClInclude Include="Application.MouseMotion.h" />

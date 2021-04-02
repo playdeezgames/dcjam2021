@@ -2,9 +2,11 @@
 #include "Game.World.h"
 #include "Game.Avatar.Statistics.h"
 #include <vector>
+#include "Common.Sounds.h"
 namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
+	const std::string SOUND_BUMPWALL = "bumpwall";
 
 	size_t avatarColumn = 0;
 	size_t avatarRow = 0;
@@ -78,16 +80,20 @@ namespace game::Avatar
 					avatarColumn--;
 					break;
 				}
-			}
-			SetExplored();
-			//do hunger!
-			if (avatar::Statistics::IsStarving())
-			{
-				avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
+				SetExplored();
+				//do hunger!
+				if (avatar::Statistics::IsStarving())
+				{
+					avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
+				}
+				else
+				{
+					avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
+				}
 			}
 			else
 			{
-				avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
+				common::Sounds::PlaySound(SOUND_BUMPWALL);
 			}
 		}
 	}
