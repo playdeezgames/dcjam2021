@@ -62,6 +62,7 @@ namespace sublayout::POV
 
 	void Start()
 	{
-		::application::Update::AddHandler(::UIState::IN_PLAY, UpdatePOV);
+		::application::Update::AddHandler(::UIState::IN_PLAY_MAP, UpdatePOV);
+		::application::Update::AddHandler(::UIState::IN_PLAY_FLOOR, UpdatePOV);
 	}
 }

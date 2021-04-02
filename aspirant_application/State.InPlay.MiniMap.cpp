@@ -37,6 +37,9 @@ namespace state::in_play::MiniMap
 		case ::Command::DOWN:
 			game::Avatar::MoveBack();
 			break;
+		case ::Command::NEXT:
+			application::UIState::Write(::UIState::IN_PLAY_FLOOR);
+			break;
 		}
 	}
 
@@ -79,8 +82,8 @@ namespace state::in_play::MiniMap
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY, OnCommand);
-		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY, OnUpdate);
+		::application::Command::SetHandler(::UIState::IN_PLAY_MAP, OnCommand);
+		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
+		::application::Update::AddHandler(::UIState::IN_PLAY_MAP, OnUpdate);
 	}
 }

@@ -27,14 +27,14 @@ Enhance The Maze:
     this leads to torches, lanterns, etc
   ☐ stairs/ladders/holes up and down
 Controls:
-  ☐ move back
+  ✔ move back @done(21-04-02 16:37)
   ☐ mouse based controls for moving and turning(stretch)
-  ☐ remappable keys(default WASD + Arrows)
+  ✔ remappable keys(default WASD + Arrows) @done(21-04-02 16:37)
 Vital Statistics:
-  ☐ health
+  ✔ health @done(21-04-02 16:37)
     leads to health potions
     can die from wounds
-  ☐ hunger
+  ✔ hunger @done(21-04-02 16:37)
     leads to food
     can starve, i.e. lose health
   ☐ attack strength
@@ -56,7 +56,7 @@ Containers:
   ☐ chest
     might be trapped!
 UI:
-  ☐ need to put in a nested layout
+  ✔ need to put in a nested layout @done(21-04-02 16:37)
 To Complete Required Features for Jam:
   ✔ "Essentially modeless" with a fixed 3D perspective. @done(21-03-31 18:57)
     (The game must have first-person exploration at all times. Exceptions are point to point overworld map movement (fast travel), combat screens or town screens.)
@@ -74,7 +74,7 @@ To Complete Required Features for Jam:
     (The game must have a death/perish condition, or some other end-of-game mechanic.)
   ☐ A way of replenishing resources and vital statistics.
     (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)
-    ☐ ground inventory <== YOU ARE WORKING ON THIS! @started(21-04-02 05:55)
+    ✔ ground inventory @started(21-04-02 05:55) @done(21-04-02 16:37) @lasted(10h42m50s)
     ☐ avatar inventory
     ☐ way to pick up items from ground
     ☐ way to drop items to ground

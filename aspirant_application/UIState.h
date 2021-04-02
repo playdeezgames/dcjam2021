@@ -8,6 +8,7 @@ enum class UIState
 	ABOUT,
 	OPTIONS,
 	START_GAME,
-	IN_PLAY,
+	IN_PLAY_MAP,
+	IN_PLAY_FLOOR,
 	LEAVE_PLAY
 };

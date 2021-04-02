@@ -21,7 +21,7 @@ namespace state::Start
 		{
 		case StartGameItem::NEW_GAME:
 			game::Reset();
-			::application::UIState::Write(::UIState::IN_PLAY);
+			::application::UIState::Write(::UIState::IN_PLAY_MAP);
 			break;
 		case StartGameItem::BACK:
 			::application::UIState::Write(::UIState::MAIN_MENU);

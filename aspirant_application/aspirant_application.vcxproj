@@ -169,6 +169,7 @@
     <ClCompile Include="Application.UIState.cpp" />
     <ClCompile Include="Application.Update.cpp" />
     <ClCompile Include="Game.Avatar.cpp" />
+    <ClCompile Include="Game.Avatar.Items.cpp" />
     <ClCompile Include="Game.Avatar.Statistics.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game.Items.cpp" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Graphics.Layout.cpp" />
     <ClCompile Include="Graphics.Layouts.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="State.InPlay.FloorInventory.cpp" />
     <ClCompile Include="State.InPlay.MiniMap.cpp" />
     <ClCompile Include="State.LeavePlay.cpp" />
     <ClCompile Include="State.MainMenu.cpp" />
@@ -224,6 +226,7 @@
     <ClInclude Include="Application.Update.h" />
     <ClInclude Include="Common.Properties.h" />
     <ClInclude Include="Game.Avatar.h" />
+    <ClInclude Include="Game.Avatar.Items.h" />
     <ClInclude Include="Game.Avatar.Statistic.h" />
     <ClInclude Include="Game.Avatar.Statistics.h" />
     <ClInclude Include="Game.h" />

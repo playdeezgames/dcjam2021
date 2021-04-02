@@ -23,7 +23,7 @@ namespace state::LeavePlay
 			::application::UIState::Write(::UIState::MAIN_MENU);
 			return;
 		case LeavePlayItem::CONTINUE:
-			::application::UIState::Write(::UIState::IN_PLAY);
+			::application::UIState::Write(::UIState::IN_PLAY_MAP);
 			return;
 		}
 	}

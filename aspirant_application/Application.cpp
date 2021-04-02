@@ -32,40 +32,13 @@ namespace state::Start { void Start(); }
 namespace state::in_play::MiniMap { void Start(); }
 namespace state::LeavePlay { void Start(); }
 namespace sublayout::POV { void Start(); }
+namespace game::avatar::Items { void Start(); }
+namespace state::in_play::FloorInventory { void Start(); }
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
 	{
 		return application::Keyboard::ToCommand(code);
-		//switch (code)
-		//{
-		//case SDLK_UP:
-		//	return std::make_optional(::Command::UP);
-		//case SDLK_DOWN:
-		//	return std::make_optional(::Command::DOWN);
-		//case SDLK_LEFT:
-		//	return std::make_optional(::Command::LEFT);
-		//case SDLK_RIGHT:
-		//	return std::make_optional(::Command::RIGHT);
-		//case SDLK_SPACE:
-		//	return std::make_optional(::Command::GREEN);
-		//case SDLK_F2:
-		//	return std::make_optional(::Command::START);
-		//case SDLK_ESCAPE:
-		//	return std::make_optional(::Command::RED);
-		//case SDLK_COMMA:
-		//	return std::make_optional(::Command::PREVIOUS);
-		//case SDLK_PERIOD:
-		//	return std::make_optional(::Command::NEXT);
-		//case SDLK_BACKSPACE:
-		//	return std::make_optional(::Command::BACK);
-		//case SDLK_TAB:
-		//	return std::make_optional(::Command::YELLOW);
-		//case SDLK_RETURN:
-		//	return std::make_optional(::Command::BLUE);
-		//default:
-		//	return std::nullopt;
-		//}
 	}
 
 	static void HandleKeyDown(const SDL_KeyboardEvent& evt)
@@ -126,7 +99,9 @@ namespace common::Application
 		state::in_play::MiniMap::Start,
 		game::Start,
 		state::LeavePlay::Start,
-		sublayout::POV::Start
+		sublayout::POV::Start,
+		game::avatar::Items::Start,
+		state::in_play::FloorInventory::Start
 	};
 
 	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)
