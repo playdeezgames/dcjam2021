@@ -131,7 +131,7 @@
     <ClCompile Include="Maze.Direction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="State.InPlay.cpp">
+    <ClCompile Include="State.InPlay.MiniMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.Images.cpp">

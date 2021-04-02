@@ -27,7 +27,7 @@ namespace state::MainMenu { void Start(); }
 namespace state::Options { void Start(); }
 namespace state::Splash { void Start(); }
 namespace state::Start { void Start(); }
-namespace state::InPlay { void Start(); }
+namespace state::in_play::MiniMap { void Start(); }
 namespace state::LeavePlay { void Start(); }
 namespace Application
 {
@@ -124,7 +124,7 @@ namespace common::Application
 		state::ConfirmQuit::Start,
 		state::Options::Start,
 		state::Start::Start,
-		state::InPlay::Start,
+		state::in_play::MiniMap::Start,
 		game::Start,
 		state::LeavePlay::Start
 	};

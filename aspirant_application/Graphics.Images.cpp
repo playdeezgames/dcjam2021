@@ -24,4 +24,19 @@ namespace graphics::Images
 			}
 		}
 	}
+
+	void SetVisible(const std::string& layoutName, const std::string& imageId, bool visible)
+	{
+		for (auto& thingie : graphics::Layouts::layouts[layoutName])
+		{
+			if (thingie[common::Properties::TYPE] == graphics::Types::IMAGE)
+			{
+				if (thingie.count(graphics::Properties::IMAGE_ID) > 0 &&
+					thingie[graphics::Properties::IMAGE_ID] == imageId)
+				{
+					thingie[graphics::Properties::VISIBLE] = visible;
+				}
+			}
+		}
+	}
 }

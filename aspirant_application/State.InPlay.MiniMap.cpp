@@ -9,10 +9,11 @@
 #include "Game.Avatar.h"
 #include "Game.World.h"
 #include "Game.Avatar.Statistics.h"
+#include "Game.Items.h"
 #include <sstream>
-namespace state::InPlay
+namespace state::in_play::MiniMap
 {
-	const std::string LAYOUT_NAME = "State.InPlay";
+	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
 	const std::string AHEAD_IMAGE_ID = "Ahead";
 	const std::string RIGHT_SIDE_IMAGE_ID = "RightSide";
@@ -20,27 +21,33 @@ namespace state::InPlay
 	const std::string POSITION_TEXT_ID = "Position";
 	const std::string HEALTH_TEXT_ID = "Health";
 	const std::string HUNGER_TEXT_ID = "Hunger";
+	const std::string FOOD_IMAGE_ID = "Food";
+	const std::string POTION_IMAGE_ID = "Potion";
+
 	static std::map<game::World::Border, std::string> leftSides =
 	{
 		{game::World::Border::DOOR, "LeftDoor"},
 		{game::World::Border::WALL, "LeftWall"}
 	};
+
 	static std::map<game::World::Border, std::string> rightSides =
 	{
 		{game::World::Border::DOOR, "RightDoor"},
 		{game::World::Border::WALL, "RightWall"}
 	};
+
 	static std::map<game::World::Border, std::string> aheads =
 	{
 		{game::World::Border::DOOR, "AheadDoor"},
 		{game::World::Border::WALL, "AheadWall"}
 	};
+
 	static std::map<maze::Direction, std::string> directionNames =
 	{
-		{maze::Direction::NORTH, "North"},
-		{maze::Direction::EAST,  "East"},
-		{maze::Direction::SOUTH, "South"},
-		{maze::Direction::WEST, "West"}
+		{maze::Direction::NORTH, "N"},
+		{maze::Direction::EAST,  "E"},
+		{maze::Direction::SOUTH, "S"},
+		{maze::Direction::WEST, "W"}
 	};
 
 	static void OnCommand(const ::Command& command)
@@ -66,14 +73,6 @@ namespace state::InPlay
 		}
 	}
 
-	static void UpdatePosition()
-	{
-		auto position = game::Avatar::GetPosition();
-		std::stringstream ss;
-		ss << "(" << position.GetX() << ", " << position.GetY() << ")";
-		::graphics::Texts::SetTextText(LAYOUT_NAME, POSITION_TEXT_ID, ss.str());
-	}
-
 	static void UpdateHealth()
 	{
 		std::stringstream ss;
@@ -86,7 +85,7 @@ namespace state::InPlay
 		{
 			ss << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) << "/" << game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH);
 		}
-		::graphics::Texts::SetTextText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
+		::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
 	}
 
 	static void UpdateHunger()
@@ -101,7 +100,7 @@ namespace state::InPlay
 		{
 			ss << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) << "/" << game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER);
 		}
-		::graphics::Texts::SetTextText(LAYOUT_NAME, HUNGER_TEXT_ID, ss.str());
+		::graphics::Texts::SetText(LAYOUT_NAME, HUNGER_TEXT_ID, ss.str());
 	}
 
 	static void UpdatePOV()
@@ -109,18 +108,20 @@ namespace state::InPlay
 		::graphics::Images::SetSprite(LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetLeftSide()]);
 		::graphics::Images::SetSprite(LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetAhead()]);
 		::graphics::Images::SetSprite(LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetRightSide()]);
+		auto position = game::Avatar::GetPosition();
+		::graphics::Images::SetVisible(LAYOUT_NAME, FOOD_IMAGE_ID, game::Items::IsPresent(game::Item::FOOD, position));
+		::graphics::Images::SetVisible(LAYOUT_NAME, POTION_IMAGE_ID, game::Items::IsPresent(game::Item::POTION, position));
 	}
 
 	static void UpdateDirection()
 	{
 		auto facing = game::Avatar::GetFacing();
-		::graphics::Texts::SetTextText(LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
+		::graphics::Texts::SetText(LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
 	}
 
 	static void OnUpdate(const Uint32& ticks)
 	{
 		UpdatePOV();
-		UpdatePosition();
 		UpdateDirection();
 		UpdateHealth();
 		UpdateHunger();

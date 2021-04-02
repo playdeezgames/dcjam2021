@@ -10,7 +10,7 @@ namespace graphics::Layouts
 }
 namespace graphics::Texts
 {
-	void SetTextText(const std::string& layoutName, const std::string& textId, const std::string& text)
+	void SetText(const std::string& layoutName, const std::string& textId, const std::string& text)
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{

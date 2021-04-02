@@ -13,14 +13,12 @@ namespace graphics::Image
 		{
 			Sprites::Read(model[Properties::SPRITE])
 				.value()
-				.Draw
-				(
+				.Draw(
 					renderer,
 					common::XY<int>(
 						(int)model[common::Properties::X],
 						(int)model[common::Properties::Y]),
-					::graphics::Colors::Get(model[Properties::COLOR])
-				);
+					::graphics::Colors::Get(model[Properties::COLOR]));
 		}
 	}
 }
