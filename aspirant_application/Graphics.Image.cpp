@@ -9,15 +9,18 @@ namespace graphics::Image
 {
 	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
 	{
-		Sprites::Read(model[Properties::SPRITE])
-			.value()
-			.Draw
-			(
-				renderer,
-				common::XY<int>(
-					(int)model[common::Properties::X], 
-					(int)model[common::Properties::Y]),
-				::graphics::Colors::Get(model[Properties::COLOR])
-			);
+		if (model.count(Properties::VISIBLE) == 0 || model[Properties::VISIBLE] == true)
+		{
+			Sprites::Read(model[Properties::SPRITE])
+				.value()
+				.Draw
+				(
+					renderer,
+					common::XY<int>(
+						(int)model[common::Properties::X],
+						(int)model[common::Properties::Y]),
+					::graphics::Colors::Get(model[Properties::COLOR])
+				);
+		}
 	}
 }

@@ -155,6 +155,9 @@
     <ClCompile Include="State.LeavePlay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.Items.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">
@@ -281,6 +284,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.Avatar.Statistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.Items.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

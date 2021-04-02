@@ -30,4 +30,5 @@ namespace graphics::Properties
 	const std::string TEXT_ID = "text-id";
 	const std::string TEXTURE = "texture";
 	const std::string VALUE = "value";
+	const std::string VISIBLE = "visible";
 }
