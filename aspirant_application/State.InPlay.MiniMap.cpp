@@ -13,17 +13,18 @@
 #include <sstream>
 namespace state::in_play::MiniMap
 {
-	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
 	const std::string AHEAD_IMAGE_ID = "Ahead";
 	const std::string RIGHT_SIDE_IMAGE_ID = "RightSide";
 	const std::string DIRECTION_TEXT_ID = "Direction";
 	const std::string POSITION_TEXT_ID = "Position";
-	const std::string HEALTH_TEXT_ID = "Health";
-	const std::string HUNGER_TEXT_ID = "Hunger";
 	const std::string FOOD_IMAGE_ID = "Food";
 	const std::string POTION_IMAGE_ID = "Potion";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
+
+	const std::string HUNGER_TEXT_ID = "Hunger";
+	const std::string HEALTH_TEXT_ID = "Health";
+	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
 
 	static std::map<game::World::Border, std::string> leftSides =
 	{
