@@ -61,4 +61,10 @@ namespace game::avatar::Statistics
 		Write(statistic, Read(statistic) - delta);
 	}
 
+	void Increase(const ::game::avatar::Statistic& statistic, int delta)
+	{
+		Decrease(statistic, -delta);
+	}
+
+
 }

@@ -4,6 +4,19 @@ namespace game::avatar::Items
 {
 	static std::map<game::Item, size_t> avatarInventory;
 
+	size_t Read(game::Item item)
+	{
+		auto iter = avatarInventory.find(item);
+		if (iter != avatarInventory.end())
+		{
+			return iter->second;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
 	const std::map<game::Item, size_t>& All()
 	{
 		return avatarInventory;

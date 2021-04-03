@@ -10,4 +10,5 @@ namespace game::avatar::Statistics
 	bool IsStarving();
 	bool IsDead();
 	void Decrease(const ::game::avatar::Statistic&, int);
+	void Increase(const ::game::avatar::Statistic&, int);
 }

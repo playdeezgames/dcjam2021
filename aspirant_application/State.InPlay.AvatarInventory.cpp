@@ -6,9 +6,12 @@
 #include "Game.Avatar.Items.h"
 #include "Game.Items.h"
 #include "Game.Avatar.h"
+#include "Game.Avatar.Statistics.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
+	const int FOOD_HUNGER_INCREASE = 10;
+	const int POTION_HEALTH_INCREASE = 10;
 
 	static void DropItem()
 	{
@@ -17,6 +20,41 @@ namespace state::in_play::AvatarInventory
 		{
 			size_t amount = game::avatar::Items::Remove(*item, 1);
 			game::Items::Add(*item, 1, game::Avatar::GetPosition());
+		}
+	}
+
+	static void EatFood()
+	{
+		if (game::avatar::Items::Read(game::Item::FOOD)>0)
+		{
+			game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, FOOD_HUNGER_INCREASE);
+			game::avatar::Items::Remove(game::Item::FOOD, 1);
+		}
+	}
+
+	static void DrinkPotion()
+	{
+		if (game::avatar::Items::Read(game::Item::POTION)>0)
+		{
+			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, POTION_HEALTH_INCREASE);
+			game::avatar::Items::Remove(game::Item::POTION, 1);
+		}
+	}
+
+	static void UseItem()
+	{
+		auto item = graphics::AvatarInventory::GetItem();
+		if (item)
+		{
+			switch (*item)
+			{
+			case game::Item::FOOD:
+				EatFood();
+				break;
+			case game::Item::POTION:
+				DrinkPotion();
+				break;
+			}
 		}
 	}
 
@@ -44,6 +82,9 @@ namespace state::in_play::AvatarInventory
 			break;
 		case ::Command::RED:
 			DropItem();
+			break;
+		case ::Command::GREEN:
+			UseItem();
 			break;
 		}
 	}
