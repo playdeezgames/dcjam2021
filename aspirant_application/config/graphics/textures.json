@@ -12,5 +12,6 @@
     "map": "assets/images/treasure-map.png",
     "troglodyte": "assets/images/creatures/troglodyte.png",
     "imp": "assets/images/creatures/imp.png",
-    "cards": "assets/images/cards.png"
+    "cards": "assets/images/cards.png",
+    "card-back": "assets/images/card-back.png"
 }

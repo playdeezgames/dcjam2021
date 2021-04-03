@@ -2854,5 +2854,376 @@
         "y": 0,
         "width": 360,
         "height": 360
+    },
+    "Card2C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+    },
+    "Card2D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 0,
+        "width": 64,
+        "height": 64
+    },
+    "Card2H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 0,
+        "width": 64,
+        "height": 64
+    },
+    "Card2S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 0,
+        "width": 64,
+        "height": 64
+    },
+    "Card3C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+    },
+    "Card3D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 64,
+        "width": 64,
+        "height": 64
+    },
+    "Card3H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 64,
+        "width": 64,
+        "height": 64
+    },
+    "Card3S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 64,
+        "width": 64,
+        "height": 64
+    },
+    "Card4C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 128,
+        "width": 64,
+        "height": 64
+    },
+    "Card4D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 128,
+        "width": 64,
+        "height": 64
+    },
+    "Card4H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 128,
+        "width": 64,
+        "height": 64
+    },
+    "Card4S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 128,
+        "width": 64,
+        "height": 64
+    },
+    "Card5C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 192,
+        "width": 64,
+        "height": 64
+    },
+    "Card5D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 192,
+        "width": 64,
+        "height": 64
+    },
+    "Card5H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 192,
+        "width": 64,
+        "height": 64
+    },
+    "Card5S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 192,
+        "width": 64,
+        "height": 64
+    },
+    "Card6C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 256,
+        "width": 64,
+        "height": 64
+    },
+    "Card6D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 256,
+        "width": 64,
+        "height": 64
+    },
+    "Card6H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 256,
+        "width": 64,
+        "height": 64
+    },
+    "Card6S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 256,
+        "width": 64,
+        "height": 64
+    },
+    "Card7C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 320,
+        "width": 64,
+        "height": 64
+    },
+    "Card7D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 320,
+        "width": 64,
+        "height": 64
+    },
+    "Card7H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 320,
+        "width": 64,
+        "height": 64
+    },
+    "Card7S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 320,
+        "width": 64,
+        "height": 64
+    },
+    "Card8C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 384,
+        "width": 64,
+        "height": 64
+    },
+    "Card8D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 384,
+        "width": 64,
+        "height": 64
+    },
+    "Card8H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 384,
+        "width": 64,
+        "height": 64
+    },
+    "Card8S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 384,
+        "width": 64,
+        "height": 64
+    },
+    "Card9C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 448,
+        "width": 64,
+        "height": 64
+    },
+    "Card9D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 448,
+        "width": 64,
+        "height": 64
+    },
+    "Card9H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 448,
+        "width": 64,
+        "height": 64
+    },
+    "Card9S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 448,
+        "width": 64,
+        "height": 64
+    },
+    "Card10C":{
+        "texture": "cards",
+        "x": 0,
+        "y": 512,
+        "width": 64,
+        "height": 64
+    },
+    "Card10D":{
+        "texture": "cards",
+        "x": 64,
+        "y": 512,
+        "width": 64,
+        "height": 64
+    },
+    "Card10H":{
+        "texture": "cards",
+        "x": 128,
+        "y": 512,
+        "width": 64,
+        "height": 64
+    },
+    "Card10S":{
+        "texture": "cards",
+        "x": 192,
+        "y": 512,
+        "width": 64,
+        "height": 64
+    },
+    "CardJC":{
+        "texture": "cards",
+        "x": 0,
+        "y": 576,
+        "width": 64,
+        "height": 64
+    },
+    "CardJD":{
+        "texture": "cards",
+        "x": 64,
+        "y": 576,
+        "width": 64,
+        "height": 64
+    },
+    "CardJH":{
+        "texture": "cards",
+        "x": 128,
+        "y": 576,
+        "width": 64,
+        "height": 64
+    },
+    "CardJS":{
+        "texture": "cards",
+        "x": 192,
+        "y": 576,
+        "width": 64,
+        "height": 64
+    },
+    "CardQC":{
+        "texture": "cards",
+        "x": 0,
+        "y": 640,
+        "width": 64,
+        "height": 64
+    },
+    "CardQD":{
+        "texture": "cards",
+        "x": 64,
+        "y": 640,
+        "width": 64,
+        "height": 64
+    },
+    "CardQH":{
+        "texture": "cards",
+        "x": 128,
+        "y": 640,
+        "width": 64,
+        "height": 64
+    },
+    "CardQS":{
+        "texture": "cards",
+        "x": 192,
+        "y": 640,
+        "width": 64,
+        "height": 64
+    },
+    "CardKC":{
+        "texture": "cards",
+        "x": 0,
+        "y": 704,
+        "width": 64,
+        "height": 64
+    },
+    "CardKD":{
+        "texture": "cards",
+        "x": 64,
+        "y": 704,
+        "width": 64,
+        "height": 64
+    },
+    "CardKH":{
+        "texture": "cards",
+        "x": 128,
+        "y": 704,
+        "width": 64,
+        "height": 64
+    },
+    "CardKS":{
+        "texture": "cards",
+        "x": 192,
+        "y": 704,
+        "width": 64,
+        "height": 64
+    },
+    "CardAC":{
+        "texture": "cards",
+        "x": 0,
+        "y": 768,
+        "width": 64,
+        "height": 64
+    },
+    "CardAD":{
+        "texture": "cards",
+        "x": 64,
+        "y": 768,
+        "width": 64,
+        "height": 64
+    },
+    "CardAH":{
+        "texture": "cards",
+        "x": 128,
+        "y": 768,
+        "width": 64,
+        "height": 64
+    },
+    "CardAS":{
+        "texture": "cards",
+        "x": 192,
+        "y": 768,
+        "width": 64,
+        "height": 64
+    },
+    "CardBack":{
+        "texture": "card-back",
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
     }
 }
