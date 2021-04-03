@@ -6,6 +6,5 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/delapouite/hamburger.html
 * https://game-icons.net/1x1/lorc/round-bottom-flask.html
 * https://game-icons.net/1x1/lorc/treasure-map.html
-
-
-* https://game-icons.net/1x1/delapouite/stomach.html
+* https://game-icons.net/1x1/delapouite/troglodyte.html
+* https://game-icons.net/1x1/lorc/imp.html

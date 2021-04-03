@@ -54,5 +54,25 @@
         "x": 276,
         "y": 292,
         "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "Troglodyte",
+        "sprite": "CreatureTroglodyte",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "Imp",
+        "sprite": "CreatureImp",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
     }
 ]
