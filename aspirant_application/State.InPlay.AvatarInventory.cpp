@@ -2,6 +2,7 @@
 #include "Application.Renderer.h"
 #include "Application.Update.h"
 #include "Application.UIState.h"
+#include "Graphics.AvatarInventory.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
@@ -14,11 +15,19 @@ namespace state::in_play::AvatarInventory
 			application::UIState::Write(::UIState::LEAVE_PLAY);
 			break;
 		case ::Command::PREVIOUS:
+			graphics::AvatarInventory::ResetIndex();
 			application::UIState::Write(::UIState::IN_PLAY_FLOOR);
 			break;
 		case ::Command::NEXT:
 		case ::Command::YELLOW:
+			graphics::AvatarInventory::ResetIndex();
 			application::UIState::Write(::UIState::IN_PLAY_STATUS);
+			break;
+		case ::Command::UP:
+			graphics::AvatarInventory::PreviousIndex();
+			break;
+		case ::Command::DOWN:
+			graphics::AvatarInventory::NextIndex();
 			break;
 		}
 	}

@@ -11,6 +11,7 @@ namespace graphics::Text { void Draw(SDL_Renderer*, const nlohmann::json&); }
 namespace graphics::WorldMap { void Draw(SDL_Renderer*, const nlohmann::json&); }
 namespace graphics::Sublayout { void Draw(SDL_Renderer*, const nlohmann::json&); }
 namespace graphics::FloorInventory { void Draw(SDL_Renderer*, const nlohmann::json&); }
+namespace graphics::AvatarInventory { void Draw(SDL_Renderer*, const nlohmann::json&); }
 namespace graphics::Layout
 {
 	static std::map<std::string, void(*)(SDL_Renderer*, const nlohmann::json&)> table =
@@ -20,7 +21,8 @@ namespace graphics::Layout
 		{graphics::Types::TEXT, graphics::Text::Draw},
 		{graphics::Types::WORLD_MAP, graphics::WorldMap::Draw},
 		{graphics::Types::LAYOUT, graphics::Sublayout::Draw},
-		{graphics::Types::FLOOR_INVENTORY, graphics::FloorInventory::Draw}
+		{graphics::Types::FLOOR_INVENTORY, graphics::FloorInventory::Draw},
+		{graphics::Types::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
 	};
 
 	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)

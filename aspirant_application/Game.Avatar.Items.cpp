@@ -4,6 +4,11 @@ namespace game::avatar::Items
 {
 	static std::map<game::Item, size_t> avatarInventory;
 
+	const std::map<game::Item, size_t>& All()
+	{
+		return avatarInventory;
+	}
+
 	void Reset()
 	{
 		avatarInventory.clear();

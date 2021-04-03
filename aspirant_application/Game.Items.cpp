@@ -7,6 +7,17 @@
 #include "Common.RNG.h"
 namespace game::Items
 {
+	const std::map<game::Item, std::string> itemName =
+	{
+		{game::Item::FOOD, "Food"},
+		{game::Item::POTION, "Potion"}
+	};
+
+	const std::string& GetName(const game::Item& item)
+	{
+		return itemName.find(item)->second;
+	}
+
 	const std::map<game::Item, size_t> itemCounts =
 	{
 		{game::Item::FOOD, 100},

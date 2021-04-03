@@ -1,15 +1,15 @@
-#include "json.hpp"
+#include "Graphics.AvatarInventory.h"
 #include <SDL.h>
-#include "Game.Item.h"
+#include "json.hpp"
 #include "Common.Properties.h"
-#include "Game.Items.h"
-#include "Game.Avatar.h"
 #include "Graphics.Properties.h"
-#include "Graphics.Fonts.h"
+#include "Game.Avatar.Items.h"
 #include <sstream>
-namespace graphics::FloorInventory
+#include "Graphics.Fonts.h"
+#include "Game.Items.h"
+namespace graphics::AvatarInventory
 {
-	static size_t inventoryIndex = 0;
+	static size_t inventoryIndex;
 
 	void ResetIndex()
 	{
@@ -18,8 +18,7 @@ namespace graphics::FloorInventory
 
 	void NextIndex()
 	{
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::Items::FloorInventory(location);
+		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + 1) % inventory.size();
@@ -28,8 +27,7 @@ namespace graphics::FloorInventory
 
 	void PreviousIndex()
 	{
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::Items::FloorInventory(location);
+		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + inventory.size() - 1) % inventory.size();
@@ -38,21 +36,7 @@ namespace graphics::FloorInventory
 
 	std::optional<game::Item> GetItem()
 	{
-		auto location = game::Avatar::GetPosition();
-		auto& inventory = game::Items::FloorInventory(location);
-		if (inventoryIndex < inventory.size())
-		{
-			auto iter = inventory.begin();
-			for (size_t dummy = 0; dummy < inventoryIndex; ++dummy)
-			{
-				iter++;
-			}
-			return iter->first;
-		}
-		else
-		{
-			return std::nullopt;
-		}
+		return std::nullopt;
 	}
 
 	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
@@ -69,8 +53,7 @@ namespace graphics::FloorInventory
 		std::string dropShadowColor = model[graphics::Properties::DROP_SHADOW_COLOR];
 
 
-		auto location = game::Avatar::GetPosition();
-		auto& inventory = game::Items::FloorInventory(location);
+		auto& inventory = game::avatar::Items::All();
 		if (inventoryIndex >= inventory.size())
 		{
 			inventoryIndex = 0;
