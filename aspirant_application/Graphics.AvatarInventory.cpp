@@ -36,7 +36,21 @@ namespace graphics::AvatarInventory
 
 	std::optional<game::Item> GetItem()
 	{
-		return std::nullopt;
+		auto& inventory = game::avatar::Items::All();
+		if (inventoryIndex < inventory.size())
+		{
+			auto iter = inventory.begin();
+			for (size_t dummy = 0; dummy < inventoryIndex; ++dummy)
+			{
+				iter++;
+			}
+			return iter->first;
+		}
+		else
+		{
+			return std::nullopt;
+		}
+
 	}
 
 	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)

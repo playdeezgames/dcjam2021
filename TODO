@@ -78,7 +78,7 @@ To Complete Required Features for Jam:
     ✔ avatar inventory @done(21-04-02 19:40)
     ✔ way to pick up items from ground @done(21-04-02 19:45)
       ✔ drop shadow on items @done(21-04-02 19:45)
-    ☐ way to drop items to ground
+    ✔ way to drop items to ground @done(21-04-03 04:18)
     ☐ way to use items
   ☐ Decisions by which risking resources can gain other resources.
     (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)

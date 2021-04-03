@@ -26,4 +26,27 @@ namespace game::avatar::Items
 	{
 		Reset();
 	}
+
+	size_t Remove(game::Item item, size_t quantity)
+	{
+		if (avatarInventory.find(item)!=avatarInventory.end())
+		{
+			size_t total = avatarInventory[item];
+			if (quantity >= total)
+			{
+				quantity = total;
+				avatarInventory.erase(item);
+			}
+			else
+			{
+				avatarInventory[item] -= quantity;
+			}
+			return quantity;
+		}
+		else
+		{
+			return 0;
+		}
+
+	}
 }

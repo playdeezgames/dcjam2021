@@ -3,9 +3,22 @@
 #include "Application.Update.h"
 #include "Application.UIState.h"
 #include "Graphics.AvatarInventory.h"
+#include "Game.Avatar.Items.h"
+#include "Game.Items.h"
+#include "Game.Avatar.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
+
+	static void DropItem()
+	{
+		auto item = graphics::AvatarInventory::GetItem();
+		if (item)
+		{
+			size_t amount = game::avatar::Items::Remove(*item, 1);
+			game::Items::Add(*item, 1, game::Avatar::GetPosition());
+		}
+	}
 
 	static void OnCommand(const ::Command& command)
 	{
@@ -28,6 +41,9 @@ namespace state::in_play::AvatarInventory
 			break;
 		case ::Command::DOWN:
 			graphics::AvatarInventory::NextIndex();
+			break;
+		case ::Command::RED:
+			DropItem();
 			break;
 		}
 	}

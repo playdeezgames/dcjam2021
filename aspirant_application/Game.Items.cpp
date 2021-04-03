@@ -96,4 +96,11 @@ namespace game::Items
 		}
 	}
 
+	void Add(const game::Item& item, size_t amount, const common::XY<size_t>& location)
+	{
+		if (amount > 0)
+		{
+			roomInventories[location.GetX()][location.GetX()][item] += amount;
+		}
+	}
 }
