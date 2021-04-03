@@ -6,7 +6,16 @@
 #include "Game.World.h"
 namespace game::Creatures
 {
+	const std::string PROPERTY_NUMBER_APPEARING = "number-appearing";
+	const std::string PROPERTY_INDEX = "index";
+	const std::string PROPERTY_IMAGE_ID = "image-id";
+
 	static nlohmann::json descriptors;
+
+	std::string GetImageId(game::Creature creature)
+	{
+		return descriptors[(int)creature][PROPERTY_IMAGE_ID];
+	}
 
 	struct CreatureInstance
 	{
@@ -18,11 +27,18 @@ namespace game::Creatures
 
 	std::optional<game::Creature> Read(const common::XY<size_t>& location)
 	{
+		auto column = roomCreatures.find(location.GetX());
+		if (column != roomCreatures.end())
+		{
+			auto row = column->second.find(location.GetY());
+			if (row != column->second.end())
+			{
+				return row->second.creature;
+			}
+		}
 		return std::nullopt;
 	}
 
-	const std::string PROPERTY_NUMBER_APPEARING = "number-appearing";
-	const std::string PROPERTY_INDEX = "index";
 
 	void Reset()
 	{

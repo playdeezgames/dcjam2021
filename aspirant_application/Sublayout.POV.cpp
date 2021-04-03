@@ -6,6 +6,7 @@
 #include "Graphics.Images.h"
 #include "Game.Items.h"
 #include "Application.Update.h"
+#include "Game.Creatures.h"
 namespace sublayout::POV
 {
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
@@ -49,6 +50,23 @@ namespace sublayout::POV
 		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
 	}
 
+	const std::vector<game::Creature> creatures =
+	{
+		game::Creature::IMP,
+		game::Creature::TROGLODYTE
+	};
+
+	static void UpdateCreatures()
+	{
+		for (auto creature : creatures)
+		{
+			auto imageId = game::Creatures::GetImageId(creature);
+			auto instance = game::Creatures::Read(game::Avatar::GetPosition());
+			bool visible = instance && instance.value() == creature;
+			graphics::Images::SetVisible(POV_LAYOUT_NAME, imageId, visible);
+		}
+	}
+
 	static void UpdatePOV(const Uint32&)
 	{
 		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetLeftSide()]);
@@ -58,6 +76,7 @@ namespace sublayout::POV
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::Items::IsPresent(game::Item::FOOD, position));
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::Items::IsPresent(game::Item::POTION, position));
 		UpdateDirection();
+		UpdateCreatures();
 	}
 
 	void Start()
