@@ -22,7 +22,6 @@ namespace state::in_play::MiniMap
 		switch (command)
 		{
 		case ::Command::BACK:
-		case ::Command::RED:
 			application::UIState::Write(::UIState::LEAVE_PLAY);
 			break;
 		case ::Command::LEFT:

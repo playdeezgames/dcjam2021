@@ -25,7 +25,6 @@ namespace state::in_play::FloorInventory
 		switch (command)
 		{
 		case ::Command::BACK:
-		case ::Command::RED:
 			application::UIState::Write(::UIState::LEAVE_PLAY);
 			break;
 		case ::Command::PREVIOUS:

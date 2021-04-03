@@ -11,7 +11,6 @@ namespace state::in_play::AvatarStatus
 		switch (command)
 		{
 		case ::Command::BACK:
-		case ::Command::RED:
 			application::UIState::Write(::UIState::LEAVE_PLAY);
 			break;
 		case ::Command::PREVIOUS:
