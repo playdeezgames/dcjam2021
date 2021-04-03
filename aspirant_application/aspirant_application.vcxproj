@@ -199,6 +199,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="State.InPlay.AvatarInventory.cpp" />
     <ClCompile Include="State.InPlay.AvatarStatus.cpp" />
+    <ClCompile Include="State.InPlay.Combat.cpp" />
     <ClCompile Include="State.InPlay.FloorInventory.cpp" />
     <ClCompile Include="State.InPlay.MiniMap.cpp" />
     <ClCompile Include="State.LeavePlay.cpp" />

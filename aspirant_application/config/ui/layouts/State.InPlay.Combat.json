@@ -1,0 +1,26 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.POV"
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "LightCyan",
+        "text": "!!Combat!!",
+        "x": 500,
+        "y": 0,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Cyan",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    }
+]

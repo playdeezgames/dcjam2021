@@ -10,6 +10,7 @@
     "world": "assets/images/world.png",
     "items": "assets/images/items.png",
     "map": "assets/images/treasure-map.png",
-    "troglodyte": "assets/images/troglodyte.png",
-    "imp": "assets/images/imp.png"
+    "troglodyte": "assets/images/creatures/troglodyte.png",
+    "imp": "assets/images/creatures/imp.png",
+    "cards": "assets/images/cards.png"
 }

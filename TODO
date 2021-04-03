@@ -83,11 +83,11 @@ To Complete Required Features for Jam:
   ☐ Decisions by which risking resources can gain other resources.
     (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)
     ☐ how much damage does the avatar do?
-    ☐ how much damage does the creature do?
-    ☐ how many HP does the creature have?
-    ☐ how much armor
-    ☐ what image id for showing the creature
-    ☐ how many of what creature spawn in the maze?
+    ✔ how much damage does the creature do? @done(21-04-03 06:16)
+    ✔ how many HP does the creature have? @done(21-04-03 06:16)
+    ✔ how much armor @done(21-04-03 06:16)
+    ✔ what image id for showing the creature @done(21-04-03 06:16)
+    ✔ how many of what creature spawn in the maze? @done(21-04-03 06:16)
     ☐ by what rule do creatures spawn in the maze?
   ✔ No offensive themes @done(21-04-01 07:08)
      (Any theme is allowed, but keep it decent and safe for work)
