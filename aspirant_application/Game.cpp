@@ -4,6 +4,7 @@ namespace game::Avatar { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
 namespace game::Items { void Reset(); }
 namespace game::avatar::Items { void Reset(); }
+namespace game::Creatures { void Reset(); }
 namespace game
 {
 	void Reset()
@@ -13,6 +14,7 @@ namespace game
 		game::Avatar::Reset();
 		game::avatar::Statistics::Reset();
 		game::avatar::Items::Reset();
+		game::Creatures::Reset();
 	}
 
 	void Start()

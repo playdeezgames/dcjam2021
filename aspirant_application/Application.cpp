@@ -23,6 +23,7 @@
 #include "Game.h"
 #include "Common.Utility.h"
 #include "Application.Keyboard.h"
+#include "Game.Creatures.h"
 namespace state::About { void Start(); }
 namespace state::ConfirmQuit { void Start(); }
 namespace state::MainMenu { void Start(); }
@@ -90,6 +91,7 @@ namespace common::Application
 	const std::string SFX = "config/audio/sfx.json";
 	const std::string MUX = "config/audio/mux.json";
 	const std::string KEYBOARD = "config/keyboard.json";
+	const std::string CREATURES = "config/creatures.json";
 
 	static std::vector<void(*)()> starters = 
 	{
@@ -100,14 +102,14 @@ namespace common::Application
 		state::Options::Start,
 		state::Start::Start,
 		state::in_play::MiniMap::Start,
-		game::Start,
 		state::LeavePlay::Start,
 		sublayout::POV::Start,
 		game::avatar::Items::Start,
 		state::in_play::FloorInventory::Start,
 		state::in_play::AvatarInventory::Start,
 		state::in_play::AvatarStatus::Start,
-		sublayout::QuickStats::Start
+		sublayout::QuickStats::Start,
+		game::Start
 	};
 
 	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)
@@ -120,6 +122,7 @@ namespace common::Application
 		common::Sounds::Start(SFX, MUX);
 		Options::Start(OPTIONS);
 		application::Keyboard::Start(KEYBOARD);
+		game::Creatures::Start(CREATURES);
 
 		for (auto starter : starters)
 		{

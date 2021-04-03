@@ -1,0 +1,20 @@
+[
+    {
+        "index":0,
+        "name":"Imp",
+        "image-id":"Imp",
+        "health":50,
+        "attack":5,
+        "defend":0,
+        "number-appearing":50
+    },
+    {
+        "index":1,
+        "name":"Troglodyte",
+        "image-id":"Troglodyte",
+        "health":100,
+        "attack":10,
+        "defend":5,
+        "number-appearing":25
+    }
+]
