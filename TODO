@@ -75,8 +75,9 @@ To Complete Required Features for Jam:
   ☐ A way of replenishing resources and vital statistics.
     (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)
     ✔ ground inventory @started(21-04-02 05:55) @done(21-04-02 16:37) @lasted(10h42m50s)
-    ☐ avatar inventory
-    ☐ way to pick up items from ground
+    ✔ avatar inventory @done(21-04-02 19:40)
+    ✔ way to pick up items from ground @done(21-04-02 19:45)
+      ✔ drop shadow on items @done(21-04-02 19:45)
     ☐ way to drop items to ground
     ☐ way to use items
   ☐ Decisions by which risking resources can gain other resources.

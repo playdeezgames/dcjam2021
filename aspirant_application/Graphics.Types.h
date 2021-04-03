@@ -2,6 +2,7 @@
 #include <string>
 namespace graphics::Types
 {
+	const std::string FLOOR_INVENTORY = "FloorInventory";
 	const std::string IMAGE = "Image";
 	const std::string LAYOUT = "Layout";
 	const std::string MENU = "Menu";

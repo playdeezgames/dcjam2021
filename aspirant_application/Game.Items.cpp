@@ -54,6 +54,35 @@ namespace game::Items
 
 	bool IsPresent(const game::Item& item, const common::XY<size_t>& location)
 	{
-		return roomInventories[location.GetX()][location.GetX()][item] > 0;
+		auto iter = roomInventories[location.GetX()][location.GetX()].find(item);
+		return iter != roomInventories[location.GetX()][location.GetX()].end();
 	}
+
+	const std::map<game::Item, size_t>& FloorInventory(const common::XY<size_t>& location)
+	{
+		return roomInventories[location.GetX()][location.GetX()];
+	}
+
+	size_t Remove(const game::Item& item, size_t quantity, const common::XY<size_t>& location)
+	{
+		if (IsPresent(item, location))
+		{
+			size_t total = roomInventories[location.GetX()][location.GetX()][item];
+			if (quantity >= total)
+			{
+				quantity = total;
+				roomInventories[location.GetX()][location.GetX()].erase(item);
+			}
+			else
+			{
+				roomInventories[location.GetX()][location.GetX()][item] -= quantity;
+			}
+			return quantity;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
 }

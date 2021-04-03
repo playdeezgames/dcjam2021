@@ -61,5 +61,20 @@
         "drop-shadow-color": "Black",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "FloorInventory",
+        "x": 360,
+        "y": 32,
+        "font": "default",
+        "row-height": 16,
+        "colors": {
+            "active": "Cyan",
+            "inactive": "Gray"
+        },
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
     }
 ]

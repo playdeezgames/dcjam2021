@@ -9,6 +9,13 @@ namespace game::avatar::Items
 		avatarInventory.clear();
 	}
 
+	void Add(game::Item item, size_t amount)
+	{
+		if (amount > 0)
+		{
+			avatarInventory[item] += amount;
+		}
+	}
 
 	void Start()
 	{
