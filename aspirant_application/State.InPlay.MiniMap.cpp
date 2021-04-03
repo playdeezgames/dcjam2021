@@ -13,8 +13,6 @@
 #include <sstream>
 namespace state::in_play::MiniMap
 {
-	const std::string HUNGER_TEXT_ID = "Hunger";
-	const std::string HEALTH_TEXT_ID = "Health";
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
 
 	static void OnCommand(const ::Command& command)
@@ -46,41 +44,10 @@ namespace state::in_play::MiniMap
 		}
 	}
 
-	static void UpdateHealth()
-	{
-		std::stringstream ss;
-		ss << "Health: ";
-		if (game::avatar::Statistics::IsDead())
-		{
-			ss << "DEAD!";
-		}
-		else
-		{
-			ss << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) << "/" << game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH);
-		}
-		::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
-	}
-
-	static void UpdateHunger()
-	{
-		std::stringstream ss;
-		ss << "Hunger: ";
-		if (game::avatar::Statistics::IsStarving())
-		{
-			ss << "STARVING!";
-		}
-		else
-		{
-			ss << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) << "/" << game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER);
-		}
-		::graphics::Texts::SetText(LAYOUT_NAME, HUNGER_TEXT_ID, ss.str());
-	}
 
 
 	static void OnUpdate(const Uint32& ticks)
 	{
-		UpdateHealth();
-		UpdateHunger();
 	}
 
 	void Start()

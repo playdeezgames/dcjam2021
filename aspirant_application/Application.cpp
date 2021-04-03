@@ -36,6 +36,7 @@ namespace game::avatar::Items { void Start(); }
 namespace state::in_play::FloorInventory { void Start(); }
 namespace state::in_play::AvatarInventory { void Start(); }
 namespace state::in_play::AvatarStatus { void Start(); }
+namespace sublayout::QuickStats { void Start(); }
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -105,7 +106,8 @@ namespace common::Application
 		game::avatar::Items::Start,
 		state::in_play::FloorInventory::Start,
 		state::in_play::AvatarInventory::Start,
-		state::in_play::AvatarStatus::Start
+		state::in_play::AvatarStatus::Start,
+		sublayout::QuickStats::Start
 	};
 
 	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)

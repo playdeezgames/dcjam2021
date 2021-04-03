@@ -72,14 +72,14 @@ To Complete Required Features for Jam:
     (The game must at the very least have some basic stats. (Minimum a single health/power bar))
   ✔ Failure end state. @started(21-04-02 03:47) @done(21-04-02 04:43) @lasted(56m56s)
     (The game must have a death/perish condition, or some other end-of-game mechanic.)
-  ☐ A way of replenishing resources and vital statistics.
+  ✔ A way of replenishing resources and vital statistics. @done(21-04-03 04:40)
     (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)
     ✔ ground inventory @started(21-04-02 05:55) @done(21-04-02 16:37) @lasted(10h42m50s)
     ✔ avatar inventory @done(21-04-02 19:40)
     ✔ way to pick up items from ground @done(21-04-02 19:45)
       ✔ drop shadow on items @done(21-04-02 19:45)
     ✔ way to drop items to ground @done(21-04-03 04:18)
-    ☐ way to use items
+    ✔ way to use items @done(21-04-03 04:40)
   ☐ Decisions by which risking resources can gain other resources.
     (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)
   ✔ No offensive themes @done(21-04-01 07:08)

@@ -77,31 +77,7 @@
         "cell-height": 16
     },
     {
-        "type": "Text",
-        "text-id": "Hunger",
-        "font": "default",
-        "color": "Magenta",
-        "text": "<hunger>",
-        "x": 360,
-        "y": 344,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
-        "type": "Text",
-        "text-id": "Health",
-        "font": "default",
-        "color": "Red",
-        "text": "<health>",
-        "x": 360,
-        "y": 328,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
+        "type": "Layout",
+        "name": "Sublayout.QuickStats"
     }
 ]
