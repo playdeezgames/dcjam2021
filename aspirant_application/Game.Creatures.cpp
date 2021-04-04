@@ -109,6 +109,19 @@ namespace game::Creatures
 		}
 	}
 
+	std::optional<bool> IsDead(const common::XY<size_t>& location)
+	{
+		auto instance = Get(location);
+		if (instance)
+		{
+			return instance.value().wounds >= GetMaximumHealth(location).value();
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
 	void DecreaseHealth(const common::XY<size_t>& location, int amount)
 	{
 		auto instance = Get(location);

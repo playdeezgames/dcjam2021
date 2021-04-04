@@ -129,8 +129,15 @@ namespace game::Combat
 		{
 			if (IsGuessCorrect(guess.value()))
 			{
-				common::Sounds::PlaySound(application::Sounds::HIT_ZOMBIE);
 				game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+				if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
+				{
+					common::Sounds::PlaySound(application::Sounds::DEAD_ZOMBIE);
+				}
+				else
+				{
+					common::Sounds::PlaySound(application::Sounds::HIT_ZOMBIE);
+				}
 			}
 			else
 			{
