@@ -1,6 +1,6 @@
 At Start of Jam:
   ✔ make new git repo @done(21-03-31 06:32)
-  ☐ make itch game page stub
+  ✔ make itch game page stub @done(21-04-04 07:42)
   ✔ Pick a name @done(21-03-31 19:38)
     ravager
     plunderer
@@ -37,7 +37,7 @@ Vital Statistics:
   ✔ hunger @done(21-04-02 16:37)
     leads to food
     can starve, i.e. lose health
-  ☐ attack strength
+  ✔ attack strength @done(21-04-04 07:42)
     leads to weapons
   ☐ defense strength
     leads to armor
@@ -47,10 +47,10 @@ Vital Statistics:
     for disarming traps
 Items:
   ☐ keys
-  ☐ torches
+  ✘ torches @cancelled(21-04-04 07:43)
   ☐ weapons
   ☐ armor
-  ☐ food
+  ✔ food @done(21-04-04 07:42)
   ☐ lock picks
 Containers:
   ☐ chest
