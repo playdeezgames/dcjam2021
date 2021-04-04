@@ -41,6 +41,7 @@ namespace state::in_play::AvatarStatus { void Start(); }
 namespace state::in_play::Combat { void Start(); }
 namespace state::in_play::CombatResult { void Start(); }
 namespace sublayout::QuickStats { void Start(); }
+namespace sublayout::EnemyStats { void Start(); }
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -112,6 +113,7 @@ namespace common::Application
 		state::in_play::AvatarInventory::Start,
 		state::in_play::AvatarStatus::Start,
 		sublayout::QuickStats::Start,
+		sublayout::EnemyStats::Start,
 		game::Start,
 		state::in_play::Combat::Start,
 		state::in_play::CombatResult::Start,

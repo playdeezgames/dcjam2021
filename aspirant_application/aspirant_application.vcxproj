@@ -219,6 +219,7 @@
     <ClCompile Include="Graphics.Text.cpp" />
     <ClCompile Include="Graphics.Textures.cpp" />
     <ClCompile Include="Common.Utility.cpp" />
+    <ClCompile Include="Sublayout.EnemyStats.cpp" />
     <ClCompile Include="Sublayout.POV.cpp" />
     <ClCompile Include="Sublayout.QuickStats.cpp" />
   </ItemGroup>

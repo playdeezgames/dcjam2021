@@ -42,6 +42,10 @@
     },
     {
         "type": "Layout",
+        "name": "Sublayout.EnemyStats"
+    },
+    {
+        "type": "Layout",
         "name": "Sublayout.QuickStats"
     }
 ]

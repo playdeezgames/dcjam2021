@@ -9,6 +9,7 @@ namespace game::Creatures
 	const std::string PROPERTY_NUMBER_APPEARING = "number-appearing";
 	const std::string PROPERTY_INDEX = "index";
 	const std::string PROPERTY_IMAGE_ID = "image-id";
+	const std::string PROPERTY_HEALTH = "health";
 
 	static nlohmann::json descriptors;
 
@@ -25,7 +26,7 @@ namespace game::Creatures
 
 	static std::map<size_t, std::map<size_t, CreatureInstance>> roomCreatures;
 
-	std::optional<game::Creature> Read(const common::XY<size_t>& location)
+	std::optional<CreatureInstance> Get(const common::XY<size_t>& location)
 	{
 		auto column = roomCreatures.find(location.GetX());
 		if (column != roomCreatures.end())
@@ -33,10 +34,49 @@ namespace game::Creatures
 			auto row = column->second.find(location.GetY());
 			if (row != column->second.end())
 			{
-				return row->second.creature;
+				return row->second;
 			}
 		}
 		return std::nullopt;
+	}
+
+	std::optional<game::Creature> Read(const common::XY<size_t>& location)
+	{
+		auto temp = Get(location);
+		if (temp)
+		{
+			return temp.value().creature;
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
+	std::optional<int> GetMaximumHealth(const common::XY<size_t>& location)
+	{
+		auto temp = Read(location);
+		if (temp)
+		{
+			return descriptors[(int)temp.value()][PROPERTY_HEALTH];
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
+	std::optional<int> GetHealth(const common::XY<size_t>& location)
+	{
+		auto temp = Get(location);
+		if (temp)
+		{
+			return GetMaximumHealth(location).value() - temp.value().wounds;
+		}
+		else
+		{
+			return std::nullopt;
+		}
 	}
 
 

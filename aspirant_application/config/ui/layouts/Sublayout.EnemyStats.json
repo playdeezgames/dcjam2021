@@ -1,0 +1,16 @@
+[
+    {
+        "type": "Text",
+        "text-id": "EnemyHealth",
+        "font": "default",
+        "color": "Yellow",
+        "text": "<health>",
+        "x": 360,
+        "y": 296,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    }
+]
