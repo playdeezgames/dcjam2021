@@ -10,6 +10,7 @@
     "State.InPlay.AvatarInventory": "config/ui/layouts/State.InPlay.AvatarInventory.json",
     "State.InPlay.AvatarStatus": "config/ui/layouts/State.InPlay.AvatarStatus.json",
     "State.InPlay.Combat": "config/ui/layouts/State.InPlay.Combat.json",
+    "State.InPlay.CombatResult": "config/ui/layouts/State.InPlay.CombatResult.json",
     "State.LeavePlay": "config/ui/layouts/State.LeavePlay.json",
     "Sublayout.POV": "config/ui/layouts/Sublayout.POV.json",
     "Sublayout.QuickStats": "config/ui/layouts/Sublayout.QuickStats.json"

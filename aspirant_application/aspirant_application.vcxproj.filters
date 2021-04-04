@@ -194,6 +194,12 @@
     <ClCompile Include="State.InPlay.Combat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="State.InPlay.CombatResult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.Combat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">
@@ -344,6 +350,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.Creatures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.Combat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

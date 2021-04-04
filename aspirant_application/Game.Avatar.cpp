@@ -3,6 +3,7 @@
 #include "Game.Avatar.Statistics.h"
 #include <vector>
 #include "Common.Sounds.h"
+#include "Application.UIState.h"
 namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
@@ -90,6 +91,7 @@ namespace game::Avatar
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
 				}
+				application::UIState::EnterGame();
 			}
 			else
 			{

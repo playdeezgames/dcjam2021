@@ -171,6 +171,7 @@
     <ClCompile Include="Game.Avatar.cpp" />
     <ClCompile Include="Game.Avatar.Items.cpp" />
     <ClCompile Include="Game.Avatar.Statistics.cpp" />
+    <ClCompile Include="Game.Combat.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game.Creatures.cpp" />
     <ClCompile Include="Game.Items.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="State.InPlay.AvatarInventory.cpp" />
     <ClCompile Include="State.InPlay.AvatarStatus.cpp" />
     <ClCompile Include="State.InPlay.Combat.cpp" />
+    <ClCompile Include="State.InPlay.CombatResult.cpp" />
     <ClCompile Include="State.InPlay.FloorInventory.cpp" />
     <ClCompile Include="State.InPlay.MiniMap.cpp" />
     <ClCompile Include="State.LeavePlay.cpp" />
@@ -236,6 +238,7 @@
     <ClInclude Include="Game.Avatar.Items.h" />
     <ClInclude Include="Game.Avatar.Statistic.h" />
     <ClInclude Include="Game.Avatar.Statistics.h" />
+    <ClInclude Include="Game.Combat.h" />
     <ClInclude Include="Game.Creature.h" />
     <ClInclude Include="Game.Creatures.h" />
     <ClInclude Include="Game.h" />

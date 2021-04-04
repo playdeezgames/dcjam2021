@@ -4,4 +4,5 @@ namespace application::UIState
 {
 	void Write(const ::UIState&);
 	const ::UIState& Read();
+	void EnterGame();
 }

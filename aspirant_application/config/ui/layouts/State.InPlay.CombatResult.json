@@ -1,0 +1,47 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.POV"
+    },
+    {
+        "type": "Text",
+        "text-id": "Result",
+        "font": "default",
+        "color": "LightCyan",
+        "text": "!!Result!!",
+        "x": 500,
+        "y": 0,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Cyan",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Image",
+        "image-id":"CurrentCard",
+        "sprite": "CardBack",
+        "color": "White",
+        "x": 436,
+        "y": 32
+    },
+    {
+        "type": "Image",
+        "image-id":"NextCard",
+        "sprite": "CardBack",
+        "color": "White",
+        "x": 500,
+        "y": 32
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.QuickStats"
+    }
+]

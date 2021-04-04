@@ -22,5 +22,59 @@
         "drop-shadow-color": "Cyan",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "Image",
+        "image-id":"CurrentCard",
+        "sprite": "CardBack",
+        "color": "White",
+        "x": 436,
+        "y": 32
+    },
+    {
+        "type": "Image",
+        "sprite": "CardBack",
+        "color": "White",
+        "x": 500,
+        "y": 32
+    },
+    {
+        "type": "Menu",
+        "menu-id": "Combat",
+        "index": 0,
+        "font": "default",
+        "colors": {
+            "active": "Cyan",
+            "inactive": "Gray"
+        },
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2,
+        "menu-items": [
+            {
+                "text": "Guess Higher",
+                "x": 500,
+                "y": 96,
+                "value": 0
+            },
+            {
+                "text": "Guess Lower",
+                "x": 500,
+                "y": 112,
+                "value": 1
+            },
+            {
+                "text": "Run Away",
+                "x": 500,
+                "y": 128,
+                "value": 2
+            }
+        ]
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.QuickStats"
     }
 ]
