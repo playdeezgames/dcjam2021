@@ -7,6 +7,7 @@
 #include "Graphics.Menus.h"
 #include "Game.Avatar.h"
 #include "Common.RNG.h"
+#include "Common.Sounds.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";

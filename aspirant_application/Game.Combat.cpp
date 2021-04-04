@@ -97,6 +97,8 @@ namespace game::Combat
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
+#include "Application.Sounds.h"
+#include "Common.Sounds.h"
 namespace game::Combat
 {
 	void Advance()
@@ -127,10 +129,12 @@ namespace game::Combat
 		{
 			if (IsGuessCorrect(guess.value()))
 			{
+				common::Sounds::PlaySound(application::Sounds::HIT_ZOMBIE);
 				game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
 			}
 			else
 			{
+				common::Sounds::PlaySound(application::Sounds::HIT_HUNTER);
 				game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
 			}
 		}

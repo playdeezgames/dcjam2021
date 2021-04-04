@@ -361,5 +361,8 @@
     <ClInclude Include="Game.Combat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Application.Sounds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

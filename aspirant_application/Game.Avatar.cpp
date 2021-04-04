@@ -4,10 +4,10 @@
 #include <vector>
 #include "Common.Sounds.h"
 #include "Application.UIState.h"
+#include "Application.Sounds.h"
 namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
-	const std::string SOUND_BUMPWALL = "bumpwall";
 
 	size_t avatarColumn = 0;
 	size_t avatarRow = 0;
@@ -95,7 +95,7 @@ namespace game::Avatar
 			}
 			else
 			{
-				common::Sounds::PlaySound(SOUND_BUMPWALL);
+				common::Sounds::PlaySound(application::Sounds::BUMP_WALL);
 			}
 		}
 	}

@@ -10,6 +10,7 @@
 #include "Application.UIState.h"
 #include "Graphics.Menus.h"
 #include "Graphics.MenuItems.h"
+#include "Application.Sounds.h"
 namespace state::Options
 {
 	const std::string LAYOUT_NAME = "State.Options";
@@ -19,7 +20,6 @@ namespace state::Options
 	const std::string MUX_VOLUME_MENU_ITEM_ID = "MuxVolume";
 	const std::string MUTE = "Mute";
 	const std::string UNMUTE = "Unmute";
-	const std::string SFX_SAMPLE_NAME = "woohoo";
 
 	enum class OptionsItem
 	{
@@ -34,7 +34,7 @@ namespace state::Options
 	static void AdjustSfxVolume(int delta)
 	{
 		common::Sounds::SetSfxVolume(common::Sounds::GetSfxVolume() + delta);
-		common::Sounds::PlaySound(SFX_SAMPLE_NAME);
+		common::Sounds::PlaySound(application::Sounds::WOOHOO);
 		
 		::Options::Save();
 	}

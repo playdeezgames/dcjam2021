@@ -2,6 +2,8 @@
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
+#include "Application.Sounds.h"
+#include "Common.Sounds.h"
 namespace application::UIState
 {
 	static ::UIState uiState = ::UIState::SPLASH;
@@ -20,6 +22,7 @@ namespace application::UIState
 	{
 		if (game::avatar::Statistics::IsDead())
 		{
+			common::Sounds::PlaySound(application::Sounds::DEAD_HUNTER);
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
 		else

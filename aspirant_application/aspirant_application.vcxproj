@@ -232,6 +232,7 @@
     <ClInclude Include="Application.MouseButtonUp.h" />
     <ClInclude Include="Application.MouseMotion.h" />
     <ClInclude Include="Application.MouseWheel.h" />
+    <ClInclude Include="Application.Sounds.h" />
     <ClInclude Include="Application.TextInput.h" />
     <ClInclude Include="Application.UIState.h" />
     <ClInclude Include="Application.Update.h" />
