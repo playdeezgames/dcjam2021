@@ -93,12 +93,43 @@ namespace game::Combat
 		deckIndex = 0;
 	}
 
+}
+#include "Game.Avatar.h"
+#include "Game.Creatures.h"
+#include "Game.Avatar.Statistics.h"
+namespace game::Combat
+{
 	void Advance()
 	{
+		game::Creatures::Advance(game::Avatar::GetPosition());
 		deckIndex++;
-		if (deckIndex >= DECK_SIZE/2)
+		if (deckIndex >= DECK_SIZE / 2)
 		{
 			Shuffle();
+		}
+	}
+
+	static bool IsGuessCorrect(Guess guess)
+	{
+		switch (guess)
+		{
+		case Guess::HIGHER:
+			return GetNextCard().rank > GetCurrentCard().rank;
+		case Guess::LOWER:
+			return GetNextCard().rank < GetCurrentCard().rank;
+		}
+		return false;
+	}
+
+	void Resolve(Guess guess)
+	{
+		if (IsGuessCorrect(guess))
+		{
+			game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+		}
+		else
+		{
+			game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
 		}
 	}
 }

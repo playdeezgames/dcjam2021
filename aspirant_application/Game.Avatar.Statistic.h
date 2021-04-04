@@ -4,6 +4,7 @@ namespace game::avatar
 	enum class Statistic
 	{
 		HUNGER,
-		HEALTH
+		HEALTH,
+		ATTACK
 	};
 }

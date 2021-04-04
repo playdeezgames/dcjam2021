@@ -21,7 +21,7 @@ namespace state::in_play::CombatResult
 			break;
 		case ::Command::GREEN:
 			game::Combat::Advance();
-			application::UIState::Write(::UIState::IN_PLAY_COMBAT);
+			application::UIState::EnterGame();
 			break;
 		}
 	}

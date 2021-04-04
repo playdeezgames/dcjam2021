@@ -25,6 +25,8 @@ namespace state::in_play::Combat
 			graphics::Menus::Next(LAYOUT_NAME, COMBAT_MENU_ID);
 			break;
 		case ::Command::GREEN:
+			auto menuId = graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value();
+			game::Combat::Resolve((menuId==0) ? (game::Combat::Guess::HIGHER) : (game::Combat::Guess::LOWER));
 			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
 			break;
 		}

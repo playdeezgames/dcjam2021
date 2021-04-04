@@ -10,6 +10,7 @@ namespace game::Creatures
 	const std::string PROPERTY_INDEX = "index";
 	const std::string PROPERTY_IMAGE_ID = "image-id";
 	const std::string PROPERTY_HEALTH = "health";
+	const std::string PROPERTY_ATTACK = "attack";
 
 	static nlohmann::json descriptors;
 
@@ -40,6 +41,22 @@ namespace game::Creatures
 		return std::nullopt;
 	}
 
+	void Put(const common::XY<size_t>& location, CreatureInstance instance)
+	{
+		roomCreatures[location.GetX()][location.GetY()] = instance;
+	}
+
+	void Remove(const common::XY<size_t>& location)
+	{
+		if (roomCreatures.contains(location.GetX()))
+		{
+			if (roomCreatures[location.GetX()].contains(location.GetY()))
+			{
+				roomCreatures[location.GetX()].erase(location.GetY());
+			}
+		}
+	}
+
 	std::optional<game::Creature> Read(const common::XY<size_t>& location)
 	{
 		auto temp = Get(location);
@@ -66,6 +83,19 @@ namespace game::Creatures
 		}
 	}
 
+	std::optional<int> GetAttack(const common::XY<size_t>& location)
+	{
+		auto temp = Read(location);
+		if (temp)
+		{
+			return descriptors[(int)temp.value()][PROPERTY_ATTACK];
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
 	std::optional<int> GetHealth(const common::XY<size_t>& location)
 	{
 		auto temp = Get(location);
@@ -79,6 +109,24 @@ namespace game::Creatures
 		}
 	}
 
+	void DecreaseHealth(const common::XY<size_t>& location, int amount)
+	{
+		auto instance = Get(location);
+		if (instance)
+		{
+			instance.value().wounds += amount;
+			Put(location, instance.value());
+		}
+	}
+
+	void Advance(const common::XY<size_t>& location)
+	{
+		auto health = GetHealth(location);
+		if (health && health.value()<=0)
+		{
+			Remove(location);
+		}
+	}
 
 	void Reset()
 	{

@@ -5,13 +5,15 @@ namespace game::avatar::Statistics
 	const std::map<::game::avatar::Statistic, int> maximums =
 	{
 		{::game::avatar::Statistic::HEALTH, 100},
-		{::game::avatar::Statistic::HUNGER, 100}
+		{::game::avatar::Statistic::HUNGER, 100},
+		{::game::avatar::Statistic::ATTACK, 10}
 	};
 
 	const std::map<::game::avatar::Statistic, int> minimums =
 	{
 		{::game::avatar::Statistic::HEALTH, 0},
-		{::game::avatar::Statistic::HUNGER, 0}
+		{::game::avatar::Statistic::HUNGER, 0},
+		{::game::avatar::Statistic::ATTACK, 10}
 	};
 
 	static std::map<::game::avatar::Statistic, int> current;
