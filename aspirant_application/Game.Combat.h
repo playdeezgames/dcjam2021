@@ -13,12 +13,13 @@ namespace game::Combat
 	const CardDescriptor& GetNextCard();
 	void Advance();
 }
+#include <optional>
 namespace game::Combat
 {
-		enum class Guess
+	enum class Guess
 	{
 		HIGHER,
 		LOWER
 	};
-	void Resolve(Guess);
+	void Resolve(std::optional<Guess>);
 }

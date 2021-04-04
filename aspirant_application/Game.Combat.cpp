@@ -121,11 +121,18 @@ namespace game::Combat
 		return false;
 	}
 
-	void Resolve(Guess guess)
+	void Resolve(std::optional<Guess> guess)
 	{
-		if (IsGuessCorrect(guess))
+		if (guess)
 		{
-			game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+			if (IsGuessCorrect(guess.value()))
+			{
+				game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+			}
+			else
+			{
+				game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
+			}
 		}
 		else
 		{

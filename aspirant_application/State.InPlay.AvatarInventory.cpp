@@ -11,7 +11,7 @@ namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
 	const int FOOD_HUNGER_INCREASE = 10;
-	const int POTION_HEALTH_INCREASE = 10;
+	const int POTION_HEALTH_INCREASE = 50;
 
 	static void DropItem()
 	{

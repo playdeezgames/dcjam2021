@@ -203,6 +203,9 @@
     <ClCompile Include="Sublayout.EnemyStats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="State.InPlay.Dead.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">

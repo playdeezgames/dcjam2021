@@ -80,15 +80,17 @@ To Complete Required Features for Jam:
       ✔ drop shadow on items @done(21-04-02 19:45)
     ✔ way to drop items to ground @done(21-04-03 04:18)
     ✔ way to use items @done(21-04-03 04:40)
-  ☐ Decisions by which risking resources can gain other resources.
+  ✔ Decisions by which risking resources can gain other resources. @done(21-04-04 07:20)
     (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)
-    ☐ how much damage does the avatar do?
+    ✔ run away mechanic @done(21-04-04 07:20)
+    ✔ character gets to zero health @done(21-04-04 07:20)
+    ✔ how much damage does the avatar do? @done(21-04-04 06:40)
     ✔ how much damage does the creature do? @done(21-04-03 06:16)
     ✔ how many HP does the creature have? @done(21-04-03 06:16)
     ✔ how much armor @done(21-04-03 06:16)
     ✔ what image id for showing the creature @done(21-04-03 06:16)
     ✔ how many of what creature spawn in the maze? @done(21-04-03 06:16)
-    ☐ by what rule do creatures spawn in the maze?
+    ✔ by what rule do creatures spawn in the maze? @done(21-04-04 06:40)
   ✔ No offensive themes @done(21-04-01 07:08)
      (Any theme is allowed, but keep it decent and safe for work)
 

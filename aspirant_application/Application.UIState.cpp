@@ -1,6 +1,7 @@
 #include "Application.UIState.h"
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
+#include "Game.Avatar.Statistics.h"
 namespace application::UIState
 {
 	static ::UIState uiState = ::UIState::SPLASH;
@@ -17,14 +18,21 @@ namespace application::UIState
 
 	void EnterGame()
 	{
-		auto roomCreature = game::Creatures::Read(game::Avatar::GetPosition());
-		if (roomCreature)
+		if (game::avatar::Statistics::IsDead())
 		{
-			application::UIState::Write(::UIState::IN_PLAY_COMBAT);
+			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
 		else
 		{
-			application::UIState::Write(::UIState::IN_PLAY_MAP);
+			auto roomCreature = game::Creatures::Read(game::Avatar::GetPosition());
+			if (roomCreature)
+			{
+				application::UIState::Write(::UIState::IN_PLAY_COMBAT);
+			}
+			else
+			{
+				application::UIState::Write(::UIState::IN_PLAY_MAP);
+			}
 		}
 	}
 }
