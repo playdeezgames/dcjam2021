@@ -2,8 +2,8 @@
   "woohoo": "assets/audio/sfx/woohoo.wav",
   "bumpwall": "assets/audio/sfx/bumpwall.wav",
   "deadhunter":"assets/audio/sfx/deadhunter.wav",
-  "deadzombie":"assets/audio/sfx/deadzombie.wav",
+  "deadmonster":"assets/audio/sfx/deadmonster.wav",
   "getpotion":"assets/audio/sfx/getpotion.wav",
   "hithunter":"assets/audio/sfx/hithunter.wav",
-  "hitzombie":"assets/audio/sfx/hitzombie.wav"
+  "hitmonster":"assets/audio/sfx/hitmonster.wav"
 }

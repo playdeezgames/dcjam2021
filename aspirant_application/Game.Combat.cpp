@@ -132,11 +132,11 @@ namespace game::Combat
 				game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
 				if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 				{
-					common::Sounds::PlaySound(application::Sounds::DEAD_ZOMBIE);
+					common::Sounds::PlaySound(application::Sounds::DEAD_MONSTER);
 				}
 				else
 				{
-					common::Sounds::PlaySound(application::Sounds::HIT_ZOMBIE);
+					common::Sounds::PlaySound(application::Sounds::HIT_MONSTER);
 				}
 			}
 			else

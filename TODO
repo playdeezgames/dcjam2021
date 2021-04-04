@@ -1,39 +1,38 @@
-Enhance The Maze:
-  ☐ locked doors
-    this leads to keys as an item
-    are they pickable?
-  ☐ secret/hidden doors
-    how do we search for them?
-  ☐ false doors
-  ☐ trapped doors
-    can we detect and disarm these traps?
-  ☐ instadeath rooms
-    because fairness is overrated
-  ☐ different wall materials
-  ☐ different floor materials
-  ☐ different ceiling materials
-  ☐ different lighting conditions
-    this leads to torches, lanterns, etc
-  ☐ stairs/ladders/holes up and down
 Controls:
   ☐ mouse based controls for moving and turning(stretch)
 Vital Statistics:
   ☐ defense strength
     leads to armor
-  ☐ perception?
-    to detect traps, secret doors, etc
-  ☐ dexterity
-    for disarming traps
 Items:
-  ☐ keys
   ☐ weapons
   ☐ armor
-  ☐ lock picks
 Containers:
   ☐ chest
     might be trapped!
 
 Archive:
+  ✘ locked doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+    this leads to keys as an item
+    are they pickable?
+  ✘ secret/hidden doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+    how do we search for them?
+  ✘ false doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+  ✘ trapped doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+    can we detect and disarm these traps?
+  ✘ instadeath rooms @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+    because fairness is overrated
+  ✘ different wall materials @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+  ✘ different floor materials @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+  ✘ different ceiling materials @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+  ✘ different lighting conditions @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+    this leads to torches, lanterns, etc
+  ✘ stairs/ladders/holes up and down @cancelled(21-04-04 17:18) @project(Enhance The Maze)
+  ✘ perception? @cancelled(21-04-04 17:18) @project(Vital Statistics)
+    to detect traps, secret doors, etc
+  ✘ dexterity @cancelled(21-04-04 17:18) @project(Vital Statistics)
+    for disarming traps
+  ✘ keys @cancelled(21-04-04 17:18) @project(Items)
+  ✘ lock picks @cancelled(21-04-04 17:18) @project(Items)
   ✔ make new git repo @done(21-03-31 06:32) @project(At Start of Jam)
   ✔ make itch game page stub @done(21-04-04 07:42) @project(At Start of Jam)
   ✔ Pick a name @done(21-03-31 19:38) @project(At Start of Jam)
