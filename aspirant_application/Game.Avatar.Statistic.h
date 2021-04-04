@@ -5,6 +5,7 @@ namespace game::avatar
 	{
 		HUNGER,
 		HEALTH,
-		ATTACK
+		ATTACK,
+		DEFEND
 	};
 }

@@ -53,7 +53,13 @@ namespace sublayout::POV
 	const std::vector<game::Creature> creatures =
 	{
 		game::Creature::IMP,
-		game::Creature::TROGLODYTE
+		game::Creature::TROGLODYTE,
+		game::Creature::BRAIN_TENTACLE,
+		game::Creature::BULLY_MINION,
+		game::Creature::EVIL_BAT,
+		game::Creature::EVIL_MINION,
+		game::Creature::WEREWOLF,
+		game::Creature::WYVERN
 	};
 
 	static void UpdateCreatures()

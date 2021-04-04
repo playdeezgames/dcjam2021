@@ -141,8 +141,18 @@ namespace game::Combat
 			}
 			else
 			{
-				common::Sounds::PlaySound(application::Sounds::HIT_HUNTER);
-				game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
+				auto attack = game::Creatures::GetAttack(game::Avatar::GetPosition()).value();
+				auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
+				auto damage = attack - defend;
+				if (damage > 0)
+				{
+					common::Sounds::PlaySound(application::Sounds::HIT_HUNTER);
+					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
+				}
+				else
+				{
+					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
+				}
 			}
 		}
 		else

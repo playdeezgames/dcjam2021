@@ -74,5 +74,65 @@
         "x": 0,
         "y": 0,
         "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "Wyvern",
+        "sprite": "CreatureWyvern",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "Werewolf",
+        "sprite": "CreatureWerewolf",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "EvilMinion",
+        "sprite": "CreatureEvilMinion",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "EvilBat",
+        "sprite": "CreatureEvilBat",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "BullyMinion",
+        "sprite": "CreatureBullyMinion",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "BrainTentacle",
+        "sprite": "CreatureBrainTentacle",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
     }
 ]

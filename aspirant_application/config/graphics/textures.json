@@ -14,5 +14,11 @@
     "imp": "assets/images/creatures/imp.png",
     "cards": "assets/images/cards.png",
     "card-back": "assets/images/card-back.png",
-    "grim-reaper": "assets/images/grim-reaper.png"
+    "grim-reaper": "assets/images/grim-reaper.png",
+    "brain-tentacle": "assets/images/creatures/brain-tentacle.png",
+    "bully-minion": "assets/images/creatures/bully-minion.png",
+    "evil-bat": "assets/images/creatures/evil-bat.png",
+    "evil-minion": "assets/images/creatures/evil-minion.png",
+    "werewolf": "assets/images/creatures/werewolf.png",
+    "wyvern": "assets/images/creatures/wyvern.png"
 }

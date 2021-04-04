@@ -9,4 +9,5 @@ namespace application::Sounds
 	const std::string GET_POTION = "getpotion";
 	const std::string HIT_HUNTER = "hithunter";
 	const std::string HIT_MONSTER = "hitmonster";
+	const std::string HIT_BLOCKED = "hitblocked";
 }

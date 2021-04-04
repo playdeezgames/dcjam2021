@@ -6,14 +6,24 @@ namespace game::avatar::Statistics
 	{
 		{::game::avatar::Statistic::HEALTH, 100},
 		{::game::avatar::Statistic::HUNGER, 100},
-		{::game::avatar::Statistic::ATTACK, 10}
+		{::game::avatar::Statistic::ATTACK, 25},
+		{::game::avatar::Statistic::DEFEND, 25}
 	};
 
 	const std::map<::game::avatar::Statistic, int> minimums =
 	{
 		{::game::avatar::Statistic::HEALTH, 0},
 		{::game::avatar::Statistic::HUNGER, 0},
-		{::game::avatar::Statistic::ATTACK, 10}
+		{::game::avatar::Statistic::ATTACK, 10},
+		{::game::avatar::Statistic::DEFEND, 0}
+	};
+
+	const std::map<::game::avatar::Statistic, int> initials =
+	{
+		{::game::avatar::Statistic::HEALTH, 100},
+		{::game::avatar::Statistic::HUNGER, 100},
+		{::game::avatar::Statistic::ATTACK, 10},
+		{::game::avatar::Statistic::DEFEND, 0}
 	};
 
 	static std::map<::game::avatar::Statistic, int> current;
@@ -45,7 +55,7 @@ namespace game::avatar::Statistics
 
 	void Reset()
 	{
-		current = maximums;
+		current = initials;
 	}
 
 	bool IsStarving()

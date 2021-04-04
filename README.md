@@ -12,3 +12,10 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
   * (also all card-(rank)-(suit) combinations!)
 * https://game-icons.net/1x1/lorc/suits.html
 * https://game-icons.net/1x1/lorc/grim-reaper.html
+
+https://game-icons.net/1x1/delapouite/bully-minion.html
+https://game-icons.net/1x1/lorc/evil-bat.html
+https://game-icons.net/1x1/lorc/evil-minion.html
+https://game-icons.net/1x1/lorc/werewolf.html
+https://game-icons.net/1x1/lorc/wyvern.html
+https://game-icons.net/1x1/delapouite/brain-tentacle.html

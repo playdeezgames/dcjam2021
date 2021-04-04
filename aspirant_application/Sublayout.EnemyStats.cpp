@@ -15,8 +15,17 @@ namespace sublayout::EnemyStats
 		std::stringstream ss;
 		ss << "Enemy: ";
 		auto position = game::Avatar::GetPosition();
-		ss << game::Creatures::GetHealth(position).value() << "/";
-		ss << game::Creatures::GetMaximumHealth(position).value();
+		auto health = game::Creatures::GetHealth(position).value();
+		if (health > 0)
+		{
+			ss << health << "/";
+			ss << game::Creatures::GetMaximumHealth(position).value();
+		}
+		else
+		{
+			ss << "DEAD!";
+		}
+		SDLK_DELETE;
 		
 		::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
 	}

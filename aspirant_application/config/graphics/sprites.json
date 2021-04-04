@@ -3232,5 +3232,47 @@
         "y": 0,
         "width": 360,
         "height": 360
+    },
+    "CreatureBrainTentacle": {
+        "texture": "brain-tentacle",
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+    },
+    "CreatureBullyMinion": {
+        "texture": "bully-minion",
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+    },
+    "CreatureEvilBat": {
+        "texture": "evil-bat",
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+    },
+    "CreatureEvilMinion": {
+        "texture": "evil-minion",
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+    },
+    "CreatureWerewolf": {
+        "texture": "werewolf",
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
+    },
+    "CreatureWyvern": {
+        "texture": "wyvern",
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 360
     }
 }
