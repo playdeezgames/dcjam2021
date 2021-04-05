@@ -61,5 +61,65 @@
         "drop-shadow-color": "Cyan",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "text-id":"Attack",
+        "color": "Gray",
+        "text": "<attack>",
+        "x": 360,
+        "y": 32,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text-id":"AttackTimer",
+        "text": "<attack timer>",
+        "x": 360,
+        "y": 48,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "text-id":"Defend",
+        "color": "Gray",
+        "text": "<defend>",
+        "x": 360,
+        "y": 80,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "text-id":"DefendTimer",
+        "font": "default",
+        "color": "Gray",
+        "text": "<defend timer>",
+        "x": 360,
+        "y": 96,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.QuickStats"
     }
 ]

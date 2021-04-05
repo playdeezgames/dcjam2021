@@ -46,6 +46,8 @@ namespace sublayout::QuickStats
 		::application::Update::AddHandler(::UIState::IN_PLAY_MAP, UpdateHunger);
 		::application::Update::AddHandler(::UIState::IN_PLAY_INVENTORY, UpdateHealth);
 		::application::Update::AddHandler(::UIState::IN_PLAY_INVENTORY, UpdateHunger);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateHealth);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateHunger);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, UpdateHealth);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, UpdateHunger);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, UpdateHealth);

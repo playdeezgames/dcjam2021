@@ -25,6 +25,19 @@
         "drop-shadow-y": 2
     },
     {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Press <space>",
+        "x": 500,
+        "y": 96,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
         "type": "Image",
         "image-id":"CurrentCard",
         "sprite": "CardBack",

@@ -6,8 +6,10 @@ namespace game::avatar::Statistics
 	{
 		{::game::avatar::Statistic::HEALTH, 100},
 		{::game::avatar::Statistic::HUNGER, 100},
-		{::game::avatar::Statistic::ATTACK, 25},
-		{::game::avatar::Statistic::DEFEND, 25}
+		{::game::avatar::Statistic::ATTACK, 50},
+		{::game::avatar::Statistic::DEFEND, 25},
+		{::game::avatar::Statistic::ATTACK_TIMER, 1000},
+		{::game::avatar::Statistic::DEFEND_TIMER, 1000}
 	};
 
 	const std::map<::game::avatar::Statistic, int> minimums =
@@ -15,7 +17,9 @@ namespace game::avatar::Statistics
 		{::game::avatar::Statistic::HEALTH, 0},
 		{::game::avatar::Statistic::HUNGER, 0},
 		{::game::avatar::Statistic::ATTACK, 10},
-		{::game::avatar::Statistic::DEFEND, 0}
+		{::game::avatar::Statistic::DEFEND, 0},
+		{::game::avatar::Statistic::ATTACK_TIMER, 0},
+		{::game::avatar::Statistic::DEFEND_TIMER, 0}
 	};
 
 	const std::map<::game::avatar::Statistic, int> initials =
@@ -23,7 +27,9 @@ namespace game::avatar::Statistics
 		{::game::avatar::Statistic::HEALTH, 100},
 		{::game::avatar::Statistic::HUNGER, 100},
 		{::game::avatar::Statistic::ATTACK, 10},
-		{::game::avatar::Statistic::DEFEND, 0}
+		{::game::avatar::Statistic::DEFEND, 0},
+		{::game::avatar::Statistic::ATTACK_TIMER, 0},
+		{::game::avatar::Statistic::DEFEND_TIMER, 0}
 	};
 
 	static std::map<::game::avatar::Statistic, int> current;
@@ -77,6 +83,4 @@ namespace game::avatar::Statistics
 	{
 		Decrease(statistic, -delta);
 	}
-
-
 }
