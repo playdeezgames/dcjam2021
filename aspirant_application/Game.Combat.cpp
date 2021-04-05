@@ -138,6 +138,34 @@ namespace game::Combat
 		return false;
 	}
 
+	static void DoAttackTimer()
+	{
+		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
+		if (timer > 0)
+		{
+			timer--;
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, timer);
+			if (timer == 0)
+			{
+				game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, game::avatar::Statistics::Default(game::avatar::Statistic::ATTACK));
+			}
+		}
+	}
+
+	static void DoDefendTimer()
+	{
+		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
+		if (timer > 0)
+		{
+			timer--;
+			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, timer);
+			if (timer == 0)
+			{
+				game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, game::avatar::Statistics::Default(game::avatar::Statistic::DEFEND));
+			}
+		}
+	}
+
 	void Resolve(std::optional<Guess> guess)
 	{
 		if (guess)
@@ -165,6 +193,7 @@ namespace game::Combat
 					SetCombatResultText(MISSED_MONSTER);
 					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
 				}
+				DoAttackTimer();
 			}
 			else
 			{
@@ -181,12 +210,14 @@ namespace game::Combat
 				{
 					SetCombatResultText(BLOCKED_HIT);
 					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
+					DoDefendTimer();
 				}
 			}
 		}
 		else
 		{
 			game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
+			DoDefendTimer();
 		}
 	}
 }

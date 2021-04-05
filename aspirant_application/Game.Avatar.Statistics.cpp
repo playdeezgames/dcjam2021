@@ -49,6 +49,11 @@ namespace game::avatar::Statistics
 		return maximums.find(statistic)->second;
 	}
 
+	int Default(const ::game::avatar::Statistic& statistic)
+	{
+		return initials.find(statistic)->second;
+	}
+
 	void Write(const ::game::avatar::Statistic& statistic, int value)
 	{
 		const auto minimum = Minimum(statistic);

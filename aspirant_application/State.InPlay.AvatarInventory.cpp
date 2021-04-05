@@ -14,6 +14,12 @@ namespace state::in_play::AvatarInventory
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
 	const int FOOD_HUNGER_INCREASE = 10;
 	const int POTION_HEALTH_INCREASE = 50;
+	const int WINE_ATTACK = 25;
+	const int WINE_ATTACK_DURATION = 50;
+	const int BEER_ATTACK = 50;
+	const int BEER_ATTACK_DURATION = 25;
+	const int COFFEE_DEFEND_INCREASE = 10;
+	const int COFFEE_DEFEND_DURATION = 25;
 
 	static void DropItem()
 	{
@@ -49,6 +55,8 @@ namespace state::in_play::AvatarInventory
 		if (game::avatar::Items::Read(game::Item::BEER) > 0)
 		{
 			common::Sounds::PlaySound(application::Sounds::BEER);
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, BEER_ATTACK);
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, BEER_ATTACK_DURATION);
 			game::avatar::Items::Remove(game::Item::BEER, 1);
 		}
 	}
@@ -58,6 +66,8 @@ namespace state::in_play::AvatarInventory
 		if (game::avatar::Items::Read(game::Item::WINE) > 0)
 		{
 			common::Sounds::PlaySound(application::Sounds::WINE);
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, WINE_ATTACK);
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, WINE_ATTACK_DURATION);
 			game::avatar::Items::Remove(game::Item::WINE, 1);
 		}
 	}
@@ -67,6 +77,8 @@ namespace state::in_play::AvatarInventory
 		if (game::avatar::Items::Read(game::Item::COFFEE) > 0)
 		{
 			common::Sounds::PlaySound(application::Sounds::COFFEE);
+			game::avatar::Statistics::Increase(game::avatar::Statistic::DEFEND, COFFEE_DEFEND_INCREASE);
+			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, COFFEE_DEFEND_DURATION);
 			game::avatar::Items::Remove(game::Item::COFFEE, 1);
 		}
 	}
