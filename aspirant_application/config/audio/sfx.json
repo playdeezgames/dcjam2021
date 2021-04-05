@@ -6,5 +6,10 @@
   "getpotion":"assets/audio/sfx/getpotion.wav",
   "hithunter":"assets/audio/sfx/hithunter.wav",
   "hitmonster":"assets/audio/sfx/hitmonster.wav",
-  "hitblocked":"assets/audio/sfx/hitblocked.wav"
+  "hitblocked":"assets/audio/sfx/hitblocked.wav",
+  "beer":"assets/audio/sfx/beer.wav",
+  "coffee":"assets/audio/sfx/coffee.wav",
+  "jools":"assets/audio/sfx/jools.wav",
+  "wine":"assets/audio/sfx/wine.wav",
+  "drinkpotion":"assets/audio/sfx/drinkpotion.wav"
 }

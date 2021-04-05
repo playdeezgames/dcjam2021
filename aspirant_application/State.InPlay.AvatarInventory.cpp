@@ -7,6 +7,8 @@
 #include "Game.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Statistics.h"
+#include "Common.Sounds.h"
+#include "Application.Sounds.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
@@ -36,8 +38,36 @@ namespace state::in_play::AvatarInventory
 	{
 		if (game::avatar::Items::Read(game::Item::POTION)>0)
 		{
+			common::Sounds::PlaySound(application::Sounds::DRINK_POTION);
 			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, POTION_HEALTH_INCREASE);
 			game::avatar::Items::Remove(game::Item::POTION, 1);
+		}
+	}
+
+	static void DrinkBeer()
+	{
+		if (game::avatar::Items::Read(game::Item::BEER) > 0)
+		{
+			common::Sounds::PlaySound(application::Sounds::BEER);
+			game::avatar::Items::Remove(game::Item::BEER, 1);
+		}
+	}
+
+	static void DrinkWine()
+	{
+		if (game::avatar::Items::Read(game::Item::WINE) > 0)
+		{
+			common::Sounds::PlaySound(application::Sounds::WINE);
+			game::avatar::Items::Remove(game::Item::WINE, 1);
+		}
+	}
+
+	static void DrinkCoffee()
+	{
+		if (game::avatar::Items::Read(game::Item::COFFEE) > 0)
+		{
+			common::Sounds::PlaySound(application::Sounds::COFFEE);
+			game::avatar::Items::Remove(game::Item::COFFEE, 1);
 		}
 	}
 
@@ -53,6 +83,15 @@ namespace state::in_play::AvatarInventory
 				break;
 			case game::Item::POTION:
 				DrinkPotion();
+				break;
+			case game::Item::BEER:
+				DrinkBeer();
+				break;
+			case game::Item::WINE:
+				DrinkWine();
+				break;
+			case game::Item::COFFEE:
+				DrinkCoffee();
 				break;
 			}
 		}

@@ -10,4 +10,9 @@ namespace application::Sounds
 	const std::string HIT_HUNTER = "hithunter";
 	const std::string HIT_MONSTER = "hitmonster";
 	const std::string HIT_BLOCKED = "hitblocked";
+	const std::string BEER = "beer";
+	const std::string COFFEE = "coffee";
+	const std::string JOOLS = "jools";
+	const std::string WINE = "wine";
+	const std::string DRINK_POTION = "drinkpotion";
 }
