@@ -10,7 +10,11 @@ namespace game::Items
 	const std::map<game::Item, std::string> itemName =
 	{
 		{game::Item::FOOD, "Food"},
-		{game::Item::POTION, "Potion"}
+		{game::Item::POTION, "Potion"},
+		{game::Item::BEER, "Beer"},
+		{game::Item::WINE, "Wine"},
+		{game::Item::COFFEE, "Coffee"},
+		{game::Item::JOOLS, "Jools"}
 	};
 
 	const std::string& GetName(const game::Item& item)
@@ -20,8 +24,12 @@ namespace game::Items
 
 	const std::map<game::Item, size_t> itemCounts =
 	{
-		{game::Item::FOOD, 100},
-		{game::Item::POTION, 50}
+		{game::Item::FOOD, 144},
+		{game::Item::POTION, 72},
+		{game::Item::BEER, 18},
+		{game::Item::WINE, 36},
+		{game::Item::COFFEE, 36},
+		{game::Item::JOOLS, 288}
 	};
 
 	static std::vector<std::vector<std::map<game::Item, size_t>>> roomInventories;

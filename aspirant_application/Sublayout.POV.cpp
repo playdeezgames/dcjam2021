@@ -16,6 +16,10 @@ namespace sublayout::POV
 	const std::string POSITION_TEXT_ID = "Position";
 	const std::string FOOD_IMAGE_ID = "Food";
 	const std::string POTION_IMAGE_ID = "Potion";
+	const std::string BEER_IMAGE_ID = "Beer";
+	const std::string WINE_IMAGE_ID = "Wine";
+	const std::string COFFEE_IMAGE_ID = "Coffee";
+	const std::string JOOLS_IMAGE_ID = "Jools";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
 
 	static std::map<game::World::Border, std::string> leftSides =
@@ -81,6 +85,10 @@ namespace sublayout::POV
 		auto position = game::Avatar::GetPosition();
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::Items::IsPresent(game::Item::FOOD, position));
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::Items::IsPresent(game::Item::POTION, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, BEER_IMAGE_ID, game::Items::IsPresent(game::Item::BEER, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, WINE_IMAGE_ID, game::Items::IsPresent(game::Item::WINE, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, COFFEE_IMAGE_ID, game::Items::IsPresent(game::Item::COFFEE, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, JOOLS_IMAGE_ID, game::Items::IsPresent(game::Item::JOOLS, position));
 		UpdateDirection();
 		UpdateCreatures();
 	}

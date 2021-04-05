@@ -2834,6 +2834,34 @@
         "width": 32,
         "height": 32
     },
+    "ItemBeer":{
+        "texture": "items",
+        "x": 64,
+        "y": 0,
+        "width": 32,
+        "height": 32
+    },
+    "ItemWine":{
+        "texture": "items",
+        "x": 96,
+        "y": 0,
+        "width": 32,
+        "height": 32
+    },
+    "ItemCoffee":{
+        "texture": "items",
+        "x": 128,
+        "y": 0,
+        "width": 32,
+        "height": 32
+    },
+    "ItemJools":{
+        "texture": "items",
+        "x": 160,
+        "y": 0,
+        "width": 32,
+        "height": 32
+    },
     "Map":{
         "texture": "map",
         "x": 0,

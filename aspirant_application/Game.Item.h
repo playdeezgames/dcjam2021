@@ -4,6 +4,10 @@ namespace game
 	enum class Item
 	{
 		FOOD,
-		POTION
+		POTION,
+		BEER,
+		WINE,
+		COFFEE,
+		JOOLS
 	};
 }

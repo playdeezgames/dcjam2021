@@ -48,11 +48,47 @@
     },
     {
         "type": "Image",
+        "image-id": "Beer",
+        "sprite": "ItemBeer",
+        "color": "White",
+        "x": 36,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "Wine",
+        "sprite": "ItemWine",
+        "color": "White",
+        "x": 116,
+        "y": 308,
+        "visible": false
+    },
+    {
+        "type": "Image",
         "image-id": "Food",
         "sprite": "ItemFood",
         "color": "White",
         "x": 276,
         "y": 292,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "Coffee",
+        "sprite": "ItemCoffee",
+        "color": "White",
+        "x": 292,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "Jools",
+        "sprite": "ItemJools",
+        "color": "White",
+        "x": 244,
+        "y": 308,
         "visible": false
     },
     {
