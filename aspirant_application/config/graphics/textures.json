@@ -20,5 +20,6 @@
     "evil-bat": "assets/images/creatures/evil-bat.png",
     "evil-minion": "assets/images/creatures/evil-minion.png",
     "werewolf": "assets/images/creatures/werewolf.png",
-    "wyvern": "assets/images/creatures/wyvern.png"
+    "wyvern": "assets/images/creatures/wyvern.png",
+    "controls": "assets/images/controls.png"
 }

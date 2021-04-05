@@ -13,6 +13,7 @@ namespace game::Creatures
 	std::optional<bool> IsDead(const common::XY<size_t>&);
 	void Advance(const common::XY<size_t>&);
 	std::optional<int> GetAttack(const common::XY<size_t>&);
+	std::optional<int> GetDefend(const common::XY<size_t>&);
 
 	void Start(const std::string&);
 }

@@ -108,6 +108,7 @@ namespace game::Combat
 	const std::string KILL_MONSTER = "You killed it!";
 	const std::string GOT_HIT = "It hit you!";
 	const std::string BLOCKED_HIT = "You block!";
+	const std::string MISSED_MONSTER = "It blocked!";
 
 
 	void SetCombatResultText(const std::string& text)
@@ -143,16 +144,26 @@ namespace game::Combat
 		{
 			if (IsGuessCorrect(guess.value()))
 			{
-				game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
-				if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
+				auto defend = game::Creatures::GetDefend(game::Avatar::GetPosition()).value();
+				auto damage = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK) - defend;
+				if (damage > 0)
 				{
-					SetCombatResultText(KILL_MONSTER);
-					common::Sounds::PlaySound(application::Sounds::DEAD_MONSTER);
+					game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
+					{
+						SetCombatResultText(KILL_MONSTER);
+						common::Sounds::PlaySound(application::Sounds::DEAD_MONSTER);
+					}
+					else
+					{
+						SetCombatResultText(HIT_MONSTER);
+						common::Sounds::PlaySound(application::Sounds::HIT_MONSTER);
+					}
 				}
 				else
 				{
-					SetCombatResultText(HIT_MONSTER);
-					common::Sounds::PlaySound(application::Sounds::HIT_MONSTER);
+					SetCombatResultText(MISSED_MONSTER);
+					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
 				}
 			}
 			else

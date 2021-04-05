@@ -11,6 +11,7 @@ namespace game::Creatures
 	const std::string PROPERTY_IMAGE_ID = "image-id";
 	const std::string PROPERTY_HEALTH = "health";
 	const std::string PROPERTY_ATTACK = "attack";
+	const std::string PROPERTY_DEFEND = "defend";
 
 	static nlohmann::json descriptors;
 
@@ -89,6 +90,19 @@ namespace game::Creatures
 		if (temp)
 		{
 			return descriptors[(int)temp.value()][PROPERTY_ATTACK];
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
+	std::optional<int> GetDefend(const common::XY<size_t>& location)
+	{
+		auto temp = Read(location);
+		if (temp)
+		{
+			return descriptors[(int)temp.value()][PROPERTY_DEFEND];
 		}
 		else
 		{
