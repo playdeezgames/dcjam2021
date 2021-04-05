@@ -6,6 +6,8 @@ namespace game::avatar
 		HUNGER,
 		HEALTH,
 		ATTACK,
-		DEFEND
+		DEFEND,
+		ATTACK_TIMER,
+		DEFEND_TIMER
 	};
 }

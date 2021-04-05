@@ -99,8 +99,22 @@ namespace game::Combat
 #include "Game.Avatar.Statistics.h"
 #include "Application.Sounds.h"
 #include "Common.Sounds.h"
+#include "Graphics.Texts.h"
 namespace game::Combat
 {
+	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
+	const std::string RESULT_TEXT_ID = "Result";
+	const std::string HIT_MONSTER = "You hit it!";
+	const std::string KILL_MONSTER = "You killed it!";
+	const std::string GOT_HIT = "It hit you!";
+	const std::string BLOCKED_HIT = "You block!";
+
+
+	void SetCombatResultText(const std::string& text)
+	{
+		graphics::Texts::SetText(LAYOUT_NAME, RESULT_TEXT_ID, text);
+	}
+
 	void Advance()
 	{
 		game::Creatures::Advance(game::Avatar::GetPosition());
@@ -132,10 +146,12 @@ namespace game::Combat
 				game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
 				if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 				{
+					SetCombatResultText(KILL_MONSTER);
 					common::Sounds::PlaySound(application::Sounds::DEAD_MONSTER);
 				}
 				else
 				{
+					SetCombatResultText(HIT_MONSTER);
 					common::Sounds::PlaySound(application::Sounds::HIT_MONSTER);
 				}
 			}
@@ -146,11 +162,13 @@ namespace game::Combat
 				auto damage = attack - defend;
 				if (damage > 0)
 				{
+					SetCombatResultText(GOT_HIT);
 					common::Sounds::PlaySound(application::Sounds::HIT_HUNTER);
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
 				}
 				else
 				{
+					SetCombatResultText(BLOCKED_HIT);
 					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
 				}
 			}
