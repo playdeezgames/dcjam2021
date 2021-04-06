@@ -12,6 +12,8 @@ namespace game::Creatures
 	const std::string PROPERTY_HEALTH = "health";
 	const std::string PROPERTY_ATTACK = "attack";
 	const std::string PROPERTY_DEFEND = "defend";
+	const std::string PROPERTY_FOOD_BRIBE = "food-bribe";
+	const std::string PROPERTY_MONEY_BRIBE = "money-bribe";
 
 	static nlohmann::json descriptors;
 
@@ -103,6 +105,32 @@ namespace game::Creatures
 		if (temp)
 		{
 			return descriptors[(int)temp.value()][PROPERTY_DEFEND];
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
+	std::optional<int> GetFoodBribe(const common::XY<size_t>& location)
+	{
+		auto temp = Read(location);
+		if (temp)
+		{
+			return descriptors[(int)temp.value()][PROPERTY_FOOD_BRIBE];
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
+	std::optional<int> GetMoneyBribe(const common::XY<size_t>& location)
+	{
+		auto temp = Read(location);
+		if (temp)
+		{
+			return descriptors[(int)temp.value()][PROPERTY_MONEY_BRIBE];
 		}
 		else
 		{

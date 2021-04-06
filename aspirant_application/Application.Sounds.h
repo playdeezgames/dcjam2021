@@ -15,4 +15,5 @@ namespace application::Sounds
 	const std::string JOOLS = "jools";
 	const std::string WINE = "wine";
 	const std::string DRINK_POTION = "drinkpotion";
+	const std::string SHUCKS = "shucks";
 }

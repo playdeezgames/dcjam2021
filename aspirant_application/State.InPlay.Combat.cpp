@@ -11,6 +11,10 @@
 #include "Graphics.AvatarInventory.h"
 #include <sstream>
 #include "Graphics.MenuItems.h"
+#include "Common.Sounds.h"
+#include "Application.Sounds.h"
+#include "Game.Creatures.h"
+#include "Game.Avatar.Items.h"
 namespace state::in_play::AvatarInventory
 {
 	void UseItem();
@@ -43,12 +47,34 @@ namespace state::in_play::Combat
 
 	static void MoneyBribe()
 	{
-
+		auto amount = game::Creatures::GetMoneyBribe(game::Avatar::GetPosition()).value_or(0);
+		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
+		{
+			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
+			common::Sounds::PlaySound(application::Sounds::WOOHOO);
+			game::Creatures::Remove(game::Avatar::GetPosition());
+			application::UIState::EnterGame();
+		}
+		else
+		{
+			common::Sounds::PlaySound(application::Sounds::SHUCKS);
+		}
 	}
 
 	static void FoodBribe()
 	{
-
+		auto amount = game::Creatures::GetFoodBribe(game::Avatar::GetPosition()).value_or(0);
+		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
+		{
+			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
+			common::Sounds::PlaySound(application::Sounds::WOOHOO);
+			game::Creatures::Remove(game::Avatar::GetPosition());
+			application::UIState::EnterGame();
+		}
+		else
+		{
+			common::Sounds::PlaySound(application::Sounds::SHUCKS);
+		}
 	}
 
 	static void UseItem()
@@ -74,7 +100,7 @@ namespace state::in_play::Combat
 		}
 		else
 		{
-			//play "shucks" sound
+			common::Sounds::PlaySound(application::Sounds::SHUCKS);
 		}
 	}
 

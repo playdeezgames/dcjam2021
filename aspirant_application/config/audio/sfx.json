@@ -11,5 +11,6 @@
   "coffee":"assets/audio/sfx/coffee.wav",
   "jools":"assets/audio/sfx/jools.wav",
   "wine":"assets/audio/sfx/wine.wav",
-  "drinkpotion":"assets/audio/sfx/drinkpotion.wav"
+  "drinkpotion":"assets/audio/sfx/drinkpotion.wav",
+  "shucks":"assets/audio/sfx/shucks.wav"
 }

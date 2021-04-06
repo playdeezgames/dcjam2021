@@ -14,6 +14,9 @@ namespace game::Creatures
 	void Advance(const common::XY<size_t>&);
 	std::optional<int> GetAttack(const common::XY<size_t>&);
 	std::optional<int> GetDefend(const common::XY<size_t>&);
+	std::optional<int> GetFoodBribe(const common::XY<size_t>&);
+	std::optional<int> GetMoneyBribe(const common::XY<size_t>&);
+	void Remove(const common::XY<size_t>&);
 
 	void Start(const std::string&);
 }
