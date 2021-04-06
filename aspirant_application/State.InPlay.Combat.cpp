@@ -140,10 +140,16 @@ namespace state::in_play::Combat
 			graphics::Menus::Next(LAYOUT_NAME, COMBAT_MENU_ID);
 			break;
 		case ::Command::LEFT:
-			graphics::AvatarInventory::PreviousIndex();
+			if (graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
+			{
+				graphics::AvatarInventory::PreviousIndex();
+			}
 			break;
 		case ::Command::RIGHT:
-			graphics::AvatarInventory::NextIndex();
+			if (graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
+			{
+				graphics::AvatarInventory::NextIndex();
+			}
 			break;
 		case ::Command::GREEN:
 			OnActivateItem();
