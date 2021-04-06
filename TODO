@@ -2,16 +2,19 @@ Other:
   ☐ document controls
   ✔ put an "instructions" page on main menu @done(21-04-05 05:19)
   ☐ make a quick YT video for explaining how to play
-  ☐ instructions on what to do on the combat result screen
+  ✔ instructions on what to do on the combat result screen @done(21-04-06 04:27)
   ☐ distinct sounds for things
     ☐ walking
-  ☐ smoother looking transition between rooms
+  ✘ smoother looking transition between rooms @cancelled(21-04-06 04:28)
+  ☐ end state when maze is cleared? show jools
+  ☐ attack/defend stats on combat screen
+  ☐ jools shown on dead screen
 Items:
-  ☐ beer
+  ✔ beer @done(21-04-06 04:26)
     increases attack alot
-  ☐ wine
+  ✔ wine @done(21-04-06 04:26)
     increases attack a little
-  ☐ coffee
+  ✔ coffee @done(21-04-06 04:27)
     increases defense
   ☐ jools
     its treasure

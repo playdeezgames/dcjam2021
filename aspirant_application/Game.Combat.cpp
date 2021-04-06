@@ -176,7 +176,9 @@ namespace game::Combat
 				auto damage = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK) - defend;
 				if (damage > 0)
 				{
-					game::Creatures::DecreaseHealth(game::Avatar::GetPosition(), game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+					game::Creatures::DecreaseHealth(
+						game::Avatar::GetPosition(), 
+						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 					{
 						SetCombatResultText(KILL_MONSTER);
