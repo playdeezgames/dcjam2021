@@ -131,8 +131,7 @@ namespace game::Avatar
 		{
 			::game::Avatar::avatarColumn = (size_t)common::RNG::FromRange(0, COLUMNS);
 			::game::Avatar::avatarRow = (size_t)common::RNG::FromRange(0, ROWS);
-		//} while (game::Creatures::Read({ avatarColumn, avatarRow }));
-		} while (!game::Creatures::Read({ avatarColumn, avatarRow }));
+		} while (game::Creatures::Read({ avatarColumn, avatarRow }));
 		SetExplored();
 	}
 }
