@@ -82,7 +82,6 @@ namespace game::Avatar
 					break;
 				}
 				SetExplored();
-				//do hunger!
 				if (avatar::Statistics::IsStarving())
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
@@ -91,13 +90,13 @@ namespace game::Avatar
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
 				}
-				application::UIState::EnterGame();
 			}
 			else
 			{
 				common::Sounds::PlaySound(application::Sounds::BUMP_WALL);
 			}
 		}
+		application::UIState::EnterGame();
 	}
 
 	void MoveBack()

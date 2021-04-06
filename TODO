@@ -9,6 +9,10 @@ Other:
   ☐ end state when maze is cleared? show jools
   ☐ attack/defend stats on combat screen
   ☐ jools shown on dead screen
+  ☐ start game in an empty room
+  ☐ give some starting potions and food
+  ☐ left and right on combat should only work when selected the use item menu item
+  ☐ shucks sound when item use fails
 Items:
   ✔ beer @done(21-04-06 04:26)
     increases attack alot
@@ -16,10 +20,10 @@ Items:
     increases attack a little
   ✔ coffee @done(21-04-06 04:27)
     increases defense
-  ☐ jools
+  ✔ jools @done(21-04-06 04:51)
     its treasure
   ☐ use during combat(stretch)
-  ☐ whiskey(stretch)
+  ✘ whiskey(stretch) @cancelled(21-04-06 04:51)
     teleport you
 Controls:
   ✘ mouse based controls for moving and turning(stretch) @cancelled(21-04-05 05:12)

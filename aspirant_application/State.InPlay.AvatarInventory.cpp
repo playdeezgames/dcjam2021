@@ -83,7 +83,7 @@ namespace state::in_play::AvatarInventory
 		}
 	}
 
-	static void UseItem()
+	void UseItem()
 	{
 		auto item = graphics::AvatarInventory::GetItem();
 		if (item)

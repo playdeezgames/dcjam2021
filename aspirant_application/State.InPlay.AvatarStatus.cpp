@@ -40,9 +40,13 @@ namespace state::in_play::AvatarStatus
 
 	static void UpdateAttackTimer()
 	{
+		auto value = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		std::stringstream ss;
-		ss << "Duration: ";
-		ss << game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
+		if (value > 0)
+		{
+			ss << "Duration: ";
+			ss << value;
+		}
 		graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TIMER_TEXT_ID, ss.str());
 	}
 
@@ -56,9 +60,13 @@ namespace state::in_play::AvatarStatus
 
 	static void UpdateDefendTimer()
 	{
+		auto value = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
 		std::stringstream ss;
-		ss << "Duration: ";
-		ss << game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
+		if (value > 0)
+		{
+			ss << "Duration: ";
+			ss << value;
+		}
 		graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TIMER_TEXT_ID, ss.str());
 	}
 

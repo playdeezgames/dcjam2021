@@ -212,8 +212,8 @@ namespace game::Combat
 				{
 					SetCombatResultText(BLOCKED_HIT);
 					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
-					DoDefendTimer();
 				}
+				DoDefendTimer();
 			}
 		}
 		else

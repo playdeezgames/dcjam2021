@@ -66,9 +66,16 @@
                 "value": 1
             },
             {
-                "text": "Run Away",
+                "menu-item-id":"UseItem",
+                "text": "<item>",
                 "x": 500,
                 "y": 128,
+                "value": 3
+            },
+            {
+                "text": "Run Away",
+                "x": 500,
+                "y": 144,
                 "value": 2
             }
         ]
