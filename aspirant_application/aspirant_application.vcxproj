@@ -203,6 +203,7 @@
     <ClCompile Include="State.InPlay.Combat.cpp" />
     <ClCompile Include="State.InPlay.CombatResult.cpp" />
     <ClCompile Include="State.InPlay.Dead.cpp" />
+    <ClCompile Include="State.InPlay.Exit.cpp" />
     <ClCompile Include="State.InPlay.FloorInventory.cpp" />
     <ClCompile Include="State.InPlay.MiniMap.cpp" />
     <ClCompile Include="State.LeavePlay.cpp" />

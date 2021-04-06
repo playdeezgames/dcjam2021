@@ -22,3 +22,4 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/delapouite/wine-bottle.html
 * https://game-icons.net/1x1/delapouite/coffee-cup.html
 * https://game-icons.net/1x1/delapouite/rupee.html
+* https://game-icons.net/1x1/delapouite/exit-door.html

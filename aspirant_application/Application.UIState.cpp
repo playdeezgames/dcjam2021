@@ -25,7 +25,7 @@ namespace application::UIState
 			common::Sounds::PlaySound(application::Sounds::DEAD_HUNTER);
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
-		else
+		else if (game::Creatures::AnyLeft())
 		{
 			auto roomCreature = game::Creatures::Read(game::Avatar::GetPosition());
 			if (roomCreature)
@@ -36,6 +36,11 @@ namespace application::UIState
 			{
 				application::UIState::Write(::UIState::IN_PLAY_MAP);
 			}
+		}
+		else
+		{
+			common::Sounds::PlaySound(application::Sounds::EXIT);
+			application::UIState::Write(::UIState::IN_PLAY_EXIT);
 		}
 	}
 }

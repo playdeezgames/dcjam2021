@@ -17,6 +17,7 @@ namespace game::Creatures
 	std::optional<int> GetFoodBribe(const common::XY<size_t>&);
 	std::optional<int> GetMoneyBribe(const common::XY<size_t>&);
 	void Remove(const common::XY<size_t>&);
+	bool AnyLeft();
 
 	void Start(const std::string&);
 }

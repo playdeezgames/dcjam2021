@@ -3,6 +3,11 @@
 namespace game::avatar::Items
 {
 	static std::map<game::Item, size_t> avatarInventory;
+	const std::map<game::Item, size_t> initial =
+	{
+		{game::Item::FOOD, 10},
+		{game::Item::POTION, 3}
+	};
 
 	size_t Read(game::Item item)
 	{
@@ -24,7 +29,7 @@ namespace game::avatar::Items
 
 	void Reset()
 	{
-		avatarInventory.clear();
+		avatarInventory = initial;
 	}
 
 	void Add(game::Item item, size_t amount)

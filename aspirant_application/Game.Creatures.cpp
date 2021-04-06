@@ -208,6 +208,19 @@ namespace game::Creatures
 		}
 	}
 
+	bool AnyLeft()
+	{
+		for (auto iter : roomCreatures)
+		{
+			if (!iter.second.empty())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	void Start(const std::string& filename)
 	{
 		descriptors = data::JSON::Load(filename);

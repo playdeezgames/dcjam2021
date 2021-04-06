@@ -41,6 +41,7 @@ namespace state::in_play::AvatarStatus { void Start(); }
 namespace state::in_play::Combat { void Start(); }
 namespace state::in_play::CombatResult { void Start(); }
 namespace state::in_play::Dead { void Start(); }
+namespace state::in_play::Exit { void Start(); }
 namespace sublayout::QuickStats { void Start(); }
 namespace sublayout::EnemyStats { void Start(); }
 namespace Application
@@ -119,6 +120,7 @@ namespace common::Application
 		state::in_play::Combat::Start,
 		state::in_play::CombatResult::Start,
 		state::in_play::Dead::Start,
+		state::in_play::Exit::Start,
 		game::Combat::Shuffle
 	};
 

@@ -16,4 +16,5 @@ namespace application::Sounds
 	const std::string WINE = "wine";
 	const std::string DRINK_POTION = "drinkpotion";
 	const std::string SHUCKS = "shucks";
+	const std::string EXIT = "exit";
 }

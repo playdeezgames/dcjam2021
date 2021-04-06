@@ -11,10 +11,10 @@ namespace game
 	{
 		game::World::Reset();
 		game::Items::Reset();
-		game::Avatar::Reset();
 		game::avatar::Statistics::Reset();
 		game::avatar::Items::Reset();
 		game::Creatures::Reset();
+		game::Avatar::Reset();
 	}
 
 	void Start()

@@ -4,12 +4,6 @@
 #include "Maze.h"
 #include "Common.RNG.h"
 #include "Maze.Direction.h"
-namespace game::Avatar
-{
-	extern size_t avatarColumn;
-	extern size_t avatarRow;
-	extern maze::Direction avatarFacing;
-}
 namespace game::World
 {
 	const size_t COLUMNS = 12;
@@ -130,11 +124,5 @@ namespace game::World
 			}
 		}
 
-		::game::Avatar::avatarFacing = (maze::Direction)common::RNG::FromRange(0, (int)maze::Directions::All().size());
-		do
-		{
-			::game::Avatar::avatarColumn = (size_t)common::RNG::FromRange(0, COLUMNS);
-			::game::Avatar::avatarRow = (size_t)common::RNG::FromRange(0, ROWS);
-		} while (maze.GetCell((int)::game::Avatar::avatarColumn, (int)::game::Avatar::avatarRow)->IsDeadEnd());
 	}
 }

@@ -1,43 +1,38 @@
 Other:
   ☐ document controls
-  ✔ put an "instructions" page on main menu @done(21-04-05 05:19)
   ☐ make a quick YT video for explaining how to play
-  ✔ instructions on what to do on the combat result screen @done(21-04-06 04:27)
   ☐ distinct sounds for things
     ☐ walking
-  ✘ smoother looking transition between rooms @cancelled(21-04-06 04:28)
-  ☐ end state when maze is cleared? show jools
-  ☐ attack/defend stats on combat screen
-  ☐ jools shown on dead screen
-  ☐ start game in an empty room
-  ☐ give some starting potions and food
-  ☐ left and right on combat should only work when selected the use item menu item
-  ☐ shucks sound when item use fails
-Items:
-  ✔ beer @done(21-04-06 04:26)
-    increases attack alot
-  ✔ wine @done(21-04-06 04:26)
-    increases attack a little
-  ✔ coffee @done(21-04-06 04:27)
-    increases defense
-  ✔ jools @done(21-04-06 04:51)
-    its treasure
-  ☐ use during combat(stretch)
-  ✘ whiskey(stretch) @cancelled(21-04-06 04:51)
-    teleport you
-Controls:
-  ✘ mouse based controls for moving and turning(stretch) @cancelled(21-04-05 05:12)
-Vital Statistics:
-  ✔ defense strength @done(21-04-05 05:12)
-    leads to armor
-Items:
-  ✘ weapons @cancelled(21-04-04 17:25)
-  ✘ armor @cancelled(21-04-04 17:25)
-Containers:
-  ✘ chest @cancelled(21-04-04 17:25)
-    might be trapped!
+  ✔ end state when maze is cleared? show jools @done(21-04-06 06:23)
+  ✔ start game in an empty room @done(21-04-06 06:07)
+  ✔ give some starting potions and food @done(21-04-06 06:09)
 
 Archive:
+  ✔ put an "instructions" page on main menu @done(21-04-05 05:19) @project(Other)
+  ✔ instructions on what to do on the combat result screen @done(21-04-06 04:27) @project(Other)
+  ✘ smoother looking transition between rooms @cancelled(21-04-06 04:28) @project(Other)
+  ✔ attack/defend stats on combat screen @done(21-04-06 06:00) @project(Other)
+  ✔ jools shown on dead screen @done(21-04-06 06:00) @project(Other)
+  ✔ left and right on combat should only work when selected the use item menu item @done(21-04-06 06:00) @project(Other)
+  ✔ shucks sound when item use fails @done(21-04-06 06:00) @project(Other)
+  ✔ beer @done(21-04-06 04:26) @project(Items)
+    increases attack alot
+  ✔ wine @done(21-04-06 04:26) @project(Items)
+    increases attack a little
+  ✔ coffee @done(21-04-06 04:27) @project(Items)
+    increases defense
+  ✔ jools @done(21-04-06 04:51) @project(Items)
+    its treasure
+  ✔ use during combat(stretch) @done(21-04-06 06:01) @project(Items)
+  ✘ whiskey(stretch) @cancelled(21-04-06 04:51) @project(Items)
+    teleport you
+  ✘ mouse based controls for moving and turning(stretch) @cancelled(21-04-05 05:12) @project(Controls)
+  ✔ defense strength @done(21-04-05 05:12) @project(Vital Statistics)
+    leads to armor
+  ✘ weapons @cancelled(21-04-04 17:25) @project(Items)
+  ✘ armor @cancelled(21-04-04 17:25) @project(Items)
+  ✘ chest @cancelled(21-04-04 17:25) @project(Containers)
+    might be trapped!
   ✘ locked doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
     this leads to keys as an item
     are they pickable?

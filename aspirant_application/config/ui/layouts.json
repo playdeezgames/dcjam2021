@@ -13,6 +13,7 @@
     "State.InPlay.CombatResult": "config/ui/layouts/State.InPlay.CombatResult.json",
     "State.LeavePlay": "config/ui/layouts/State.LeavePlay.json",
     "State.InPlay.Dead": "config/ui/layouts/State.InPlay.Dead.json",
+    "State.InPlay.Exit": "config/ui/layouts/State.InPlay.Exit.json",
     "Sublayout.POV": "config/ui/layouts/Sublayout.POV.json",
     "Sublayout.QuickStats": "config/ui/layouts/Sublayout.QuickStats.json",
     "Sublayout.EnemyStats": "config/ui/layouts/Sublayout.EnemyStats.json"

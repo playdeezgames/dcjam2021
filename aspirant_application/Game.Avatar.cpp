@@ -5,8 +5,13 @@
 #include "Common.Sounds.h"
 #include "Application.UIState.h"
 #include "Application.Sounds.h"
+#include "Common.RNG.h"
+#include "Game.Creatures.h"
 namespace game::Avatar
 {
+	const size_t COLUMNS = 12;//TODO: i am duplicated!
+	const size_t ROWS = 12;//TODO: i am duplicated!
+
 	const int HUNGER_RATE = 1;
 
 	size_t avatarColumn = 0;
@@ -121,6 +126,13 @@ namespace game::Avatar
 				column.push_back(0);
 			}
 		}
+		::game::Avatar::avatarFacing = (maze::Direction)common::RNG::FromRange(0, (int)maze::Directions::All().size());
+		do
+		{
+			::game::Avatar::avatarColumn = (size_t)common::RNG::FromRange(0, COLUMNS);
+			::game::Avatar::avatarRow = (size_t)common::RNG::FromRange(0, ROWS);
+		//} while (game::Creatures::Read({ avatarColumn, avatarRow }));
+		} while (!game::Creatures::Read({ avatarColumn, avatarRow }));
 		SetExplored();
 	}
 }
