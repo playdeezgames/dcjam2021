@@ -178,7 +178,7 @@ namespace game::Combat
 				{
 					game::Creatures::DecreaseHealth(
 						game::Avatar::GetPosition(), 
-						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+						damage);
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 					{
 						SetCombatResultText(KILL_MONSTER);

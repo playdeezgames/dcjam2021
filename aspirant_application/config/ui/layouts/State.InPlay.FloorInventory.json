@@ -89,5 +89,31 @@
         "drop-shadow-color": "Black",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Black",
+        "text": "<space> to",
+        "x": 500,
+        "y": 328,
+        "horizontal-alignment": 0,
+        "drop-shadow": false,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Black",
+        "text": "pick up items",
+        "x": 500,
+        "y": 344,
+        "horizontal-alignment": 0,
+        "drop-shadow": false,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
     }
 ]

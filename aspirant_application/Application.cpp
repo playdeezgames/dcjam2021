@@ -140,6 +140,7 @@ namespace common::Application
 		{
 			starter();
 		}
+		common::Sounds::PlayMusic("songs");
 	}
 
 	bool IsRunning()

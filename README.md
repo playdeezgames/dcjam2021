@@ -23,3 +23,10 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/delapouite/coffee-cup.html
 * https://game-icons.net/1x1/delapouite/rupee.html
 * https://game-icons.net/1x1/delapouite/exit-door.html
+
+# Music Credits
+* https://freemusicarchive.org/music/Komiku/
+  * CC0 (public domain)
+  * Komiku - Ancient Heavy Tech Donjon
+  * Komiku - Remember this shadow
+  * Komiku - Fight, run, breath deeply

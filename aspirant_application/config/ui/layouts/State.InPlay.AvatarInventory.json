@@ -93,5 +93,31 @@
     {
         "type": "Layout",
         "name": "Sublayout.QuickStats"
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Black",
+        "text": "<space> to use",
+        "x": 500,
+        "y": 296,
+        "horizontal-alignment": 0,
+        "drop-shadow": false,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Black",
+        "text": "<del> to drop",
+        "x": 500,
+        "y": 312,
+        "horizontal-alignment": 0,
+        "drop-shadow": false,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
     }
 ]
