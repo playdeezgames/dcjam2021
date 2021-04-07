@@ -28,8 +28,8 @@ namespace state::in_play::CombatResult
 
 	static void OnUpdate(const Uint32& ticks)
 	{
-		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, game::Combat::GetCurrentCard().sprite);
-		graphics::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, game::Combat::GetNextCard().sprite);
+		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, game::CombatDeck::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
+		graphics::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, game::CombatDeck::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}
 
 	void Start()

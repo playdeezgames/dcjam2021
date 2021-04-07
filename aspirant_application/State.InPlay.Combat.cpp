@@ -196,8 +196,8 @@ namespace state::in_play::Combat
 
 	static void OnUpdate(const Uint32& ticks)
 	{
-		auto& card = game::Combat::GetCurrentCard();
-		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, card.sprite);
+		auto& card = game::CombatDeck::GetCurrentCard();
+		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, game::CombatDeck::GetSpriteForCard(card));
 		UpdateUseItem();
 	}
 

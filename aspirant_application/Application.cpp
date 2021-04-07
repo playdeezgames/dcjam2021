@@ -121,7 +121,8 @@ namespace common::Application
 		state::in_play::CombatResult::Start,
 		state::in_play::Dead::Start,
 		state::in_play::Exit::Start,
-		game::Combat::Shuffle
+		game::CombatDeck::Deal,
+		game::CombatDeck::Deal
 	};
 
 	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)
