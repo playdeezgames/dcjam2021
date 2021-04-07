@@ -78,19 +78,22 @@ namespace game::Combat
 
 	void Shuffle()
 	{
-		deck.clear();
-		while (deck.size() < DECK_SIZE)
+		std::vector<size_t> newDeck;
+		while (newDeck.size() < DECK_SIZE)
 		{
-			deck.push_back(deck.size());
+			newDeck.push_back(newDeck.size());
 		}
 		for (size_t index = 0; index < DECK_SIZE; ++index)
 		{
 			size_t otherIndex = (size_t)common::RNG::FromRange(0, (int)DECK_SIZE);
-			size_t dummy = deck[index];
-			deck[index] = deck[otherIndex];
-			deck[otherIndex] = dummy;
+			size_t dummy = newDeck[index];
+			newDeck[index] = newDeck[otherIndex];
+			newDeck[otherIndex] = dummy;
 		}
-		deckIndex = 0;
+		for (auto card : newDeck)
+		{
+			deck.push_back(card);
+		}
 	}
 
 }
@@ -122,6 +125,11 @@ namespace game::Combat
 		deckIndex++;
 		if (deckIndex >= DECK_SIZE / 2)
 		{
+			while (deckIndex > 0)
+			{
+				deck.erase(deck.begin());
+				deckIndex--;
+			}
 			Shuffle();
 		}
 	}

@@ -2750,6 +2750,13 @@
         "width": 16,
         "height": 16
     },
+    "MapCellDanger": {
+        "texture": "world",
+        "x": 48,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
     "MapCellUnexplored": {
         "texture": "world",
         "x": 32,

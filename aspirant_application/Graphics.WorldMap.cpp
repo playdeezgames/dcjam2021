@@ -6,6 +6,7 @@
 #include "Graphics.Sprites.h"
 #include <map>
 #include "Game.Avatar.h"
+#include "Game.Creatures.h"
 namespace graphics::WorldMap 
 { 
 	const std::string MAP_CELL_BASE = "MapCellBase";
@@ -18,6 +19,7 @@ namespace graphics::WorldMap
 	const std::string AVATAR_EAST = "AvatarEast";
 	const std::string AVATAR_SOUTH = "AvatarSouth";
 	const std::string AVATAR_WEST = "AvatarWest";
+	const std::string DANGER = "MapCellDanger";
 
 	static std::map<maze::Direction, std::string> wallSprites =
 	{
@@ -70,6 +72,11 @@ namespace graphics::WorldMap
 					if (cell == avatarPosition)
 					{
 						graphics::Sprites::Read(avatarSprites[game::Avatar::GetFacing()]).value().Draw(renderer, plot);
+					}
+
+					if (game::Creatures::Read(cell))
+					{
+						graphics::Sprites::Read(DANGER).value().Draw(renderer, plot);
 					}
 				}
 				else
