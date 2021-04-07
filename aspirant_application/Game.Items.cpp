@@ -24,12 +24,12 @@ namespace game::Items
 
 	const std::map<game::Item, size_t> itemCounts =
 	{
-		{game::Item::FOOD, 144},
-		{game::Item::POTION, 72},
-		{game::Item::BEER, 18},
-		{game::Item::WINE, 36},
-		{game::Item::COFFEE, 36},
-		{game::Item::JOOLS, 288}
+		{game::Item::FOOD, 72},
+		{game::Item::POTION, 18},
+		{game::Item::BEER, 9},
+		{game::Item::WINE, 9},
+		{game::Item::COFFEE, 9},
+		{game::Item::JOOLS, 144}
 	};
 
 	static std::vector<std::vector<std::map<game::Item, size_t>>> roomInventories;
@@ -43,16 +43,19 @@ namespace game::Items
 
 	static void PopulateItems()
 	{
+		size_t totalCount = 0;
 		for (auto itemCount : itemCounts)
 		{
 			auto item = itemCount.first;
 			auto count = itemCount.second;
 			while (count > 0)
 			{
+				totalCount++;
 				PopulateItem(item);
 				count--;
 			}
 		}
+		totalCount = totalCount;
 	}
 
 	void Reset()
@@ -73,28 +76,28 @@ namespace game::Items
 
 	bool IsPresent(const game::Item& item, const common::XY<size_t>& location)
 	{
-		auto iter = roomInventories[location.GetX()][location.GetX()].find(item);
-		return iter != roomInventories[location.GetX()][location.GetX()].end();
+		auto iter = roomInventories[location.GetX()][location.GetY()].find(item);
+		return iter != roomInventories[location.GetX()][location.GetY()].end();
 	}
 
 	const std::map<game::Item, size_t>& FloorInventory(const common::XY<size_t>& location)
 	{
-		return roomInventories[location.GetX()][location.GetX()];
+		return roomInventories[location.GetX()][location.GetY()];
 	}
 
 	size_t Remove(const game::Item& item, size_t quantity, const common::XY<size_t>& location)
 	{
 		if (IsPresent(item, location))
 		{
-			size_t total = roomInventories[location.GetX()][location.GetX()][item];
+			size_t total = roomInventories[location.GetX()][location.GetY()][item];
 			if (quantity >= total)
 			{
 				quantity = total;
-				roomInventories[location.GetX()][location.GetX()].erase(item);
+				roomInventories[location.GetX()][location.GetY()].erase(item);
 			}
 			else
 			{
-				roomInventories[location.GetX()][location.GetX()][item] -= quantity;
+				roomInventories[location.GetX()][location.GetY()][item] -= quantity;
 			}
 			return quantity;
 		}
@@ -108,7 +111,7 @@ namespace game::Items
 	{
 		if (amount > 0)
 		{
-			roomInventories[location.GetX()][location.GetX()][item] += amount;
+			roomInventories[location.GetX()][location.GetY()][item] += amount;
 		}
 	}
 }

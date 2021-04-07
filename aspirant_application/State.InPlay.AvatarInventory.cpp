@@ -12,14 +12,14 @@
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
-	const int FOOD_HUNGER_INCREASE = 10;
-	const int POTION_HEALTH_INCREASE = 50;
+	const int FOOD_HUNGER_INCREASE = 5;
+	const int POTION_HEALTH_INCREASE = 30;
 	const int WINE_ATTACK = 25;
-	const int WINE_ATTACK_DURATION = 50;
+	const int WINE_ATTACK_DURATION = 25;
 	const int BEER_ATTACK = 50;
-	const int BEER_ATTACK_DURATION = 25;
+	const int BEER_ATTACK_DURATION = 10;
 	const int COFFEE_DEFEND_INCREASE = 10;
-	const int COFFEE_DEFEND_DURATION = 25;
+	const int COFFEE_DEFEND_DURATION = 10;
 
 	static void DropItem()
 	{

@@ -5,8 +5,8 @@ namespace game::avatar::Items
 	static std::map<game::Item, size_t> avatarInventory;
 	const std::map<game::Item, size_t> initial =
 	{
-		{game::Item::FOOD, 10},
-		{game::Item::POTION, 3}
+		{game::Item::FOOD, 5},
+		{game::Item::POTION, 2}
 	};
 
 	size_t Read(game::Item item)
