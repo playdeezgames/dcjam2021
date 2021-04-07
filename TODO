@@ -1,115 +1,16 @@
-
-Archive:
-  ✔ "space to pick up" on Flr screen @done(21-04-06 16:04) @project(Other)
-  ✘ distinct sounds for things @cancelled(21-04-07 07:25) @project(Other)
-  ✘ walking @cancelled(21-04-07 07:25) @project(Other)
-  ✔ document controls @done(21-04-06 15:41) @project(Other)
-  ✔ make a quick YT video for explaining how to play @done(21-04-06 15:41) @project(Other)
-  ✔ end state when maze is cleared? show jools @done(21-04-06 06:23) @project(Other)
-  ✔ start game in an empty room @done(21-04-06 06:07) @project(Other)
-  ✔ give some starting potions and food @done(21-04-06 06:09) @project(Other)
-  ✔ put an "instructions" page on main menu @done(21-04-05 05:19) @project(Other)
-  ✔ instructions on what to do on the combat result screen @done(21-04-06 04:27) @project(Other)
-  ✘ smoother looking transition between rooms @cancelled(21-04-06 04:28) @project(Other)
-  ✔ attack/defend stats on combat screen @done(21-04-06 06:00) @project(Other)
-  ✔ jools shown on dead screen @done(21-04-06 06:00) @project(Other)
-  ✔ left and right on combat should only work when selected the use item menu item @done(21-04-06 06:00) @project(Other)
-  ✔ shucks sound when item use fails @done(21-04-06 06:00) @project(Other)
-  ✔ beer @done(21-04-06 04:26) @project(Items)
-    increases attack alot
-  ✔ wine @done(21-04-06 04:26) @project(Items)
-    increases attack a little
-  ✔ coffee @done(21-04-06 04:27) @project(Items)
-    increases defense
-  ✔ jools @done(21-04-06 04:51) @project(Items)
-    its treasure
-  ✔ use during combat(stretch) @done(21-04-06 06:01) @project(Items)
-  ✘ whiskey(stretch) @cancelled(21-04-06 04:51) @project(Items)
-    teleport you
-  ✘ mouse based controls for moving and turning(stretch) @cancelled(21-04-05 05:12) @project(Controls)
-  ✔ defense strength @done(21-04-05 05:12) @project(Vital Statistics)
-    leads to armor
-  ✘ weapons @cancelled(21-04-04 17:25) @project(Items)
-  ✘ armor @cancelled(21-04-04 17:25) @project(Items)
-  ✘ chest @cancelled(21-04-04 17:25) @project(Containers)
-    might be trapped!
-  ✘ locked doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-    this leads to keys as an item
-    are they pickable?
-  ✘ secret/hidden doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-    how do we search for them?
-  ✘ false doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-  ✘ trapped doors @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-    can we detect and disarm these traps?
-  ✘ instadeath rooms @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-    because fairness is overrated
-  ✘ different wall materials @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-  ✘ different floor materials @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-  ✘ different ceiling materials @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-  ✘ different lighting conditions @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-    this leads to torches, lanterns, etc
-  ✘ stairs/ladders/holes up and down @cancelled(21-04-04 17:18) @project(Enhance The Maze)
-  ✘ perception? @cancelled(21-04-04 17:18) @project(Vital Statistics)
-    to detect traps, secret doors, etc
-  ✘ dexterity @cancelled(21-04-04 17:18) @project(Vital Statistics)
-    for disarming traps
-  ✘ keys @cancelled(21-04-04 17:18) @project(Items)
-  ✘ lock picks @cancelled(21-04-04 17:18) @project(Items)
-  ✔ make new git repo @done(21-03-31 06:32) @project(At Start of Jam)
-  ✔ make itch game page stub @done(21-04-04 07:42) @project(At Start of Jam)
-  ✔ Pick a name @done(21-03-31 19:38) @project(At Start of Jam)
-    ravager
-    plunderer
-    marauder
-    pillager
-    looter
-    raider
-    *freebooter*
-  ✔ move back @done(21-04-02 16:37) @project(Controls)
-  ✔ remappable keys(default WASD + Arrows) @done(21-04-02 16:37) @project(Controls)
-  ✔ health @done(21-04-02 16:37) @project(Vital Statistics)
-    leads to health potions
-    can die from wounds
-  ✔ hunger @done(21-04-02 16:37) @project(Vital Statistics)
-    leads to food
-    can starve, i.e. lose health
-  ✔ attack strength @done(21-04-04 07:42) @project(Vital Statistics)
-    leads to weapons
-  ✘ torches @cancelled(21-04-04 07:43) @project(Items)
-  ✔ food @done(21-04-04 07:42) @project(Items)
-  ✔ need to put in a nested layout @done(21-04-02 16:37) @project(UI)
-  ✔ "Essentially modeless" with a fixed 3D perspective. @done(21-03-31 18:57) @project(To Complete Required Features for Jam)
-    (The game must have first-person exploration at all times. Exceptions are point to point overworld map movement (fast travel), combat screens or town screens.)
-  ✔ An initially unknown explorable map. (i.e. a map of the dungeon level) @done(21-04-01 05:53) @project(To Complete Required Features for Jam)
-    (The game must have explorable locations. It doesn't have to be a dungeon in the traditional sense. It can be urban environments, outdoors, spaceship interiors, planetary surfaces etc. Whichever environment the game has it must be viewed and explored in first-person.)
-  ✔ Entities occupy the entire tile, and only one tile at a time. @done(21-04-01 05:53) @project(To Complete Required Features for Jam)
-    (The game must have instant step movement on a grid. Smooth transition between grid squares is allowed. Half-steps or dividing the square into smaller squares is not accepted.)
-  ✔ The grid is 2D/3D made from squares/cubes. @done(21-03-31 19:33) @project(To Complete Required Features for Jam)
-    (The game must have 90 degree turns in the cardinal directions, North, East, South, West. Smooth transition between 90 degree angles is allowed. Mouse-look is also allowed. Games which let you turn 90 degrees up and down are also allowed.)
-  ✔ First Person POV. @done(21-03-31 19:34) @project(To Complete Required Features for Jam)
-    (The game must have a player controlled character (or party of characters), or the abstraction of a character or persona.)
-  ✔ Resource management and vital statistics. @done(21-04-02 04:43) @project(To Complete Required Features for Jam)
-    (The game must at the very least have some basic stats. (Minimum a single health/power bar))
-  ✔ Failure end state. @started(21-04-02 03:47) @done(21-04-02 04:43) @lasted(56m56s) @project(To Complete Required Features for Jam)
-    (The game must have a death/perish condition, or some other end-of-game mechanic.)
-  ✔ A way of replenishing resources and vital statistics. @done(21-04-03 04:40) @project(To Complete Required Features for Jam)
-    (The game must have at least one way to affect character stat(s). Examples are resting, potions, items with bonuses, food, water, powerups etc.)
-  ✔ ground inventory @started(21-04-02 05:55) @done(21-04-02 16:37) @lasted(10h42m50s) @project(To Complete Required Features for Jam)
-  ✔ avatar inventory @done(21-04-02 19:40) @project(To Complete Required Features for Jam)
-  ✔ way to pick up items from ground @done(21-04-02 19:45) @project(To Complete Required Features for Jam)
-  ✔ drop shadow on items @done(21-04-02 19:45) @project(To Complete Required Features for Jam)
-  ✔ way to drop items to ground @done(21-04-03 04:18) @project(To Complete Required Features for Jam)
-  ✔ way to use items @done(21-04-03 04:40) @project(To Complete Required Features for Jam)
-  ✔ Decisions by which risking resources can gain other resources. @done(21-04-04 07:20) @project(To Complete Required Features for Jam)
-    (The game must have combat or a similar mechanic for determining outcome of certain situations, enemy encounters and events.)
-  ✔ run away mechanic @done(21-04-04 07:20) @project(To Complete Required Features for Jam)
-  ✔ character gets to zero health @done(21-04-04 07:20) @project(To Complete Required Features for Jam)
-  ✔ how much damage does the avatar do? @done(21-04-04 06:40) @project(To Complete Required Features for Jam)
-  ✔ how much damage does the creature do? @done(21-04-03 06:16) @project(To Complete Required Features for Jam)
-  ✔ how many HP does the creature have? @done(21-04-03 06:16) @project(To Complete Required Features for Jam)
-  ✔ how much armor @done(21-04-03 06:16) @project(To Complete Required Features for Jam)
-  ✔ what image id for showing the creature @done(21-04-03 06:16) @project(To Complete Required Features for Jam)
-  ✔ how many of what creature spawn in the maze? @done(21-04-03 06:16) @project(To Complete Required Features for Jam)
-  ✔ by what rule do creatures spawn in the maze? @done(21-04-04 06:40) @project(To Complete Required Features for Jam)
-  ✔ No offensive themes @done(21-04-01 07:08) @project(To Complete Required Features for Jam)
-    (Any theme is allowed, but keep it decent and safe for work)
+Refactors:
+  ☐ Items To Config Files
+Additional Features:
+  ☐ better MUX shuffler
+  ☐ mouse controls
+    ☐ movement
+    ☐ menus
+    ☐ tabs
+    ☐ floor
+    ☐ inventory
+  ☐ dead ends
+    ☐ dead end monsters
+    ☐ locked doors
+    ☐ keys
+  ☐ monster drops
+  

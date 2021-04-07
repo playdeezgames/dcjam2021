@@ -367,5 +367,8 @@
     <ClInclude Include="Application.Sounds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common.Card.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
