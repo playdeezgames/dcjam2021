@@ -2,7 +2,7 @@
 #include "Game.World.h"
 #include "Game.Avatar.Statistics.h"
 #include <vector>
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Application.UIState.h"
 #include "Application.Sounds.h"
 #include "Common.RNG.h"
@@ -98,7 +98,7 @@ namespace game::Avatar
 			}
 			else
 			{
-				common::Sounds::PlaySound(application::Sounds::BUMP_WALL);
+				common::audio::PlaySound(application::Sounds::BUMP_WALL);
 			}
 		}
 		application::UIState::EnterGame();

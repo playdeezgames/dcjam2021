@@ -5,5 +5,8 @@
 namespace application::Renderer
 {
 	void SetRenderLayout(const ::UIState&, const std::string&);
+}
+namespace common::Application
+{
 	void Render(SDL_Renderer* renderer);
 }

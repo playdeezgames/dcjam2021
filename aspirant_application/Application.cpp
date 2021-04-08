@@ -9,7 +9,7 @@
 #include "Graphics.Sprites.h"
 #include "Graphics.Fonts.h"
 #include "Graphics.Layouts.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Options.h"
 #include <map>
 #include "Application.MouseMotion.h"
@@ -133,7 +133,7 @@ namespace common::Application
 		graphics::Sprites::InitializeFromFile(SPRITE);
 		graphics::Fonts::Start(FONTS);
 		graphics::Layouts::Start(LAYOUTS);
-		common::Sounds::Start(SFX, MUX);
+		common::Audio::Start(SFX, MUX);
 		Options::Start(OPTIONS);
 		application::Keyboard::Start(KEYBOARD);
 		game::Creatures::Start(CREATURES);
@@ -142,7 +142,7 @@ namespace common::Application
 		{
 			starter();
 		}
-		common::Sounds::PlayMusic("songs");
+		common::audio::PlayMusic("songs");
 	}
 
 	bool IsRunning()

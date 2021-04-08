@@ -5,6 +5,6 @@
 namespace application::MouseButtonDown
 {
 	typedef void (*Handler)(const common::XY<Sint32>&, Uint8);
-	void SetHandler(const UIState&, Handler);
+	void SetHandler(const ::UIState&, Handler);
 	void Handle(const SDL_MouseButtonEvent&);
 }

@@ -212,7 +212,7 @@
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="State.Options.cpp" />
     <ClCompile Include="Common.RNG.cpp" />
-    <ClCompile Include="Common.Sounds.cpp" />
+    <ClCompile Include="Common.Audio.cpp" />
     <ClCompile Include="State.Splash.cpp" />
     <ClCompile Include="Graphics.Sprite.cpp" />
     <ClCompile Include="Graphics.Font.cpp" />
@@ -274,7 +274,7 @@
     <ClInclude Include="Maze.Door.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Common.RNG.h" />
-    <ClInclude Include="Common.Sounds.h" />
+    <ClInclude Include="Common.Audio.h" />
     <ClInclude Include="Graphics.Sprite.h" />
     <ClInclude Include="Graphics.Font.h" />
     <ClInclude Include="Graphics.Sprites.h" />

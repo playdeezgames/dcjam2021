@@ -1,17 +1,15 @@
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include <fstream>
 #include "Common.Utility.h"
 #include <fstream>
 #include "Data.JSON.h"
-namespace common::Sounds
+namespace common::audio
 {
 	static std::map<std::string, Mix_Chunk*> sounds;
 	static int sfxVolume = MIX_MAX_VOLUME;
 
 	static std::map<std::string, Mix_Music*> music;
 	static int muxVolume = MIX_MAX_VOLUME;
-
-	static bool muted = false;
 
 	const int ANY_CHANNEL = -1;
 	const int NO_LOOPS = 0;
@@ -62,7 +60,7 @@ namespace common::Sounds
 
 	void PlaySound(const std::string& name)
 	{
-		if (!muted)
+		if (!common::Audio::IsMuted())
 		{
 			const auto& item = sounds.find(name);
 			if (item != sounds.end())
@@ -74,29 +72,11 @@ namespace common::Sounds
 
 	void PlayMusic(const std::string& name)
 	{
-		if (!muted)
+		if (!common::Audio::IsMuted())
 		{
 			const auto& item = music.find(name);
 			Mix_PlayMusic(item->second, LOOP_FOREVER);
 		}
-	}
-
-	void SetMuted(bool newValue)
-	{
-		muted = newValue;
-		if (muted)
-		{
-			Mix_PauseMusic();
-		}
-		else
-		{
-			Mix_ResumeMusic();
-		}
-	}
-
-	bool IsMuted()
-	{
-		return muted;
 	}
 
 	static int ClampVolume(int volume)
@@ -150,12 +130,34 @@ namespace common::Sounds
 			AddMusic(i.key(), i.value());
 		}
 	}
+}
+namespace common::Audio
+{
+	static bool muted = false;
+
+	void SetMuted(bool newValue)
+	{
+		muted = newValue;
+		if (muted)
+		{
+			Mix_PauseMusic();
+		}
+		else
+		{
+			Mix_ResumeMusic();
+		}
+	}
+
+	bool IsMuted()
+	{
+		return muted;
+	}
 
 	void Start(const std::string& sfxFileName, const std::string& muxFileName)
 	{
-		atexit(Finish);
-		StartSound(sfxFileName);
-		StartMusic(muxFileName);
+		atexit(common::audio::Finish);
+		common::audio::StartSound(sfxFileName);
+		common::audio::StartMusic(muxFileName);
 	}
 }
 

@@ -3,7 +3,7 @@
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
 #include "Application.Sounds.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 namespace application::UIState
 {
 	static ::UIState uiState = ::UIState::SPLASH;
@@ -22,7 +22,7 @@ namespace application::UIState
 	{
 		if (game::avatar::Statistics::IsDead())
 		{
-			common::Sounds::PlaySound(application::Sounds::DEAD_HUNTER);
+			common::audio::PlaySound(application::Sounds::DEAD_HUNTER);
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
 		else if (game::Creatures::AnyLeft())
@@ -39,7 +39,7 @@ namespace application::UIState
 		}
 		else
 		{
-			common::Sounds::PlaySound(application::Sounds::EXIT);
+			common::audio::PlaySound(application::Sounds::EXIT);
 			application::UIState::Write(::UIState::IN_PLAY_EXIT);
 		}
 	}

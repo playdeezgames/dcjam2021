@@ -59,7 +59,7 @@
     <ClCompile Include="Graphics.Layouts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common.Sounds.cpp">
+    <ClCompile Include="Common.Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Options.cpp">
@@ -259,7 +259,7 @@
     <ClInclude Include="Graphics.Layouts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common.Sounds.h">
+    <ClInclude Include="Common.Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Options.h">

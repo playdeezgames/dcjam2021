@@ -4,7 +4,7 @@
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
 #include "Application.Sounds.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Graphics.Texts.h"
 namespace game::Combat
 {
@@ -84,18 +84,18 @@ namespace game::Combat
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 					{
 						SetCombatResultText(KILL_MONSTER);
-						common::Sounds::PlaySound(application::Sounds::DEAD_MONSTER);
+						common::audio::PlaySound(application::Sounds::DEAD_MONSTER);
 					}
 					else
 					{
 						SetCombatResultText(HIT_MONSTER);
-						common::Sounds::PlaySound(application::Sounds::HIT_MONSTER);
+						common::audio::PlaySound(application::Sounds::HIT_MONSTER);
 					}
 				}
 				else
 				{
 					SetCombatResultText(MISSED_MONSTER);
-					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
+					common::audio::PlaySound(application::Sounds::HIT_BLOCKED);
 				}
 				DoAttackTimer();
 			}
@@ -107,13 +107,13 @@ namespace game::Combat
 				if (damage > 0)
 				{
 					SetCombatResultText(GOT_HIT);
-					common::Sounds::PlaySound(application::Sounds::HIT_HUNTER);
+					common::audio::PlaySound(application::Sounds::HIT_HUNTER);
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
 				}
 				else
 				{
 					SetCombatResultText(BLOCKED_HIT);
-					common::Sounds::PlaySound(application::Sounds::HIT_BLOCKED);
+					common::audio::PlaySound(application::Sounds::HIT_BLOCKED);
 				}
 				DoDefendTimer();
 			}

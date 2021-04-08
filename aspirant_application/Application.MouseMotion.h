@@ -5,6 +5,6 @@
 namespace application::MouseMotion
 {
 	typedef void (*Handler)(const common::XY<Sint32>&);
-	void SetHandler(const UIState&, Handler);
+	void SetHandler(const ::UIState&, Handler);
 	void Handle(const SDL_MouseMotionEvent&);
 }

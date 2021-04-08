@@ -1,6 +1,6 @@
 #include "Options.h"
 #include "Data.JSON.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 namespace Options
 {
 	const std::string MUTED = "muted";
@@ -12,17 +12,17 @@ namespace Options
 	{
 		fileName = filename;
 		auto properties = data::JSON::Load(fileName);
-		common::Sounds::SetMuted((bool)properties[MUTED]);
-		common::Sounds::SetSfxVolume((int)properties[SFX_VOLUME]);
-		common::Sounds::SetMuxVolume((int)properties[MUX_VOLUME]);
+		common::Audio::SetMuted((bool)properties[MUTED]);
+		common::audio::SetSfxVolume((int)properties[SFX_VOLUME]);
+		common::audio::SetMuxVolume((int)properties[MUX_VOLUME]);
 	}
 
 	void Save()
 	{
 		nlohmann::json properties;
-		properties[MUTED] = common::Sounds::IsMuted();
-		properties[MUX_VOLUME] = common::Sounds::GetMuxVolume();
-		properties[SFX_VOLUME] = common::Sounds::GetSfxVolume();
+		properties[MUTED] = common::Audio::IsMuted();
+		properties[MUX_VOLUME] = common::audio::GetMuxVolume();
+		properties[SFX_VOLUME] = common::audio::GetSfxVolume();
 		data::JSON::Save(fileName, properties);
 	}
 }

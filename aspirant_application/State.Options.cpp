@@ -1,7 +1,7 @@
 #include "Application.Renderer.h"
 #include "Graphics.Layouts.h"
 #include <map>
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Options.h"
 #include <sstream>
 #include "Common.Utility.h"
@@ -33,15 +33,15 @@ namespace state::Options
 
 	static void AdjustSfxVolume(int delta)
 	{
-		common::Sounds::SetSfxVolume(common::Sounds::GetSfxVolume() + delta);
-		common::Sounds::PlaySound(application::Sounds::WOOHOO);
+		common::audio::SetSfxVolume(common::audio::GetSfxVolume() + delta);
+		common::audio::PlaySound(application::Sounds::WOOHOO);
 		
 		::Options::Save();
 	}
 
 	static void AdjustMuxVolume(int delta)
 	{
-		common::Sounds::SetMuxVolume(common::Sounds::GetMuxVolume() + delta);
+		common::audio::SetMuxVolume(common::audio::GetMuxVolume() + delta);
 		::Options::Save();
 	}
 
@@ -78,7 +78,7 @@ namespace state::Options
 		switch (GetCurrentItem())
 		{
 		case OptionsItem::TOGGLE_MUTE:
-			common::Sounds::SetMuted(!common::Sounds::IsMuted());
+			common::Audio::SetMuted(!common::Audio::IsMuted());
 			::Options::Save();
 			break;
 		case OptionsItem::BACK:
@@ -116,20 +116,20 @@ namespace state::Options
 	static void UpdateMuteMenuItem()
 	{
 		graphics::MenuItems::SetItemText(LAYOUT_NAME, MUTE_MENU_ITEM_ID, 
-			common::Sounds::IsMuted() ? UNMUTE : MUTE);
+			common::Audio::IsMuted() ? UNMUTE : MUTE);
 	}
 
 	static void UpdateSfxMenuItem()
 	{
 		std::stringstream ss;
-		ss << "SFX Volume (" << common::Utility::ToPercentage(common::Sounds::GetSfxVolume(), MIX_MAX_VOLUME) << "%)";
+		ss << "SFX Volume (" << common::Utility::ToPercentage(common::audio::GetSfxVolume(), MIX_MAX_VOLUME) << "%)";
 		graphics::MenuItems::SetItemText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
 	static void UpdateMuxMenuItem()
 	{
 		std::stringstream ss;
-		ss << "MUX Volume (" << common::Utility::ToPercentage(common::Sounds::GetMuxVolume(), MIX_MAX_VOLUME) << "%)";
+		ss << "MUX Volume (" << common::Utility::ToPercentage(common::audio::GetMuxVolume(), MIX_MAX_VOLUME) << "%)";
 		graphics::MenuItems::SetItemText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 

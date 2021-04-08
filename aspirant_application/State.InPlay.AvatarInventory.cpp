@@ -7,7 +7,7 @@
 #include "Game.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Statistics.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Application.Sounds.h"
 namespace state::in_play::AvatarInventory
 {
@@ -44,7 +44,7 @@ namespace state::in_play::AvatarInventory
 	{
 		if (game::avatar::Items::Read(game::Item::POTION)>0)
 		{
-			common::Sounds::PlaySound(application::Sounds::DRINK_POTION);
+			common::audio::PlaySound(application::Sounds::DRINK_POTION);
 			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, POTION_HEALTH_INCREASE);
 			game::avatar::Items::Remove(game::Item::POTION, 1);
 		}
@@ -54,7 +54,7 @@ namespace state::in_play::AvatarInventory
 	{
 		if (game::avatar::Items::Read(game::Item::BEER) > 0)
 		{
-			common::Sounds::PlaySound(application::Sounds::BEER);
+			common::audio::PlaySound(application::Sounds::BEER);
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, BEER_ATTACK);
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, BEER_ATTACK_DURATION);
 			game::avatar::Items::Remove(game::Item::BEER, 1);
@@ -65,7 +65,7 @@ namespace state::in_play::AvatarInventory
 	{
 		if (game::avatar::Items::Read(game::Item::WINE) > 0)
 		{
-			common::Sounds::PlaySound(application::Sounds::WINE);
+			common::audio::PlaySound(application::Sounds::WINE);
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, WINE_ATTACK);
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, WINE_ATTACK_DURATION);
 			game::avatar::Items::Remove(game::Item::WINE, 1);
@@ -76,7 +76,7 @@ namespace state::in_play::AvatarInventory
 	{
 		if (game::avatar::Items::Read(game::Item::COFFEE) > 0)
 		{
-			common::Sounds::PlaySound(application::Sounds::COFFEE);
+			common::audio::PlaySound(application::Sounds::COFFEE);
 			game::avatar::Statistics::Increase(game::avatar::Statistic::DEFEND, COFFEE_DEFEND_INCREASE);
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, COFFEE_DEFEND_DURATION);
 			game::avatar::Items::Remove(game::Item::COFFEE, 1);

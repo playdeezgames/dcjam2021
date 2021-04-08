@@ -7,11 +7,11 @@
 #include "Graphics.Menus.h"
 #include "Game.Avatar.h"
 #include "Common.RNG.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Graphics.AvatarInventory.h"
 #include <sstream>
 #include "Graphics.MenuItems.h"
-#include "Common.Sounds.h"
+#include "Common.Audio.h"
 #include "Application.Sounds.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Items.h"
@@ -52,13 +52,13 @@ namespace state::in_play::Combat
 		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
 		{
 			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
-			common::Sounds::PlaySound(application::Sounds::WOOHOO);
+			common::audio::PlaySound(application::Sounds::WOOHOO);
 			game::Creatures::Remove(game::Avatar::GetPosition());
 			application::UIState::EnterGame();
 		}
 		else
 		{
-			common::Sounds::PlaySound(application::Sounds::SHUCKS);
+			common::audio::PlaySound(application::Sounds::SHUCKS);
 		}
 	}
 
@@ -68,13 +68,13 @@ namespace state::in_play::Combat
 		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
 		{
 			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
-			common::Sounds::PlaySound(application::Sounds::WOOHOO);
+			common::audio::PlaySound(application::Sounds::WOOHOO);
 			game::Creatures::Remove(game::Avatar::GetPosition());
 			application::UIState::EnterGame();
 		}
 		else
 		{
-			common::Sounds::PlaySound(application::Sounds::SHUCKS);
+			common::audio::PlaySound(application::Sounds::SHUCKS);
 		}
 	}
 
@@ -101,7 +101,7 @@ namespace state::in_play::Combat
 		}
 		else
 		{
-			common::Sounds::PlaySound(application::Sounds::SHUCKS);
+			common::audio::PlaySound(application::Sounds::SHUCKS);
 		}
 	}
 

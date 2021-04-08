@@ -2,9 +2,8 @@
 #include <map>
 #include <string>
 #include <SDL_Mixer.h>
-namespace common::Sounds
+namespace common::audio
 {
-	void Start(const std::string&, const std::string&);
 
 	void PlaySound(const std::string&);
 	void SetSfxVolume(int);
@@ -13,7 +12,10 @@ namespace common::Sounds
 	void PlayMusic(const std::string&);
 	void SetMuxVolume(int);
 	int GetMuxVolume();
-
+}
+namespace common::Audio
+{
+	void Start(const std::string&, const std::string&);
 	void SetMuted(bool);
 	bool IsMuted();
 }
