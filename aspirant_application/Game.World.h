@@ -13,5 +13,7 @@ namespace game::World
 	Border GetRightSide();
 
 	common::XY<size_t> GetSize();
-	Border GetBorder(const common::XY<size_t>&, const maze::Direction &);
+	Border GetBorder(const common::XY<size_t>&, const maze::Direction&);
+	bool IsExplored(const common::XY<size_t>&);
+	void SetExplored(const common::XY<size_t>&);
 }

@@ -60,7 +60,7 @@ namespace graphics::WorldMap
 			{
 				auto cell = common::XY<size_t>(column, row);
 				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
-				if (game::Avatar::IsExplored(cell))
+				if (game::World::IsExplored(cell))
 				{
 
 					graphics::Sprites::Read(MAP_CELL_BASE).value().Draw(renderer, plot);

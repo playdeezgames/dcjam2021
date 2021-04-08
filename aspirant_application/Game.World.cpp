@@ -13,6 +13,18 @@ namespace game::World
 	const size_t EW_BORDER_COUNT = ROWS * COLUMNS + ROWS;
 	const size_t EW_BORDER_STRIDE = COLUMNS + 1;
 
+	static std::vector<std::vector<size_t>> explored;
+
+	void SetExplored(const common::XY<size_t>& xy)
+	{
+		explored[xy.GetX()][xy.GetY()]++;
+	}
+
+	bool IsExplored(const common::XY<size_t>& cell)
+	{
+		return explored[cell.GetX()][cell.GetY()] > 0;
+	}
+
 	common::XY<size_t> GetSize()
 	{
 		return common::XY<size_t>(COLUMNS, ROWS);
@@ -86,6 +98,17 @@ namespace game::World
 
 	void Reset()
 	{
+		explored.clear();
+		auto worldSize = game::World::GetSize();
+		while (explored.size() < worldSize.GetX())
+		{
+			explored.push_back(std::vector<size_t>());
+			auto& column = explored.back();
+			while (column.size() < worldSize.GetY())
+			{
+				column.push_back(0);
+			}
+		}
 		nsBorders.reserve(NS_BORDER_COUNT);
 		nsBorders.clear();
 		while (nsBorders.size() < NS_BORDER_COUNT)

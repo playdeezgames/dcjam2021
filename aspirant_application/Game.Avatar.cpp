@@ -7,6 +7,7 @@
 #include "Application.Sounds.h"
 #include "Common.RNG.h"
 #include "Game.Creatures.h"
+#include "Game.World.h"
 namespace game::Avatar
 {
 	const size_t COLUMNS = 12;//TODO: i am duplicated!
@@ -17,19 +18,6 @@ namespace game::Avatar
 	size_t avatarColumn = 0;
 	size_t avatarRow = 0;
 	maze::Direction avatarFacing = maze::Direction::EAST;
-
-	static std::vector<std::vector<size_t>> explored;
-
-	static void SetExplored()
-	{
-		explored[avatarColumn][avatarRow]++;
-	}
-
-	bool IsExplored(const common::XY<size_t>& cell)
-	{
-		return explored[cell.GetX()][cell.GetY()] > 0;
-	}
-
 
 	maze::Direction GetFacing()
 	{
@@ -86,7 +74,7 @@ namespace game::Avatar
 					avatarColumn--;
 					break;
 				}
-				SetExplored();
+				game::World::SetExplored({avatarColumn, avatarRow});
 				if (avatar::Statistics::IsStarving())
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
@@ -115,23 +103,12 @@ namespace game::Avatar
 
 	void Reset()
 	{
-		explored.clear();
-		auto worldSize = game::World::GetSize();
-		while (explored.size() < worldSize.GetX())
-		{
-			explored.push_back(std::vector<size_t>());
-			auto& column = explored.back();
-			while (column.size() < worldSize.GetY())
-			{
-				column.push_back(0);
-			}
-		}
 		::game::Avatar::avatarFacing = (maze::Direction)common::RNG::FromRange(0, (int)maze::Directions::All().size());
 		do
 		{
 			::game::Avatar::avatarColumn = (size_t)common::RNG::FromRange(0, COLUMNS);
 			::game::Avatar::avatarRow = (size_t)common::RNG::FromRange(0, ROWS);
 		} while (game::Creatures::Read({ avatarColumn, avatarRow }));
-		SetExplored();
+		game::World::SetExplored({avatarColumn, avatarRow});
 	}
 }
