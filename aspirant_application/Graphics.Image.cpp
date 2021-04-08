@@ -7,6 +7,8 @@
 #include "Graphics.Sprites.h"
 namespace graphics::Image
 {
+	static SDL_Color defaultColor = { 255, 255, 255, 255 };
+
 	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
 	{
 		if (model.count(Properties::VISIBLE) == 0 || model[Properties::VISIBLE] == true)
@@ -18,7 +20,9 @@ namespace graphics::Image
 					common::XY<int>(
 						(int)model[common::Properties::X],
 						(int)model[common::Properties::Y]),
-					::graphics::Colors::Get(model[Properties::COLOR]));
+					(model.count(Properties::COLOR)>0) ?
+					(::graphics::Colors::Get(model[Properties::COLOR])) :
+					(defaultColor));
 		}
 	}
 }

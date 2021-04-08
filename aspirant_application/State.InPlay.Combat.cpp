@@ -15,6 +15,7 @@
 #include "Application.Sounds.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Items.h"
+#include "Game.CombatDeck.h"
 namespace state::in_play::AvatarInventory
 {
 	void UseItem();

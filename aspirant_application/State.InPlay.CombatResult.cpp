@@ -4,12 +4,12 @@
 #include "Application.UIState.h"
 #include "Game.Combat.h"
 #include "Graphics.Images.h"
+#include "Game.CombatDeck.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
 	const std::string CURRENT_CARD_IMAGE_ID = "CurrentCard";
 	const std::string NEXT_CARD_IMAGE_ID = "NextCard";
-
 
 	static void OnCommand(const ::Command& command)
 	{

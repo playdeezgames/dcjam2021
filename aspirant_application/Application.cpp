@@ -25,6 +25,7 @@
 #include "Application.Keyboard.h"
 #include "Game.Creatures.h"
 #include "Game.Combat.h"
+#include "Game.CombatDeck.h"
 namespace state::About { void Start(); }
 namespace state::ConfirmQuit { void Start(); }
 namespace state::MainMenu { void Start(); }
