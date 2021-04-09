@@ -115,12 +115,12 @@ namespace game::World
 				size_t ewBorderIndex = column + row * EW_BORDER_STRIDE;
 
 				auto cell = maze.GetCell((int)column, (int)row);
-				auto northDoor = cell->GetDoor(maze::Direction::NORTH);
+				auto northDoor = cell.value()->GetDoor(maze::Direction::NORTH);
 				if (northDoor && *northDoor.value() == maze::Door::OPEN)
 				{
 					nsBorders[nsBorderIndex] = world::Border::DOOR;
 				}
-				auto westDoor = cell->GetDoor(maze::Direction::WEST);
+				auto westDoor = cell.value()->GetDoor(maze::Direction::WEST);
 				if (westDoor && *westDoor.value() == maze::Door::OPEN)
 				{
 					ewBorders[ewBorderIndex] = world::Border::DOOR;

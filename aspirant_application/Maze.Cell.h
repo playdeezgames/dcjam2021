@@ -4,21 +4,22 @@
 #include <map>
 #include <vector>
 #include <optional>
+#include <memory>
 namespace maze
 {
 	class Cell
 	{
 	private:
-		std::map<Direction, Door*> exits;//TODO: shared_ptr
-		std::map<Direction, Cell*> neighbors;//TODO: shared_ptr
+		std::map<Direction, std::shared_ptr<Door>> exits;
+		std::map<Direction, std::shared_ptr<Cell>> neighbors;
 	public:
 		Cell();
-		void SetNeighbor(Direction, Cell*);//TODO: shared_ptr
-		void SetDoor(Direction, Door*);//TODO: shared_ptr
-		std::optional<const Cell*> GetNeighbor(Direction) const;//TODO: shared_ptr
-		std::optional<Cell*> GetNeighbor(Direction);//TODO: shared_ptr
-		std::optional<const Door*> GetDoor(Direction) const;//TODO: shared_ptr
-		std::optional<Door*> GetDoor(Direction);//TODO: shared_ptr
+		void SetNeighbor(Direction, std::shared_ptr<Cell>);
+		void SetDoor(Direction, std::shared_ptr<Door>);
+		std::optional<const std::shared_ptr<Cell>> GetNeighbor(Direction) const;
+		std::optional<std::shared_ptr<Cell>> GetNeighbor(Direction);
+		std::optional<const std::shared_ptr<Door>> GetDoor(Direction) const;
+		std::optional<std::shared_ptr<Door>> GetDoor(Direction);
 		bool IsDeadEnd() const;
 	};
 }

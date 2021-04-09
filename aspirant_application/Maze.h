@@ -2,6 +2,8 @@
 #include <vector>
 #include "Maze.Cell.h"
 #include "Maze.Door.h"
+#include <memory>
+#include <optional>
 namespace maze
 {
 	class Maze
@@ -9,17 +11,16 @@ namespace maze
 	private:
 		size_t columns;
 		size_t rows;
-		std::vector<Cell*> cells;//TODO: shared_ptr
-		std::vector<Door*> doors;//TODO: shared_ptr
+		std::vector<std::shared_ptr<Cell>> cells;
+		std::vector<std::shared_ptr<Door>> doors;
 		void Clear();
 		void PopulateCells();
 		void InitializeCells();
 		void InitializeCell(int, int);
 	public:
 		Maze(size_t, size_t);
-		~Maze();
-		Cell* GetCell(int, int);//TODO: shared_ptr
-		const Cell* GetCell(int, int) const;//TODO: shared_ptr
+		std::optional<std::shared_ptr<Cell>> GetCell(int, int);
+		std::optional<const std::shared_ptr<Cell>> GetCell(int, int) const;
 		void Generate();
 		size_t GetColumns() const;
 		size_t GetRows() const;

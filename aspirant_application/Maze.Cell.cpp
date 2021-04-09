@@ -8,17 +8,17 @@ namespace maze
 
 	}
 
-	void Cell::SetNeighbor(Direction direction, Cell* cell)
+	void Cell::SetNeighbor(Direction direction, std::shared_ptr<Cell> cell)
 	{
 		neighbors[direction] = cell;
 	}
 
-	void Cell::SetDoor(Direction direction, Door* door)
+	void Cell::SetDoor(Direction direction, std::shared_ptr<Door> door)
 	{
 		exits[direction] = door;
 	}
 
-	std::optional<const Cell*> Cell::GetNeighbor(Direction direction) const
+	std::optional<const std::shared_ptr<Cell>> Cell::GetNeighbor(Direction direction) const
 	{
 		auto neighbor = neighbors.find(direction);
 		return 
@@ -27,7 +27,7 @@ namespace maze
 			(std::nullopt);
 	}
 
-	std::optional<Cell*> Cell::GetNeighbor(Direction direction)
+	std::optional<std::shared_ptr<Cell>> Cell::GetNeighbor(Direction direction)
 	{
 		auto neighbor = neighbors.find(direction);
 		return
@@ -36,21 +36,21 @@ namespace maze
 			(std::nullopt);
 	}
 
-	std::optional<const Door*> Cell::GetDoor(Direction direction) const
+	std::optional<const std::shared_ptr<Door>> Cell::GetDoor(Direction direction) const
 	{
 		auto door = exits.find(direction);
 		return 
 			(door!=exits.end()) ? 
-			(std::optional<const Door*>(door->second)) : 
+			(std::optional<const std::shared_ptr<Door>>(door->second)) :
 			(std::nullopt);
 	}
 
-	std::optional<Door*> Cell::GetDoor(Direction direction)
+	std::optional<std::shared_ptr<Door>> Cell::GetDoor(Direction direction)
 	{
 		auto door = exits.find(direction);
 		return
 			(door != exits.end()) ?
-			(std::optional<Door*>(door->second)) :
+			(std::optional<std::shared_ptr<Door>>(door->second)) :
 			(std::nullopt);
 	}
 

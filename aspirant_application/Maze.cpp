@@ -18,7 +18,7 @@ namespace maze
 
 		while (cells.size() < columns * rows)
 		{
-			cells.push_back(new Cell());
+			cells.push_back(std::make_shared<Cell>());
 		}
 	}
 
@@ -37,55 +37,43 @@ namespace maze
 
 	void Maze::InitializeCell(int column, int row)
 	{
-		Cell* cell = GetCell(column, row);
+		auto cell = GetCell(column, row);
 		for (auto direction : Directions::All())
 		{
-			if (!cell->GetNeighbor(direction))
+			if (!cell.value()->GetNeighbor(direction))
 			{
 				int nextColumn = Directions::NextColumn(column, row, direction);
 				int nextRow = Directions::NextRow(column, row, direction);
 				if (nextColumn >= 0 && nextColumn < columns && nextRow >= 0 && nextRow < rows)
 				{
-					Cell* neighbor = GetCell(nextColumn, nextRow);
-					Door* door = new Door();
+					auto neighbor = GetCell(nextColumn, nextRow);
+					auto door = std::make_shared<Door>();
 					doors.push_back(door);
-					cell->SetNeighbor(direction, neighbor);
-					cell->SetDoor(direction, door);
-					neighbor->SetNeighbor(Directions::Opposite(direction), cell);
-					neighbor->SetDoor(Directions::Opposite(direction), door);
+					cell.value()->SetNeighbor(direction, neighbor.value());
+					cell.value()->SetDoor(direction, door);
+					neighbor.value()->SetNeighbor(Directions::Opposite(direction), cell.value());
+					neighbor.value()->SetDoor(Directions::Opposite(direction), door);
 				}
 			}
 		}
 	}
 
-	Maze::~Maze()
-	{
-		for (auto& ptr : cells)
-		{
-			delete ptr;
-		}
-		for (auto& ptr : doors)
-		{
-			delete ptr;
-		}
-	}
-
-	Cell* Maze::GetCell(int column, int row)
+	std::optional<std::shared_ptr<Cell>> Maze::GetCell(int column, int row)
 	{
 		if (column >= 0 && column < columns && row >= 0 && row < rows)
 		{
 			return cells[column + row * columns];
 		}
-		return nullptr;
+		return std::nullopt;
 	}
 
-	const Cell* Maze::GetCell(int column, int row) const
+	std::optional<const std::shared_ptr<Cell>> Maze::GetCell(int column, int row) const
 	{
 		if (column >= 0 && column < columns && row >= 0 && row < rows)
 		{
 			return cells[column + row * columns];
 		}
-		return nullptr;
+		return std::nullopt;
 	}
 
 	void Maze::Clear()
@@ -99,10 +87,10 @@ namespace maze
 	void Maze::Generate()
 	{
 		Clear();
-		std::set<Cell*> outside(cells.begin(), cells.end());
-		std::vector<Cell*> frontier;
-		std::set<Cell*> inside;
-		Cell* cell = cells[common::RNG::FromRange(0, (int)cells.size())];
+		std::set<std::shared_ptr<Cell>> outside(cells.begin(), cells.end());
+		std::vector<std::shared_ptr<Cell>> frontier;
+		std::set<std::shared_ptr<Cell>> inside;
+		auto cell = cells[common::RNG::FromRange(0, (int)cells.size())];
 		outside.erase(cell);
 		inside.insert(cell);
 		for (auto direction : Directions::All())
