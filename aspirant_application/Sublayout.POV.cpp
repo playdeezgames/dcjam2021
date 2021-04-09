@@ -5,6 +5,7 @@
 #include "Graphics.Texts.h"
 #include "Graphics.Images.h"
 #include "Game.Items.h"
+#include "Game.World.Items.h"
 #include "Application.Update.h"
 #include "Game.Creatures.h"
 namespace sublayout::POV
@@ -22,22 +23,22 @@ namespace sublayout::POV
 	const std::string JOOLS_IMAGE_ID = "Jools";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
 
-	static std::map<game::World::Border, std::string> leftSides =
+	static std::map<game::world::Border, std::string> leftSides =
 	{
-		{game::World::Border::DOOR, "LeftDoor"},
-		{game::World::Border::WALL, "LeftWall"}
+		{game::world::Border::DOOR, "LeftDoor"},
+		{game::world::Border::WALL, "LeftWall"}
 	};
 
-	static std::map<game::World::Border, std::string> rightSides =
+	static std::map<game::world::Border, std::string> rightSides =
 	{
-		{game::World::Border::DOOR, "RightDoor"},
-		{game::World::Border::WALL, "RightWall"}
+		{game::world::Border::DOOR, "RightDoor"},
+		{game::world::Border::WALL, "RightWall"}
 	};
 
-	static std::map<game::World::Border, std::string> aheads =
+	static std::map<game::world::Border, std::string> aheads =
 	{
-		{game::World::Border::DOOR, "AheadDoor"},
-		{game::World::Border::WALL, "AheadWall"}
+		{game::world::Border::DOOR, "AheadDoor"},
+		{game::world::Border::WALL, "AheadWall"}
 	};
 
 	static std::map<maze::Direction, std::string> directionNames =
@@ -83,12 +84,12 @@ namespace sublayout::POV
 		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetAhead()]);
 		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetRightSide()]);
 		auto position = game::Avatar::GetPosition();
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::Items::IsPresent(game::Item::FOOD, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::Items::IsPresent(game::Item::POTION, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, BEER_IMAGE_ID, game::Items::IsPresent(game::Item::BEER, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, WINE_IMAGE_ID, game::Items::IsPresent(game::Item::WINE, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, COFFEE_IMAGE_ID, game::Items::IsPresent(game::Item::COFFEE, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, JOOLS_IMAGE_ID, game::Items::IsPresent(game::Item::JOOLS, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::world::Items::IsPresent(game::Item::FOOD, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::world::Items::IsPresent(game::Item::POTION, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, BEER_IMAGE_ID, game::world::Items::IsPresent(game::Item::BEER, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, WINE_IMAGE_ID, game::world::Items::IsPresent(game::Item::WINE, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, COFFEE_IMAGE_ID, game::world::Items::IsPresent(game::Item::COFFEE, position));
+		::graphics::Images::SetVisible(POV_LAYOUT_NAME, JOOLS_IMAGE_ID, game::world::Items::IsPresent(game::Item::JOOLS, position));
 		UpdateDirection();
 		UpdateCreatures();
 	}

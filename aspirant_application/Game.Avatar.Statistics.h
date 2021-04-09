@@ -6,6 +6,7 @@ namespace game::avatar::Statistics
 	void Write(const ::game::avatar::Statistic&, int);
 	int Maximum(const ::game::avatar::Statistic&);
 	int Default(const ::game::avatar::Statistic&);
+	bool IsMinimum(const ::game::avatar::Statistic&);
 	void Reset();
 	bool IsStarving();
 	bool IsDead();

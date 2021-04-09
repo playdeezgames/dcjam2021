@@ -5,6 +5,7 @@
 #include "Graphics.AvatarInventory.h"
 #include "Game.Avatar.Items.h"
 #include "Game.Items.h"
+#include "Game.World.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Statistics.h"
 #include "Common.Audio.h"
@@ -27,7 +28,7 @@ namespace state::in_play::AvatarInventory
 		if (item)
 		{
 			size_t amount = game::avatar::Items::Remove(*item, 1);
-			game::Items::Add(*item, 1, game::Avatar::GetPosition());
+			game::world::Items::Add(*item, 1, game::Avatar::GetPosition());
 		}
 	}
 

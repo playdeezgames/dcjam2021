@@ -1,6 +1,7 @@
 #include "json.hpp"
 #include <SDL.h>
 #include "Game.Item.h"
+#include "Game.World.Items.h"
 #include "Common.Properties.h"
 #include "Game.Items.h"
 #include "Game.Avatar.h"
@@ -19,7 +20,7 @@ namespace graphics::FloorInventory
 	void NextIndex()
 	{
 		auto location = game::Avatar::GetPosition();
-		auto inventory = game::Items::FloorInventory(location);
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + 1) % inventory.size();
@@ -29,7 +30,7 @@ namespace graphics::FloorInventory
 	void PreviousIndex()
 	{
 		auto location = game::Avatar::GetPosition();
-		auto inventory = game::Items::FloorInventory(location);
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + inventory.size() - 1) % inventory.size();
@@ -39,7 +40,7 @@ namespace graphics::FloorInventory
 	std::optional<game::Item> GetItem()
 	{
 		auto location = game::Avatar::GetPosition();
-		auto& inventory = game::Items::FloorInventory(location);
+		auto& inventory = game::world::Items::FloorInventory(location);
 		if (inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
@@ -70,7 +71,7 @@ namespace graphics::FloorInventory
 
 
 		auto location = game::Avatar::GetPosition();
-		auto& inventory = game::Items::FloorInventory(location);
+		auto& inventory = game::world::Items::FloorInventory(location);
 		if (inventoryIndex >= inventory.size())
 		{
 			inventoryIndex = 0;

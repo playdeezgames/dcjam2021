@@ -164,14 +164,18 @@ namespace game::Creatures
 		}
 	}
 
-	void DecreaseHealth(const common::XY<size_t>& location, int amount)
+	std::optional<int> DoDamage(const common::XY<size_t>& location, int amount)
 	{
 		auto instance = Get(location);
 		if (instance)
 		{
+			amount = amount - game::Creatures::GetDefend(location).value();
+			amount = (amount < 0) ? (0) : (amount);
 			instance.value().wounds += amount;
 			Put(location, instance.value());
+			return amount;
 		}
+		return std::nullopt;
 	}
 
 	void Advance(const common::XY<size_t>& location)

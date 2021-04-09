@@ -64,6 +64,11 @@ namespace game::avatar::Statistics
 			(value);
 	}
 
+	bool IsMinimum(const ::game::avatar::Statistic& statistic)
+	{
+		return Read(statistic) == Minimum(statistic);
+	}
+
 	void Reset()
 	{
 		current = initials;

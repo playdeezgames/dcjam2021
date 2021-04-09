@@ -57,7 +57,7 @@ namespace game::Avatar
 	{
 		if (!game::avatar::Statistics::IsDead())
 		{
-			if (game::World::GetAhead() == game::World::Border::DOOR)
+			if (game::World::GetAhead() == game::world::Border::DOOR)
 			{
 				switch (avatarFacing)
 				{

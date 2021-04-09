@@ -4,6 +4,7 @@
 #include "Application.UIState.h"
 #include "Graphics.FloorInventory.h"
 #include "Game.Items.h"
+#include "Game.World.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Items.h"
 namespace state::in_play::FloorInventory
@@ -15,8 +16,8 @@ namespace state::in_play::FloorInventory
 		auto item = graphics::FloorInventory::GetItem();
 		if (item)
 		{
-			auto inventory = game::Items::FloorInventory(game::Avatar::GetPosition());
-			size_t amount = game::Items::Remove(*item, inventory[*item], game::Avatar::GetPosition());
+			auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+			size_t amount = game::world::Items::Remove(*item, inventory[*item], game::Avatar::GetPosition());
 			game::avatar::Items::Add(*item, amount);
 		}
 	}

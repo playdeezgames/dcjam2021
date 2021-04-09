@@ -74,13 +74,12 @@ namespace game::Combat
 		{
 			if (IsGuessCorrect(guess.value()))
 			{
-				auto defend = game::Creatures::GetDefend(game::Avatar::GetPosition()).value();
-				auto damage = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK) - defend;
+				auto damage = 
+					game::Creatures::DoDamage(
+						game::Avatar::GetPosition(), 
+						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
 				if (damage > 0)
 				{
-					game::Creatures::DecreaseHealth(
-						game::Avatar::GetPosition(), 
-						damage);
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 					{
 						SetCombatResultText(KILL_MONSTER);

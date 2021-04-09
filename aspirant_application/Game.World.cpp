@@ -30,10 +30,10 @@ namespace game::World
 		return common::XY<size_t>(COLUMNS, ROWS);
 	}
 
-	static std::vector<Border> nsBorders;
-	static std::vector<Border> ewBorders;
+	static std::vector<world::Border> nsBorders;
+	static std::vector<world::Border> ewBorders;
 
-	Border GetBorder(const common::XY<size_t>& position, const maze::Direction& direction)
+	world::Border GetBorder(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
 		switch (direction)
 		{
@@ -48,7 +48,7 @@ namespace game::World
 		}
 	}
 
-	Border GetLeftSide()
+	world::Border GetLeftSide()
 	{
 		auto position = game::Avatar::GetPosition();
 		switch (game::Avatar::GetFacing())
@@ -64,7 +64,7 @@ namespace game::World
 		}
 	}
 
-	Border GetAhead()
+	world::Border GetAhead()
 	{
 		auto position = game::Avatar::GetPosition();
 		switch (game::Avatar::GetFacing())
@@ -80,7 +80,7 @@ namespace game::World
 		}
 	}
 
-	Border GetRightSide()
+	world::Border GetRightSide()
 	{
 		auto position = game::Avatar::GetPosition();
 		switch (game::Avatar::GetFacing())
@@ -113,14 +113,14 @@ namespace game::World
 		nsBorders.clear();
 		while (nsBorders.size() < NS_BORDER_COUNT)
 		{
-			nsBorders.push_back(Border::WALL);
+			nsBorders.push_back(world::Border::WALL);
 		}
 
 		ewBorders.reserve(EW_BORDER_COUNT);
 		ewBorders.clear();
 		while (ewBorders.size() < EW_BORDER_COUNT)
 		{
-			ewBorders.push_back(Border::WALL);
+			ewBorders.push_back(world::Border::WALL);
 		}
 
 		maze::Maze maze(COLUMNS, ROWS);
@@ -137,12 +137,12 @@ namespace game::World
 				auto northDoor = cell->GetDoor(maze::Direction::NORTH);
 				if (northDoor && *northDoor.value() == maze::Door::OPEN)
 				{
-					nsBorders[nsBorderIndex] = Border::DOOR;
+					nsBorders[nsBorderIndex] = world::Border::DOOR;
 				}
 				auto westDoor = cell->GetDoor(maze::Direction::WEST);
 				if (westDoor && *westDoor.value() == maze::Door::OPEN)
 				{
-					ewBorders[ewBorderIndex] = Border::DOOR;
+					ewBorders[ewBorderIndex] = world::Border::DOOR;
 				}
 			}
 		}
