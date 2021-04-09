@@ -1,6 +1,5 @@
 #include "Game.World.h"
 #include <vector>
-#include "Game.Avatar.h"
 #include "Maze.h"
 #include "Common.RNG.h"
 #include "Maze.Direction.h"
@@ -33,7 +32,7 @@ namespace game::World
 	static std::vector<world::Border> nsBorders;
 	static std::vector<world::Border> ewBorders;
 
-	world::Border GetBorder(const common::XY<size_t>& position, const maze::Direction& direction)
+	world::Border GetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
 		switch (direction)
 		{
@@ -48,10 +47,9 @@ namespace game::World
 		}
 	}
 
-	world::Border GetLeftSide()
+	world::Border GetBorderLeft(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		auto position = game::Avatar::GetPosition();
-		switch (game::Avatar::GetFacing())
+		switch (direction)
 		{
 		case maze::Direction::NORTH:
 			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE];
@@ -64,26 +62,9 @@ namespace game::World
 		}
 	}
 
-	world::Border GetAhead()
+	world::Border GetBorderRight(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		auto position = game::Avatar::GetPosition();
-		switch (game::Avatar::GetFacing())
-		{
-		case maze::Direction::NORTH:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE];
-		case maze::Direction::EAST:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1];
-		case maze::Direction::SOUTH:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE + NS_BORDER_STRIDE];
-		default:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE];
-		}
-	}
-
-	world::Border GetRightSide()
-	{
-		auto position = game::Avatar::GetPosition();
-		switch (game::Avatar::GetFacing())
+		switch (direction)
 		{
 		case maze::Direction::NORTH:
 			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1];

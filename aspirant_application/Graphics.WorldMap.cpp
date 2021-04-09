@@ -39,7 +39,7 @@ namespace graphics::WorldMap
 
 	static void DrawWall(SDL_Renderer* renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
 	{
-		if (game::World::GetBorder(cell, direction) == game::world::Border::WALL)
+		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
 			graphics::Sprites::Read(wallSprites[direction]).value().Draw(renderer, plot);
 		}

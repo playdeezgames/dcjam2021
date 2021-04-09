@@ -80,10 +80,11 @@ namespace sublayout::POV
 
 	static void UpdatePOV(const Uint32&)
 	{
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetLeftSide()]);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetAhead()]);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetRightSide()]);
 		auto position = game::Avatar::GetPosition();
+		auto facing = game::Avatar::GetFacing();
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetBorderLeft(position, facing)]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetBorderAhead(position, facing)]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetBorderRight(position, facing)]);
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::world::Items::IsPresent(game::Item::FOOD, position));
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::world::Items::IsPresent(game::Item::POTION, position));
 		::graphics::Images::SetVisible(POV_LAYOUT_NAME, BEER_IMAGE_ID, game::world::Items::IsPresent(game::Item::BEER, position));

@@ -4,12 +4,10 @@
 #include "Game.World.Border.h"
 namespace game::World
 {
-	world::Border GetLeftSide();
-	world::Border GetAhead();
-	world::Border GetRightSide();
-
+	world::Border GetBorderAhead(const common::XY<size_t>&, const maze::Direction&);
+	world::Border GetBorderLeft(const common::XY<size_t>&, const maze::Direction&);
+	world::Border GetBorderRight(const common::XY<size_t>&, const maze::Direction&);
 	common::XY<size_t> GetSize();
-	world::Border GetBorder(const common::XY<size_t>&, const maze::Direction&);
 	bool IsExplored(const common::XY<size_t>&);
 	void SetExplored(const common::XY<size_t>&);
 }
