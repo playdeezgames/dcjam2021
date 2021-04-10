@@ -6,6 +6,8 @@ namespace graphics::Menus
 {
 	//TODO: this can perhaps replace avatarinventory and floorinventory if we make it generic enough
 	std::optional<int> Read(const std::string&, const std::string&);
+	size_t GetCount(const std::string&, const std::string&);
+	//void Write(const std::string&, const std::string&, int);
 	void Next(const std::string&, const std::string&);
 	void Previous(const std::string&, const std::string&);
 	//TODO: set font
@@ -16,6 +18,5 @@ namespace graphics::Menus
 	//TODO: set drop shadow xy
 	//TODO: add menu item
 	//TODO: remove menu item
-	//TODO: set index
 	//TODO: get item count
 }

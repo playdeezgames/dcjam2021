@@ -3,7 +3,14 @@ Plating:
 Refactors:
   ☐ Items To Config Files
 Additional Features:
+  ☐ depending on the length of a "hot streak" do extra damage
   ☐ better MUX shuffler
+  ☐ save and load the game
+  ☐ difficulty levels
+  ☐ new item: whiskey
+    teleports you randomly somewhere else in the maze
+  ☐ map sections
+    3x3 or 4x4 areas to show on screen
   ☐ mouse controls
     ☐ movement
     ☐ menus
@@ -15,4 +22,6 @@ Additional Features:
     ☐ locked doors
     ☐ keys
   ☐ monster drops
+  ☐ key remapper
+    needs to be able to revert to defaults!
   

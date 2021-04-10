@@ -10,7 +10,8 @@ namespace graphics::Layouts
 }
 namespace graphics::Images
 {
-	void SetSprite(const std::string& layoutName, const std::string& imageId, const std::string& spriteName)
+	template<typename TResult>
+	static TResult WithImage(const std::string& layoutName, const std::string& imageId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
@@ -19,24 +20,26 @@ namespace graphics::Images
 				if (thingie.count(graphics::Properties::IMAGE_ID) > 0 &&
 					thingie[graphics::Properties::IMAGE_ID] == imageId)
 				{
-					thingie[graphics::Properties::SPRITE] = spriteName;
+					return func(thingie);
 				}
 			}
 		}
+		return notFound();
+	}
+
+	void SetSprite(const std::string& layoutName, const std::string& imageId, const std::string& spriteName)
+	{
+		WithImage<void>(layoutName, imageId, [spriteName](auto& thingie)
+		{
+			thingie[graphics::Properties::SPRITE] = spriteName;
+		}, []() {});
 	}
 
 	void SetVisible(const std::string& layoutName, const std::string& imageId, bool visible)
 	{
-		for (auto& thingie : graphics::Layouts::layouts[layoutName])
+		WithImage<void>(layoutName, imageId, [visible](auto& thingie) 
 		{
-			if (thingie[common::Properties::TYPE] == graphics::Types::IMAGE)
-			{
-				if (thingie.count(graphics::Properties::IMAGE_ID) > 0 &&
-					thingie[graphics::Properties::IMAGE_ID] == imageId)
-				{
-					thingie[graphics::Properties::VISIBLE] = visible;
-				}
-			}
-		}
+			thingie[graphics::Properties::VISIBLE] = visible;
+		}, []() {});
 	}
 }

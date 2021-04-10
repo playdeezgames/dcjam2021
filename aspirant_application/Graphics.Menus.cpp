@@ -4,38 +4,45 @@
 #include "Graphics.Types.h"
 #include "Common.Properties.h"
 #include "Graphics.Properties.h"
-namespace graphics::Layouts 
-{ 
+namespace graphics::Layouts
+{
+	//TODO: i dont like this here
 	extern std::map<std::string, nlohmann::json> layouts;
 }
 namespace graphics::Menus
 {
-	std::optional<int> Read(const std::string& layoutName, const std::string& menuId)
+	template<typename TResult>
+	static TResult WithMenu(const std::string& layoutName, const std::string& menuId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
 			if (thingie[common::Properties::TYPE] == graphics::Types::MENU &&
 				thingie[graphics::Properties::MENU_ID] == menuId)
 			{
-				int index = thingie[graphics::Properties::INDEX];//TODO: this cannot be proxied!
-				return (int)thingie[graphics::Properties::MENU_ITEMS][index][graphics::Properties::VALUE];
+				return func(thingie);
 			}
 		}
-		return std::nullopt;
+		return notFound();
+	}
+
+	std::optional<int> Read(const std::string& layoutName, const std::string& menuId)
+	{
+		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
+		{
+			int index = thingie[graphics::Properties::INDEX];
+			return (int)thingie[graphics::Properties::MENU_ITEMS][index][graphics::Properties::VALUE];
+		},
+			[]() {return std::nullopt; });
 	}
 
 	static void ChangeMenuIndex(const std::string& layoutName, const std::string& menuId, int delta)
 	{
-		for (auto& thingie : graphics::Layouts::layouts[layoutName])
+		WithMenu<void>(layoutName, menuId, [delta](nlohmann::json& thingie)
 		{
-			if (thingie[common::Properties::TYPE] == graphics::Types::MENU &&
-				thingie[graphics::Properties::MENU_ID] == menuId)
-			{
-				auto itemCount = thingie[graphics::Properties::MENU_ITEMS].size();
-				//TODO: this cannot be proxied! vv
-				thingie[graphics::Properties::INDEX] = (thingie[graphics::Properties::INDEX] + itemCount + delta) % itemCount;
-			}
-		}
+			auto itemCount = thingie[graphics::Properties::MENU_ITEMS].size();
+			thingie[graphics::Properties::INDEX] = (thingie[graphics::Properties::INDEX] + itemCount + delta) % itemCount;
+		},
+			[]() {});
 	}
 
 	void Next(const std::string& layoutName, const std::string& menuId)
@@ -46,5 +53,14 @@ namespace graphics::Menus
 	void Previous(const std::string& layoutName, const std::string& menuId)
 	{
 		ChangeMenuIndex(layoutName, menuId, -1);
+	}
+
+	size_t GetCount(const std::string& layoutName, const std::string& menuId)
+	{
+		return WithMenu<size_t>(layoutName, menuId, [](auto& thingie)
+		{
+			return thingie[graphics::Properties::MENU_ITEMS].size();
+		},
+			[]() { return 0; });
 	}
 }
