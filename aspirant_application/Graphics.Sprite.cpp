@@ -24,14 +24,14 @@ namespace graphics
 		auto texture = graphics::Textures::Read(model[graphics::Properties::TEXTURE]);
 		SDL_SetTextureColorMod
 		(
-			texture,
+			texture.get(),
 			color.r,
 			color.g,
 			color.b
 		);
 		SDL_SetTextureAlphaMod
 		(
-			texture,
+			texture.get(),
 			color.a
 		);
 		SDL_Rect rcDst =
@@ -48,7 +48,7 @@ namespace graphics
 			model[common::Properties::WIDTH],
 			model[common::Properties::HEIGHT]
 		};
-		SDL_RenderCopy(renderer.get(), texture, &source, &rcDst);
+		SDL_RenderCopy(renderer.get(), texture.get(), &source, &rcDst);
 	}
 
 	int Sprite::GetWidth() const

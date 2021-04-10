@@ -3,40 +3,27 @@
 #include <SDL_image.h>
 #include "Data.JSON.h"
 #include <map>
+#include <memory>
 namespace graphics::Textures
 {
-	static std::map<std::string, SDL_Texture*> textures;
+	static std::map<std::string, std::shared_ptr<SDL_Texture>> textures;
 
-	static void Finish()
-	{
-		for (auto& entry : textures)
-		{
-			if (entry.second)
-			{
-				SDL_DestroyTexture(entry.second);
-				entry.second = nullptr;
-			}
-		}
-		textures.clear();
-	}
-
-	static void Add(const std::string& name, SDL_Texture* texture)
+	static void Add(const std::string& name, std::shared_ptr<SDL_Texture> texture)
 	{
 		textures[name] = texture;
 	}
 
 	void InitializeFromFile(std::shared_ptr<SDL_Renderer> renderer, const std::string& fileName)
 	{
-		atexit(Finish);
 		auto properties = data::JSON::Load(fileName);
 		for (auto& entry : properties.items())
 		{
 			std::string imageFileName = entry.value();
-			Add(entry.key(), IMG_LoadTexture(renderer.get(), imageFileName.c_str()));
+			Add(entry.key(), std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderer.get(), imageFileName.c_str()), SDL_DestroyTexture));
 		}
 	}
 
-	SDL_Texture* Read(const std::string& name)
+	std::shared_ptr<SDL_Texture> Read(const std::string& name)
 	{
 		auto iter = textures.find(name);
 		if (iter != textures.end())

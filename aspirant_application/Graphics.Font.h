@@ -23,10 +23,7 @@ namespace graphics
 		void WriteTextRight(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
 		common::XY<int> WriteGlyph(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, char, const std::string&) const;
 	public:
-		Font
-		(
-			const nlohmann::json&
-		);
+		Font(const nlohmann::json&);
 		void WriteText(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&, const HorizontalAlignment&) const;
 	};
 }
