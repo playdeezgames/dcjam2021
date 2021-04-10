@@ -10,7 +10,8 @@ namespace graphics::Layouts
 }
 namespace graphics::Texts
 {
-	void SetText(const std::string& layoutName, const std::string& textId, const std::string& text)
+	template <typename TResult>
+	static TResult WithText(const std::string& layoutName, const std::string& textId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
@@ -19,9 +20,18 @@ namespace graphics::Texts
 				if (thingie.count(graphics::Properties::TEXT_ID) > 0 &&
 					thingie[graphics::Properties::TEXT_ID] == textId)
 				{
-					thingie[graphics::Properties::TEXT] = text;
+					return func(thingie);
 				}
 			}
 		}
+		return notFound();
+	}
+
+	void SetText(const std::string& layoutName, const std::string& textId, const std::string& text)
+	{
+		WithText<void>(layoutName, textId, [text](auto& thingie) 
+		{
+			thingie[graphics::Properties::TEXT] = text;
+		}, []() {});
 	}
 }
