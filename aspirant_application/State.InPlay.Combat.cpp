@@ -192,7 +192,7 @@ namespace state::in_play::Combat
 		{
 			ss << "(no items)";
 		}
-		graphics::MenuItems::SetItemText(LAYOUT_NAME, USE_ITEM_MENU_ITEM_ID, ss.str());
+		graphics::MenuItems::SetText(LAYOUT_NAME, USE_ITEM_MENU_ITEM_ID, ss.str());
 	}
 
 	static void OnUpdate(const Uint32& ticks)

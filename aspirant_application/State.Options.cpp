@@ -115,7 +115,7 @@ namespace state::Options
 
 	static void UpdateMuteMenuItem()
 	{
-		graphics::MenuItems::SetItemText(LAYOUT_NAME, MUTE_MENU_ITEM_ID, 
+		graphics::MenuItems::SetText(LAYOUT_NAME, MUTE_MENU_ITEM_ID, 
 			common::Audio::IsMuted() ? UNMUTE : MUTE);
 	}
 
@@ -123,14 +123,14 @@ namespace state::Options
 	{
 		std::stringstream ss;
 		ss << "SFX Volume (" << common::Utility::ToPercentage(common::audio::GetSfxVolume(), MIX_MAX_VOLUME) << "%)";
-		graphics::MenuItems::SetItemText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
+		graphics::MenuItems::SetText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
 	static void UpdateMuxMenuItem()
 	{
 		std::stringstream ss;
 		ss << "MUX Volume (" << common::Utility::ToPercentage(common::audio::GetMuxVolume(), MIX_MAX_VOLUME) << "%)";
-		graphics::MenuItems::SetItemText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
+		graphics::MenuItems::SetText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
 	static void OnUpdate(const Uint32& ticks)

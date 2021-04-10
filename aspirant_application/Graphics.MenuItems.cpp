@@ -10,7 +10,8 @@ namespace graphics::Layouts
 }
 namespace graphics::MenuItems
 {
-	void SetItemText(const std::string& layoutName, const std::string& menuItemId, const std::string& text)
+	template <typename TResult>
+	static TResult WithMenuItem(const std::string& layoutName, const std::string& menuItemId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
@@ -21,10 +22,19 @@ namespace graphics::MenuItems
 					if (menuItem.count(graphics::Properties::MENU_ITEM_ID) > 0 &&
 						menuItem[graphics::Properties::MENU_ITEM_ID] == menuItemId)
 					{
-						menuItem[graphics::Properties::TEXT] = text;
+						return func(menuItem);
 					}
 				}
 			}
 		}
+		return notFound();
+	}
+
+	void SetText(const std::string& layoutName, const std::string& menuItemId, const std::string& text)
+	{
+		WithMenuItem<void>(layoutName, menuItemId, [text](auto& menuItem)
+		{
+			menuItem[graphics::Properties::TEXT] = text;
+		}, []() {});
 	}
 }
