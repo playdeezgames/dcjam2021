@@ -25,14 +25,14 @@ namespace graphics::Textures
 		textures[name] = texture;
 	}
 
-	void InitializeFromFile(SDL_Renderer* renderer, const std::string& fileName)
+	void InitializeFromFile(std::shared_ptr<SDL_Renderer> renderer, const std::string& fileName)
 	{
 		atexit(Finish);
 		auto properties = data::JSON::Load(fileName);
 		for (auto& entry : properties.items())
 		{
 			std::string imageFileName = entry.value();
-			Add(entry.key(), IMG_LoadTexture(renderer, imageFileName.c_str()));
+			Add(entry.key(), IMG_LoadTexture(renderer.get(), imageFileName.c_str()));
 		}
 	}
 

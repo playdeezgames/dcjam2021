@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include "Data.JSON.h"
 #include "Common.Properties.h"
+#include <memory>
 namespace common::Application
 {
 	const std::string LOGICAL_WIDTH = "logicalWidth";
@@ -13,13 +14,13 @@ namespace common::Application
 	const std::string CHANNEL_COUNT = "channelCount";
 	const std::string CHUNK_SIZE = "chunkSize";
 
-	static SDL_Window* window = nullptr;
-	static SDL_Renderer* renderer = nullptr;
+	static std::shared_ptr<SDL_Window> window = nullptr;
+	static std::shared_ptr<SDL_Renderer> renderer = nullptr;
 
-	extern void Start(SDL_Renderer*, const std::vector<std::string>&);
+	extern void Start(std::shared_ptr<SDL_Renderer>, const std::vector<std::string>&);
 	extern bool IsRunning();
 	extern void Update(Uint32);
-	extern void Render(SDL_Renderer*);
+	extern void Render(std::shared_ptr<SDL_Renderer>);
 	extern void HandleEvent(const SDL_Event&);
 
 	static std::map<int, SDL_GameController*> controllers;
@@ -58,16 +59,20 @@ namespace common::Application
 		int logicalHeight = properties[LOGICAL_HEIGHT];
 		std::string windowTitle = properties[TITLE];
 		std::string iconFileName = properties[ICON];
+		SDL_Window* pw = nullptr;
+		SDL_Renderer* pr = nullptr;
 		SDL_CreateWindowAndRenderer(
 			windowWidth,
 			windowHeight,
 			0,
-			&window,
-			&renderer);
-		SDL_RenderSetLogicalSize(renderer, logicalWidth, logicalHeight);
-		SDL_SetWindowTitle(window, windowTitle.c_str());
+			&pw,
+			&pr);
+		window = std::shared_ptr<SDL_Window>(pw, SDL_DestroyWindow);
+		renderer = std::shared_ptr<SDL_Renderer>(pr, SDL_DestroyRenderer);
+		SDL_RenderSetLogicalSize(renderer.get(), logicalWidth, logicalHeight);
+		SDL_SetWindowTitle(window.get(), windowTitle.c_str());
 		auto iconSurface = IMG_Load(iconFileName.c_str());
-		SDL_SetWindowIcon(window, iconSurface);
+		SDL_SetWindowIcon(window.get(), iconSurface);
 		SDL_FreeSurface(iconSurface);
 	}
 
@@ -105,7 +110,7 @@ namespace common::Application
 			Update(frameTicks - currentTicks);
 			currentTicks = frameTicks;
 			Render(renderer);
-			SDL_RenderPresent(renderer);
+			SDL_RenderPresent(renderer.get());
 			while (SDL_PollEvent(&evt))
 			{
 				HandleEvent(evt);
@@ -113,29 +118,8 @@ namespace common::Application
 		}
 	}
 
-	template<typename TAsset>
-	void CleanUpPointer(TAsset*& asset, void (*finisher)(TAsset*))
-	{
-		if (asset)
-		{
-			finisher(asset);
-			asset = nullptr;
-		}
-	}
-
-	static void DestroyWindow()
-	{
-		if (window)
-		{
-			SDL_DestroyWindow(window);
-			window = nullptr;
-		}
-	}
-
 	static void DoFinish()
 	{
-		CleanUpPointer(renderer, SDL_DestroyRenderer);
-		CleanUpPointer(window, SDL_DestroyWindow);
 		Mix_CloseAudio();
 		Mix_Quit();
 	}

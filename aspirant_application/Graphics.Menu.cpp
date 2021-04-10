@@ -4,7 +4,7 @@
 #include "json.hpp"
 namespace graphics::Menu
 {
-	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		int index = model[Properties::INDEX];
         std::string font = model[Properties::FONT];

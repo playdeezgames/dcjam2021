@@ -126,7 +126,7 @@ namespace common::Application
 		game::CombatDeck::Deal
 	};
 
-	void Start(SDL_Renderer* renderer, const std::vector<std::string>& arguments)
+	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
 		graphics::Colors::Start(COLOR);
 		graphics::Textures::InitializeFromFile(renderer, TEXTURE);

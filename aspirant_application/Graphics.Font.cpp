@@ -27,14 +27,14 @@ namespace graphics
 		}
 	}
 
-	common::XY<int> Font::WriteGlyph(SDL_Renderer* renderer, const common::XY<int>& xy, char ch, const std::string& color) const
+	common::XY<int> Font::WriteGlyph(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color) const
 	{
 		const auto& sprite = GetGlyphSprite(ch);
 		sprite.value().Draw(renderer, xy, ::graphics::Colors::Get(color));
 		return common::XY(xy.GetX() + sprite.value().GetWidth(), xy.GetY());
 	}
 
-	common::XY<int> Font::WriteTextLeft(SDL_Renderer* renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
+	common::XY<int> Font::WriteTextLeft(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
 	{
 		common::XY<int> temp = xy;
 		for (auto ch : text)
@@ -44,7 +44,7 @@ namespace graphics
 		return temp;
 	}
 
-	void Font::WriteTextCentered(SDL_Renderer* renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
+	void Font::WriteTextCentered(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
 	{
 		int width = 0;
 		for (auto ch : text)
@@ -56,7 +56,7 @@ namespace graphics
 		WriteTextLeft(renderer, adjustedXY, text, color);
 	}
 
-	void Font::WriteTextRight(SDL_Renderer* renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
+	void Font::WriteTextRight(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
 	{
 		int width = 0;
 		for (auto ch : text)
@@ -70,7 +70,7 @@ namespace graphics
 
 	void Font::WriteText
 	(
-		SDL_Renderer* renderer,
+		std::shared_ptr<SDL_Renderer> renderer,
 		const common::XY<int>& xy,
 		const std::string& text,
 		const std::string& color,

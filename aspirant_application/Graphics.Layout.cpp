@@ -5,16 +5,16 @@
 #include "json.hpp"
 #include <SDL.h>
 #include "Graphics.Layouts.h"
-namespace graphics::Menu { void Draw(SDL_Renderer*, const nlohmann::json&); }
-namespace graphics::Image { void Draw(SDL_Renderer*, const nlohmann::json&); }
-namespace graphics::Text { void Draw(SDL_Renderer*, const nlohmann::json&); }
-namespace graphics::WorldMap { void Draw(SDL_Renderer*, const nlohmann::json&); }
-namespace graphics::Sublayout { void Draw(SDL_Renderer*, const nlohmann::json&); }
-namespace graphics::FloorInventory { void Draw(SDL_Renderer*, const nlohmann::json&); }
-namespace graphics::AvatarInventory { void Draw(SDL_Renderer*, const nlohmann::json&); }
+namespace graphics::Menu { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace graphics::Image { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace graphics::Text { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace graphics::WorldMap { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace graphics::Sublayout { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace graphics::FloorInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace graphics::AvatarInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
 namespace graphics::Layout
 {
-	static std::map<std::string, void(*)(SDL_Renderer*, const nlohmann::json&)> table =
+	static std::map<std::string, void(*)(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)> table =
 	{
 		{graphics::Types::IMAGE, graphics::Image::Draw},
 		{graphics::Types::MENU, graphics::Menu::Draw},
@@ -25,7 +25,7 @@ namespace graphics::Layout
 		{graphics::Types::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
 	};
 
-	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		for (auto& drawn : model)
 		{

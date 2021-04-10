@@ -10,8 +10,8 @@ namespace graphics
 		const nlohmann::json& model;
 	public:
 		Sprite(const nlohmann::json&);
-		void Draw(SDL_Renderer*, const ::common::XY<int>&, const SDL_Color&) const;
-		void Draw(SDL_Renderer*, const ::common::XY<int>&) const;
+		void Draw(std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&, const SDL_Color&) const;
+		void Draw(std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&) const;
 		int GetWidth() const;
 	};
 }

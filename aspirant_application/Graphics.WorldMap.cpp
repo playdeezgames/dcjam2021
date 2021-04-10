@@ -37,7 +37,7 @@ namespace graphics::WorldMap
 		{maze::Direction::WEST, AVATAR_WEST}
 	};
 
-	static void DrawWall(SDL_Renderer* renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
+	static void DrawWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
@@ -45,7 +45,7 @@ namespace graphics::WorldMap
 		}
 	}
 
-	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		int x = model[common::Properties::X];
 		int y = model[common::Properties::Y];

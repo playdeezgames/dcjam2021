@@ -13,13 +13,13 @@ namespace graphics
 
 	}
 
-	void Sprite::Draw(SDL_Renderer* renderer, const common::XY<int>& xy) const
+	void Sprite::Draw(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy) const
 	{
 		Draw(renderer, xy, { 255,255,255,255 });
 	}
 
 
-	void Sprite::Draw(SDL_Renderer* renderer, const common::XY<int>& xy, const SDL_Color& color) const
+	void Sprite::Draw(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const SDL_Color& color) const
 	{
 		auto texture = graphics::Textures::Read(model[graphics::Properties::TEXTURE]);
 		SDL_SetTextureColorMod
@@ -48,7 +48,7 @@ namespace graphics
 			model[common::Properties::WIDTH],
 			model[common::Properties::HEIGHT]
 		};
-		SDL_RenderCopy(renderer, texture, &source, &rcDst);
+		SDL_RenderCopy(renderer.get(), texture, &source, &rcDst);
 	}
 
 	int Sprite::GetWidth() const

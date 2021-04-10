@@ -53,7 +53,7 @@ namespace graphics::AvatarInventory
 
 	}
 
-	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		int x = model[common::Properties::X];
 		int y = model[common::Properties::Y];

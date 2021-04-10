@@ -9,7 +9,7 @@ namespace graphics::Image
 {
 	static SDL_Color defaultColor = { 255, 255, 255, 255 };
 
-	void Draw(SDL_Renderer* renderer, const nlohmann::json& model)
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		if (model.count(Properties::VISIBLE) == 0 || model[Properties::VISIBLE] == true)
 		{

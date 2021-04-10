@@ -4,7 +4,7 @@
 #include "Graphics.Types.h"
 #include "Common.Properties.h"
 #include "Graphics.Properties.h"
-namespace graphics::Layout { void Draw(SDL_Renderer*, const nlohmann::json&); }
+namespace graphics::Layout { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
 namespace graphics::Layouts
 {
 	std::map<std::string, nlohmann::json> layouts;
@@ -19,7 +19,7 @@ namespace graphics::Layouts
 		}
 	}
 
-	void Draw(SDL_Renderer* renderer, const std::string& layoutName)
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const std::string& layoutName)
 	{
 		graphics::Layout::Draw(renderer, layouts[layoutName]);
 	}
