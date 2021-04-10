@@ -9,7 +9,7 @@ namespace graphics::Fonts
 		table[identifier] = data::JSON::Load(properties);
 	}
 
-	std::optional<graphics::Font> Get(const std::string& key)
+	std::optional<graphics::Font> Read(const std::string& key)
 	{
 		if (table.count(key) > 0)
 		{

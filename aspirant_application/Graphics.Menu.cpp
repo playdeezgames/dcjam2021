@@ -24,7 +24,7 @@ namespace graphics::Menu
 			int y = menuItem[common::Properties::Y];
 			if (dropShadow)
 			{
-				Fonts::Get(font).value().WriteText(
+				Fonts::Read(font).value().WriteText(
 					renderer, 
 					common::XY<int>(x + dropShadowX, y + dropShadowY), 
 					text, 
@@ -32,7 +32,7 @@ namespace graphics::Menu
 					horizontalAlignment);
 			}
 			std::string color = (currentIndex == index) ? (activeColor) : (inactiveColor);
-			Fonts::Get(font).value().WriteText(renderer, common::XY<int>(x, y), text, color, horizontalAlignment);
+			Fonts::Read(font).value().WriteText(renderer, common::XY<int>(x, y), text, color, horizontalAlignment);
 			currentIndex++;
 		}
 	}

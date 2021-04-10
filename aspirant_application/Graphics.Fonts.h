@@ -5,5 +5,5 @@
 namespace graphics::Fonts
 {
 	void Start(const std::string&);
-	std::optional<graphics::Font> Get(const std::string&);
+	std::optional<graphics::Font> Read(const std::string&);
 }

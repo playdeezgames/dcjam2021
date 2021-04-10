@@ -81,9 +81,9 @@ namespace graphics::AvatarInventory
 			auto color = (index == inventoryIndex) ? (activeColor) : (inactiveColor);
 			if (dropShadow)
 			{
-				graphics::Fonts::Get(font).value().WriteText(renderer, { x + dropShadowX,y + dropShadowY }, ss.str(), dropShadowColor, graphics::HorizontalAlignment::LEFT);
+				graphics::Fonts::Read(font).value().WriteText(renderer, { x + dropShadowX,y + dropShadowY }, ss.str(), dropShadowColor, graphics::HorizontalAlignment::LEFT);
 			}
-			graphics::Fonts::Get(font).value().WriteText(renderer, { x,y }, ss.str(), color, graphics::HorizontalAlignment::LEFT);
+			graphics::Fonts::Read(font).value().WriteText(renderer, { x,y }, ss.str(), color, graphics::HorizontalAlignment::LEFT);
 			y += rowHeight;
 			index++;
 		}
@@ -92,9 +92,9 @@ namespace graphics::AvatarInventory
 		{
 			if (dropShadow)
 			{
-				graphics::Fonts::Get(font).value().WriteText(renderer, { x + dropShadowX,y + dropShadowY }, "(nothing)", dropShadowColor, graphics::HorizontalAlignment::LEFT);
+				graphics::Fonts::Read(font).value().WriteText(renderer, { x + dropShadowX,y + dropShadowY }, "(nothing)", dropShadowColor, graphics::HorizontalAlignment::LEFT);
 			}
-			graphics::Fonts::Get(font).value().WriteText(renderer, { x,y }, "(nothing)", inactiveColor, graphics::HorizontalAlignment::LEFT);
+			graphics::Fonts::Read(font).value().WriteText(renderer, { x,y }, "(nothing)", inactiveColor, graphics::HorizontalAlignment::LEFT);
 		}
 	}
 }
