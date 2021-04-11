@@ -18,7 +18,7 @@ namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
 
-	static nlohmann::json& GetAvatar()
+	nlohmann::json& GetAvatar()
 	{
 		if (data.count(game::Properties::AVATAR) == 0)
 		{
@@ -60,7 +60,7 @@ namespace game::Avatar
 
 	void TurnLeft()
 	{
-		if (!game::avatar::Statistics::IsDead())
+		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
 			SetFacing(
 				(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::WEST) :
@@ -72,7 +72,7 @@ namespace game::Avatar
 
 	void TurnRight()
 	{
-		if (!game::avatar::Statistics::IsDead())
+		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
 			SetFacing(
 				(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::EAST) :
@@ -84,7 +84,7 @@ namespace game::Avatar
 
 	void MoveAhead()
 	{
-		if (!game::avatar::Statistics::IsDead())
+		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
 			if (game::World::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing()) == game::world::Border::DOOR)
 			{
@@ -104,7 +104,7 @@ namespace game::Avatar
 					break;
 				}
 				game::World::SetExplored(GetPosition());
-				if (avatar::Statistics::IsStarving())
+				if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
 				}

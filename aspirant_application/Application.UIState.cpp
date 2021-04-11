@@ -20,7 +20,7 @@ namespace application::UIState
 
 	void EnterGame()
 	{
-		if (game::avatar::Statistics::IsDead())
+		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
 			common::audio::PlaySound(application::Sounds::DEAD_HUNTER);
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);

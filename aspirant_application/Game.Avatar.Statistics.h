@@ -8,8 +8,7 @@ namespace game::avatar::Statistics
 	int Default(const ::game::avatar::Statistic&);
 	bool IsMinimum(const ::game::avatar::Statistic&);
 	void Reset();
-	bool IsStarving();
-	bool IsDead();
+	bool IsMinimum(const ::game::avatar::Statistic&);
 	void Decrease(const ::game::avatar::Statistic&, int);
 	void Increase(const ::game::avatar::Statistic&, int);
 }

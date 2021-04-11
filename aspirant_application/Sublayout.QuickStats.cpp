@@ -13,7 +13,7 @@ namespace sublayout::QuickStats
 	{
 		std::stringstream ss;
 		ss << "Health: ";
-		if (game::avatar::Statistics::IsDead())
+		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
 			ss << "DEAD!";
 		}
@@ -28,7 +28,7 @@ namespace sublayout::QuickStats
 	{
 		std::stringstream ss;
 		ss << "Hunger: ";
-		if (game::avatar::Statistics::IsStarving())
+		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
 		{
 			ss << "STARVING!";
 		}

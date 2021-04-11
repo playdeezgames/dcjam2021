@@ -1,7 +1,23 @@
 #include "Game.Avatar.Statistics.h"
 #include <map>
+#include "json.hpp"
+#include "Game.Properties.h"
+namespace game::Avatar
+{
+	nlohmann::json& GetAvatar();
+}
 namespace game::avatar::Statistics
 {
+	nlohmann::json& GetAvatarStatistics()
+	{
+		auto& avatar = game::Avatar::GetAvatar();
+		if (avatar.count(game::Properties::STATISTICS) == 0)
+		{
+			avatar[game::Properties::STATISTICS] = nlohmann::json();
+		}
+		return avatar[game::Properties::STATISTICS];
+	}
+
 	const std::map<::game::avatar::Statistic, int> maximums =
 	{
 		{::game::avatar::Statistic::HEALTH, 100},
@@ -32,11 +48,9 @@ namespace game::avatar::Statistics
 		{::game::avatar::Statistic::DEFEND_TIMER, 0}
 	};
 
-	static std::map<::game::avatar::Statistic, int> current;
-
 	int Read(const ::game::avatar::Statistic& statistic)
 	{
-		return current[statistic];
+		return GetAvatarStatistics()[(int)statistic];
 	}
 
 	int Minimum(const ::game::avatar::Statistic& statistic)
@@ -58,7 +72,7 @@ namespace game::avatar::Statistics
 	{
 		const auto minimum = Minimum(statistic);
 		const auto maximum = Maximum(statistic);
-		current[statistic] =
+		GetAvatarStatistics()[(int)statistic] =
 			(value < minimum) ? (minimum) :
 			(value > maximum) ? (maximum) :
 			(value);
@@ -71,17 +85,10 @@ namespace game::avatar::Statistics
 
 	void Reset()
 	{
-		current = initials;
-	}
-
-	bool IsStarving()
-	{
-		return Read(Statistic::HUNGER) == Minimum(Statistic::HUNGER);
-	}
-
-	bool IsDead()
-	{
-		return Read(Statistic::HEALTH) == Minimum(Statistic::HEALTH);
+		for (auto& initial : initials)
+		{
+			Write(initial.first, initial.second);
+		}
 	}
 
 	void Decrease(const ::game::avatar::Statistic& statistic, int delta)
