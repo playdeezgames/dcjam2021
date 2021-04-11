@@ -17,12 +17,12 @@ namespace graphics::Colors
 		return result;
 	}
 
-	void Start(const std::string& fileName)
+	void InitializeFromFile(const std::string& fileName)
 	{
 		table = data::JSON::Load(fileName);
 	}
 
-	SDL_Color Get(const std::string& key)
+	SDL_Color Read(const std::string& key)
 	{
 		return ParseDescriptor(table[key]);
 	}

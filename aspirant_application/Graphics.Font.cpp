@@ -30,7 +30,7 @@ namespace graphics
 	common::XY<int> Font::WriteGlyph(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color) const
 	{
 		const auto& sprite = GetGlyphSprite(ch);
-		sprite.value().Draw(renderer, xy, ::graphics::Colors::Get(color));
+		sprite.value().Draw(renderer, xy, ::graphics::Colors::Read(color));
 		return common::XY(xy.GetX() + sprite.value().GetWidth(), xy.GetY());
 	}
 

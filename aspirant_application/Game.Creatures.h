@@ -22,5 +22,5 @@ namespace game::Creatures
 	void Remove(const common::XY<size_t>&);
 	void Advance(const common::XY<size_t>&);
 
-	void Start(const std::string&);
+	void InitializeFromFile(const std::string&);
 }

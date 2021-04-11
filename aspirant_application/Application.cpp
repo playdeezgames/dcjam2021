@@ -128,7 +128,7 @@ namespace common::Application
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
-		graphics::Colors::Start(COLOR);
+		graphics::Colors::InitializeFromFile(COLOR);
 		graphics::Textures::InitializeFromFile(renderer, TEXTURE);
 		graphics::Sprites::InitializeFromFile(SPRITE);
 		graphics::Fonts::Start(FONTS);
@@ -136,7 +136,7 @@ namespace common::Application
 		common::Audio::Start(SFX, MUX);
 		Options::Start(OPTIONS);
 		application::Keyboard::Start(KEYBOARD);
-		game::Creatures::Start(CREATURES);
+		game::Creatures::InitializeFromFile(CREATURES);
 
 		for (auto starter : starters)
 		{

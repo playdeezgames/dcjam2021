@@ -21,7 +21,7 @@ namespace graphics::Image
 						(int)model[common::Properties::X],
 						(int)model[common::Properties::Y]),
 					(model.count(Properties::COLOR)>0) ?
-					(::graphics::Colors::Get(model[Properties::COLOR])) :
+					(::graphics::Colors::Read(model[Properties::COLOR])) :
 					(defaultColor));
 		}
 	}

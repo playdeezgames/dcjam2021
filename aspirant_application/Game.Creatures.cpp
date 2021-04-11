@@ -4,22 +4,28 @@
 #include <map>
 #include "Common.RNG.h"
 #include "Game.World.h"
+#include "Game.Properties.h"
+#include <sstream>
+namespace game
+{
+	extern nlohmann::json data;
+}
 namespace game::Creatures
 {
-	const std::string PROPERTY_NUMBER_APPEARING = "number-appearing";
-	const std::string PROPERTY_INDEX = "index";
-	const std::string PROPERTY_IMAGE_ID = "image-id";
-	const std::string PROPERTY_HEALTH = "health";
-	const std::string PROPERTY_ATTACK = "attack";
-	const std::string PROPERTY_DEFEND = "defend";
-	const std::string PROPERTY_FOOD_BRIBE = "food-bribe";
-	const std::string PROPERTY_MONEY_BRIBE = "money-bribe";
+	nlohmann::json& GetCreatures()
+	{
+		if (data.count(game::Properties::CREATURES) == 0)
+		{
+			data[game::Properties::CREATURES] = nlohmann::json();
+		}
+		return data[game::Properties::CREATURES];
+	}
 
 	static nlohmann::json descriptors;
 
 	std::string GetImageId(game::Creature creature)
 	{
-		return descriptors[(int)creature][PROPERTY_IMAGE_ID];
+		return descriptors[(int)creature][game::Properties::IMAGE_ID];
 	}
 
 	struct CreatureInstance
@@ -28,35 +34,44 @@ namespace game::Creatures
 		int wounds;
 	};
 
-	static std::map<size_t, std::map<size_t, CreatureInstance>> roomCreatures;
-
-	std::optional<CreatureInstance> Get(const common::XY<size_t>& location)
+	static std::string XYToString(const common::XY<size_t>& location)
 	{
-		auto column = roomCreatures.find(location.GetX());
-		if (column != roomCreatures.end())
+		std::stringstream ss;
+		ss << "(" << location.GetX() << "," << location.GetY() << ")";
+		return ss.str();
+	}
+
+	static std::optional<CreatureInstance> Get(const common::XY<size_t>& location)
+	{
+		auto place = XYToString(location);
+		auto& creatures = GetCreatures();
+		if (creatures.count(place) > 0)
 		{
-			auto row = column->second.find(location.GetY());
-			if (row != column->second.end())
-			{
-				return row->second;
-			}
+			auto& creature = GetCreatures()[place];
+			return std::optional<CreatureInstance>({ (game::Creature)(int)creature[game::Properties::CREATURE], (int)creature[game::Properties::WOUNDS] });
 		}
 		return std::nullopt;
 	}
 
 	void Put(const common::XY<size_t>& location, CreatureInstance instance)
 	{
-		roomCreatures[location.GetX()][location.GetY()] = instance;
+		auto place = XYToString(location);
+		auto& creatures = GetCreatures();
+		if (creatures.count(place) == 0)
+		{
+			creatures[place] = nlohmann::json();
+		}
+		creatures[place][game::Properties::CREATURE] = (int)instance.creature;
+		creatures[place][game::Properties::WOUNDS] = instance.wounds;
 	}
 
 	void Remove(const common::XY<size_t>& location)
 	{
-		if (roomCreatures.contains(location.GetX()))
+		auto place = XYToString(location);
+		auto& creatures = GetCreatures();
+		if (creatures.count(place) > 0)
 		{
-			if (roomCreatures[location.GetX()].contains(location.GetY()))
-			{
-				roomCreatures[location.GetX()].erase(location.GetY());
-			}
+			creatures.erase(place);
 		}
 	}
 
@@ -78,7 +93,7 @@ namespace game::Creatures
 		auto temp = Read(location);
 		if (temp)
 		{
-			return descriptors[(int)temp.value()][PROPERTY_HEALTH];
+			return descriptors[(int)temp.value()][game::Properties::HEALTH];
 		}
 		else
 		{
@@ -91,7 +106,7 @@ namespace game::Creatures
 		auto temp = Read(location);
 		if (temp)
 		{
-			return descriptors[(int)temp.value()][PROPERTY_ATTACK];
+			return descriptors[(int)temp.value()][game::Properties::ATTACK];
 		}
 		else
 		{
@@ -104,7 +119,7 @@ namespace game::Creatures
 		auto temp = Read(location);
 		if (temp)
 		{
-			return descriptors[(int)temp.value()][PROPERTY_DEFEND];
+			return descriptors[(int)temp.value()][game::Properties::DEFEND];
 		}
 		else
 		{
@@ -117,7 +132,7 @@ namespace game::Creatures
 		auto temp = Read(location);
 		if (temp)
 		{
-			return descriptors[(int)temp.value()][PROPERTY_FOOD_BRIBE];
+			return descriptors[(int)temp.value()][game::Properties::FOOD_BRIBE];
 		}
 		else
 		{
@@ -130,7 +145,7 @@ namespace game::Creatures
 		auto temp = Read(location);
 		if (temp)
 		{
-			return descriptors[(int)temp.value()][PROPERTY_MONEY_BRIBE];
+			return descriptors[(int)temp.value()][game::Properties::MONEY_BRIBE];
 		}
 		else
 		{
@@ -190,11 +205,11 @@ namespace game::Creatures
 	void Reset()
 	{
 		auto worldSize = game::World::GetSize();
-		roomCreatures.clear();
+		GetCreatures().clear();
 		for (auto& descriptor : descriptors)
 		{
-			game::Creature creature = (game::Creature)(int)descriptor[PROPERTY_INDEX];
-			size_t numberAppearing = descriptor[PROPERTY_NUMBER_APPEARING];
+			game::Creature creature = (game::Creature)(int)descriptor[game::Properties::INDEX];
+			size_t numberAppearing = descriptor[game::Properties::NUMBER_APPEARING];
 			while (numberAppearing > 0)
 			{
 				bool available = false;
@@ -204,9 +219,9 @@ namespace game::Creatures
 				{
 					x = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
 					y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
-					available = roomCreatures.find(x) == roomCreatures.end() || roomCreatures[x].find(y) == roomCreatures[x].end();
+					available = !Get({ x,y });
 				}
-				roomCreatures[x][y] = { creature, 0 };
+				Put({ x,y }, { creature, 0 });
 				numberAppearing--;
 			}
 		}
@@ -214,18 +229,10 @@ namespace game::Creatures
 
 	bool AnyLeft()
 	{
-		for (auto iter : roomCreatures)
-		{
-			if (!iter.second.empty())
-			{
-				return true;
-			}
-		}
-		return false;
+		return !GetCreatures().empty();
 	}
 
-
-	void Start(const std::string& filename)
+	void InitializeFromFile(const std::string& filename)
 	{
 		descriptors = data::JSON::Load(filename);
 	}

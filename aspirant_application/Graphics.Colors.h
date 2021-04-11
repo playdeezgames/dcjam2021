@@ -4,6 +4,6 @@
 #include <vector>
 namespace graphics::Colors
 {
-	void Start(const std::string&);
-	SDL_Color Get(const std::string&);
+	void InitializeFromFile(const std::string&);
+	SDL_Color Read(const std::string&);
 }
