@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "json.hpp"
 namespace game::World { void Reset(); }
 namespace game::Avatar { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
@@ -7,6 +8,8 @@ namespace game::avatar::Items { void Reset(); }
 namespace game::Creatures { void Reset(); }
 namespace game
 {
+	nlohmann::json data;
+
 	void Reset()
 	{
 		game::World::Reset();

@@ -8,33 +8,65 @@
 #include "Common.RNG.h"
 #include "Game.Creatures.h"
 #include "Game.World.h"
+#include "json.hpp"
+#include "Game.Properties.h"
+namespace game
+{
+	extern nlohmann::json data;
+}
 namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
 
-	size_t avatarColumn = 0;
-	size_t avatarRow = 0;
-	maze::Direction avatarFacing = maze::Direction::EAST;
+	static nlohmann::json& GetAvatar()
+	{
+		if (data.count(game::Properties::AVATAR) == 0)
+		{
+			data[game::Properties::AVATAR] = nlohmann::json();
+		}
+		return data[game::Properties::AVATAR];
+	}
+
+	static void SetFacing(maze::Direction direction)
+	{
+		GetAvatar()[game::Properties::FACING] = (int)direction;
+	}
 
 	maze::Direction GetFacing()
 	{
-		return avatarFacing;
+		return (maze::Direction)(int)GetAvatar()[game::Properties::FACING];
+	}
+
+	static void SetColumn(size_t column)
+	{
+		GetAvatar()[game::Properties::COLUMN] = column;
+	}
+
+	static void SetRow(size_t row)
+	{
+		GetAvatar()[game::Properties::ROW] = row;
+	}
+
+	static void SetPosition(const common::XY<size_t> position)
+	{
+		SetColumn(position.GetX());
+		SetRow(position.GetY());
 	}
 
 	common::XY<size_t> GetPosition()
 	{
-		return { avatarColumn, avatarRow };
+		return { (size_t)GetAvatar()[game::Properties::COLUMN], (size_t)GetAvatar()[game::Properties::ROW] };
 	}
 
 	void TurnLeft()
 	{
 		if (!game::avatar::Statistics::IsDead())
 		{
-			avatarFacing =
-				(avatarFacing == maze::Direction::NORTH) ? (maze::Direction::WEST) :
-				(avatarFacing == maze::Direction::EAST) ? (maze::Direction::NORTH) :
-				(avatarFacing == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
-				(maze::Direction::SOUTH);
+			SetFacing(
+				(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::WEST) :
+				(GetFacing() == maze::Direction::EAST) ? (maze::Direction::NORTH) :
+				(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
+				(maze::Direction::SOUTH));
 		}
 	}
 
@@ -42,11 +74,11 @@ namespace game::Avatar
 	{
 		if (!game::avatar::Statistics::IsDead())
 		{
-			avatarFacing =
-				(avatarFacing == maze::Direction::NORTH) ? (maze::Direction::EAST) :
-				(avatarFacing == maze::Direction::EAST) ? (maze::Direction::SOUTH) :
-				(avatarFacing == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
-				(maze::Direction::NORTH);
+			SetFacing(
+				(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::EAST) :
+				(GetFacing() == maze::Direction::EAST) ? (maze::Direction::SOUTH) :
+				(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
+				(maze::Direction::NORTH));
 		}
 	}
 
@@ -56,22 +88,22 @@ namespace game::Avatar
 		{
 			if (game::World::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing()) == game::world::Border::DOOR)
 			{
-				switch (avatarFacing)
+				switch (GetFacing())
 				{
 				case maze::Direction::NORTH:
-					avatarRow--;
+					SetRow(GetPosition().GetY() - 1);
 					break;
 				case maze::Direction::EAST:
-					avatarColumn++;
+					SetColumn(GetPosition().GetX() + 1);
 					break;
 				case maze::Direction::SOUTH:
-					avatarRow++;
+					SetRow(GetPosition().GetY() + 1);
 					break;
 				case maze::Direction::WEST:
-					avatarColumn--;
+					SetColumn(GetPosition().GetX() - 1);
 					break;
 				}
-				game::World::SetExplored({avatarColumn, avatarRow});
+				game::World::SetExplored(GetPosition());
 				if (avatar::Statistics::IsStarving())
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
@@ -101,12 +133,12 @@ namespace game::Avatar
 	void Reset()
 	{
 		auto worldSize = game::World::GetSize();
-		::game::Avatar::avatarFacing = (maze::Direction)common::RNG::FromRange(0, (int)maze::Directions::All().size());
+		SetFacing((maze::Direction)common::RNG::FromRange(0, (int)maze::Directions::All().size()));
 		do
 		{
-			::game::Avatar::avatarColumn = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
-			::game::Avatar::avatarRow = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
-		} while (game::Creatures::Read({ avatarColumn, avatarRow }));
-		game::World::SetExplored({avatarColumn, avatarRow});
+			SetColumn((size_t)common::RNG::FromRange(0, (int)worldSize.GetX()));
+			SetRow((size_t)common::RNG::FromRange(0, (int)worldSize.GetY()));
+		} while (game::Creatures::Read(GetPosition()));
+		game::World::SetExplored(GetPosition());
 	}
 }

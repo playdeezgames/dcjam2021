@@ -388,5 +388,8 @@
     <ClInclude Include="Game.World.Border.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.Properties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
