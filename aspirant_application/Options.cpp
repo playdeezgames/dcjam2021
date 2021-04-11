@@ -8,7 +8,7 @@ namespace Options
 	const std::string MUX_VOLUME = "muxVolume";
 	static std::string fileName;
 
-	void Start(const std::string& filename)
+	void InitializeFromFile(const std::string& filename)
 	{
 		fileName = filename;
 		auto properties = data::JSON::Load(fileName);

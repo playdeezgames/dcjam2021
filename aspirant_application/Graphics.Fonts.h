@@ -4,6 +4,6 @@
 #include <optional>
 namespace graphics::Fonts
 {
-	void Start(const std::string&);
+	void InitializeFromFile(const std::string&);
 	std::optional<graphics::Font> Read(const std::string&);
 }

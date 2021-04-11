@@ -131,10 +131,10 @@ namespace common::Application
 		graphics::Colors::InitializeFromFile(COLOR);
 		graphics::Textures::InitializeFromFile(renderer, TEXTURE);
 		graphics::Sprites::InitializeFromFile(SPRITE);
-		graphics::Fonts::Start(FONTS);
-		graphics::Layouts::Start(LAYOUTS);
+		graphics::Fonts::InitializeFromFile(FONTS);
+		graphics::Layouts::InitializeFromFile(LAYOUTS);
 		common::Audio::Start(SFX, MUX);
-		Options::Start(OPTIONS);
+		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::Start(KEYBOARD);
 		game::Creatures::InitializeFromFile(CREATURES);
 

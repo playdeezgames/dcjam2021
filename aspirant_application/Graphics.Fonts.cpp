@@ -21,7 +21,7 @@ namespace graphics::Fonts
 		}
 	}
 
-	void Start(const std::string& fileName)
+	void InitializeFromFile(const std::string& fileName)
 	{
 		auto properties = data::JSON::Load(fileName);
 		for (auto& item : properties.items())

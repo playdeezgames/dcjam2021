@@ -3,6 +3,6 @@
 #include "Common.Audio.h"
 namespace Options
 {
-	void Start(const std::string&);
+	void InitializeFromFile(const std::string&);
 	void Save();
 }

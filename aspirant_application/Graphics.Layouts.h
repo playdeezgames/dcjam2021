@@ -5,5 +5,5 @@
 namespace graphics::Layouts
 {
 	void Draw(std::shared_ptr<SDL_Renderer>, const std::string&);
-	void Start(const std::string&);
+	void InitializeFromFile(const std::string&);
 }

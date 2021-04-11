@@ -153,7 +153,7 @@ namespace common::Audio
 		return muted;
 	}
 
-	void Start(const std::string& sfxFileName, const std::string& muxFileName)
+	void InitializeFromFile(const std::string& sfxFileName, const std::string& muxFileName)
 	{
 		atexit(common::audio::Finish);
 		common::audio::StartSound(sfxFileName);

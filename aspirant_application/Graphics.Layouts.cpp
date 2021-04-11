@@ -10,7 +10,7 @@ namespace graphics::Layouts
 	std::map<std::string, nlohmann::json> layouts;
 	static nlohmann::json table;
 
-	void Start(const std::string& fileName)
+	void InitializeFromFile(const std::string& fileName)
 	{
 		table = data::JSON::Load(fileName);
 		for (auto& item : table.items())
