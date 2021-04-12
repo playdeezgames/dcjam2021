@@ -5,6 +5,6 @@
 #include <optional>
 namespace application::Keyboard
 {
-	void Start(const std::string&);
+	void InitializeFromFile(const std::string&);
 	std::optional<::Command> ToCommand(SDL_KeyCode);
 }

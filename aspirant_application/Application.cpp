@@ -133,9 +133,9 @@ namespace common::Application
 		graphics::Sprites::InitializeFromFile(SPRITE);
 		graphics::Fonts::InitializeFromFile(FONTS);
 		graphics::Layouts::InitializeFromFile(LAYOUTS);
-		common::Audio::Start(SFX, MUX);
+		common::Audio::InitializeFromFile(SFX, MUX);
 		Options::InitializeFromFile(OPTIONS);
-		application::Keyboard::Start(KEYBOARD);
+		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::Creatures::InitializeFromFile(CREATURES);
 
 		for (auto starter : starters)

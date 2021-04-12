@@ -43,17 +43,9 @@ namespace state::in_play::MiniMap
 			break;
 		}
 	}
-
-
-
-	static void OnUpdate(const Uint32& ticks)
-	{
-	}
-
 	void Start()
 	{
 		::application::Command::SetHandler(::UIState::IN_PLAY_MAP, OnCommand);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY_MAP, OnUpdate);
 	}
 }

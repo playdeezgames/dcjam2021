@@ -32,7 +32,7 @@ namespace application::Keyboard
 		}
 	}
 
-	void Start(const std::string& fileName)
+	void InitializeFromFile(const std::string& fileName)
 	{
 		auto properties = data::JSON::Load(fileName);
 		InitializeKeyboardCommands(properties);
