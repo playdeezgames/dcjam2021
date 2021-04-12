@@ -9,7 +9,7 @@ namespace graphics
 	{
 	private:
 		const nlohmann::json& model;
-		std::optional<graphics::Sprite> GetGlyphSprite(char) const;
+		std::optional<std::string> GetGlyphSprite(char) const;
 		void WriteTextCentered(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
 		common::XY<int> WriteTextLeft(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
 		void WriteTextRight(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
@@ -27,13 +27,13 @@ namespace graphics
 	{
 	}
 
-	std::optional<graphics::Sprite> Font::GetGlyphSprite(char ch) const
+	std::optional<std::string> Font::GetGlyphSprite(char ch) const
 	{
 		std::stringstream ss;
 		ss << (int)ch;
 		if (model.count(ss.str()) > 0)
 		{
-			return Sprites::Read(model[ss.str()]);
+			return model[ss.str()];
 		}
 		else
 		{
@@ -43,9 +43,9 @@ namespace graphics
 
 	common::XY<int> Font::WriteGlyph(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color) const
 	{
-		const auto& sprite = GetGlyphSprite(ch);
-		sprite.value().Draw(renderer, xy, ::graphics::Colors::Read(color));
-		return common::XY(xy.GetX() + sprite.value().GetWidth(), xy.GetY());
+		auto sprite = GetGlyphSprite(ch);
+		Sprites::Draw(sprite.value(), renderer, xy, ::graphics::Colors::Read(color));
+		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()), xy.GetY());
 	}
 
 	common::XY<int> Font::WriteTextLeft(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
@@ -64,7 +64,7 @@ namespace graphics
 		for (auto ch : text)
 		{
 			const auto& sprite = GetGlyphSprite(ch);
-			width += sprite.value().GetWidth();
+			width += Sprites::GetWidth(sprite.value());
 		}
 		auto adjustedXY = common::XY<int>(xy.GetX() - width / 2, xy.GetY());
 		WriteTextLeft(renderer, adjustedXY, text, color);
@@ -76,7 +76,7 @@ namespace graphics
 		for (auto ch : text)
 		{
 			const auto& sprite = GetGlyphSprite(ch);
-			width += sprite.value().GetWidth();
+			width += Sprites::GetWidth(sprite.value());
 		}
 		auto adjustedXY = common::XY<int>(xy.GetX() - width, xy.GetY());
 		WriteTextLeft(renderer, adjustedXY, text, color);

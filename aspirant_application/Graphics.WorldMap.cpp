@@ -41,7 +41,7 @@ namespace graphics::WorldMap
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
-			graphics::Sprites::Read(wallSprites[direction]).value().Draw(renderer, plot);
+			graphics::Sprites::Draw(wallSprites[direction], renderer, plot);
 		}
 	}
 
@@ -63,7 +63,7 @@ namespace graphics::WorldMap
 				if (game::World::IsExplored(cell))
 				{
 
-					graphics::Sprites::Read(MAP_CELL_BASE).value().Draw(renderer, plot);
+					graphics::Sprites::Draw(MAP_CELL_BASE, renderer, plot);
 					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
 					DrawWall(renderer, cell, plot, maze::Direction::EAST);
 					DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
@@ -71,17 +71,17 @@ namespace graphics::WorldMap
 
 					if (cell == avatarPosition)
 					{
-						graphics::Sprites::Read(avatarSprites[game::Avatar::GetFacing()]).value().Draw(renderer, plot);
+						graphics::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot);
 					}
 
 					if (game::Creatures::Read(cell))
 					{
-						graphics::Sprites::Read(DANGER).value().Draw(renderer, plot);
+						graphics::Sprites::Draw(DANGER, renderer, plot);
 					}
 				}
 				else
 				{
-					graphics::Sprites::Read(MAP_CELL_UNEXPLORED).value().Draw(renderer, plot);
+					graphics::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot);
 				}
 			}
 		}

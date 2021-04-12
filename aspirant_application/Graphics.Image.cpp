@@ -13,9 +13,8 @@ namespace graphics::Image
 	{
 		if (model.count(Properties::VISIBLE) == 0 || model[Properties::VISIBLE] == true)
 		{
-			Sprites::Read(model[Properties::SPRITE])
-				.value()
-				.Draw(
+			Sprites::Draw(
+					model[Properties::SPRITE],
 					renderer,
 					common::XY<int>(
 						(int)model[common::Properties::X],

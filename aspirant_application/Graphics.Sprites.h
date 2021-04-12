@@ -1,9 +1,15 @@
 #pragma once
 #include <string>
-#include "Graphics.Sprite.h"
 #include <optional>
+#include <SDL.h>
+#include "Common.XY.h"
+#include "json.hpp"
 namespace graphics::Sprites
 {
-	std::optional<Sprite> Read(const std::string&);
 	void InitializeFromFile(const std::string&);
+	void Draw(const std::string&, std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&, const SDL_Color&);
+	void Draw(const std::string&, std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&);
+	//TODO: make me optional
+	int GetWidth(const std::string&);
+
 }
