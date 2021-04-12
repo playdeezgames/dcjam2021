@@ -9,9 +9,8 @@ namespace graphics::Text
 	{
 		if ((bool)model[graphics::Properties::DROP_SHADOW])
 		{
-			graphics::Fonts::Read(model[graphics::Properties::FONT])
-				.value()
-				.WriteText(
+			graphics::Fonts::WriteText(
+					model[graphics::Properties::FONT],
 					renderer, 
 					common::XY<int>
 					(
@@ -22,9 +21,8 @@ namespace graphics::Text
 					model[graphics::Properties::DROP_SHADOW_COLOR],
 					(HorizontalAlignment)(int)model[graphics::Properties::HORIZONTAL_ALIGNMENT]);
 		}
-		graphics::Fonts::Read(model[graphics::Properties::FONT])
-			.value()
-			.WriteText(
+		graphics::Fonts::WriteText(
+				model[graphics::Properties::FONT],
 				renderer, 
 				common::XY<int>
 				(
