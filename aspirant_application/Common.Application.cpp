@@ -34,6 +34,11 @@ namespace common::Application
 		controllers.clear();
 	}
 
+	static void HookMixQuit()
+	{
+		Mix_Quit();
+	}
+
 	static void StartAudio(const nlohmann::json& properties)
 	{
 		int mixerFrequency = properties[MIXER_FREQUENCY];
@@ -47,7 +52,7 @@ namespace common::Application
 			channelCount,
 			chunkSize
 		);
-		atexit(Mix_Quit);
+		atexit(HookMixQuit);
 		atexit(Mix_CloseAudio);
 	}
 

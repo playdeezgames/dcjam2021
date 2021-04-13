@@ -9,7 +9,7 @@ namespace common::audio
 	static std::map<std::string, std::shared_ptr<Mix_Chunk>> sounds;
 	static int sfxVolume = MIX_MAX_VOLUME;
 
-	static std::map<std::string, Mix_Music*> music;
+	static std::map<std::string, std::shared_ptr<Mix_Music>> music;
 	static int muxVolume = MIX_MAX_VOLUME;
 
 	const int ANY_CHANNEL = -1;
@@ -27,24 +27,28 @@ namespace common::audio
 
 	namespace Mux
 	{
-		static void Finish()
+		static void HookFreeMusic(Mix_Music* m)
 		{
-			for (auto& item : music)
-			{
-				Mix_FreeMusic(item.second);
-			}
-			music.clear();
+			Mix_FreeMusic(m);
 		}
 		static void AddMusic(const std::string& name, const std::string& filename)
 		{
-			music[name] = Mix_LoadMUS(filename.c_str());
+			music[name] = std::shared_ptr<Mix_Music>(Mix_LoadMUS(filename.c_str()), HookFreeMusic);
+		}
+		static void Finish()
+		{
+			//TODO: awful, but eliminated a memory exception
+			while (music.begin() != music.end())
+			{
+				music.erase(music.begin());
+			}
 		}
 		void Play(const std::string& name)
 		{
 			if (!common::Audio::IsMuted())
 			{
 				const auto& item = music.find(name);
-				Mix_PlayMusic(item->second, LOOP_FOREVER);
+				Mix_PlayMusic(item->second.get(), LOOP_FOREVER);
 			}
 		}
 
