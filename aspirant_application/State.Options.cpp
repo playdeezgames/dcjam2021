@@ -11,6 +11,7 @@
 #include "Graphics.Menus.h"
 #include "Graphics.MenuItems.h"
 #include "Application.Sounds.h"
+#include <SDL_mixer.h>
 namespace state::Options
 {
 	const std::string LAYOUT_NAME = "State.Options";

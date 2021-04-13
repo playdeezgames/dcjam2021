@@ -4,6 +4,7 @@
 #include <fstream>
 #include "Data.JSON.h"
 #include <memory>
+#include <SDL_Mixer.h>
 namespace common::audio
 {
 	static std::map<std::string, std::shared_ptr<Mix_Chunk>> sounds;
@@ -20,7 +21,7 @@ namespace common::audio
 	{
 		return
 			(volume < 0) ? (0) :
-			(volume > SDL_MIX_MAXVOLUME) ? (SDL_MIX_MAXVOLUME) :
+			(volume > MIX_MAX_VOLUME) ? (MIX_MAX_VOLUME) :
 			(volume);
 
 	}
