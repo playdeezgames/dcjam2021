@@ -15,70 +15,6 @@ namespace common::audio
 	const int NO_LOOPS = 0;
 	const int LOOP_FOREVER = -1;
 
-	static void FinishMusic()
-	{
-		Mix_HaltMusic();
-		for (auto& entry : music)
-		{
-			if (entry.second)
-			{
-				Mix_FreeMusic(entry.second);
-				entry.second = nullptr;
-			}
-		}
-		music.clear();
-	}
-
-	static void FinishSound()
-	{
-		for (auto& entry : sounds)
-		{
-			if (entry.second)
-			{
-				Mix_FreeChunk(entry.second);
-				entry.second = nullptr;
-			}
-		}
-		sounds.clear();
-	}
-
-	static void Finish()
-	{
-		FinishMusic();
-		FinishSound();
-	}
-
-	static void AddSound(const std::string& name, const std::string& filename)
-	{
-		sounds[name] = Mix_LoadWAV(filename.c_str());
-	}
-
-	static void AddMusic(const std::string& name, const std::string& filename)
-	{
-		music[name] = Mix_LoadMUS(filename.c_str());
-	}
-
-	void PlaySound(const std::string& name)
-	{
-		if (!common::Audio::IsMuted())
-		{
-			const auto& item = sounds.find(name);
-			if (item != sounds.end())
-			{
-				Mix_PlayChannel(ANY_CHANNEL, item->second, NO_LOOPS);
-			}
-		}
-	}
-
-	void PlayMusic(const std::string& name)
-	{
-		if (!common::Audio::IsMuted())
-		{
-			const auto& item = music.find(name);
-			Mix_PlayMusic(item->second, LOOP_FOREVER);
-		}
-	}
-
 	static int ClampVolume(int volume)
 	{
 		return
@@ -88,37 +24,110 @@ namespace common::audio
 
 	}
 
-	void SetSfxVolume(int volume)
+	namespace Mux
 	{
-		sfxVolume = ClampVolume(volume);
-		for (auto& entry : sounds)
+		static void FinishMusic()
 		{
-			Mix_VolumeChunk(entry.second, sfxVolume);
+			Mix_HaltMusic();
+			for (auto& entry : music)
+			{
+				if (entry.second)
+				{
+					Mix_FreeMusic(entry.second);
+					entry.second = nullptr;
+				}
+			}
+			music.clear();
 		}
+		static void AddMusic(const std::string& name, const std::string& filename)
+		{
+			music[name] = Mix_LoadMUS(filename.c_str());
+		}
+		void Play(const std::string& name)
+		{
+			if (!common::Audio::IsMuted())
+			{
+				const auto& item = music.find(name);
+				Mix_PlayMusic(item->second, LOOP_FOREVER);
+			}
+		}
+
+		void SetVolume(int volume)
+		{
+			muxVolume = ClampVolume(volume);
+			Mix_VolumeMusic(muxVolume);
+		}
+
+		int GetVolume()
+		{
+			return muxVolume;
+		}
+
+
 	}
 
-	void SetMuxVolume(int volume)
+	namespace Sfx
 	{
-		muxVolume = ClampVolume(volume);
-		Mix_VolumeMusic(muxVolume);
+		static void FinishSound()
+		{
+			for (auto& entry : sounds)
+			{
+				if (entry.second)
+				{
+					Mix_FreeChunk(entry.second);
+					entry.second = nullptr;
+				}
+			}
+			sounds.clear();
+		}
+
+		static void AddSound(const std::string& name, const std::string& filename)
+		{
+			sounds[name] = Mix_LoadWAV(filename.c_str());
+		}
+
+		void Play(const std::string& name)
+		{
+			if (!common::Audio::IsMuted())
+			{
+				const auto& item = sounds.find(name);
+				if (item != sounds.end())
+				{
+					Mix_PlayChannel(ANY_CHANNEL, item->second, NO_LOOPS);
+				}
+			}
+		}
+
+		void SetVolume(int volume)
+		{
+			sfxVolume = ClampVolume(volume);
+			for (auto& entry : sounds)
+			{
+				Mix_VolumeChunk(entry.second, sfxVolume);
+			}
+		}
+		int GetVolume()
+		{
+			return sfxVolume;
+		}
+
+
+
 	}
 
-	int GetSfxVolume()
+	static void Finish()
 	{
-		return sfxVolume;
+		Mux::FinishMusic();
+		Sfx::FinishSound();
 	}
 
-	int GetMuxVolume()
-	{
-		return muxVolume;
-	}
 
 	static void StartSound(const std::string& sfxFileName)
 	{
 		nlohmann::json j = data::JSON::Load(sfxFileName);
 		for (auto& i : j.items())
 		{
-			AddSound(i.key(), i.value());
+			Sfx::AddSound(i.key(), i.value());
 		}
 	}
 
@@ -127,7 +136,7 @@ namespace common::audio
 		nlohmann::json j = data::JSON::Load(muxFileName);
 		for (auto& i : j.items())
 		{
-			AddMusic(i.key(), i.value());
+			Mux::AddMusic(i.key(), i.value());
 		}
 	}
 }

@@ -4,14 +4,19 @@
 #include <SDL_Mixer.h>
 namespace common::audio
 {
+	namespace Sfx
+	{
+		void Play(const std::string&);
+		void SetVolume(int);
+		int GetVolume();
+	}
 
-	void PlaySound(const std::string&);
-	void SetSfxVolume(int);
-	int GetSfxVolume();
-
-	void PlayMusic(const std::string&);
-	void SetMuxVolume(int);
-	int GetMuxVolume();
+	namespace Mux
+	{
+		void Play(const std::string&);
+		void SetVolume(int);
+		int GetVolume();
+	}
 }
 namespace common::Audio
 {

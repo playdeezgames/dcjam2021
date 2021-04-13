@@ -115,7 +115,7 @@ namespace game::Avatar
 			}
 			else
 			{
-				common::audio::PlaySound(application::Sounds::BUMP_WALL);
+				common::audio::Sfx::Play(application::Sounds::BUMP_WALL);
 			}
 		}
 		application::UIState::EnterGame();

@@ -142,7 +142,7 @@ namespace common::Application
 		{
 			starter();
 		}
-		common::audio::PlayMusic("songs");
+		common::audio::Mux::Play("songs");
 	}
 
 	bool IsRunning()

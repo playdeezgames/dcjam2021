@@ -13,16 +13,16 @@ namespace Options
 		fileName = filename;
 		auto properties = data::JSON::Load(fileName);
 		common::Audio::SetMuted((bool)properties[MUTED]);
-		common::audio::SetSfxVolume((int)properties[SFX_VOLUME]);
-		common::audio::SetMuxVolume((int)properties[MUX_VOLUME]);
+		common::audio::Sfx::SetVolume((int)properties[SFX_VOLUME]);
+		common::audio::Mux::SetVolume((int)properties[MUX_VOLUME]);
 	}
 
 	void Save()
 	{
 		nlohmann::json properties;
 		properties[MUTED] = common::Audio::IsMuted();
-		properties[MUX_VOLUME] = common::audio::GetMuxVolume();
-		properties[SFX_VOLUME] = common::audio::GetSfxVolume();
+		properties[MUX_VOLUME] = common::audio::Mux::GetVolume();
+		properties[SFX_VOLUME] = common::audio::Sfx::GetVolume();
 		data::JSON::Save(fileName, properties);
 	}
 }

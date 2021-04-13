@@ -83,18 +83,18 @@ namespace game::Combat
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 					{
 						SetCombatResultText(KILL_MONSTER);
-						common::audio::PlaySound(application::Sounds::DEAD_MONSTER);
+						common::audio::Sfx::Play(application::Sounds::DEAD_MONSTER);
 					}
 					else
 					{
 						SetCombatResultText(HIT_MONSTER);
-						common::audio::PlaySound(application::Sounds::HIT_MONSTER);
+						common::audio::Sfx::Play(application::Sounds::HIT_MONSTER);
 					}
 				}
 				else
 				{
 					SetCombatResultText(MISSED_MONSTER);
-					common::audio::PlaySound(application::Sounds::HIT_BLOCKED);
+					common::audio::Sfx::Play(application::Sounds::HIT_BLOCKED);
 				}
 				DoAttackTimer();
 			}
@@ -106,13 +106,13 @@ namespace game::Combat
 				if (damage > 0)
 				{
 					SetCombatResultText(GOT_HIT);
-					common::audio::PlaySound(application::Sounds::HIT_HUNTER);
+					common::audio::Sfx::Play(application::Sounds::HIT_HUNTER);
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
 				}
 				else
 				{
 					SetCombatResultText(BLOCKED_HIT);
-					common::audio::PlaySound(application::Sounds::HIT_BLOCKED);
+					common::audio::Sfx::Play(application::Sounds::HIT_BLOCKED);
 				}
 				DoDefendTimer();
 			}

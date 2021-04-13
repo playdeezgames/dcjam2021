@@ -52,13 +52,13 @@ namespace state::in_play::Combat
 		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
 		{
 			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
-			common::audio::PlaySound(application::Sounds::WOOHOO);
+			common::audio::Sfx::Play(application::Sounds::WOOHOO);
 			game::Creatures::Remove(game::Avatar::GetPosition());
 			application::UIState::EnterGame();
 		}
 		else
 		{
-			common::audio::PlaySound(application::Sounds::SHUCKS);
+			common::audio::Sfx::Play(application::Sounds::SHUCKS);
 		}
 	}
 
@@ -68,13 +68,13 @@ namespace state::in_play::Combat
 		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
 		{
 			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
-			common::audio::PlaySound(application::Sounds::WOOHOO);
+			common::audio::Sfx::Play(application::Sounds::WOOHOO);
 			game::Creatures::Remove(game::Avatar::GetPosition());
 			application::UIState::EnterGame();
 		}
 		else
 		{
-			common::audio::PlaySound(application::Sounds::SHUCKS);
+			common::audio::Sfx::Play(application::Sounds::SHUCKS);
 		}
 	}
 
@@ -101,7 +101,7 @@ namespace state::in_play::Combat
 		}
 		else
 		{
-			common::audio::PlaySound(application::Sounds::SHUCKS);
+			common::audio::Sfx::Play(application::Sounds::SHUCKS);
 		}
 	}
 

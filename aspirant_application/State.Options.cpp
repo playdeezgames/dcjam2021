@@ -33,15 +33,15 @@ namespace state::Options
 
 	static void AdjustSfxVolume(int delta)
 	{
-		common::audio::SetSfxVolume(common::audio::GetSfxVolume() + delta);
-		common::audio::PlaySound(application::Sounds::WOOHOO);
+		common::audio::Sfx::SetVolume(common::audio::Sfx::GetVolume() + delta);
+		common::audio::Sfx::Play(application::Sounds::WOOHOO);
 		
 		::Options::Save();
 	}
 
 	static void AdjustMuxVolume(int delta)
 	{
-		common::audio::SetMuxVolume(common::audio::GetMuxVolume() + delta);
+		common::audio::Mux::SetVolume(common::audio::Mux::GetVolume() + delta);
 		::Options::Save();
 	}
 
@@ -122,14 +122,14 @@ namespace state::Options
 	static void UpdateSfxMenuItem()
 	{
 		std::stringstream ss;
-		ss << "SFX Volume (" << common::Utility::ToPercentage(common::audio::GetSfxVolume(), MIX_MAX_VOLUME) << "%)";
+		ss << "SFX Volume (" << common::Utility::ToPercentage(common::audio::Sfx::GetVolume(), MIX_MAX_VOLUME) << "%)";
 		graphics::MenuItems::SetText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
 	static void UpdateMuxMenuItem()
 	{
 		std::stringstream ss;
-		ss << "MUX Volume (" << common::Utility::ToPercentage(common::audio::GetMuxVolume(), MIX_MAX_VOLUME) << "%)";
+		ss << "MUX Volume (" << common::Utility::ToPercentage(common::audio::Mux::GetVolume(), MIX_MAX_VOLUME) << "%)";
 		graphics::MenuItems::SetText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
