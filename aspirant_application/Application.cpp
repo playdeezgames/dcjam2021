@@ -122,7 +122,7 @@ namespace common::Application
 		common::Audio::InitializeFromFile(SFX, MUX);
 		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
-		game::Creatures::InitializeFromFile(CREATURES);
+		game::creature::InitializeFromFile(CREATURES);
 		game::Items::InitializeFromFile(ITEMS);
 
 		for (auto starter : starters)

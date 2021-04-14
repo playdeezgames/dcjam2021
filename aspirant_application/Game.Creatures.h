@@ -3,7 +3,7 @@
 #include "Common.XY.h"
 #include <optional>
 #include <string>
-namespace game::Creatures
+namespace game::creature
 {
 	struct Descriptor
 	{
@@ -17,13 +17,18 @@ namespace game::Creatures
 
 	Descriptor GetDescriptor(game::Creature);
 	std::optional<Descriptor> GetDescriptor(const common::XY<size_t>&);
-	void InitializeFromFile(const std::string&);//descriptor
-
-	std::optional<int> GetHealth(const common::XY<size_t>&);//instance+descriptor
-	std::optional<bool> IsDead(const common::XY<size_t>&);//instance+descriptor
-	
+	void InitializeFromFile(const std::string&);
+}
+namespace game::Creatures
+{
+	struct Instance
+	{
+		game::Creature creature;
+		int health;
+		game::creature::Descriptor descriptor;
+	};
+	std::optional<Instance> GetInstance(const common::XY<size_t>&);
 	bool AnyLeft();//instances
-	std::optional<game::Creature> Read(const common::XY<size_t>&);//instance
 	std::optional<int> DoDamage(const common::XY<size_t>&, int);//instance
 	void Remove(const common::XY<size_t>&);//instance
 	void Advance(const common::XY<size_t>&);//instance

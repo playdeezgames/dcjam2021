@@ -74,7 +74,7 @@ namespace graphics::WorldMap
 						graphics::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot);
 					}
 
-					if (game::Creatures::Read(cell))
+					if (game::Creatures::GetInstance(cell))
 					{
 						graphics::Sprites::Draw(DANGER, renderer, plot);
 					}

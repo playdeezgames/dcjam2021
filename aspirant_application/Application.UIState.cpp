@@ -27,8 +27,7 @@ namespace application::UIState
 		}
 		else if (game::Creatures::AnyLeft())
 		{
-			auto roomCreature = game::Creatures::Read(game::Avatar::GetPosition());
-			if (roomCreature)
+			if (game::Creatures::GetInstance(game::Avatar::GetPosition()))
 			{
 				application::UIState::Write(::UIState::IN_PLAY_COMBAT);
 			}

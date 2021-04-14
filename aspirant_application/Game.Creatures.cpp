@@ -10,6 +10,41 @@ namespace game
 {
 	extern nlohmann::json data;
 }
+namespace game::creature
+{
+	static nlohmann::json descriptors;
+
+	Descriptor GetDescriptor(game::Creature creature)
+	{
+		return
+		{
+			descriptors[(int)creature][game::Properties::IMAGE_ID],
+			descriptors[(int)creature][game::Properties::HEALTH],
+			descriptors[(int)creature][game::Properties::ATTACK],
+			descriptors[(int)creature][game::Properties::DEFEND],
+			descriptors[(int)creature][game::Properties::FOOD_BRIBE],
+			descriptors[(int)creature][game::Properties::MONEY_BRIBE]
+		};
+	}
+
+	std::optional<Descriptor> GetDescriptor(const common::XY<size_t>& location)
+	{
+		auto temp = game::Creatures::GetInstance(location);
+		if (temp)
+		{
+			return temp.value().descriptor;
+		}
+		else
+		{
+			return std::nullopt;
+		}
+	}
+
+	void InitializeFromFile(const std::string& filename)
+	{
+		descriptors = data::JSON::Load(filename);
+	}
+}
 namespace game::Creatures
 {
 	nlohmann::json& GetCreatures()
@@ -21,33 +56,6 @@ namespace game::Creatures
 		return data[game::Properties::CREATURES];
 	}
 
-	static nlohmann::json descriptors;
-
-	Descriptor GetDescriptor(game::Creature creature)
-	{
-		return
-		{
-			descriptors[(int)creature][game::Properties::IMAGE_ID], //std::string imageId;
-			descriptors[(int)creature][game::Properties::HEALTH],//int maximumHealth;
-			descriptors[(int)creature][game::Properties::ATTACK],//int attack;
-			descriptors[(int)creature][game::Properties::DEFEND],//int defend;
-			descriptors[(int)creature][game::Properties::FOOD_BRIBE],//int foodBribe;
-			descriptors[(int)creature][game::Properties::MONEY_BRIBE]//int moneyBribe;
-		};
-	}
-
-	std::optional<Descriptor> GetDescriptor(const common::XY<size_t>& location)
-	{
-		auto temp = Read(location);
-		if (temp)
-		{
-			return GetDescriptor(temp.value());
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
 
 	struct CreatureInstance
 	{
@@ -108,39 +116,12 @@ namespace game::Creatures
 			return std::nullopt;
 		}
 	}
-
-	std::optional<int> GetHealth(const common::XY<size_t>& location)
-	{
-		auto temp = Get(location);
-		if (temp)
-		{
-			return GetDescriptor(location).value().maximumHealth - temp.value().wounds;
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	std::optional<bool> IsDead(const common::XY<size_t>& location)
-	{
-		auto instance = Get(location);
-		if (instance)
-		{
-			return instance.value().wounds >= GetDescriptor(location).value().maximumHealth;
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
 	std::optional<int> DoDamage(const common::XY<size_t>& location, int amount)
 	{
 		auto instance = Get(location);
 		if (instance)
 		{
-			amount = amount - game::Creatures::GetDescriptor(location).value().defend;
+			amount = amount - game::creature::GetDescriptor(location).value().defend;
 			amount = (amount < 0) ? (0) : (amount);
 			instance.value().wounds += amount;
 			Put(location, instance.value());
@@ -151,8 +132,8 @@ namespace game::Creatures
 
 	void Advance(const common::XY<size_t>& location)
 	{
-		auto health = GetHealth(location);
-		if (health && health.value()<=0)
+		auto instance = GetInstance(location);
+		if (instance && instance.value().health<=0)
 		{
 			Remove(location);
 		}
@@ -162,7 +143,7 @@ namespace game::Creatures
 	{
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
-		for (auto& descriptor : descriptors)
+		for (auto& descriptor : game::creature::descriptors)
 		{
 			game::Creature creature = (game::Creature)(int)descriptor[game::Properties::INDEX];
 			size_t numberAppearing = descriptor[game::Properties::NUMBER_APPEARING];
@@ -188,8 +169,19 @@ namespace game::Creatures
 		return !GetCreatures().empty();
 	}
 
-	void InitializeFromFile(const std::string& filename)
+	std::optional<Instance> GetInstance(const common::XY<size_t>& location)
 	{
-		descriptors = data::JSON::Load(filename);
+		auto instance = Get(location);
+		if (instance)
+		{
+			auto descriptor = game::creature::GetDescriptor(instance.value().creature);
+			return std::optional<Instance>(
+			{
+				instance.value().creature,
+				descriptor.maximumHealth-instance.value().wounds,
+				descriptor
+			});
+		}
+		return std::nullopt;
 	}
 }

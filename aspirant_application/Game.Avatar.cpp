@@ -138,7 +138,7 @@ namespace game::Avatar
 		{
 			SetColumn((size_t)common::RNG::FromRange(0, (int)worldSize.GetX()));
 			SetRow((size_t)common::RNG::FromRange(0, (int)worldSize.GetY()));
-		} while (game::Creatures::Read(GetPosition()));
+		} while (game::Creatures::GetInstance(GetPosition()));
 		game::World::SetExplored(GetPosition());
 	}
 }

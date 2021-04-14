@@ -18,11 +18,11 @@ namespace sublayout::EnemyStats
 		std::stringstream ss;
 		ss << "Enemy: ";
 		auto position = game::Avatar::GetPosition();
-		auto health = game::Creatures::GetHealth(position).value();
+		auto health = game::Creatures::GetInstance(position).value().health;
 		if (health > 0)
 		{
 			ss << health << "/";
-			ss << game::Creatures::GetDescriptor(position).value().maximumHealth;
+			ss << game::creature::GetDescriptor(position).value().maximumHealth;
 		}
 		else
 		{
