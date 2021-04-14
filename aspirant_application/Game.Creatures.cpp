@@ -23,9 +23,30 @@ namespace game::Creatures
 
 	static nlohmann::json descriptors;
 
-	std::string GetImageId(game::Creature creature)
+	Descriptor GetDescriptor(game::Creature creature)
 	{
-		return descriptors[(int)creature][game::Properties::IMAGE_ID];
+		return
+		{
+			descriptors[(int)creature][game::Properties::IMAGE_ID], //std::string imageId;
+			descriptors[(int)creature][game::Properties::HEALTH],//int maximumHealth;
+			descriptors[(int)creature][game::Properties::ATTACK],//int attack;
+			descriptors[(int)creature][game::Properties::DEFEND],//int defend;
+			descriptors[(int)creature][game::Properties::FOOD_BRIBE],//int foodBribe;
+			descriptors[(int)creature][game::Properties::MONEY_BRIBE]//int moneyBribe;
+		};
+	}
+
+	std::optional<Descriptor> GetDescriptor(const common::XY<size_t>& location)
+	{
+		auto temp = Read(location);
+		if (temp)
+		{
+			return GetDescriptor(temp.value());
+		}
+		else
+		{
+			return std::nullopt;
+		}
 	}
 
 	struct CreatureInstance
@@ -88,77 +109,12 @@ namespace game::Creatures
 		}
 	}
 
-	std::optional<int> GetMaximumHealth(const common::XY<size_t>& location)
-	{
-		auto temp = Read(location);
-		if (temp)
-		{
-			return descriptors[(int)temp.value()][game::Properties::HEALTH];
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	std::optional<int> GetAttack(const common::XY<size_t>& location)
-	{
-		auto temp = Read(location);
-		if (temp)
-		{
-			return descriptors[(int)temp.value()][game::Properties::ATTACK];
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	std::optional<int> GetDefend(const common::XY<size_t>& location)
-	{
-		auto temp = Read(location);
-		if (temp)
-		{
-			return descriptors[(int)temp.value()][game::Properties::DEFEND];
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	std::optional<int> GetFoodBribe(const common::XY<size_t>& location)
-	{
-		auto temp = Read(location);
-		if (temp)
-		{
-			return descriptors[(int)temp.value()][game::Properties::FOOD_BRIBE];
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	std::optional<int> GetMoneyBribe(const common::XY<size_t>& location)
-	{
-		auto temp = Read(location);
-		if (temp)
-		{
-			return descriptors[(int)temp.value()][game::Properties::MONEY_BRIBE];
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
 	std::optional<int> GetHealth(const common::XY<size_t>& location)
 	{
 		auto temp = Get(location);
 		if (temp)
 		{
-			return GetMaximumHealth(location).value() - temp.value().wounds;
+			return GetDescriptor(location).value().maximumHealth - temp.value().wounds;
 		}
 		else
 		{
@@ -171,7 +127,7 @@ namespace game::Creatures
 		auto instance = Get(location);
 		if (instance)
 		{
-			return instance.value().wounds >= GetMaximumHealth(location).value();
+			return instance.value().wounds >= GetDescriptor(location).value().maximumHealth;
 		}
 		else
 		{
@@ -184,7 +140,7 @@ namespace game::Creatures
 		auto instance = Get(location);
 		if (instance)
 		{
-			amount = amount - game::Creatures::GetDefend(location).value();
+			amount = amount - game::Creatures::GetDescriptor(location).value().defend;
 			amount = (amount < 0) ? (0) : (amount);
 			instance.value().wounds += amount;
 			Put(location, instance.value());

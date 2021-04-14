@@ -71,7 +71,7 @@ namespace sublayout::POV
 	{
 		for (auto creature : creatures)
 		{
-			auto imageId = game::Creatures::GetImageId(creature);
+			auto imageId = game::Creatures::GetDescriptor(creature).imageId;
 			auto instance = game::Creatures::Read(game::Avatar::GetPosition());
 			bool visible = instance && instance.value() == creature;
 			graphics::Images::SetVisible(POV_LAYOUT_NAME, imageId, visible);

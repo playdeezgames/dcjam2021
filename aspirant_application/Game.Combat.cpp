@@ -43,7 +43,7 @@ namespace game::Combat
 			}
 			else
 			{
-				auto attack = game::Creatures::GetAttack(game::Avatar::GetPosition()).value();
+				auto attack = game::Creatures::GetDescriptor(game::Avatar::GetPosition()).value().attack;
 				auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
 				auto damage = attack - defend;
 				game::avatar::Statistics::DoDefendTimer();
@@ -60,7 +60,7 @@ namespace game::Combat
 		}
 		else
 		{
-			game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
+			game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetDescriptor(game::Avatar::GetPosition()).value().attack);
 			return CombatResult::HUNTER_RAN;
 		}
 	}

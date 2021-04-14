@@ -50,7 +50,8 @@ namespace state::in_play::Combat
 
 	static void MoneyBribe()
 	{
-		auto amount = game::Creatures::GetMoneyBribe(game::Avatar::GetPosition()).value_or(0);
+		auto descriptor = game::Creatures::GetDescriptor(game::Avatar::GetPosition());
+		size_t amount = (descriptor.has_value()) ? (descriptor.value().moneyBribe) : (0);
 		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
 		{
 			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
@@ -66,7 +67,8 @@ namespace state::in_play::Combat
 
 	static void FoodBribe()
 	{
-		auto amount = game::Creatures::GetFoodBribe(game::Avatar::GetPosition()).value_or(0);
+		auto descriptor = game::Creatures::GetDescriptor(game::Avatar::GetPosition());
+		size_t amount = (descriptor.has_value()) ? (descriptor.value().foodBribe) : (0);
 		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
 		{
 			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
