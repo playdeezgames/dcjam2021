@@ -14,18 +14,6 @@ namespace game::Combat
 		CombatDeck::Deal();
 	}
 
-	static bool IsGuessCorrect(Guess guess)//TODO: move this to CombatDeck
-	{
-		switch (guess)
-		{
-		case Guess::HIGHER:
-			return std::get<0>(CombatDeck::GetNextCard()) > std::get<0>(CombatDeck::GetCurrentCard());
-		case Guess::LOWER:
-			return std::get<0>(CombatDeck::GetNextCard()) < std::get<0>(CombatDeck::GetCurrentCard());
-		}
-		return false;
-	}
-
 	static void DoAttackTimer()//TODO: move this to avatar statistics
 	{
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
@@ -54,11 +42,11 @@ namespace game::Combat
 		}
 	}
 
-	CombatResult Resolve(std::optional<Guess> guess)
+	CombatResult Resolve(std::optional<game::CombatDeck::Guess> guess)
 	{
 		if (guess)
 		{
-			if (IsGuessCorrect(guess.value()))
+			if (game::CombatDeck::IsGuessCorrect(guess.value()))
 			{
 				auto damage =
 					game::Creatures::DoDamage(

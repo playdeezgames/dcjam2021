@@ -146,4 +146,16 @@ namespace game::CombatDeck
 		}
 		nextCard = deck.Draw().value();
 	}
+
+	bool IsGuessCorrect(Guess guess)
+	{
+		switch (guess)
+		{
+		case Guess::HIGHER:
+			return std::get<0>(GetNextCard()) > std::get<0>(GetCurrentCard());
+		case Guess::LOWER:
+			return std::get<0>(GetNextCard()) < std::get<0>(GetCurrentCard());
+		}
+		return false;
+	}
 }

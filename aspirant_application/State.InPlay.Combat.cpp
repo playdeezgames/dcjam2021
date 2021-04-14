@@ -130,7 +130,7 @@ namespace state::in_play::Combat
 		{game::Combat::CombatResult::HUNTER_RAN, {COMBATRESULT_HUNTER_RAN, application::Sounds::HIT_HUNTER}}
 	};
 
-	void ResolveCombat(std::optional<game::Combat::Guess> guess)
+	void ResolveCombat(std::optional<game::CombatDeck::Guess> guess)
 	{
 		auto& resolutionDetails = resolutions.find(game::Combat::Resolve(guess))->second;
 		SetCombatResultText(std::get<0>(resolutionDetails));
@@ -142,11 +142,11 @@ namespace state::in_play::Combat
 		switch ((CombatMenuItem)graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value())
 		{
 		case CombatMenuItem::HIGHER:
-			ResolveCombat(game::Combat::Guess::HIGHER);
+			ResolveCombat(game::CombatDeck::Guess::HIGHER);
 			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
 			break;
 		case CombatMenuItem::LOWER:
-			ResolveCombat(game::Combat::Guess::LOWER);
+			ResolveCombat(game::CombatDeck::Guess::LOWER);
 			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
 			break;
 		case CombatMenuItem::RUN_AWAY:

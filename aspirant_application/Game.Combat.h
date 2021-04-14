@@ -1,13 +1,9 @@
 #pragma once
 #include <optional>
+#include "Game.CombatDeck.h"
 namespace game::Combat
 {
 	void Advance();
-	enum class Guess
-	{
-		HIGHER,
-		LOWER
-	};
 	enum class CombatResult
 	{
 		MONSTER_KILLED,
@@ -17,5 +13,5 @@ namespace game::Combat
 		HUNTER_BLOCKED,
 		HUNTER_RAN
 	};
-	CombatResult Resolve(std::optional<Guess>);
+	CombatResult Resolve(std::optional<game::CombatDeck::Guess>);
 }
