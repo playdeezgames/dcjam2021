@@ -281,6 +281,8 @@
     <ClInclude Include="Graphics.Sprite.h" />
     <ClInclude Include="Graphics.Sprites.h" />
     <ClInclude Include="Graphics.Textures.h" />
+    <ClInclude Include="States.h" />
+    <ClInclude Include="Sublayouts.h" />
     <ClInclude Include="UIState.h" />
     <ClInclude Include="Common.Utility.h" />
     <ClInclude Include="Common.XY.h" />

@@ -385,5 +385,11 @@
     <ClInclude Include="Game.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="States.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sublayouts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,25 +26,10 @@
 #include "Game.Creatures.h"
 #include "Game.Combat.h"
 #include "Game.CombatDeck.h"
-namespace state::About { void Start(); }
-namespace state::ConfirmQuit { void Start(); }
-namespace state::MainMenu { void Start(); }
-namespace state::Options { void Start(); }
-namespace state::Splash { void Start(); }
-namespace state::Start { void Start(); }
-namespace state::in_play::MiniMap { void Start(); }
-namespace state::LeavePlay { void Start(); }
-namespace sublayout::POV { void Start(); }
-namespace game::avatar::Items { void Start(); }
-namespace state::in_play::FloorInventory { void Start(); }
-namespace state::in_play::AvatarInventory { void Start(); }
-namespace state::in_play::AvatarStatus { void Start(); }
-namespace state::in_play::Combat { void Start(); }
-namespace state::in_play::CombatResult { void Start(); }
-namespace state::in_play::Dead { void Start(); }
-namespace state::in_play::Exit { void Start(); }
-namespace sublayout::QuickStats { void Start(); }
-namespace sublayout::EnemyStats { void Start(); }
+#include "Game.Items.h"
+#include "Game.Avatar.Items.h"
+#include "States.h"
+#include "Sublayouts.h"
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -99,6 +84,7 @@ namespace common::Application
 	const std::string MUX = "config/audio/mux.json";
 	const std::string KEYBOARD = "config/keyboard.json";
 	const std::string CREATURES = "config/creatures.json";
+	const std::string ITEMS = "config/items.json";
 
 	static std::vector<void(*)()> starters = 
 	{
@@ -137,6 +123,7 @@ namespace common::Application
 		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::Creatures::InitializeFromFile(CREATURES);
+		game::Items::InitializeFromFile(ITEMS);
 
 		for (auto starter : starters)
 		{

@@ -5,8 +5,12 @@
 #include "Common.XY.h"
 #include "Game.World.h"
 #include "Common.RNG.h"
+#include "Data.JSON.h"
+#include "Common.Properties.h"
 namespace game::Items
 {
+	static nlohmann::json items;
+
 	const std::map<game::Item, std::string> itemName =
 	{
 		{game::Item::FOOD, "Food"},
@@ -19,6 +23,12 @@ namespace game::Items
 
 	const std::string& GetName(const game::Item& item)
 	{
-		return itemName.find(item)->second;
+		return items[(int)item][common::Properties::NAME];
 	}
+
+	void InitializeFromFile(const std::string& filename)
+	{
+		items = data::JSON::Load(filename);
+	}
+
 }
