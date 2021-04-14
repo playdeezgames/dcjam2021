@@ -100,4 +100,33 @@ namespace game::avatar::Statistics
 	{
 		Decrease(statistic, -delta);
 	}
+
+	void DoAttackTimer()
+	{
+		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
+		if (timer > 0)
+		{
+			timer--;
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, timer);
+			if (timer == 0)
+			{
+				game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, game::avatar::Statistics::Default(game::avatar::Statistic::ATTACK));
+			}
+		}
+	}
+
+	void DoDefendTimer()
+	{
+		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
+		if (timer > 0)
+		{
+			timer--;
+			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, timer);
+			if (timer == 0)
+			{
+				game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, game::avatar::Statistics::Default(game::avatar::Statistic::DEFEND));
+			}
+		}
+	}
+
 }

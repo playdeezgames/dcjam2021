@@ -14,34 +14,6 @@ namespace game::Combat
 		CombatDeck::Deal();
 	}
 
-	static void DoAttackTimer()//TODO: move this to avatar statistics
-	{
-		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
-		if (timer > 0)
-		{
-			timer--;
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, timer);
-			if (timer == 0)
-			{
-				game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, game::avatar::Statistics::Default(game::avatar::Statistic::ATTACK));
-			}
-		}
-	}
-
-	static void DoDefendTimer()//TODO: move this to avatar statistics
-	{
-		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
-		if (timer > 0)
-		{
-			timer--;
-			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, timer);
-			if (timer == 0)
-			{
-				game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, game::avatar::Statistics::Default(game::avatar::Statistic::DEFEND));
-			}
-		}
-	}
-
 	CombatResult Resolve(std::optional<game::CombatDeck::Guess> guess)
 	{
 		if (guess)
@@ -52,6 +24,7 @@ namespace game::Combat
 					game::Creatures::DoDamage(
 						game::Avatar::GetPosition(),
 						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+				game::avatar::Statistics::DoAttackTimer();
 				if (damage > 0)
 				{
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
@@ -67,13 +40,13 @@ namespace game::Combat
 				{
 					return CombatResult::MONSTER_BLOCKED;
 				}
-				DoAttackTimer();
 			}
 			else
 			{
 				auto attack = game::Creatures::GetAttack(game::Avatar::GetPosition()).value();
 				auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
 				auto damage = attack - defend;
+				game::avatar::Statistics::DoDefendTimer();
 				if (damage > 0)
 				{
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
@@ -83,7 +56,6 @@ namespace game::Combat
 				{
 					return CombatResult::HUNTER_BLOCKED;
 				}
-				DoDefendTimer();
 			}
 		}
 		else

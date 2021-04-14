@@ -11,4 +11,6 @@ namespace game::avatar::Statistics
 	bool IsMinimum(const ::game::avatar::Statistic&);
 	void Decrease(const ::game::avatar::Statistic&, int);
 	void Increase(const ::game::avatar::Statistic&, int);
+	void DoAttackTimer();
+	void DoDefendTimer();
 }
