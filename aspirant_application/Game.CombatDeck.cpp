@@ -7,7 +7,6 @@
 #include "Common.Deck.h"
 namespace game::CombatDeck
 {
-
 	static common::Deck<common::Card> deck
 	({
 		{common::card::Rank::DEUCE, common::card::Suit::CLUB},
