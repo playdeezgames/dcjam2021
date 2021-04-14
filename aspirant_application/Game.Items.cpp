@@ -7,29 +7,29 @@
 #include "Common.RNG.h"
 #include "Data.JSON.h"
 #include "Common.Properties.h"
+#include "Game.Properties.h"
 #include <sstream>
 namespace game::Items
 {
 	static nlohmann::json items;
 
-	const std::map<game::Item, std::string> itemName =
-	{
-		{game::Item::FOOD, "Food"},
-		{game::Item::POTION, "Potion"},
-		{game::Item::BEER, "Beer"},
-		{game::Item::WINE, "Wine"},
-		{game::Item::COFFEE, "Coffee"},
-		{game::Item::JOOLS, "Jools"}
-	};
-
-	std::string GetName(const game::Item& item)
+	static std::string ItemToItemKey(const game::Item& item)
 	{
 		std::stringstream ss;
 		ss << (int)item;
-		auto itemKey = ss.str();
-		auto& itemRecord = items[itemKey];
-		return itemRecord[common::Properties::NAME];
+		return ss.str();
 	}
+
+	std::string GetName(const game::Item& item)
+	{
+		return items[ItemToItemKey(item)][common::Properties::NAME];
+	}
+
+	std::string GetImageId(const game::Item& item)
+	{
+		return items[ItemToItemKey(item)][game::Properties::IMAGE_ID];
+	}
+
 
 	void InitializeFromFile(const std::string& filename)
 	{

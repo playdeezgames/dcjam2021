@@ -8,6 +8,7 @@
 #include "Game.World.Items.h"
 #include "Application.Update.h"
 #include "Game.Creatures.h"
+#include <tuple>
 namespace sublayout::POV
 {
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
@@ -49,9 +50,8 @@ namespace sublayout::POV
 		{maze::Direction::WEST, "W"}
 	};
 
-	static void UpdateDirection()
+	static void UpdateDirection(maze::Direction facing	)
 	{
-		auto facing = game::Avatar::GetFacing();
 		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
 	}
 
@@ -67,14 +67,39 @@ namespace sublayout::POV
 		game::Creature::WYVERN
 	};
 
-	static void UpdateCreatures()
+	static void UpdateCreatures(const common::XY<size_t> position)
 	{
 		for (auto creature : creatures)
 		{
 			auto imageId = game::creature::GetDescriptor(creature).imageId;
-			auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
+			auto instance = game::Creatures::GetInstance(position);
 			bool visible = instance && instance.value().creature == creature;
 			graphics::Images::SetVisible(POV_LAYOUT_NAME, imageId, visible);
+		}
+	}
+
+	static void UpdateRoom(const common::XY<size_t> position, const maze::Direction& facing)
+	{
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetBorderLeft(position, facing)]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetBorderAhead(position, facing)]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetBorderRight(position, facing)]);
+	}
+
+	const std::vector<std::tuple<std::string, game::Item>> items =
+	{
+		{FOOD_IMAGE_ID, game::Item::FOOD},
+		{POTION_IMAGE_ID, game::Item::POTION},
+		{BEER_IMAGE_ID, game::Item::BEER},
+		{WINE_IMAGE_ID, game::Item::WINE},
+		{COFFEE_IMAGE_ID, game::Item::COFFEE},
+		{JOOLS_IMAGE_ID, game::Item::JOOLS}
+	};
+
+	static void UpdateItems(const common::XY<size_t> position)
+	{
+		for (auto& item : items)
+		{
+			::graphics::Images::SetVisible(POV_LAYOUT_NAME, std::get<0>(item), game::world::Items::IsPresent(std::get<1>(item), position));
 		}
 	}
 
@@ -82,26 +107,27 @@ namespace sublayout::POV
 	{
 		auto position = game::Avatar::GetPosition();
 		auto facing = game::Avatar::GetFacing();
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetBorderLeft(position, facing)]);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetBorderAhead(position, facing)]);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetBorderRight(position, facing)]);
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, FOOD_IMAGE_ID, game::world::Items::IsPresent(game::Item::FOOD, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, POTION_IMAGE_ID, game::world::Items::IsPresent(game::Item::POTION, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, BEER_IMAGE_ID, game::world::Items::IsPresent(game::Item::BEER, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, WINE_IMAGE_ID, game::world::Items::IsPresent(game::Item::WINE, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, COFFEE_IMAGE_ID, game::world::Items::IsPresent(game::Item::COFFEE, position));
-		::graphics::Images::SetVisible(POV_LAYOUT_NAME, JOOLS_IMAGE_ID, game::world::Items::IsPresent(game::Item::JOOLS, position));
-		UpdateDirection();
-		UpdateCreatures();
+		UpdateRoom(position, facing);
+		UpdateItems(position);
+		UpdateDirection(facing);
+		UpdateCreatures(position);
 	}
+
+	const std::vector<::UIState> states = 
+	{
+		::UIState::IN_PLAY_MAP,
+		::UIState::IN_PLAY_FLOOR,
+		::UIState::IN_PLAY_INVENTORY,
+		::UIState::IN_PLAY_STATUS,
+		::UIState::IN_PLAY_COMBAT,
+		::UIState::IN_PLAY_COMBAT_RESULT
+	};
 
 	void Start()
 	{
-		::application::Update::AddHandler(::UIState::IN_PLAY_MAP, UpdatePOV);
-		::application::Update::AddHandler(::UIState::IN_PLAY_FLOOR, UpdatePOV);
-		::application::Update::AddHandler(::UIState::IN_PLAY_INVENTORY, UpdatePOV);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdatePOV);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, UpdatePOV);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, UpdatePOV);
+		for (auto state : states)
+		{
+			::application::Update::AddHandler(state, UpdatePOV);
+		}
 	}
 }
