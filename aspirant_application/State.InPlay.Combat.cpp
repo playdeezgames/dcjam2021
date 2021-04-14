@@ -16,6 +16,7 @@
 #include "Game.Creatures.h"
 #include "Game.Avatar.Items.h"
 #include "Game.CombatDeck.h"
+#include "Graphics.Texts.h"
 namespace state::in_play::AvatarInventory
 {
 	void UseItem();
@@ -105,9 +106,35 @@ namespace state::in_play::Combat
 		}
 	}
 
-	static void ResolveCombat(std::optional<game::Combat::Guess> guess)
+	const std::string COMBATRESULT_LAYOUT_NAME = "State.InPlay.CombatResult";
+	const std::string COMBATRESULT_RESULT_TEXT_ID = "Result";
+	const std::string COMBATRESULT_HIT_MONSTER = "You hit it!";
+	const std::string COMBATRESULT_KILL_MONSTER = "You killed it!";
+	const std::string COMBATRESULT_GOT_HIT = "It hit you!";
+	const std::string COMBATRESULT_BLOCKED_HIT = "You block!";
+	const std::string COMBATRESULT_MISSED_MONSTER = "It blocked!";
+	const std::string COMBATRESULT_HUNTER_RAN = "You attempted to run!";
+
+	void SetCombatResultText(const std::string& text)
 	{
-		game::Combat::Resolve(guess);
+		graphics::Texts::SetText(COMBATRESULT_LAYOUT_NAME, COMBATRESULT_RESULT_TEXT_ID, text);
+	}
+
+	const std::map<game::Combat::CombatResult, std::tuple<std::string, std::string>> resolutions =
+	{
+		{game::Combat::CombatResult::MONSTER_KILLED, {COMBATRESULT_KILL_MONSTER, application::Sounds::DEAD_MONSTER}},
+		{game::Combat::CombatResult::MONSTER_HIT, {COMBATRESULT_HIT_MONSTER, application::Sounds::HIT_MONSTER}},
+		{game::Combat::CombatResult::MONSTER_BLOCKED, {COMBATRESULT_MISSED_MONSTER, application::Sounds::HIT_BLOCKED}},
+		{game::Combat::CombatResult::HUNTER_HIT, {COMBATRESULT_GOT_HIT, application::Sounds::HIT_HUNTER}},
+		{game::Combat::CombatResult::HUNTER_BLOCKED, {COMBATRESULT_BLOCKED_HIT, application::Sounds::HIT_BLOCKED}},
+		{game::Combat::CombatResult::HUNTER_RAN, {COMBATRESULT_HUNTER_RAN, application::Sounds::HIT_HUNTER}}
+	};
+
+	void ResolveCombat(std::optional<game::Combat::Guess> guess)
+	{
+		auto& resolutionDetails = resolutions.find(game::Combat::Resolve(guess))->second;
+		SetCombatResultText(std::get<0>(resolutionDetails));
+		common::audio::Sfx::Play(std::get<1>(resolutionDetails));
 	}
 
 	static void OnActivateItem()
