@@ -3,6 +3,6 @@
 #include <string>
 namespace game::Items
 {
-	const std::string& GetName(const game::Item&);
+	std::string GetName(const game::Item&);
 	void InitializeFromFile(const std::string&);
 }

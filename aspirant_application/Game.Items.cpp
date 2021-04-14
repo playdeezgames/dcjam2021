@@ -7,6 +7,7 @@
 #include "Common.RNG.h"
 #include "Data.JSON.h"
 #include "Common.Properties.h"
+#include <sstream>
 namespace game::Items
 {
 	static nlohmann::json items;
@@ -21,9 +22,13 @@ namespace game::Items
 		{game::Item::JOOLS, "Jools"}
 	};
 
-	const std::string& GetName(const game::Item& item)
+	std::string GetName(const game::Item& item)
 	{
-		return items[(int)item][common::Properties::NAME];
+		std::stringstream ss;
+		ss << (int)item;
+		auto itemKey = ss.str();
+		auto& itemRecord = items[itemKey];
+		return itemRecord[common::Properties::NAME];
 	}
 
 	void InitializeFromFile(const std::string& filename)

@@ -36,7 +36,7 @@ namespace graphics::AvatarInventory
 
 	std::optional<game::Item> GetItem()
 	{
-		auto& inventory = game::avatar::Items::All();
+		auto inventory = game::avatar::Items::All();
 		if (inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
@@ -67,7 +67,7 @@ namespace graphics::AvatarInventory
 		std::string dropShadowColor = model[graphics::Properties::DROP_SHADOW_COLOR];
 
 
-		auto& inventory = game::avatar::Items::All();
+		auto inventory = game::avatar::Items::All();
 		if (inventoryIndex >= inventory.size())
 		{
 			inventoryIndex = 0;

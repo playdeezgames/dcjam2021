@@ -1,42 +1,74 @@
 #include "Game.Avatar.Items.h"
 #include <map>
+#include "json.hpp"
+#include "Game.Properties.h"
+#include <sstream>
+#include "Common.Utility.h"
+namespace game::Avatar
+{
+	nlohmann::json& GetAvatar();
+}
 namespace game::avatar::Items
 {
-	static std::map<game::Item, size_t> avatarInventory;
+	nlohmann::json& GetAvatarInventory()
+	{
+		auto& avatar = game::Avatar::GetAvatar();
+		if (avatar.count(game::Properties::INVENTORY) == 0)
+		{
+			avatar[game::Properties::INVENTORY] = nlohmann::json();
+		}
+		return avatar[game::Properties::INVENTORY];
+	}
+
 	const std::map<game::Item, size_t> initial =
 	{
 		{game::Item::FOOD, 5},
 		{game::Item::POTION, 2}
 	};
 
-	size_t Read(game::Item item)
+	static std::string ItemToKey(game::Item item)
 	{
-		auto iter = avatarInventory.find(item);
-		if (iter != avatarInventory.end())
-		{
-			return iter->second;
-		}
-		else
-		{
-			return 0;
-		}
+		std::stringstream ss;
+		ss << (int)item;
+		return ss.str();
 	}
 
-	const std::map<game::Item, size_t>& All()
+	size_t Read(game::Item item)
 	{
-		return avatarInventory;
+		auto itemKey = ItemToKey(item);
+		auto& inventory = GetAvatarInventory();
+		if (inventory.count(itemKey) > 0)
+		{
+			return inventory[itemKey];
+		}
+		return 0;
+	}
+
+	std::map<game::Item, size_t> All()
+	{
+		std::map<game::Item, size_t> result;
+		for (auto& item : GetAvatarInventory().items())
+		{
+			result[(game::Item)common::Utility::StringToInt(item.key())] = item.value();
+		}
+		return result;
 	}
 
 	void Reset()
 	{
-		avatarInventory = initial;
+		GetAvatarInventory().clear();
+		for (auto& item : initial)
+		{
+			Add(item.first, item.second);
+		}
 	}
 
 	void Add(game::Item item, size_t amount)
 	{
 		if (amount > 0)
 		{
-			avatarInventory[item] += amount;
+			auto itemKey = ItemToKey(item);
+			GetAvatarInventory()[itemKey] = Read(item) + amount;
 		}
 	}
 
@@ -47,17 +79,18 @@ namespace game::avatar::Items
 
 	size_t Remove(game::Item item, size_t quantity)
 	{
-		if (avatarInventory.find(item)!=avatarInventory.end())
+		auto total = Read(item);
+		if (total >0)
 		{
-			size_t total = avatarInventory[item];
+			auto itemKey = ItemToKey(item);
 			if (quantity >= total)
 			{
 				quantity = total;
-				avatarInventory.erase(item);
+				GetAvatarInventory().erase(itemKey);
 			}
 			else
 			{
-				avatarInventory[item] -= quantity;
+				GetAvatarInventory()[itemKey] = Read(item) -quantity;
 			}
 			return quantity;
 		}
