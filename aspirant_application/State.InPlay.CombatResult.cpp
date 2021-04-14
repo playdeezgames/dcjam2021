@@ -5,6 +5,7 @@
 #include "Game.Combat.h"
 #include "Graphics.Images.h"
 #include "Game.CombatDeck.h"
+#include "Graphics.CardSprites.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
@@ -28,8 +29,8 @@ namespace state::in_play::CombatResult
 
 	static void OnUpdate(const Uint32& ticks)
 	{
-		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, game::CombatDeck::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
-		graphics::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, game::CombatDeck::GetSpriteForCard(game::CombatDeck::GetNextCard()));
+		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
+		graphics::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}
 
 	void Start()

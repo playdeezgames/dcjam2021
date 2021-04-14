@@ -17,6 +17,7 @@
 #include "Game.Avatar.Items.h"
 #include "Game.CombatDeck.h"
 #include "Graphics.Texts.h"
+#include "Graphics.CardSprites.h"
 namespace state::in_play::AvatarInventory
 {
 	void UseItem();
@@ -230,7 +231,7 @@ namespace state::in_play::Combat
 	static void OnUpdate(const Uint32& ticks)
 	{
 		auto& card = game::CombatDeck::GetCurrentCard();
-		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, game::CombatDeck::GetSpriteForCard(card));
+		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(card));
 		UpdateUseItem();
 	}
 

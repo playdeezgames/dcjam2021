@@ -179,6 +179,7 @@
     <ClCompile Include="Game.World.cpp" />
     <ClCompile Include="Game.World.Items.cpp" />
     <ClCompile Include="Graphics.AvatarInventory.cpp" />
+    <ClCompile Include="Graphics.CardSprites.cpp" />
     <ClCompile Include="Graphics.FloorInventory.cpp" />
     <ClCompile Include="Graphics.Images.cpp" />
     <ClCompile Include="Graphics.Menu.cpp" />
@@ -257,6 +258,7 @@
     <ClInclude Include="Game.World.h" />
     <ClInclude Include="Game.World.Items.h" />
     <ClInclude Include="Graphics.AvatarInventory.h" />
+    <ClInclude Include="Graphics.CardSprites.h" />
     <ClInclude Include="Graphics.FloorInventory.h" />
     <ClInclude Include="Graphics.Images.h" />
     <ClInclude Include="Graphics.MenuItems.h" />
