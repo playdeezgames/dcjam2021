@@ -4,28 +4,32 @@
         "initial-inventory": 5,
         "non-combat": "eat",
         "combat": "bribe",
-        "amount": 5
+        "amount": 5,
+        "image-id":"Food"
     },
     "1":{
         "name":"Potion",
         "initial-inventory": 2,
         "non-combat":"heal",
         "combat":"heal",
-        "amount": 30
+        "amount": 30,
+        "image-id":"Potion"
     },
     "2":{
         "name":"Beer",
         "non-combat":"attack-buff",
         "combat":"attack-buff",
         "amount": 50,
-        "duration": 10
+        "duration": 10,
+        "image-id":"Beer"
     },
     "3":{
         "name":"Wine",
         "non-combat":"attack-buff",
         "combat":"attack-buff",
         "amount": 25,
-        "duration": 25
+        "duration": 25,
+        "image-id":"Wine"
     },
     "4":{
         "name":"Coffee",
@@ -33,10 +37,12 @@
         "combat":"defend-buff",
         "amount": 10,
         "duration": 10,
-        "amount-stacks":true
+        "amount-stacks":true,
+        "image-id":"Coffee"
     },
     "5":{
         "name":"Jools",
-        "combat":"bribe"
+        "combat":"bribe",
+        "image-id":"Jools"
     }
 }

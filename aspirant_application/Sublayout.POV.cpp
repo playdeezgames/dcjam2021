@@ -85,21 +85,21 @@ namespace sublayout::POV
 		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetBorderRight(position, facing)]);
 	}
 
-	const std::vector<std::tuple<std::string, game::Item>> items =
+	const std::vector<game::Item> items =
 	{
-		{FOOD_IMAGE_ID, game::Item::FOOD},
-		{POTION_IMAGE_ID, game::Item::POTION},
-		{BEER_IMAGE_ID, game::Item::BEER},
-		{WINE_IMAGE_ID, game::Item::WINE},
-		{COFFEE_IMAGE_ID, game::Item::COFFEE},
-		{JOOLS_IMAGE_ID, game::Item::JOOLS}
+		game::Item::FOOD,
+		game::Item::POTION,
+		game::Item::BEER,
+		game::Item::WINE,
+		game::Item::COFFEE,
+		game::Item::JOOLS
 	};
 
 	static void UpdateItems(const common::XY<size_t> position)
 	{
 		for (auto& item : items)
 		{
-			::graphics::Images::SetVisible(POV_LAYOUT_NAME, std::get<0>(item), game::world::Items::IsPresent(std::get<1>(item), position));
+			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::Items::GetImageId(item), game::world::Items::IsPresent(item, position));
 		}
 	}
 
