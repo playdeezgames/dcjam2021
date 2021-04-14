@@ -1,7 +1,16 @@
+Appearance:
+  ☐ hunger bar (instead of text)
+    i can shake it when it is low
+    i can flash or change colors when high and low
+  ☐ health bar (instead of text)
+Quality of Life:
+  ☐ dont eat food if hunger is at max
+  ☐ dont drink potion if health is at max
 Plating:
   ☐ link to source on game page
 Refactors:
   ☐ Items To Config Files
+  ☐ avatar statistic minimum maximum initial values to config file
 Additional Features:
   ☐ depending on the length of a "hot streak" do extra damage
   ☐ better MUX shuffler

@@ -105,20 +105,25 @@ namespace state::in_play::Combat
 		}
 	}
 
+	static void ResolveCombat(std::optional<game::Combat::Guess> guess)
+	{
+		game::Combat::Resolve(guess);
+	}
+
 	static void OnActivateItem()
 	{
 		switch ((CombatMenuItem)graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value())
 		{
 		case CombatMenuItem::HIGHER:
-			game::Combat::Resolve(game::Combat::Guess::HIGHER);
+			ResolveCombat(game::Combat::Guess::HIGHER);
 			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
 			break;
 		case CombatMenuItem::LOWER:
-			game::Combat::Resolve(game::Combat::Guess::LOWER);
+			ResolveCombat(game::Combat::Guess::LOWER);
 			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
 			break;
 		case CombatMenuItem::RUN_AWAY:
-			game::Combat::Resolve(std::nullopt);
+			ResolveCombat(std::nullopt);
 			Flee();
 			break;
 		case CombatMenuItem::USE_ITEM:

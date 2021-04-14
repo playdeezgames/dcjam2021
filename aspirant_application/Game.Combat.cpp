@@ -6,8 +6,10 @@
 #include "Application.Sounds.h"
 #include "Common.Audio.h"
 #include "Graphics.Texts.h"
+#include <tuple>
 namespace game::Combat
 {
+	//TODO: move to State.InPlay.Combat vvv
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
 	const std::string RESULT_TEXT_ID = "Result";
 	const std::string HIT_MONSTER = "You hit it!";
@@ -15,9 +17,9 @@ namespace game::Combat
 	const std::string GOT_HIT = "It hit you!";
 	const std::string BLOCKED_HIT = "You block!";
 	const std::string MISSED_MONSTER = "It blocked!";
+	const std::string HUNTER_RAN = "You attempted to run!";//Doesnt matter... never seen
 
-
-	void SetCombatResultText(const std::string& text)
+	void SetCombatResultText(const std::string& text)//TODO: move to State.InPlay.Combat
 	{
 		graphics::Texts::SetText(LAYOUT_NAME, RESULT_TEXT_ID, text);
 	}
@@ -28,7 +30,7 @@ namespace game::Combat
 		CombatDeck::Deal();
 	}
 
-	static bool IsGuessCorrect(Guess guess)
+	static bool IsGuessCorrect(Guess guess)//TODO: move this to CombatDeck
 	{
 		switch (guess)
 		{
@@ -40,7 +42,7 @@ namespace game::Combat
 		return false;
 	}
 
-	static void DoAttackTimer()
+	static void DoAttackTimer()//TODO: move this to avatar statistics
 	{
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		if (timer > 0)
@@ -54,7 +56,7 @@ namespace game::Combat
 		}
 	}
 
-	static void DoDefendTimer()
+	static void DoDefendTimer()//TODO: move this to avatar statistics
 	{
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
 		if (timer > 0)
@@ -68,33 +70,40 @@ namespace game::Combat
 		}
 	}
 
-	void Resolve(std::optional<Guess> guess)
+	enum class CombatResult
+	{
+		MONSTER_KILLED,
+		MONSTER_HIT,
+		MONSTER_BLOCKED,
+		HUNTER_HIT,
+		HUNTER_BLOCKED,
+		HUNTER_RAN
+	};
+
+	static CombatResult DetermineResult(std::optional<Guess> guess)//TODO: badly named
 	{
 		if (guess)
 		{
 			if (IsGuessCorrect(guess.value()))
 			{
-				auto damage = 
+				auto damage =
 					game::Creatures::DoDamage(
-						game::Avatar::GetPosition(), 
+						game::Avatar::GetPosition(),
 						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
 				if (damage > 0)
 				{
 					if (game::Creatures::IsDead(game::Avatar::GetPosition()).value())
 					{
-						SetCombatResultText(KILL_MONSTER);
-						common::audio::Sfx::Play(application::Sounds::DEAD_MONSTER);
+						return CombatResult::MONSTER_KILLED;
 					}
 					else
 					{
-						SetCombatResultText(HIT_MONSTER);
-						common::audio::Sfx::Play(application::Sounds::HIT_MONSTER);
+						return CombatResult::MONSTER_HIT;
 					}
 				}
 				else
 				{
-					SetCombatResultText(MISSED_MONSTER);
-					common::audio::Sfx::Play(application::Sounds::HIT_BLOCKED);
+					return CombatResult::MONSTER_BLOCKED;
 				}
 				DoAttackTimer();
 			}
@@ -105,14 +114,12 @@ namespace game::Combat
 				auto damage = attack - defend;
 				if (damage > 0)
 				{
-					SetCombatResultText(GOT_HIT);
-					common::audio::Sfx::Play(application::Sounds::HIT_HUNTER);
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
+					return CombatResult::HUNTER_HIT;
 				}
 				else
 				{
-					SetCombatResultText(BLOCKED_HIT);
-					common::audio::Sfx::Play(application::Sounds::HIT_BLOCKED);
+					return CombatResult::HUNTER_BLOCKED;
 				}
 				DoDefendTimer();
 			}
@@ -120,7 +127,24 @@ namespace game::Combat
 		else
 		{
 			game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, game::Creatures::GetAttack(game::Avatar::GetPosition()).value());
-			DoDefendTimer();
+			return CombatResult::HUNTER_RAN;
 		}
+	}
+
+	const std::map<CombatResult, std::tuple<std::string, std::string>> resolutions =
+	{
+		{CombatResult::MONSTER_KILLED, {KILL_MONSTER, application::Sounds::DEAD_MONSTER}},
+		{CombatResult::MONSTER_HIT, {HIT_MONSTER, application::Sounds::HIT_MONSTER}},
+		{CombatResult::MONSTER_BLOCKED, {MISSED_MONSTER, application::Sounds::HIT_BLOCKED}},
+		{CombatResult::HUNTER_HIT, {GOT_HIT, application::Sounds::HIT_HUNTER}},
+		{CombatResult::HUNTER_BLOCKED, {BLOCKED_HIT, application::Sounds::HIT_BLOCKED}},
+		{CombatResult::HUNTER_RAN, {HUNTER_RAN, application::Sounds::HIT_HUNTER}}
+	};
+
+	void Resolve(std::optional<Guess> guess)//TODO: this returns the tuple, and the text updated and the sound playing moves to State.InPlay.Combat
+	{
+		auto& resolutionDetails = resolutions.find(DetermineResult(guess))->second;
+		SetCombatResultText(std::get<0>(resolutionDetails));//TODO: side effect
+		common::audio::Sfx::Play(std::get<1>(resolutionDetails));//TODO: side effect
 	}
 }
