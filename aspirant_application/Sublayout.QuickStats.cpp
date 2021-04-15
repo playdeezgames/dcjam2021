@@ -3,25 +3,18 @@
 #include "Game.Avatar.Statistics.h"
 #include "Graphics.Texts.h"
 #include "Application.Update.h"
+#include "Graphics.Images.h"
 namespace sublayout::QuickStats
 {
 	const std::string LAYOUT_NAME = "Sublayout.QuickStats";
 	const std::string HUNGER_TEXT_ID = "Hunger";
-	const std::string HEALTH_TEXT_ID = "Health";
+	const std::string HEALTH_IMAGE_ID = "HealthBar";
 
 	static void UpdateHealth(const Uint32&)
 	{
 		std::stringstream ss;
-		ss << "Health: ";
-		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
-		{
-			ss << "DEAD!";
-		}
-		else
-		{
-			ss << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) << "/" << game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH);
-		}
-		::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
+		ss << "HealthBarForeground" << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH);
+		::graphics::Images::SetSprite(LAYOUT_NAME, HEALTH_IMAGE_ID, ss.str());
 	}
 
 	static void UpdateHunger(const Uint32&)
