@@ -114,7 +114,7 @@ namespace game::avatar::Items
 	const int COFFEE_DEFEND_INCREASE = 10;
 	const int COFFEE_DEFEND_DURATION = 10;
 
-	void DropItem(std::optional<game::Item> item)
+	void Drop(std::optional<game::Item> item)
 	{
 		if (item)
 		{
@@ -180,7 +180,7 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	std::optional<std::string> UseItem(std::optional<game::Item> item)
+	std::optional<std::string> Use(std::optional<game::Item> item)
 	{
 		if (item)
 		{

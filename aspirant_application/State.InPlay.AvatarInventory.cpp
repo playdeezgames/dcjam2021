@@ -37,10 +37,10 @@ namespace state::in_play::AvatarInventory
 			graphics::AvatarInventory::NextIndex();
 			break;
 		case ::Command::RED:
-			game::avatar::Items::DropItem(graphics::AvatarInventory::GetItem());
+			game::avatar::Items::Drop(graphics::AvatarInventory::GetItem());
 			break;
 		case ::Command::GREEN:
-			auto sfx = game::avatar::Items::UseItem(graphics::AvatarInventory::GetItem());
+			auto sfx = game::avatar::Items::Use(graphics::AvatarInventory::GetItem());
 			if (sfx)
 			{
 				common::audio::Sfx::Play(sfx.value());

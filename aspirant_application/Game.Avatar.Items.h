@@ -11,6 +11,6 @@ namespace game::avatar::Items
 	size_t Remove(game::Item, size_t);
 	std::map<game::Item, size_t> All();
 	void Start(); 
-	void DropItem(std::optional<game::Item> item);
-	std::optional<std::string> UseItem(std::optional<game::Item> item);
+	void Drop(std::optional<game::Item> item);
+	std::optional<std::string> Use(std::optional<game::Item> item);
 }

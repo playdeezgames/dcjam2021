@@ -90,7 +90,7 @@ namespace state::in_play::Combat
 			case game::Item::WINE:
 			case game::Item::COFFEE:
 			case game::Item::POTION:
-				game::avatar::Items::UseItem(item);
+				game::avatar::Items::Use(item);
 				break;
 			case game::Item::JOOLS:
 				MoneyBribe();
