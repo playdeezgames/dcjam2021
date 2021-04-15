@@ -1,9 +1,9 @@
 {
-    "splash" : "assets/images/splash.png",
-    "font" : "assets/images/fonts/font.png",
-    "font35" : "assets/images/fonts/Font3x5.png",
-    "font46" : "assets/images/fonts/Font4x6.png",
-    "font57" : "assets/images/fonts/Font5x7.png",
+    "splash": "assets/images/splash.png",
+    "font": "assets/images/fonts/font.png",
+    "font35": "assets/images/fonts/Font3x5.png",
+    "font46": "assets/images/fonts/Font4x6.png",
+    "font57": "assets/images/fonts/Font5x7.png",
     "background": "assets/images/background.png",
     "all_open": "assets/images/all_open.png",
     "all_closed": "assets/images/all_closed.png",
@@ -22,5 +22,6 @@
     "evil-minion": "assets/images/creatures/evil-minion.png",
     "werewolf": "assets/images/creatures/werewolf.png",
     "wyvern": "assets/images/creatures/wyvern.png",
-    "controls": "assets/images/controls.png"
+    "controls": "assets/images/controls.png",
+    "health-bar": "assets/images/health-bar.png"
 }

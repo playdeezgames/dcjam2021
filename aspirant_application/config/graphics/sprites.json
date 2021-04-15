@@ -3323,5 +3323,719 @@
         "y": 0,
         "width": 280,
         "height": 360
+    },
+    "HealthBarBackground": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 16,
+        "width": 102,
+        "height": 16
+    },
+    "HealthBarForeground0": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 16
+    },
+    "HealthBarForeground1": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 2,
+        "height": 16
+    },
+    "HealthBarForeground2": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 3,
+        "height": 16
+    },
+    "HealthBarForeground3": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 16
+    },
+    "HealthBarForeground4": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 5,
+        "height": 16
+    },
+    "HealthBarForeground5": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 6,
+        "height": 16
+    },
+    "HealthBarForeground6": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 7,
+        "height": 16
+    },
+    "HealthBarForeground7": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 8,
+        "height": 16
+    },
+    "HealthBarForeground8": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 9,
+        "height": 16
+    },
+    "HealthBarForeground9": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 16
+    },
+    "HealthBarForeground10": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 11,
+        "height": 16
+    },
+    "HealthBarForeground11": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 16
+    },
+    "HealthBarForeground12": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 13,
+        "height": 16
+    },
+    "HealthBarForeground13": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 14,
+        "height": 16
+    },
+    "HealthBarForeground14": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 15,
+        "height": 16
+    },
+    "HealthBarForeground15": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "HealthBarForeground16": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 17,
+        "height": 16
+    },
+    "HealthBarForeground17": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 18,
+        "height": 16
+    },
+    "HealthBarForeground18": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 19,
+        "height": 16
+    },
+    "HealthBarForeground19": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 20,
+        "height": 16
+    },
+    "HealthBarForeground20": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 21,
+        "height": 16
+    },
+    "HealthBarForeground21": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 22,
+        "height": 16
+    },
+    "HealthBarForeground22": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 23,
+        "height": 16
+    },
+    "HealthBarForeground23": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 24,
+        "height": 16
+    },
+    "HealthBarForeground24": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 25,
+        "height": 16
+    },
+    "HealthBarForeground25": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 26,
+        "height": 16
+    },
+    "HealthBarForeground26": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 27,
+        "height": 16
+    },
+    "HealthBarForeground27": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 28,
+        "height": 16
+    },
+    "HealthBarForeground28": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 29,
+        "height": 16
+    },
+    "HealthBarForeground29": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 30,
+        "height": 16
+    },
+    "HealthBarForeground30": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 31,
+        "height": 16
+    },
+    "HealthBarForeground31": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 16
+    },
+    "HealthBarForeground32": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 33,
+        "height": 16
+    },
+    "HealthBarForeground33": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 34,
+        "height": 16
+    },
+    "HealthBarForeground34": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 35,
+        "height": 16
+    },
+    "HealthBarForeground35": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 36,
+        "height": 16
+    },
+    "HealthBarForeground36": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 37,
+        "height": 16
+    },
+    "HealthBarForeground37": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 38,
+        "height": 16
+    },
+    "HealthBarForeground38": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 39,
+        "height": 16
+    },
+    "HealthBarForeground39": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 16
+    },
+    "HealthBarForeground40": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 41,
+        "height": 16
+    },
+    "HealthBarForeground41": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 42,
+        "height": 16
+    },
+    "HealthBarForeground42": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 43,
+        "height": 16
+    },
+    "HealthBarForeground43": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 44,
+        "height": 16
+    },
+    "HealthBarForeground44": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 16
+    },
+    "HealthBarForeground45": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 46,
+        "height": 16
+    },
+    "HealthBarForeground46": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 16
+    },
+    "HealthBarForeground47": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 8,
+        "height": 16
+    },
+    "HealthBarForeground48": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 49,
+        "height": 16
+    },
+    "HealthBarForeground49": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 50,
+        "height": 16
+    },
+    "HealthBarForeground50": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 51,
+        "height": 16
+    },
+    "HealthBarForeground51": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 52,
+        "height": 16
+    },
+    "HealthBarForeground52": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 53,
+        "height": 16
+    },
+    "HealthBarForeground53": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 54,
+        "height": 16
+    },
+    "HealthBarForeground54": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 55,
+        "height": 16
+    },
+    "HealthBarForeground55": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 56,
+        "height": 16
+    },
+    "HealthBarForeground56": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 57,
+        "height": 16
+    },
+    "HealthBarForeground57": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 58,
+        "height": 16
+    },
+    "HealthBarForeground58": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 59,
+        "height": 16
+    },
+    "HealthBarForeground59": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 60,
+        "height": 16
+    },
+    "HealthBarForeground60": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 61,
+        "height": 16
+    },
+    "HealthBarForeground61": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 16
+    },
+    "HealthBarForeground62": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 63,
+        "height": 16
+    },
+    "HealthBarForeground63": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 16
+    },
+    "HealthBarForeground64": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 65,
+        "height": 16
+    },
+    "HealthBarForeground65": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 66,
+        "height": 16
+    },
+    "HealthBarForeground66": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 67,
+        "height": 16
+    },
+    "HealthBarForeground67": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 68,
+        "height": 16
+    },
+    "HealthBarForeground68": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 69,
+        "height": 16
+    },
+    "HealthBarForeground69": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 70,
+        "height": 16
+    },
+    "HealthBarForeground70": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 71,
+        "height": 16
+    },
+    "HealthBarForeground71": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 72,
+        "height": 16
+    },
+    "HealthBarForeground72": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 33,
+        "height": 16
+    },
+    "HealthBarForeground73": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 74,
+        "height": 16
+    },
+    "HealthBarForeground74": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 75,
+        "height": 16
+    },
+    "HealthBarForeground75": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 76,
+        "height": 16
+    },
+    "HealthBarForeground76": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 77,
+        "height": 16
+    },
+    "HealthBarForeground77": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 78,
+        "height": 16
+    },
+    "HealthBarForeground78": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 79,
+        "height": 16
+    },
+    "HealthBarForeground79": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 80,
+        "height": 16
+    },
+    "HealthBarForeground80": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 81,
+        "height": 16
+    },
+    "HealthBarForeground81": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 82,
+        "height": 16
+    },
+    "HealthBarForeground82": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 83,
+        "height": 16
+    },
+    "HealthBarForeground83": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 84,
+        "height": 16
+    },
+    "HealthBarForeground84": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 85,
+        "height": 16
+    },
+    "HealthBarForeground85": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 86,
+        "height": 16
+    },
+    "HealthBarForeground86": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 87,
+        "height": 16
+    },
+    "HealthBarForeground87": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 8,
+        "height": 16
+    },
+    "HealthBarForeground88": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 89,
+        "height": 16
+    },
+    "HealthBarForeground89": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 90,
+        "height": 16
+    },
+    "HealthBarForeground90": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 91,
+        "height": 16
+    },
+    "HealthBarForeground91": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 92,
+        "height": 16
+    },
+    "HealthBarForeground92": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 93,
+        "height": 16
+    },
+    "HealthBarForeground93": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 94,
+        "height": 16
+    },
+    "HealthBarForeground94": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 95,
+        "height": 16
+    },
+    "HealthBarForeground95": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 16
+    },
+    "HealthBarForeground96": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 97,
+        "height": 16
+    },
+    "HealthBarForeground97": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 98,
+        "height": 16
+    },
+    "HealthBarForeground98": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 99,
+        "height": 16
+    },
+    "HealthBarForeground99": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 100,
+        "height": 16
+    },
+    "HealthBarForeground100": {
+        "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 101,
+        "height": 16
     }
 }
