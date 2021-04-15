@@ -12,38 +12,7 @@ namespace game
 }
 namespace game::creature
 {
-	static nlohmann::json descriptors;
-
-	Descriptor GetDescriptor(game::Creature creature)
-	{
-		return
-		{
-			descriptors[(int)creature][game::Properties::IMAGE_ID],
-			descriptors[(int)creature][game::Properties::HEALTH],
-			descriptors[(int)creature][game::Properties::ATTACK],
-			descriptors[(int)creature][game::Properties::DEFEND],
-			descriptors[(int)creature][game::Properties::FOOD_BRIBE],
-			descriptors[(int)creature][game::Properties::MONEY_BRIBE]
-		};
-	}
-
-	std::optional<Descriptor> GetDescriptor(const common::XY<size_t>& location)
-	{
-		auto temp = game::Creatures::GetInstance(location);
-		if (temp)
-		{
-			return temp.value().descriptor;
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	void InitializeFromFile(const std::string& filename)
-	{
-		descriptors = data::JSON::Load(filename);
-	}
+	extern nlohmann::json descriptors;
 }
 namespace game::Creatures
 {
@@ -121,7 +90,7 @@ namespace game::Creatures
 		auto instance = Get(location);
 		if (instance)
 		{
-			amount = amount - game::creature::GetDescriptor(location).value().defend;
+			amount = amount - game::Creatures::GetInstance(location).value().descriptor.defend;
 			amount = (amount < 0) ? (0) : (amount);
 			instance.value().wounds += amount;
 			Put(location, instance.value());

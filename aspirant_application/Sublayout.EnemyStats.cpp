@@ -22,7 +22,7 @@ namespace sublayout::EnemyStats
 		if (health > 0)
 		{
 			ss << health << "/";
-			ss << game::creature::GetDescriptor(position).value().maximumHealth;
+			ss << game::Creatures::GetInstance(position).value().descriptor.maximumHealth;
 		}
 		else
 		{
