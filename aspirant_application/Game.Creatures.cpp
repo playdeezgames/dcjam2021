@@ -22,7 +22,7 @@ namespace game::Creatures
 
 	struct CreatureInstance
 	{
-		game::Creature creature;
+		int creature;
 		int wounds;
 	};
 
@@ -40,7 +40,7 @@ namespace game::Creatures
 		if (creatures.count(place) > 0)
 		{
 			auto& creature = GetCreatures()[place];
-			return std::optional<CreatureInstance>({ (game::Creature)(int)creature[game::Properties::CREATURE], (int)creature[game::Properties::WOUNDS] });
+			return std::optional<CreatureInstance>({ (int)creature[game::Properties::CREATURE], (int)creature[game::Properties::WOUNDS] });
 		}
 		return std::nullopt;
 	}
@@ -67,7 +67,7 @@ namespace game::Creatures
 		}
 	}
 
-	std::optional<game::Creature> Read(const common::XY<size_t>& location)
+	std::optional<int> Read(const common::XY<size_t>& location)
 	{
 		auto temp = Get(location);
 		if (temp)

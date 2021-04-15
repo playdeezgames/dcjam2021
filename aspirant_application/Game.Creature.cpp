@@ -5,7 +5,7 @@ namespace game::creature
 {
 	nlohmann::json descriptors;
 
-	Descriptor GetDescriptor(game::Creature creature)
+	Descriptor GetDescriptor(int creature)
 	{
 		return
 		{
@@ -24,12 +24,12 @@ namespace game::creature
 		descriptors = data::JSON::Load(filename);
 	}
 
-	std::vector<game::Creature> All()
+	std::vector<int> All()
 	{
-		std::vector<game::Creature> result;
+		std::vector<int> result;
 		for (auto& descriptor : descriptors)
 		{
-			result.push_back((game::Creature)(int)descriptor[game::Properties::INDEX]);
+			result.push_back((int)descriptor[game::Properties::INDEX]);
 		}
 		return result;
 	}

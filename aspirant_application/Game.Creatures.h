@@ -7,7 +7,7 @@ namespace game::Creatures
 {
 	struct Instance
 	{
-		game::Creature creature;
+		int creature;
 		int health;
 		game::creature::Descriptor descriptor;
 	};

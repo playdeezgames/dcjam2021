@@ -3,20 +3,6 @@
 #include <optional>
 #include <string>
 #include <vector>
-namespace game
-{
-	enum class Creature//TODO: not extensible from json, so eliminate!!
-	{
-		IMP,
-		TROGLODYTE,
-		BRAIN_TENTACLE,
-		BULLY_MINION,
-		EVIL_BAT,
-		EVIL_MINION,
-		WEREWOLF,
-		WYVERN
-	};
-}
 namespace game::creature
 {
 	struct Descriptor
@@ -30,7 +16,7 @@ namespace game::creature
 		size_t numberAppearing;
 	};
 
-	Descriptor GetDescriptor(game::Creature);
+	Descriptor GetDescriptor(int);
 	void InitializeFromFile(const std::string&);
-	std::vector<game::Creature> All();
+	std::vector<int> All();
 }
