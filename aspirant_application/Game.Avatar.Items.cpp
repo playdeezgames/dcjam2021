@@ -62,7 +62,7 @@ namespace game::avatar::Items
 	void Reset()
 	{
 		GetAvatarInventory().clear();
-		for (auto& item : initial)
+		for (auto& item : initial)//TODO: move to item descriptor
 		{
 			Add(item.first, item.second);
 		}
@@ -82,7 +82,7 @@ namespace game::avatar::Items
 		Reset();
 	}
 
-	size_t Remove(game::Item item, size_t quantity)
+	static size_t Remove(game::Item item, size_t quantity)
 	{
 		auto total = Read(item);
 		if (total >0)
