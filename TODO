@@ -4,7 +4,7 @@ Appearance:
     i can flash or change colors when high and low
   ☐ health bar (instead of text)
   ☐ give the evil minion red eyes
-  ☐ eliminate creature enum
+  ✔ eliminate creature enum @done(21-04-15 07:12)
     drive solely with json
   ☐ eliminate item enum
     drive solely with json
