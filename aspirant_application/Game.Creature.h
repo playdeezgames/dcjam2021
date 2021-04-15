@@ -5,7 +5,7 @@
 #include <vector>
 namespace game
 {
-	enum class Creature
+	enum class Creature//TODO: not extensible from json, so eliminate!!
 	{
 		IMP,
 		TROGLODYTE,
@@ -16,7 +16,6 @@ namespace game
 		WEREWOLF,
 		WYVERN
 	};
-
 }
 namespace game::creature
 {

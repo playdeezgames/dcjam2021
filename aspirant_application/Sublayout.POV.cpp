@@ -49,20 +49,9 @@ namespace sublayout::POV
 		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
 	}
 
-	const std::vector<game::Creature> creatures =
-	{
-		game::Creature::IMP,
-		game::Creature::TROGLODYTE,
-		game::Creature::BRAIN_TENTACLE,
-		game::Creature::BULLY_MINION,
-		game::Creature::EVIL_BAT,
-		game::Creature::EVIL_MINION,
-		game::Creature::WEREWOLF,
-		game::Creature::WYVERN
-	};
-
 	static void UpdateCreatures(const common::XY<size_t> position)
 	{
+		auto creatures = game::creature::All();
 		for (auto creature : creatures)
 		{
 			auto imageId = game::creature::GetDescriptor(creature).imageId;
