@@ -10,6 +10,11 @@ namespace game
 {
 	nlohmann::json data;
 
+	nlohmann::json& GetData()
+	{
+		return data;
+	}
+
 	void Reset()
 	{
 		game::World::Reset();

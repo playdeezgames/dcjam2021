@@ -2,6 +2,7 @@
 #include "Common.XY.h"
 #include <optional>
 #include <string>
+#include <vector>
 namespace game
 {
 	enum class Creature
@@ -27,8 +28,10 @@ namespace game::creature
 		int defend;
 		int foodBribe;
 		int moneyBribe;
+		size_t numberAppearing;
 	};
 
 	Descriptor GetDescriptor(game::Creature);
 	void InitializeFromFile(const std::string&);
+	std::vector<game::Creature> All();
 }

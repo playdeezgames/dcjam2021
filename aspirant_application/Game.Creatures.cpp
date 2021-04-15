@@ -6,18 +6,12 @@
 #include "Game.World.h"
 #include "Game.Properties.h"
 #include <sstream>
-namespace game
-{
-	extern nlohmann::json data;
-}
-namespace game::creature
-{
-	extern nlohmann::json descriptors;
-}
+#include "Game.h"
 namespace game::Creatures
 {
 	nlohmann::json& GetCreatures()
 	{
+		auto& data = game::GetData();
 		if (data.count(game::Properties::CREATURES) == 0)
 		{
 			data[game::Properties::CREATURES] = nlohmann::json();
@@ -112,10 +106,10 @@ namespace game::Creatures
 	{
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
-		for (auto& descriptor : game::creature::descriptors)
+		for (auto creature : game::creature::All())
 		{
-			game::Creature creature = (game::Creature)(int)descriptor[game::Properties::INDEX];
-			size_t numberAppearing = descriptor[game::Properties::NUMBER_APPEARING];
+			auto descriptor = game::creature::GetDescriptor(creature);
+			size_t numberAppearing = descriptor.numberAppearing;
 			while (numberAppearing > 0)
 			{
 				bool available = false;
