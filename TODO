@@ -18,6 +18,7 @@ Refactors:
   ☐ avatar statistic minimum maximum initial values to config file
 Carrying Stuff:
   ☐ if i dont have a weight limit or limited number of things that i can carry, why would i ever drop an item?
+  ☐ if i dont have a weight limit, is there any reason i dont want to just take everything in the room?
 Additional Features:
   ☐ achievements!!!
   ☐ ways of manipulating the card

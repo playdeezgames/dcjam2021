@@ -10,16 +10,14 @@
 #include "Game.World.h"
 #include "json.hpp"
 #include "Game.Properties.h"
-namespace game
-{
-	extern nlohmann::json data;
-}
+#include "Game.h"
 namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
 
 	nlohmann::json& GetAvatar()
 	{
+		auto& data = game::GetData();
 		if (data.count(game::Properties::AVATAR) == 0)
 		{
 			data[game::Properties::AVATAR] = nlohmann::json();

@@ -45,66 +45,6 @@ namespace state::in_play::Combat
 		game::Avatar::MoveAhead();
 	}
 
-	static void MoneyBribe()
-	{
-		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
-		size_t amount = (instance.has_value()) ? (instance.value().descriptor.moneyBribe) : (0);
-		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
-		{
-			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
-			common::audio::Sfx::Play(application::Sounds::WOOHOO);
-			game::Creatures::Remove(game::Avatar::GetPosition());
-			application::UIState::EnterGame();
-		}
-		else
-		{
-			common::audio::Sfx::Play(application::Sounds::SHUCKS);
-		}
-	}
-
-	static void FoodBribe()
-	{
-		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
-		size_t amount = (instance.has_value()) ? (instance.value().descriptor.foodBribe) : (0);
-		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
-		{
-			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
-			common::audio::Sfx::Play(application::Sounds::WOOHOO);
-			game::Creatures::Remove(game::Avatar::GetPosition());
-			application::UIState::EnterGame();
-		}
-		else
-		{
-			common::audio::Sfx::Play(application::Sounds::SHUCKS);
-		}
-	}
-
-	static void UseItem()
-	{
-		auto item = graphics::AvatarInventory::GetItem();
-		if (item)
-		{
-			switch (item.value())
-			{
-			case game::Item::BEER:
-			case game::Item::WINE:
-			case game::Item::COFFEE:
-			case game::Item::POTION:
-				game::avatar::Items::Use(item);
-				break;
-			case game::Item::JOOLS:
-				MoneyBribe();
-				break;
-			case game::Item::FOOD:
-				FoodBribe();
-				break;
-			}
-		}
-		else
-		{
-			common::audio::Sfx::Play(application::Sounds::SHUCKS);
-		}
-	}
 
 	const std::string COMBATRESULT_LAYOUT_NAME = "State.InPlay.CombatResult";
 	const std::string COMBATRESULT_RESULT_TEXT_ID = "Result";
@@ -154,7 +94,15 @@ namespace state::in_play::Combat
 			Flee();
 			break;
 		case CombatMenuItem::USE_ITEM:
-			UseItem();
+			auto result = game::avatar::Items::CombatUse(graphics::AvatarInventory::GetItem());
+			if (result)
+			{
+				common::audio::Sfx::Play(std::get<0>(*result));
+				if (std::get<1>(*result))
+				{
+					application::UIState::EnterGame();
+				}
+			}
 			break;
 		}
 	}

@@ -8,6 +8,7 @@
 #include "Game.Avatar.Statistics.h"
 #include "Game.Avatar.h"
 #include "Application.Sounds.h"
+#include "Game.Creatures.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar();
@@ -199,5 +200,59 @@ namespace game::avatar::Items
 			}
 		}
 		return std::nullopt;
+	}
+
+	static std::optional<std::tuple<std::string, bool>> MoneyBribe()
+	{
+		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
+		size_t amount = (instance.has_value()) ? (instance.value().descriptor.moneyBribe) : (0);
+		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
+		{
+			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
+			game::Creatures::Remove(game::Avatar::GetPosition());
+			return std::make_tuple(application::Sounds::WOOHOO, true);
+		}
+		return std::make_tuple(application::Sounds::SHUCKS, false);
+	}
+
+	static std::optional<std::tuple<std::string, bool>> FoodBribe()
+	{
+		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
+		size_t amount = (instance.has_value()) ? (instance.value().descriptor.foodBribe) : (0);
+		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
+		{
+			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
+			game::Creatures::Remove(game::Avatar::GetPosition());
+			return std::make_tuple(application::Sounds::WOOHOO, true);
+
+		}
+		return std::make_tuple(application::Sounds::SHUCKS, false);
+	}
+
+	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<game::Item> item)
+	{
+		if (item)
+		{
+			switch (item.value())
+			{
+			case game::Item::BEER:
+			case game::Item::WINE:
+			case game::Item::COFFEE:
+			case game::Item::POTION:
+			{
+				auto useResult = game::avatar::Items::Use(item);
+				if (useResult)
+				{
+					return std::make_tuple(*useResult, false);
+				}
+			}
+			break;
+			case game::Item::JOOLS:
+				return MoneyBribe();
+			case game::Item::FOOD:
+				return FoodBribe();
+			}
+		}
+		return std::make_tuple(application::Sounds::SHUCKS, false);
 	}
 }
