@@ -16,12 +16,6 @@ namespace sublayout::POV
 	const std::string RIGHT_SIDE_IMAGE_ID = "RightSide";
 	const std::string DIRECTION_TEXT_ID = "Direction";
 	const std::string POSITION_TEXT_ID = "Position";
-	const std::string FOOD_IMAGE_ID = "Food";
-	const std::string POTION_IMAGE_ID = "Potion";
-	const std::string BEER_IMAGE_ID = "Beer";
-	const std::string WINE_IMAGE_ID = "Wine";
-	const std::string COFFEE_IMAGE_ID = "Coffee";
-	const std::string JOOLS_IMAGE_ID = "Jools";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
 
 	static std::map<game::world::Border, std::string> leftSides =
