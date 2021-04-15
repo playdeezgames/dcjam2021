@@ -18,10 +18,7 @@
 #include "Game.CombatDeck.h"
 #include "Graphics.Texts.h"
 #include "Graphics.CardSprites.h"
-namespace state::in_play::AvatarInventory
-{
-	void UseItem();
-}
+#include "Game.Avatar.Items.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -93,7 +90,7 @@ namespace state::in_play::Combat
 			case game::Item::WINE:
 			case game::Item::COFFEE:
 			case game::Item::POTION:
-				state::in_play::AvatarInventory::UseItem();
+				game::avatar::Items::UseItem(item);
 				break;
 			case game::Item::JOOLS:
 				MoneyBribe();

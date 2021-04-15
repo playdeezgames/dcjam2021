@@ -4,6 +4,10 @@
 #include "Game.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"
+#include "Game.World.Items.h"
+#include "Game.Avatar.Statistics.h"
+#include "Game.Avatar.h"
+#include "Application.Sounds.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar();
@@ -99,5 +103,101 @@ namespace game::avatar::Items
 			return 0;
 		}
 
+	}
+
+	const int FOOD_HUNGER_INCREASE = 5;
+	const int POTION_HEALTH_INCREASE = 30;
+	const int WINE_ATTACK = 25;
+	const int WINE_ATTACK_DURATION = 25;
+	const int BEER_ATTACK = 50;
+	const int BEER_ATTACK_DURATION = 10;
+	const int COFFEE_DEFEND_INCREASE = 10;
+	const int COFFEE_DEFEND_DURATION = 10;
+
+	void DropItem(std::optional<game::Item> item)
+	{
+		if (item)
+		{
+			size_t amount = game::avatar::Items::Remove(*item, 1);
+			game::world::Items::Add(*item, 1, game::Avatar::GetPosition());
+		}
+	}
+
+	static std::optional<std::string> EatFood()
+	{
+		if (game::avatar::Items::Read(game::Item::FOOD) > 0)
+		{
+			game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, FOOD_HUNGER_INCREASE);
+			game::avatar::Items::Remove(game::Item::FOOD, 1);
+		}
+		return std::nullopt;//TODO: make sound associated with eating
+	}
+
+	static std::optional<std::string> DrinkPotion()
+	{
+		if (game::avatar::Items::Read(game::Item::POTION) > 0)
+		{
+			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, POTION_HEALTH_INCREASE);
+			game::avatar::Items::Remove(game::Item::POTION, 1);
+			return application::Sounds::DRINK_POTION;
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::string> DrinkBeer()
+	{
+		if (game::avatar::Items::Read(game::Item::BEER) > 0)
+		{
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, BEER_ATTACK);
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, BEER_ATTACK_DURATION);
+			game::avatar::Items::Remove(game::Item::BEER, 1);
+			return application::Sounds::BEER;
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::string> DrinkWine()
+	{
+		if (game::avatar::Items::Read(game::Item::WINE) > 0)
+		{
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, WINE_ATTACK);
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, WINE_ATTACK_DURATION);
+			game::avatar::Items::Remove(game::Item::WINE, 1);
+			return application::Sounds::WINE;
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::string> DrinkCoffee()
+	{
+		if (game::avatar::Items::Read(game::Item::COFFEE) > 0)
+		{
+			game::avatar::Statistics::Increase(game::avatar::Statistic::DEFEND, COFFEE_DEFEND_INCREASE);
+			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, COFFEE_DEFEND_DURATION);
+			game::avatar::Items::Remove(game::Item::COFFEE, 1);
+			return application::Sounds::COFFEE;
+		}
+		return std::nullopt;
+	}
+
+	std::optional<std::string> UseItem(std::optional<game::Item> item)
+	{
+		if (item)
+		{
+			switch (*item)
+			{
+			case game::Item::FOOD:
+				return EatFood();
+			case game::Item::POTION:
+				return DrinkPotion();
+			case game::Item::BEER:
+				return DrinkBeer();
+			case game::Item::WINE:
+				return DrinkWine();
+			case game::Item::COFFEE:
+				return DrinkCoffee();
+			}
+		}
+		return std::nullopt;
 	}
 }

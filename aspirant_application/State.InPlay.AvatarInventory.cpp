@@ -13,102 +13,6 @@
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
-	const int FOOD_HUNGER_INCREASE = 5;
-	const int POTION_HEALTH_INCREASE = 30;
-	const int WINE_ATTACK = 25;
-	const int WINE_ATTACK_DURATION = 25;
-	const int BEER_ATTACK = 50;
-	const int BEER_ATTACK_DURATION = 10;
-	const int COFFEE_DEFEND_INCREASE = 10;
-	const int COFFEE_DEFEND_DURATION = 10;
-
-	static void DropItem()
-	{
-		auto item = graphics::AvatarInventory::GetItem();
-		if (item)
-		{
-			size_t amount = game::avatar::Items::Remove(*item, 1);
-			game::world::Items::Add(*item, 1, game::Avatar::GetPosition());
-		}
-	}
-
-	static void EatFood()
-	{
-		if (game::avatar::Items::Read(game::Item::FOOD)>0)
-		{
-			game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, FOOD_HUNGER_INCREASE);
-			game::avatar::Items::Remove(game::Item::FOOD, 1);
-		}
-	}
-
-	static void DrinkPotion()
-	{
-		if (game::avatar::Items::Read(game::Item::POTION)>0)
-		{
-			common::audio::Sfx::Play(application::Sounds::DRINK_POTION);
-			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, POTION_HEALTH_INCREASE);
-			game::avatar::Items::Remove(game::Item::POTION, 1);
-		}
-	}
-
-	static void DrinkBeer()
-	{
-		if (game::avatar::Items::Read(game::Item::BEER) > 0)
-		{
-			common::audio::Sfx::Play(application::Sounds::BEER);
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, BEER_ATTACK);
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, BEER_ATTACK_DURATION);
-			game::avatar::Items::Remove(game::Item::BEER, 1);
-		}
-	}
-
-	static void DrinkWine()
-	{
-		if (game::avatar::Items::Read(game::Item::WINE) > 0)
-		{
-			common::audio::Sfx::Play(application::Sounds::WINE);
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, WINE_ATTACK);
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, WINE_ATTACK_DURATION);
-			game::avatar::Items::Remove(game::Item::WINE, 1);
-		}
-	}
-
-	static void DrinkCoffee()
-	{
-		if (game::avatar::Items::Read(game::Item::COFFEE) > 0)
-		{
-			common::audio::Sfx::Play(application::Sounds::COFFEE);
-			game::avatar::Statistics::Increase(game::avatar::Statistic::DEFEND, COFFEE_DEFEND_INCREASE);
-			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, COFFEE_DEFEND_DURATION);
-			game::avatar::Items::Remove(game::Item::COFFEE, 1);
-		}
-	}
-
-	void UseItem()
-	{
-		auto item = graphics::AvatarInventory::GetItem();
-		if (item)
-		{
-			switch (*item)
-			{
-			case game::Item::FOOD:
-				EatFood();
-				break;
-			case game::Item::POTION:
-				DrinkPotion();
-				break;
-			case game::Item::BEER:
-				DrinkBeer();
-				break;
-			case game::Item::WINE:
-				DrinkWine();
-				break;
-			case game::Item::COFFEE:
-				DrinkCoffee();
-				break;
-			}
-		}
-	}
 
 	static void OnCommand(const ::Command& command)
 	{
@@ -133,23 +37,21 @@ namespace state::in_play::AvatarInventory
 			graphics::AvatarInventory::NextIndex();
 			break;
 		case ::Command::RED:
-			DropItem();
+			game::avatar::Items::DropItem(graphics::AvatarInventory::GetItem());
 			break;
 		case ::Command::GREEN:
-			UseItem();
+			auto sfx = game::avatar::Items::UseItem(graphics::AvatarInventory::GetItem());
+			if (sfx)
+			{
+				common::audio::Sfx::Play(sfx.value());
+			}
 			break;
 		}
-	}
-
-	static void OnUpdate(const Uint32& ticks)
-	{
-
 	}
 
 	void Start()
 	{
 		::application::Command::SetHandler(::UIState::IN_PLAY_INVENTORY, OnCommand);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_INVENTORY, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY_INVENTORY, OnUpdate);
 	}
 }

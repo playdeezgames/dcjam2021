@@ -16,7 +16,12 @@ Plating:
 Refactors:
   ☐ Items To Config Files
   ☐ avatar statistic minimum maximum initial values to config file
+Carrying Stuff:
+  ☐ if i dont have a weight limit or limited number of things that i can carry, why would i ever drop an item?
 Additional Features:
+  ☐ achievements!!!
+  ☐ ways of manipulating the card
+    a way of getting a new card dealt
   ☐ depending on the length of a "hot streak" do extra damage
   ☐ better MUX shuffler
   ☐ save and load the game
