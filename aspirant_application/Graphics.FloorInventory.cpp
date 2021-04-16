@@ -3,7 +3,7 @@
 #include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Common.Properties.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include "Game.Avatar.h"
 #include "Graphics.Properties.h"
 #include "Graphics.Fonts.h"
@@ -81,7 +81,7 @@ namespace graphics::FloorInventory
 		for (auto& entry : inventory)
 		{
 			std::stringstream ss;
-			ss << game::Items::GetName(entry.first) << " x " << entry.second;
+			ss << game::item::GetDescriptor(entry.first).name << " x " << entry.second;
 			auto color = (index == inventoryIndex) ? (activeColor) : (inactiveColor);
 			if (dropShadow)
 			{

@@ -6,7 +6,7 @@
 #include "Game.Avatar.Items.h"
 #include <sstream>
 #include "Graphics.Fonts.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 namespace graphics::AvatarInventory
 {
 	static size_t inventoryIndex;
@@ -77,7 +77,7 @@ namespace graphics::AvatarInventory
 		for (auto& entry : inventory)
 		{
 			std::stringstream ss;
-			ss << game::Items::GetName(entry.first) << " x " << entry.second;
+			ss << game::item::GetDescriptor(entry.first).name << " x " << entry.second;
 			auto color = (index == inventoryIndex) ? (activeColor) : (inactiveColor);
 			if (dropShadow)
 			{

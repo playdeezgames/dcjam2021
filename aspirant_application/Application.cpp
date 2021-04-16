@@ -26,7 +26,7 @@
 #include "Game.Creatures.h"
 #include "Game.Combat.h"
 #include "Game.CombatDeck.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include "Game.Avatar.Items.h"
 #include "States.h"
 #include "Sublayouts.h"
@@ -123,7 +123,7 @@ namespace common::Application
 		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::creature::InitializeFromFile(CREATURES);
-		game::Items::InitializeFromFile(ITEMS);
+		game::item::InitializeFromFile(ITEMS);
 
 		for (auto starter : starters)
 		{

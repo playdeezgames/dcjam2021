@@ -1,4 +1,4 @@
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include <map>
 #include <vector>
 #include "Game.Item.h"
@@ -9,9 +9,14 @@
 #include "Common.Properties.h"
 #include "Game.Properties.h"
 #include <sstream>
-namespace game::Items
+namespace game::item
 {
 	static nlohmann::json items;
+
+	void InitializeFromFile(const std::string& filename)
+	{
+		items = data::JSON::Load(filename);
+	}
 
 	static std::string ItemToItemKey(const game::Item& item)
 	{
@@ -20,20 +25,14 @@ namespace game::Items
 		return ss.str();
 	}
 
-	std::string GetName(const game::Item& item)
+	Descriptor GetDescriptor(game::Item item)
 	{
-		return items[ItemToItemKey(item)][common::Properties::NAME];
-	}
-
-	std::string GetImageId(const game::Item& item)
-	{
-		return items[ItemToItemKey(item)][game::Properties::IMAGE_ID];
-	}
-
-
-	void InitializeFromFile(const std::string& filename)
-	{
-		items = data::JSON::Load(filename);
+		auto descriptor = items[ItemToItemKey(item)];
+		return
+		{
+			descriptor[common::Properties::NAME],
+			descriptor[game::Properties::IMAGE_ID]
+		};
 	}
 
 }

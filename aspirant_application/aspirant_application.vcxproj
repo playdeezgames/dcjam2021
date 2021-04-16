@@ -176,7 +176,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game.Creature.cpp" />
     <ClCompile Include="Game.Creatures.cpp" />
-    <ClCompile Include="Game.Items.cpp" />
+    <ClCompile Include="Game.Item.cpp" />
     <ClCompile Include="Game.World.cpp" />
     <ClCompile Include="Game.World.Items.cpp" />
     <ClCompile Include="Graphics.AvatarInventory.cpp" />
@@ -252,7 +252,6 @@
     <ClInclude Include="Game.Creatures.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game.Item.h" />
-    <ClInclude Include="Game.Items.h" />
     <ClInclude Include="Game.Properties.h" />
     <ClInclude Include="Game.World.Border.h" />
     <ClInclude Include="Game.World.h" />

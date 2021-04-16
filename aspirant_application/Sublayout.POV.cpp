@@ -4,7 +4,7 @@
 #include "Game.World.h"
 #include "Graphics.Texts.h"
 #include "Graphics.Images.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Application.Update.h"
 #include "Game.Creatures.h"
@@ -82,7 +82,7 @@ namespace sublayout::POV
 	{
 		for (auto& item : items)
 		{
-			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::Items::GetImageId(item), game::world::Items::IsPresent(item, position));
+			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(item, position));
 		}
 	}
 

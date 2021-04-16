@@ -9,7 +9,7 @@
 #include "Game.Avatar.h"
 #include "Game.World.h"
 #include "Game.Avatar.Statistics.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include <sstream>
 namespace state::in_play::MiniMap
 {

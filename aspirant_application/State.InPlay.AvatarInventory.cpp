@@ -4,7 +4,7 @@
 #include "Application.UIState.h"
 #include "Graphics.AvatarInventory.h"
 #include "Game.Avatar.Items.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Statistics.h"

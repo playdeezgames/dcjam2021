@@ -3,7 +3,7 @@
 #include "Application.Update.h"
 #include "Application.UIState.h"
 #include "Graphics.FloorInventory.h"
-#include "Game.Items.h"
+#include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Items.h"
