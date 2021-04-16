@@ -171,12 +171,13 @@ namespace game::avatar::Items
 		});
 	}
 
-	static std::map<game::item::Usage, std::function<std::optional<std::string>(game::Item)>> verbs =
+	static std::map<game::item::Usage, std::function<std::optional<std::string>(game::Item)>> nonCombatVerbs =
 	{
 		{game::item::Usage::EAT, Eat},
 		{game::item::Usage::HEAL, Heal},
 		{game::item::Usage::ATTACK_BUFF, BuffAttack},
-		{game::item::Usage::DEFEND_BUFF, BuffDefend}
+		{game::item::Usage::DEFEND_BUFF, BuffDefend},
+		{game::item::Usage::BRIBE, [](game::Item) { return std::nullopt; }}
 	};
 
 	std::optional<std::string> Use(std::optional<game::Item> item)
@@ -186,7 +187,7 @@ namespace game::avatar::Items
 			auto usage = game::item::GetDescriptor(*item).usage;
 			if (usage)
 			{
-				return verbs.find(*usage)->second(*item);
+				return nonCombatVerbs.find(*usage)->second(*item);
 			}
 		}
 		return std::nullopt;
