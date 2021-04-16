@@ -124,79 +124,69 @@ namespace game::avatar::Items
 		}
 	}
 
-	static std::optional<std::string> EatFood()
+	static std::optional<std::string> ConsumeItem(game::Item item, std::function<void(const game::item::Descriptor&)> action)
 	{
-		if (game::avatar::Items::Read(game::Item::FOOD) > 0)
+		//TODO: check if verb is valid? but only if it becomes non-static
+		auto descriptor = game::item::GetDescriptor(item);
+		if (game::avatar::Items::Read(item) > 0)
 		{
-			game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, FOOD_HUNGER_INCREASE);
-			game::avatar::Items::Remove(game::Item::FOOD, 1);
+			action(descriptor);
+			game::avatar::Items::Remove(item, 1);
+			return descriptor.sfxSuccess;
 		}
-		return std::nullopt;//TODO: make sound associated with eating
+		return descriptor.sfxFailure;
 	}
 
-	static std::optional<std::string> DrinkPotion()
+	static std::optional<std::string> Eat(game::Item item)
 	{
-		if (game::avatar::Items::Read(game::Item::POTION) > 0)
+		return ConsumeItem(item, [](const game::item::Descriptor& descriptor) 
 		{
-			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, POTION_HEALTH_INCREASE);
-			game::avatar::Items::Remove(game::Item::POTION, 1);
-			return application::Sounds::DRINK_POTION;
-		}
-		return std::nullopt;
+			game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, descriptor.amount.value());
+		});
 	}
 
-	static std::optional<std::string> DrinkBeer()
+	std::optional<std::string> Heal(game::Item item)
 	{
-		if (game::avatar::Items::Read(game::Item::BEER) > 0)
+		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, BEER_ATTACK);
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, BEER_ATTACK_DURATION);
-			game::avatar::Items::Remove(game::Item::BEER, 1);
-			return application::Sounds::BEER;
-		}
-		return std::nullopt;
+			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, descriptor.amount.value());
+		});
 	}
 
-	static std::optional<std::string> DrinkWine()
+	std::optional<std::string> BuffAttack(game::Item item)
 	{
-		if (game::avatar::Items::Read(game::Item::WINE) > 0)
+		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, WINE_ATTACK);
-			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, WINE_ATTACK_DURATION);
-			game::avatar::Items::Remove(game::Item::WINE, 1);
-			return application::Sounds::WINE;
-		}
-		return std::nullopt;
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, descriptor.amount.value());
+			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, descriptor.duration.value());
+		});
 	}
 
-	static std::optional<std::string> DrinkCoffee()
+	std::optional<std::string> BuffDefend(game::Item item)
 	{
-		if (game::avatar::Items::Read(game::Item::COFFEE) > 0)
+		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
-			game::avatar::Statistics::Increase(game::avatar::Statistic::DEFEND, COFFEE_DEFEND_INCREASE);
-			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, COFFEE_DEFEND_DURATION);
-			game::avatar::Items::Remove(game::Item::COFFEE, 1);
-			return application::Sounds::COFFEE;
-		}
-		return std::nullopt;
+			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, descriptor.amount.value());
+			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, descriptor.duration.value());
+		});
 	}
+
+	static std::map<game::item::Usage, std::function<std::optional<std::string>(game::Item)>> verbs =
+	{
+		{game::item::Usage::EAT, Eat},
+		{game::item::Usage::HEAL, Heal},
+		{game::item::Usage::ATTACK_BUFF, BuffAttack},
+		{game::item::Usage::DEFEND_BUFF, BuffDefend}
+	};
 
 	std::optional<std::string> Use(std::optional<game::Item> item)
 	{
 		if (item)
 		{
-			switch (*item)
+			auto usage = game::item::GetDescriptor(*item).usage;
+			if (usage)
 			{
-			case game::Item::FOOD:
-				return EatFood();
-			case game::Item::POTION:
-				return DrinkPotion();
-			case game::Item::BEER:
-				return DrinkBeer();
-			case game::Item::WINE:
-				return DrinkWine();
-			case game::Item::COFFEE:
-				return DrinkCoffee();
+				return verbs.find(*usage)->second(*item);
 			}
 		}
 		return std::nullopt;

@@ -2,47 +2,51 @@
     "0":{
         "name":"Food",
         "initial-inventory": 5,
-        "non-combat": "eat",
-        "combat": "bribe",
+        "non-combat": 0,
+        "combat": 4,
         "amount": 5,
         "image-id":"Food"
     },
     "1":{
         "name":"Potion",
         "initial-inventory": 2,
-        "non-combat":"heal",
-        "combat":"heal",
+        "non-combat":1,
+        "combat":1,
         "amount": 30,
-        "image-id":"Potion"
+        "image-id":"Potion",
+        "sfx-success":"drinkpotion"
     },
     "2":{
         "name":"Beer",
-        "non-combat":"attack-buff",
-        "combat":"attack-buff",
+        "non-combat":2,
+        "combat":2,
         "amount": 50,
         "duration": 10,
-        "image-id":"Beer"
+        "image-id":"Beer",
+        "sfx-success":"beer"
     },
     "3":{
         "name":"Wine",
-        "non-combat":"attack-buff",
-        "combat":"attack-buff",
+        "non-combat":2,
+        "combat":2,
         "amount": 25,
         "duration": 25,
-        "image-id":"Wine"
+        "image-id":"Wine",
+        "sfx-success":"wine"
     },
     "4":{
         "name":"Coffee",
-        "non-combat":"defend-buff",
-        "combat":"defend-buff",
+        "non-combat":3,
+        "combat":3,
         "amount": 10,
         "duration": 10,
         "amount-stacks":true,
-        "image-id":"Coffee"
+        "image-id":"Coffee",
+        "sfx-success":"coffee"
     },
     "5":{
         "name":"Jools",
-        "combat":"bribe",
+        "combat":4,
         "image-id":"Jools"
     }
 }

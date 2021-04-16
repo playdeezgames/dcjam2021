@@ -31,7 +31,12 @@ namespace game::item
 		return
 		{
 			descriptor[common::Properties::NAME],
-			descriptor[game::Properties::IMAGE_ID]
+			descriptor[game::Properties::IMAGE_ID],
+			(descriptor.count(game::Properties::NON_COMBAT)>0) ? (std::optional<Usage>((Usage)(int)descriptor[game::Properties::NON_COMBAT])) : (std::nullopt),
+			(descriptor.count(game::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::Properties::AMOUNT])) : (std::nullopt),
+			(descriptor.count(game::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::Properties::DURATION])) : (std::nullopt),
+			(descriptor.count(game::Properties::SFX_SUCCESS) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_SUCCESS])) : (std::nullopt),
+			(descriptor.count(game::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_FAILURE])) : (std::nullopt)
 		};
 	}
 
