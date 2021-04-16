@@ -2,6 +2,7 @@
 #include "Game.Avatar.Statistic.h"
 namespace game::avatar::Statistics
 {
+	//TODO: this concept needs descriptors
 	int Read(const ::game::avatar::Statistic&);
 	void Write(const ::game::avatar::Statistic&, int);
 	int Maximum(const ::game::avatar::Statistic&);

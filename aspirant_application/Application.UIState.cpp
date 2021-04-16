@@ -22,7 +22,7 @@ namespace application::UIState
 	{
 		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			common::audio::Sfx::Play(application::Sounds::DEAD_HUNTER);
+			common::audio::Sfx::Play(application::Sounds::DEAD_HUNTER);//TODO: this is in the wrong layer
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
 		else if (game::Creatures::AnyLeft())
@@ -38,7 +38,7 @@ namespace application::UIState
 		}
 		else
 		{
-			common::audio::Sfx::Play(application::Sounds::EXIT);
+			common::audio::Sfx::Play(application::Sounds::EXIT);//TODO: this is in the wrong layer
 			application::UIState::Write(::UIState::IN_PLAY_EXIT);
 		}
 	}

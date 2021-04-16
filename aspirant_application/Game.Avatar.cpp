@@ -113,7 +113,7 @@ namespace game::Avatar
 			}
 			else
 			{
-				common::audio::Sfx::Play(application::Sounds::BUMP_WALL);
+				common::audio::Sfx::Play(application::Sounds::BUMP_WALL);//TODO: this is in the wrong layer
 			}
 		}
 		application::UIState::EnterGame();

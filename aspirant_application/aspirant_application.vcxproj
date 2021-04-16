@@ -217,7 +217,6 @@
     <ClCompile Include="Common.RNG.cpp" />
     <ClCompile Include="Common.Audio.cpp" />
     <ClCompile Include="State.Splash.cpp" />
-    <ClCompile Include="Graphics.Sprite.cpp" />
     <ClCompile Include="Graphics.Sprites.cpp" />
     <ClCompile Include="State.Start.cpp" />
     <ClCompile Include="Graphics.Image.cpp" />
@@ -281,7 +280,6 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="Common.RNG.h" />
     <ClInclude Include="Common.Audio.h" />
-    <ClInclude Include="Graphics.Sprite.h" />
     <ClInclude Include="Graphics.Sprites.h" />
     <ClInclude Include="Graphics.Textures.h" />
     <ClInclude Include="States.h" />
