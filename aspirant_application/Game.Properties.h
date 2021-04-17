@@ -15,6 +15,7 @@ namespace game::Properties
 	const std::string HEALTH = "health";
 	const std::string IMAGE_ID = "image-id";
 	const std::string INDEX = "index";
+	const std::string INITIAL_INVENTORY = "initial-inventory";
 	const std::string INVENTORY = "inventory";
 	const std::string MONEY_BRIBE = "money-bribe";
 	const std::string NON_COMBAT = "non-combat";

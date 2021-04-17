@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <optional>
+#include <vector>
 namespace game
 {
 	//TODO: eliminate and replace with int
@@ -32,8 +33,10 @@ namespace game
 			std::optional<int> duration;
 			std::optional<std::string> sfxSuccess;
 			std::optional<std::string> sfxFailure;
+			std::optional<size_t> initialInventory;
 		};
 		Descriptor GetDescriptor(game::Item);
+		std::vector<game::Item> All();
 		void InitializeFromFile(const std::string&);
 	}
 }

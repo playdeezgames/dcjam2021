@@ -9,6 +9,7 @@
 #include "Common.Properties.h"
 #include "Game.Properties.h"
 #include <sstream>
+#include "Common.Utility.h"
 namespace game::item
 {
 	static nlohmann::json items;
@@ -25,6 +26,16 @@ namespace game::item
 		return ss.str();
 	}
 
+	std::vector<game::Item> All()
+	{
+		std::vector<game::Item> result;
+		for (auto& item : items.items())
+		{
+			result.push_back((game::Item)common::Utility::StringToInt(item.key()));
+		}
+		return result;
+	}
+
 	Descriptor GetDescriptor(game::Item item)
 	{
 		auto descriptor = items[ItemToItemKey(item)];
@@ -36,7 +47,8 @@ namespace game::item
 			(descriptor.count(game::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::Properties::AMOUNT])) : (std::nullopt),
 			(descriptor.count(game::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::Properties::DURATION])) : (std::nullopt),
 			(descriptor.count(game::Properties::SFX_SUCCESS) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_SUCCESS])) : (std::nullopt),
-			(descriptor.count(game::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_FAILURE])) : (std::nullopt)
+			(descriptor.count(game::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_FAILURE])) : (std::nullopt),
+			(descriptor.count(game::Properties::INITIAL_INVENTORY) > 0) ? (std::optional<size_t>((size_t)descriptor[game::Properties::INITIAL_INVENTORY])) : (std::nullopt)
 		};
 	}
 

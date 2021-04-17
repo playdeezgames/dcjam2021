@@ -25,12 +25,6 @@ namespace game::avatar::Items
 		return avatar[game::Properties::INVENTORY];
 	}
 
-	const std::map<game::Item, size_t> initial =
-	{
-		{game::Item::FOOD, 5},
-		{game::Item::POTION, 2}
-	};
-
 	static std::string ItemToKey(game::Item item)
 	{
 		std::stringstream ss;
@@ -62,9 +56,13 @@ namespace game::avatar::Items
 	void Reset()
 	{
 		GetAvatarInventory().clear();
-		for (auto& item : initial)//TODO: move to item descriptor
+		for (auto item : game::item::All())
 		{
-			Add(item.first, item.second);
+			auto descriptor = game::item::GetDescriptor(item);
+			if (descriptor.initialInventory)
+			{
+				Add(item, descriptor.initialInventory.value());
+			}
 		}
 	}
 
