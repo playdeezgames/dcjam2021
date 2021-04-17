@@ -5,7 +5,9 @@ namespace game::Properties
 	const std::string AMOUNT = "amount";
 	const std::string ATTACK = "attack";
 	const std::string AVATAR = "avatar";
+	const std::string BRIBES = "bribes";
 	const std::string COLUMN = "column";
+	const std::string COMBAT = "combat";
 	const std::string CREATURE = "creature";
 	const std::string CREATURES = "creatures";
 	const std::string DEFEND = "defend";

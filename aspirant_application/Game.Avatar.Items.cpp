@@ -191,57 +191,81 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> MoneyBribe()
+	static std::optional<std::tuple<std::string, bool>> CombatEat(game::Item item)
 	{
-		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
-		size_t amount = (instance.has_value()) ? (instance.value().descriptor.moneyBribe) : (0);
-		if (amount > 0 && game::avatar::Items::Read(game::Item::JOOLS) >= amount)
+		auto result = Eat(item);
+		if (result)
 		{
-			game::avatar::Items::Remove(game::Item::JOOLS, (size_t)amount);
-			game::Creatures::Remove(game::Avatar::GetPosition());
-			return std::make_tuple(application::Sounds::WOOHOO, true);
+			return std::make_tuple(*result, false);
 		}
-		return std::make_tuple(application::Sounds::SHUCKS, false);
+		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> FoodBribe()
+	static std::optional<std::tuple<std::string, bool>> CombatHeal(game::Item item)
+	{
+		auto result = Heal(item);
+		if (result)
+		{
+			return std::make_tuple(*result, false);
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::tuple<std::string, bool>> CombatBuffAttack(game::Item item)
+	{
+		auto result = BuffAttack(item);
+		if (result)
+		{
+			return std::make_tuple(*result, false);
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::tuple<std::string, bool>> CombatBuffDefend(game::Item item)
+	{
+		auto result = BuffDefend(item);
+		if (result)
+		{
+			return std::make_tuple(*result, false);
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::tuple<std::string, bool>> CombatBribe(game::Item item)
 	{
 		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
-		size_t amount = (instance.has_value()) ? (instance.value().descriptor.foodBribe) : (0);
-		if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
+		if (instance && instance.value().descriptor.bribes.contains(item))
 		{
-			game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
-			game::Creatures::Remove(game::Avatar::GetPosition());
-			return std::make_tuple(application::Sounds::WOOHOO, true);
-
+			size_t amount = instance.value().descriptor.bribes.find(item)->second;
+			if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
+			{
+				game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
+				game::Creatures::Remove(game::Avatar::GetPosition());
+				return std::make_tuple(application::Sounds::WOOHOO, true);//TODO: success sound
+			}
 		}
-		return std::make_tuple(application::Sounds::SHUCKS, false);
+		return std::make_tuple(application::Sounds::SHUCKS, false);//TODO: failure sound
 	}
+
+	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(game::Item)>> combatVerbs =
+	{
+		{game::item::Usage::EAT, CombatEat},
+		{game::item::Usage::HEAL, CombatHeal},
+		{game::item::Usage::ATTACK_BUFF, CombatBuffAttack},
+		{game::item::Usage::DEFEND_BUFF, CombatBuffDefend},
+		{game::item::Usage::BRIBE, CombatBribe}
+	};
 
 	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<game::Item> item)
 	{
 		if (item)
 		{
-			switch (item.value())
+			auto usage = game::item::GetDescriptor(*item).combatUsage;
+			if (usage)
 			{
-			case game::Item::BEER:
-			case game::Item::WINE:
-			case game::Item::COFFEE:
-			case game::Item::POTION:
-			{
-				auto useResult = game::avatar::Items::Use(item);
-				if (useResult)
-				{
-					return std::make_tuple(*useResult, false);
-				}
-			}
-			break;
-			case game::Item::JOOLS:
-				return MoneyBribe();
-			case game::Item::FOOD:
-				return FoodBribe();
+				return combatVerbs.find(*usage)->second(*item);
 			}
 		}
-		return std::make_tuple(application::Sounds::SHUCKS, false);
+		return std::nullopt;
 	}
 }

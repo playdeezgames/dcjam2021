@@ -34,6 +34,7 @@ namespace game
 			std::optional<std::string> sfxSuccess;
 			std::optional<std::string> sfxFailure;
 			std::optional<size_t> initialInventory;
+			std::optional<Usage> combatUsage;
 		};
 		Descriptor GetDescriptor(game::Item);
 		std::vector<game::Item> All();

@@ -3,6 +3,8 @@
 #include <optional>
 #include <string>
 #include <vector>
+#include <map>
+#include "Game.Item.h"
 namespace game::creature
 {
 	struct Descriptor
@@ -14,6 +16,7 @@ namespace game::creature
 		int foodBribe;
 		int moneyBribe;
 		size_t numberAppearing;
+		std::map<game::Item, size_t> bribes;
 	};
 
 	Descriptor GetDescriptor(int);

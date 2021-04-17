@@ -7,6 +7,10 @@
         "attack":5,
         "defend":0,
         "number-appearing":18,
+        "bribes":{
+            "0":2,
+            "5":2
+        },
         "food-bribe": 2,
         "money-bribe": 2
     },
@@ -18,6 +22,10 @@
         "attack":10,
         "defend":5,
         "number-appearing":9,
+        "bribes":{
+            "0":3,
+            "5":3
+        },
         "food-bribe": 3,
         "money-bribe": 3
     },
@@ -40,6 +48,10 @@
         "attack":15,
         "defend":5,
         "number-appearing":9,
+        "bribes":{
+            "0":5,
+            "5":5
+        },
         "food-bribe": 5,
         "money-bribe": 5
     },
@@ -51,6 +63,9 @@
         "attack":5,
         "defend":0,
         "number-appearing":18,
+        "bribes":{
+            "0":1
+        },
         "food-bribe": 1,
         "money-bribe": 0
     },
@@ -62,6 +77,10 @@
         "attack":10,
         "defend":0,
         "number-appearing":9,
+        "bribes":{
+            "0":1,
+            "5":1
+        },
         "food-bribe": 1,
         "money-bribe": 1
     },
@@ -84,6 +103,9 @@
         "attack":25,
         "defend":15,
         "number-appearing":1,
+        "bribes":{
+            "5":100
+        },
         "food-bribe": 0,
         "money-bribe": 100
     }
