@@ -82,9 +82,6 @@ namespace game::World
 		return common::XY<size_t>(COLUMNS, ROWS);
 	}
 
-	static std::vector<world::Border> nsBorders;//TODO: this goes away
-	static std::vector<world::Border> ewBorders;//TODO: this goes away
-
 	static size_t XYToNorthBorderIndex(const common::XY<size_t> position)
 	{
 		return position.GetX() + position.GetY() * NS_BORDER_STRIDE;
@@ -105,24 +102,45 @@ namespace game::World
 		return XYToWestBorderIndex(position) + 1;
 	}
 
+	static std::string IndexToString(size_t index)
+	{
+		std::stringstream ss;
+		ss << index;
+		return ss.str();
+	}
+
 	static void SetNSBorder(size_t index, world::Border border)
 	{
-		nsBorders[index] = border;
+		auto& borders = GetNSBorders();
+		borders[IndexToString(index)] = (int)border;
 	}
 
 	static world::Border GetNSBorder(size_t index)
 	{
-		return nsBorders[index];
+		auto key = IndexToString(index);
+		auto& borders = GetNSBorders();
+		if (borders.count(key) > 0)
+		{
+			return (world::Border)(int)borders[key];
+		}
+		return world::Border::WALL;
 	}
 
 	static void SetEWBorder(size_t index, world::Border border)
 	{
-		ewBorders[index] = border;
+		auto& borders = GetEWBorders();
+		borders[IndexToString(index)] = (int)border;
 	}
 
 	static world::Border GetEWBorder(size_t index)
 	{
-		return ewBorders[index];
+		auto key = IndexToString(index);
+		auto& borders = GetEWBorders();
+		if (borders.count(key) > 0)
+		{
+			return (world::Border)(int)borders[key];
+		}
+		return world::Border::WALL;
 	}
 
 	world::Border GetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction)
@@ -174,20 +192,6 @@ namespace game::World
 	{
 		GetExplored().clear();
 		auto worldSize = game::World::GetSize();
-		nsBorders.reserve(NS_BORDER_COUNT);
-		nsBorders.clear();
-		while (nsBorders.size() < NS_BORDER_COUNT)
-		{
-			nsBorders.push_back(world::Border::WALL);
-		}
-
-		ewBorders.reserve(EW_BORDER_COUNT);
-		ewBorders.clear();
-		while (ewBorders.size() < EW_BORDER_COUNT)
-		{
-			ewBorders.push_back(world::Border::WALL);
-		}
-
 		maze::Maze maze(COLUMNS, ROWS);
 		maze.Generate();
 
@@ -204,10 +208,18 @@ namespace game::World
 				{
 					SetNSBorder(nsBorderIndex, world::Border::DOOR);
 				}
+				else
+				{
+					SetNSBorder(nsBorderIndex, world::Border::WALL);
+				}
 				auto westDoor = cell.value()->GetDoor(maze::Direction::WEST);
 				if (westDoor && *westDoor.value() == maze::Door::OPEN)
 				{
 					SetEWBorder(ewBorderIndex, world::Border::DOOR);
+				}
+				else
+				{
+					SetEWBorder(ewBorderIndex, world::Border::WALL);
 				}
 			}
 		}
