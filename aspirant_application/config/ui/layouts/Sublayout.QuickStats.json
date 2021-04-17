@@ -3,22 +3,22 @@
         "type": "Image",
         "sprite": "HealthBarBackground",
         "color": "White",
-        "x": 360,
-        "y": 328
+        "x": 379,
+        "y": 344
     },
     {
         "type": "Image",
         "image-id": "HealthBar",
         "sprite": "HealthBarForeground50",
         "color": "White",
-        "x": 360,
-        "y": 328
+        "x": 379,
+        "y": 344
     },
     {
         "type": "Image",
         "sprite": "HungerBarBackground",
         "color": "White",
-        "x": 360,
+        "x": 519,
         "y": 344
     },
     {
@@ -26,7 +26,7 @@
         "image-id": "HungerBar",
         "sprite": "HungerBarForeground50",
         "color": "White",
-        "x": 360,
+        "x": 519,
         "y": 344
     }
 ]
