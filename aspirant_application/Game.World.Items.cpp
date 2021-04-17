@@ -3,18 +3,9 @@
 #include <vector>
 #include "Common.RNG.h"
 #include "Game.World.h"
+#include "Game.Item.h"
 namespace game::world::Items
 {
-	const std::map<int, size_t> itemCounts =
-	{
-		{0, 72},
-		{1, 18},
-		{2, 9},
-		{3, 9},
-		{4, 9},
-		{5, 144}
-	};
-
 	static std::vector<std::vector<std::map<int, size_t>>> roomInventories;
 
 	static void PopulateItem(int item)
@@ -27,10 +18,10 @@ namespace game::world::Items
 	static void PopulateItems()
 	{
 		size_t totalCount = 0;
-		for (auto itemCount : itemCounts)
+		for (auto item : game::item::All())
 		{
-			auto item = itemCount.first;
-			auto count = itemCount.second;
+			auto descriptor = game::item::GetDescriptor(item);
+			auto count = descriptor.numberAppearing;
 			while (count > 0)
 			{
 				totalCount++;

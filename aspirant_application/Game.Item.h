@@ -25,6 +25,7 @@ namespace game
 			std::optional<std::string> sfxFailure;
 			std::optional<size_t> initialInventory;
 			std::optional<Usage> combatUsage;
+			size_t numberAppearing;
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();
