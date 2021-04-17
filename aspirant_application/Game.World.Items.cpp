@@ -19,16 +19,9 @@ namespace game::world::Items
 		return data[game::Properties::ROOM_INVENTORIES];
 	}
 
-	static std::string XYToRoomKey(const common::XY<size_t>& xy)//TODO: this is duplicated code
-	{
-		std::stringstream ss;
-		ss << "(" << xy.GetX() << "," << xy.GetY() << ")";
-		return ss.str();
-	}
-
 	static nlohmann::json& GetRoomInventory(const common::XY<size_t>& xy)
 	{
-		auto roomKey = XYToRoomKey(xy);
+		auto roomKey = game::World::XYToRoomKey(xy);
 		auto& inventories = GetRoomInventories();
 		if (inventories.count(roomKey) == 0)
 		{

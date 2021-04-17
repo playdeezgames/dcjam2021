@@ -8,7 +8,7 @@
 #include "Game.Properties.h"
 namespace game::World
 {
-	static std::string XYToRoomKey(const common::XY<size_t>& xy)//TODO: this is duplicated code
+	std::string XYToRoomKey(const common::XY<size_t>& xy)
 	{
 		std::stringstream ss;
 		ss << "(" << xy.GetX() << "," << xy.GetY() << ")";

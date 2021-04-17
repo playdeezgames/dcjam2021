@@ -38,7 +38,6 @@ namespace common::audio
 		}
 		static void Finish()
 		{
-			//TODO: awful, but eliminated a memory exception
 			while (music.begin() != music.end())
 			{
 				music.erase(music.begin());
