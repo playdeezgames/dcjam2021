@@ -4,16 +4,13 @@
 #include "Graphics.Types.h"
 #include "Common.Properties.h"
 #include "Graphics.Properties.h"
-namespace graphics::Layouts
-{
-	extern std::map<std::string, nlohmann::json> layouts;
-}
+#include "Graphics.MenuItems.h"
 namespace graphics::MenuItems
 {
 	template <typename TResult>
 	static TResult WithMenuItem(const std::string& layoutName, const std::string& menuItemId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::layouts[layoutName])
+		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
 			if (thingie[common::Properties::TYPE] == graphics::Types::MENU)
 			{

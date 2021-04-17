@@ -8,12 +8,4 @@ namespace graphics::AvatarInventory
 	void NextIndex();//TODO: becomes Next(l,n)
 	void PreviousIndex();//TODO: becomes Previous(l,n)
 	std::optional<int> GetItem();//TODO: becomes Read(l,n)
-	//TODO: set XY
-	//TODO: set font
-	//TODO: set row height
-	//TODO: set colors
-	//TODO: set drop shadow flag
-	//TODO: set drop shadow color
-	//TODO: set drop shadow XY
-	//TODO: set visible
 }
