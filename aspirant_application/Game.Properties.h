@@ -12,6 +12,8 @@ namespace game::Properties
 	const std::string CREATURES = "creatures";
 	const std::string DEFEND = "defend";
 	const std::string DURATION = "duration";
+	const std::string EW_BORDERS = "ew-borders";
+	const std::string EXPLORED = "explored";
 	const std::string FACING = "facing";
 	const std::string HEALTH = "health";
 	const std::string IMAGE_ID = "image-id";
@@ -19,6 +21,7 @@ namespace game::Properties
 	const std::string INITIAL_INVENTORY = "initial-inventory";
 	const std::string INVENTORY = "inventory";
 	const std::string NON_COMBAT = "non-combat";
+	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";
 	const std::string ROOM_INVENTORIES = "room-inventories";
 	const std::string ROW = "row";

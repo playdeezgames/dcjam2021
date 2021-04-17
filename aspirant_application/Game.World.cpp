@@ -3,8 +3,48 @@
 #include "Maze.h"
 #include "Common.RNG.h"
 #include "Maze.Direction.h"
+#include "Game.h"
+#include <sstream>
+#include "Game.Properties.h"
 namespace game::World
 {
+	static std::string XYToRoomKey(const common::XY<size_t>& xy)//TODO: this is duplicated code
+	{
+		std::stringstream ss;
+		ss << "(" << xy.GetX() << "," << xy.GetY() << ")";
+		return ss.str();
+	}
+
+	static nlohmann::json& GetNSBorders()
+	{
+		auto& data = game::GetData();
+		if (data.count(game::Properties::NS_BORDERS) == 0)
+		{
+			data[game::Properties::NS_BORDERS] = nlohmann::json();
+		}
+		return data[game::Properties::NS_BORDERS];
+	}
+
+	static nlohmann::json& GetEWBorders()
+	{
+		auto& data = game::GetData();
+		if (data.count(game::Properties::EW_BORDERS) == 0)
+		{
+			data[game::Properties::EW_BORDERS] = nlohmann::json();
+		}
+		return data[game::Properties::EW_BORDERS];
+	}
+
+	static nlohmann::json& GetExplored()
+	{
+		auto& data = game::GetData();
+		if (data.count(game::Properties::EXPLORED) == 0)
+		{
+			data[game::Properties::EXPLORED] = nlohmann::json();
+		}
+		return data[game::Properties::EXPLORED];
+	}
+
 	const size_t COLUMNS = 12;//TODO: make this configurable?
 	const size_t ROWS = 12;//TODO: make this configurable?
 	const size_t NS_BORDER_COUNT = ROWS * COLUMNS + COLUMNS;
@@ -12,16 +52,29 @@ namespace game::World
 	const size_t EW_BORDER_COUNT = ROWS * COLUMNS + ROWS;
 	const size_t EW_BORDER_STRIDE = COLUMNS + 1;
 
-	static std::vector<std::vector<size_t>> explored;
+	static void SetExplored(const common::XY<size_t>& xy, size_t value)
+	{
+		GetExplored()[XYToRoomKey(xy)] = value;
+	}
+
+	static size_t GetExplored(const common::XY<size_t>& xy)
+	{
+		auto roomKey = XYToRoomKey(xy);
+		if (GetExplored().count(roomKey) > 0)
+		{
+			return GetExplored()[roomKey];
+		}
+		return 0;
+	}
 
 	void SetExplored(const common::XY<size_t>& xy)
 	{
-		explored[xy.GetX()][xy.GetY()]++;
+		SetExplored(xy, GetExplored(xy) + 1);
 	}
 
 	bool IsExplored(const common::XY<size_t>& cell)
 	{
-		return explored[cell.GetX()][cell.GetY()] > 0;
+		return GetExplored(cell) > 0;
 	}
 
 	common::XY<size_t> GetSize()
@@ -29,21 +82,61 @@ namespace game::World
 		return common::XY<size_t>(COLUMNS, ROWS);
 	}
 
-	static std::vector<world::Border> nsBorders;
-	static std::vector<world::Border> ewBorders;
+	static std::vector<world::Border> nsBorders;//TODO: this goes away
+	static std::vector<world::Border> ewBorders;//TODO: this goes away
+
+	static size_t XYToNorthBorderIndex(const common::XY<size_t> position)
+	{
+		return position.GetX() + position.GetY() * NS_BORDER_STRIDE;
+	}
+
+	static size_t XYToSouthBorderIndex(const common::XY<size_t> position)
+	{
+		return XYToNorthBorderIndex(position) + NS_BORDER_STRIDE;
+	}
+
+	static size_t XYToWestBorderIndex(const common::XY<size_t> position)
+	{
+		return position.GetX() + position.GetY() * EW_BORDER_STRIDE;
+	}
+
+	static size_t XYToEastBorderIndex(const common::XY<size_t> position)
+	{
+		return XYToWestBorderIndex(position) + 1;
+	}
+
+	static void SetNSBorder(size_t index, world::Border border)
+	{
+		nsBorders[index] = border;
+	}
+
+	static world::Border GetNSBorder(size_t index)
+	{
+		return nsBorders[index];
+	}
+
+	static void SetEWBorder(size_t index, world::Border border)
+	{
+		ewBorders[index] = border;
+	}
+
+	static world::Border GetEWBorder(size_t index)
+	{
+		return ewBorders[index];
+	}
 
 	world::Border GetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE];
+			return GetNSBorder(XYToNorthBorderIndex(position));
 		case maze::Direction::EAST:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1];
+			return GetEWBorder(XYToEastBorderIndex(position));
 		case maze::Direction::SOUTH:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE + NS_BORDER_STRIDE];
+			return GetNSBorder(XYToSouthBorderIndex(position));
 		default:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE];
+			return GetEWBorder(position.GetX() + position.GetY() * EW_BORDER_STRIDE);
 		}
 	}
 
@@ -52,13 +145,13 @@ namespace game::World
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE];
+			return GetEWBorder(XYToWestBorderIndex(position));
 		case maze::Direction::EAST:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE];
+			return GetNSBorder(XYToNorthBorderIndex(position));
 		case maze::Direction::SOUTH:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1];
+			return GetEWBorder(XYToEastBorderIndex(position));
 		default:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE + NS_BORDER_STRIDE];
+			return GetNSBorder(XYToSouthBorderIndex(position));
 		}
 	}
 
@@ -67,29 +160,20 @@ namespace game::World
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1];
+			return GetEWBorder(XYToEastBorderIndex(position));
 		case maze::Direction::EAST:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE + NS_BORDER_STRIDE];
+			return GetNSBorder(XYToSouthBorderIndex(position));
 		case maze::Direction::SOUTH:
-			return ewBorders[position.GetX() + position.GetY() * EW_BORDER_STRIDE];
+			return GetEWBorder(XYToWestBorderIndex(position));
 		default:
-			return nsBorders[position.GetX() + position.GetY() * NS_BORDER_STRIDE];
+			return GetNSBorder(XYToNorthBorderIndex(position));
 		}
 	}
 
 	void Reset()
 	{
-		explored.clear();
+		GetExplored().clear();
 		auto worldSize = game::World::GetSize();
-		while (explored.size() < worldSize.GetX())
-		{
-			explored.push_back(std::vector<size_t>());
-			auto& column = explored.back();
-			while (column.size() < worldSize.GetY())
-			{
-				column.push_back(0);
-			}
-		}
 		nsBorders.reserve(NS_BORDER_COUNT);
 		nsBorders.clear();
 		while (nsBorders.size() < NS_BORDER_COUNT)
@@ -118,12 +202,12 @@ namespace game::World
 				auto northDoor = cell.value()->GetDoor(maze::Direction::NORTH);
 				if (northDoor && *northDoor.value() == maze::Door::OPEN)
 				{
-					nsBorders[nsBorderIndex] = world::Border::DOOR;
+					SetNSBorder(nsBorderIndex, world::Border::DOOR);
 				}
 				auto westDoor = cell.value()->GetDoor(maze::Direction::WEST);
 				if (westDoor && *westDoor.value() == maze::Door::OPEN)
 				{
-					ewBorders[ewBorderIndex] = world::Border::DOOR;
+					SetEWBorder(ewBorderIndex, world::Border::DOOR);
 				}
 			}
 		}
