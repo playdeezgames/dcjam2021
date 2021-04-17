@@ -4,6 +4,7 @@
 #include "Data.JSON.h"
 #include "Common.Properties.h"
 #include <memory>
+#include "Common.Application.h"
 namespace common::Application
 {
 	const std::string LOGICAL_WIDTH = "logicalWidth";
@@ -20,7 +21,6 @@ namespace common::Application
 	extern void Start(std::shared_ptr<SDL_Renderer>, const std::vector<std::string>&);
 	extern bool IsRunning();
 	extern void Update(Uint32);
-	extern void Render(std::shared_ptr<SDL_Renderer>);
 	extern void HandleEvent(const SDL_Event&);
 
 	static std::map<int, SDL_GameController*> controllers;

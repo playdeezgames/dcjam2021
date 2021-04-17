@@ -391,5 +391,8 @@
     <ClInclude Include="Graphics.CardSprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common.Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

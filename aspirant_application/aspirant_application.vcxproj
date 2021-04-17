@@ -239,6 +239,7 @@
     <ClInclude Include="Application.TextInput.h" />
     <ClInclude Include="Application.UIState.h" />
     <ClInclude Include="Application.Update.h" />
+    <ClInclude Include="Common.Application.h" />
     <ClInclude Include="Common.Card.h" />
     <ClInclude Include="Common.Deck.h" />
     <ClInclude Include="Common.Properties.h" />
