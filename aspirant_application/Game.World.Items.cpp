@@ -4,15 +4,45 @@
 #include "Common.RNG.h"
 #include "Game.World.h"
 #include "Game.Item.h"
+#include "Game.h"
+#include "Game.Properties.h"
+#include <sstream>
 namespace game::world::Items
 {
-	static std::vector<std::vector<std::map<int, size_t>>> roomInventories;
+	static nlohmann::json& GetRoomInventories()
+	{
+		auto& data = game::GetData();
+		if (data.count(game::Properties::ROOM_INVENTORIES) == 0)
+		{
+			data[game::Properties::ROOM_INVENTORIES] = nlohmann::json();
+		}
+		return data[game::Properties::ROOM_INVENTORIES];
+	}
+
+	static std::string XYToRoomKey(const common::XY<size_t>& xy)
+	{
+		std::stringstream ss;
+		ss << "(" << xy.GetX() << "," << xy.GetY() << ")";
+		return ss.str();
+	}
+
+	static nlohmann::json& GetRoomInventory(const common::XY<size_t>& xy)
+	{
+		auto roomKey = XYToRoomKey(xy);
+		auto& inventories = GetRoomInventories();
+		if (inventories.count(roomKey) == 0)
+		{
+			inventories[roomKey] = nlohmann::json();
+		}
+		return inventories[roomKey];
+	}
 
 	static void PopulateItem(int item)
 	{
-		size_t column = (size_t)common::RNG::FromRange(0, (int)roomInventories.size());
-		size_t row = (size_t)common::RNG::FromRange(0, (int)roomInventories[column].size());
-		roomInventories[column][row][item]++;
+		auto worldSize = game::World::GetSize();
+		size_t column = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
+		size_t row = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
+		Add({column, row}, item, 1);
 	}
 
 	static void PopulateItems()
@@ -34,44 +64,65 @@ namespace game::world::Items
 
 	void Reset()
 	{
-		roomInventories.clear();
-		auto worldSize = game::World::GetSize();
-		while (roomInventories.size() < worldSize.GetX())
-		{
-			roomInventories.push_back(std::vector<std::map<int, size_t>>());
-			auto& column = roomInventories.back();
-			while (column.size() < worldSize.GetY())
-			{
-				column.push_back({});
-			}
-		}
+		GetRoomInventories().clear();
 		PopulateItems();
+	}
+
+	static std::string IntToItemKey(const int& item)
+	{
+		std::stringstream ss;
+		ss << item;
+		return ss.str();
+	}
+
+	static size_t GetRoomInventory(const common::XY<size_t>& location, const int& item)
+	{
+		auto& roomInventory = GetRoomInventory(location);
+		if (roomInventory.count(IntToItemKey(item)) > 0)
+		{
+			return roomInventory[IntToItemKey(item)];
+		}
+		return 0;
+	}
+
+	static void SetRoomInventory(const common::XY<size_t>& location, const int& item, size_t amount)
+	{
+		auto& roomInventory = GetRoomInventory(location);
+		roomInventory[IntToItemKey(item)] = amount;
 	}
 
 	bool IsPresent(const common::XY<size_t>& location, const int& item)
 	{
-		auto iter = roomInventories[location.GetX()][location.GetY()].find(item);
-		return iter != roomInventories[location.GetX()][location.GetY()].end();
+		return GetRoomInventory(location, item) > 0;
 	}
 
-	const std::map<int, size_t>& FloorInventory(const common::XY<size_t>& location)
+	std::map<int, size_t> FloorInventory(const common::XY<size_t>& location)
 	{
-		return roomInventories[location.GetX()][location.GetY()];
+		std::map<int, size_t> result;
+		for (auto item : game::item::All())
+		{
+			auto amount = GetRoomInventory(location, item);
+			if (amount > 0)
+			{
+				result[item] = amount;
+			}
+		}
+		return result;
 	}
 
 	size_t Remove(const common::XY<size_t>& location, const int& item, size_t quantity)
 	{
 		if (IsPresent(location, item))
 		{
-			size_t total = roomInventories[location.GetX()][location.GetY()][item];
+			size_t total = GetRoomInventory(location, item);
 			if (quantity >= total)
 			{
 				quantity = total;
-				roomInventories[location.GetX()][location.GetY()].erase(item);
+				SetRoomInventory(location, item, 0);
 			}
 			else
 			{
-				roomInventories[location.GetX()][location.GetY()][item] -= quantity;
+				SetRoomInventory(location, item, GetRoomInventory(location, item) - quantity);
 			}
 			return quantity;
 		}
@@ -85,7 +136,7 @@ namespace game::world::Items
 	{
 		if (amount > 0)
 		{
-			roomInventories[location.GetX()][location.GetY()][item] += amount;
+			SetRoomInventory(location, item, GetRoomInventory(location, item) + amount);
 		}
 	}
 }

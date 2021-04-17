@@ -40,7 +40,7 @@ namespace graphics::FloorInventory
 	std::optional<int> GetItem()
 	{
 		auto location = game::Avatar::GetPosition();
-		auto& inventory = game::world::Items::FloorInventory(location);
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
@@ -71,7 +71,7 @@ namespace graphics::FloorInventory
 
 
 		auto location = game::Avatar::GetPosition();
-		auto& inventory = game::world::Items::FloorInventory(location);
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (inventoryIndex >= inventory.size())
 		{
 			inventoryIndex = 0;

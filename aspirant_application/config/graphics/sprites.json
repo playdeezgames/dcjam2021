@@ -3334,8 +3334,8 @@
     "HealthBarForeground0": {
         "texture": "health-bar",
         "x": 0,
-        "y": 0,
-        "width": 1,
+        "y": 32,
+        "width": 102,
         "height": 16
     },
     "HealthBarForeground1": {
@@ -4048,8 +4048,8 @@
     "HungerBarForeground0": {
         "texture": "hunger-bar",
         "x": 0,
-        "y": 0,
-        "width": 1,
+        "y": 32,
+        "width": 102,
         "height": 16
     },
     "HungerBarForeground1": {

@@ -20,6 +20,7 @@ namespace game::Properties
 	const std::string INVENTORY = "inventory";
 	const std::string NON_COMBAT = "non-combat";
 	const std::string NUMBER_APPEARING = "number-appearing";
+	const std::string ROOM_INVENTORIES = "room-inventories";
 	const std::string ROW = "row";
 	const std::string SFX_SUCCESS = "sfx-success";
 	const std::string SFX_FAILURE = "sfx-failure";
