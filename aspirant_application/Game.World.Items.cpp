@@ -57,7 +57,7 @@ namespace game::world::Items
 		PopulateItems();
 	}
 
-	bool IsPresent(const int& item, const common::XY<size_t>& location)
+	bool IsPresent(const common::XY<size_t>& location, const int& item)
 	{
 		auto iter = roomInventories[location.GetX()][location.GetY()].find(item);
 		return iter != roomInventories[location.GetX()][location.GetY()].end();
@@ -68,9 +68,9 @@ namespace game::world::Items
 		return roomInventories[location.GetX()][location.GetY()];
 	}
 
-	size_t Remove(const int& item, size_t quantity, const common::XY<size_t>& location)
+	size_t Remove(const common::XY<size_t>& location, const int& item, size_t quantity)
 	{
-		if (IsPresent(item, location))
+		if (IsPresent(location, item))
 		{
 			size_t total = roomInventories[location.GetX()][location.GetY()][item];
 			if (quantity >= total)
@@ -90,7 +90,7 @@ namespace game::world::Items
 		}
 	}
 
-	void Add(const int& item, size_t amount, const common::XY<size_t>& location)
+	void Add(const common::XY<size_t>& location, const int& item, size_t amount)
 	{
 		if (amount > 0)
 		{

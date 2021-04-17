@@ -10,9 +10,7 @@
         "bribes":{
             "0":2,
             "5":2
-        },
-        "food-bribe": 2,
-        "money-bribe": 2
+        }
     },
     {
         "index":1,
@@ -25,9 +23,7 @@
         "bribes":{
             "0":3,
             "5":3
-        },
-        "food-bribe": 3,
-        "money-bribe": 3
+        }
     },
     {
         "index":2,
@@ -36,9 +32,7 @@
         "health":300,
         "attack":25,
         "defend":0,
-        "number-appearing":6,
-        "food-bribe": 0,
-        "money-bribe": 0
+        "number-appearing":6
     },
     {
         "index":3,
@@ -51,9 +45,7 @@
         "bribes":{
             "0":5,
             "5":5
-        },
-        "food-bribe": 5,
-        "money-bribe": 5
+        }
     },
     {
         "index":4,
@@ -65,9 +57,7 @@
         "number-appearing":18,
         "bribes":{
             "0":1
-        },
-        "food-bribe": 1,
-        "money-bribe": 0
+        }
     },
     {
         "index":5,
@@ -80,9 +70,7 @@
         "bribes":{
             "0":1,
             "5":1
-        },
-        "food-bribe": 1,
-        "money-bribe": 1
+        }
     },
     {
         "index":6,
@@ -91,9 +79,7 @@
         "health":250,
         "attack":25,
         "defend":10,
-        "number-appearing":2,
-        "food-bribe": 0,
-        "money-bribe": 0
+        "number-appearing":2
     },
     {
         "index":7,
@@ -105,8 +91,6 @@
         "number-appearing":1,
         "bribes":{
             "5":100
-        },
-        "food-bribe": 0,
-        "money-bribe": 100
+        }
     }
 ]

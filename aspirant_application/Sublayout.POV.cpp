@@ -68,21 +68,11 @@ namespace sublayout::POV
 		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetBorderRight(position, facing)]);
 	}
 
-	const std::vector<int> items =
-	{
-		0,
-		1,
-		2,
-		3,
-		4,
-		5
-	};
-
 	static void UpdateItems(const common::XY<size_t> position)
 	{
-		for (auto& item : items)
+		for (auto& item : game::item::All())
 		{
-			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(item, position));
+			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(position, item));
 		}
 	}
 

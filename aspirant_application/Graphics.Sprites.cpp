@@ -30,7 +30,6 @@ namespace graphics
 		Draw(renderer, xy, { 255,255,255,255 });
 	}
 
-
 	void Sprite::Draw(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const SDL_Color& color) const
 	{
 		auto texture = graphics::Textures::Read(model[graphics::Properties::TEXTURE]);

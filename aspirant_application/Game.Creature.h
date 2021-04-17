@@ -13,8 +13,6 @@ namespace game::creature
 		int maximumHealth;
 		int attack;
 		int defend;
-		int foodBribe;//TODO: go away
-		int moneyBribe;//TODO: go away
 		size_t numberAppearing;
 		std::map<int, size_t> bribes;
 	};

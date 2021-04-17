@@ -118,7 +118,7 @@ namespace game::avatar::Items
 		if (item)
 		{
 			size_t amount = game::avatar::Items::Remove(*item, 1);
-			game::world::Items::Add(*item, 1, game::Avatar::GetPosition());
+			game::world::Items::Add(game::Avatar::GetPosition(), *item, 1);
 		}
 	}
 

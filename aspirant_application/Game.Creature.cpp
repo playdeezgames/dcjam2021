@@ -24,8 +24,6 @@ namespace game::creature
 			creatureDescriptor[game::Properties::HEALTH],
 			creatureDescriptor[game::Properties::ATTACK],
 			creatureDescriptor[game::Properties::DEFEND],
-			creatureDescriptor[game::Properties::FOOD_BRIBE],
-			creatureDescriptor[game::Properties::MONEY_BRIBE],
 			creatureDescriptor[game::Properties::NUMBER_APPEARING],
 			bribes
 		};
