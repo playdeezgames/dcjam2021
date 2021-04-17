@@ -19,7 +19,7 @@ namespace application::Update
 	{
 		application::Handlers::WithCurrent(handlers, [ticks](const std::vector<Handler>& updaters) 
 		{
-			for (auto updater : updaters)
+			for (auto& updater : updaters)
 			{
 				updater(ticks);
 			}

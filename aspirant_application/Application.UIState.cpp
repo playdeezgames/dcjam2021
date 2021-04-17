@@ -18,7 +18,7 @@ namespace application::UIState
 		return uiState;
 	}
 
-	void EnterGame()
+	void EnterGame()//TODO: return optional string with sound effect name
 	{
 		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{

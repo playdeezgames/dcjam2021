@@ -57,7 +57,7 @@ namespace graphics::Menus
 			auto itemCount = GetCount(layoutName, menuId);
 			if (itemCount > 0)
 			{
-				Write(layoutName, menuId, *index + (int)itemCount + delta);
+				Write(layoutName, menuId, (*index + (int)itemCount + delta) % itemCount);
 			}
 			else
 			{
