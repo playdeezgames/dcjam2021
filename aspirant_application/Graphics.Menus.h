@@ -10,7 +10,4 @@ namespace graphics::Menus
 	size_t GetCount(const std::string&, const std::string&);
 	void Next(const std::string&, const std::string&);
 	void Previous(const std::string&, const std::string&);
-	//TODO: add menu item
-	//TODO: remove menu item
-	//TODO: get item count
 }

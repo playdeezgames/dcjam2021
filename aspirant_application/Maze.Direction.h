@@ -9,7 +9,7 @@ namespace maze
 		SOUTH,
 		WEST
 	};
-	namespace Directions//TODO: gets its own file
+	namespace Directions
 	{
 		int NextColumn(int, int, Direction);
 		int NextRow(int, int, Direction);

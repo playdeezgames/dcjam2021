@@ -2,16 +2,14 @@
 #include "Game.Avatar.Statistic.h"
 namespace game::avatar::Statistics
 {
-	//TODO: this concept needs descriptors
 	int Read(const ::game::avatar::Statistic&);
 	void Write(const ::game::avatar::Statistic&, int);
-	int Maximum(const ::game::avatar::Statistic&);
-	int Default(const ::game::avatar::Statistic&);
-	bool IsMinimum(const ::game::avatar::Statistic&);
-	void Reset();
 	bool IsMinimum(const ::game::avatar::Statistic&);
 	void Decrease(const ::game::avatar::Statistic&, int);
 	void Increase(const ::game::avatar::Statistic&, int);
+	void Reset();
 	void DoAttackTimer();
 	void DoDefendTimer();
+	int Maximum(const ::game::avatar::Statistic&);
+	int Default(const ::game::avatar::Statistic&);
 }

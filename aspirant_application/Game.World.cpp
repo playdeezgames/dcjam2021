@@ -45,8 +45,8 @@ namespace game::World
 		return data[game::Properties::EXPLORED];
 	}
 
-	const size_t COLUMNS = 12;//TODO: make this configurable?
-	const size_t ROWS = 12;//TODO: make this configurable?
+	const size_t COLUMNS = 12;
+	const size_t ROWS = 12;
 	const size_t NS_BORDER_COUNT = ROWS * COLUMNS + COLUMNS;
 	const size_t NS_BORDER_STRIDE = COLUMNS;
 	const size_t EW_BORDER_COUNT = ROWS * COLUMNS + ROWS;

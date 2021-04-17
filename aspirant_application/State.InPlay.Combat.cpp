@@ -143,7 +143,7 @@ namespace state::in_play::Combat
 	{
 		auto item = graphics::AvatarInventory::GetItem();
 		std::stringstream ss;
-		if (item)//TODO: pull from item descriptor!
+		if (item)
 		{
 			auto descriptor = game::item::GetDescriptor(*item);
 			if (descriptor.combatText)

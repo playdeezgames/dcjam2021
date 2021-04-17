@@ -4,8 +4,7 @@
 #include "Graphics.Types.h"
 #include "Common.Properties.h"
 #include "Graphics.Properties.h"
-//TODO: dont like this here
-namespace graphics::Layout { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+#include "Graphics.Layout.h"
 namespace graphics::Layouts
 {
 	std::map<std::string, nlohmann::json> layouts;

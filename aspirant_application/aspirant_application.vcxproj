@@ -261,6 +261,7 @@
     <ClInclude Include="Graphics.CardSprites.h" />
     <ClInclude Include="Graphics.FloorInventory.h" />
     <ClInclude Include="Graphics.Images.h" />
+    <ClInclude Include="Graphics.Layout.h" />
     <ClInclude Include="Graphics.MenuItems.h" />
     <ClInclude Include="Graphics.Menus.h" />
     <ClInclude Include="Graphics.Properties.h" />
