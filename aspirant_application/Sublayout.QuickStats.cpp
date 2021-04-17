@@ -7,8 +7,8 @@
 namespace sublayout::QuickStats
 {
 	const std::string LAYOUT_NAME = "Sublayout.QuickStats";
-	const std::string HUNGER_TEXT_ID = "Hunger";
 	const std::string HEALTH_IMAGE_ID = "HealthBar";
+	const std::string HUNGER_IMAGE_ID = "HungerBar";
 
 	static void UpdateHealth(const Uint32&)
 	{
@@ -20,16 +20,8 @@ namespace sublayout::QuickStats
 	static void UpdateHunger(const Uint32&)
 	{
 		std::stringstream ss;
-		ss << "Hunger: ";
-		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
-		{
-			ss << "STARVING!";
-		}
-		else
-		{
-			ss << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) << "/" << game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER);
-		}
-		::graphics::Texts::SetText(LAYOUT_NAME, HUNGER_TEXT_ID, ss.str());
+		ss << "HungerBarForeground" << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER);
+		::graphics::Images::SetSprite(LAYOUT_NAME, HUNGER_IMAGE_ID, ss.str());
 	}
 
 

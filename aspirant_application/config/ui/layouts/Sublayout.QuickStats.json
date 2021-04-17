@@ -1,19 +1,5 @@
 [
     {
-        "type": "Text",
-        "text-id": "Hunger",
-        "font": "default",
-        "color": "Magenta",
-        "text": "<hunger>",
-        "x": 360,
-        "y": 344,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
         "type": "Image",
         "sprite": "HealthBarBackground",
         "color": "White",
@@ -27,5 +13,20 @@
         "color": "White",
         "x": 360,
         "y": 328
+    },
+    {
+        "type": "Image",
+        "sprite": "HungerBarBackground",
+        "color": "White",
+        "x": 360,
+        "y": 344
+    },
+    {
+        "type": "Image",
+        "image-id": "HungerBar",
+        "sprite": "HungerBarForeground50",
+        "color": "White",
+        "x": 360,
+        "y": 344
     }
 ]

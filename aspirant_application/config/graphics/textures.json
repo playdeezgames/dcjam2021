@@ -23,5 +23,6 @@
     "werewolf": "assets/images/creatures/werewolf.png",
     "wyvern": "assets/images/creatures/wyvern.png",
     "controls": "assets/images/controls.png",
-    "health-bar": "assets/images/health-bar.png"
+    "health-bar": "assets/images/health-bar.png",
+    "hunger-bar": "assets/images/hunger-bar.png"
 }

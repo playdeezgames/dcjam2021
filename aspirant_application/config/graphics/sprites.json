@@ -3664,7 +3664,7 @@
         "texture": "health-bar",
         "x": 0,
         "y": 0,
-        "width": 8,
+        "width": 48,
         "height": 16
     },
     "HealthBarForeground48": {
@@ -3839,7 +3839,7 @@
         "texture": "health-bar",
         "x": 0,
         "y": 0,
-        "width": 33,
+        "width": 73,
         "height": 16
     },
     "HealthBarForeground73": {
@@ -3944,7 +3944,7 @@
         "texture": "health-bar",
         "x": 0,
         "y": 0,
-        "width": 8,
+        "width": 88,
         "height": 16
     },
     "HealthBarForeground88": {
@@ -4033,6 +4033,720 @@
     },
     "HealthBarForeground100": {
         "texture": "health-bar",
+        "x": 0,
+        "y": 0,
+        "width": 101,
+        "height": 16
+    },
+    "HungerBarBackground": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 16,
+        "width": 102,
+        "height": 16
+    },
+    "HungerBarForeground0": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 16
+    },
+    "HungerBarForeground1": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 2,
+        "height": 16
+    },
+    "HungerBarForeground2": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 3,
+        "height": 16
+    },
+    "HungerBarForeground3": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 16
+    },
+    "HungerBarForeground4": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 5,
+        "height": 16
+    },
+    "HungerBarForeground5": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 6,
+        "height": 16
+    },
+    "HungerBarForeground6": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 7,
+        "height": 16
+    },
+    "HungerBarForeground7": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 8,
+        "height": 16
+    },
+    "HungerBarForeground8": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 9,
+        "height": 16
+    },
+    "HungerBarForeground9": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 10,
+        "height": 16
+    },
+    "HungerBarForeground10": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 11,
+        "height": 16
+    },
+    "HungerBarForeground11": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 16
+    },
+    "HungerBarForeground12": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 13,
+        "height": 16
+    },
+    "HungerBarForeground13": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 14,
+        "height": 16
+    },
+    "HungerBarForeground14": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 15,
+        "height": 16
+    },
+    "HungerBarForeground15": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "HungerBarForeground16": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 17,
+        "height": 16
+    },
+    "HungerBarForeground17": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 18,
+        "height": 16
+    },
+    "HungerBarForeground18": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 19,
+        "height": 16
+    },
+    "HungerBarForeground19": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 20,
+        "height": 16
+    },
+    "HungerBarForeground20": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 21,
+        "height": 16
+    },
+    "HungerBarForeground21": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 22,
+        "height": 16
+    },
+    "HungerBarForeground22": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 23,
+        "height": 16
+    },
+    "HungerBarForeground23": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 24,
+        "height": 16
+    },
+    "HungerBarForeground24": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 25,
+        "height": 16
+    },
+    "HungerBarForeground25": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 26,
+        "height": 16
+    },
+    "HungerBarForeground26": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 27,
+        "height": 16
+    },
+    "HungerBarForeground27": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 28,
+        "height": 16
+    },
+    "HungerBarForeground28": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 29,
+        "height": 16
+    },
+    "HungerBarForeground29": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 30,
+        "height": 16
+    },
+    "HungerBarForeground30": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 31,
+        "height": 16
+    },
+    "HungerBarForeground31": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 16
+    },
+    "HungerBarForeground32": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 33,
+        "height": 16
+    },
+    "HungerBarForeground33": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 34,
+        "height": 16
+    },
+    "HungerBarForeground34": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 35,
+        "height": 16
+    },
+    "HungerBarForeground35": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 36,
+        "height": 16
+    },
+    "HungerBarForeground36": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 37,
+        "height": 16
+    },
+    "HungerBarForeground37": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 38,
+        "height": 16
+    },
+    "HungerBarForeground38": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 39,
+        "height": 16
+    },
+    "HungerBarForeground39": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 16
+    },
+    "HungerBarForeground40": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 41,
+        "height": 16
+    },
+    "HungerBarForeground41": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 42,
+        "height": 16
+    },
+    "HungerBarForeground42": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 43,
+        "height": 16
+    },
+    "HungerBarForeground43": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 44,
+        "height": 16
+    },
+    "HungerBarForeground44": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 16
+    },
+    "HungerBarForeground45": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 46,
+        "height": 16
+    },
+    "HungerBarForeground46": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 16
+    },
+    "HungerBarForeground47": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 16
+    },
+    "HungerBarForeground48": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 49,
+        "height": 16
+    },
+    "HungerBarForeground49": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 50,
+        "height": 16
+    },
+    "HungerBarForeground50": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 51,
+        "height": 16
+    },
+    "HungerBarForeground51": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 52,
+        "height": 16
+    },
+    "HungerBarForeground52": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 53,
+        "height": 16
+    },
+    "HungerBarForeground53": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 54,
+        "height": 16
+    },
+    "HungerBarForeground54": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 55,
+        "height": 16
+    },
+    "HungerBarForeground55": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 56,
+        "height": 16
+    },
+    "HungerBarForeground56": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 57,
+        "height": 16
+    },
+    "HungerBarForeground57": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 58,
+        "height": 16
+    },
+    "HungerBarForeground58": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 59,
+        "height": 16
+    },
+    "HungerBarForeground59": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 60,
+        "height": 16
+    },
+    "HungerBarForeground60": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 61,
+        "height": 16
+    },
+    "HungerBarForeground61": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 16
+    },
+    "HungerBarForeground62": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 63,
+        "height": 16
+    },
+    "HungerBarForeground63": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 16
+    },
+    "HungerBarForeground64": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 65,
+        "height": 16
+    },
+    "HungerBarForeground65": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 66,
+        "height": 16
+    },
+    "HungerBarForeground66": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 67,
+        "height": 16
+    },
+    "HungerBarForeground67": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 68,
+        "height": 16
+    },
+    "HungerBarForeground68": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 69,
+        "height": 16
+    },
+    "HungerBarForeground69": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 70,
+        "height": 16
+    },
+    "HungerBarForeground70": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 71,
+        "height": 16
+    },
+    "HungerBarForeground71": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 72,
+        "height": 16
+    },
+    "HungerBarForeground72": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 73,
+        "height": 16
+    },
+    "HungerBarForeground73": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 74,
+        "height": 16
+    },
+    "HungerBarForeground74": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 75,
+        "height": 16
+    },
+    "HungerBarForeground75": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 76,
+        "height": 16
+    },
+    "HungerBarForeground76": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 77,
+        "height": 16
+    },
+    "HungerBarForeground77": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 78,
+        "height": 16
+    },
+    "HungerBarForeground78": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 79,
+        "height": 16
+    },
+    "HungerBarForeground79": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 80,
+        "height": 16
+    },
+    "HungerBarForeground80": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 81,
+        "height": 16
+    },
+    "HungerBarForeground81": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 82,
+        "height": 16
+    },
+    "HungerBarForeground82": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 83,
+        "height": 16
+    },
+    "HungerBarForeground83": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 84,
+        "height": 16
+    },
+    "HungerBarForeground84": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 85,
+        "height": 16
+    },
+    "HungerBarForeground85": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 86,
+        "height": 16
+    },
+    "HungerBarForeground86": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 87,
+        "height": 16
+    },
+    "HungerBarForeground87": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 88,
+        "height": 16
+    },
+    "HungerBarForeground88": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 89,
+        "height": 16
+    },
+    "HungerBarForeground89": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 90,
+        "height": 16
+    },
+    "HungerBarForeground90": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 91,
+        "height": 16
+    },
+    "HungerBarForeground91": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 92,
+        "height": 16
+    },
+    "HungerBarForeground92": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 93,
+        "height": 16
+    },
+    "HungerBarForeground93": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 94,
+        "height": 16
+    },
+    "HungerBarForeground94": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 95,
+        "height": 16
+    },
+    "HungerBarForeground95": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 16
+    },
+    "HungerBarForeground96": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 97,
+        "height": 16
+    },
+    "HungerBarForeground97": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 98,
+        "height": 16
+    },
+    "HungerBarForeground98": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 99,
+        "height": 16
+    },
+    "HungerBarForeground99": {
+        "texture": "hunger-bar",
+        "x": 0,
+        "y": 0,
+        "width": 100,
+        "height": 16
+    },
+    "HungerBarForeground100": {
+        "texture": "hunger-bar",
         "x": 0,
         "y": 0,
         "width": 101,
