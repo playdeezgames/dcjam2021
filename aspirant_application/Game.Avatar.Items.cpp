@@ -124,7 +124,6 @@ namespace game::avatar::Items
 
 	static std::optional<std::string> ConsumeItem(game::Item item, std::function<void(const game::item::Descriptor&)> action)
 	{
-		//TODO: check if verb is valid? but only if it becomes non-static
 		auto descriptor = game::item::GetDescriptor(item);
 		if (game::avatar::Items::Read(item) > 0)
 		{
@@ -143,7 +142,7 @@ namespace game::avatar::Items
 		});
 	}
 
-	std::optional<std::string> Heal(game::Item item)
+	static std::optional<std::string> Heal(game::Item item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
@@ -151,7 +150,7 @@ namespace game::avatar::Items
 		});
 	}
 
-	std::optional<std::string> BuffAttack(game::Item item)
+	static 	std::optional<std::string> BuffAttack(game::Item item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
@@ -160,7 +159,7 @@ namespace game::avatar::Items
 		});
 	}
 
-	std::optional<std::string> BuffDefend(game::Item item)
+	static std::optional<std::string> BuffDefend(game::Item item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
