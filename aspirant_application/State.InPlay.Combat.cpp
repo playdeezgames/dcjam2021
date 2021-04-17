@@ -19,6 +19,7 @@
 #include "Graphics.Texts.h"
 #include "Graphics.CardSprites.h"
 #include "Game.Avatar.Items.h"
+#include "Game.Item.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -144,29 +145,11 @@ namespace state::in_play::Combat
 		std::stringstream ss;
 		if (item)//TODO: pull from item descriptor!
 		{
-			ss << "< ";
-			switch (item.value())
+			auto descriptor = game::item::GetDescriptor(*item);
+			if (descriptor.combatText)
 			{
-			case 2:
-				ss << "Drink Beer";
-				break;
-			case 4:
-				ss << "Drink Coffee";
-				break;
-			case 0:
-				ss << "Food Bribe";
-				break;
-			case 5:
-				ss << "Money Bribe";
-				break;
-			case 1:
-				ss << "Drink Potion";
-				break;
-			case 3:
-				ss << "Drink Wine";
-				break;
+				ss << "< " << (*descriptor.combatText) << " >";
 			}
-			ss << " >";
 		}
 		else
 		{

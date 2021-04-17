@@ -6,7 +6,8 @@
         "combat": 4,
         "amount": 5,
         "image-id":"Food",
-        "number-appearing": 72
+        "number-appearing": 72,
+        "combat-text":"Food Bribe"
     },
     "1":{
         "name":"Potion",
@@ -16,7 +17,8 @@
         "amount": 30,
         "image-id":"Potion",
         "sfx-success":"drinkpotion",
-        "number-appearing": 18
+        "number-appearing": 18,
+        "combat-text":"Drink Potion"
     },
     "2":{
         "name":"Beer",
@@ -26,7 +28,8 @@
         "duration": 10,
         "image-id":"Beer",
         "sfx-success":"beer",
-        "number-appearing": 9
+        "number-appearing": 9,
+        "combat-text":"Drink Beer"
     },
     "3":{
         "name":"Wine",
@@ -36,7 +39,8 @@
         "duration": 25,
         "image-id":"Wine",
         "sfx-success":"wine",
-        "number-appearing": 9
+        "number-appearing": 9,
+        "combat-text":"Drink Wine"
     },
     "4":{
         "name":"Coffee",
@@ -47,12 +51,14 @@
         "amount-stacks":true,
         "image-id":"Coffee",
         "sfx-success":"coffee",
-        "number-appearing": 9
+        "number-appearing": 9,
+        "combat-text":"Drink Coffee"
     },
     "5":{
         "name":"Jools",
         "combat":4,
         "image-id":"Jools",
-        "number-appearing": 144
+        "number-appearing": 144,
+        "combat-text":"Money Bribe"
     }
 }

@@ -26,6 +26,7 @@ namespace game
 			std::optional<size_t> initialInventory;
 			std::optional<Usage> combatUsage;
 			size_t numberAppearing;
+			std::optional<std::string> combatText;
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();

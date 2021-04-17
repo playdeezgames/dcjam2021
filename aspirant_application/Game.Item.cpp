@@ -50,7 +50,8 @@ namespace game::item
 			(descriptor.count(game::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_FAILURE])) : (std::nullopt),
 			(descriptor.count(game::Properties::INITIAL_INVENTORY) > 0) ? (std::optional<size_t>((size_t)descriptor[game::Properties::INITIAL_INVENTORY])) : (std::nullopt),
 			(descriptor.count(game::Properties::COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::Properties::COMBAT])) : (std::nullopt),
-			(descriptor.count(game::Properties::NUMBER_APPEARING) > 0) ? ((size_t)descriptor[game::Properties::NUMBER_APPEARING]) : (0)
+			(descriptor.count(game::Properties::NUMBER_APPEARING) > 0) ? ((size_t)descriptor[game::Properties::NUMBER_APPEARING]) : (0),
+			(descriptor.count(game::Properties::COMBAT_TEXT) > 0) ? (std::optional<std::string>(descriptor[game::Properties::COMBAT_TEXT])) : (std::nullopt)
 		};
 	}
 

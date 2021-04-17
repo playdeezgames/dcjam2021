@@ -56,7 +56,7 @@ namespace game::Avatar
 		return { (size_t)GetAvatar()[game::Properties::COLUMN], (size_t)GetAvatar()[game::Properties::ROW] };
 	}
 
-	void TurnLeft()
+	std::optional<std::string> TurnLeft()
 	{
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
@@ -66,9 +66,10 @@ namespace game::Avatar
 				(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
 				(maze::Direction::SOUTH));
 		}
+		return std::nullopt;
 	}
 
-	void TurnRight()
+	std::optional<std::string> TurnRight()
 	{
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
@@ -78,10 +79,12 @@ namespace game::Avatar
 				(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
 				(maze::Direction::NORTH));
 		}
+		return std::nullopt;
 	}
 
-	void MoveAhead()
+	std::optional<std::string> MoveAhead()
 	{
+		std::optional<std::string> result = std::nullopt;
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
 			if (game::World::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing()) == game::world::Border::DOOR)
@@ -113,19 +116,21 @@ namespace game::Avatar
 			}
 			else
 			{
-				common::audio::Sfx::Play(application::Sounds::BUMP_WALL);//TODO: this is in the wrong layer
+				result = application::Sounds::BUMP_WALL;
 			}
 		}
 		application::UIState::EnterGame();
+		return result;
 	}
 
-	void MoveBack()
+	std::optional<std::string> MoveBack()
 	{
 		TurnRight();
 		TurnRight();
-		MoveAhead();
+		auto result = MoveAhead();
 		TurnRight();
 		TurnRight();
+		return result;
 	}
 
 	void Reset()

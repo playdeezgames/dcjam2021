@@ -1,12 +1,14 @@
 #pragma once
 #include "Maze.Direction.h"
 #include "Common.XY.h"
+#include <string>
+#include <optional>
 namespace game::Avatar
 {
-	void TurnLeft();//TODO: this should return an optional string with a sound effect?
-	void TurnRight();//TODO: this should return an optional string with a sound effect?
-	void MoveAhead();//TODO: this should return an optional string with a sound effect?
-	void MoveBack();//TODO: this should return an optional string with a sound effect?
+	std::optional<std::string> TurnLeft();
+	std::optional<std::string> TurnRight();
+	std::optional<std::string> MoveAhead();
+	std::optional<std::string> MoveBack();
 	maze::Direction GetFacing();
 	common::XY<size_t> GetPosition();
 }

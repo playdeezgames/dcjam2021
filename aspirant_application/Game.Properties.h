@@ -8,6 +8,7 @@ namespace game::Properties
 	const std::string BRIBES = "bribes";
 	const std::string COLUMN = "column";
 	const std::string COMBAT = "combat";
+	const std::string COMBAT_TEXT = "combat-text";
 	const std::string CREATURE = "creature";
 	const std::string CREATURES = "creatures";
 	const std::string DEFEND = "defend";
