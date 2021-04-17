@@ -25,14 +25,14 @@ namespace game::avatar::Items
 		return avatar[game::Properties::INVENTORY];
 	}
 
-	static std::string ItemToKey(game::Item item)
+	static std::string ItemToKey(int item)
 	{
 		std::stringstream ss;
 		ss << (int)item;
 		return ss.str();
 	}
 
-	size_t Read(game::Item item)
+	size_t Read(int item)
 	{
 		auto itemKey = ItemToKey(item);
 		auto& inventory = GetAvatarInventory();
@@ -43,12 +43,12 @@ namespace game::avatar::Items
 		return 0;
 	}
 
-	std::map<game::Item, size_t> All()
+	std::map<int, size_t> All()
 	{
-		std::map<game::Item, size_t> result;
+		std::map<int, size_t> result;
 		for (auto& item : GetAvatarInventory().items())
 		{
-			result[(game::Item)common::Utility::StringToInt(item.key())] = item.value();
+			result[(int)common::Utility::StringToInt(item.key())] = item.value();
 		}
 		return result;
 	}
@@ -66,7 +66,7 @@ namespace game::avatar::Items
 		}
 	}
 
-	void Add(game::Item item, size_t amount)
+	void Add(int item, size_t amount)
 	{
 		if (amount > 0)
 		{
@@ -80,7 +80,7 @@ namespace game::avatar::Items
 		Reset();
 	}
 
-	static size_t Remove(game::Item item, size_t quantity)
+	static size_t Remove(int item, size_t quantity)
 	{
 		auto total = Read(item);
 		if (total >0)
@@ -113,7 +113,7 @@ namespace game::avatar::Items
 	const int COFFEE_DEFEND_INCREASE = 10;
 	const int COFFEE_DEFEND_DURATION = 10;
 
-	void Drop(std::optional<game::Item> item)
+	void Drop(std::optional<int> item)
 	{
 		if (item)
 		{
@@ -122,7 +122,7 @@ namespace game::avatar::Items
 		}
 	}
 
-	static std::optional<std::string> ConsumeItem(game::Item item, std::function<void(const game::item::Descriptor&)> action)
+	static std::optional<std::string> ConsumeItem(int item, std::function<void(const game::item::Descriptor&)> action)
 	{
 		auto descriptor = game::item::GetDescriptor(item);
 		if (game::avatar::Items::Read(item) > 0)
@@ -134,7 +134,7 @@ namespace game::avatar::Items
 		return descriptor.sfxFailure;
 	}
 
-	static std::optional<std::string> Eat(game::Item item)
+	static std::optional<std::string> Eat(int item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor) 
 		{
@@ -142,7 +142,7 @@ namespace game::avatar::Items
 		});
 	}
 
-	static std::optional<std::string> Heal(game::Item item)
+	static std::optional<std::string> Heal(int item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
@@ -150,7 +150,7 @@ namespace game::avatar::Items
 		});
 	}
 
-	static 	std::optional<std::string> BuffAttack(game::Item item)
+	static 	std::optional<std::string> BuffAttack(int item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
@@ -159,7 +159,7 @@ namespace game::avatar::Items
 		});
 	}
 
-	static std::optional<std::string> BuffDefend(game::Item item)
+	static std::optional<std::string> BuffDefend(int item)
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
@@ -168,16 +168,16 @@ namespace game::avatar::Items
 		});
 	}
 
-	static std::map<game::item::Usage, std::function<std::optional<std::string>(game::Item)>> nonCombatVerbs =
+	static std::map<game::item::Usage, std::function<std::optional<std::string>(int)>> nonCombatVerbs =
 	{
 		{game::item::Usage::EAT, Eat},
 		{game::item::Usage::HEAL, Heal},
 		{game::item::Usage::ATTACK_BUFF, BuffAttack},
 		{game::item::Usage::DEFEND_BUFF, BuffDefend},
-		{game::item::Usage::BRIBE, [](game::Item) { return std::nullopt; }}
+		{game::item::Usage::BRIBE, [](int) { return std::nullopt; }}
 	};
 
-	std::optional<std::string> Use(std::optional<game::Item> item)
+	std::optional<std::string> Use(std::optional<int> item)
 	{
 		if (item)
 		{
@@ -190,7 +190,7 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatEat(game::Item item)
+	static std::optional<std::tuple<std::string, bool>> CombatEat(int item)
 	{
 		auto result = Eat(item);
 		if (result)
@@ -200,7 +200,7 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatHeal(game::Item item)
+	static std::optional<std::tuple<std::string, bool>> CombatHeal(int item)
 	{
 		auto result = Heal(item);
 		if (result)
@@ -210,7 +210,7 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatBuffAttack(game::Item item)
+	static std::optional<std::tuple<std::string, bool>> CombatBuffAttack(int item)
 	{
 		auto result = BuffAttack(item);
 		if (result)
@@ -220,7 +220,7 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatBuffDefend(game::Item item)
+	static std::optional<std::tuple<std::string, bool>> CombatBuffDefend(int item)
 	{
 		auto result = BuffDefend(item);
 		if (result)
@@ -230,15 +230,15 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatBribe(game::Item item)
+	static std::optional<std::tuple<std::string, bool>> CombatBribe(int item)
 	{
 		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
 		if (instance && instance.value().descriptor.bribes.contains(item))
 		{
 			size_t amount = instance.value().descriptor.bribes.find(item)->second;
-			if (amount > 0 && game::avatar::Items::Read(game::Item::FOOD) >= amount)
+			if (amount > 0 && game::avatar::Items::Read(item) >= amount)
 			{
-				game::avatar::Items::Remove(game::Item::FOOD, (size_t)amount);
+				game::avatar::Items::Remove(item, (size_t)amount);
 				game::Creatures::Remove(game::Avatar::GetPosition());
 				return std::make_tuple(application::Sounds::WOOHOO, true);//TODO: success sound
 			}
@@ -246,7 +246,7 @@ namespace game::avatar::Items
 		return std::make_tuple(application::Sounds::SHUCKS, false);//TODO: failure sound
 	}
 
-	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(game::Item)>> combatVerbs =
+	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(int)>> combatVerbs =
 	{
 		{game::item::Usage::EAT, CombatEat},
 		{game::item::Usage::HEAL, CombatHeal},
@@ -255,7 +255,7 @@ namespace game::avatar::Items
 		{game::item::Usage::BRIBE, CombatBribe}
 	};
 
-	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<game::Item> item)
+	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<int> item)
 	{
 		if (item)
 		{

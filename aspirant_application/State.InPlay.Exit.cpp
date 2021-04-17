@@ -18,7 +18,7 @@ namespace state::in_play::Exit
 	static void OnUpdate(const Uint32&)
 	{
 		std::stringstream ss;
-		ss << "You collected " << game::avatar::Items::Read(game::Item::JOOLS) << " jools!";
+		ss << "You collected " << game::avatar::Items::Read(5) << " jools!";
 		graphics::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());
 	}
 

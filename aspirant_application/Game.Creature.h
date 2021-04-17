@@ -13,10 +13,10 @@ namespace game::creature
 		int maximumHealth;
 		int attack;
 		int defend;
-		int foodBribe;
-		int moneyBribe;
+		int foodBribe;//TODO: go away
+		int moneyBribe;//TODO: go away
 		size_t numberAppearing;
-		std::map<game::Item, size_t> bribes;
+		std::map<int, size_t> bribes;
 	};
 
 	Descriptor GetDescriptor(int);

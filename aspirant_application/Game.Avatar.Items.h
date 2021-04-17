@@ -6,12 +6,12 @@
 #include <tuple>
 namespace game::avatar::Items
 {
-	size_t Read(game::Item);
+	size_t Read(int);
 	void Reset();
-	void Add(game::Item, size_t);
-	std::map<game::Item, size_t> All();
+	void Add(int, size_t);
+	std::map<int, size_t> All();
 	void Start(); 
-	void Drop(std::optional<game::Item> item);
-	std::optional<std::string> Use(std::optional<game::Item>);
-	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<game::Item>);
+	void Drop(std::optional<int> item);
+	std::optional<std::string> Use(std::optional<int>);
+	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<int>);
 }

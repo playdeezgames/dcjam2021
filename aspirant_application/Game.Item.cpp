@@ -19,24 +19,24 @@ namespace game::item
 		items = data::JSON::Load(filename);
 	}
 
-	static std::string ItemToItemKey(const game::Item& item)
+	static std::string ItemToItemKey(const int& item)
 	{
 		std::stringstream ss;
 		ss << (int)item;
 		return ss.str();
 	}
 
-	std::vector<game::Item> All()
+	std::vector<int> All()
 	{
-		std::vector<game::Item> result;
+		std::vector<int> result;
 		for (auto& item : items.items())
 		{
-			result.push_back((game::Item)common::Utility::StringToInt(item.key()));
+			result.push_back(common::Utility::StringToInt(item.key()));
 		}
 		return result;
 	}
 
-	Descriptor GetDescriptor(game::Item item)
+	Descriptor GetDescriptor(int item)
 	{
 		auto descriptor = items[ItemToItemKey(item)];
 		return

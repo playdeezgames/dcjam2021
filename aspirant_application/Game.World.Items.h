@@ -4,8 +4,8 @@
 #include <map>
 namespace game::world::Items
 {
-	bool IsPresent(const game::Item&, const common::XY<size_t>&);//TODO: should xy be first?
-	const std::map<game::Item, size_t>& FloorInventory(const common::XY<size_t>&);
-	size_t Remove(const game::Item&, size_t, const common::XY<size_t>&);//TODO: should xy be first?
-	void Add(const game::Item&, size_t, const common::XY<size_t>&);//TODO: should xy be first?
+	bool IsPresent(const int&, const common::XY<size_t>&);//TODO: should xy be first?
+	const std::map<int, size_t>& FloorInventory(const common::XY<size_t>&);
+	size_t Remove(const int&, size_t, const common::XY<size_t>&);//TODO: should xy be first?
+	void Add(const int&, size_t, const common::XY<size_t>&);//TODO: should xy be first?
 }

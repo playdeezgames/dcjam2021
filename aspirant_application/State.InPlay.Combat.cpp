@@ -142,27 +142,27 @@ namespace state::in_play::Combat
 	{
 		auto item = graphics::AvatarInventory::GetItem();
 		std::stringstream ss;
-		if (item)
+		if (item)//TODO: pull from item descriptor!
 		{
 			ss << "< ";
 			switch (item.value())
 			{
-			case game::Item::BEER:
+			case 2:
 				ss << "Drink Beer";
 				break;
-			case game::Item::COFFEE:
+			case 4:
 				ss << "Drink Coffee";
 				break;
-			case game::Item::FOOD:
+			case 0:
 				ss << "Food Bribe";
 				break;
-			case game::Item::JOOLS:
+			case 5:
 				ss << "Money Bribe";
 				break;
-			case game::Item::POTION:
+			case 1:
 				ss << "Drink Potion";
 				break;
-			case game::Item::WINE:
+			case 3:
 				ss << "Drink Wine";
 				break;
 			}

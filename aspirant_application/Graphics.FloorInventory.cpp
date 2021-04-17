@@ -37,7 +37,7 @@ namespace graphics::FloorInventory
 		}
 	}
 
-	std::optional<game::Item> GetItem()
+	std::optional<int> GetItem()
 	{
 		auto location = game::Avatar::GetPosition();
 		auto& inventory = game::world::Items::FloorInventory(location);

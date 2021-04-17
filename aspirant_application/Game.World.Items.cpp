@@ -5,19 +5,19 @@
 #include "Game.World.h"
 namespace game::world::Items
 {
-	const std::map<game::Item, size_t> itemCounts =
+	const std::map<int, size_t> itemCounts =
 	{
-		{game::Item::FOOD, 72},
-		{game::Item::POTION, 18},
-		{game::Item::BEER, 9},
-		{game::Item::WINE, 9},
-		{game::Item::COFFEE, 9},
-		{game::Item::JOOLS, 144}
+		{0, 72},
+		{1, 18},
+		{2, 9},
+		{3, 9},
+		{4, 9},
+		{5, 144}
 	};
 
-	static std::vector<std::vector<std::map<game::Item, size_t>>> roomInventories;
+	static std::vector<std::vector<std::map<int, size_t>>> roomInventories;
 
-	static void PopulateItem(game::Item item)
+	static void PopulateItem(int item)
 	{
 		size_t column = (size_t)common::RNG::FromRange(0, (int)roomInventories.size());
 		size_t row = (size_t)common::RNG::FromRange(0, (int)roomInventories[column].size());
@@ -47,7 +47,7 @@ namespace game::world::Items
 		auto worldSize = game::World::GetSize();
 		while (roomInventories.size() < worldSize.GetX())
 		{
-			roomInventories.push_back(std::vector<std::map<game::Item, size_t>>());
+			roomInventories.push_back(std::vector<std::map<int, size_t>>());
 			auto& column = roomInventories.back();
 			while (column.size() < worldSize.GetY())
 			{
@@ -57,18 +57,18 @@ namespace game::world::Items
 		PopulateItems();
 	}
 
-	bool IsPresent(const game::Item& item, const common::XY<size_t>& location)
+	bool IsPresent(const int& item, const common::XY<size_t>& location)
 	{
 		auto iter = roomInventories[location.GetX()][location.GetY()].find(item);
 		return iter != roomInventories[location.GetX()][location.GetY()].end();
 	}
 
-	const std::map<game::Item, size_t>& FloorInventory(const common::XY<size_t>& location)
+	const std::map<int, size_t>& FloorInventory(const common::XY<size_t>& location)
 	{
 		return roomInventories[location.GetX()][location.GetY()];
 	}
 
-	size_t Remove(const game::Item& item, size_t quantity, const common::XY<size_t>& location)
+	size_t Remove(const int& item, size_t quantity, const common::XY<size_t>& location)
 	{
 		if (IsPresent(item, location))
 		{
@@ -90,7 +90,7 @@ namespace game::world::Items
 		}
 	}
 
-	void Add(const game::Item& item, size_t amount, const common::XY<size_t>& location)
+	void Add(const int& item, size_t amount, const common::XY<size_t>& location)
 	{
 		if (amount > 0)
 		{

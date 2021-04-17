@@ -5,7 +5,8 @@
         "non-combat": 0,
         "combat": 4,
         "amount": 5,
-        "image-id":"Food"
+        "image-id":"Food",
+        "number-appearing": 72
     },
     "1":{
         "name":"Potion",
@@ -14,7 +15,8 @@
         "combat":1,
         "amount": 30,
         "image-id":"Potion",
-        "sfx-success":"drinkpotion"
+        "sfx-success":"drinkpotion",
+        "number-appearing": 18
     },
     "2":{
         "name":"Beer",
@@ -23,7 +25,8 @@
         "amount": 50,
         "duration": 10,
         "image-id":"Beer",
-        "sfx-success":"beer"
+        "sfx-success":"beer",
+        "number-appearing": 9
     },
     "3":{
         "name":"Wine",
@@ -32,7 +35,8 @@
         "amount": 25,
         "duration": 25,
         "image-id":"Wine",
-        "sfx-success":"wine"
+        "sfx-success":"wine",
+        "number-appearing": 9
     },
     "4":{
         "name":"Coffee",
@@ -42,11 +46,13 @@
         "duration": 10,
         "amount-stacks":true,
         "image-id":"Coffee",
-        "sfx-success":"coffee"
+        "sfx-success":"coffee",
+        "number-appearing": 9
     },
     "5":{
         "name":"Jools",
         "combat":4,
-        "image-id":"Jools"
+        "image-id":"Jools",
+        "number-appearing": 144
     }
 }

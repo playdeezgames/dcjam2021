@@ -8,14 +8,14 @@ namespace game::creature
 
 	Descriptor GetDescriptor(int creature)
 	{
-		std::map<game::Item, size_t> bribes;
+		std::map<int, size_t> bribes;
 		auto& creatureDescriptor = descriptors[(int)creature];
 		if (creatureDescriptor.count(game::Properties::BRIBES) > 0)
 		{
 			auto& amounts = creatureDescriptor[game::Properties::BRIBES];
 			for (auto& amount : amounts.items())
 			{
-				bribes[(game::Item)common::Utility::StringToInt(amount.key())] = (size_t)amount.value();
+				bribes[common::Utility::StringToInt(amount.key())] = (size_t)amount.value();
 			}
 		}
 		return
