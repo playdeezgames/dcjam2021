@@ -4,6 +4,7 @@
 #include "Application.UIState.h"
 #include "Graphics.Menus.h"
 #include "Game.h"
+#include "Common.Audio.h"
 namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";
@@ -20,9 +21,15 @@ namespace state::Start
 		switch ((StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
 		{
 		case StartGameItem::NEW_GAME:
+		{
 			game::Reset();
-			::application::UIState::EnterGame();
-			break;
+			auto sfx = application::UIState::EnterGame();
+			if (sfx)
+			{
+				common::audio::Sfx::Play(*sfx);
+			}
+		}
+		break;
 		case StartGameItem::BACK:
 			::application::UIState::Write(::UIState::MAIN_MENU);
 			break;

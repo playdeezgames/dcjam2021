@@ -6,6 +6,7 @@
 #include "Graphics.Images.h"
 #include "Game.CombatDeck.h"
 #include "Graphics.CardSprites.h"
+#include "Common.Audio.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
@@ -22,7 +23,11 @@ namespace state::in_play::CombatResult
 			break;
 		case ::Command::GREEN:
 			game::Combat::Advance();
-			application::UIState::EnterGame();
+			auto sfx = application::UIState::EnterGame();
+			if (sfx)
+			{
+				common::audio::Sfx::Play(*sfx);
+			}
 			break;
 		}
 	}

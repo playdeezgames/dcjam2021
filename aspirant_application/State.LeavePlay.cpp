@@ -4,6 +4,7 @@
 #include "Command.h"
 #include "Application.Command.h"
 #include "Application.Renderer.h"
+#include "Common.Audio.h"
 namespace state::LeavePlay
 {
 	const std::string LAYOUT_NAME = "State.LeavePlay";
@@ -23,7 +24,11 @@ namespace state::LeavePlay
 			::application::UIState::Write(::UIState::MAIN_MENU);
 			return;
 		case LeavePlayItem::CONTINUE:
-			::application::UIState::EnterGame();
+			auto sfx = application::UIState::EnterGame();
+			if (sfx)
+			{
+				common::audio::Sfx::Play(*sfx);
+			}
 			return;
 		}
 	}

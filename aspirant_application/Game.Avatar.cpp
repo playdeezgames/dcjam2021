@@ -119,7 +119,11 @@ namespace game::Avatar
 				result = application::Sounds::BUMP_WALL;
 			}
 		}
-		application::UIState::EnterGame();
+		auto sfx = application::UIState::EnterGame();
+		if (sfx)
+		{
+			common::audio::Sfx::Play(*sfx);
+		}
 		return result;
 	}
 

@@ -3,10 +3,9 @@
 #include <map>
 #include <vector>
 #include "Graphics.Data.Properties.h"
+#include "Data.Stores.h"
 namespace graphics::Colors
 {
-	static nlohmann::json table;
-	
 	static SDL_Color ParseDescriptor(const nlohmann::json& properties)
 	{
 		SDL_Color result;
@@ -17,13 +16,8 @@ namespace graphics::Colors
 		return result;
 	}
 
-	void InitializeFromFile(const std::string& fileName)
-	{
-		table = ::data::JSON::Load(fileName);
-	}
-
 	SDL_Color Read(const std::string& key)
 	{
-		return ParseDescriptor(table[key]);
+		return ParseDescriptor(::data::Stores::GetStore(::data::Store::COLORS)[key]);
 	}
 }

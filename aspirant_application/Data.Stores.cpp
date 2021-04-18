@@ -14,7 +14,8 @@ namespace data::Stores
 	const std::map<data::Store, std::string> storeFiles =
 	{
 		{data::Store::CREATURE_DESCRIPTORS, "config/creatures.json"},
-		{data::Store::ITEM_DESCRIPTORS, "config/items.json"}
+		{data::Store::ITEM_DESCRIPTORS, "config/items.json"},
+		{data::Store::COLORS, "config/graphics/colors.json" }
 	};
 
 	void Start()

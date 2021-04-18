@@ -101,7 +101,11 @@ namespace state::in_play::Combat
 				common::audio::Sfx::Play(std::get<0>(*result));
 				if (std::get<1>(*result))
 				{
-					application::UIState::EnterGame();
+					auto sfx = application::UIState::EnterGame();
+					if (sfx)
+					{
+						common::audio::Sfx::Play(*sfx);
+					}
 				}
 			}
 			break;

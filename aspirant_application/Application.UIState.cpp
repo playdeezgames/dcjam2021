@@ -3,7 +3,6 @@
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
 #include "Application.Sounds.h"
-#include "Common.Audio.h"
 namespace application::UIState
 {
 	static ::UIState uiState = ::UIState::SPLASH;
@@ -18,11 +17,12 @@ namespace application::UIState
 		return uiState;
 	}
 
-	void EnterGame()//TODO: return optional string with sound effect name
+	std::optional<std::string> EnterGame()
 	{
+		std::optional<std::string> result = std::nullopt;
 		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			common::audio::Sfx::Play(application::Sounds::DEAD_HUNTER);//TODO: this is in the wrong layer
+			result = application::Sounds::DEAD_HUNTER;
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
 		else if (game::Creatures::AnyLeft())
@@ -38,8 +38,9 @@ namespace application::UIState
 		}
 		else
 		{
-			common::audio::Sfx::Play(application::Sounds::EXIT);//TODO: this is in the wrong layer
+			result = application::Sounds::EXIT;
 			application::UIState::Write(::UIState::IN_PLAY_EXIT);
 		}
+		return result;
 	}
 }

@@ -78,7 +78,6 @@ namespace common::Application
 {
 	const std::string TEXTURE = "config/graphics/textures.json";
 	const std::string SPRITE = "config/graphics/sprites.json";
-	const std::string COLOR = "config/graphics/colors.json";
 	const std::string FONTS = "config/graphics/fonts.json";
 	const std::string LAYOUTS = "config/ui/layouts.json";
 	const std::string OPTIONS = "config/options.json";
@@ -116,7 +115,6 @@ namespace common::Application
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
-		graphics::Colors::InitializeFromFile(COLOR);
 		graphics::Textures::InitializeFromFile(renderer, TEXTURE);
 		graphics::Sprites::InitializeFromFile(SPRITE);
 		graphics::Fonts::InitializeFromFile(FONTS);
