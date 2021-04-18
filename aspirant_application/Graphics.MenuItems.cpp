@@ -2,7 +2,7 @@
 #include "Data.JSON.h"
 #include <algorithm>
 #include "Graphics.Types.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Graphics.MenuItems.h"
 namespace graphics::MenuItems

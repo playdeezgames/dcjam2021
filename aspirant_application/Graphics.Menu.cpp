@@ -1,6 +1,6 @@
 #include "Graphics.Properties.h"
 #include "Graphics.Fonts.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "json.hpp"
 namespace graphics::Menu
 {

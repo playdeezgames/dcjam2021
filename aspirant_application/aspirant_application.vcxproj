@@ -242,7 +242,7 @@
     <ClInclude Include="Common.Application.h" />
     <ClInclude Include="Common.Card.h" />
     <ClInclude Include="Common.Deck.h" />
-    <ClInclude Include="Common.Properties.h" />
+    <ClInclude Include="Common.Data.Properties.h" />
     <ClInclude Include="Game.Avatar.h" />
     <ClInclude Include="Game.Avatar.Items.h" />
     <ClInclude Include="Game.Avatar.Statistic.h" />

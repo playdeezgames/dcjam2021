@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "Game.Item.h"
 #include "Game.World.Items.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Game.Item.h"
 #include "Game.Avatar.h"
 #include "Graphics.Properties.h"

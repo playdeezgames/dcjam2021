@@ -1,7 +1,7 @@
 #include "Graphics.Images.h"
 #include <map>
 #include "json.hpp"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Graphics.Types.h"
 namespace graphics::Layouts

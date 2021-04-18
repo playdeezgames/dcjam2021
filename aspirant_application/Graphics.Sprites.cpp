@@ -2,7 +2,7 @@
 #include "Common.Utility.h"
 #include "Data.JSON.h"
 #include "Graphics.Textures.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 namespace graphics
 {

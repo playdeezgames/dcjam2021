@@ -1,7 +1,7 @@
 #include "json.hpp"
 #include <SDL.h>
 #include "Game.World.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Graphics.Sprites.h"
 #include <map>

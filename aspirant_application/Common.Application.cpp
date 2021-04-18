@@ -2,7 +2,7 @@
 #include <SDL_mixer.h>
 #include <SDL_image.h>
 #include "Data.JSON.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include <memory>
 #include "Common.Application.h"
 namespace common::Application

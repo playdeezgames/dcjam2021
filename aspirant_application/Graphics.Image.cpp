@@ -1,4 +1,4 @@
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Common.Utility.h"
 #include "Common.XY.h"
 #include "json.hpp"

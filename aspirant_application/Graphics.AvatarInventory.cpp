@@ -1,7 +1,7 @@
 #include "Graphics.AvatarInventory.h"
 #include <SDL.h>
 #include "json.hpp"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Game.Avatar.Items.h"
 #include <sstream>

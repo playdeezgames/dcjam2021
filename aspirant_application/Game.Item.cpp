@@ -6,7 +6,7 @@
 #include "Game.World.h"
 #include "Common.RNG.h"
 #include "Data.JSON.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include "Game.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"

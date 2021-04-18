@@ -262,7 +262,7 @@
     <ClInclude Include="Options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common.Properties.h">
+    <ClInclude Include="Common.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.Properties.h">

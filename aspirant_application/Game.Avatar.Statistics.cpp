@@ -4,7 +4,7 @@
 #include "Game.Properties.h"
 #include "Game.Avatar.h"
 #include "Data.JSON.h"
-#include "Common.Properties.h"
+#include "Common.Data.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"
 namespace game::avatar::Statistics
