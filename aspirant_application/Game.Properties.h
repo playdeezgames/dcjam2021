@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace game::Properties
+namespace game::Properties//TODO: DAL
 {
 	const std::string AMOUNT = "amount";
 	const std::string ATTACK = "attack";

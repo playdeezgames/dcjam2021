@@ -11,6 +11,7 @@
 #include "Game.Avatar.Statistics.h"
 #include "Game.Item.h"
 #include <sstream>
+#include "States.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";

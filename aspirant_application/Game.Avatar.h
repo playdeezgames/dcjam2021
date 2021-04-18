@@ -12,5 +12,5 @@ namespace game::Avatar
 	std::optional<std::string> MoveBack();
 	maze::Direction GetFacing();
 	common::XY<size_t> GetPosition();
-	nlohmann::json& GetAvatar();
+	nlohmann::json& GetAvatar();//TODO: this is part of the DAL
 }

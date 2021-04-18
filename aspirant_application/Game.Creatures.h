@@ -12,8 +12,8 @@ namespace game::Creatures
 		game::creature::Descriptor descriptor;
 	};
 	std::optional<Instance> GetInstance(const common::XY<size_t>&);
-	bool AnyLeft();//instances
-	std::optional<int> DoDamage(const common::XY<size_t>&, int);//instance
-	void Remove(const common::XY<size_t>&);//instance
-	void Advance(const common::XY<size_t>&);//instance
+	bool AnyLeft();
+	std::optional<int> DoDamage(const common::XY<size_t>&, int);
+	void Remove(const common::XY<size_t>&);
+	void Advance(const common::XY<size_t>&);
 }

@@ -18,6 +18,6 @@ namespace game::creature
 	};
 
 	Descriptor GetDescriptor(int);
-	void InitializeFromFile(const std::string&);
+	void InitializeFromFile(const std::string&);//TODO: DAL
 	std::vector<int> All();
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace graphics::Types
+namespace graphics::Types//TODO: DAL
 {
 	const std::string AVATAR_INVENTORY = "AvatarInventory";
 	const std::string FLOOR_INVENTORY = "FloorInventory";

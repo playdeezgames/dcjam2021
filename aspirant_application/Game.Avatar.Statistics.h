@@ -13,5 +13,5 @@ namespace game::avatar::Statistics
 	void DoDefendTimer();
 	int Maximum(const ::game::avatar::Statistic&);
 	int Default(const ::game::avatar::Statistic&);
-	void InitializeFromFile(const std::string&);
+	void InitializeFromFile(const std::string&);//TODO: part of the DAL
 }

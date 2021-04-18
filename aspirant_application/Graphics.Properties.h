@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace graphics::Properties
+namespace graphics::Properties//TODO: DAL?
 {
 	const std::string ACTIVE = "active";
 	const std::string ALPHA = "alpha";

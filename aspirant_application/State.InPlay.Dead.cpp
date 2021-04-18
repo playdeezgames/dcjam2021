@@ -5,6 +5,7 @@
 #include "Graphics.Texts.h"
 #include "Game.Avatar.Items.h"
 #include <sstream>
+#include "States.h"
 namespace state::in_play::Dead
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Dead";
