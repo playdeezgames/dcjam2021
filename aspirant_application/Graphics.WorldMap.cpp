@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "Game.World.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.Sprites.h"
 #include <map>
 #include "Game.Avatar.h"
@@ -49,8 +49,8 @@ namespace graphics::WorldMap
 	{
 		int x = model[common::data::Properties::X];
 		int y = model[common::data::Properties::Y];
-		int cellWidth = model[graphics::Properties::CELL_WIDTH];
-		int cellHeight = model[graphics::Properties::CELL_WIDTH];
+		int cellWidth = model[graphics::data::Properties::CELL_WIDTH];
+		int cellHeight = model[graphics::data::Properties::CELL_WIDTH];
 		auto avatarPosition = game::Avatar::GetPosition();
 
 		auto worldSize = game::World::GetSize();

@@ -265,7 +265,7 @@
     <ClInclude Include="Common.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Properties.h">
+    <ClInclude Include="Graphics.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.Data.Types.h">

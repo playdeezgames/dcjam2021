@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.MenuItems.h"
 namespace graphics::MenuItems
 {
@@ -14,10 +14,10 @@ namespace graphics::MenuItems
 		{
 			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::MENU)
 			{
-				for (auto& menuItem : thingie[graphics::Properties::MENU_ITEMS])
+				for (auto& menuItem : thingie[graphics::data::Properties::MENU_ITEMS])
 				{
-					if (menuItem.count(graphics::Properties::MENU_ITEM_ID) > 0 &&
-						menuItem[graphics::Properties::MENU_ITEM_ID] == menuItemId)
+					if (menuItem.count(graphics::data::Properties::MENU_ITEM_ID) > 0 &&
+						menuItem[graphics::data::Properties::MENU_ITEM_ID] == menuItemId)
 					{
 						return func(menuItem);
 					}
@@ -31,7 +31,7 @@ namespace graphics::MenuItems
 	{
 		WithMenuItem<void>(layoutName, menuItemId, [text](auto& menuItem)
 		{
-			menuItem[graphics::Properties::TEXT] = text;
+			menuItem[graphics::data::Properties::TEXT] = text;
 		}, []() {});
 	}
 }

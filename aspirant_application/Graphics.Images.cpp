@@ -2,7 +2,7 @@
 #include <map>
 #include "json.hpp"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.Data.Types.h"
 #include "Graphics.Layouts.h"
 namespace graphics::Images
@@ -14,8 +14,8 @@ namespace graphics::Images
 		{
 			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::IMAGE)
 			{
-				if (thingie.count(graphics::Properties::IMAGE_ID) > 0 &&
-					thingie[graphics::Properties::IMAGE_ID] == imageId)
+				if (thingie.count(graphics::data::Properties::IMAGE_ID) > 0 &&
+					thingie[graphics::data::Properties::IMAGE_ID] == imageId)
 				{
 					return func(thingie);
 				}
@@ -28,7 +28,7 @@ namespace graphics::Images
 	{
 		WithImage<void>(layoutName, imageId, [spriteName](auto& thingie)
 		{
-			thingie[graphics::Properties::SPRITE] = spriteName;
+			thingie[graphics::data::Properties::SPRITE] = spriteName;
 		}, []() {});
 	}
 
@@ -36,7 +36,7 @@ namespace graphics::Images
 	{
 		WithImage<void>(layoutName, imageId, [visible](auto& thingie) 
 		{
-			thingie[graphics::Properties::VISIBLE] = visible;
+			thingie[graphics::data::Properties::VISIBLE] = visible;
 		}, []() {});
 	}
 }

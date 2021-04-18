@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 namespace graphics::Layouts
 {
 	extern std::map<std::string, nlohmann::json> layouts;
@@ -17,8 +17,8 @@ namespace graphics::Texts
 		{
 			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::TEXT)
 			{
-				if (thingie.count(graphics::Properties::TEXT_ID) > 0 &&
-					thingie[graphics::Properties::TEXT_ID] == textId)
+				if (thingie.count(graphics::data::Properties::TEXT_ID) > 0 &&
+					thingie[graphics::data::Properties::TEXT_ID] == textId)
 				{
 					return func(thingie);
 				}
@@ -31,7 +31,7 @@ namespace graphics::Texts
 	{
 		WithText<void>(layoutName, textId, [text](auto& thingie) 
 		{
-			thingie[graphics::Properties::TEXT] = text;
+			thingie[graphics::data::Properties::TEXT] = text;
 		}, []() {});
 	}
 }

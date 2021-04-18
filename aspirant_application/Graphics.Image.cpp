@@ -3,7 +3,7 @@
 #include "Common.XY.h"
 #include "json.hpp"
 #include "Graphics.Colors.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.Sprites.h"
 namespace graphics::Image
 {
@@ -11,16 +11,16 @@ namespace graphics::Image
 
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
-		if (model.count(Properties::VISIBLE) == 0 || model[Properties::VISIBLE] == true)
+		if (model.count(data::Properties::VISIBLE) == 0 || model[data::Properties::VISIBLE] == true)
 		{
 			Sprites::Draw(
-					model[Properties::SPRITE],
+					model[data::Properties::SPRITE],
 					renderer,
 					common::XY<int>(
 						(int)model[common::data::Properties::X],
 						(int)model[common::data::Properties::Y]),
-					(model.count(Properties::COLOR)>0) ?
-					(::graphics::Colors::Read(model[Properties::COLOR])) :
+					(model.count(data::Properties::COLOR)>0) ?
+					(::graphics::Colors::Read(model[data::Properties::COLOR])) :
 					(defaultColor));
 		}
 	}

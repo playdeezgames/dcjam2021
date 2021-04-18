@@ -3,7 +3,7 @@
 #include "Data.JSON.h"
 #include "Graphics.Textures.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 namespace graphics
 {
 	class Sprite
@@ -32,7 +32,7 @@ namespace graphics
 
 	void Sprite::Draw(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const SDL_Color& color) const
 	{
-		auto texture = graphics::Textures::Read(model[graphics::Properties::TEXTURE]);
+		auto texture = graphics::Textures::Read(model[graphics::data::Properties::TEXTURE]);
 		SDL_SetTextureColorMod
 		(
 			texture.get(),
@@ -47,8 +47,8 @@ namespace graphics
 		);
 		SDL_Rect rcDst =
 		{
-			xy.GetX() + ((model.count(Properties::OFFSET_X) > 0) ? ((int)model[Properties::OFFSET_X]) : (0)),
-			xy.GetY() + ((model.count(Properties::OFFSET_Y) > 0) ? ((int)model[Properties::OFFSET_Y]) : (0)),
+			xy.GetX() + ((model.count(data::Properties::OFFSET_X) > 0) ? ((int)model[data::Properties::OFFSET_X]) : (0)),
+			xy.GetY() + ((model.count(data::Properties::OFFSET_Y) > 0) ? ((int)model[data::Properties::OFFSET_Y]) : (0)),
 			model[common::data::Properties::WIDTH],
 			model[common::data::Properties::HEIGHT]
 		};
@@ -114,6 +114,6 @@ namespace graphics::Sprites
 
 	void InitializeFromFile(const std::string& fileName)
 	{
-		table = data::JSON::Load(fileName);
+		table = ::data::JSON::Load(fileName);
 	}
 }

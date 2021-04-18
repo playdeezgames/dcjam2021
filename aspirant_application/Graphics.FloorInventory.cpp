@@ -5,7 +5,7 @@
 #include "Common.Data.Properties.h"
 #include "Game.Item.h"
 #include "Game.Avatar.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.Fonts.h"
 #include <sstream>
 namespace graphics::FloorInventory
@@ -60,14 +60,14 @@ namespace graphics::FloorInventory
 	{
 		int x = model[common::data::Properties::X];
 		int y = model[common::data::Properties::Y];
-		int rowHeight = model[graphics::Properties::ROW_HEIGHT];
-		std::string font = model[graphics::Properties::FONT];
-		std::string inactiveColor = model[graphics::Properties::COLORS][graphics::Properties::INACTIVE];
-		std::string activeColor = model[graphics::Properties::COLORS][graphics::Properties::ACTIVE];
-		bool dropShadow = model[graphics::Properties::DROP_SHADOW];
-		int dropShadowX = model[graphics::Properties::DROP_SHADOW_X];
-		int dropShadowY = model[graphics::Properties::DROP_SHADOW_Y];
-		std::string dropShadowColor = model[graphics::Properties::DROP_SHADOW_COLOR];
+		int rowHeight = model[graphics::data::Properties::ROW_HEIGHT];
+		std::string font = model[graphics::data::Properties::FONT];
+		std::string inactiveColor = model[graphics::data::Properties::COLORS][graphics::data::Properties::INACTIVE];
+		std::string activeColor = model[graphics::data::Properties::COLORS][graphics::data::Properties::ACTIVE];
+		bool dropShadow = model[graphics::data::Properties::DROP_SHADOW];
+		int dropShadowX = model[graphics::data::Properties::DROP_SHADOW_X];
+		int dropShadowY = model[graphics::data::Properties::DROP_SHADOW_Y];
+		std::string dropShadowColor = model[graphics::data::Properties::DROP_SHADOW_COLOR];
 
 
 		auto location = game::Avatar::GetPosition();

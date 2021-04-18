@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.Layout.h"
 namespace graphics::Layouts
 {

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Properties.h"
+#include "Graphics.Data.Properties.h"
 #include "Graphics.Layouts.h"
 namespace graphics::Menus
 {
@@ -13,7 +13,7 @@ namespace graphics::Menus
 		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
 			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::MENU &&
-				thingie[graphics::Properties::MENU_ID] == menuId)
+				thingie[graphics::data::Properties::MENU_ID] == menuId)
 			{
 				return func(thingie);
 			}
@@ -25,7 +25,7 @@ namespace graphics::Menus
 	{
 		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
 		{
-			return thingie[graphics::Properties::INDEX];
+			return thingie[graphics::data::Properties::INDEX];
 		},
 			[]() {return std::nullopt; });
 	}
@@ -34,8 +34,8 @@ namespace graphics::Menus
 	{
 		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
 		{
-			int index = thingie[graphics::Properties::INDEX];
-			return (int)thingie[graphics::Properties::MENU_ITEMS][index][graphics::Properties::VALUE];
+			int index = thingie[graphics::data::Properties::INDEX];
+			return (int)thingie[graphics::data::Properties::MENU_ITEMS][index][graphics::data::Properties::VALUE];
 		},
 			[]() {return std::nullopt; });
 	}
@@ -44,7 +44,7 @@ namespace graphics::Menus
 	{
 		return WithMenu<void>(layoutName, menuId, [index](nlohmann::json& thingie)
 		{
-			thingie[graphics::Properties::INDEX] = index;
+			thingie[graphics::data::Properties::INDEX] = index;
 		},
 			[]() {});
 	}
@@ -53,7 +53,7 @@ namespace graphics::Menus
 	{
 		return WithMenu<size_t>(layoutName, menuId, [](auto& thingie)
 		{
-			return thingie[graphics::Properties::MENU_ITEMS].size();
+			return thingie[graphics::data::Properties::MENU_ITEMS].size();
 		},
 			[]() { return 0; });
 	}
