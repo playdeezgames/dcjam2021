@@ -70,13 +70,13 @@
                 "text": "<item>",
                 "x": 500,
                 "y": 128,
-                "value": 3
+                "value": 2
             },
             {
                 "text": "Run Away",
                 "x": 500,
                 "y": 144,
-                "value": 2
+                "value": 3
             }
         ]
     },

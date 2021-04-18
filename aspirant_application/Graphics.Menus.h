@@ -4,9 +4,9 @@
 #include <optional>
 namespace graphics::Menus
 {
-	//TODO: this can perhaps replace avatarinventory and floorinventory if we make it generic enough
-	std::optional<int> Read(const std::string&, const std::string&);
-	void Write(const std::string&, const std::string&, int);
+	std::optional<int> ReadIndex(const std::string&, const std::string&);
+	std::optional<int> ReadValue(const std::string&, const std::string&);
+	void WriteIndex(const std::string&, const std::string&, int);
 	size_t GetCount(const std::string&, const std::string&);
 	void Next(const std::string&, const std::string&);
 	void Previous(const std::string&, const std::string&);

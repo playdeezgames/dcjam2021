@@ -17,7 +17,7 @@ namespace state::Start
 
 	static void ActivateItem()
 	{
-		switch ((StartGameItem)graphics::Menus::Read(LAYOUT_NAME, MENU_ID).value())
+		switch ((StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
 		{
 		case StartGameItem::NEW_GAME:
 			game::Reset();

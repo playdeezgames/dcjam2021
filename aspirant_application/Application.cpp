@@ -30,6 +30,7 @@
 #include "Game.Avatar.Items.h"
 #include "States.h"
 #include "Sublayouts.h"
+#include "Game.Avatar.Statistics.h"
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -85,6 +86,7 @@ namespace common::Application
 	const std::string KEYBOARD = "config/keyboard.json";
 	const std::string CREATURES = "config/creatures.json";
 	const std::string ITEMS = "config/items.json";
+	const std::string STATISTICS = "config/statistics.json";
 
 	static std::vector<void(*)()> starters = 
 	{
@@ -124,6 +126,7 @@ namespace common::Application
 		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::creature::InitializeFromFile(CREATURES);
 		game::item::InitializeFromFile(ITEMS);
+		game::avatar::Statistics::InitializeFromFile(STATISTICS);
 
 		for (auto starter : starters)
 		{

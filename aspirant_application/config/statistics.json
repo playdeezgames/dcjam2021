@@ -1,3 +1,32 @@
 {
-    
+    "0":{
+        "minimum":0,
+        "maximum":100,
+        "default":100
+    },
+    "1":{
+        "minimum":0,
+        "maximum":100,
+        "default":100
+    },
+    "2":{
+        "minimum":10,
+        "maximum":50,
+        "default":10
+    },
+    "3":{
+        "minimum":0,
+        "maximum":25,
+        "default":0
+    },
+    "4":{
+        "minimum":0,
+        "maximum":1000,
+        "default":0
+    },
+    "5":{
+        "minimum":0,
+        "maximum":1000,
+        "default":0
+    }
 }

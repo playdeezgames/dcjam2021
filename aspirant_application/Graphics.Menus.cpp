@@ -21,7 +21,16 @@ namespace graphics::Menus
 		return notFound();
 	}
 
-	std::optional<int> Read(const std::string& layoutName, const std::string& menuId)
+	std::optional<int> ReadIndex(const std::string& layoutName, const std::string& menuId)
+	{
+		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
+		{
+			return thingie[graphics::Properties::INDEX];
+		},
+			[]() {return std::nullopt; });
+	}
+
+	std::optional<int> ReadValue(const std::string& layoutName, const std::string& menuId)
 	{
 		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
 		{
@@ -31,7 +40,7 @@ namespace graphics::Menus
 			[]() {return std::nullopt; });
 	}
 
-	void Write(const std::string& layoutName, const std::string& menuId, int index)
+	void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
 	{
 		return WithMenu<void>(layoutName, menuId, [index](nlohmann::json& thingie)
 		{
@@ -51,17 +60,17 @@ namespace graphics::Menus
 
 	static void ChangeMenuIndex(const std::string& layoutName, const std::string& menuId, int delta)
 	{
-		auto index = Read(layoutName, menuId);
+		auto index = ReadIndex(layoutName, menuId);
 		if (index)
 		{
 			auto itemCount = GetCount(layoutName, menuId);
 			if (itemCount > 0)
 			{
-				Write(layoutName, menuId, (*index + (int)itemCount + delta) % itemCount);
+				WriteIndex(layoutName, menuId, ((*index) + (int)itemCount + delta) % itemCount);
 			}
 			else
 			{
-				Write(layoutName, menuId, 0);
+				WriteIndex(layoutName, menuId, 0);
 			}
 		}
 	}

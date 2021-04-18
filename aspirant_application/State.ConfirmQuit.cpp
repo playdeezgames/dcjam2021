@@ -16,7 +16,7 @@ namespace state::ConfirmQuit
 
 	static void ActivateItem()
 	{
-		switch ((ConfirmQuitItem)graphics::Menus::Read(LAYOUT_NAME,MENU_ID).value())
+		switch ((ConfirmQuitItem)graphics::Menus::ReadValue(LAYOUT_NAME,MENU_ID).value())
 		{
 		case ConfirmQuitItem::NO:
 			::application::UIState::Write(::UIState::MAIN_MENU);

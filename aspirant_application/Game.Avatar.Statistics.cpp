@@ -3,8 +3,26 @@
 #include "json.hpp"
 #include "Game.Properties.h"
 #include "Game.Avatar.h"
+#include "Data.JSON.h"
+#include "Common.Properties.h"
+#include <sstream>
+#include "Common.Utility.h"
 namespace game::avatar::Statistics
 {
+	nlohmann::json statistics;
+
+	void InitializeFromFile(const std::string& fileName)
+	{
+		statistics = data::JSON::Load(fileName);
+	}
+
+	static const nlohmann::json& GetStatistic(game::avatar::Statistic statistic)
+	{
+		std::stringstream ss;
+		ss << (int)statistic;
+		return statistics[ss.str()];
+	}
+
 	nlohmann::json& GetAvatarStatistics()
 	{
 		auto& avatar = game::Avatar::GetAvatar();
@@ -15,36 +33,6 @@ namespace game::avatar::Statistics
 		return avatar[game::Properties::STATISTICS];
 	}
 
-	const std::map<::game::avatar::Statistic, int> maximums =
-	{
-		{::game::avatar::Statistic::HEALTH, 100},
-		{::game::avatar::Statistic::HUNGER, 100},
-		{::game::avatar::Statistic::ATTACK, 50},
-		{::game::avatar::Statistic::DEFEND, 25},
-		{::game::avatar::Statistic::ATTACK_TIMER, 1000},
-		{::game::avatar::Statistic::DEFEND_TIMER, 1000}
-	};
-
-	const std::map<::game::avatar::Statistic, int> minimums =
-	{
-		{::game::avatar::Statistic::HEALTH, 0},
-		{::game::avatar::Statistic::HUNGER, 0},
-		{::game::avatar::Statistic::ATTACK, 10},
-		{::game::avatar::Statistic::DEFEND, 0},
-		{::game::avatar::Statistic::ATTACK_TIMER, 0},
-		{::game::avatar::Statistic::DEFEND_TIMER, 0}
-	};
-
-	const std::map<::game::avatar::Statistic, int> initials =
-	{
-		{::game::avatar::Statistic::HEALTH, 100},
-		{::game::avatar::Statistic::HUNGER, 100},
-		{::game::avatar::Statistic::ATTACK, 10},
-		{::game::avatar::Statistic::DEFEND, 0},
-		{::game::avatar::Statistic::ATTACK_TIMER, 0},
-		{::game::avatar::Statistic::DEFEND_TIMER, 0}
-	};
-
 	int Read(const ::game::avatar::Statistic& statistic)
 	{
 		return GetAvatarStatistics()[(int)statistic];
@@ -52,17 +40,17 @@ namespace game::avatar::Statistics
 
 	int Minimum(const ::game::avatar::Statistic& statistic)
 	{
-		return minimums.find(statistic)->second;
+		return (int)GetStatistic(statistic)[common::Properties::MINIMUM];
 	}
 
 	int Maximum(const ::game::avatar::Statistic& statistic)
 	{
-		return maximums.find(statistic)->second;
+		return (int)GetStatistic(statistic)[common::Properties::MAXIMUM];
 	}
 
 	int Default(const ::game::avatar::Statistic& statistic)
 	{
-		return initials.find(statistic)->second;
+		return (int)GetStatistic(statistic)[common::Properties::DEFAULT];
 	}
 
 	void Write(const ::game::avatar::Statistic& statistic, int value)
@@ -82,9 +70,10 @@ namespace game::avatar::Statistics
 
 	void Reset()
 	{
-		for (auto& initial : initials)
+		for (auto& item : statistics.items())
 		{
-			Write(initial.first, initial.second);
+			game::avatar::Statistic statistic = (game::avatar::Statistic)common::Utility::StringToInt(item.key());
+			Write(statistic, Default(statistic));
 		}
 	}
 
@@ -125,5 +114,4 @@ namespace game::avatar::Statistics
 			}
 		}
 	}
-
 }

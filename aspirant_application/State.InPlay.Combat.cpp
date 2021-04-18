@@ -31,8 +31,8 @@ namespace state::in_play::Combat
 	{
 		HIGHER,
 		LOWER,
-		RUN_AWAY,
-		USE_ITEM
+		USE_ITEM,
+		RUN_AWAY
 	};
 
 	static void Flee()
@@ -80,7 +80,7 @@ namespace state::in_play::Combat
 
 	static void OnActivateItem()
 	{
-		switch ((CombatMenuItem)graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value())
+		switch ((CombatMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value())
 		{
 		case CombatMenuItem::HIGHER:
 			ResolveCombat(game::CombatDeck::Guess::HIGHER);
@@ -122,13 +122,13 @@ namespace state::in_play::Combat
 			graphics::Menus::Next(LAYOUT_NAME, COMBAT_MENU_ID);
 			break;
 		case ::Command::LEFT:
-			if (graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
+			if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
 			{
 				graphics::AvatarInventory::PreviousIndex();
 			}
 			break;
 		case ::Command::RIGHT:
-			if (graphics::Menus::Read(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
+			if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
 			{
 				graphics::AvatarInventory::NextIndex();
 			}

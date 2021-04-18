@@ -48,7 +48,7 @@ namespace state::Options
 
 	static OptionsItem GetCurrentItem()
 	{
-		return (OptionsItem)graphics::Menus::Read(LAYOUT_NAME, MENU_ID).value();
+		return (OptionsItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value();
 	}
 
 	static void ChangeItem(int delta)

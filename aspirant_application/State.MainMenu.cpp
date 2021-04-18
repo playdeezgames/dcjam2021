@@ -18,7 +18,7 @@ namespace state::MainMenu
 
 	static void ActivateItem()
 	{
-		switch ((MainMenuItem)graphics::Menus::Read(LAYOUT_NAME, MENU_ID).value())
+		switch ((MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
 		{
 		case MainMenuItem::START:
 			::application::UIState::Write(::UIState::START_GAME);

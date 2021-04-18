@@ -17,7 +17,7 @@ namespace state::LeavePlay
 
 	static void ActivateItem()
 	{
-		switch ((LeavePlayItem)graphics::Menus::Read(LAYOUT_NAME, MENU_ID).value())
+		switch ((LeavePlayItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
 		{
 		case LeavePlayItem::ABANDON:
 			::application::UIState::Write(::UIState::MAIN_MENU);
