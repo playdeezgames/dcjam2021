@@ -6,6 +6,6 @@
 namespace graphics::Textures
 {
 	void InitializeFromFile(std::shared_ptr<SDL_Renderer>, const std::string&);//TODO: DAL
-	std::shared_ptr<SDL_Texture> Read(const std::string&);
+	std::shared_ptr<SDL_Texture> Read(const std::string&);//TODO: this takes a renderer
 }
 

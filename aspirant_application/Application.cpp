@@ -81,8 +81,6 @@ namespace common::Application
 	const std::string FONTS = "config/graphics/fonts.json";
 	const std::string LAYOUTS = "config/ui/layouts.json";
 	const std::string OPTIONS = "config/options.json";
-	const std::string SFX = "config/audio/sfx.json";
-	const std::string MUX = "config/audio/mux.json";
 	const std::string KEYBOARD = "config/keyboard.json";
 	const std::string STATISTICS = "config/statistics.json";
 
@@ -109,7 +107,6 @@ namespace common::Application
 		state::in_play::CombatResult::Start,
 		state::in_play::Dead::Start,
 		state::in_play::Exit::Start,
-		game::CombatDeck::Deal,
 		game::CombatDeck::Deal
 	};
 
@@ -119,8 +116,6 @@ namespace common::Application
 		graphics::Sprites::InitializeFromFile(SPRITE);
 		graphics::Fonts::InitializeFromFile(FONTS);
 		graphics::Layouts::InitializeFromFile(LAYOUTS);
-		common::Audio::InitializeFromFile(SFX, MUX);
-		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::avatar::Statistics::InitializeFromFile(STATISTICS);
 
@@ -128,7 +123,8 @@ namespace common::Application
 		{
 			starter();
 		}
-		common::audio::Mux::Play("songs");
+		Options::InitializeFromFile(OPTIONS);//TODO: this may have to stay here and not be part of the data store
+		common::audio::Mux::Play("songs");//TODO: nekkid string
 	}
 
 	bool IsRunning()

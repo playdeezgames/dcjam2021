@@ -2,9 +2,9 @@
 #include <fstream>
 #include "Common.Utility.h"
 #include <fstream>
-#include "Data.JSON.h"
 #include <memory>
 #include <SDL_Mixer.h>
+#include "Data.Stores.h"
 namespace common::audio
 {
 	static std::map<std::string, std::shared_ptr<Mix_Chunk>> sounds;
@@ -32,10 +32,12 @@ namespace common::audio
 		{
 			Mix_FreeMusic(m);
 		}
+
 		static void AddMusic(const std::string& name, const std::string& filename)
 		{
 			music[name] = std::shared_ptr<Mix_Music>(Mix_LoadMUS(filename.c_str()), HookFreeMusic);
 		}
+
 		static void Finish()
 		{
 			while (music.begin() != music.end())
@@ -43,8 +45,26 @@ namespace common::audio
 				music.erase(music.begin());
 			}
 		}
+
+		static bool initialized = false;
+
+		static void Initialize()
+		{
+			if (!initialized)
+			{
+				atexit(Finish);
+				nlohmann::json& j = data::Stores::GetStore(data::Store::MUSIC_THEMES);
+				for (auto& i : j.items())
+				{
+					Mux::AddMusic(i.key(), i.value());
+				}
+				initialized = true;
+			}
+		}
+
 		void Play(const std::string& name)
 		{
+			Initialize();
 			if (!common::Audio::IsMuted())
 			{
 				const auto& item = music.find(name);
@@ -54,6 +74,7 @@ namespace common::audio
 
 		void SetVolume(int volume)
 		{
+			Initialize();
 			muxVolume = ClampVolume(volume);
 			Mix_VolumeMusic(muxVolume);
 		}
@@ -63,15 +84,6 @@ namespace common::audio
 			return muxVolume;
 		}
 
-		static void InitializeFromFile(const std::string& muxFileName)
-		{
-			atexit(Finish);
-			nlohmann::json j = data::JSON::Load(muxFileName);
-			for (auto& i : j.items())
-			{
-				Mux::AddMusic(i.key(), i.value());
-			}
-		}
 
 	}
 
@@ -82,8 +94,24 @@ namespace common::audio
 			sounds[name] = std::shared_ptr<Mix_Chunk>(Mix_LoadWAV_RW(SDL_RWFromFile(filename.c_str(), "rb"), 1), Mix_FreeChunk);
 		}
 
+		static bool initialized = false;
+
+		static void Initialize()
+		{
+			if (!initialized)
+			{
+				nlohmann::json& j = data::Stores::GetStore(data::Store::SOUND_EFFECTS);
+				for (auto& i : j.items())
+				{
+					Sfx::AddSound(i.key(), i.value());
+				}
+				initialized = true;
+			}
+		}
+
 		void Play(const std::string& name)
 		{
+			Initialize();
 			if (!common::Audio::IsMuted())
 			{
 				const auto& item = sounds.find(name);
@@ -96,28 +124,18 @@ namespace common::audio
 
 		void SetVolume(int volume)
 		{
+			Initialize();
 			sfxVolume = ClampVolume(volume);
 			for (auto& entry : sounds)
 			{
 				Mix_VolumeChunk(entry.second.get(), sfxVolume);
 			}
 		}
+
 		int GetVolume()
 		{
 			return sfxVolume;
 		}
-
-
-
-		static void InitializeFromFile(const std::string& sfxFileName)
-		{
-			nlohmann::json j = data::JSON::Load(sfxFileName);
-			for (auto& i : j.items())
-			{
-				Sfx::AddSound(i.key(), i.value());
-			}
-		}
-
 	}
 
 }
@@ -125,8 +143,15 @@ namespace common::Audio
 {
 	static bool muted = false;
 
+	void Initialize()
+	{
+		common::audio::Sfx::Initialize();
+		common::audio::Mux::Initialize();
+	}
+
 	void SetMuted(bool newValue)
 	{
+		Initialize();
 		muted = newValue;
 		if (muted)
 		{
@@ -143,10 +168,5 @@ namespace common::Audio
 		return muted;
 	}
 
-	void InitializeFromFile(const std::string& sfxFileName, const std::string& muxFileName)
-	{
-		common::audio::Sfx::InitializeFromFile(sfxFileName);
-		common::audio::Mux::InitializeFromFile(muxFileName);
-	}
 }
 

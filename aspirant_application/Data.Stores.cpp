@@ -15,7 +15,10 @@ namespace data::Stores
 	{
 		{data::Store::CREATURE_DESCRIPTORS, "config/creatures.json"},
 		{data::Store::ITEM_DESCRIPTORS, "config/items.json"},
-		{data::Store::COLORS, "config/graphics/colors.json" }
+		{data::Store::COLORS, "config/graphics/colors.json" },
+		{data::Store::SOUND_EFFECTS, "config/audio/sfx.json"},
+		{data::Store::MUSIC_THEMES, "config/audio/mux.json"}
+
 	};
 
 	void Start()

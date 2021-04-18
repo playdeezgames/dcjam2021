@@ -19,7 +19,6 @@ namespace common::audio
 }
 namespace common::Audio
 {
-	void InitializeFromFile(const std::string&, const std::string&);
 	void SetMuted(bool);
 	bool IsMuted();
 }
