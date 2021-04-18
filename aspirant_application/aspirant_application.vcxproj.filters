@@ -379,7 +379,7 @@
     <ClInclude Include="Game.World.Border.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.Properties.h">
+    <ClInclude Include="Game.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="States.h">

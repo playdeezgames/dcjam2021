@@ -7,7 +7,7 @@
 #include "Common.RNG.h"
 #include "Data.JSON.h"
 #include "Common.Data.Properties.h"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"
 namespace game::item
@@ -16,7 +16,7 @@ namespace game::item
 
 	void InitializeFromFile(const std::string& filename)
 	{
-		items = data::JSON::Load(filename);
+		items = ::data::JSON::Load(filename);
 	}
 
 	static std::string ItemToItemKey(const int& item)
@@ -42,16 +42,16 @@ namespace game::item
 		return
 		{
 			descriptor[common::data::Properties::NAME],
-			descriptor[game::Properties::IMAGE_ID],
-			(descriptor.count(game::Properties::NON_COMBAT)>0) ? (std::optional<Usage>((Usage)(int)descriptor[game::Properties::NON_COMBAT])) : (std::nullopt),
-			(descriptor.count(game::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::Properties::AMOUNT])) : (std::nullopt),
-			(descriptor.count(game::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::Properties::DURATION])) : (std::nullopt),
-			(descriptor.count(game::Properties::SFX_SUCCESS) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_SUCCESS])) : (std::nullopt),
-			(descriptor.count(game::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::Properties::SFX_FAILURE])) : (std::nullopt),
-			(descriptor.count(game::Properties::INITIAL_INVENTORY) > 0) ? (std::optional<size_t>((size_t)descriptor[game::Properties::INITIAL_INVENTORY])) : (std::nullopt),
-			(descriptor.count(game::Properties::COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::Properties::COMBAT])) : (std::nullopt),
-			(descriptor.count(game::Properties::NUMBER_APPEARING) > 0) ? ((size_t)descriptor[game::Properties::NUMBER_APPEARING]) : (0),
-			(descriptor.count(game::Properties::COMBAT_TEXT) > 0) ? (std::optional<std::string>(descriptor[game::Properties::COMBAT_TEXT])) : (std::nullopt)
+			descriptor[game::data::Properties::IMAGE_ID],
+			(descriptor.count(game::data::Properties::NON_COMBAT)>0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::NON_COMBAT])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::AMOUNT])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DURATION])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::SFX_SUCCESS) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_SUCCESS])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_FAILURE])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::INITIAL_INVENTORY) > 0) ? (std::optional<size_t>((size_t)descriptor[game::data::Properties::INITIAL_INVENTORY])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::COMBAT])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::NUMBER_APPEARING) > 0) ? ((size_t)descriptor[game::data::Properties::NUMBER_APPEARING]) : (0),
+			(descriptor.count(game::data::Properties::COMBAT_TEXT) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::COMBAT_TEXT])) : (std::nullopt)
 		};
 	}
 

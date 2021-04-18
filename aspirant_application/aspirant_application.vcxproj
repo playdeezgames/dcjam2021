@@ -253,7 +253,7 @@
     <ClInclude Include="Game.Creatures.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game.Item.h" />
-    <ClInclude Include="Game.Properties.h" />
+    <ClInclude Include="Game.Data.Properties.h" />
     <ClInclude Include="Game.World.Border.h" />
     <ClInclude Include="Game.World.h" />
     <ClInclude Include="Game.World.Items.h" />

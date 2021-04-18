@@ -1,5 +1,5 @@
 #include "Game.Creature.h"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include "Data.JSON.h"
 #include "Common.Utility.h"
 namespace game::creature
@@ -10,9 +10,9 @@ namespace game::creature
 	{
 		std::map<int, size_t> bribes;
 		auto& creatureDescriptor = descriptors[(int)creature];
-		if (creatureDescriptor.count(game::Properties::BRIBES) > 0)
+		if (creatureDescriptor.count(game::data::Properties::BRIBES) > 0)
 		{
-			auto& amounts = creatureDescriptor[game::Properties::BRIBES];
+			auto& amounts = creatureDescriptor[game::data::Properties::BRIBES];
 			for (auto& amount : amounts.items())
 			{
 				bribes[common::Utility::StringToInt(amount.key())] = (size_t)amount.value();
@@ -20,18 +20,18 @@ namespace game::creature
 		}
 		return
 		{
-			creatureDescriptor[game::Properties::IMAGE_ID],
-			creatureDescriptor[game::Properties::HEALTH],
-			creatureDescriptor[game::Properties::ATTACK],
-			creatureDescriptor[game::Properties::DEFEND],
-			creatureDescriptor[game::Properties::NUMBER_APPEARING],
+			creatureDescriptor[game::data::Properties::IMAGE_ID],
+			creatureDescriptor[game::data::Properties::HEALTH],
+			creatureDescriptor[game::data::Properties::ATTACK],
+			creatureDescriptor[game::data::Properties::DEFEND],
+			creatureDescriptor[game::data::Properties::NUMBER_APPEARING],
 			bribes
 		};
 	}
 
 	void InitializeFromFile(const std::string& filename)
 	{
-		descriptors = data::JSON::Load(filename);
+		descriptors = ::data::JSON::Load(filename);
 	}
 
 	std::vector<int> All()
@@ -39,7 +39,7 @@ namespace game::creature
 		std::vector<int> result;
 		for (auto& descriptor : descriptors)
 		{
-			result.push_back((int)descriptor[game::Properties::INDEX]);
+			result.push_back((int)descriptor[game::data::Properties::INDEX]);
 		}
 		return result;
 	}

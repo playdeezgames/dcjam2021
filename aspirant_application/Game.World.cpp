@@ -5,7 +5,7 @@
 #include "Maze.Direction.h"
 #include "Game.h"
 #include <sstream>
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 namespace game::World
 {
 	std::string XYToRoomKey(const common::XY<size_t>& xy)
@@ -18,31 +18,31 @@ namespace game::World
 	static nlohmann::json& GetNSBorders()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::Properties::NS_BORDERS) == 0)
+		if (data.count(game::data::Properties::NS_BORDERS) == 0)
 		{
-			data[game::Properties::NS_BORDERS] = nlohmann::json();
+			data[game::data::Properties::NS_BORDERS] = nlohmann::json();
 		}
-		return data[game::Properties::NS_BORDERS];
+		return data[game::data::Properties::NS_BORDERS];
 	}
 
 	static nlohmann::json& GetEWBorders()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::Properties::EW_BORDERS) == 0)
+		if (data.count(game::data::Properties::EW_BORDERS) == 0)
 		{
-			data[game::Properties::EW_BORDERS] = nlohmann::json();
+			data[game::data::Properties::EW_BORDERS] = nlohmann::json();
 		}
-		return data[game::Properties::EW_BORDERS];
+		return data[game::data::Properties::EW_BORDERS];
 	}
 
 	static nlohmann::json& GetExplored()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::Properties::EXPLORED) == 0)
+		if (data.count(game::data::Properties::EXPLORED) == 0)
 		{
-			data[game::Properties::EXPLORED] = nlohmann::json();
+			data[game::data::Properties::EXPLORED] = nlohmann::json();
 		}
-		return data[game::Properties::EXPLORED];
+		return data[game::data::Properties::EXPLORED];
 	}
 
 	const size_t COLUMNS = 12;

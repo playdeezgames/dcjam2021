@@ -1,7 +1,7 @@
 #include "Game.Avatar.Items.h"
 #include <map>
 #include "json.hpp"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"
 #include "Game.World.Items.h"
@@ -18,11 +18,11 @@ namespace game::avatar::Items
 	nlohmann::json& GetAvatarInventory()
 	{
 		auto& avatar = game::Avatar::GetAvatar();
-		if (avatar.count(game::Properties::INVENTORY) == 0)
+		if (avatar.count(game::data::Properties::INVENTORY) == 0)
 		{
-			avatar[game::Properties::INVENTORY] = nlohmann::json();
+			avatar[game::data::Properties::INVENTORY] = nlohmann::json();
 		}
-		return avatar[game::Properties::INVENTORY];
+		return avatar[game::data::Properties::INVENTORY];
 	}
 
 	static std::string ItemToKey(int item)

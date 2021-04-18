@@ -5,18 +5,18 @@
 #include "Game.World.h"
 #include "Game.Item.h"
 #include "Game.h"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include <sstream>
 namespace game::world::Items
 {
 	static nlohmann::json& GetRoomInventories()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::Properties::ROOM_INVENTORIES) == 0)
+		if (data.count(game::data::Properties::ROOM_INVENTORIES) == 0)
 		{
-			data[game::Properties::ROOM_INVENTORIES] = nlohmann::json();
+			data[game::data::Properties::ROOM_INVENTORIES] = nlohmann::json();
 		}
-		return data[game::Properties::ROOM_INVENTORIES];
+		return data[game::data::Properties::ROOM_INVENTORIES];
 	}
 
 	static nlohmann::json& GetRoomInventory(const common::XY<size_t>& xy)

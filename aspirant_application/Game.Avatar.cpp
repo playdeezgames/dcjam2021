@@ -9,7 +9,7 @@
 #include "Game.Creatures.h"
 #include "Game.World.h"
 #include "json.hpp"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include "Game.h"
 namespace game::Avatar
 {
@@ -18,31 +18,31 @@ namespace game::Avatar
 	nlohmann::json& GetAvatar()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::Properties::AVATAR) == 0)
+		if (data.count(game::data::Properties::AVATAR) == 0)
 		{
-			data[game::Properties::AVATAR] = nlohmann::json();
+			data[game::data::Properties::AVATAR] = nlohmann::json();
 		}
-		return data[game::Properties::AVATAR];
+		return data[game::data::Properties::AVATAR];
 	}
 
 	static void SetFacing(maze::Direction direction)
 	{
-		GetAvatar()[game::Properties::FACING] = (int)direction;
+		GetAvatar()[game::data::Properties::FACING] = (int)direction;
 	}
 
 	maze::Direction GetFacing()
 	{
-		return (maze::Direction)(int)GetAvatar()[game::Properties::FACING];
+		return (maze::Direction)(int)GetAvatar()[game::data::Properties::FACING];
 	}
 
 	static void SetColumn(size_t column)
 	{
-		GetAvatar()[game::Properties::COLUMN] = column;
+		GetAvatar()[game::data::Properties::COLUMN] = column;
 	}
 
 	static void SetRow(size_t row)
 	{
-		GetAvatar()[game::Properties::ROW] = row;
+		GetAvatar()[game::data::Properties::ROW] = row;
 	}
 
 	static void SetPosition(const common::XY<size_t> position)
@@ -53,7 +53,7 @@ namespace game::Avatar
 
 	common::XY<size_t> GetPosition()
 	{
-		return { (size_t)GetAvatar()[game::Properties::COLUMN], (size_t)GetAvatar()[game::Properties::ROW] };
+		return { (size_t)GetAvatar()[game::data::Properties::COLUMN], (size_t)GetAvatar()[game::data::Properties::ROW] };
 	}
 
 	std::optional<std::string> TurnLeft()

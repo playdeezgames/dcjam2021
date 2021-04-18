@@ -1,7 +1,7 @@
 #include "Game.Avatar.Statistics.h"
 #include <map>
 #include "json.hpp"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include "Game.Avatar.h"
 #include "Data.JSON.h"
 #include "Common.Data.Properties.h"
@@ -13,7 +13,7 @@ namespace game::avatar::Statistics
 
 	void InitializeFromFile(const std::string& fileName)
 	{
-		statistics = data::JSON::Load(fileName);
+		statistics = ::data::JSON::Load(fileName);
 	}
 
 	static const nlohmann::json& GetStatistic(game::avatar::Statistic statistic)
@@ -26,11 +26,11 @@ namespace game::avatar::Statistics
 	nlohmann::json& GetAvatarStatistics()
 	{
 		auto& avatar = game::Avatar::GetAvatar();
-		if (avatar.count(game::Properties::STATISTICS) == 0)
+		if (avatar.count(game::data::Properties::STATISTICS) == 0)
 		{
-			avatar[game::Properties::STATISTICS] = nlohmann::json();
+			avatar[game::data::Properties::STATISTICS] = nlohmann::json();
 		}
-		return avatar[game::Properties::STATISTICS];
+		return avatar[game::data::Properties::STATISTICS];
 	}
 
 	int Read(const ::game::avatar::Statistic& statistic)

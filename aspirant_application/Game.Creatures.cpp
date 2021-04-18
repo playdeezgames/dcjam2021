@@ -4,7 +4,7 @@
 #include <map>
 #include "Common.RNG.h"
 #include "Game.World.h"
-#include "Game.Properties.h"
+#include "Game.Data.Properties.h"
 #include <sstream>
 #include "Game.h"
 namespace game::Creatures
@@ -12,11 +12,11 @@ namespace game::Creatures
 	nlohmann::json& GetCreatures()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::Properties::CREATURES) == 0)
+		if (data.count(game::data::Properties::CREATURES) == 0)
 		{
-			data[game::Properties::CREATURES] = nlohmann::json();
+			data[game::data::Properties::CREATURES] = nlohmann::json();
 		}
-		return data[game::Properties::CREATURES];
+		return data[game::data::Properties::CREATURES];
 	}
 
 
@@ -40,7 +40,7 @@ namespace game::Creatures
 		if (creatures.count(place) > 0)
 		{
 			auto& creature = GetCreatures()[place];
-			return std::optional<CreatureInstance>({ (int)creature[game::Properties::CREATURE], (int)creature[game::Properties::WOUNDS] });
+			return std::optional<CreatureInstance>({ (int)creature[game::data::Properties::CREATURE], (int)creature[game::data::Properties::WOUNDS] });
 		}
 		return std::nullopt;
 	}
@@ -53,8 +53,8 @@ namespace game::Creatures
 		{
 			creatures[place] = nlohmann::json();
 		}
-		creatures[place][game::Properties::CREATURE] = (int)instance.creature;
-		creatures[place][game::Properties::WOUNDS] = instance.wounds;
+		creatures[place][game::data::Properties::CREATURE] = (int)instance.creature;
+		creatures[place][game::data::Properties::WOUNDS] = instance.wounds;
 	}
 
 	void Remove(const common::XY<size_t>& location)
