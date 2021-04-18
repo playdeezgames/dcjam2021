@@ -2,10 +2,7 @@
 #include <map>
 #include "json.hpp"
 #include "Game.Properties.h"
-namespace game::Avatar
-{
-	nlohmann::json& GetAvatar();
-}
+#include "Game.Avatar.h"
 namespace game::avatar::Statistics
 {
 	nlohmann::json& GetAvatarStatistics()

@@ -3,6 +3,7 @@
 #include "Common.XY.h"
 #include <string>
 #include <optional>
+#include "json.hpp"
 namespace game::Avatar
 {
 	std::optional<std::string> TurnLeft();
@@ -11,4 +12,5 @@ namespace game::Avatar
 	std::optional<std::string> MoveBack();
 	maze::Direction GetFacing();
 	common::XY<size_t> GetPosition();
+	nlohmann::json& GetAvatar();
 }
