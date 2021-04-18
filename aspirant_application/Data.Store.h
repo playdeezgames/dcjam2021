@@ -3,6 +3,7 @@ namespace data
 {
 	enum class Store
 	{
-		CREATURE_DESCRIPTORS
+		CREATURE_DESCRIPTORS,
+		ITEM_DESCRIPTORS
 	};
 }

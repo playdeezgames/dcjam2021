@@ -10,15 +10,9 @@
 #include "Game.Data.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"
+#include "Data.Stores.h"
 namespace game::item
 {
-	static nlohmann::json items;
-
-	void InitializeFromFile(const std::string& filename)
-	{
-		items = ::data::JSON::Load(filename);
-	}
-
 	static std::string ItemToItemKey(const int& item)
 	{
 		std::stringstream ss;
@@ -29,7 +23,7 @@ namespace game::item
 	std::vector<int> All()
 	{
 		std::vector<int> result;
-		for (auto& item : items.items())
+		for (auto& item : ::data::Stores::GetStore(::data::Store::ITEM_DESCRIPTORS).items())
 		{
 			result.push_back(common::Utility::StringToInt(item.key()));
 		}
@@ -38,7 +32,7 @@ namespace game::item
 
 	Descriptor GetDescriptor(int item)
 	{
-		auto descriptor = items[ItemToItemKey(item)];
+		auto& descriptor = ::data::Stores::GetStore(::data::Store::ITEM_DESCRIPTORS)[ItemToItemKey(item)];
 		return
 		{
 			descriptor[common::data::Properties::NAME],

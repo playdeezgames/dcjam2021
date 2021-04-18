@@ -30,7 +30,6 @@ namespace game
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();
-		void InitializeFromFile(const std::string&);//TODO: DAL
 	}
 }
 

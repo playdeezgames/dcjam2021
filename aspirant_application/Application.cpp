@@ -85,7 +85,6 @@ namespace common::Application
 	const std::string SFX = "config/audio/sfx.json";
 	const std::string MUX = "config/audio/mux.json";
 	const std::string KEYBOARD = "config/keyboard.json";
-	const std::string ITEMS = "config/items.json";
 	const std::string STATISTICS = "config/statistics.json";
 
 	static std::vector<void(*)()> starters = 
@@ -125,7 +124,6 @@ namespace common::Application
 		common::Audio::InitializeFromFile(SFX, MUX);
 		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
-		game::item::InitializeFromFile(ITEMS);
 		game::avatar::Statistics::InitializeFromFile(STATISTICS);
 
 		for (auto starter : starters)
