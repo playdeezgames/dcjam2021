@@ -3,19 +3,16 @@
 #include "json.hpp"
 #include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
-#include "Graphics.Types.h"
-namespace graphics::Layouts
-{
-	extern std::map<std::string, nlohmann::json> layouts;
-}
+#include "Graphics.Data.Types.h"
+#include "Graphics.Layouts.h"
 namespace graphics::Images
 {
 	template<typename TResult>
 	static TResult WithImage(const std::string& layoutName, const std::string& imageId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::layouts[layoutName])
+		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
-			if (thingie[common::data::Properties::TYPE] == graphics::Types::IMAGE)
+			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::IMAGE)
 			{
 				if (thingie.count(graphics::Properties::IMAGE_ID) > 0 &&
 					thingie[graphics::Properties::IMAGE_ID] == imageId)

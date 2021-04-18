@@ -266,7 +266,7 @@
     <ClInclude Include="Graphics.Menus.h" />
     <ClInclude Include="Graphics.Properties.h" />
     <ClInclude Include="Graphics.Texts.h" />
-    <ClInclude Include="Graphics.Types.h" />
+    <ClInclude Include="Graphics.Data.Types.h" />
     <ClInclude Include="Application.Renderer.h" />
     <ClInclude Include="Graphics.Colors.h" />
     <ClInclude Include="Command.h" />

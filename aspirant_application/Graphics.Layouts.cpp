@@ -1,7 +1,7 @@
 #include "Graphics.Layouts.h"
 #include "Data.JSON.h"
 #include <algorithm>
-#include "Graphics.Types.h"
+#include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Graphics.Layout.h"
@@ -18,10 +18,10 @@ namespace graphics::Layouts
 
 	void InitializeFromFile(const std::string& fileName)
 	{
-		table = data::JSON::Load(fileName);
+		table = ::data::JSON::Load(fileName);
 		for (auto& item : table.items())
 		{
-			layouts[item.key()] = data::JSON::Load(item.value());
+			layouts[item.key()] = ::data::JSON::Load(item.value());
 		}
 	}
 

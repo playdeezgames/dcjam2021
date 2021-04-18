@@ -1,7 +1,7 @@
 #include "Graphics.Layouts.h"
 #include "Data.JSON.h"
 #include <algorithm>
-#include "Graphics.Types.h"
+#include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 namespace graphics::Layouts
@@ -15,7 +15,7 @@ namespace graphics::Texts
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
-			if (thingie[common::data::Properties::TYPE] == graphics::Types::TEXT)
+			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::TEXT)
 			{
 				if (thingie.count(graphics::Properties::TEXT_ID) > 0 &&
 					thingie[graphics::Properties::TEXT_ID] == textId)

@@ -1,7 +1,7 @@
 #include "Graphics.Layouts.h"
 #include "Data.JSON.h"
 #include <algorithm>
-#include "Graphics.Types.h"
+#include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Graphics.MenuItems.h"
@@ -12,7 +12,7 @@ namespace graphics::MenuItems
 	{
 		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
-			if (thingie[common::data::Properties::TYPE] == graphics::Types::MENU)
+			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::MENU)
 			{
 				for (auto& menuItem : thingie[graphics::Properties::MENU_ITEMS])
 				{

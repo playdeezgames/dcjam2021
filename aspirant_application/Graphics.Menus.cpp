@@ -1,7 +1,7 @@
 #include "Graphics.Menus.h"
 #include "Data.JSON.h"
 #include <algorithm>
-#include "Graphics.Types.h"
+#include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
 #include "Graphics.Properties.h"
 #include "Graphics.Layouts.h"
@@ -12,7 +12,7 @@ namespace graphics::Menus
 	{
 		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
-			if (thingie[common::data::Properties::TYPE] == graphics::Types::MENU &&
+			if (thingie[common::data::Properties::TYPE] == graphics::data::Types::MENU &&
 				thingie[graphics::Properties::MENU_ID] == menuId)
 			{
 				return func(thingie);

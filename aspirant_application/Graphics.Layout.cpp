@@ -1,6 +1,6 @@
 #include "Common.Utility.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Types.h"
+#include "Graphics.Data.Types.h"
 #include <map>
 #include "json.hpp"
 #include <SDL.h>
@@ -16,13 +16,13 @@ namespace graphics::Layout
 {
 	static std::map<std::string, void(*)(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)> table =
 	{
-		{graphics::Types::IMAGE, graphics::Image::Draw},
-		{graphics::Types::MENU, graphics::Menu::Draw},
-		{graphics::Types::TEXT, graphics::Text::Draw},
-		{graphics::Types::WORLD_MAP, graphics::WorldMap::Draw},
-		{graphics::Types::LAYOUT, graphics::Sublayout::Draw},
-		{graphics::Types::FLOOR_INVENTORY, graphics::FloorInventory::Draw},
-		{graphics::Types::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
+		{graphics::data::Types::IMAGE, graphics::Image::Draw},
+		{graphics::data::Types::MENU, graphics::Menu::Draw},
+		{graphics::data::Types::TEXT, graphics::Text::Draw},
+		{graphics::data::Types::WORLD_MAP, graphics::WorldMap::Draw},
+		{graphics::data::Types::LAYOUT, graphics::Sublayout::Draw},
+		{graphics::data::Types::FLOOR_INVENTORY, graphics::FloorInventory::Draw},
+		{graphics::data::Types::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
 	};
 
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
