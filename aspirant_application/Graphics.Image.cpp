@@ -17,8 +17,8 @@ namespace graphics::Image
 					model[Properties::SPRITE],
 					renderer,
 					common::XY<int>(
-						(int)model[common::Properties::X],
-						(int)model[common::Properties::Y]),
+						(int)model[common::data::Properties::X],
+						(int)model[common::data::Properties::Y]),
 					(model.count(Properties::COLOR)>0) ?
 					(::graphics::Colors::Read(model[Properties::COLOR])) :
 					(defaultColor));

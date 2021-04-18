@@ -15,7 +15,7 @@ namespace graphics::Texts
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
-			if (thingie[common::Properties::TYPE] == graphics::Types::TEXT)
+			if (thingie[common::data::Properties::TYPE] == graphics::Types::TEXT)
 			{
 				if (thingie.count(graphics::Properties::TEXT_ID) > 0 &&
 					thingie[graphics::Properties::TEXT_ID] == textId)

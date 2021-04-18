@@ -29,7 +29,7 @@ namespace graphics::Layout
 	{
 		for (auto& drawn : model)
 		{
-			std::string drawnType = drawn[common::Properties::TYPE];
+			std::string drawnType = drawn[common::data::Properties::TYPE];
 			auto drawer = table.find(drawnType);
 			if (drawer != table.end())
 			{

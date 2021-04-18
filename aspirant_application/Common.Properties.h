@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace common::Properties//TODO: DAL
+namespace common::data::Properties//TODO: DAL
 {
 	const std::string DEFAULT = "default";
 	const std::string HEIGHT = "height";

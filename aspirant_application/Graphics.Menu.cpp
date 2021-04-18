@@ -20,8 +20,8 @@ namespace graphics::Menu
 		for (auto& menuItem : menuItems)
 		{
 			std::string text = menuItem[Properties::TEXT];
-			int x = menuItem[common::Properties::X];
-			int y = menuItem[common::Properties::Y];
+			int x = menuItem[common::data::Properties::X];
+			int y = menuItem[common::data::Properties::Y];
 			if (dropShadow)
 			{
 				Fonts::WriteText(

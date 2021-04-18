@@ -12,7 +12,7 @@ namespace graphics::MenuItems
 	{
 		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
-			if (thingie[common::Properties::TYPE] == graphics::Types::MENU)
+			if (thingie[common::data::Properties::TYPE] == graphics::Types::MENU)
 			{
 				for (auto& menuItem : thingie[graphics::Properties::MENU_ITEMS])
 				{

@@ -15,7 +15,7 @@ namespace graphics::Images
 	{
 		for (auto& thingie : graphics::Layouts::layouts[layoutName])
 		{
-			if (thingie[common::Properties::TYPE] == graphics::Types::IMAGE)
+			if (thingie[common::data::Properties::TYPE] == graphics::Types::IMAGE)
 			{
 				if (thingie.count(graphics::Properties::IMAGE_ID) > 0 &&
 					thingie[graphics::Properties::IMAGE_ID] == imageId)

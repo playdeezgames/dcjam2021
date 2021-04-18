@@ -41,7 +41,7 @@ namespace game::item
 		auto descriptor = items[ItemToItemKey(item)];
 		return
 		{
-			descriptor[common::Properties::NAME],
+			descriptor[common::data::Properties::NAME],
 			descriptor[game::Properties::IMAGE_ID],
 			(descriptor.count(game::Properties::NON_COMBAT)>0) ? (std::optional<Usage>((Usage)(int)descriptor[game::Properties::NON_COMBAT])) : (std::nullopt),
 			(descriptor.count(game::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::Properties::AMOUNT])) : (std::nullopt),

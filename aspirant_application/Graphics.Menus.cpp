@@ -12,7 +12,7 @@ namespace graphics::Menus
 	{
 		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
-			if (thingie[common::Properties::TYPE] == graphics::Types::MENU &&
+			if (thingie[common::data::Properties::TYPE] == graphics::Types::MENU &&
 				thingie[graphics::Properties::MENU_ID] == menuId)
 			{
 				return func(thingie);

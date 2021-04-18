@@ -14,8 +14,8 @@ namespace graphics::Text
 					renderer, 
 					common::XY<int>
 					(
-						(int)model[common::Properties::X] + (int)model[graphics::Properties::DROP_SHADOW_X], 
-						(int)model[common::Properties::Y] + (int)model[graphics::Properties::DROP_SHADOW_Y]
+						(int)model[common::data::Properties::X] + (int)model[graphics::Properties::DROP_SHADOW_X],
+						(int)model[common::data::Properties::Y] + (int)model[graphics::Properties::DROP_SHADOW_Y]
 					),
 					model[graphics::Properties::TEXT],
 					model[graphics::Properties::DROP_SHADOW_COLOR],
@@ -26,8 +26,8 @@ namespace graphics::Text
 				renderer, 
 				common::XY<int>
 				(
-					model[common::Properties::X], 
-					model[common::Properties::Y]
+					model[common::data::Properties::X],
+					model[common::data::Properties::Y]
 				),
 				model[graphics::Properties::TEXT],
 				model[graphics::Properties::COLOR],

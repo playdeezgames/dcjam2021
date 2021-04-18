@@ -40,17 +40,17 @@ namespace game::avatar::Statistics
 
 	int Minimum(const ::game::avatar::Statistic& statistic)
 	{
-		return (int)GetStatistic(statistic)[common::Properties::MINIMUM];
+		return (int)GetStatistic(statistic)[common::data::Properties::MINIMUM];
 	}
 
 	int Maximum(const ::game::avatar::Statistic& statistic)
 	{
-		return (int)GetStatistic(statistic)[common::Properties::MAXIMUM];
+		return (int)GetStatistic(statistic)[common::data::Properties::MAXIMUM];
 	}
 
 	int Default(const ::game::avatar::Statistic& statistic)
 	{
-		return (int)GetStatistic(statistic)[common::Properties::DEFAULT];
+		return (int)GetStatistic(statistic)[common::data::Properties::DEFAULT];
 	}
 
 	void Write(const ::game::avatar::Statistic& statistic, int value)

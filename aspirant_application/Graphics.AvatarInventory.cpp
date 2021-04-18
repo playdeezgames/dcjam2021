@@ -54,8 +54,8 @@ namespace graphics::AvatarInventory
 
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
-		int x = model[common::Properties::X];
-		int y = model[common::Properties::Y];
+		int x = model[common::data::Properties::X];
+		int y = model[common::data::Properties::Y];
 		int rowHeight = model[graphics::Properties::ROW_HEIGHT];
 		std::string font = model[graphics::Properties::FONT];
 		std::string inactiveColor = model[graphics::Properties::COLORS][graphics::Properties::INACTIVE];

@@ -58,8 +58,8 @@ namespace common::Application
 
 	static void StartWindow(const nlohmann::json& properties)
 	{
-		int windowWidth = properties[common::Properties::WIDTH];
-		int windowHeight = properties[common::Properties::HEIGHT];
+		int windowWidth = properties[common::data::Properties::WIDTH];
+		int windowHeight = properties[common::data::Properties::HEIGHT];
 		int logicalWidth = properties[LOGICAL_WIDTH];
 		int logicalHeight = properties[LOGICAL_HEIGHT];
 		std::string windowTitle = properties[TITLE];
@@ -98,7 +98,7 @@ namespace common::Application
 		SDL_Init(SDL_INIT_EVERYTHING);
 		atexit(SDL_Quit);
 
-		auto properties = data::JSON::Load(configFile);
+		auto properties = ::data::JSON::Load(configFile);
 		StartAudio(properties);
 		StartWindow(properties);
 		StartControllers();

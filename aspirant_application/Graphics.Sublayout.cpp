@@ -6,6 +6,6 @@ namespace graphics::Sublayout
 {
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
-		graphics::Layouts::Draw(renderer, model[common::Properties::NAME]);
+		graphics::Layouts::Draw(renderer, model[common::data::Properties::NAME]);
 	}
 }

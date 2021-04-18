@@ -49,22 +49,22 @@ namespace graphics
 		{
 			xy.GetX() + ((model.count(Properties::OFFSET_X) > 0) ? ((int)model[Properties::OFFSET_X]) : (0)),
 			xy.GetY() + ((model.count(Properties::OFFSET_Y) > 0) ? ((int)model[Properties::OFFSET_Y]) : (0)),
-			model[common::Properties::WIDTH],
-			model[common::Properties::HEIGHT]
+			model[common::data::Properties::WIDTH],
+			model[common::data::Properties::HEIGHT]
 		};
 		SDL_Rect source =
 		{
-			model[common::Properties::X],
-			model[common::Properties::Y],
-			model[common::Properties::WIDTH],
-			model[common::Properties::HEIGHT]
+			model[common::data::Properties::X],
+			model[common::data::Properties::Y],
+			model[common::data::Properties::WIDTH],
+			model[common::data::Properties::HEIGHT]
 		};
 		SDL_RenderCopy(renderer.get(), texture.get(), &source, &rcDst);
 	}
 
 	int Sprite::GetWidth() const
 	{
-		return model[common::Properties::WIDTH];
+		return model[common::data::Properties::WIDTH];
 	}
 }
 namespace graphics::Sprites
