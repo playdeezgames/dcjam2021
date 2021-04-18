@@ -215,6 +215,9 @@
     <ClCompile Include="Game.Creature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Data.Stores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">
@@ -395,6 +398,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.Layout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.Store.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.Stores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

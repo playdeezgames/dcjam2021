@@ -31,6 +31,7 @@
 #include "States.h"
 #include "Sublayouts.h"
 #include "Game.Avatar.Statistics.h"
+#include "Data.Stores.h"
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -84,12 +85,12 @@ namespace common::Application
 	const std::string SFX = "config/audio/sfx.json";
 	const std::string MUX = "config/audio/mux.json";
 	const std::string KEYBOARD = "config/keyboard.json";
-	const std::string CREATURES = "config/creatures.json";
 	const std::string ITEMS = "config/items.json";
 	const std::string STATISTICS = "config/statistics.json";
 
 	static std::vector<void(*)()> starters = 
 	{
+		data::Stores::Start,
 		state::Splash::Start,
 		state::MainMenu::Start,
 		state::About::Start,
@@ -124,7 +125,6 @@ namespace common::Application
 		common::Audio::InitializeFromFile(SFX, MUX);
 		Options::InitializeFromFile(OPTIONS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
-		game::creature::InitializeFromFile(CREATURES);
 		game::item::InitializeFromFile(ITEMS);
 		game::avatar::Statistics::InitializeFromFile(STATISTICS);
 

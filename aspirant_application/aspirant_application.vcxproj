@@ -168,6 +168,7 @@
     <ClCompile Include="Application.TextInput.cpp" />
     <ClCompile Include="Application.UIState.cpp" />
     <ClCompile Include="Application.Update.cpp" />
+    <ClCompile Include="Data.Stores.cpp" />
     <ClCompile Include="Game.Avatar.cpp" />
     <ClCompile Include="Game.Avatar.Items.cpp" />
     <ClCompile Include="Game.Avatar.Statistics.cpp" />
@@ -243,6 +244,8 @@
     <ClInclude Include="Common.Card.h" />
     <ClInclude Include="Common.Deck.h" />
     <ClInclude Include="Common.Data.Properties.h" />
+    <ClInclude Include="Data.Store.h" />
+    <ClInclude Include="Data.Stores.h" />
     <ClInclude Include="Game.Avatar.h" />
     <ClInclude Include="Game.Avatar.Items.h" />
     <ClInclude Include="Game.Avatar.Statistic.h" />

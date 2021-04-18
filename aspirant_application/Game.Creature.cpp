@@ -2,14 +2,13 @@
 #include "Game.Data.Properties.h"
 #include "Data.JSON.h"
 #include "Common.Utility.h"
+#include "Data.Stores.h"
 namespace game::creature
 {
-	nlohmann::json descriptors;
-
 	Descriptor GetDescriptor(int creature)
 	{
 		std::map<int, size_t> bribes;
-		auto& creatureDescriptor = descriptors[(int)creature];
+		auto& creatureDescriptor = ::data::Stores::GetStore(::data::Store::CREATURE_DESCRIPTORS)[(int)creature];
 		if (creatureDescriptor.count(game::data::Properties::BRIBES) > 0)
 		{
 			auto& amounts = creatureDescriptor[game::data::Properties::BRIBES];
@@ -29,15 +28,10 @@ namespace game::creature
 		};
 	}
 
-	void InitializeFromFile(const std::string& filename)
-	{
-		descriptors = ::data::JSON::Load(filename);
-	}
-
 	std::vector<int> All()
 	{
 		std::vector<int> result;
-		for (auto& descriptor : descriptors)
+		for (auto& descriptor : ::data::Stores::GetStore(::data::Store::CREATURE_DESCRIPTORS))
 		{
 			result.push_back((int)descriptor[game::data::Properties::INDEX]);
 		}
