@@ -23,7 +23,7 @@ namespace graphics::Textures
 		}
 	}
 
-	std::shared_ptr<SDL_Texture> Read(const std::string& name)
+	std::shared_ptr<SDL_Texture> Read(std::shared_ptr<SDL_Renderer>, const std::string& name)
 	{
 		auto iter = textures.find(name);
 		if (iter != textures.end())
