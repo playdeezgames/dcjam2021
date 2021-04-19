@@ -5,28 +5,28 @@
 #include "Common.Data.Properties.h"
 #include "Graphics.Data.Properties.h"
 #include "Graphics.Layout.h"
+#include "Data.Stores.h"
 namespace graphics::Layouts
 {
 	std::map<std::string, nlohmann::json> layouts;
 
-	nlohmann::json& GetLayout(const std::string& layoutName)
+	void InitializeLayout(const std::string& layoutName)
 	{
-		return layouts.find(layoutName)->second;
+		if (!layouts.contains(layoutName))
+		{
+			layouts[layoutName] = ::data::JSON::Load(::data::Stores::GetStore(::data::Store::LAYOUTS)[layoutName]);
+		}
 	}
 
-	static nlohmann::json table;
-
-	void InitializeFromFile(const std::string& fileName)
+	nlohmann::json& GetLayout(const std::string& layoutName)
 	{
-		table = ::data::JSON::Load(fileName);
-		for (auto& item : table.items())
-		{
-			layouts[item.key()] = ::data::JSON::Load(item.value());
-		}
+		InitializeLayout(layoutName);
+		return layouts.find(layoutName)->second;
 	}
 
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const std::string& layoutName)
 	{
+		InitializeLayout(layoutName);
 		graphics::Layout::Draw(renderer, layouts[layoutName]);
 	}
 }

@@ -76,7 +76,6 @@ namespace Application
 }
 namespace common::Application
 {
-	const std::string LAYOUTS = "config/ui/layouts.json";
 	const std::string OPTIONS = "config/options.json";
 	const std::string KEYBOARD = "config/keyboard.json";
 	const std::string STATISTICS = "config/statistics.json";
@@ -109,7 +108,6 @@ namespace common::Application
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
-		graphics::Layouts::InitializeFromFile(LAYOUTS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::avatar::Statistics::InitializeFromFile(STATISTICS);
 

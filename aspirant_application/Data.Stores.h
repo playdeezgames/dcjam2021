@@ -11,7 +11,8 @@ namespace data
 		MUSIC_THEMES,
 		TEXTURES,
 		SPRITES,
-		FONTS
+		FONTS,
+		LAYOUTS
 	};
 }
 namespace data::Stores
