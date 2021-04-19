@@ -1,10 +1,9 @@
 #pragma once
 #include <string>
-#include <optional>
 #include <SDL.h>
 #include "Common.XY.h"
-#include "json.hpp"
 #include <optional>
+#include <memory>
 namespace graphics::Sprites
 {
 	void Draw(const std::string&, std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&, const SDL_Color&);
