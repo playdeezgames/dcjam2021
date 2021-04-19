@@ -16,43 +16,47 @@ namespace state::Start
 		BACK
 	};
 
-	static void ActivateItem()
+	static void NewGame()
 	{
-		switch ((StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
+		game::Reset();
+		auto sfx = application::UIState::EnterGame();
+		if (sfx)
 		{
-		case StartGameItem::NEW_GAME:
-		{
-			game::Reset();
-			auto sfx = application::UIState::EnterGame();
-			if (sfx)
-			{
-				common::audio::Sfx::Play(*sfx);
-			}
-		}
-		break;
-		case StartGameItem::BACK:
-			::application::UIState::Write(::UIState::MAIN_MENU);
-			break;
+			common::audio::Sfx::Play(*sfx);
 		}
 	}
 
+	static void GoBack()
+	{
+		::application::UIState::Write(::UIState::MAIN_MENU);
+	}
+
+	const std::map<StartGameItem, std::function<void()>> activations =
+	{
+		{ StartGameItem::NEW_GAME, NewGame },
+		{ StartGameItem::BACK, GoBack }
+	};
+
+	static void ActivateItem()
+	{
+		activations.find((StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())->second();
+	}
+
+	const std::map<::Command, std::function<void()>> commandHandlers =
+	{
+		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
+		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
+		{ ::Command::GREEN, ActivateItem }
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
+		auto iter = commandHandlers.find(command);
+		if (iter != commandHandlers.end())
 		{
-		case ::Command::UP:
-			graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
-			break;
-		case ::Command::DOWN:
-			graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
-			break;
-		case ::Command::BACK:
-		case ::Command::RED:
-			::application::UIState::Write(::UIState::MAIN_MENU);
-			break;
-		case ::Command::GREEN:
-			ActivateItem();
-			break;
+			iter->second();
 		}
 	}
 

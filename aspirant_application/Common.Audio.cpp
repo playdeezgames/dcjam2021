@@ -23,7 +23,6 @@ namespace common::audio
 			(volume < 0) ? (0) :
 			(volume > MIX_MAX_VOLUME) ? (MIX_MAX_VOLUME) :
 			(volume);
-
 	}
 
 	namespace Mux
@@ -167,6 +166,5 @@ namespace common::Audio
 	{
 		return muted;
 	}
-
 }
 
