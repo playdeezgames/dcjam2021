@@ -12,6 +12,7 @@
 #include "Graphics.MenuItems.h"
 #include "Application.Sounds.h"
 #include <SDL_mixer.h>
+#include "Common.Utility.h"
 namespace state::Options
 {
 	const std::string LAYOUT_NAME = "State.Options";
@@ -82,11 +83,7 @@ namespace state::Options
 
 	static void ActivateItem()
 	{
-		auto iter = activators.find(GetCurrentItem());
-		if (iter != activators.end())
-		{
-			iter->second();
-		}
+		common::Utility::Dispatch(activators, GetCurrentItem());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
@@ -102,11 +99,7 @@ namespace state::Options
 
 	static void OnCommand(const ::Command& command)
 	{
-		auto iter = commandHandlers.find(command);
-		if (iter != commandHandlers.end())
-		{
-			iter->second();
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 
 	static void UpdateMuteMenuItem(const Uint32&)

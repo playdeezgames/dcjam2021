@@ -5,6 +5,7 @@
 #include "Graphics.Menus.h"
 #include "Game.h"
 #include "Common.Audio.h"
+#include "Common.Utility.h"
 namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";
@@ -27,7 +28,7 @@ namespace state::Start
 		::application::UIState::Write(::UIState::MAIN_MENU);
 	}
 
-	const std::map<StartGameItem, std::function<void()>> activations =
+	const std::map<StartGameItem, std::function<void()>> activators =
 	{
 		{ StartGameItem::NEW_GAME, NewGame },
 		{ StartGameItem::BACK, GoBack }
@@ -35,7 +36,7 @@ namespace state::Start
 
 	static void ActivateItem()
 	{
-		activations.find((StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())->second();
+		common::Utility::Dispatch(activators, (StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
@@ -49,11 +50,7 @@ namespace state::Start
 
 	static void OnCommand(const ::Command& command)
 	{
-		auto iter = commandHandlers.find(command);
-		if (iter != commandHandlers.end())
-		{
-			iter->second();
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 
 	void Start()

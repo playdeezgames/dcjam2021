@@ -3,6 +3,7 @@
 #include "Application.Command.h"
 #include "Application.UIState.h"
 #include "Graphics.Menus.h"
+#include "Common.Utility.h"
 namespace state::MainMenu
 {
 	const std::string LAYOUT_NAME = "State.MainMenu";
@@ -26,11 +27,7 @@ namespace state::MainMenu
 
 	static void ActivateItem()
 	{
-		auto iter = activators.find((MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
-		if (iter != activators.end())
-		{
-			iter->second();
-		}
+		common::Utility::Dispatch(activators, (MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
@@ -44,11 +41,7 @@ namespace state::MainMenu
 
 	static void OnCommand(const ::Command& command)
 	{
-		auto iter = commandHandlers.find(command);
-		if (iter != commandHandlers.end())
-		{
-			iter->second();
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 
 	void Start()
