@@ -6,6 +6,7 @@
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
+#include <vector>
 namespace sublayout::EnemyStats
 {
 	const std::string LAYOUT_NAME = "Sublayout.EnemyStats";
@@ -57,13 +58,19 @@ namespace sublayout::EnemyStats
 		::graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TEXT_ID, ss.str());
 	}
 
+	const std::vector<::UIState> states =
+	{
+		::UIState::IN_PLAY_COMBAT,
+		::UIState::IN_PLAY_COMBAT_RESULT
+	};
+
 	void Start()
 	{
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, UpdateHealth);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, UpdateHealth);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, UpdateAttack);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, UpdateAttack);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, UpdateDefend);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, UpdateDefend);
+		for (auto state : states)
+		{
+			::application::Update::AddHandler(state, UpdateHealth);
+			::application::Update::AddHandler(state, UpdateAttack);
+			::application::Update::AddHandler(state, UpdateDefend);
+		}
 	}
 }
