@@ -8,7 +8,5 @@
 namespace graphics::Sprites
 {
 	void Draw(const std::string&, std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&, const SDL_Color&);
-	void Draw(const std::string&, std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&);
 	std::optional<int> GetWidth(const std::string&);
-
 }
