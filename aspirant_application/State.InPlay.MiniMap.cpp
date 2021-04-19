@@ -16,32 +16,24 @@ namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
 
+	const std::map<::Command, std::function<void()>> commandHandlers =
+	{
+		{ ::Command::BACK, []() { application::UIState::Write(::UIState::LEAVE_PLAY); }},
+		{ ::Command::LEFT, game::Avatar::TurnLeft },
+		{ ::Command::RIGHT, game::Avatar::TurnRight },
+		{ ::Command::UP, game::Avatar::MoveAhead },
+		{ ::Command::DOWN, game::Avatar::MoveBack },
+		{ ::Command::NEXT, []() { application::UIState::Write(::UIState::IN_PLAY_FLOOR); }},
+		{ ::Command::YELLOW, []() {	application::UIState::Write(::UIState::IN_PLAY_FLOOR); }},
+		{ ::Command::PREVIOUS, []() { application::UIState::Write(::UIState::IN_PLAY_STATUS); }}
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
+		auto iter = commandHandlers.find(command);
+		if (iter != commandHandlers.end())
 		{
-		case ::Command::BACK:
-			application::UIState::Write(::UIState::LEAVE_PLAY);
-			break;
-		case ::Command::LEFT:
-			game::Avatar::TurnLeft();
-			break;
-		case ::Command::RIGHT:
-			game::Avatar::TurnRight();
-			break;
-		case ::Command::UP:
-			game::Avatar::MoveAhead();
-			break;
-		case ::Command::DOWN:
-			game::Avatar::MoveBack();
-			break;
-		case ::Command::NEXT:
-		case ::Command::YELLOW:
-			application::UIState::Write(::UIState::IN_PLAY_FLOOR);
-			break;
-		case ::Command::PREVIOUS:
-			application::UIState::Write(::UIState::IN_PLAY_STATUS);
-			break;
+			iter->second();
 		}
 	}
 	void Start()
