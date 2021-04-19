@@ -18,25 +18,25 @@ namespace sublayout::POV
 	const std::string POSITION_TEXT_ID = "Position";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
 
-	static std::map<game::world::Border, std::string> leftSides =
+	const std::map<game::world::Border, std::string> leftSides =
 	{
 		{game::world::Border::DOOR, "LeftDoor"},
 		{game::world::Border::WALL, "LeftWall"}
 	};
 
-	static std::map<game::world::Border, std::string> rightSides =
+	const std::map<game::world::Border, std::string> rightSides =
 	{
 		{game::world::Border::DOOR, "RightDoor"},
 		{game::world::Border::WALL, "RightWall"}
 	};
 
-	static std::map<game::world::Border, std::string> aheads =
+	const std::map<game::world::Border, std::string> aheads =
 	{
 		{game::world::Border::DOOR, "AheadDoor"},
 		{game::world::Border::WALL, "AheadWall"}
 	};
 
-	static std::map<maze::Direction, std::string> directionNames =
+	const std::map<maze::Direction, std::string> directionNames =
 	{
 		{maze::Direction::NORTH, "N"},
 		{maze::Direction::EAST,  "E"},
@@ -46,7 +46,7 @@ namespace sublayout::POV
 
 	static void UpdateDirection(maze::Direction facing	)
 	{
-		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames[facing]);
+		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames.find(facing)->second);
 	}
 
 	static void UpdateCreatures(const common::XY<size_t> position)
@@ -63,9 +63,9 @@ namespace sublayout::POV
 
 	static void UpdateRoom(const common::XY<size_t> position, const maze::Direction& facing)
 	{
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides[game::World::GetBorderLeft(position, facing)]);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads[game::World::GetBorderAhead(position, facing)]);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides[game::World::GetBorderRight(position, facing)]);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads.find(game::World::GetBorderAhead(position, facing))->second);
+		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides.find(game::World::GetBorderRight(position, facing))->second);
 	}
 
 	static void UpdateItems(const common::XY<size_t> position)
