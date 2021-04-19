@@ -15,8 +15,6 @@ namespace maze
 		return allDirections;
 	}
 
-
-
 	Direction Directions::Opposite(Direction direction)
 	{
 		switch (direction)

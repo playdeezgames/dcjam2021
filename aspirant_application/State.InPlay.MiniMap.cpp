@@ -12,6 +12,7 @@
 #include "Game.Item.h"
 #include <sstream>
 #include "States.h"
+#include "Common.Utility.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
@@ -30,11 +31,7 @@ namespace state::in_play::MiniMap
 
 	static void OnCommand(const ::Command& command)
 	{
-		auto iter = commandHandlers.find(command);
-		if (iter != commandHandlers.end())
-		{
-			iter->second();
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 	void Start()
 	{
