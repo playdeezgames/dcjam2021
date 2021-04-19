@@ -9,7 +9,8 @@ namespace data
 		COLORS,
 		SOUND_EFFECTS,
 		MUSIC_THEMES,
-		TEXTURES
+		TEXTURES,
+		SPRITES
 	};
 }
 namespace data::Stores

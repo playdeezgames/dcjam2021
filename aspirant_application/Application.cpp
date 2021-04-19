@@ -76,7 +76,6 @@ namespace Application
 }
 namespace common::Application
 {
-	const std::string SPRITE = "config/graphics/sprites.json";
 	const std::string FONTS = "config/graphics/fonts.json";
 	const std::string LAYOUTS = "config/ui/layouts.json";
 	const std::string OPTIONS = "config/options.json";
@@ -111,7 +110,6 @@ namespace common::Application
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
-		graphics::Sprites::InitializeFromFile(SPRITE);
 		graphics::Fonts::InitializeFromFile(FONTS);
 		graphics::Layouts::InitializeFromFile(LAYOUTS);
 		application::Keyboard::InitializeFromFile(KEYBOARD);

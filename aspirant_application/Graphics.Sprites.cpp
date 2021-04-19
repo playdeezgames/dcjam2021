@@ -4,6 +4,7 @@
 #include "Graphics.Textures.h"
 #include "Common.Data.Properties.h"
 #include "Graphics.Data.Properties.h"
+#include "Data.Stores.h"
 namespace graphics
 {
 	class Sprite
@@ -70,13 +71,12 @@ namespace graphics
 namespace graphics::Sprites
 {
 	static std::map<std::string, Sprite> sprites;
-	static nlohmann::json table;
 
 	std::optional<Sprite> Read(const std::string& name)
 	{
-		if (table.count(name) > 0)
+		if (::data::Stores::GetStore(::data::Store::SPRITES).count(name) > 0)
 		{
-			return Sprite(table[name]);
+			return Sprite(::data::Stores::GetStore(::data::Store::SPRITES)[name]);
 		}
 		else
 		{
@@ -110,10 +110,5 @@ namespace graphics::Sprites
 			return sprite.value().GetWidth();
 		}
 		return std::nullopt;
-	}
-
-	void InitializeFromFile(const std::string& fileName)
-	{
-		table = ::data::JSON::Load(fileName);
 	}
 }
