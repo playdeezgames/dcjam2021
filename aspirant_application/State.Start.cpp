@@ -19,11 +19,7 @@ namespace state::Start
 	static void NewGame()
 	{
 		game::Reset();
-		auto sfx = application::UIState::EnterGame();
-		if (sfx)
-		{
-			common::audio::Sfx::Play(*sfx);
-		}
+		common::audio::Sfx::Play(application::UIState::EnterGame());
 	}
 
 	static void GoBack()

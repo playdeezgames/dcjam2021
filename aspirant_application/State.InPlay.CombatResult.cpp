@@ -23,11 +23,7 @@ namespace state::in_play::CombatResult
 			break;
 		case ::Command::GREEN:
 			game::Combat::Advance();
-			auto sfx = application::UIState::EnterGame();
-			if (sfx)
-			{
-				common::audio::Sfx::Play(*sfx);
-			}
+			common::audio::Sfx::Play(application::UIState::EnterGame());
 			break;
 		}
 	}

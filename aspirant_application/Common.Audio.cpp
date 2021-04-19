@@ -121,6 +121,14 @@ namespace common::audio
 			}
 		}
 
+		void Play(const std::optional<std::string>& name)
+		{
+			if (name)
+			{
+				Play(name.value());
+			}
+		}
+
 		void SetVolume(int volume)
 		{
 			Initialize();

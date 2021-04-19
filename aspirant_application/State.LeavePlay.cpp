@@ -24,11 +24,7 @@ namespace state::LeavePlay
 			::application::UIState::Write(::UIState::MAIN_MENU);
 			return;
 		case LeavePlayItem::CONTINUE:
-			auto sfx = application::UIState::EnterGame();
-			if (sfx)
-			{
-				common::audio::Sfx::Play(*sfx);
-			}
+			common::audio::Sfx::Play(application::UIState::EnterGame());
 			return;
 		}
 	}
@@ -47,6 +43,8 @@ namespace state::LeavePlay
 			ActivateItem();
 			break;
 		case ::Command::BACK:
+			::application::UIState::Write(::UIState::MAIN_MENU);
+			break;
 		case ::Command::RED:
 			::application::UIState::Write(::UIState::MAIN_MENU);
 			break;
