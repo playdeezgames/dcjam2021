@@ -16,38 +16,36 @@ namespace state::LeavePlay
 		ABANDON
 	};
 
+	const std::map<LeavePlayItem, std::function<void()>> activators =
+	{
+		{ LeavePlayItem::ABANDON, []() {::application::UIState::Write(::UIState::MAIN_MENU); }},
+		{ LeavePlayItem::CONTINUE, []() {common::audio::Sfx::Play(application::UIState::EnterGame()); }}
+	};
+
 	static void ActivateItem()
 	{
-		switch ((LeavePlayItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
+		auto iter = activators.find((LeavePlayItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		if (iter != activators.end())
 		{
-		case LeavePlayItem::ABANDON:
-			::application::UIState::Write(::UIState::MAIN_MENU);
-			return;
-		case LeavePlayItem::CONTINUE:
-			common::audio::Sfx::Play(application::UIState::EnterGame());
-			return;
+			iter->second();
 		}
 	}
 
+	const std::map<::Command, std::function<void()>> commandHandlers =
+	{
+		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::GREEN, ActivateItem },
+		{ ::Command::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
+		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
+		auto iter = commandHandlers.find(command);
+		if (iter != commandHandlers.end())
 		{
-		case ::Command::UP:
-			graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
-			break;
-		case ::Command::DOWN:
-			graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
-			break;
-		case ::Command::GREEN:
-			ActivateItem();
-			break;
-		case ::Command::BACK:
-			::application::UIState::Write(::UIState::MAIN_MENU);
-			break;
-		case ::Command::RED:
-			::application::UIState::Write(::UIState::MAIN_MENU);
-			break;
+			iter->second();
 		}
 	}
 
