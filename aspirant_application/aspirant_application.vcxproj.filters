@@ -400,9 +400,6 @@
     <ClInclude Include="Graphics.Layout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Data.Store.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Data.Stores.h">
       <Filter>Header Files</Filter>
     </ClInclude>

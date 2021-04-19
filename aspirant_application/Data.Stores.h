@@ -1,6 +1,16 @@
 #pragma once
-#include "Data.Store.h"
 #include "json.hpp"
+namespace data
+{
+	enum class Store
+	{
+		CREATURE_DESCRIPTORS,
+		ITEM_DESCRIPTORS,
+		COLORS,
+		SOUND_EFFECTS,
+		MUSIC_THEMES
+	};
+}
 namespace data::Stores
 {
 	nlohmann::json& GetStore(const data::Store&);
