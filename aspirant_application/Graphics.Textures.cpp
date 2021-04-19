@@ -4,6 +4,7 @@
 #include "Data.JSON.h"
 #include <map>
 #include <memory>
+#include "Data.Stores.h"
 namespace graphics::Textures
 {
 	static std::map<std::string, std::shared_ptr<SDL_Texture>> textures;
@@ -13,18 +14,25 @@ namespace graphics::Textures
 		textures[name] = texture;
 	}
 
-	void InitializeFromFile(std::shared_ptr<SDL_Renderer> renderer, const std::string& fileName)
+	static bool initialized = false;
+
+	static void Initialize(std::shared_ptr<SDL_Renderer> renderer)
 	{
-		auto properties = data::JSON::Load(fileName);
-		for (auto& entry : properties.items())
+		if (!initialized)
 		{
-			std::string imageFileName = entry.value();
-			Add(entry.key(), std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderer.get(), imageFileName.c_str()), SDL_DestroyTexture));
+			auto& properties = data::Stores::GetStore(data::Store::TEXTURES);
+			for (auto& entry : properties.items())
+			{
+				std::string imageFileName = entry.value();
+				Add(entry.key(), std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderer.get(), imageFileName.c_str()), SDL_DestroyTexture));
+			}
+			initialized = true;
 		}
 	}
 
-	std::shared_ptr<SDL_Texture> Read(std::shared_ptr<SDL_Renderer>, const std::string& name)
+	std::shared_ptr<SDL_Texture> Read(std::shared_ptr<SDL_Renderer> renderer, const std::string& name)
 	{
+		Initialize(renderer);
 		auto iter = textures.find(name);
 		if (iter != textures.end())
 		{

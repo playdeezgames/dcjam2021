@@ -8,7 +8,8 @@ namespace data
 		ITEM_DESCRIPTORS,
 		COLORS,
 		SOUND_EFFECTS,
-		MUSIC_THEMES
+		MUSIC_THEMES,
+		TEXTURES
 	};
 }
 namespace data::Stores
