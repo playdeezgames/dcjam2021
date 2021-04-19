@@ -3,122 +3,44 @@
 #include "Graphics.Sprites.h"
 #include <sstream>
 #include "Graphics.Colors.h"
-namespace graphics
-{
-	class Font
-	{
-	private:
-		const nlohmann::json& model;
-		std::optional<std::string> GetGlyphSprite(char) const;
-		void WriteTextCentered(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
-		common::XY<int> WriteTextLeft(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
-		void WriteTextRight(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&) const;
-		common::XY<int> WriteGlyph(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, char, const std::string&) const;
-	public:
-		Font(const nlohmann::json&);
-		void WriteText(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&, const HorizontalAlignment&) const;
-	};
-
-	Font::Font
-	(
-		const nlohmann::json& model
-	)
-		: model(model)
-	{
-	}
-
-	std::optional<std::string> Font::GetGlyphSprite(char ch) const
-	{
-		std::stringstream ss;
-		ss << (int)ch;
-		if (model.count(ss.str()) > 0)
-		{
-			return model[ss.str()];
-		}
-		else
-		{
-			return std::nullopt;
-		}
-	}
-
-	common::XY<int> Font::WriteGlyph(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color) const
-	{
-		auto sprite = GetGlyphSprite(ch);
-		Sprites::Draw(sprite.value(), renderer, xy, ::graphics::Colors::Read(color));
-		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()).value_or(0), xy.GetY());
-	}
-
-	common::XY<int> Font::WriteTextLeft(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
-	{
-		common::XY<int> temp = xy;
-		for (auto ch : text)
-		{
-			temp = WriteGlyph(renderer, temp, ch, color);
-		}
-		return temp;
-	}
-
-	void Font::WriteTextCentered(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
-	{
-		int width = 0;
-		for (auto ch : text)
-		{
-			const auto& sprite = GetGlyphSprite(ch);
-			width += Sprites::GetWidth(sprite.value()).value_or(0);
-		}
-		auto adjustedXY = common::XY<int>(xy.GetX() - width / 2, xy.GetY());
-		WriteTextLeft(renderer, adjustedXY, text, color);
-	}
-
-	void Font::WriteTextRight(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
-	{
-		int width = 0;
-		for (auto ch : text)
-		{
-			const auto& sprite = GetGlyphSprite(ch);
-			width += Sprites::GetWidth(sprite.value()).value_or(0);
-		}
-		auto adjustedXY = common::XY<int>(xy.GetX() - width, xy.GetY());
-		WriteTextLeft(renderer, adjustedXY, text, color);
-	}
-
-	void Font::WriteText
-	(
-		std::shared_ptr<SDL_Renderer> renderer,
-		const common::XY<int>& xy,
-		const std::string& text,
-		const std::string& color,
-		const HorizontalAlignment& alignment
-	) const
-	{
-		switch (alignment)
-		{
-		case HorizontalAlignment::LEFT:
-			WriteTextLeft(renderer, xy, text, color);
-			break;
-		case HorizontalAlignment::RIGHT:
-			WriteTextRight(renderer, xy, text, color);
-			break;
-		case HorizontalAlignment::CENTER:
-			WriteTextCentered(renderer, xy, text, color);
-			break;
-		}
-	}
-}
+#include "Data.Stores.h"
 namespace graphics::Fonts
 {
 	static std::map<std::string, nlohmann::json> table;
 
-	static void ParseDescriptor(const std::string& identifier, const nlohmann::json& properties)
+	static void InitializeFont(const std::string& name)
 	{
-		table[identifier] = data::JSON::Load(properties);
+		if (!table.contains(name))
+		{
+			if (::data::Stores::GetStore(::data::Store::FONTS).count(name) > 0)
+			{
+				table[name] = data::JSON::Load(::data::Stores::GetStore(::data::Store::FONTS)[name]);
+			}
+		}
 	}
 
-	static std::optional<graphics::Font> Read(const std::string& key)
+	const nlohmann::json empty = nlohmann::json();
+
+	static const nlohmann::json& NameToData(const std::string name)
 	{
-		if (table.count(key) > 0)
+		if (::data::Stores::GetStore(::data::Store::FONTS).count(name) > 0)
 		{
-			return Font(table[key]);
+			InitializeFont(name);
+			return table[name];
+		}
+		else
+		{
+			return empty;
+		}
+	}
+
+	static std::optional<std::string> GetGlyphSprite(const std::string& fontname, char ch)
+	{
+		std::stringstream ss;
+		ss << (int)ch;
+		if (NameToData(fontname).count(ss.str()) > 0)
+		{
+			return NameToData(fontname)[ss.str()];
 		}
 		else
 		{
@@ -126,21 +48,56 @@ namespace graphics::Fonts
 		}
 	}
 
-	void InitializeFromFile(const std::string& fileName)
+	static common::XY<int> WriteGlyph(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color)
 	{
-		auto properties = data::JSON::Load(fileName);
-		for (auto& item : properties.items())
+		auto sprite = GetGlyphSprite(fontname, ch);
+		Sprites::Draw(sprite.value(), renderer, xy, ::graphics::Colors::Read(color));
+		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()).value_or(0), xy.GetY());
+	}
+
+	void WriteTextLeft(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
+	{
+		common::XY<int> temp = xy;
+		for (auto ch : text)
 		{
-			ParseDescriptor(item.key(), item.value());
+			temp = WriteGlyph(fontname, renderer, temp, ch, color);
 		}
 	}
 
+	static int GetTextWidth(const std::string& fontname, const std::string& text)
+	{
+		int width = 0;
+		for (auto ch : text)
+		{
+			const auto& sprite = GetGlyphSprite(fontname, ch);
+			width += Sprites::GetWidth(sprite.value()).value_or(0);
+		}
+		return width;
+	}
+
+	static void WriteTextCentered(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
+	{
+		auto adjustedXY = common::XY<int>(xy.GetX() - GetTextWidth(fontname, text) / 2, xy.GetY());
+		WriteTextLeft(fontname, renderer, adjustedXY, text, color);
+	}
+
+	static void WriteTextRight(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
+	{
+		auto adjustedXY = common::XY<int>(xy.GetX() - GetTextWidth(fontname, text), xy.GetY());
+		WriteTextLeft(fontname, renderer, adjustedXY, text, color);
+	}
+
+	typedef std::function<void(const std::string&, std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&)> WriteFunction;
+
+	const std::map<HorizontalAlignment, WriteFunction> writers =
+	{
+		{HorizontalAlignment::LEFT, WriteTextLeft},
+		{HorizontalAlignment::RIGHT, WriteTextRight},
+		{HorizontalAlignment::CENTER, WriteTextCentered}
+	};
+
 	void WriteText(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color, const HorizontalAlignment& alignment)
 	{
-		auto font = Read(fontname);
-		if (font)
-		{
-			font.value().WriteText(renderer, xy, text, color, alignment);
-		}
+		writers.find(alignment)->second(fontname, renderer, xy, text, color);
 	}
 }
