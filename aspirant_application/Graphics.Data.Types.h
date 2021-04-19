@@ -1,12 +1,20 @@
 #pragma once
 #include <string>
+#include <optional>
+namespace graphics::data
+{
+	enum class Type
+	{
+		AVATAR_INVENTORY,
+		FLOOR_INVENTORY,
+		IMAGE,
+		LAYOUT,
+		MENU,
+		TEXT,
+		WORLD_MAP
+	};
+}
 namespace graphics::data::Types
 {
-	const std::string AVATAR_INVENTORY = "AvatarInventory";
-	const std::string FLOOR_INVENTORY = "FloorInventory";
-	const std::string IMAGE = "Image";
-	const std::string LAYOUT = "Layout";
-	const std::string MENU = "Menu";
-	const std::string TEXT = "Text";
-	const std::string WORLD_MAP = "WorldMap";
+	std::optional<graphics::data::Type> FromString(const std::string&);
 }

@@ -4,7 +4,6 @@
 #include "Graphics.Data.Types.h"
 #include "Common.Data.Properties.h"
 #include "Graphics.Data.Properties.h"
-#include "Graphics.Layout.h"
 #include "Data.Stores.h"
 namespace graphics::Menu { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
 namespace graphics::Image { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
@@ -15,26 +14,29 @@ namespace graphics::FloorInventory { void Draw(std::shared_ptr<SDL_Renderer>, co
 namespace graphics::AvatarInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
 namespace graphics::Layout
 {
-	static std::map<std::string, void(*)(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)> table =
+	static std::map<graphics::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
 	{
-		{graphics::data::Types::IMAGE, graphics::Image::Draw},
-		{graphics::data::Types::MENU, graphics::Menu::Draw},
-		{graphics::data::Types::TEXT, graphics::Text::Draw},
-		{graphics::data::Types::WORLD_MAP, graphics::WorldMap::Draw},
-		{graphics::data::Types::LAYOUT, graphics::Sublayout::Draw},
-		{graphics::data::Types::FLOOR_INVENTORY, graphics::FloorInventory::Draw},
-		{graphics::data::Types::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
+		{graphics::data::Type::IMAGE, graphics::Image::Draw},
+		{graphics::data::Type::MENU, graphics::Menu::Draw},
+		{graphics::data::Type::TEXT, graphics::Text::Draw},
+		{graphics::data::Type::WORLD_MAP, graphics::WorldMap::Draw},
+		{graphics::data::Type::LAYOUT, graphics::Sublayout::Draw},
+		{graphics::data::Type::FLOOR_INVENTORY, graphics::FloorInventory::Draw},
+		{graphics::data::Type::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
 	};
 
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		for (auto& drawn : model)
 		{
-			std::string drawnType = drawn[common::data::Properties::TYPE];
-			auto drawer = table.find(drawnType);
-			if (drawer != table.end())
+			auto drawnType = graphics::data::Types::FromString(drawn[common::data::Properties::TYPE]);
+			if (drawnType)
 			{
-				drawer->second(renderer, drawn);
+				auto drawer = table.find(*drawnType);
+				if (drawer != table.end())
+				{
+					drawer->second(renderer, drawn);
+				}
 			}
 		}
 	}
