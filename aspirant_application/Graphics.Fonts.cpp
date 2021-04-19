@@ -45,7 +45,7 @@ namespace graphics
 	{
 		auto sprite = GetGlyphSprite(ch);
 		Sprites::Draw(sprite.value(), renderer, xy, ::graphics::Colors::Read(color));
-		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()), xy.GetY());
+		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()).value_or(0), xy.GetY());
 	}
 
 	common::XY<int> Font::WriteTextLeft(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color) const
@@ -64,7 +64,7 @@ namespace graphics
 		for (auto ch : text)
 		{
 			const auto& sprite = GetGlyphSprite(ch);
-			width += Sprites::GetWidth(sprite.value());
+			width += Sprites::GetWidth(sprite.value()).value_or(0);
 		}
 		auto adjustedXY = common::XY<int>(xy.GetX() - width / 2, xy.GetY());
 		WriteTextLeft(renderer, adjustedXY, text, color);
@@ -76,7 +76,7 @@ namespace graphics
 		for (auto ch : text)
 		{
 			const auto& sprite = GetGlyphSprite(ch);
-			width += Sprites::GetWidth(sprite.value());
+			width += Sprites::GetWidth(sprite.value()).value_or(0);
 		}
 		auto adjustedXY = common::XY<int>(xy.GetX() - width, xy.GetY());
 		WriteTextLeft(renderer, adjustedXY, text, color);

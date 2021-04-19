@@ -102,14 +102,14 @@ namespace graphics::Sprites
 		}
 	}
 
-	int GetWidth(const std::string& spriteName)
+	std::optional<int> GetWidth(const std::string& spriteName)
 	{
 		auto sprite = Read(spriteName);
 		if (sprite)
 		{
 			return sprite.value().GetWidth();
 		}
-		return 0;
+		return std::nullopt;
 	}
 
 	void InitializeFromFile(const std::string& fileName)
