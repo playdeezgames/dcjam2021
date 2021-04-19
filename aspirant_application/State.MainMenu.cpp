@@ -16,43 +16,38 @@ namespace state::MainMenu
 		QUIT
 	};
 
+	const std::map<MainMenuItem, std::function<void()>> activators =
+	{
+		{ MainMenuItem::START, []() {::application::UIState::Write(::UIState::START_GAME); }},
+		{ MainMenuItem::OPTIONS, []() { ::application::UIState::Write(::UIState::OPTIONS); }},
+		{ MainMenuItem::ABOUT, []() { SDL_SetClipboardText("https://thegrumpygamedev.itch.io/"); ::application::UIState::Write(::UIState::ABOUT); }},
+		{ MainMenuItem::QUIT, []() { ::application::UIState::Write(::UIState::CONFIRM_QUIT); }},
+	};
+
 	static void ActivateItem()
 	{
-		switch ((MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value())
+		auto iter = activators.find((MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		if (iter != activators.end())
 		{
-		case MainMenuItem::START:
-			::application::UIState::Write(::UIState::START_GAME);
-			return;
-		case MainMenuItem::OPTIONS:
-			::application::UIState::Write(::UIState::OPTIONS);
-			return;
-		case MainMenuItem::ABOUT:
-			SDL_SetClipboardText("https://thegrumpygamedev.itch.io/");
-			::application::UIState::Write(::UIState::ABOUT);
-			return;
-		case MainMenuItem::QUIT:
-			::application::UIState::Write(::UIState::CONFIRM_QUIT);
-			return;
+			iter->second();
 		}
 	}
 
+	const std::map<::Command, std::function<void()>> commandHandlers =
+	{
+		{::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
+		{::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{::Command::GREEN, ActivateItem },
+		{::Command::BACK, []() { ::application::UIState::Write(::UIState::CONFIRM_QUIT); }},
+		{::Command::RED, []() { ::application::UIState::Write(::UIState::CONFIRM_QUIT); }}
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
+		auto iter = commandHandlers.find(command);
+		if (iter != commandHandlers.end())
 		{
-		case ::Command::UP:
-			graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
-			break;
-		case ::Command::DOWN:
-			graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
-			break;
-		case ::Command::GREEN:
-			ActivateItem();
-			break;
-		case ::Command::BACK:
-		case ::Command::RED:
-			::application::UIState::Write(::UIState::CONFIRM_QUIT);
-			break;
+			iter->second();
 		}
 	}
 
