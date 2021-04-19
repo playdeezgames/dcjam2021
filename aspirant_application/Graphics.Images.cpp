@@ -5,9 +5,31 @@
 #include "Graphics.Data.Properties.h"
 #include "Graphics.Data.Types.h"
 #include "Graphics.Layouts.h"
+#include "Graphics.Sprites.h"
+#include "Graphics.Colors.h"
 namespace graphics::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
+}
+namespace graphics::Image
+{
+	const SDL_Color defaultColor = { 255, 255, 255, 255 };
+
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
+	{
+		if (model.count(data::Properties::VISIBLE) == 0 || model[data::Properties::VISIBLE] == true)
+		{
+			Sprites::Draw(
+				model[data::Properties::SPRITE],
+				renderer,
+				common::XY<int>(
+					(int)model[common::data::Properties::X],
+					(int)model[common::data::Properties::Y]),
+				(model.count(data::Properties::COLOR) > 0) ?
+				(::graphics::Colors::Read(model[data::Properties::COLOR])) :
+				(defaultColor));
+		}
+	}
 }
 namespace graphics::Images
 {

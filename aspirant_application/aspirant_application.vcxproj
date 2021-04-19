@@ -220,7 +220,6 @@
     <ClCompile Include="State.Splash.cpp" />
     <ClCompile Include="Graphics.Sprites.cpp" />
     <ClCompile Include="State.Start.cpp" />
-    <ClCompile Include="Graphics.Image.cpp" />
     <ClCompile Include="Graphics.Text.cpp" />
     <ClCompile Include="Graphics.Textures.cpp" />
     <ClCompile Include="Common.Utility.cpp" />

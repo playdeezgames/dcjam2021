@@ -41,9 +41,6 @@
     <ClCompile Include="Graphics.Fonts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics.Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
