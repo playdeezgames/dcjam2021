@@ -50,37 +50,35 @@ namespace Application
 
 	static std::map<Uint8, Command> controllerButtonCommand = 
 	{
-		{(Uint8)SDL_CONTROLLER_BUTTON_DPAD_DOWN, Command::DOWN},
-		{(Uint8)SDL_CONTROLLER_BUTTON_DPAD_UP, Command::UP},
-		{(Uint8)SDL_CONTROLLER_BUTTON_DPAD_LEFT, Command::LEFT},
-		{(Uint8)SDL_CONTROLLER_BUTTON_DPAD_RIGHT, Command::RIGHT},
-		{(Uint8)SDL_CONTROLLER_BUTTON_A, Command::GREEN },
-		{(Uint8)SDL_CONTROLLER_BUTTON_B, Command::RED},
-		{(Uint8)SDL_CONTROLLER_BUTTON_X, Command::BLUE},
-		{(Uint8)SDL_CONTROLLER_BUTTON_Y, Command::YELLOW},
-		{(Uint8)SDL_CONTROLLER_BUTTON_BACK, Command::BACK},
-		{(Uint8)SDL_CONTROLLER_BUTTON_START, Command::START},
-		{(Uint8)SDL_CONTROLLER_BUTTON_LEFTSHOULDER, Command::PREVIOUS},
-		{(Uint8)SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, Command::NEXT}
+		{ (Uint8)SDL_CONTROLLER_BUTTON_DPAD_DOWN,     Command::DOWN     },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_DPAD_UP,       Command::UP       },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_DPAD_LEFT,     Command::LEFT     },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_DPAD_RIGHT,    Command::RIGHT    },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_A,             Command::GREEN    },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_B,             Command::RED      },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_X,             Command::BLUE     },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_Y,             Command::YELLOW   },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_BACK,          Command::BACK     },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_START,         Command::START    },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_LEFTSHOULDER,  Command::PREVIOUS },
+		{ (Uint8)SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, Command::NEXT     }
 	};
 
 	static void HandleControllerButtonDown(const SDL_ControllerButtonEvent& evt)
 	{
-		auto iter = controllerButtonCommand.find(evt.button);
-		if (iter != controllerButtonCommand.end())
+		auto item = controllerButtonCommand.find(evt.button);
+		if (item!=controllerButtonCommand.end())
 		{
-			::application::Command::Handle(iter->second);
+			::application::Command::Handle(item->second);
 		}
 	}
-
 }
 namespace common::Application
 {
 	const std::string OPTIONS = "config/options.json";
-	const std::string KEYBOARD = "config/keyboard.json";
 	const std::string STATISTICS = "config/statistics.json";
 
-	static std::vector<void(*)()> starters = 
+	static std::vector<std::function<void()>> starters = 
 	{
 		data::Stores::Start,
 		state::Splash::Start,
@@ -108,10 +106,9 @@ namespace common::Application
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
-		application::Keyboard::InitializeFromFile(KEYBOARD);
 		game::avatar::Statistics::InitializeFromFile(STATISTICS);
 
-		for (auto starter : starters)
+		for (auto& starter : starters)
 		{
 			starter();
 		}
@@ -129,34 +126,24 @@ namespace common::Application
 		application::Update::Handle(ticks);
 	}
 
+	std::map<Uint32, std::function<void(const SDL_Event&)>> eventHandlers =
+	{
+		{ SDL_QUIT,                 [](const SDL_Event&    ) { ::application::UIState::Write(::UIState::QUIT); }},
+		{ SDL_KEYDOWN,              [](const SDL_Event& evt) { ::Application::HandleKeyDown(evt.key); }},
+		{ SDL_TEXTINPUT,            [](const SDL_Event& evt) { ::application::TextInput::Handle(evt.text); }},
+		{ SDL_CONTROLLERBUTTONDOWN, [](const SDL_Event& evt) { ::Application::HandleControllerButtonDown(evt.cbutton); }},
+		{ SDL_MOUSEMOTION,          [](const SDL_Event& evt) { ::application::MouseMotion::Handle(evt.motion); }},
+		{ SDL_MOUSEBUTTONDOWN,      [](const SDL_Event& evt) { ::application::MouseButtonDown::Handle(evt.button); }},
+		{ SDL_MOUSEBUTTONUP,        [](const SDL_Event& evt) { ::application::MouseButtonUp::Handle(evt.button); }},
+		{ SDL_MOUSEWHEEL,           [](const SDL_Event& evt) { ::application::MouseWheel::Handle(evt.wheel); }}
+	};
+
 	void HandleEvent(const SDL_Event& evt)
 	{
-		switch (evt.type)
+		auto item = eventHandlers.find(evt.type);
+		if (item!=eventHandlers.end())
 		{
-		case SDL_QUIT:
-			::application::UIState::Write(::UIState::QUIT);
-			break;
-		case SDL_KEYDOWN:
-			::Application::HandleKeyDown(evt.key);
-			break;
-		case SDL_TEXTINPUT:
-			::application::TextInput::Handle(evt.text);
-			break;
-		case SDL_CONTROLLERBUTTONDOWN:
-			::Application::HandleControllerButtonDown(evt.cbutton);
-			break;
-		case SDL_MOUSEMOTION:
-			::application::MouseMotion::Handle(evt.motion);
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			::application::MouseButtonDown::Handle(evt.button);
-			break;
-		case SDL_MOUSEBUTTONUP:
-			::application::MouseButtonUp::Handle(evt.button);
-			break;
-		case SDL_MOUSEWHEEL:
-			::application::MouseWheel::Handle(evt.wheel);
-			break;
+			item->second(evt);
 		}
 	}
 }

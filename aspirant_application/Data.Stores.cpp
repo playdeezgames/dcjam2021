@@ -21,7 +21,8 @@ namespace data::Stores
 		{data::Store::TEXTURES, "config/graphics/textures.json"},
 		{data::Store::SPRITES, "config/graphics/sprites.json"},
 		{data::Store::FONTS, "config/graphics/fonts.json"},
-		{data::Store::LAYOUTS, "config/ui/layouts.json"}
+		{data::Store::LAYOUTS, "config/ui/layouts.json"},
+		{data::Store::KEYS, "config/keyboard.json"}
 	};
 
 	void Start()

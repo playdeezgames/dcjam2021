@@ -12,7 +12,8 @@ namespace data
 		TEXTURES,
 		SPRITES,
 		FONTS,
-		LAYOUTS
+		LAYOUTS,
+		KEYS
 	};
 }
 namespace data::Stores
