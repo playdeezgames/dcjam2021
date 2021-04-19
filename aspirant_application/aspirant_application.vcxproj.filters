@@ -47,9 +47,6 @@
     <ClCompile Include="Graphics.Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics.Layouts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -395,9 +392,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common.Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.Layout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Data.Stores.h">

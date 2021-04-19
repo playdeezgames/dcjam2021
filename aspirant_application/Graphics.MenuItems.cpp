@@ -5,6 +5,10 @@
 #include "Common.Data.Properties.h"
 #include "Graphics.Data.Properties.h"
 #include "Graphics.MenuItems.h"
+namespace graphics::Layouts
+{
+	nlohmann::json& GetLayout(const std::string&);
+}
 namespace graphics::MenuItems
 {
 	template <typename TResult>
