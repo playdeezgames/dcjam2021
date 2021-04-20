@@ -5,6 +5,7 @@
 #include <sstream>
 #include "Game.Avatar.Statistics.h"
 #include "Graphics.Texts.h"
+#include "Common.Utility.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -13,24 +14,20 @@ namespace state::in_play::AvatarStatus
 	const std::string DEFEND_TEXT_ID = "Defend";
 	const std::string DEFEND_TIMER_TEXT_ID = "DefendTimer";
 
+	const std::map<Command, std::function<void()>> commandHandlers =
+	{
+		{ ::Command::BACK, []() {application::UIState::Write(::UIState::LEAVE_PLAY); }},
+		{ ::Command::PREVIOUS, []() {application::UIState::Write(::UIState::IN_PLAY_INVENTORY); }},
+		{ ::Command::NEXT, []() {application::UIState::Write(::UIState::IN_PLAY_MAP); }},
+		{ ::Command::YELLOW, []() {application::UIState::Write(::UIState::IN_PLAY_MAP); }}
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
-		{
-		case ::Command::BACK:
-			application::UIState::Write(::UIState::LEAVE_PLAY);
-			break;
-		case ::Command::PREVIOUS:
-			application::UIState::Write(::UIState::IN_PLAY_INVENTORY);
-			break;
-		case ::Command::NEXT:
-		case ::Command::YELLOW:
-			application::UIState::Write(::UIState::IN_PLAY_MAP);
-			break;
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 
-	static void UpdateAttack()
+	static void UpdateAttack(const Uint32&)
 	{
 		std::stringstream ss;
 		ss << "Attack: ";
@@ -38,7 +35,7 @@ namespace state::in_play::AvatarStatus
 		graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
 	}
 
-	static void UpdateAttackTimer()
+	static void UpdateAttackTimer(const Uint32&)
 	{
 		auto value = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		std::stringstream ss;
@@ -50,7 +47,7 @@ namespace state::in_play::AvatarStatus
 		graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TIMER_TEXT_ID, ss.str());
 	}
 
-	static void UpdateDefend()
+	static void UpdateDefend(const Uint32&)
 	{
 		std::stringstream ss;
 		ss << "Defend: ";
@@ -58,7 +55,7 @@ namespace state::in_play::AvatarStatus
 		graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TEXT_ID, ss.str());
 	}
 
-	static void UpdateDefendTimer()
+	static void UpdateDefendTimer(const Uint32&)
 	{
 		auto value = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
 		std::stringstream ss;
@@ -70,19 +67,13 @@ namespace state::in_play::AvatarStatus
 		graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TIMER_TEXT_ID, ss.str());
 	}
 
-
-	static void OnUpdate(const Uint32& ticks)
-	{
-		UpdateAttack();
-		UpdateAttackTimer();
-		UpdateDefend();
-		UpdateDefendTimer();
-	}
-
 	void Start()
 	{
 		::application::Command::SetHandler(::UIState::IN_PLAY_STATUS, OnCommand);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, OnUpdate);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefendTimer);
 	}
 }
