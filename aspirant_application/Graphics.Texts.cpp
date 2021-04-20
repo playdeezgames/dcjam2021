@@ -6,14 +6,14 @@
 #include "Graphics.Data.Properties.h"
 namespace graphics::Layouts
 {
-	extern std::map<std::string, nlohmann::json> layouts;
+	nlohmann::json& GetLayout(const std::string&);
 }
 namespace graphics::Texts
 {
 	template <typename TResult>
 	static TResult WithText(const std::string& layoutName, const std::string& textId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::layouts[layoutName])
+		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
 			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::TEXT)
 			{
