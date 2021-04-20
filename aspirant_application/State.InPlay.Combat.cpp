@@ -123,35 +123,19 @@ namespace state::in_play::Combat
 		common::Utility::Dispatch(activators, (CombatMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value());
 	}
 
+	std::map<Command, std::function<void()>> commandHandlers =
+	{
+		{ ::Command::BACK, []() { application::UIState::Write(::UIState::LEAVE_PLAY); }},
+		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, COMBAT_MENU_ID); }},
+		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, COMBAT_MENU_ID); }},
+		{ ::Command::LEFT, []() { if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) { graphics::AvatarInventory::PreviousIndex(); } } },
+		{ ::Command::RIGHT, []() { if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) { graphics::AvatarInventory::NextIndex(); } } },
+		{ ::Command::GREEN, OnActivateItem },
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
-		{
-		case ::Command::BACK:
-			application::UIState::Write(::UIState::LEAVE_PLAY);
-			break;
-		case ::Command::UP:
-			graphics::Menus::Previous(LAYOUT_NAME, COMBAT_MENU_ID);
-			break;
-		case ::Command::DOWN:
-			graphics::Menus::Next(LAYOUT_NAME, COMBAT_MENU_ID);
-			break;
-		case ::Command::LEFT:
-			if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
-			{
-				graphics::AvatarInventory::PreviousIndex();
-			}
-			break;
-		case ::Command::RIGHT:
-			if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM)
-			{
-				graphics::AvatarInventory::NextIndex();
-			}
-			break;
-		case ::Command::GREEN:
-			OnActivateItem();
-			break;
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 
 	static void UpdateUseItem()
