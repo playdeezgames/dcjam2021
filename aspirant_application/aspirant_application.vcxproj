@@ -269,7 +269,6 @@
     <ClInclude Include="Graphics.Data.Types.h" />
     <ClInclude Include="Application.Renderer.h" />
     <ClInclude Include="Graphics.Colors.h" />
-    <ClInclude Include="Command.h" />
     <ClInclude Include="Graphics.Fonts.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Data.JSON.h" />

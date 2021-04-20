@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <SDL.h>
-#include "Command.h"
+#include "Application.Command.h"
 #include <optional>
 namespace application::Keyboard
 {

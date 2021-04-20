@@ -1,8 +1,22 @@
 #pragma once
-#include "Command.h"
 #include "UIState.h"
 #include <functional>
 #include <map>
+enum class Command
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	GREEN,
+	RED,
+	YELLOW,
+	BLUE,
+	NEXT,
+	PREVIOUS,
+	BACK,
+	START
+};
 namespace application::Command
 {
 	void SetHandlers(const ::UIState&, const std::map<::Command, std::function<void()>>&);

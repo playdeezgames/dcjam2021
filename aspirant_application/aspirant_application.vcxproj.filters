@@ -235,9 +235,6 @@
     <ClInclude Include="Application.Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics.Colors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
