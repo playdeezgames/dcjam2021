@@ -229,9 +229,6 @@
     <ClInclude Include="Data.JSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UIState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Application.Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

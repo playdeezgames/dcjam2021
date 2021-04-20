@@ -1,7 +1,6 @@
 #include <SDL.h>
 #include <string>
 #include <optional>
-#include "UIState.h"
 #include "Application.Renderer.h"
 #include "Graphics.Colors.h"
 #include "Graphics.Textures.h"
