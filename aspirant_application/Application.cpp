@@ -75,8 +75,6 @@ namespace Application
 }
 namespace common::Application
 {
-	const std::string STATISTICS = "config/statistics.json";
-
 	static std::vector<std::function<void()>> starters = 
 	{
 		data::Stores::Start,
@@ -106,8 +104,6 @@ namespace common::Application
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
 	{
-		game::avatar::Statistics::InitializeFromFile(STATISTICS);
-
 		for (auto& starter : starters)
 		{
 			starter();

@@ -7,20 +7,14 @@
 #include "Common.Data.Properties.h"
 #include <sstream>
 #include "Common.Utility.h"
+#include "Data.Stores.h"
 namespace game::avatar::Statistics
 {
-	nlohmann::json statistics;
-
-	void InitializeFromFile(const std::string& fileName)
-	{
-		statistics = ::data::JSON::Load(fileName);
-	}
-
 	static const nlohmann::json& GetStatistic(game::avatar::Statistic statistic)
 	{
 		std::stringstream ss;
 		ss << (int)statistic;
-		return statistics[ss.str()];
+		return ::data::Stores::GetStore(::data::Store::STATISTICS)[ss.str()];
 	}
 
 	nlohmann::json& GetAvatarStatistics()
@@ -70,7 +64,7 @@ namespace game::avatar::Statistics
 
 	void Reset()
 	{
-		for (auto& item : statistics.items())
+		for (auto& item : ::data::Stores::GetStore(::data::Store::STATISTICS).items())
 		{
 			game::avatar::Statistic statistic = (game::avatar::Statistic)common::Utility::StringToInt(item.key());
 			Write(statistic, Default(statistic));
