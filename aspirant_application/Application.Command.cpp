@@ -15,4 +15,11 @@ namespace application::Command
 	{
 		handlers[state] = handler;
 	}
+
+	static std::map<::UIState, std::map<::Command, std::function<void()>>> commandHandlers;
+
+	void SetHandlers(const ::UIState& state, const std::map<::Command, std::function<void()>>& handlers)
+	{
+		commandHandlers[state] = handlers;
+	}
 }
