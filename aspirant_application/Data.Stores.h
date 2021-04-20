@@ -13,11 +13,14 @@ namespace data
 		SPRITES,
 		FONTS,
 		LAYOUTS,
-		KEYS
+		KEYS,
+		OPTIONS,
+		STATISTICS
 	};
 }
 namespace data::Stores
 {
 	nlohmann::json& GetStore(const data::Store&);
 	void Start();
+	void Save(const data::Store&);
 }

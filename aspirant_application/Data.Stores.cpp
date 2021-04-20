@@ -22,7 +22,10 @@ namespace data::Stores
 		{data::Store::SPRITES, "config/graphics/sprites.json"},
 		{data::Store::FONTS, "config/graphics/fonts.json"},
 		{data::Store::LAYOUTS, "config/ui/layouts.json"},
-		{data::Store::KEYS, "config/keyboard.json"}
+		{data::Store::KEYS, "config/keyboard.json"},
+		{data::Store::OPTIONS, "config/options.json"},
+		{data::Store::STATISTICS, "config/statistics.json"}
+
 	};
 
 	void Start()
@@ -32,4 +35,14 @@ namespace data::Stores
 			stores[entry.first] = ::data::JSON::Load(entry.second);
 		}
 	}
+
+	void Save(const data::Store& store)
+	{
+		auto iter = storeFiles.find(store);
+		if (iter != storeFiles.end())
+		{
+			data::JSON::Save(iter->second, GetStore(store));
+		}
+	}
+
 }

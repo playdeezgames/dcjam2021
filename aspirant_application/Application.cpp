@@ -75,7 +75,6 @@ namespace Application
 }
 namespace common::Application
 {
-	const std::string OPTIONS = "config/options.json";
 	const std::string STATISTICS = "config/statistics.json";
 
 	static std::vector<std::function<void()>> starters = 
@@ -113,7 +112,7 @@ namespace common::Application
 		{
 			starter();
 		}
-		Options::InitializeFromFile(OPTIONS);//TODO: this may have to stay here and not be part of the data store
+		Options::Initialize();//TODO: this may have to stay here and not be part of the data store
 		common::audio::Mux::Play("songs");//TODO: nekkid string
 	}
 
