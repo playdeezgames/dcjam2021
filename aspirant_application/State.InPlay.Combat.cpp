@@ -133,11 +133,6 @@ namespace state::in_play::Combat
 		{ ::Command::GREEN, OnActivateItem },
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	static void UpdateUseItem()
 	{
 		auto item = graphics::AvatarInventory::GetItem();
@@ -166,7 +161,7 @@ namespace state::in_play::Combat
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_COMBAT, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, OnUpdate);
 	}

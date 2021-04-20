@@ -19,14 +19,9 @@ namespace state::About
 		{Command::YELLOW, GoToMainMenu}
 	};
 
-	void OnCommand(const Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::ABOUT, OnCommand);
+		::application::Command::SetHandlers(::UIState::ABOUT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::ABOUT, LAYOUT_NAME);
 	}
 }

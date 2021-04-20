@@ -37,14 +37,9 @@ namespace state::LeavePlay
 		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::LEAVE_PLAY, OnCommand);
+		::application::Command::SetHandlers(::UIState::LEAVE_PLAY, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::LEAVE_PLAY, LAYOUT_NAME);
 	}
 }

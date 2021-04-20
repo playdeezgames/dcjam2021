@@ -10,10 +10,18 @@ namespace state::in_play::Exit
 	const std::string LAYOUT_NAME = "State.InPlay.Exit";
 	const std::string JOOLS_TEXT_ID = "Jools";
 
-	static void OnCommand(const ::Command& command)
+	static void GoToMainMenu()
 	{
 		::application::UIState::Write(::UIState::MAIN_MENU);
 	}
+
+	const std::map<Command, std::function<void()>> commandHandlers =
+	{
+		{Command::GREEN, GoToMainMenu},
+		{Command::RED, GoToMainMenu},
+		{Command::BLUE, GoToMainMenu},
+		{Command::YELLOW, GoToMainMenu}
+	};
 
 	static void OnUpdate(const Uint32&)
 	{
@@ -24,7 +32,7 @@ namespace state::in_play::Exit
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_EXIT, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_EXIT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_EXIT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_EXIT, OnUpdate);
 	}

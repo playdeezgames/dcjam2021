@@ -27,14 +27,9 @@ namespace state::in_play::AvatarInventory
 		{ ::Command::GREEN, []() { common::audio::Sfx::Play(game::avatar::Items::Use(graphics::AvatarInventory::GetItem())); }}
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_INVENTORY, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_INVENTORY, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_INVENTORY, LAYOUT_NAME);
 	}
 }

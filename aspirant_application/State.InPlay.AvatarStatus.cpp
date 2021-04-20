@@ -22,11 +22,6 @@ namespace state::in_play::AvatarStatus
 		{ ::Command::YELLOW, []() {application::UIState::Write(::UIState::IN_PLAY_MAP); }}
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	static void UpdateAttack(const Uint32&)
 	{
 		std::stringstream ss;
@@ -69,7 +64,7 @@ namespace state::in_play::AvatarStatus
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_STATUS, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_STATUS, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);

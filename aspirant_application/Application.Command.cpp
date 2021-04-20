@@ -2,21 +2,19 @@
 #include "UIState.h"
 #include <map>
 #include "Application.Handlers.h"
+#include "Common.Utility.h"
 namespace application::Command
 {
-	static std::map<::UIState, Handler> handlers;
+	static std::map<::UIState, std::map<::Command, std::function<void()>>> commandHandlers;
 
 	void Handle(const ::Command& command)
 	{
-		application::Handlers::WithCurrent(handlers, [command](const Handler& handler) {handler(command); });
+		application::Handlers::WithCurrent(commandHandlers, 
+			[command](const std::map<::Command, std::function<void()>>& handlers) 
+			{
+				common::Utility::Dispatch(handlers, command);
+			});
 	}
-
-	void SetHandler(const ::UIState& state, Handler handler)
-	{
-		handlers[state] = handler;
-	}
-
-	static std::map<::UIState, std::map<::Command, std::function<void()>>> commandHandlers;
 
 	void SetHandlers(const ::UIState& state, const std::map<::Command, std::function<void()>>& handlers)
 	{

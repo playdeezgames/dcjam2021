@@ -124,7 +124,7 @@ namespace state::Options
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::OPTIONS, OnCommand);
+		::application::Command::SetHandlers(::UIState::OPTIONS, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::OPTIONS, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::OPTIONS, UpdateMuteMenuItem);
 		::application::Update::AddHandler(::UIState::OPTIONS, UpdateSfxMenuItem);

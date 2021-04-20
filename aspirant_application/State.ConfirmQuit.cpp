@@ -35,14 +35,9 @@ namespace state::ConfirmQuit
 		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::CONFIRM_QUIT, OnCommand);
+		::application::Command::SetHandlers(::UIState::CONFIRM_QUIT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::CONFIRM_QUIT, LAYOUT_NAME);
 	}
 }

@@ -34,14 +34,9 @@ namespace state::in_play::FloorInventory
 		{ ::Command::GREEN, PickUpItem }
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_FLOOR, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_FLOOR, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_FLOOR, LAYOUT_NAME);
 	}
 }

@@ -20,11 +20,6 @@ namespace state::in_play::CombatResult
 		{ ::Command::GREEN, []() { game::Combat::Advance(); common::audio::Sfx::Play(application::UIState::EnterGame()); }}
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	static void OnUpdate(const Uint32& ticks)
 	{
 		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
@@ -33,7 +28,7 @@ namespace state::in_play::CombatResult
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT_RESULT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT_RESULT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnUpdate);
 	}

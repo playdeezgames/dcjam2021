@@ -46,7 +46,7 @@ namespace state::MainMenu
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::MAIN_MENU, OnCommand);
+		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);
 	}
 }

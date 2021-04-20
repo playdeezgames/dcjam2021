@@ -48,14 +48,9 @@ namespace state::Start
 		{ ::Command::GREEN, ActivateItem }
 	};
 
-	static void OnCommand(const ::Command& command)
-	{
-		common::Utility::Dispatch(commandHandlers, command);
-	}
-
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::START_GAME, OnCommand);
+		::application::Command::SetHandlers(::UIState::START_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::START_GAME, LAYOUT_NAME);
 	}
 }

@@ -8,10 +8,18 @@ namespace state::Splash
 	const std::string LAYOUT_NAME = "State.Splash";
 	static size_t ticksLeft = TICKS_TOTAL;
 
-	static void OnCommand(const ::Command& command)
+	static void GoToMainMenu()
 	{
 		ticksLeft = 0;
 	}
+
+	const std::map<Command, std::function<void()>> commandHandlers =
+	{
+		{Command::GREEN, GoToMainMenu},
+		{Command::RED, GoToMainMenu},
+		{Command::BLUE, GoToMainMenu},
+		{Command::YELLOW, GoToMainMenu}
+	};
 
 	static void OnUpdate(const Uint32& ticks)
 	{
@@ -25,7 +33,7 @@ namespace state::Splash
 
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::SPLASH, OnCommand);
+		::application::Command::SetHandlers(::UIState::SPLASH, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::SPLASH, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::SPLASH, OnUpdate);
 	}

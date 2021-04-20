@@ -35,7 +35,7 @@ namespace state::in_play::MiniMap
 	}
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::IN_PLAY_MAP, OnCommand);
+		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
 	}
 }
