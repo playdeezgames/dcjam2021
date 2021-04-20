@@ -1,6 +1,17 @@
 #pragma once
-#include "Game.Avatar.Statistic.h"
 #include <string>
+namespace game::avatar
+{
+	enum class Statistic
+	{
+		HUNGER,
+		HEALTH,
+		ATTACK,
+		DEFEND,
+		ATTACK_TIMER,
+		DEFEND_TIMER
+	};
+}
 namespace game::avatar::Statistics
 {
 	int Read(const ::game::avatar::Statistic&);

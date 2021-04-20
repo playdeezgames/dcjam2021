@@ -246,7 +246,6 @@
     <ClInclude Include="Data.Stores.h" />
     <ClInclude Include="Game.Avatar.h" />
     <ClInclude Include="Game.Avatar.Items.h" />
-    <ClInclude Include="Game.Avatar.Statistic.h" />
     <ClInclude Include="Game.Avatar.Statistics.h" />
     <ClInclude Include="Game.Combat.h" />
     <ClInclude Include="Game.CombatDeck.h" />

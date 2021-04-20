@@ -328,9 +328,6 @@
     <ClInclude Include="Game.Avatar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.Avatar.Statistic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.Avatar.Statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
