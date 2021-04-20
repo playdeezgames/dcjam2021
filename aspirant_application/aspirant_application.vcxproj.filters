@@ -313,9 +313,6 @@
     <ClInclude Include="Maze.Direction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Maze.Door.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics.Images.h">
       <Filter>Header Files</Filter>
     </ClInclude>

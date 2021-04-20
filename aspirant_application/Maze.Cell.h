@@ -1,12 +1,17 @@
 #pragma once
 #include "Maze.Direction.h"
-#include "Maze.Door.h"
 #include <map>
 #include <vector>
 #include <optional>
 #include <memory>
 namespace maze
 {
+	enum class Door
+	{
+		CLOSED,
+		OPEN
+	};
+
 	class Cell
 	{
 	private:

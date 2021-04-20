@@ -274,7 +274,6 @@
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Maze.Cell.h" />
     <ClInclude Include="Maze.Direction.h" />
-    <ClInclude Include="Maze.Door.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Common.RNG.h" />
     <ClInclude Include="Common.Audio.h" />
