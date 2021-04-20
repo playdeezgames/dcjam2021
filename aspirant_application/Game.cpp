@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "json.hpp"
+#include "Data.JSON.h"
 namespace game::World { void Reset(); }
 namespace game::Avatar { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
@@ -28,5 +29,10 @@ namespace game
 	void Start()
 	{
 		Reset();
+	}
+
+	void AutoSave()
+	{
+		data::JSON::Save("autosave.json", GetData());//TODO: magic string
 	}
 }

@@ -3,6 +3,7 @@
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
 #include "Application.Sounds.h"
+#include "Game.h"
 namespace application::UIState
 {
 	static ::UIState uiState = ::UIState::SPLASH;
@@ -33,6 +34,7 @@ namespace application::UIState
 			}
 			else
 			{
+				game::AutoSave();
 				application::UIState::Write(::UIState::IN_PLAY_MAP);
 			}
 		}
