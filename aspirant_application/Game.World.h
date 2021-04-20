@@ -1,8 +1,15 @@
 #pragma once
 #include "Common.XY.h"
 #include "Maze.Direction.h"
-#include "Game.World.Border.h"
 #include <string>
+namespace game::world
+{
+	enum class Border
+	{
+		WALL,
+		DOOR
+	};
+}
 namespace game::World
 {
 	world::Border GetBorderAhead(const common::XY<size_t>&, const maze::Direction&);

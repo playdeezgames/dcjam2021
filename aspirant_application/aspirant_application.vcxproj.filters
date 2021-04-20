@@ -370,9 +370,6 @@
     <ClInclude Include="Game.World.Items.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.World.Border.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
