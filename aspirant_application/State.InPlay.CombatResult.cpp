@@ -7,25 +7,22 @@
 #include "Game.CombatDeck.h"
 #include "Graphics.CardSprites.h"
 #include "Common.Audio.h"
+#include "Common.Utility.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
 	const std::string CURRENT_CARD_IMAGE_ID = "CurrentCard";
 	const std::string NEXT_CARD_IMAGE_ID = "NextCard";
 
+	const std::map<Command, std::function<void()>> commandHandlers =
+	{
+		{ ::Command::BACK, []() { game::Combat::Advance(); application::UIState::Write(::UIState::LEAVE_PLAY); }},
+		{ ::Command::GREEN, []() { game::Combat::Advance(); common::audio::Sfx::Play(application::UIState::EnterGame()); }}
+	};
+
 	static void OnCommand(const ::Command& command)
 	{
-		switch (command)
-		{
-		case ::Command::BACK:
-			game::Combat::Advance();
-			application::UIState::Write(::UIState::LEAVE_PLAY);
-			break;
-		case ::Command::GREEN:
-			game::Combat::Advance();
-			common::audio::Sfx::Play(application::UIState::EnterGame());
-			break;
-		}
+		common::Utility::Dispatch(commandHandlers, command);
 	}
 
 	static void OnUpdate(const Uint32& ticks)

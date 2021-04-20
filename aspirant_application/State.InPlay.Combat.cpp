@@ -20,6 +20,7 @@
 #include "Graphics.CardSprites.h"
 #include "Game.Avatar.Items.h"
 #include "Game.Item.h"
+#include "Common.Utility.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -78,34 +79,48 @@ namespace state::in_play::Combat
 		common::audio::Sfx::Play(std::get<1>(resolutionDetails));
 	}
 
+	static void GuessHigher()
+	{
+		ResolveCombat(game::CombatDeck::Guess::HIGHER);
+		application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
+	}
+
+	static void GuessLower()
+	{
+		ResolveCombat(game::CombatDeck::Guess::LOWER);
+		application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
+	}
+
+	static void RunAway()
+	{
+		ResolveCombat(std::nullopt);
+		Flee();
+	}
+
+	static void UseItem()
+	{
+		auto result = game::avatar::Items::CombatUse(graphics::AvatarInventory::GetItem());
+		if (result)
+		{
+			common::audio::Sfx::Play(std::get<0>(*result));
+			if (std::get<1>(*result))
+			{
+				common::audio::Sfx::Play(application::UIState::EnterGame());
+			}
+		}
+	}
+
+	const std::map<CombatMenuItem, std::function<void()>> activators =
+	{
+		{CombatMenuItem::HIGHER, GuessHigher},
+		{CombatMenuItem::LOWER, GuessLower},
+		{CombatMenuItem::RUN_AWAY, RunAway},
+		{CombatMenuItem::USE_ITEM, UseItem}
+	};
+
 	static void OnActivateItem()
 	{
-		switch ((CombatMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value())
-		{
-		case CombatMenuItem::HIGHER:
-			ResolveCombat(game::CombatDeck::Guess::HIGHER);
-			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
-			break;
-		case CombatMenuItem::LOWER:
-			ResolveCombat(game::CombatDeck::Guess::LOWER);
-			application::UIState::Write(::UIState::IN_PLAY_COMBAT_RESULT);
-			break;
-		case CombatMenuItem::RUN_AWAY:
-			ResolveCombat(std::nullopt);
-			Flee();
-			break;
-		case CombatMenuItem::USE_ITEM:
-			auto result = game::avatar::Items::CombatUse(graphics::AvatarInventory::GetItem());
-			if (result)
-			{
-				common::audio::Sfx::Play(std::get<0>(*result));
-				if (std::get<1>(*result))
-				{
-					common::audio::Sfx::Play(application::UIState::EnterGame());
-				}
-			}
-			break;
-		}
+		common::Utility::Dispatch(activators, (CombatMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value());
 	}
 
 	static void OnCommand(const ::Command& command)
