@@ -30,6 +30,7 @@
 #include "Sublayouts.h"
 #include "Game.Avatar.Statistics.h"
 #include "Data.Stores.h"
+#include "Application.OnEnter.h"
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -116,8 +117,15 @@ namespace common::Application
 		return ::application::UIState::Read() != ::UIState::QUIT;
 	}
 
+	static std::optional<::UIState> currentState = std::nullopt;
+
 	void Update(Uint32 ticks)
 	{
+		if (!currentState || currentState.value() != ::application::UIState::Read())
+		{
+			currentState = ::application::UIState::Read();
+			application::OnEnter::Handle();
+		}
 		application::Update::Handle(ticks);
 	}
 

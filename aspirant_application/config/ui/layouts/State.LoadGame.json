@@ -35,36 +35,42 @@
         "drop-shadow-y": 2,
         "menu-items": [
             {
+                "menu-item-id":"Autosave",
                 "text": "Autosave",
                 "x": 320,
                 "y": 32,
                 "value": 0
             },
             {
+                "menu-item-id":"Slot1",
                 "text": "Slot 1",
                 "x": 320,
                 "y": 48,
                 "value": 1
             },
             {
+                "menu-item-id":"Slot2",
                 "text": "Slot 2",
                 "x": 320,
                 "y": 64,
                 "value": 2
             },
             {
+                "menu-item-id":"Slot3",
                 "text": "Slot 3",
                 "x": 320,
                 "y": 80,
                 "value": 3
             },
             {
+                "menu-item-id":"Slot4",
                 "text": "Slot 4",
                 "x": 320,
                 "y": 96,
                 "value": 4
             },
             {
+                "menu-item-id":"Slot5",
                 "text": "Slot 5",
                 "x": 320,
                 "y": 112,

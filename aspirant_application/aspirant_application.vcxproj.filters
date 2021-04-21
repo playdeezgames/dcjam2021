@@ -221,6 +221,9 @@
     <ClCompile Include="State.LoadGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Application.OnEnter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">
@@ -386,6 +389,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Data.Stores.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.OnEnter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

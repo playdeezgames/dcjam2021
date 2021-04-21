@@ -169,6 +169,7 @@
     <ClCompile Include="Application.TextInput.cpp" />
     <ClCompile Include="Application.UIState.cpp" />
     <ClCompile Include="Application.Update.cpp" />
+    <ClCompile Include="Application.OnEnter.cpp" />
     <ClCompile Include="Data.Stores.cpp" />
     <ClCompile Include="Game.Avatar.cpp" />
     <ClCompile Include="Game.Avatar.Items.cpp" />
@@ -237,6 +238,7 @@
     <ClInclude Include="Application.MouseButtonUp.h" />
     <ClInclude Include="Application.MouseMotion.h" />
     <ClInclude Include="Application.MouseWheel.h" />
+    <ClInclude Include="Application.OnEnter.h" />
     <ClInclude Include="Application.Sounds.h" />
     <ClInclude Include="Application.TextInput.h" />
     <ClInclude Include="Application.UIState.h" />

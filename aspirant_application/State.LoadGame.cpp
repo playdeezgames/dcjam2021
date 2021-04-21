@@ -6,10 +6,18 @@
 #include "Game.h"
 #include "Common.Audio.h"
 #include "Common.Utility.h"
+#include "Application.OnEnter.h"
+#include "Graphics.MenuItems.h"
 namespace state::LoadGame
 {
 	const std::string LAYOUT_NAME = "State.LoadGame";
 	const std::string MENU_ID = "LoadGame";
+	const std::string MENU_ITEM_AUTOSAVE = "Autosave";
+	//const std::string MENU_ITEM_SLOT1 = "Slot1";
+	//const std::string MENU_ITEM_SLOT2 = "Slot2";
+	//const std::string MENU_ITEM_SLOT3 = "Slot3";
+	//const std::string MENU_ITEM_SLOT4 = "Slot4";
+	//const std::string MENU_ITEM_SLOT5 = "Slot5";
 
 	enum class LoadGameItem
 	{
@@ -29,8 +37,6 @@ namespace state::LoadGame
 
 	const std::map<LoadGameItem, std::function<void()>> activators =
 	{
-	//	{ StartGameItem::NEW_GAME, NewGame },
-	//	{ StartGameItem::CONTINUE_GAME, ContinueGame },
 		{ LoadGameItem::BACK, GoBack }
 	};
 
@@ -48,9 +54,15 @@ namespace state::LoadGame
 		{ ::Command::GREEN, ActivateItem }
 	};
 
+	static void OnEnter()
+	{
+		graphics::MenuItems::SetText(LAYOUT_NAME, MENU_ITEM_AUTOSAVE, "(autosave)");
+	}
+
 	void Start()
 	{
 		::application::Command::SetHandlers(::UIState::LOAD_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::LOAD_GAME, LAYOUT_NAME);
+		::application::OnEnter::AddHandler(::UIState::LOAD_GAME, OnEnter);
 	}
 }
