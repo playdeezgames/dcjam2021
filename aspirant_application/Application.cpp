@@ -97,7 +97,8 @@ namespace common::Application
 		state::in_play::Dead::Start,
 		state::in_play::Exit::Start,
 		game::CombatDeck::Deal,
-		game::CombatDeck::Deal
+		game::CombatDeck::Deal,
+		state::LoadGame::Start
 	};
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)

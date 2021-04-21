@@ -16,5 +16,6 @@
     "State.InPlay.Exit": "config/ui/layouts/State.InPlay.Exit.json",
     "Sublayout.POV": "config/ui/layouts/Sublayout.POV.json",
     "Sublayout.QuickStats": "config/ui/layouts/Sublayout.QuickStats.json",
-    "Sublayout.EnemyStats": "config/ui/layouts/Sublayout.EnemyStats.json"
+    "Sublayout.EnemyStats": "config/ui/layouts/Sublayout.EnemyStats.json",
+    "State.LoadGame": "config/ui/layouts/State.LoadGame.json"
 }

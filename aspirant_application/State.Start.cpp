@@ -26,7 +26,7 @@ namespace state::Start
 
 	static void ContinueGame()
 	{
-		//TODO: go to a new screen
+		::application::UIState::Write(::UIState::LOAD_GAME);
 	}
 
 	static void GoBack()

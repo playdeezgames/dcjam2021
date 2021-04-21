@@ -213,6 +213,7 @@
     <ClCompile Include="State.InPlay.FloorInventory.cpp" />
     <ClCompile Include="State.InPlay.MiniMap.cpp" />
     <ClCompile Include="State.LeavePlay.cpp" />
+    <ClCompile Include="State.LoadGame.cpp" />
     <ClCompile Include="State.MainMenu.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="State.Options.cpp" />
