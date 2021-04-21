@@ -14,6 +14,7 @@ namespace state::Start
 	enum class StartGameItem
 	{
 		NEW_GAME,
+		CONTINUE_GAME,
 		BACK
 	};
 
@@ -21,6 +22,11 @@ namespace state::Start
 	{
 		game::Reset();
 		common::audio::Sfx::Play(application::UIState::EnterGame());
+	}
+
+	static void ContinueGame()
+	{
+		//TODO: go to a new screen
 	}
 
 	static void GoBack()
@@ -31,6 +37,7 @@ namespace state::Start
 	const std::map<StartGameItem, std::function<void()>> activators =
 	{
 		{ StartGameItem::NEW_GAME, NewGame },
+		{ StartGameItem::CONTINUE_GAME, ContinueGame },
 		{ StartGameItem::BACK, GoBack }
 	};
 

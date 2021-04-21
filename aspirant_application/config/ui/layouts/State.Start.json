@@ -41,10 +41,16 @@
                 "value": 0
             },
             {
-                "text": "Back",
+                "text": "Continue Game",
                 "x": 320,
                 "y": 48,
                 "value": 1
+            },
+            {
+                "text": "Back",
+                "x": 320,
+                "y": 64,
+                "value": 2
             }
         ]
     }
