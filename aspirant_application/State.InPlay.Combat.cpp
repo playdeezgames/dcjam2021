@@ -72,33 +72,23 @@ namespace state::in_play::Combat
 		{game::Combat::CombatResult::HUNTER_RAN, COMBATRESULT_HUNTER_RAN}
 	};
 
+	const std::map<game::Combat::CombatResult, std::function<std::optional<std::string>(const std::optional<game::Creatures::Instance>&)>> sounds =
+	{
+		{game::Combat::CombatResult::MONSTER_KILLED, [](const std::optional<game::Creatures::Instance>& instance) { return instance.value().descriptor.sfx.find(game::creature::Sfx::DEATH)->second; }},
+		{game::Combat::CombatResult::MONSTER_HIT, [](const std::optional<game::Creatures::Instance>& instance) { return instance.value().descriptor.sfx.find(game::creature::Sfx::HIT)->second; }},
+		{game::Combat::CombatResult::MONSTER_BLOCKED, [](const std::optional<game::Creatures::Instance>& instance) { return instance.value().descriptor.sfx.find(game::creature::Sfx::BLOCK)->second; }},
+		{game::Combat::CombatResult::HUNTER_HIT, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_HUNTER); }},
+		{game::Combat::CombatResult::HUNTER_BLOCKED, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_BLOCKED); }},
+		{game::Combat::CombatResult::HUNTER_RAN, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_HUNTER); }}
+	};
+
 	void ResolveCombat(std::optional<game::CombatDeck::Guess> guess)
 	{
 		auto result = game::Combat::Resolve(guess);
 		auto& resolutionDetails = resolutions.find(result)->second;
 		SetCombatResultText(resolutionDetails);
 		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
-		switch (result)
-		{
-			case game::Combat::CombatResult::MONSTER_KILLED:
-				common::audio::Sfx::Play(instance.value().descriptor.sfx[game::creature::Sfx::DEATH]);
-				break;
-			case game::Combat::CombatResult::MONSTER_HIT:
-				common::audio::Sfx::Play(instance.value().descriptor.sfx[game::creature::Sfx::HIT]);
-				break;
-			case game::Combat::CombatResult::MONSTER_BLOCKED:
-				common::audio::Sfx::Play(instance.value().descriptor.sfx[game::creature::Sfx::BLOCK]);
-				break;
-			case game::Combat::CombatResult::HUNTER_HIT:
-				common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::HIT_HUNTER));
-				break;
-			case game::Combat::CombatResult::HUNTER_BLOCKED:
-				common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::HIT_BLOCKED));
-				break;
-			case game::Combat::CombatResult::HUNTER_RAN:
-				common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::HIT_HUNTER));
-				break;
-		}
+		common::audio::Sfx::Play(sounds.find(result)->second(instance));
 	}
 
 	static void GuessHigher()
