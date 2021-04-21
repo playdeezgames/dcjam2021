@@ -122,14 +122,16 @@ namespace game::avatar::Items
 		}
 	}
 
-	static std::optional<std::string> ConsumeItem(int item, std::function<void(const game::item::Descriptor&)> action)
+	static std::optional<std::string> ConsumeItem(int item, std::function<bool(const game::item::Descriptor&)> action)
 	{
 		auto descriptor = game::item::GetDescriptor(item);
 		if (game::avatar::Items::Read(item) > 0)
 		{
-			action(descriptor);
-			game::avatar::Items::Remove(item, 1);
-			return descriptor.sfxSuccess;
+			if (action(descriptor))
+			{
+				game::avatar::Items::Remove(item, 1);
+				return descriptor.sfxSuccess;
+			}
 		}
 		return descriptor.sfxFailure;
 	}
@@ -138,7 +140,12 @@ namespace game::avatar::Items
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor) 
 		{
-			game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, descriptor.amount.value());
+			if (game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER))
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, descriptor.amount.value());
+				return true;
+			}
+			return false;
 		});
 	}
 
@@ -146,7 +153,12 @@ namespace game::avatar::Items
 	{
 		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
 		{
-			game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, descriptor.amount.value());
+			if (game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH))
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, descriptor.amount.value());
+				return true;
+			}
+			return false;
 		});
 	}
 
@@ -156,6 +168,7 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, descriptor.duration.value());
+			return true;
 		});
 	}
 
@@ -165,6 +178,8 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, descriptor.duration.value());
+			return true;
+
 		});
 	}
 
