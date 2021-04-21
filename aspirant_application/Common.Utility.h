@@ -17,5 +17,6 @@ namespace common::Utility
 			iter->second();
 		}
 	}
+	bool FileExists(const std::string&);
 }
 

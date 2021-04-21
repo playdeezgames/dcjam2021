@@ -1,5 +1,6 @@
 #include "Common.Utility.h"
 #include <sstream>
+#include <filesystem>
 namespace common::Utility
 {
 	std::vector<std::string> ParseCommandLine(int argc, char** argv)
@@ -25,6 +26,11 @@ namespace common::Utility
 	int ToPercentage(int value, int maximum)
 	{
 		return value * 100 / maximum;
+	}
+
+	bool FileExists(const std::string& filename)
+	{
+		return std::filesystem::exists(filename);
 	}
 }
 
