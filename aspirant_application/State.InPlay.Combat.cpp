@@ -21,6 +21,7 @@
 #include "Game.Avatar.Items.h"
 #include "Game.Item.h"
 #include "Common.Utility.h"
+#include "Game.Creatures.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -62,21 +63,43 @@ namespace state::in_play::Combat
 		graphics::Texts::SetText(COMBATRESULT_LAYOUT_NAME, COMBATRESULT_RESULT_TEXT_ID, text);
 	}
 
-	const std::map<game::Combat::CombatResult, std::tuple<std::string, std::string>> resolutions =
+	const std::map<game::Combat::CombatResult, std::string> resolutions =
 	{
-		{game::Combat::CombatResult::MONSTER_KILLED, {COMBATRESULT_KILL_MONSTER, application::Sounds::DEAD_MONSTER}},
-		{game::Combat::CombatResult::MONSTER_HIT, {COMBATRESULT_HIT_MONSTER, application::Sounds::HIT_MONSTER}},
-		{game::Combat::CombatResult::MONSTER_BLOCKED, {COMBATRESULT_MISSED_MONSTER, application::Sounds::HIT_BLOCKED}},
-		{game::Combat::CombatResult::HUNTER_HIT, {COMBATRESULT_GOT_HIT, application::Sounds::HIT_HUNTER}},
-		{game::Combat::CombatResult::HUNTER_BLOCKED, {COMBATRESULT_BLOCKED_HIT, application::Sounds::HIT_BLOCKED}},
-		{game::Combat::CombatResult::HUNTER_RAN, {COMBATRESULT_HUNTER_RAN, application::Sounds::HIT_HUNTER}}
+		{game::Combat::CombatResult::MONSTER_KILLED, COMBATRESULT_KILL_MONSTER},
+		{game::Combat::CombatResult::MONSTER_HIT, COMBATRESULT_HIT_MONSTER},
+		{game::Combat::CombatResult::MONSTER_BLOCKED, COMBATRESULT_MISSED_MONSTER},
+		{game::Combat::CombatResult::HUNTER_HIT, COMBATRESULT_GOT_HIT},
+		{game::Combat::CombatResult::HUNTER_BLOCKED, COMBATRESULT_BLOCKED_HIT},
+		{game::Combat::CombatResult::HUNTER_RAN, COMBATRESULT_HUNTER_RAN}
 	};
 
 	void ResolveCombat(std::optional<game::CombatDeck::Guess> guess)
 	{
-		auto& resolutionDetails = resolutions.find(game::Combat::Resolve(guess))->second;
-		SetCombatResultText(std::get<0>(resolutionDetails));
-		common::audio::Sfx::Play(std::get<1>(resolutionDetails));
+		auto result = game::Combat::Resolve(guess);
+		auto& resolutionDetails = resolutions.find(result)->second;
+		SetCombatResultText(resolutionDetails);
+		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
+		switch (result)
+		{
+			case game::Combat::CombatResult::MONSTER_KILLED:
+				common::audio::Sfx::Play(instance.value().descriptor.sfx[game::creature::Sfx::DEATH]);
+				break;
+			case game::Combat::CombatResult::MONSTER_HIT:
+				common::audio::Sfx::Play(instance.value().descriptor.sfx[game::creature::Sfx::HIT]);
+				break;
+			case game::Combat::CombatResult::MONSTER_BLOCKED:
+				common::audio::Sfx::Play(instance.value().descriptor.sfx[game::creature::Sfx::BLOCK]);
+				break;
+			case game::Combat::CombatResult::HUNTER_HIT:
+				common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::HIT_HUNTER));
+				break;
+			case game::Combat::CombatResult::HUNTER_BLOCKED:
+				common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::HIT_BLOCKED));
+				break;
+			case game::Combat::CombatResult::HUNTER_RAN:
+				common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::HIT_HUNTER));
+				break;
+		}
 	}
 
 	static void GuessHigher()

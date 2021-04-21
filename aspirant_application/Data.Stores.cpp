@@ -24,8 +24,8 @@ namespace data::Stores
 		{data::Store::LAYOUTS, "config/ui/layouts.json"},
 		{data::Store::KEYS, "config/keyboard.json"},
 		{data::Store::OPTIONS, "config/options.json"},
-		{data::Store::STATISTICS, "config/statistics.json"}
-
+		{data::Store::STATISTICS, "config/statistics.json"},
+		{data::Store::UI_SFX, "config/ui/sfx.json"}
 	};
 
 	void Start()

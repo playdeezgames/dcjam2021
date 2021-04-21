@@ -240,10 +240,10 @@ namespace game::avatar::Items
 			{
 				game::avatar::Items::Remove(item, (size_t)amount);
 				game::Creatures::Remove(game::Avatar::GetPosition());
-				return std::make_tuple(application::Sounds::WOOHOO, true);//TODO: success sound
+				return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::BRIBE], true);
 			}
 		}
-		return std::make_tuple(application::Sounds::SHUCKS, false);//TODO: failure sound
+		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::BRIBE], false);
 	}
 
 	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(int)>> combatVerbs =

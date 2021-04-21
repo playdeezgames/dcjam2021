@@ -165,6 +165,7 @@
     <ClCompile Include="Application.MouseMotion.cpp" />
     <ClCompile Include="Application.MouseWheel.cpp" />
     <ClCompile Include="Application.Renderer.cpp" />
+    <ClCompile Include="Application.Sounds.cpp" />
     <ClCompile Include="Application.TextInput.cpp" />
     <ClCompile Include="Application.UIState.cpp" />
     <ClCompile Include="Application.Update.cpp" />

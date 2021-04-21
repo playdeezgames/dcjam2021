@@ -15,7 +15,8 @@ namespace data
 		LAYOUTS,
 		KEYS,
 		OPTIONS,
-		STATISTICS
+		STATISTICS,
+		UI_SFX
 	};
 }
 namespace data::Stores

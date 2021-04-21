@@ -23,7 +23,7 @@ namespace application::UIState
 		std::optional<std::string> result = std::nullopt;
 		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			result = application::Sounds::DEAD_HUNTER;
+			result = application::Sounds::Read(application::UI::Sfx::DEAD_HUNTER);
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
 		}
 		else if (game::Creatures::AnyLeft())
@@ -40,7 +40,7 @@ namespace application::UIState
 		}
 		else
 		{
-			result = application::Sounds::EXIT;
+			result = application::Sounds::Read(application::UI::Sfx::EXIT);
 			application::UIState::Write(::UIState::IN_PLAY_EXIT);
 		}
 		return result;
