@@ -48,7 +48,6 @@ namespace state::in_play::Combat
 		game::Avatar::MoveAhead();
 	}
 
-
 	const std::string COMBATRESULT_LAYOUT_NAME = "State.InPlay.CombatResult";
 	const std::string COMBATRESULT_RESULT_TEXT_ID = "Result";
 	const std::string COMBATRESULT_HIT_MONSTER = "You hit it!";
