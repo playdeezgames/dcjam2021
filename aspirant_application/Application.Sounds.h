@@ -16,5 +16,6 @@ namespace application::Sounds
 	//TODO: these should be put as descriptor properties for items and creatures where possible
 	const std::string DEAD_MONSTER = "deadmonster";
 	const std::string HIT_MONSTER = "hitmonster";
+
 	const std::string SHUCKS = "shucks";
 }

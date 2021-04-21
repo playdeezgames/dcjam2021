@@ -10,6 +10,13 @@
         "bribes":{
             "0":2,
             "5":2
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
         }
     },
     {
@@ -23,6 +30,13 @@
         "bribes":{
             "0":3,
             "5":3
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
         }
     },
     {
@@ -32,7 +46,13 @@
         "health":300,
         "attack":25,
         "defend":0,
-        "number-appearing":6
+        "number-appearing":6,
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "4":"shucks"
+        }
     },
     {
         "index":3,
@@ -45,6 +65,13 @@
         "bribes":{
             "0":5,
             "5":5
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
         }
     },
     {
@@ -57,6 +84,13 @@
         "number-appearing":18,
         "bribes":{
             "0":1
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
         }
     },
     {
@@ -70,6 +104,13 @@
         "bribes":{
             "0":1,
             "5":1
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
         }
     },
     {
@@ -79,7 +120,13 @@
         "health":250,
         "attack":25,
         "defend":10,
-        "number-appearing":2
+        "number-appearing":2,
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "4":"shucks"
+        }
     },
     {
         "index":7,
@@ -91,6 +138,13 @@
         "number-appearing":1,
         "bribes":{
             "5":100
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
         }
     }
 ]

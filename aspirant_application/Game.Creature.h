@@ -7,6 +7,14 @@
 #include "Game.Item.h"
 namespace game::creature
 {
+	enum class Sfx
+	{
+		HIT,
+		DEATH,
+		BLOCK,
+		BRIBE,
+		NO_BRIBE
+	};
 	struct Descriptor
 	{
 		std::string imageId;
@@ -15,6 +23,7 @@ namespace game::creature
 		int defend;
 		size_t numberAppearing;
 		std::map<int, size_t> bribes;
+		std::map<Sfx, std::string> sfx;
 	};
 
 	Descriptor GetDescriptor(int);

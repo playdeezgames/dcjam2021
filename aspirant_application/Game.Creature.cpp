@@ -17,6 +17,15 @@ namespace game::creature
 				bribes[common::Utility::StringToInt(amount.key())] = (size_t)amount.value();
 			}
 		}
+		std::map<Sfx, std::string> sfx;
+		if (creatureDescriptor.count(game::data::Properties::SFX) > 0)
+		{
+			auto& amounts = creatureDescriptor[game::data::Properties::SFX];
+			for (auto& amount : amounts.items())
+			{
+				sfx[(Sfx)common::Utility::StringToInt(amount.key())] = amount.value();
+			}
+		}
 		return
 		{
 			creatureDescriptor[game::data::Properties::IMAGE_ID],
@@ -24,7 +33,8 @@ namespace game::creature
 			creatureDescriptor[game::data::Properties::ATTACK],
 			creatureDescriptor[game::data::Properties::DEFEND],
 			creatureDescriptor[game::data::Properties::NUMBER_APPEARING],
-			bribes
+			bribes,
+			sfx
 		};
 	}
 

@@ -26,6 +26,7 @@ namespace game::data::Properties
 	const std::string NUMBER_APPEARING = "number-appearing";
 	const std::string ROOM_INVENTORIES = "room-inventories";
 	const std::string ROW = "row";
+	const std::string SFX = "sfx";
 	const std::string SFX_SUCCESS = "sfx-success";
 	const std::string SFX_FAILURE = "sfx-failure";
 	const std::string STATISTICS = "statistics";
