@@ -2,10 +2,13 @@
 #include "Application.Command.h"
 #include "Application.Update.h"
 #include "Application.UIState.h"
+#include "Application.MouseButtonUp.h"
+#include "Graphics.Areas.h"
 namespace state::Splash
 {
 	const size_t TICKS_TOTAL = 3000;
 	const std::string LAYOUT_NAME = "State.Splash";
+	const std::string AREA_SCREEN = "Screen";
 	static size_t ticksLeft = TICKS_TOTAL;
 
 	static void RunOutTimer()
@@ -23,8 +26,18 @@ namespace state::Splash
 		}
 	}
 
+	void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (areas.contains(AREA_SCREEN))
+		{
+			RunOutTimer();
+		}
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::SetHandler(::UIState::SPLASH, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::SPLASH, RunOutTimer);
 		::application::Renderer::SetRenderLayout(::UIState::SPLASH, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::SPLASH, OnUpdate);

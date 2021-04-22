@@ -9,6 +9,7 @@ namespace graphics::data::Types
 	const std::string MENU = "Menu";
 	const std::string TEXT = "Text";
 	const std::string WORLD_MAP = "WorldMap";
+	const std::string AREA = "Area";
 }
 namespace graphics::data
 {
@@ -21,6 +22,7 @@ namespace graphics::data
 		{ graphics::data::Types::MENU, Type::MENU },
 		{ graphics::data::Types::TEXT, Type::TEXT },
 		{ graphics::data::Types::WORLD_MAP, Type::WORLD_MAP },
+		{ graphics::data::Types::AREA, Type::AREA }
 	};
 }
 namespace graphics::data::Types

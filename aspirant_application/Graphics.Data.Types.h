@@ -11,7 +11,8 @@ namespace graphics::data
 		LAYOUT,
 		MENU,
 		TEXT,
-		WORLD_MAP
+		WORLD_MAP,
+		AREA
 	};
 }
 namespace graphics::data::Types

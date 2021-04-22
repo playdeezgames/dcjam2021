@@ -31,5 +31,13 @@
         "drop-shadow-color": "Black",
         "drop-shadow-x": 1,
         "drop-shadow-y": 1
+    },
+    {
+        "type": "Area",
+        "area-id":"Screen",
+        "x":0,
+        "y":0,
+        "width":640,
+        "height":360
     }
 ]

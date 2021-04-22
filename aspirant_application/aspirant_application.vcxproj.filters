@@ -224,6 +224,9 @@
     <ClCompile Include="Application.OnEnter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics.Areas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">
@@ -392,6 +395,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application.OnEnter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.Areas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
