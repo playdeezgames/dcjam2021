@@ -99,7 +99,8 @@ namespace common::Application
 		state::in_play::Exit::Start,
 		game::CombatDeck::Deal,
 		game::CombatDeck::Deal,
-		state::LoadGame::Start
+		state::LoadGame::Start,
+		Options::Initialize
 	};
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
@@ -108,7 +109,6 @@ namespace common::Application
 		{
 			starter();
 		}
-		Options::Initialize();//TODO: this may have to stay here and not be part of the data store
 		common::audio::Mux::Play("songs");//TODO: nekkid string
 	}
 

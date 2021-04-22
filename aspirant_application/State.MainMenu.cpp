@@ -116,7 +116,7 @@ namespace state::MainMenu
 	void Start()
 	{
 		::application::MouseButtonUp::SetHandler(::UIState::MAIN_MENU, OnMouseButtonUp);
-		::application::MouseMotion::SetHandler(::UIState::MAIN_MENU, OnMouseMotion);
+		::application::MouseMotion::AddHandler(::UIState::MAIN_MENU, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);
 	}

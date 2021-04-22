@@ -3,17 +3,23 @@
 #include "Application.Handlers.h"
 namespace application::MouseMotion
 {
-	static std::map<::UIState, Handler> handlers;
+	static std::map<::UIState, std::vector<Handler>> mouseMotionHandlers;
 
 	void Handle(const SDL_MouseMotionEvent& evt)
 	{
 		application::Handlers::WithCurrent(
-			handlers,
-			[evt](const Handler& handler) { handler(common::XY<Sint32>(evt.x, evt.y)); });
+			mouseMotionHandlers,
+			[evt](const std::vector<Handler>& handlers)
+		{ 
+			for (auto& handler : handlers)
+			{
+				handler(common::XY<Sint32>(evt.x, evt.y));
+			}
+		});
 	}
 
-	void SetHandler(const ::UIState& state, Handler handler)
+	void AddHandler(const ::UIState& state, Handler handler)
 	{
-		handlers[state] = handler;
+		mouseMotionHandlers[state].push_back(handler);
 	}
 }

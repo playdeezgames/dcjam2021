@@ -92,7 +92,7 @@ namespace state::ConfirmQuit
 	void Start()
 	{
 		::application::MouseButtonUp::SetHandler(::UIState::CONFIRM_QUIT, OnMouseButtonUp);
-		::application::MouseMotion::SetHandler(::UIState::CONFIRM_QUIT, OnMouseMotion);
+		::application::MouseMotion::AddHandler(::UIState::CONFIRM_QUIT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::CONFIRM_QUIT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::CONFIRM_QUIT, LAYOUT_NAME);
 	}
