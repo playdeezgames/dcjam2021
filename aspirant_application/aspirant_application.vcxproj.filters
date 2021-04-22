@@ -86,12 +86,6 @@
     <ClCompile Include="Application.Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Application.MouseWheel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.MouseButtonDown.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Application.MouseButtonUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -289,13 +283,7 @@
     <ClInclude Include="Application.Update.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Application.MouseButtonDown.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Application.MouseButtonUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.MouseWheel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application.Handlers.h">

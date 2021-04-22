@@ -160,10 +160,8 @@
   <ItemGroup>
     <ClCompile Include="Application.Command.cpp" />
     <ClCompile Include="Application.Keyboard.cpp" />
-    <ClCompile Include="Application.MouseButtonDown.cpp" />
     <ClCompile Include="Application.MouseButtonUp.cpp" />
     <ClCompile Include="Application.MouseMotion.cpp" />
-    <ClCompile Include="Application.MouseWheel.cpp" />
     <ClCompile Include="Application.Renderer.cpp" />
     <ClCompile Include="Application.Sounds.cpp" />
     <ClCompile Include="Application.TextInput.cpp" />
@@ -235,10 +233,8 @@
     <ClInclude Include="Application.Command.h" />
     <ClInclude Include="Application.Handlers.h" />
     <ClInclude Include="Application.Keyboard.h" />
-    <ClInclude Include="Application.MouseButtonDown.h" />
     <ClInclude Include="Application.MouseButtonUp.h" />
     <ClInclude Include="Application.MouseMotion.h" />
-    <ClInclude Include="Application.MouseWheel.h" />
     <ClInclude Include="Application.OnEnter.h" />
     <ClInclude Include="Application.Sounds.h" />
     <ClInclude Include="Application.TextInput.h" />

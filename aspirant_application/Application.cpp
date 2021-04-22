@@ -14,8 +14,6 @@
 #include "Application.Command.h"
 #include "Application.TextInput.h"
 #include "Application.Update.h"
-#include "Application.MouseWheel.h"
-#include "Application.MouseButtonDown.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.UIState.h"
 #include "Game.h"
@@ -136,9 +134,7 @@ namespace common::Application
 		{ SDL_TEXTINPUT,            [](const SDL_Event& evt) { ::application::TextInput::Handle(evt.text); }},
 		{ SDL_CONTROLLERBUTTONDOWN, [](const SDL_Event& evt) { ::Application::HandleControllerButtonDown(evt.cbutton); }},
 		{ SDL_MOUSEMOTION,          [](const SDL_Event& evt) { ::application::MouseMotion::Handle(evt.motion); }},
-		{ SDL_MOUSEBUTTONDOWN,      [](const SDL_Event& evt) { ::application::MouseButtonDown::Handle(evt.button); }},
-		{ SDL_MOUSEBUTTONUP,        [](const SDL_Event& evt) { ::application::MouseButtonUp::Handle(evt.button); }},
-		{ SDL_MOUSEWHEEL,           [](const SDL_Event& evt) { ::application::MouseWheel::Handle(evt.wheel); }}
+		{ SDL_MOUSEBUTTONUP,        [](const SDL_Event& evt) { ::application::MouseButtonUp::Handle(evt.button); }}
 	};
 
 	void HandleEvent(const SDL_Event& evt)
