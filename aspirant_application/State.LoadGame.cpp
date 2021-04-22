@@ -18,7 +18,6 @@ namespace state::LoadGame
 	//const std::string MENU_ITEM_SLOT3 = "Slot3";
 	//const std::string MENU_ITEM_SLOT4 = "Slot4";
 	//const std::string MENU_ITEM_SLOT5 = "Slot5";
-	const std::string FILENAME_AUTOSAVE = "autosave.json";
 	const std::string AUTOSAVE_PRESENT = "(autosave)";
 	const std::string NOT_PRESENT = "-";
 
@@ -39,8 +38,15 @@ namespace state::LoadGame
 		::application::UIState::Write(::UIState::START_GAME);
 	}
 
+	static void LoadFromAutosave()
+	{
+		game::LoadFromAutosave();
+		application::UIState::EnterGame();
+	}
+
 	const std::map<LoadGameItem, std::function<void()>> activators =
 	{
+		{ LoadGameItem::AUTOSAVE, LoadFromAutosave },
 		{ LoadGameItem::BACK, GoBack }
 	};
 
@@ -60,7 +66,7 @@ namespace state::LoadGame
 
 	static void OnEnter()
 	{
-		if (common::Utility::FileExists(FILENAME_AUTOSAVE))
+		if (game::DoesAutosaveExist())
 		{
 			graphics::MenuItems::SetText(LAYOUT_NAME, MENU_ITEM_AUTOSAVE, AUTOSAVE_PRESENT);
 		}

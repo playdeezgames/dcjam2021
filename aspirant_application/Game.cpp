@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "json.hpp"
 #include "Data.JSON.h"
+#include "Common.Utility.h"
 namespace game::World { void Reset(); }
 namespace game::Avatar { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
@@ -9,6 +10,8 @@ namespace game::avatar::Items { void Reset(); }
 namespace game::Creatures { void Reset(); }
 namespace game
 {
+	const std::string FILENAME_AUTOSAVE = "autosave.json";
+
 	nlohmann::json data;
 
 	nlohmann::json& GetData()
@@ -33,6 +36,18 @@ namespace game
 
 	void AutoSave()
 	{
-		data::JSON::Save("autosave.json", GetData());//TODO: magic string
+		data::JSON::Save(FILENAME_AUTOSAVE, GetData());
 	}
+
+	void LoadFromAutosave()
+	{
+		data = data::JSON::Load(FILENAME_AUTOSAVE);
+	}
+
+	bool DoesAutosaveExist()
+	{
+		return common::Utility::FileExists(FILENAME_AUTOSAVE);
+	}
+
+
 }

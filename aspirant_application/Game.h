@@ -4,6 +4,8 @@ namespace game
 {
 	void Start();
 	void Reset();
-	nlohmann::json& GetData();//TODO: DAL
+	nlohmann::json& GetData();
 	void AutoSave();
+	bool DoesAutosaveExist();
+	void LoadFromAutosave();
 }
