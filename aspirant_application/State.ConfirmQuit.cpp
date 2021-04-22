@@ -4,10 +4,15 @@
 #include "Graphics.Layouts.h"
 #include "Graphics.Menus.h"
 #include "Common.Utility.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
+#include "Graphics.Areas.h"
 namespace state::ConfirmQuit
 {
 	const std::string LAYOUT_NAME = "State.ConfirmQuit";
 	const std::string MENU_ID = "ConfirmQuit";
+	const std::string AREA_NO = "No";
+	const std::string AREA_YES = "Yes";
 
 	enum class ConfirmQuitItem
 	{
@@ -55,8 +60,39 @@ namespace state::ConfirmQuit
 		{ ::Command::RED, GoToMainMenu }
 	};
 
+	static void SetCurrentMenuItem(ConfirmQuitItem item)
+	{
+		graphics::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+	}
+
+	const std::map<std::string, ConfirmQuitItem> areaMenuItems =
+	{
+		{ AREA_NO,  ConfirmQuitItem::NO},
+		{ AREA_YES,  ConfirmQuitItem::YES}
+	};
+
+	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		for (auto& area : areas)
+		{
+			SetCurrentMenuItem(areaMenuItems.find(area)->second);
+		}
+	}
+
+	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (!areas.empty())
+		{
+			ActivateItem();
+		}
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::SetHandler(::UIState::CONFIRM_QUIT, OnMouseButtonUp);
+		::application::MouseMotion::SetHandler(::UIState::CONFIRM_QUIT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::CONFIRM_QUIT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::CONFIRM_QUIT, LAYOUT_NAME);
 	}

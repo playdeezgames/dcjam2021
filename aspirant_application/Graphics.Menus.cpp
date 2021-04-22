@@ -62,7 +62,7 @@ namespace graphics::Menus
 			[]() { return 0; });
 	}
 
-	std::optional<int> FindIndexForValue(const std::string& layoutName, const std::string& menuId, int value)
+	static std::optional<int> FindIndexForValue(const std::string& layoutName, const std::string& menuId, int value)
 	{
 		return WithMenu<std::optional<int>>(layoutName, menuId, [value](auto& thingie) 
 		{ 
@@ -79,6 +79,18 @@ namespace graphics::Menus
 		}, 
 			[]() { return std::nullopt;  });
 	}
+
+	bool WriteValue(const std::string& layoutName, const std::string& menuId, int value)
+	{
+		auto index = graphics::Menus::FindIndexForValue(layoutName, menuId, value);
+		if (index)
+		{
+			graphics::Menus::WriteIndex(layoutName, menuId, *index);
+			return true;
+		}
+		return false;
+	}
+
 
 
 	static void ChangeMenuIndex(const std::string& layoutName, const std::string& menuId, int delta)

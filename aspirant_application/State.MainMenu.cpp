@@ -92,11 +92,10 @@ namespace state::MainMenu
 
 	static void SetCurrentMenuItem(MainMenuItem item) 
 	{ 
-		graphics::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, 
-			graphics::Menus::FindIndexForValue(LAYOUT_NAME, MENU_ID, (int)item).value()); 
+		graphics::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& area : areas)
@@ -105,7 +104,7 @@ namespace state::MainMenu
 		}
 	}
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())

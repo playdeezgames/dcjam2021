@@ -47,5 +47,21 @@
                 "value": 1
             }
         ]
+    },
+    {
+        "type":"Area",
+        "area-id":"No",
+        "x":240,
+        "y":32,
+        "width":160,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Yes",
+        "x":240,
+        "y":48,
+        "width":160,
+        "height":16
     }
 ]
