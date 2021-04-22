@@ -5,6 +5,7 @@
 #include "Graphics.Menus.h"
 #include "Common.Utility.h"
 #include "Application.MouseMotion.h"
+#include "Application.MouseButtonUp.h"
 #include "Graphics.Areas.h"
 namespace state::MainMenu
 {
@@ -23,12 +24,33 @@ namespace state::MainMenu
 		QUIT
 	};
 
+	static void StartGame()
+	{
+		::application::UIState::Write(::UIState::START_GAME);
+	}
+
+	static void GoToOptions()
+	{
+		::application::UIState::Write(::UIState::OPTIONS);
+	}
+
+	static void GoToAbout()
+	{
+		SDL_SetClipboardText("https://thegrumpygamedev.itch.io/"); 
+		::application::UIState::Write(::UIState::ABOUT);
+	}
+
+	static void ConfirmQuit()
+	{
+		::application::UIState::Write(::UIState::CONFIRM_QUIT);
+	}
+
 	const std::map<MainMenuItem, std::function<void()>> activators =
 	{
-		{ MainMenuItem::START, []() {::application::UIState::Write(::UIState::START_GAME); }},
-		{ MainMenuItem::OPTIONS, []() { ::application::UIState::Write(::UIState::OPTIONS); }},
-		{ MainMenuItem::ABOUT, []() { SDL_SetClipboardText("https://thegrumpygamedev.itch.io/"); ::application::UIState::Write(::UIState::ABOUT); }},
-		{ MainMenuItem::QUIT, []() { ::application::UIState::Write(::UIState::CONFIRM_QUIT); }},
+		{ MainMenuItem::START, StartGame },
+		{ MainMenuItem::OPTIONS, GoToOptions },
+		{ MainMenuItem::ABOUT, GoToAbout },
+		{ MainMenuItem::QUIT, ConfirmQuit },
 	};
 
 	static void ActivateItem()
@@ -36,13 +58,23 @@ namespace state::MainMenu
 		common::Utility::Dispatch(activators, (MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
+	static void NextMenuItem()
+	{
+		graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
+	}
+
+	static void PreviousMenuItem()
+	{
+		graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
+	}
+
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
-		{::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{::Command::UP, PreviousMenuItem },
+		{::Command::DOWN, NextMenuItem },
 		{::Command::GREEN, ActivateItem },
-		{::Command::BACK, []() { ::application::UIState::Write(::UIState::CONFIRM_QUIT); }},
-		{::Command::RED, []() { ::application::UIState::Write(::UIState::CONFIRM_QUIT); }}
+		{::Command::BACK, ConfirmQuit },
+		{::Command::RED, ConfirmQuit }
 	};
 
 	static void OnCommand(const ::Command& command)
@@ -73,8 +105,18 @@ namespace state::MainMenu
 		}
 	}
 
+	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (!areas.empty())
+		{
+			ActivateItem();
+		}
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::SetHandler(::UIState::MAIN_MENU, OnMouseButtonUp);
 		::application::MouseMotion::SetHandler(::UIState::MAIN_MENU, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);
