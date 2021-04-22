@@ -6,6 +6,7 @@
 #include "Game.Avatar.Items.h"
 #include <sstream>
 #include "States.h"
+#include "Application.MouseButtonUp.h"
 namespace state::in_play::Dead
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Dead";
@@ -23,9 +24,15 @@ namespace state::in_play::Dead
 		graphics::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());
 	}
 
+	void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	{
+		GoToMainMenu();
+	}
+
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::ABOUT, GoToMainMenu);
+		::application::MouseButtonUp::SetHandler(::UIState::IN_PLAY_DEAD, OnMouseButtonUp);
+		::application::Command::SetHandler(::UIState::IN_PLAY_DEAD, GoToMainMenu);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_DEAD, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_DEAD, OnUpdate);
 	}

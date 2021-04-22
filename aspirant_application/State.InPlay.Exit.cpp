@@ -5,6 +5,7 @@
 #include "Graphics.Texts.h"
 #include "Game.Avatar.Items.h"
 #include <sstream>
+#include "Application.MouseButtonUp.h"
 namespace state::in_play::Exit
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Exit";
@@ -22,9 +23,15 @@ namespace state::in_play::Exit
 		graphics::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());
 	}
 
+	void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	{
+		GoToMainMenu();
+	}
+
 	void Start()
 	{
-		::application::Command::SetHandler(::UIState::ABOUT, GoToMainMenu);
+		::application::MouseButtonUp::SetHandler(::UIState::IN_PLAY_EXIT, OnMouseButtonUp);
+		::application::Command::SetHandler(::UIState::IN_PLAY_EXIT, GoToMainMenu);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_EXIT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_EXIT, OnUpdate);
 	}
