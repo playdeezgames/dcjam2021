@@ -15,10 +15,20 @@ namespace state::ConfirmQuit
 		YES
 	};
 
+	static void GoToMainMenu()
+	{
+		::application::UIState::Write(::UIState::MAIN_MENU);
+	}
+
+	static void Quit()
+	{
+		::application::UIState::Write(::UIState::QUIT);
+	}
+
 	const std::map<ConfirmQuitItem, std::function<void()>> activators =
 	{
-		{ ConfirmQuitItem::NO, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
-		{ ConfirmQuitItem::YES, []() { ::application::UIState::Write(::UIState::QUIT); }}
+		{ ConfirmQuitItem::NO, GoToMainMenu },
+		{ ConfirmQuitItem::YES, Quit }
 	};
 
 	static void ActivateItem()
@@ -26,13 +36,23 @@ namespace state::ConfirmQuit
 		common::Utility::Dispatch(activators, (ConfirmQuitItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
+	static void PreviousMenuItem()
+	{
+		graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
+	}
+
+	static void NextMenuItem()
+	{
+		graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
+	}
+
 	const std::map<Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
-		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::UP, PreviousMenuItem },
+		{ ::Command::DOWN, NextMenuItem },
 		{ ::Command::GREEN, ActivateItem },
-		{ ::Command::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
-		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
+		{ ::Command::BACK, GoToMainMenu },
+		{ ::Command::RED, GoToMainMenu }
 	};
 
 	void Start()
