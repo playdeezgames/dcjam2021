@@ -4,10 +4,16 @@
 #include "Application.UIState.h"
 #include "Graphics.Menus.h"
 #include "Common.Utility.h"
+#include "Application.MouseMotion.h"
+#include "Graphics.Areas.h"
 namespace state::MainMenu
 {
 	const std::string LAYOUT_NAME = "State.MainMenu";
 	const std::string MENU_ID = "Main";
+	const std::string AREA_START = "Start";
+	const std::string AREA_ABOUT = "About";
+	const std::string AREA_OPTIONS = "Options";
+	const std::string AREA_QUIT = "Quit";
 
 	enum class MainMenuItem
 	{
@@ -44,8 +50,32 @@ namespace state::MainMenu
 		common::Utility::Dispatch(commandHandlers, command);
 	}
 
+	const std::map<std::string, MainMenuItem> areaMenuItems =
+	{
+		{ AREA_START,  MainMenuItem::START},
+		{ AREA_ABOUT,  MainMenuItem::ABOUT},
+		{ AREA_OPTIONS,  MainMenuItem::OPTIONS},
+		{ AREA_QUIT,  MainMenuItem::QUIT}
+	};
+
+	static void SetCurrentMenuItem(MainMenuItem item) 
+	{ 
+		graphics::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, 
+			graphics::Menus::FindIndexForValue(LAYOUT_NAME, MENU_ID, (int)item).value()); 
+	}
+
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		for (auto& area : areas)
+		{
+			SetCurrentMenuItem(areaMenuItems.find(area)->second);
+		}
+	}
+
 	void Start()
 	{
+		::application::MouseMotion::SetHandler(::UIState::MAIN_MENU, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);
 	}

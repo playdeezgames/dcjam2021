@@ -66,5 +66,37 @@
                 "value": 3
             }
         ]
+    },
+    {
+        "type":"Area",
+        "area-id":"Start",
+        "x":240,
+        "y":32,
+        "width":160,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"About",
+        "x":240,
+        "y":48,
+        "width":160,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Options",
+        "x":240,
+        "y":64,
+        "width":160,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Quit",
+        "x":240,
+        "y":80,
+        "width":160,
+        "height":16
     }
 ]

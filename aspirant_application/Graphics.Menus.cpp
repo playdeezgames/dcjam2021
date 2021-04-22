@@ -62,6 +62,25 @@ namespace graphics::Menus
 			[]() { return 0; });
 	}
 
+	std::optional<int> FindIndexForValue(const std::string& layoutName, const std::string& menuId, int value)
+	{
+		return WithMenu<std::optional<int>>(layoutName, menuId, [value](auto& thingie) 
+		{ 
+			int index = 0;
+			for (auto& menuItem : thingie[graphics::data::Properties::MENU_ITEMS])
+			{
+				if (value == (int)menuItem[graphics::data::Properties::VALUE])
+				{
+					return std::optional<int>(index);
+				}
+				index++;
+			}
+			return std::optional<int>();
+		}, 
+			[]() { return std::nullopt;  });
+	}
+
+
 	static void ChangeMenuIndex(const std::string& layoutName, const std::string& menuId, int delta)
 	{
 		auto index = ReadIndex(layoutName, menuId);
