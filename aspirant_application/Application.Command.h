@@ -20,5 +20,6 @@ enum class Command
 namespace application::Command
 {
 	void SetHandlers(const ::UIState&, const std::map<::Command, std::function<void()>>&);
+	void SetHandler(const ::UIState&, std::function<void()>);
 	void Handle(const ::Command& command);
 }

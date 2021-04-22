@@ -20,4 +20,31 @@ namespace application::Command
 	{
 		commandHandlers[state] = handlers;
 	}
+
+	const std::vector<::Command> commands =
+	{
+		::Command::UP,
+		::Command::DOWN,
+		::Command::LEFT,
+		::Command::RIGHT,
+		::Command::GREEN,
+		::Command::RED,
+		::Command::YELLOW,
+		::Command::BLUE,
+		::Command::NEXT,
+		::Command::PREVIOUS,
+		::Command::BACK,
+		::Command::START
+	};
+
+	void SetHandler(const ::UIState& state, std::function<void()> handler)
+	{
+		std::map<::Command, std::function<void()>> commandHandlers;
+		for (auto command : commands)
+		{
+			commandHandlers[command] = handler;
+		}
+		SetHandlers(state, commandHandlers);
+	}
+
 }

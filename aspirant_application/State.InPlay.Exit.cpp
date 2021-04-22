@@ -15,14 +15,6 @@ namespace state::in_play::Exit
 		::application::UIState::Write(::UIState::MAIN_MENU);
 	}
 
-	const std::map<Command, std::function<void()>> commandHandlers =
-	{
-		{Command::GREEN, GoToMainMenu},
-		{Command::RED, GoToMainMenu},
-		{Command::BLUE, GoToMainMenu},
-		{Command::YELLOW, GoToMainMenu}
-	};
-
 	static void OnUpdate(const Uint32&)
 	{
 		std::stringstream ss;
@@ -32,7 +24,7 @@ namespace state::in_play::Exit
 
 	void Start()
 	{
-		::application::Command::SetHandlers(::UIState::IN_PLAY_EXIT, commandHandlers);
+		::application::Command::SetHandler(::UIState::ABOUT, GoToMainMenu);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_EXIT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_EXIT, OnUpdate);
 	}

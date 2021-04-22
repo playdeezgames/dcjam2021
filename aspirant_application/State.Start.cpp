@@ -46,12 +46,22 @@ namespace state::Start
 		common::Utility::Dispatch(activators, (StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
+	static void PreviousMenuItem()
+	{
+		graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
+	}
+
+	static void NextMenuItem()
+	{
+		graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
+	}
+
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
-		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
-		{ ::Command::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
-		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
+		{ ::Command::UP, PreviousMenuItem },
+		{ ::Command::DOWN, NextMenuItem },
+		{ ::Command::BACK, GoBack },
+		{ ::Command::RED, GoBack },
 		{ ::Command::GREEN, ActivateItem }
 	};
 
