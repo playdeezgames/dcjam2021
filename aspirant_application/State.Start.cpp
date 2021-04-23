@@ -6,10 +6,16 @@
 #include "Game.h"
 #include "Common.Audio.h"
 #include "Common.Utility.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
+#include "Graphics.Areas.h"
 namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";
 	const std::string MENU_ID = "Start";
+	const std::string AREA_NEW_GAME = "NewGame";
+	const std::string AREA_CONTINUE_GAME = "ContinueGame";
+	const std::string AREA_BACK = "Back";
 
 	enum class StartGameItem
 	{
@@ -65,8 +71,40 @@ namespace state::Start
 		{ ::Command::GREEN, ActivateItem }
 	};
 
+	static void SetCurrentMenuItem(StartGameItem item)
+	{
+		graphics::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+	}
+
+	const std::map<std::string, StartGameItem> areaMenuItems =
+	{
+		{ AREA_NEW_GAME,  StartGameItem::NEW_GAME},
+		{ AREA_CONTINUE_GAME,  StartGameItem::CONTINUE_GAME},
+		{ AREA_BACK,  StartGameItem::BACK}
+	};
+
+	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		for (auto& area : areas)
+		{
+			SetCurrentMenuItem(areaMenuItems.find(area)->second);
+		}
+	}
+
+	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (!areas.empty())
+		{
+			ActivateItem();
+		}
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::SetHandler(::UIState::START_GAME, OnMouseButtonUp);
+		::application::MouseMotion::AddHandler(::UIState::START_GAME, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::START_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::START_GAME, LAYOUT_NAME);
 	}

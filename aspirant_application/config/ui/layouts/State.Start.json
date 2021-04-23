@@ -53,5 +53,29 @@
                 "value": 2
             }
         ]
+    },
+    {
+        "type":"Area",
+        "area-id":"NewGame",
+        "x":0,
+        "y":32,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"ContinueGame",
+        "x":0,
+        "y":48,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Back",
+        "x":0,
+        "y":64,
+        "width":640,
+        "height":16
     }
 ]
