@@ -62,5 +62,53 @@
                 "value": 3
             }
         ]
+    },
+    {
+        "type":"Area",
+        "area-id":"Mute",
+        "x":240,
+        "y":32,
+        "width":160,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"DecreaseSfxVolume",
+        "x":0,
+        "y":48,
+        "width":320,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"IncreaseSfxVolume",
+        "x":320,
+        "y":48,
+        "width":320,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"DecreaseMuxVolume",
+        "x":0,
+        "y":64,
+        "width":320,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"IncreaseMuxVolume",
+        "x":320,
+        "y":64,
+        "width":320,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Back",
+        "x":240,
+        "y":80,
+        "width":160,
+        "height":16
     }
 ]
