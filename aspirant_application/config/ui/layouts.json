@@ -17,5 +17,6 @@
     "Sublayout.POV": "config/ui/layouts/Sublayout.POV.json",
     "Sublayout.QuickStats": "config/ui/layouts/Sublayout.QuickStats.json",
     "Sublayout.EnemyStats": "config/ui/layouts/Sublayout.EnemyStats.json",
-    "State.LoadGame": "config/ui/layouts/State.LoadGame.json"
+    "State.LoadGame": "config/ui/layouts/State.LoadGame.json",
+    "Sublayout.UIHamburger":"config/ui/layouts/Sublayout.UIHamburger.json"
 }

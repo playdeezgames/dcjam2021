@@ -60,5 +60,9 @@
     {
         "type": "Layout",
         "name": "Sublayout.QuickStats"
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.UIHamburger"
     }
 ]

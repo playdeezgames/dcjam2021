@@ -221,6 +221,9 @@
     <ClCompile Include="Graphics.Areas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sublayout.UIHamburger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">

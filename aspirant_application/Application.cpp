@@ -81,6 +81,7 @@ namespace common::Application
 		state::ConfirmQuit::Start,
 		state::Options::Start,
 		state::Start::Start,
+		sublayout::UIHamburger::Start,
 		state::in_play::MiniMap::Start,
 		state::LeavePlay::Start,
 		sublayout::POV::Start,
