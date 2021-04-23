@@ -47,5 +47,21 @@
                 "value": 1
             }
         ]
+    },
+    {
+        "type":"Area",
+        "area-id":"Continue",
+        "x":0,
+        "y":32,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Abandon",
+        "x":0,
+        "y":48,
+        "width":640,
+        "height":16
     }
 ]
