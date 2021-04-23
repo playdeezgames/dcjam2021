@@ -104,18 +104,20 @@ namespace state::MainMenu
 		}
 	}
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())
 		{
 			ActivateItem();
+			return true;
 		}
+		return false;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::MAIN_MENU, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::MAIN_MENU, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);

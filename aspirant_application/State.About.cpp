@@ -12,14 +12,15 @@ namespace state::About
 		::application::UIState::Write(::UIState::MAIN_MENU);
 	}
 
-	void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
 	{
 		GoToMainMenu();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::ABOUT, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::ABOUT, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::ABOUT, GoToMainMenu);
 		::application::Renderer::SetRenderLayout(::UIState::ABOUT, LAYOUT_NAME);
 	}

@@ -23,14 +23,15 @@ namespace state::in_play::Exit
 		graphics::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());
 	}
 
-	void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
 	{
 		GoToMainMenu();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::IN_PLAY_EXIT, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_EXIT, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::IN_PLAY_EXIT, GoToMainMenu);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_EXIT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_EXIT, OnUpdate);

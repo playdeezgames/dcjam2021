@@ -92,18 +92,20 @@ namespace state::Start
 		}
 	}
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())
 		{
 			ActivateItem();
+			return true;
 		}
+		return false;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::START_GAME, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::START_GAME, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::START_GAME, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::START_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::START_GAME, LAYOUT_NAME);

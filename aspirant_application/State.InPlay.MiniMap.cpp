@@ -69,18 +69,20 @@ namespace state::in_play::MiniMap
 		}
 	}
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		if (areas.contains(AREA_UI_HAMBURGER))
 		{
 			LeavePlay();
+			return true;
 		}
+		return false;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);

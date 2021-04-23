@@ -178,7 +178,7 @@ namespace state::Options
 		{AREA_SFX_INCREASE, IncreaseItem}
 	};
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& area : areas)
@@ -187,15 +187,16 @@ namespace state::Options
 			if (iter != areaClickActions.end())
 			{
 				iter->second();
-				return;
+				return true;
 			}
 		}
 		ActivateItem();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::OPTIONS, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::OPTIONS, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::OPTIONS, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::OPTIONS, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::OPTIONS, LAYOUT_NAME);

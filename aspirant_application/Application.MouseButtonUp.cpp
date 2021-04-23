@@ -3,17 +3,27 @@
 #include "Application.Handlers.h"
 namespace application::MouseButtonUp
 {
-	static std::map<::UIState, Handler> handlers;
+	static std::map<::UIState, std::vector<Handler>> mouseUpHandlers;
 
-	void SetHandler(const ::UIState& state, Handler handler)
+	void AddHandler(const ::UIState& state, Handler handler)
 	{
-		handlers[state] = handler;
+		mouseUpHandlers[state].push_back(handler);
 	}
 
 	void Handle(const SDL_MouseButtonEvent& evt)
 	{
 		application::Handlers::WithCurrent(
-			handlers,
-			[evt](const Handler& handler) { handler(common::XY<Sint32>(evt.x, evt.y), evt.button); });
+			mouseUpHandlers,
+			[evt](const std::vector<Handler>& handlers)
+		{ 
+			for (auto& handler : handlers)
+			{
+				if (handler(common::XY<Sint32>(evt.x, evt.y), evt.button))
+				{
+					return true;
+				}
+			}
+			return false;
+		});
 	}
 }

@@ -80,18 +80,20 @@ namespace state::ConfirmQuit
 		}
 	}
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())
 		{
 			ActivateItem();
+			return true;
 		}
+		return false;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::CONFIRM_QUIT, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::CONFIRM_QUIT, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::CONFIRM_QUIT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::CONFIRM_QUIT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::CONFIRM_QUIT, LAYOUT_NAME);

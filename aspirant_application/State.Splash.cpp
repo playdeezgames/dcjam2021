@@ -25,14 +25,15 @@ namespace state::Splash
 		}
 	}
 
-	void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
 	{
 		RunOutTimer();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::SPLASH, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::SPLASH, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::SPLASH, RunOutTimer);
 		::application::Renderer::SetRenderLayout(::UIState::SPLASH, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::SPLASH, OnUpdate);

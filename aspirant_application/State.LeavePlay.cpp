@@ -61,18 +61,20 @@ namespace state::LeavePlay
 		}
 	}
 
-	static void OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())
 		{
 			ActivateItem();
+			return true;
 		}
+		return false;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::SetHandler(::UIState::LEAVE_PLAY, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::LEAVE_PLAY, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::LEAVE_PLAY, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::LEAVE_PLAY, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::LEAVE_PLAY, LAYOUT_NAME);
