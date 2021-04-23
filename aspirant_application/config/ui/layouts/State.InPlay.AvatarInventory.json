@@ -127,5 +127,13 @@
         "color": "White",
         "x": 624,
         "y": 0
+    },
+    {
+        "type":"Area",
+        "area-id":"UIHamburger",
+        "x":624,
+        "y":0,
+        "width":16,
+        "height":16
     }
 ]
