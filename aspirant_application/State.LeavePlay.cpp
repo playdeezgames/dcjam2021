@@ -21,10 +21,20 @@ namespace state::LeavePlay
 		ABANDON
 	};
 
+	static void GoToMainMenu()
+	{
+		::application::UIState::Write(::UIState::MAIN_MENU);
+	}
+
+	static void ContinueGame()
+	{
+		common::audio::Sfx::Play(application::UIState::EnterGame());
+	}
+
 	const std::map<LeavePlayItem, std::function<void()>> activators =
 	{
-		{ LeavePlayItem::ABANDON, []() {::application::UIState::Write(::UIState::MAIN_MENU); }},
-		{ LeavePlayItem::CONTINUE, []() {common::audio::Sfx::Play(application::UIState::EnterGame()); }}
+		{ LeavePlayItem::ABANDON, GoToMainMenu },
+		{ LeavePlayItem::CONTINUE, ContinueGame }
 	};
 
 	static void ActivateItem()
@@ -32,13 +42,23 @@ namespace state::LeavePlay
 		common::Utility::Dispatch(activators, (LeavePlayItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
+	static void PreviousMenuItem()
+	{
+		graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
+	}
+
+	static void NextMenuItem()
+	{
+		graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
+	}
+
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
-		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::UP, PreviousMenuItem },
+		{ ::Command::DOWN, NextMenuItem },
 		{ ::Command::GREEN, ActivateItem },
-		{ ::Command::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }},
-		{ ::Command::RED, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
+		{ ::Command::BACK, ContinueGame },
+		{ ::Command::RED, ContinueGame }
 	};
 
 	static void SetCurrentMenuItem(LeavePlayItem item)
