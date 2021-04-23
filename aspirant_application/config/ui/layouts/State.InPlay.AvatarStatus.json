@@ -134,5 +134,13 @@
     {
         "type": "Layout",
         "name": "Sublayout.QuickStats"
+    },
+    {
+        "type": "Image",
+        "image-id": "ui-hamburger",
+        "sprite": "UIHamburgerNormal",
+        "color": "White",
+        "x": 624,
+        "y": 0
     }
 ]

@@ -119,5 +119,13 @@
         "drop-shadow-color": "Black",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "Image",
+        "image-id": "ui-hamburger",
+        "sprite": "UIHamburgerNormal",
+        "color": "White",
+        "x": 624,
+        "y": 0
     }
 ]

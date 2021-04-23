@@ -4751,5 +4751,19 @@
         "y": 0,
         "width": 101,
         "height": 16
+    },
+    "UIHamburgerNormal": {
+        "texture": "ui-hamburger",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "UIHamburgerHover": {
+        "texture": "ui-hamburger",
+        "x": 16,
+        "y": 0,
+        "width": 16,
+        "height": 16
     }
 }
