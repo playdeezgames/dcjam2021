@@ -58,12 +58,20 @@ namespace state::in_play::MiniMap
 		common::Utility::Dispatch(commandHandlers, command);
 	}
 
+	std::vector<std::tuple<std::string, std::string>> areaImages =
+	{
+		{AREA_MOVE_AHEAD, IMAGE_MOVE_AHEAD},
+		{AREA_TURN_LEFT, IMAGE_TURN_LEFT},
+		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT}
+	};
+
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		graphics::Images::SetVisible(LAYOUT_NAME, IMAGE_MOVE_AHEAD, areas.contains(AREA_MOVE_AHEAD));
-		graphics::Images::SetVisible(LAYOUT_NAME, IMAGE_TURN_LEFT, areas.contains(AREA_TURN_LEFT));
-		graphics::Images::SetVisible(LAYOUT_NAME, IMAGE_TURN_RIGHT, areas.contains(AREA_TURN_RIGHT));
+		for (auto& areaImage : areaImages)
+		{
+			graphics::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), areas.contains(std::get<0>(areaImage)));
+		}
 	}
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
