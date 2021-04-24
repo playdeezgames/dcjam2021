@@ -74,25 +74,22 @@ namespace state::in_play::MiniMap
 		}
 	}
 
+	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
+	{
+		{ AREA_MOVE_AHEAD, []() {game::Avatar::MoveAhead(); return true; }},
+		{ AREA_TURN_LEFT, []() {game::Avatar::TurnLeft(); return true; }},
+		{ AREA_TURN_RIGHT, []() {game::Avatar::TurnRight(); return true; }}
+	};
+
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		if (areas.contains(AREA_MOVE_AHEAD))
+		bool result = false;
+		for (auto& area : areas)
 		{
-			game::Avatar::MoveAhead();
-			return true;
+			result = result || common::Utility::Dispatch(mouseUpHandlers, area, false);
 		}
-		if (areas.contains(AREA_TURN_LEFT))
-		{
-			game::Avatar::TurnLeft();
-			return true;
-		}
-		if (areas.contains(AREA_TURN_RIGHT))
-		{
-			game::Avatar::TurnRight();
-			return true;
-		}
-		return false;
+		return result;
 	}
 
 	void Start()
