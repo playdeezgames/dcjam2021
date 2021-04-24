@@ -95,7 +95,7 @@
         "x":0,
         "y":0,
         "width":52,
-        "height":360
+        "height":292
     },
     {
         "type": "Area",
@@ -103,7 +103,7 @@
         "x":308,
         "y":0,
         "width":52,
-        "height":360
+        "height":292
     },
     {
         "type": "Area",
@@ -111,6 +111,6 @@
         "x":52,
         "y":0,
         "width":256,
-        "height":360
+        "height":292
     }
 ]
