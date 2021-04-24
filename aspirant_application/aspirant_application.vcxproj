@@ -228,6 +228,7 @@
     <ClCompile Include="Sublayout.EnemyStats.cpp" />
     <ClCompile Include="Sublayout.POV.cpp" />
     <ClCompile Include="Sublayout.QuickStats.cpp" />
+    <ClCompile Include="Sublayout.TabControls.cpp" />
     <ClCompile Include="Sublayout.UIHamburger.cpp" />
   </ItemGroup>
   <ItemGroup>

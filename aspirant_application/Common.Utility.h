@@ -17,6 +17,16 @@ namespace common::Utility
 			iter->second();
 		}
 	}
+	template<typename TEnum, typename TResult>
+	TResult Dispatch(const std::map<TEnum, std::function<TResult()>> handlers, const TEnum& key, const TResult& defaultResult)
+	{
+		auto iter = handlers.find(key);
+		if (iter != handlers.end())
+		{
+			return iter->second();
+		}
+		return defaultResult;
+	}
 	bool FileExists(const std::string&);
 }
 

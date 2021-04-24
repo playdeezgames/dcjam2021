@@ -69,6 +69,10 @@
         "name": "Sublayout.UIHamburger"
     },
     {
+        "type": "Layout",
+        "name": "Sublayout.TabControls"
+    },
+    {
         "type": "Text",
         "font": "default",
         "color": "LightCyan",

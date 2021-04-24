@@ -1,0 +1,90 @@
+[
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Map",
+        "text-id":"Map",
+        "x": 380,
+        "y": 16,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type":"Area",
+        "area-id":"Map",
+        "x":360,
+        "y":16,
+        "width":70,
+        "height":16
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Flr",
+        "text-id":"Flr",
+        "x": 444,
+        "y": 16,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type":"Area",
+        "area-id":"Flr",
+        "x":430,
+        "y":16,
+        "width":70,
+        "height":16
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Inv",
+        "text-id":"Inv",
+        "x": 508,
+        "y": 16,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type":"Area",
+        "area-id":"Inv",
+        "x":500,
+        "y":16,
+        "width":70,
+        "height":16
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "Sta",
+        "text-id":"Sta",
+        "x": 572,
+        "y": 16,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type":"Area",
+        "area-id":"Sta",
+        "x":570,
+        "y":16,
+        "width":70,
+        "height":16
+    }
+]

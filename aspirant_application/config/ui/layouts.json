@@ -18,5 +18,6 @@
     "Sublayout.QuickStats": "config/ui/layouts/Sublayout.QuickStats.json",
     "Sublayout.EnemyStats": "config/ui/layouts/Sublayout.EnemyStats.json",
     "State.LoadGame": "config/ui/layouts/State.LoadGame.json",
-    "Sublayout.UIHamburger":"config/ui/layouts/Sublayout.UIHamburger.json"
+    "Sublayout.UIHamburger":"config/ui/layouts/Sublayout.UIHamburger.json",
+    "Sublayout.TabControls":"config/ui/layouts/Sublayout.TabControls.json"
 }
