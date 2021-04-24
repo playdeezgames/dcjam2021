@@ -8,6 +8,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Graphics.Areas.h"
+#include <map>
 namespace sublayout::UIHamburger
 {
 	const std::string LAYOUT_NAME = "Sublayout.UIHamburger";
@@ -73,18 +74,31 @@ namespace sublayout::UIHamburger
 		}
 	}
 
-	static void LeavePlay()
+	static bool LeavePlay()
 	{
 		application::UIState::Write(::UIState::LEAVE_PLAY);
+		return true;
 	}
+
+	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
+	{
+		{AREA_UI_HAMBURGER, LeavePlay },
+		{AREA_MAP, []() {application::UIState::Write(::UIState::IN_PLAY_MAP); return true; }},
+		{AREA_FLR, []() {application::UIState::Write(::UIState::IN_PLAY_FLOOR); return true; }},
+		{AREA_INV, []() {application::UIState::Write(::UIState::IN_PLAY_INVENTORY); return true; }},
+		{AREA_STA, []() {application::UIState::Write(::UIState::IN_PLAY_STATUS); return true; }}
+	};
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		if (areas.contains(AREA_UI_HAMBURGER))
+		for (auto& area : areas)
 		{
-			LeavePlay();
-			return true;
+			auto iter = mouseUpHandlers.find(area);
+			if (iter != mouseUpHandlers.end())
+			{
+				return iter->second();
+			}
 		}
 		return false;
 	}
