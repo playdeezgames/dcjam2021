@@ -58,7 +58,7 @@ namespace state::in_play::MiniMap
 		common::Utility::Dispatch(commandHandlers, command);
 	}
 
-	std::vector<std::tuple<std::string, std::string>> areaImages =
+	const std::vector<std::tuple<std::string, std::string>> areaImages =
 	{
 		{AREA_MOVE_AHEAD, IMAGE_MOVE_AHEAD},
 		{AREA_TURN_LEFT, IMAGE_TURN_LEFT},
