@@ -61,5 +61,56 @@
         "drop-shadow-color": "Cyan",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "Image",
+        "sprite": "TurnLeft",
+        "image-id": "TurnLeft",
+        "color": "White",
+        "x": 0,
+        "y": 164,
+        "visible":false
+    },
+    {
+        "type": "Image",
+        "sprite": "MoveAhead",
+        "image-id": "MoveAhead",
+        "color": "White",
+        "x": 164,
+        "y": 164,
+        "visible":false
+    },
+    {
+        "type": "Image",
+        "sprite": "TurnRight",
+        "image-id": "TurnRight",
+        "color": "White",
+        "x": 328,
+        "y": 164,
+        "visible":false
+    },
+    {
+        "type": "Area",
+        "area-id":"TurnLeft",
+        "x":0,
+        "y":0,
+        "width":52,
+        "height":360
+    },
+    {
+        "type": "Area",
+        "area-id":"TurnRight",
+        "x":308,
+        "y":0,
+        "width":52,
+        "height":360
+    },
+    {
+        "type": "Area",
+        "area-id":"MoveAhead",
+        "x":52,
+        "y":0,
+        "width":256,
+        "height":360
     }
 ]

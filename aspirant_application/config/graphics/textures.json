@@ -25,5 +25,6 @@
     "controls": "assets/images/controls.png",
     "health-bar": "assets/images/health-bar.png",
     "hunger-bar": "assets/images/hunger-bar.png",
-    "ui-hamburger": "assets/images/ui-hamburger.png"
+    "ui-hamburger": "assets/images/ui-hamburger.png",
+    "movement": "assets/images/movement.png"
 }

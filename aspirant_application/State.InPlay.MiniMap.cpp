@@ -19,6 +19,12 @@
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
+	const std::string AREA_TURN_LEFT = "TurnLeft";
+	const std::string AREA_TURN_RIGHT = "TurnRight";
+	const std::string AREA_MOVE_AHEAD = "MoveAhead";
+	const std::string IMAGE_MOVE_AHEAD = "MoveAhead";
+	const std::string IMAGE_TURN_RIGHT = "TurnRight";
+	const std::string IMAGE_TURN_LEFT = "TurnLeft";
 
 	static void LeavePlay()
 	{
@@ -52,9 +58,39 @@ namespace state::in_play::MiniMap
 		common::Utility::Dispatch(commandHandlers, command);
 	}
 
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		graphics::Images::SetVisible(LAYOUT_NAME, IMAGE_MOVE_AHEAD, areas.contains(AREA_MOVE_AHEAD));
+		graphics::Images::SetVisible(LAYOUT_NAME, IMAGE_TURN_LEFT, areas.contains(AREA_TURN_LEFT));
+		graphics::Images::SetVisible(LAYOUT_NAME, IMAGE_TURN_RIGHT, areas.contains(AREA_TURN_RIGHT));
+	}
+
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (areas.contains(AREA_MOVE_AHEAD))
+		{
+			game::Avatar::MoveAhead();
+			return true;
+		}
+		if (areas.contains(AREA_TURN_LEFT))
+		{
+			game::Avatar::TurnLeft();
+			return true;
+		}
+		if (areas.contains(AREA_TURN_RIGHT))
+		{
+			game::Avatar::TurnRight();
+			return true;
+		}
+		return false;
+	}
 
 	void Start()
 	{
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
 	}

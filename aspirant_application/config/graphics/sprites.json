@@ -4765,5 +4765,26 @@
         "y": 0,
         "width": 16,
         "height": 16
+    },
+    "TurnLeft":{
+        "texture": "movement",
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 32
+    },
+    "MoveAhead":{
+        "texture": "movement",
+        "x": 32,
+        "y": 0,
+        "width": 32,
+        "height": 32
+    },
+    "TurnRight":{
+        "texture": "movement",
+        "x": 64,
+        "y": 0,
+        "width": 32,
+        "height": 32
     }
 }
