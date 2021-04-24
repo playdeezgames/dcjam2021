@@ -2,6 +2,7 @@
 #include "Application.UIState.h"
 #include <optional>
 #include <string>
+#include <functional>
 enum class UIState
 {
 	SPLASH,

@@ -91,8 +91,6 @@ namespace graphics::Menus
 		return false;
 	}
 
-
-
 	static void ChangeMenuIndex(const std::string& layoutName, const std::string& menuId, int delta)
 	{
 		auto index = ReadIndex(layoutName, menuId);
@@ -110,14 +108,19 @@ namespace graphics::Menus
 		}
 	}
 
-	void Next(const std::string& layoutName, const std::string& menuId)
+	std::function<void()> NavigateNext(const std::string& layoutName, const std::string& menuId)
 	{
-		ChangeMenuIndex(layoutName, menuId, 1);
+		return [layoutName, menuId]() 
+		{
+			ChangeMenuIndex(layoutName, menuId, 1);
+		};
 	}
 
-	void Previous(const std::string& layoutName, const std::string& menuId)
+	std::function<void()> NavigatePrevious(const std::string& layoutName, const std::string& menuId)
 	{
-		ChangeMenuIndex(layoutName, menuId, -1);
+		return [layoutName, menuId]()
+		{
+			ChangeMenuIndex(layoutName, menuId, -1);
+		};
 	}
-
 }

@@ -57,8 +57,8 @@ namespace state::LoadGame
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::UP, []() { graphics::Menus::Previous(LAYOUT_NAME, MENU_ID); }},
-		{ ::Command::DOWN, []() { graphics::Menus::Next(LAYOUT_NAME, MENU_ID); }},
+		{ ::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{ ::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{ ::Command::BACK, GoBack },
 		{ ::Command::RED, GoBack },
 		{ ::Command::GREEN, ActivateItem }

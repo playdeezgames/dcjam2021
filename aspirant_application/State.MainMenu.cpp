@@ -58,20 +58,10 @@ namespace state::MainMenu
 		common::Utility::Dispatch(activators, (MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
-	static void NextMenuItem()
-	{
-		graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
-	}
-
-	static void PreviousMenuItem()
-	{
-		graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
-	}
-
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{::Command::UP, PreviousMenuItem },
-		{::Command::DOWN, NextMenuItem },
+		{::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{::Command::GREEN, ActivateItem },
 		{::Command::BACK, ConfirmQuit },
 		{::Command::RED, ConfirmQuit }

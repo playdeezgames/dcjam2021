@@ -95,16 +95,6 @@ namespace state::Options
 		common::Utility::Dispatch(activators, GetCurrentItem());
 	}
 
-	static void PreviousMenuItem()
-	{
-		graphics::Menus::Previous(LAYOUT_NAME, MENU_ID);
-	}
-
-	static void NextMenuItem()
-	{
-		graphics::Menus::Next(LAYOUT_NAME, MENU_ID);
-	}
-
 	static void GoToMainMenu()
 	{
 		::application::UIState::Write(::UIState::MAIN_MENU);
@@ -112,8 +102,8 @@ namespace state::Options
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{::Command::UP, PreviousMenuItem },
-		{::Command::DOWN, NextMenuItem },
+		{::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{::Command::LEFT, DecreaseItem },
 		{::Command::RIGHT, IncreaseItem },
 		{::Command::BACK, GoToMainMenu },

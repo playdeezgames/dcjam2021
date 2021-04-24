@@ -20,29 +20,27 @@ namespace application::UIState
 
 	std::optional<std::string> EnterGame()
 	{
-		std::optional<std::string> result = std::nullopt;
-		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
+		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))//are you dead?
 		{
-			result = application::Sounds::Read(application::UI::Sfx::DEAD_HUNTER);
 			application::UIState::Write(::UIState::IN_PLAY_DEAD);
+			return application::Sounds::Read(application::UI::Sfx::DEAD_HUNTER);
 		}
-		else if (game::Creatures::AnyLeft())
+
+		if (!game::Creatures::AnyLeft())//did you win?
 		{
-			if (game::Creatures::GetInstance(game::Avatar::GetPosition()))
-			{
-				application::UIState::Write(::UIState::IN_PLAY_COMBAT);
-			}
-			else
-			{
-				game::AutoSave();
-				application::UIState::Write(::UIState::IN_PLAY_MAP);
-			}
-		}
-		else
-		{
-			result = application::Sounds::Read(application::UI::Sfx::EXIT);
 			application::UIState::Write(::UIState::IN_PLAY_EXIT);
+			return application::Sounds::Read(application::UI::Sfx::EXIT);
 		}
-		return result;
+
+		if (game::Creatures::GetInstance(game::Avatar::GetPosition()))//are you fighting?
+		{
+			application::UIState::Write(::UIState::IN_PLAY_COMBAT);
+			return std::nullopt;
+		}
+
+		//yer exploring
+		game::AutoSave();
+		application::UIState::Write(::UIState::IN_PLAY_MAP);
+		return std::nullopt;
 	}
 }
