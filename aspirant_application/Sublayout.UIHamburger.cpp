@@ -12,9 +12,19 @@ namespace sublayout::UIHamburger
 {
 	const std::string LAYOUT_NAME = "Sublayout.UIHamburger";
 	const std::string AREA_UI_HAMBURGER = "UIHamburger";
+	const std::string AREA_MAP = "Map";
+	const std::string AREA_FLR = "Flr";
+	const std::string AREA_INV = "Inv";
+	const std::string AREA_STA = "Sta";
+	const std::string TEXT_MAP = "Map";
+	const std::string TEXT_FLR = "Flr";
+	const std::string TEXT_INV = "Inv";
+	const std::string TEXT_STA = "Sta";
 	const std::string IMAGE_UI_HAMBURGER = "ui-hamburger";
 	const std::string SPRITE_UI_HAMBURGER_NORMAL = "UIHamburgerNormal";
 	const std::string SPRITE_UI_HAMBURGER_HOVER = "UIHamburgerHover";
+	const std::string COLOR_HIGHLIGHT = "Yellow";
+	const std::string COLOR_NORMAL = "Gray";
 
 	const std::vector<::UIState> states =
 	{
@@ -24,6 +34,26 @@ namespace sublayout::UIHamburger
 		::UIState::IN_PLAY_STATUS,
 		::UIState::IN_PLAY_COMBAT,
 		::UIState::IN_PLAY_COMBAT_RESULT,
+	};
+
+	static void UpdateTabColor(const std::set<std::string>& areas, const std::string& areaId, const std::string textId)
+	{
+		if (areas.contains(areaId))
+		{
+			graphics::Texts::SetColor(LAYOUT_NAME, textId, COLOR_HIGHLIGHT);
+		}
+		else
+		{
+			graphics::Texts::SetColor(LAYOUT_NAME, textId, COLOR_NORMAL);
+		}
+	}
+
+	const std::vector<std::tuple<std::string, std::string>> tabControls =
+	{
+		{ AREA_MAP, TEXT_MAP },
+		{ AREA_FLR, TEXT_FLR },
+		{ AREA_INV, TEXT_INV },
+		{ AREA_STA, TEXT_STA }
 	};
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
@@ -36,6 +66,10 @@ namespace sublayout::UIHamburger
 		else
 		{
 			graphics::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_NORMAL);
+		}
+		for (auto& tabControl : tabControls)
+		{
+			UpdateTabColor(areas, std::get<0>(tabControl), std::get<1>(tabControl));
 		}
 	}
 

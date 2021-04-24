@@ -34,4 +34,12 @@ namespace graphics::Texts
 			thingie[graphics::data::Properties::TEXT] = text;
 		}, []() {});
 	}
+
+	void SetColor(const std::string& layoutName, const std::string& textId, const std::string& color)
+	{
+		WithText<void>(layoutName, textId, [color](auto& thingie)
+		{
+			thingie[graphics::data::Properties::COLOR] = color;
+		}, []() {});
+	}
 }

@@ -24,58 +24,6 @@
         "drop-shadow-y": 2
     },
     {
-        "type": "Text",
-        "font": "default",
-        "color": "Gray",
-        "text": "Map",
-        "x": 380,
-        "y": 16,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
-        "type": "Text",
-        "font": "default",
-        "color": "LightCyan",
-        "text": "Flr",
-        "x": 444,
-        "y": 16,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Cyan",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
-        "type": "Text",
-        "font": "default",
-        "color": "Gray",
-        "text": "Inv",
-        "x": 508,
-        "y": 16,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
-        "type": "Text",
-        "font": "default",
-        "color": "Gray",
-        "text": "Sta",
-        "x": 572,
-        "y": 16,
-        "horizontal-alignment": 1,
-        "drop-shadow": true,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
         "type": "FloorInventory",
         "x": 360,
         "y": 48,
@@ -119,5 +67,18 @@
     {
         "type": "Layout",
         "name": "Sublayout.UIHamburger"
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "LightCyan",
+        "text": "Flr",
+        "x": 444,
+        "y": 16,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Cyan",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
     }
 ]
