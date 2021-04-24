@@ -25,8 +25,10 @@
     },
     {
         "type": "AvatarInventory",
+        "control-id": "AvatarInventory",
         "x": 360,
         "y": 48,
+        "width": 280,
         "font": "default",
         "row-height": 16,
         "colors": {

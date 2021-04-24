@@ -10,6 +10,7 @@ namespace graphics::data::Properties
 	const std::string CELL_WIDTH = "cell-width";
 	const std::string COLOR = "color";
 	const std::string COLORS = "colors";
+	const std::string CONTROL_ID = "control-id";
 	const std::string DROP_SHADOW = "drop-shadow";
 	const std::string DROP_SHADOW_COLOR = "drop-shadow-color";
 	const std::string DROP_SHADOW_X = "drop-shadow-x";
