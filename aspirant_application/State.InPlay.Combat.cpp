@@ -22,12 +22,22 @@
 #include "Game.Item.h"
 #include "Common.Utility.h"
 #include "Game.Creatures.h"
+#include "Graphics.Areas.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
 	const std::string CURRENT_CARD_IMAGE_ID = "CurrentCard";
 	const std::string COMBAT_MENU_ID = "Combat";
 	const std::string USE_ITEM_MENU_ITEM_ID = "UseItem";
+
+	const std::string AREA_GUESS_HIGHER = "GuessHigher";
+	const std::string AREA_GUESS_LOWER = "GuessLower";
+	const std::string AREA_USE_ITEM = "UseItem";
+	const std::string AREA_NEXT_ITEM = "NextItem";
+	const std::string AREA_PREVIOUS_ITEM = "PreviousItem";
+	const std::string AREA_RUN_AWAY = "RunAway";
 
 	enum class CombatMenuItem
 	{
@@ -135,13 +145,34 @@ namespace state::in_play::Combat
 		common::Utility::Dispatch(activators, (CombatMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value());
 	}
 
+	static void NextItem()
+	{
+		if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
+		{ 
+			graphics::AvatarInventory::NextIndex(); 
+		}
+	}
+
+	static void PreviousItem()
+	{
+		if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
+		{ 
+			graphics::AvatarInventory::PreviousIndex(); 
+		}
+	}
+
+	static void LeavePlay()
+	{
+		application::UIState::Write(::UIState::LEAVE_PLAY);
+	}
+
 	std::map<Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::BACK, []() { application::UIState::Write(::UIState::LEAVE_PLAY); }},
+		{ ::Command::BACK, LeavePlay },
 		{ ::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, COMBAT_MENU_ID) },
 		{ ::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, COMBAT_MENU_ID) },
-		{ ::Command::LEFT, []() { if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) { graphics::AvatarInventory::PreviousIndex(); } } },
-		{ ::Command::RIGHT, []() { if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) { graphics::AvatarInventory::NextIndex(); } } },
+		{ ::Command::LEFT, PreviousItem },
+		{ ::Command::RIGHT, NextItem },
 		{ ::Command::GREEN, OnActivateItem },
 	};
 
@@ -171,8 +202,55 @@ namespace state::in_play::Combat
 		UpdateUseItem();
 	}
 
+	const std::map<std::string, CombatMenuItem> areaMenuItems =
+	{
+		{ AREA_GUESS_HIGHER,  CombatMenuItem::HIGHER},
+		{ AREA_GUESS_LOWER,  CombatMenuItem::LOWER},
+		{ AREA_USE_ITEM,  CombatMenuItem::USE_ITEM},
+		{ AREA_PREVIOUS_ITEM,  CombatMenuItem::USE_ITEM},
+		{ AREA_NEXT_ITEM,  CombatMenuItem::USE_ITEM},
+		{ AREA_RUN_AWAY,  CombatMenuItem::RUN_AWAY}
+	};
+
+	static void SetCurrentMenuItem(CombatMenuItem item)
+	{
+		graphics::Menus::WriteValue(LAYOUT_NAME, COMBAT_MENU_ID, (int)item);
+	}
+
+	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		for (auto& area : areas)
+		{
+			SetCurrentMenuItem(areaMenuItems.find(area)->second);
+		}
+	}
+
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (areas.contains(AREA_PREVIOUS_ITEM))
+		{
+			PreviousItem();
+			return true;
+		}
+		if (areas.contains(AREA_NEXT_ITEM))
+		{
+			NextItem();
+			return true;
+		}
+		if (!areas.empty())
+		{
+			OnActivateItem();
+			return true;
+		}
+		return false;
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT, OnMouseButtonUp);
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, OnUpdate);

@@ -258,7 +258,7 @@ namespace game::avatar::Items
 				return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::BRIBE], true);
 			}
 		}
-		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::BRIBE], false);
+		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::NO_BRIBE], false);
 	}
 
 	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(int)>> combatVerbs =

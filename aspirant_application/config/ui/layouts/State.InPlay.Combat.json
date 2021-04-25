@@ -91,5 +91,53 @@
     {
         "type": "Layout",
         "name": "Sublayout.UIHamburger"
+    },
+    {
+        "type":"Area",
+        "area-id":"GuessHigher",
+        "x": 360,
+        "y": 96,
+        "width":280,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"GuessLower",
+        "x": 360,
+        "y": 112,
+        "width":280,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"UseItem",
+        "x": 376,
+        "y": 128,
+        "width":248,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"PreviousItem",
+        "x": 360,
+        "y": 128,
+        "width":16,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"NextItem",
+        "x": 624,
+        "y": 128,
+        "width":16,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"RunAway",
+        "x": 360,
+        "y": 144,
+        "width":280,
+        "height":16
     }
 ]
