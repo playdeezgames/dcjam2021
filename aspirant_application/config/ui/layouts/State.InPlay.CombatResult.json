@@ -64,5 +64,13 @@
     {
         "type": "Layout",
         "name": "Sublayout.UIHamburger"
+    },
+    {
+        "type":"Area",
+        "area-id":"Continue",
+        "x": 360,
+        "y": 96,
+        "width":280,
+        "height":16
     }
 ]
