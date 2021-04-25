@@ -141,7 +141,7 @@ namespace graphics::AvatarInventory
 		}, []() {});
 	}
 
-	std::optional<size_t> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
+	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
 	{
 		return WithControl<std::optional<int>>(layoutName, controlId,
 			[xy, buttons](nlohmann::json& thingie) 
@@ -156,10 +156,10 @@ namespace graphics::AvatarInventory
 				auto inventory = game::avatar::Items::All();
 				if ((size_t)row < inventory.size())
 				{
-					return std::optional<size_t>(row);
+					return std::optional<int>((int)row);
 				}
 			}
-			return std::optional<size_t>();
-		}, []() { return std::nullopt; });
+			return std::optional<int>();
+		}, []() { return std::optional<int>(); });
 	}
 }
