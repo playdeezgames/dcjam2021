@@ -12,6 +12,7 @@
 #include "Graphics.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
+#include "Game.Avatar.Items.h"
 namespace sublayout::POV
 {
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
@@ -114,9 +115,33 @@ namespace sublayout::POV
 		}
 	}
 
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	{
+		auto areas = graphics::Areas::Get(POV_LAYOUT_NAME, xy);
+		auto position = game::Avatar::GetPosition();
+		int index = 0;
+		for (auto& item : game::item::All())
+		{
+			auto descriptor = game::item::GetDescriptor(item);
+			if (areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item))
+			{
+				//TODO: this is duplicated code
+				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+				size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
+				game::avatar::Items::Add(item, amount);
+
+				::graphics::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, false);
+				return true;
+			}
+			index++;
+		}
+		return false;
+	}
+
 	void Start()
 	{
 		application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
+		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
 		for (auto state : states)
 		{
 			::application::Update::AddHandler(state, UpdatePOV);

@@ -20,6 +20,7 @@ namespace state::in_play::FloorInventory
 		auto item = graphics::FloorInventory::GetItem();
 		if (item)
 		{
+			//TODO: this is duplicated code
 			auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
 			size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), *item, inventory[*item]);
 			game::avatar::Items::Add(*item, amount);
