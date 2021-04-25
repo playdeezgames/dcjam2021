@@ -25,6 +25,7 @@
 #include "Graphics.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
+#include "Graphics.Data.Colors.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -222,8 +223,8 @@ namespace state::in_play::Combat
 	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? ("Yellow") : ("Gray"));
-		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (areas.contains(AREA_NEXT_ITEM)) ? ("Yellow") : ("Gray"));
+		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));
+		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (areas.contains(AREA_NEXT_ITEM)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));
 		for (auto& area : areas)
 		{
 			SetCurrentMenuItem(areaMenuItems.find(area)->second);

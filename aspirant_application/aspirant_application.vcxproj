@@ -262,6 +262,7 @@
     <ClInclude Include="Graphics.Areas.h" />
     <ClInclude Include="Graphics.AvatarInventory.h" />
     <ClInclude Include="Graphics.CardSprites.h" />
+    <ClInclude Include="Graphics.Data.Colors.h" />
     <ClInclude Include="Graphics.FloorInventory.h" />
     <ClInclude Include="Graphics.Images.h" />
     <ClInclude Include="Graphics.MenuItems.h" />

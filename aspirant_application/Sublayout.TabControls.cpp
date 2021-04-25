@@ -10,6 +10,7 @@
 #include "Graphics.Areas.h"
 #include <map>
 #include "Common.Utility.h"
+#include "Graphics.Data.Colors.h"
 namespace sublayout::TabControls
 {
 	const std::string LAYOUT_NAME = "Sublayout.TabControls";
@@ -21,8 +22,6 @@ namespace sublayout::TabControls
 	const std::string TEXT_FLR = "Flr";
 	const std::string TEXT_INV = "Inv";
 	const std::string TEXT_STA = "Sta";
-	const std::string COLOR_HIGHLIGHT = "Yellow";
-	const std::string COLOR_NORMAL = "Gray";
 
 	const std::vector<::UIState> states =
 	{
@@ -36,11 +35,11 @@ namespace sublayout::TabControls
 	{
 		if (areas.contains(areaId))
 		{
-			graphics::Texts::SetColor(LAYOUT_NAME, textId, COLOR_HIGHLIGHT);
+			graphics::Texts::SetColor(LAYOUT_NAME, textId, graphics::data::Colors::HIGHLIGHT);
 		}
 		else
 		{
-			graphics::Texts::SetColor(LAYOUT_NAME, textId, COLOR_NORMAL);
+			graphics::Texts::SetColor(LAYOUT_NAME, textId, graphics::data::Colors::NORMAL);
 		}
 	}
 

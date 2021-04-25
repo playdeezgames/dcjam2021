@@ -12,6 +12,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Graphics.Texts.h"
+#include "Graphics.Data.Colors.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
@@ -47,7 +48,7 @@ namespace state::in_play::CombatResult
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (areas.contains(AREA_CONTINUE)) ? ("Yellow") : ("Gray"));
+		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (areas.contains(AREA_CONTINUE)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));
 	}
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
