@@ -8,8 +8,7 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/lorc/treasure-map.html
 * https://game-icons.net/1x1/delapouite/troglodyte.html
 * https://game-icons.net/1x1/lorc/imp.html
-* https://game-icons.net/1x1/aussiesim/card-10-clubs.html
-  * (also all card-(rank)-(suit) combinations!)
+* TODO: cards are now from the Kenney boardgame pack
 * https://game-icons.net/1x1/lorc/suits.html
 * https://game-icons.net/1x1/lorc/grim-reaper.html
 * https://game-icons.net/1x1/delapouite/bully-minion.html
@@ -23,6 +22,8 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/delapouite/coffee-cup.html
 * https://game-icons.net/1x1/delapouite/rupee.html
 * https://game-icons.net/1x1/delapouite/exit-door.html
+* https://game-icons.net/1x1/sbed/hand.html
+* https://game-icons.net/1x1/delapouite/plain-arrow.html
 
 # Music Credits
 * https://freemusicarchive.org/music/Komiku/
