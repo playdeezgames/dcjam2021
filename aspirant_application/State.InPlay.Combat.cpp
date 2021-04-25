@@ -38,6 +38,8 @@ namespace state::in_play::Combat
 	const std::string AREA_NEXT_ITEM = "NextItem";
 	const std::string AREA_PREVIOUS_ITEM = "PreviousItem";
 	const std::string AREA_RUN_AWAY = "RunAway";
+	const std::string TEXT_NEXT_ITEM = "NextItem";
+	const std::string TEXT_PREVIOUS_ITEM = "PreviousItem";
 
 	enum class CombatMenuItem
 	{
@@ -185,7 +187,7 @@ namespace state::in_play::Combat
 			auto descriptor = game::item::GetDescriptor(*item);
 			if (descriptor.combatText)
 			{
-				ss << "< " << (*descriptor.combatText) << " >";
+				ss << (*descriptor.combatText);
 			}
 		}
 		else
@@ -220,6 +222,8 @@ namespace state::in_play::Combat
 	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? ("Yellow") : ("Gray"));
+		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (areas.contains(AREA_NEXT_ITEM)) ? ("Yellow") : ("Gray"));
 		for (auto& area : areas)
 		{
 			SetCurrentMenuItem(areaMenuItems.find(area)->second);

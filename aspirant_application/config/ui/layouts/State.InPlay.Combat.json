@@ -81,6 +81,34 @@
         ]
     },
     {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": "<",
+        "text-id": "PreviousItem",
+        "x": 360,
+        "y": 128,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Gray",
+        "text": ">",
+        "text-id": "NextItem",
+        "x": 640,
+        "y": 128,
+        "horizontal-alignment": -1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
         "type": "Layout",
         "name": "Sublayout.EnemyStats"
     },
