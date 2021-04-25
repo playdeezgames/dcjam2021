@@ -2869,6 +2869,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemTake":{
+        "texture": "items",
+        "x": 224,
+        "y": 224,
+        "width": 32,
+        "height": 32
+    },
     "Map":{
         "texture": "map",
         "x": 0,

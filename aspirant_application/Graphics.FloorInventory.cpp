@@ -7,9 +7,31 @@
 #include "Game.Avatar.h"
 #include "Graphics.Data.Properties.h"
 #include "Graphics.Fonts.h"
+#include "Graphics.Data.Types.h"
 #include <sstream>
+namespace graphics::Layouts
+{
+	nlohmann::json& GetLayout(const std::string&);
+}
 namespace graphics::FloorInventory
 {
+	template <typename TResult>
+	static TResult WithControl(const std::string& layoutName, const std::string& controlId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
+	{
+		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
+		{
+			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::FLOOR_INVENTORY)
+			{
+				if (thingie.count(graphics::data::Properties::CONTROL_ID) > 0 &&
+					thingie[graphics::data::Properties::CONTROL_ID] == controlId)
+				{
+					return func(thingie);
+				}
+			}
+		}
+		return notFound();
+	}
+
 	static size_t inventoryIndex = 0;
 
 	void ResetIndex()
@@ -100,5 +122,49 @@ namespace graphics::FloorInventory
 			}
 			graphics::Fonts::WriteText(font, renderer, { x,y }, "(nothing)", inactiveColor, graphics::HorizontalAlignment::LEFT);
 		}
+	}
+
+	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
+	{
+		WithControl<void>(layoutName, controlId,
+			[xy](nlohmann::json& thingie)
+		{
+			int x = thingie[common::data::Properties::X];
+			int y = thingie[common::data::Properties::Y];
+			int width = thingie[common::data::Properties::WIDTH];
+			int rowHeight = thingie[graphics::data::Properties::ROW_HEIGHT];
+			
+			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
+			{
+				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
+				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+				if ((size_t)row < inventory.size())
+				{
+					inventoryIndex = row;
+				}
+			}
+		}, []() {});
+	}
+
+	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
+	{
+		return WithControl<std::optional<int>>(layoutName, controlId,
+			[xy, buttons](nlohmann::json& thingie)
+		{
+			int x = thingie[common::data::Properties::X];
+			int y = thingie[common::data::Properties::Y];
+			int width = thingie[common::data::Properties::WIDTH];
+			int rowHeight = thingie[graphics::data::Properties::ROW_HEIGHT];
+			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
+			{
+				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
+				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+				if ((size_t)row < inventory.size())
+				{
+					return std::optional<int>(row);
+				}
+			}
+			return std::optional<int>();
+		}, []() { return std::nullopt; });
 	}
 }

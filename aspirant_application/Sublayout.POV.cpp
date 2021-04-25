@@ -9,6 +9,9 @@
 #include "Application.Update.h"
 #include "Game.Creatures.h"
 #include <tuple>
+#include "Graphics.Areas.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
 namespace sublayout::POV
 {
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
@@ -17,6 +20,9 @@ namespace sublayout::POV
 	const std::string DIRECTION_TEXT_ID = "Direction";
 	const std::string POSITION_TEXT_ID = "Position";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
+
+	const std::string AREA_TAKE_FOOD = "TakeFood";
+	const std::string IMAGE_TAKE_FOOD = "TakeFood";
 
 	const std::map<game::world::Border, std::string> leftSides =
 	{
@@ -70,6 +76,7 @@ namespace sublayout::POV
 
 	static void UpdateItems(const common::XY<size_t> position)
 	{
+
 		for (auto& item : game::item::All())
 		{
 			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(position, item));
@@ -96,8 +103,20 @@ namespace sublayout::POV
 		::UIState::IN_PLAY_COMBAT_RESULT
 	};
 
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		auto areas = graphics::Areas::Get(POV_LAYOUT_NAME, xy);
+		auto position = game::Avatar::GetPosition();
+		for (auto& item : game::item::All())
+		{
+			auto descriptor = game::item::GetDescriptor(item);
+			::graphics::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item));
+		}
+	}
+
 	void Start()
 	{
+		application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
 		for (auto state : states)
 		{
 			::application::Update::AddHandler(state, UpdatePOV);

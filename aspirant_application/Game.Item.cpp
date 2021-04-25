@@ -37,6 +37,8 @@ namespace game::item
 		{
 			descriptor[common::data::Properties::NAME],
 			descriptor[game::data::Properties::IMAGE_ID],
+			descriptor[game::data::Properties::TAKE_IMAGE_ID],
+			descriptor[game::data::Properties::TAKE_AREA_ID],
 			(descriptor.count(game::data::Properties::NON_COMBAT)>0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::NON_COMBAT])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::AMOUNT])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DURATION])) : (std::nullopt),

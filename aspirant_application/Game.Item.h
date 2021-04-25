@@ -18,6 +18,8 @@ namespace game
 		{
 			const std::string name;
 			const std::string imageId;
+			const std::string takeImageId;
+			const std::string takeAreaId;
 			std::optional<Usage> usage;
 			std::optional<int> amount;
 			std::optional<int> duration;

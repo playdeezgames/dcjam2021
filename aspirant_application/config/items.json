@@ -7,7 +7,9 @@
         "amount": 5,
         "image-id":"Food",
         "number-appearing": 72,
-        "combat-text":"Food Bribe"
+        "combat-text":"Food Bribe",
+        "take-image-id":"TakeFood",
+        "take-area-id":"TakeFood"
     },
     "1":{
         "name":"Potion",
@@ -18,7 +20,9 @@
         "image-id":"Potion",
         "sfx-success":"drinkpotion",
         "number-appearing": 18,
-        "combat-text":"Drink Potion"
+        "combat-text":"Drink Potion",
+        "take-image-id":"TakePotion",
+        "take-area-id":"TakePotion"
     },
     "2":{
         "name":"Beer",
@@ -29,7 +33,9 @@
         "image-id":"Beer",
         "sfx-success":"beer",
         "number-appearing": 9,
-        "combat-text":"Drink Beer"
+        "combat-text":"Drink Beer",
+        "take-image-id":"TakeBeer",
+        "take-area-id":"TakeBeer"
     },
     "3":{
         "name":"Wine",
@@ -40,7 +46,9 @@
         "image-id":"Wine",
         "sfx-success":"wine",
         "number-appearing": 9,
-        "combat-text":"Drink Wine"
+        "combat-text":"Drink Wine",
+        "take-image-id":"TakeWine",
+        "take-area-id":"TakeWine"
     },
     "4":{
         "name":"Coffee",
@@ -52,13 +60,17 @@
         "image-id":"Coffee",
         "sfx-success":"coffee",
         "number-appearing": 9,
-        "combat-text":"Drink Coffee"
+        "combat-text":"Drink Coffee",
+        "take-image-id":"TakeCoffee",
+        "take-area-id":"TakeCoffee"
     },
     "5":{
         "name":"Jools",
         "combat":4,
         "image-id":"Jools",
         "number-appearing": 144,
-        "combat-text":"Money Bribe"
+        "combat-text":"Money Bribe",
+        "take-image-id":"TakeJools",
+        "take-area-id":"TakeJools"
     }
 }

@@ -8,9 +8,12 @@
 #include "Game.Avatar.h"
 #include "Game.Avatar.Items.h"
 #include "Common.Utility.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
 namespace state::in_play::FloorInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.FloorInventory";
+	const std::string CONTROL_FLOOR_INVENTORY = "FloorInventory";
 
 	static void PickUpItem()
 	{
@@ -34,8 +37,25 @@ namespace state::in_play::FloorInventory
 		{ ::Command::GREEN, PickUpItem }
 	};
 
+	void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		graphics::FloorInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy);
+	}
+
+	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	{
+		auto itemUsed = graphics::FloorInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy, buttons);
+		if (itemUsed.has_value())
+		{
+			PickUpItem();
+		}
+		return itemUsed.has_value();
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseButtonUp);
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_FLOOR, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_FLOOR, LAYOUT_NAME);
 	}

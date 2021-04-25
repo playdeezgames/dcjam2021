@@ -30,5 +30,7 @@ namespace game::data::Properties
 	const std::string SFX_SUCCESS = "sfx-success";
 	const std::string SFX_FAILURE = "sfx-failure";
 	const std::string STATISTICS = "statistics";
+	const std::string TAKE_AREA_ID = "take-area-id";
+	const std::string TAKE_IMAGE_ID = "take-image-id";
 	const std::string WOUNDS = "wounds";
 }

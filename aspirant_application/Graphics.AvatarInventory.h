@@ -10,5 +10,5 @@ namespace graphics::AvatarInventory
 	void PreviousIndex();
 	std::optional<int> GetItem();
 	void OnMouseMotion(const std::string&, const std::string&, const common::XY<Sint32>&);
-	std::optional<int> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<Sint32>&, Uint8);
+	std::optional<size_t> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<Sint32>&, Uint8);
 }
