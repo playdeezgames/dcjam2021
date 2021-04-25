@@ -29,6 +29,7 @@
         "font": "default",
         "color": "Gray",
         "text": "Press <space>",
+        "text-id": "Continue",
         "x": 500,
         "y": 96,
         "horizontal-alignment": 0,

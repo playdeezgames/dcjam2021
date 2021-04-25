@@ -8,16 +8,34 @@
 #include "Graphics.CardSprites.h"
 #include "Common.Audio.h"
 #include "Common.Utility.h"
+#include "Graphics.Areas.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
+#include "Graphics.Texts.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
 	const std::string CURRENT_CARD_IMAGE_ID = "CurrentCard";
 	const std::string NEXT_CARD_IMAGE_ID = "NextCard";
+	const std::string AREA_CONTINUE = "Continue";
+	const std::string TEXT_CONTINUE = "Continue";
+
+	static void LeavePlay()
+	{
+		game::Combat::Advance(); 
+		application::UIState::Write(::UIState::LEAVE_PLAY);
+	}
+
+	static void AdvanceCombat()
+	{
+		game::Combat::Advance(); 
+		common::audio::Sfx::Play(application::UIState::EnterGame());
+	}
 
 	const std::map<Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::BACK, []() { game::Combat::Advance(); application::UIState::Write(::UIState::LEAVE_PLAY); }},
-		{ ::Command::GREEN, []() { game::Combat::Advance(); common::audio::Sfx::Play(application::UIState::EnterGame()); }}
+		{ ::Command::BACK, LeavePlay },
+		{ ::Command::GREEN, AdvanceCombat }
 	};
 
 	static void OnUpdate(const Uint32& ticks)
@@ -26,8 +44,26 @@ namespace state::in_play::CombatResult
 		graphics::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}
 
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (areas.contains(AREA_CONTINUE)) ? ("Yellow") : ("Gray"));
+	}
+
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	{
+		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		if (areas.contains(AREA_CONTINUE))
+		{
+			AdvanceCombat();
+		}
+		return false;
+	}
+
 	void Start()
 	{
+		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnMouseButtonUp);
+		application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT_RESULT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT_RESULT, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnUpdate);
