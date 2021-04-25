@@ -48,6 +48,23 @@
     },
     {
         "type": "Image",
+        "image-id": "TakePotion",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 52,
+        "y": 292,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakePotion",
+        "x": 52,
+        "y": 292,
+        "width": 32,
+        "height":32
+    },
+    {
+        "type": "Image",
         "image-id": "Beer",
         "sprite": "ItemBeer",
         "color": "White",
@@ -57,12 +74,46 @@
     },
     {
         "type": "Image",
+        "image-id": "TakeBeer",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 36,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeBeer",
+        "x": 36,
+        "y": 324,
+        "width": 32,
+        "height":32
+    },
+    {
+        "type": "Image",
         "image-id": "Wine",
         "sprite": "ItemWine",
         "color": "White",
         "x": 116,
         "y": 308,
         "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakeWine",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 116,
+        "y": 308,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeWine",
+        "x": 116,
+        "y": 308,
+        "width": 32,
+        "height":32
     },
     {
         "type": "Image",
@@ -101,12 +152,46 @@
     },
     {
         "type": "Image",
+        "image-id": "TakeCoffee",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 292,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeCoffee",
+        "x": 292,
+        "y": 324,
+        "width": 32,
+        "height":32
+    },
+    {
+        "type": "Image",
         "image-id": "Jools",
         "sprite": "ItemJools",
         "color": "White",
         "x": 212,
         "y": 308,
         "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakeJools",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 212,
+        "y": 308,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeJools",
+        "x": 212,
+        "y": 308,
+        "width": 32,
+        "height":32
     },
     {
         
