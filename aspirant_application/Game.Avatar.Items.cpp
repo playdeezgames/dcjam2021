@@ -270,10 +270,10 @@ namespace game::avatar::Items
 
 	static std::optional<std::tuple<std::string, bool>> CombatTeleport(int item)
 	{
-		auto result = Heal(item);
+		auto result = Teleport(item);
 		if (result)
 		{
-			return std::make_tuple(*result, false);
+			return std::make_tuple(*result, true);
 		}
 		return std::nullopt;
 	}

@@ -19,17 +19,21 @@ namespace sublayout::EnemyStats
 		std::stringstream ss;
 		ss << "Enemy: ";
 		auto position = game::Avatar::GetPosition();
-		auto health = game::Creatures::GetInstance(position).value().health;
-		if (health > 0)
+		auto creature = game::Creatures::GetInstance(position);
+		if (creature)
 		{
-			ss << health << "/";
-			ss << game::Creatures::GetInstance(position).value().descriptor.maximumHealth;
+			auto health = creature.value().health;
+			if (health > 0)
+			{
+				ss << health << "/";
+				ss << creature.value().descriptor.maximumHealth;
+			}
+			else
+			{
+				ss << "DEAD!";
+			}
+			::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
 		}
-		else
-		{
-			ss << "DEAD!";
-		}
-		::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
 	}
 
 	static void UpdateAttack(const Uint32&)

@@ -91,6 +91,7 @@
         "number-appearing": 9,
         "combat-text":"Drink Booze",
         "take-image-id":"TakeBooze",
-        "take-area-id":"TakeBooze"
+        "take-area-id":"TakeBooze",
+        "sfx-success":"woohoo"
     }
 }
