@@ -24,6 +24,8 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/delapouite/exit-door.html
 * https://game-icons.net/1x1/sbed/hand.html
 * https://game-icons.net/1x1/delapouite/plain-arrow.html
+* https://game-icons.net/1x1/lucasms/trousers.html
+* https://game-icons.net/1x1/delapouite/booze.html
 
 # Music Credits
 * https://freemusicarchive.org/music/Komiku/

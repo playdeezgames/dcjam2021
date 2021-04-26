@@ -12,7 +12,8 @@ namespace game
 			HEAL,
 			ATTACK_BUFF,
 			DEFEND_BUFF,
-			BRIBE
+			BRIBE,
+			TROUSERS
 		};
 		struct Descriptor
 		{

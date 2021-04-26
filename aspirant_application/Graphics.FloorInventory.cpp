@@ -165,6 +165,6 @@ namespace graphics::FloorInventory
 				}
 			}
 			return std::optional<int>();
-		}, []() { return std::nullopt; });
+		}, []() { return std::optional<int>(); });
 	}
 }

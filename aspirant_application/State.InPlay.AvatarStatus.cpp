@@ -25,7 +25,7 @@ namespace state::in_play::AvatarStatus
 	static void UpdateAttack(const Uint32&)
 	{
 		std::stringstream ss;
-		ss << "Attack: ";
+		ss << "Courage: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK);
 		graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
 	}
@@ -45,7 +45,7 @@ namespace state::in_play::AvatarStatus
 	static void UpdateDefend(const Uint32&)
 	{
 		std::stringstream ss;
-		ss << "Defend: ";
+		ss << "Alertness: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
 		graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TEXT_ID, ss.str());
 	}
