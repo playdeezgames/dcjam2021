@@ -1,5 +1,4 @@
 #include "Graphics.AvatarInventory.h"
-#include <SDL.h>
 #include "json.hpp"
 #include "Common.Data.Properties.h"
 #include "Graphics.Data.Properties.h"
