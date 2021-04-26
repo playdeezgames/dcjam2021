@@ -159,9 +159,9 @@ namespace graphics::FloorInventory
 			{
 				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
 				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
-				if ((size_t)row < inventory.size())
+				if (row < inventory.size())
 				{
-					return std::optional<int>(row);
+					return std::optional<int>((int)row);
 				}
 			}
 			return std::optional<int>();

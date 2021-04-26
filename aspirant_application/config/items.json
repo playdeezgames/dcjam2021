@@ -82,5 +82,15 @@
         "combat-text":"????",
         "take-image-id":"TakeTrousers",
         "take-area-id":"TakeTrousers"
+    },
+    "7":{
+        "name":"Booze",
+        "initial-inventory": 1,
+        "combat":6,
+        "image-id":"Booze",
+        "number-appearing": 0,
+        "combat-text":"????",
+        "take-image-id":"TakeBooze",
+        "take-area-id":"TakeBooze"
     }
 }
