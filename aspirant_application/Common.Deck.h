@@ -18,6 +18,7 @@ namespace common
 		{
 
 		}
+
 		void Shuffle()
 		{
 			index = 0;
@@ -27,6 +28,7 @@ namespace common
 				std::swap(cards[first], cards[second]);
 			}
 		}
+
 		std::optional<TCard> Peek()
 		{
 			if (index < cards.size())
@@ -35,6 +37,7 @@ namespace common
 			}
 			return std::nullopt;
 		}
+
 		std::optional<TCard> Draw()
 		{
 			auto result = Peek();
