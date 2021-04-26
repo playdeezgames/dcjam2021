@@ -15,6 +15,20 @@
     },
     {
         "type": "Text",
+        "text-id": "EnemyAttitude",
+        "font": "default",
+        "color": "Yellow",
+        "text": "<attitude>",
+        "x": 360,
+        "y": 248,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
         "text-id": "Attack",
         "font": "default",
         "color": "Blue",

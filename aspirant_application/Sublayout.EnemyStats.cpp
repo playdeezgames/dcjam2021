@@ -13,6 +13,24 @@ namespace sublayout::EnemyStats
 	const std::string HEALTH_TEXT_ID = "EnemyHealth";
 	const std::string ATTACK_TEXT_ID = "Attack";
 	const std::string DEFEND_TEXT_ID = "Defend";
+	const std::string TEXT_ENEMY_ATTITUDE = "EnemyAttitude";
+
+	const std::map<game::creature::Attitude, std::string> attitudeTexts =
+	{
+		{ game::creature::Attitude::NEUTRAL, "" }
+	};
+
+	static void UpdateAttitude(const Uint32&)
+	{
+		std::stringstream ss;
+		auto position = game::Avatar::GetPosition();
+		auto creature = game::Creatures::GetInstance(position);
+		if (creature)
+		{
+			ss << attitudeTexts.find(creature.value().attitude)->second;
+		}
+		::graphics::Texts::SetText(LAYOUT_NAME, TEXT_ENEMY_ATTITUDE, ss.str());
+	}
 
 	static void UpdateHealth(const Uint32&)
 	{
@@ -75,6 +93,7 @@ namespace sublayout::EnemyStats
 			::application::Update::AddHandler(state, UpdateHealth);
 			::application::Update::AddHandler(state, UpdateAttack);
 			::application::Update::AddHandler(state, UpdateDefend);
+			::application::Update::AddHandler(state, UpdateAttitude);
 		}
 	}
 }

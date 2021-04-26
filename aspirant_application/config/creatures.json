@@ -17,6 +17,10 @@
             "2":"hitblocked",
             "3":"woohoo",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -37,6 +41,10 @@
             "2":"hitblocked",
             "3":"woohoo",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -52,6 +60,10 @@
             "1":"deadmonster",
             "2":"hitblocked",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -72,6 +84,10 @@
             "2":"hitblocked",
             "3":"woohoo",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -91,6 +107,10 @@
             "2":"hitblocked",
             "3":"woohoo",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -111,6 +131,10 @@
             "2":"hitblocked",
             "3":"woohoo",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -126,6 +150,10 @@
             "1":"deadmonster",
             "2":"hitblocked",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     },
     {
@@ -145,6 +173,10 @@
             "2":"hitblocked",
             "3":"woohoo",
             "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1
         }
     }
 ]

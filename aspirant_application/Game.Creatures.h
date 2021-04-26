@@ -10,6 +10,7 @@ namespace game::Creatures
 		int creature;
 		int health;
 		game::creature::Descriptor descriptor;
+		game::creature::Attitude attitude;
 	};
 	std::optional<Instance> GetInstance(const common::XY<size_t>&);
 	bool AnyLeft();

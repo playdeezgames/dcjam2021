@@ -4,6 +4,8 @@ namespace game::data::Properties
 {
 	const std::string AMOUNT = "amount";
 	const std::string ATTACK = "attack";
+	const std::string ATTITUDE = "attitude";
+	const std::string ATTITUDES = "attitudes";
 	const std::string AVATAR = "avatar";
 	const std::string BRIBES = "bribes";
 	const std::string COLUMN = "column";

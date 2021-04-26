@@ -24,6 +24,7 @@ namespace game::Creatures
 	{
 		int creature;
 		int wounds;
+		int attitude;
 	};
 
 	static std::string XYToString(const common::XY<size_t>& location)
@@ -40,7 +41,7 @@ namespace game::Creatures
 		if (creatures.count(place) > 0)
 		{
 			auto& creature = GetCreatures()[place];
-			return std::optional<CreatureInstance>({ (int)creature[game::data::Properties::CREATURE], (int)creature[game::data::Properties::WOUNDS] });
+			return std::optional<CreatureInstance>({ (int)creature[game::data::Properties::CREATURE], (int)creature[game::data::Properties::WOUNDS], (int)creature[game::data::Properties::ATTITUDE] });
 		}
 		return std::nullopt;
 	}
@@ -55,6 +56,7 @@ namespace game::Creatures
 		}
 		creatures[place][game::data::Properties::CREATURE] = (int)instance.creature;
 		creatures[place][game::data::Properties::WOUNDS] = instance.wounds;
+		creatures[place][game::data::Properties::ATTITUDE] = instance.attitude;
 	}
 
 	void Remove(const common::XY<size_t>& location)
@@ -121,7 +123,7 @@ namespace game::Creatures
 					y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
 					available = !Get({ x,y });
 				}
-				Put({ x,y }, { creature, 0 });
+				Put({ x,y }, { creature, 0, (int)descriptor.attitude });
 				numberAppearing--;
 			}
 		}

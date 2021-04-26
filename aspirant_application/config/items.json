@@ -78,6 +78,8 @@
         "initial-inventory": 1,
         "image-id":"Trousers",
         "number-appearing": 0,
+        "combat":6,
+        "combat-text":"Drop Trousers",
         "take-image-id":"TakeTrousers",
         "take-area-id":"TakeTrousers",
         "lose-on-teleport": true

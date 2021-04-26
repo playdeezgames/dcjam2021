@@ -7,6 +7,11 @@
 #include "Game.Item.h"
 namespace game::creature
 {
+	enum class Attitude
+	{
+		NEUTRAL,
+		UNIMPRESSED
+	};
 	enum class Sfx
 	{
 		HIT,
@@ -24,6 +29,8 @@ namespace game::creature
 		size_t numberAppearing;
 		std::map<int, size_t> bribes;
 		std::map<Sfx, std::string> sfx;
+		Attitude attitude;
+		std::map<int, Attitude> attitudes;
 	};
 
 	Descriptor GetDescriptor(int);

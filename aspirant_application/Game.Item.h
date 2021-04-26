@@ -13,7 +13,8 @@ namespace game
 			ATTACK_BUFF,
 			DEFEND_BUFF,
 			BRIBE,
-			TELEPORT
+			TELEPORT,
+			INTIMIDATE
 		};
 		struct Descriptor
 		{
