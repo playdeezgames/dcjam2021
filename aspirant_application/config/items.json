@@ -76,20 +76,19 @@
     "6":{
         "name":"Trousers",
         "initial-inventory": 1,
-        "combat":5,
         "image-id":"Trousers",
         "number-appearing": 0,
-        "combat-text":"????",
         "take-image-id":"TakeTrousers",
         "take-area-id":"TakeTrousers"
     },
     "7":{
         "name":"Booze",
-        "initial-inventory": 1,
-        "combat":6,
+        "initial-inventory": 0,
+        "non-combat":5,
+        "combat":5,
         "image-id":"Booze",
-        "number-appearing": 0,
-        "combat-text":"????",
+        "number-appearing": 9,
+        "combat-text":"Drink Booze",
         "take-image-id":"TakeBooze",
         "take-area-id":"TakeBooze"
     }

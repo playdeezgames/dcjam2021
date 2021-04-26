@@ -13,8 +13,7 @@ namespace game
 			ATTACK_BUFF,
 			DEFEND_BUFF,
 			BRIBE,
-			TROUSERS,
-			BOOZE
+			TELEPORT
 		};
 		struct Descriptor
 		{
