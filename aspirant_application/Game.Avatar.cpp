@@ -45,7 +45,7 @@ namespace game::Avatar
 		GetAvatar()[game::data::Properties::ROW] = row;
 	}
 
-	static void SetPosition(const common::XY<size_t> position)
+	void SetPosition(const common::XY<size_t>& position)
 	{
 		SetColumn(position.GetX());
 		SetRow(position.GetY());

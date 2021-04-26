@@ -30,6 +30,7 @@ namespace game
 			std::optional<Usage> combatUsage;
 			size_t numberAppearing;
 			std::optional<std::string> combatText;
+			bool loseOnTeleport;
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();

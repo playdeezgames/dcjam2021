@@ -9,6 +9,8 @@
 #include "Game.Avatar.h"
 #include "Application.Sounds.h"
 #include "Game.Creatures.h"
+#include "Game.World.h"
+#include "Common.RNG.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar();
@@ -183,12 +185,53 @@ namespace game::avatar::Items
 		});
 	}
 
+	static void LoseTeleportItems()
+	{
+		auto worldSize = game::World::GetSize();
+		auto inventory = All();
+		for (auto& item : inventory)
+		{
+			auto descriptor = game::item::GetDescriptor(item.first);
+			if (descriptor.loseOnTeleport)
+			{
+				while (Read(item.first)>0)
+				{
+					Drop(item.first);
+					size_t x = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
+					size_t y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
+					auto xy = common::XY<size_t>(x, y);
+					game::world::Items::Add(xy, item.first, 1);
+				}
+			}
+		}
+	}
+
+	static std::optional<std::string> Teleport(int item)
+	{
+		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
+		{
+			auto worldSize = game::World::GetSize();
+			common::XY<size_t> xy;
+			do
+			{
+				size_t x = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
+				size_t y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
+				xy = common::XY<size_t>(x, y);
+			} while (game::Creatures::GetInstance(xy).has_value());
+			LoseTeleportItems();
+			game::Avatar::SetPosition(xy);
+			game::World::SetExplored(xy);
+			return true;
+		});
+	}
+
 	static std::map<game::item::Usage, std::function<std::optional<std::string>(int)>> nonCombatVerbs =
 	{
 		{game::item::Usage::EAT, Eat},
 		{game::item::Usage::HEAL, Heal},
 		{game::item::Usage::ATTACK_BUFF, BuffAttack},
 		{game::item::Usage::DEFEND_BUFF, BuffDefend},
+		{game::item::Usage::TELEPORT, Teleport},
 		{game::item::Usage::BRIBE, [](int) { return std::nullopt; }}
 	};
 
@@ -216,6 +259,16 @@ namespace game::avatar::Items
 	}
 
 	static std::optional<std::tuple<std::string, bool>> CombatHeal(int item)
+	{
+		auto result = Heal(item);
+		if (result)
+		{
+			return std::make_tuple(*result, false);
+		}
+		return std::nullopt;
+	}
+
+	static std::optional<std::tuple<std::string, bool>> CombatTeleport(int item)
 	{
 		auto result = Heal(item);
 		if (result)
@@ -267,6 +320,7 @@ namespace game::avatar::Items
 		{game::item::Usage::HEAL, CombatHeal},
 		{game::item::Usage::ATTACK_BUFF, CombatBuffAttack},
 		{game::item::Usage::DEFEND_BUFF, CombatBuffDefend},
+		{game::item::Usage::TELEPORT, CombatTeleport},
 		{game::item::Usage::BRIBE, CombatBribe}
 	};
 

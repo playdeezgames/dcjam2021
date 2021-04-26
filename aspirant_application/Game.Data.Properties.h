@@ -21,6 +21,7 @@ namespace game::data::Properties
 	const std::string INDEX = "index";
 	const std::string INITIAL_INVENTORY = "initial-inventory";
 	const std::string INVENTORY = "inventory";
+	const std::string LOSE_ON_TELEPORT = "lose-on-teleport";
 	const std::string NON_COMBAT = "non-combat";
 	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";

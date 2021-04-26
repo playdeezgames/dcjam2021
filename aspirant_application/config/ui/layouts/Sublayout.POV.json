@@ -120,8 +120,8 @@
         "image-id": "Booze",
         "sprite": "ItemBooze",
         "color": "White",
-        "x": 116,
-        "y": 340,
+        "x": 78,
+        "y": 324,
         "visible": false
     },
     {
@@ -129,15 +129,15 @@
         "image-id": "TakeBooze",
         "sprite": "ItemTake",
         "color": "White",
-        "x": 116,
-        "y": 340,
+        "x": 78,
+        "y": 324,
         "visible": false
     },
     {
         "type": "Area",
         "area-id": "TakeBooze",
-        "x": 116,
-        "y": 340,
+        "x": 78,
+        "y": 324,
         "width": 32,
         "height":32
     },
@@ -224,8 +224,8 @@
         "image-id": "Trousers",
         "sprite": "ItemTrousers",
         "color": "White",
-        "x": 212,
-        "y": 340,
+        "x": 260,
+        "y": 324,
         "visible": false
     },
     {
@@ -233,15 +233,15 @@
         "image-id": "TakeTrousers",
         "sprite": "ItemTake",
         "color": "White",
-        "x": 212,
-        "y": 340,
+        "x": 260,
+        "y": 324,
         "visible": false
     },
     {
         "type": "Area",
         "area-id": "TakeTrousers",
-        "x": 212,
-        "y": 340,
+        "x": 260,
+        "y": 324,
         "width": 32,
         "height":32
     },
