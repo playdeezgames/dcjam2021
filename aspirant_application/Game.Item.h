@@ -14,7 +14,7 @@ namespace game
 			DEFEND_BUFF,
 			BRIBE,
 			TELEPORT,
-			INTIMIDATE
+			ATTITUDE
 		};
 		struct Descriptor
 		{
@@ -32,6 +32,7 @@ namespace game
 			size_t numberAppearing;
 			std::optional<std::string> combatText;
 			bool loseOnTeleport;
+			bool dropOnUse;
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();

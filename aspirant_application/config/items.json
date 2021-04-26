@@ -82,7 +82,8 @@
         "combat-text":"Drop Trousers",
         "take-image-id":"TakeTrousers",
         "take-area-id":"TakeTrousers",
-        "lose-on-teleport": true
+        "lose-on-teleport": true,
+        "drop-on-use": true
     },
     "7":{
         "name":"Booze",

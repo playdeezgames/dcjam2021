@@ -131,7 +131,14 @@ namespace game::avatar::Items
 		{
 			if (action(descriptor))
 			{
-				game::avatar::Items::Remove(item, 1);
+				if (descriptor.dropOnUse)
+				{
+					Drop(item);
+				}
+				else
+				{
+					game::avatar::Items::Remove(item, 1);
+				}
 				return descriptor.sfxSuccess;
 			}
 		}
@@ -232,7 +239,8 @@ namespace game::avatar::Items
 		{game::item::Usage::ATTACK_BUFF, BuffAttack},
 		{game::item::Usage::DEFEND_BUFF, BuffDefend},
 		{game::item::Usage::TELEPORT, Teleport},
-		{game::item::Usage::BRIBE, [](int) { return std::nullopt; }}
+		{game::item::Usage::BRIBE, [](int) { return std::nullopt; }},
+		{game::item::Usage::ATTITUDE, [](int) { return std::nullopt; }}
 	};
 
 	std::optional<std::string> Use(std::optional<int> item)
@@ -314,6 +322,17 @@ namespace game::avatar::Items
 		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::NO_BRIBE], false);
 	}
 
+	static std::optional<std::tuple<std::string, bool>> CombatAttitude(int item)
+	{
+		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
+		if (instance && instance.value().descriptor.attitudes.contains(item))
+		{
+			//TODO: change the attitude of the creature
+			return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::ATTITUDE], true);
+		}
+		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::NO_ATTITUDE], false);
+	}
+
 	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(int)>> combatVerbs =
 	{
 		{game::item::Usage::EAT, CombatEat},
@@ -321,7 +340,8 @@ namespace game::avatar::Items
 		{game::item::Usage::ATTACK_BUFF, CombatBuffAttack},
 		{game::item::Usage::DEFEND_BUFF, CombatBuffDefend},
 		{game::item::Usage::TELEPORT, CombatTeleport},
-		{game::item::Usage::BRIBE, CombatBribe}
+		{game::item::Usage::BRIBE, CombatBribe},
+		{game::item::Usage::ATTITUDE, CombatAttitude}
 	};
 
 	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<int> item)
