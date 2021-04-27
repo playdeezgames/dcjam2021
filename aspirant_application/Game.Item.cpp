@@ -49,7 +49,8 @@ namespace game::item
 			(descriptor.count(game::data::Properties::NUMBER_APPEARING) > 0) ? ((size_t)descriptor[game::data::Properties::NUMBER_APPEARING]) : (0),
 			(descriptor.count(game::data::Properties::COMBAT_TEXT) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::COMBAT_TEXT])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::LOSE_ON_TELEPORT) > 0) ? ((bool)descriptor[game::data::Properties::LOSE_ON_TELEPORT]) : (false),
-			(descriptor.count(game::data::Properties::DROP_ON_USE) > 0) ? ((bool)descriptor[game::data::Properties::DROP_ON_USE]) : (false)
+			(descriptor.count(game::data::Properties::DROP_ON_USE) > 0) ? ((bool)descriptor[game::data::Properties::DROP_ON_USE]) : (false),
+			(descriptor.count(game::data::Properties::BOWEL) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::BOWEL])) : (std::nullopt)
 		};
 	}
 

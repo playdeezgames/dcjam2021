@@ -33,6 +33,7 @@ namespace game
 			std::optional<std::string> combatText;
 			bool loseOnTeleport;
 			bool dropOnUse;
+			std::optional<int> bowel;
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();

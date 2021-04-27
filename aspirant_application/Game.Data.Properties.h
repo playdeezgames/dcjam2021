@@ -8,6 +8,7 @@ namespace game::data::Properties
 	const std::string ATTITUDES = "attitudes";
 	const std::string AVATAR = "avatar";
 	const std::string BRIBES = "bribes";
+	const std::string BOWEL = "bowel";
 	const std::string COLUMN = "column";
 	const std::string COMBAT = "combat";
 	const std::string COMBAT_TEXT = "combat-text";

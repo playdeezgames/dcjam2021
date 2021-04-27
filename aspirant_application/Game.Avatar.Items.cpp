@@ -139,6 +139,10 @@ namespace game::avatar::Items
 				{
 					game::avatar::Items::Remove(item, 1);
 				}
+				if (descriptor.bowel)
+				{
+					game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+				}
 				return descriptor.sfxSuccess;
 			}
 		}
