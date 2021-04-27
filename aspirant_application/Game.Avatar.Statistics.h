@@ -9,7 +9,10 @@ namespace game::avatar
 		ATTACK,
 		DEFEND,
 		ATTACK_TIMER,
-		DEFEND_TIMER
+		DEFEND_TIMER,
+		BOWEL,
+		NAUSEA,
+		DRUNKENNESS,
 	};
 }
 namespace game::avatar::Statistics

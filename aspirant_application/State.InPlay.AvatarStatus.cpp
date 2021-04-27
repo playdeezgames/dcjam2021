@@ -9,10 +9,14 @@
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
-	const std::string ATTACK_TEXT_ID = "Attack";
-	const std::string ATTACK_TIMER_TEXT_ID = "AttackTimer";
-	const std::string DEFEND_TEXT_ID = "Defend";
-	const std::string DEFEND_TIMER_TEXT_ID = "DefendTimer";
+	const std::string TEXT_ATTACK = "Attack";
+	const std::string TEXT_ATTACK_TIMER = "AttackTimer";
+	const std::string TEXT_DEFEND = "Defend";
+	const std::string TEXT_DEFEND_TIMER = "DefendTimer";
+	const std::string TEXT_BOWEL = "Bowel";
+	const std::string TEXT_DRUNKENNESS = "Drunkenness";
+	const std::string TEXT_NAUSEA = "Nausea";
+
 
 	const std::map<Command, std::function<void()>> commandHandlers =
 	{
@@ -27,7 +31,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Courage: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK);
-		graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK, ss.str());
 	}
 
 	static void UpdateAttackTimer(const Uint32&)
@@ -39,7 +43,7 @@ namespace state::in_play::AvatarStatus
 			ss << "Duration: ";
 			ss << value;
 		}
-		graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TIMER_TEXT_ID, ss.str());
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK_TIMER, ss.str());
 	}
 
 	static void UpdateDefend(const Uint32&)
@@ -47,7 +51,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Alertness: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
-		graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TEXT_ID, ss.str());
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND, ss.str());
 	}
 
 	static void UpdateDefendTimer(const Uint32&)
@@ -59,7 +63,31 @@ namespace state::in_play::AvatarStatus
 			ss << "Duration: ";
 			ss << value;
 		}
-		graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TIMER_TEXT_ID, ss.str());
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND_TIMER, ss.str());
+	}
+
+	static void UpdateBowel(const Uint32&)
+	{
+		std::stringstream ss;
+		ss << "Bowel: ";
+		ss << game::avatar::Statistics::Read(game::avatar::Statistic::BOWEL);
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_BOWEL, ss.str());
+	}
+
+	static void UpdateDrunkenness(const Uint32&)
+	{
+		std::stringstream ss;
+		ss << "Drunkenness: ";
+		ss << game::avatar::Statistics::Read(game::avatar::Statistic::DRUNKENNESS);
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_DRUNKENNESS, ss.str());
+	}
+
+	static void UpdateNausea(const Uint32&)
+	{
+		std::stringstream ss;
+		ss << "Nausea: ";
+		ss << game::avatar::Statistics::Read(game::avatar::Statistic::NAUSEA);
+		graphics::Texts::SetText(LAYOUT_NAME, TEXT_NAUSEA, ss.str());
 	}
 
 	void Start()
@@ -70,5 +98,10 @@ namespace state::in_play::AvatarStatus
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefendTimer);
+
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateBowel);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDrunkenness);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateNausea);
+
 	}
 }

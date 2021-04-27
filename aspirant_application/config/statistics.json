@@ -28,5 +28,20 @@
         "minimum":0,
         "maximum":1000,
         "default":0
+    },
+    "6":{
+        "minimum":0,
+        "maximum":100,
+        "default":0
+    },
+    "7":{
+        "minimum":0,
+        "maximum":100,
+        "default":0
+    },
+    "8":{
+        "minimum":0,
+        "maximum":100,
+        "default":0
     }
 }
