@@ -1,0 +1,143 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "LightGreen",
+        "text": "==SAVE GAME==",
+        "x": 320,
+        "y": 0,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Menu",
+        "menu-id": "SaveGame",
+        "index": 0,
+        "font": "default",
+        "colors": {
+            "active": "Cyan",
+            "inactive": "Gray"
+        },
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2,
+        "menu-items": [
+            {
+                "menu-item-id":"Autosave",
+                "text": "Autosave",
+                "x": 320,
+                "y": 32,
+                "value": 0
+            },
+            {
+                "menu-item-id":"Slot1",
+                "text": "Slot 1",
+                "x": 320,
+                "y": 48,
+                "value": 1
+            },
+            {
+                "menu-item-id":"Slot2",
+                "text": "Slot 2",
+                "x": 320,
+                "y": 64,
+                "value": 2
+            },
+            {
+                "menu-item-id":"Slot3",
+                "text": "Slot 3",
+                "x": 320,
+                "y": 80,
+                "value": 3
+            },
+            {
+                "menu-item-id":"Slot4",
+                "text": "Slot 4",
+                "x": 320,
+                "y": 96,
+                "value": 4
+            },
+            {
+                "menu-item-id":"Slot5",
+                "text": "Slot 5",
+                "x": 320,
+                "y": 112,
+                "value": 5
+            },
+            {
+                "text": "Back",
+                "x": 320,
+                "y": 128,
+                "value": 6
+            }
+        ]
+    },
+    {
+        "type":"Area",
+        "area-id": "Autosave",
+        "x":0,
+        "y":32,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot1",
+        "x":0,
+        "y":48,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot2",
+        "x":0,
+        "y":64,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot3",
+        "x":0,
+        "y":80,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot4",
+        "x":0,
+        "y":96,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot5",
+        "x":0,
+        "y":112,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Back",
+        "x":0,
+        "y":128,
+        "width":640,
+        "height":16
+    }
+]

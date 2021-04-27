@@ -100,6 +100,7 @@ namespace common::Application
 		game::CombatDeck::Deal,
 		game::CombatDeck::Deal,
 		state::LoadGame::Start,
+		state::SaveGame::Start,
 		Options::Initialize
 	};
 

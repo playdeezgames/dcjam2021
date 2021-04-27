@@ -11,9 +11,9 @@ namespace game::avatar::Items { void Reset(); }
 namespace game::Creatures { void Reset(); }
 namespace game
 {
-	const std::string FILENAME_AUTOSAVE = "autosave.json";
 	const std::vector<std::string> FILENAME_SLOTS = 
 	{
+		"autosave.json",
 		"slot1.json",
 		"slot2.json",
 		"slot3.json",
@@ -45,17 +45,17 @@ namespace game
 
 	void AutoSave()
 	{
-		data::JSON::Save(FILENAME_AUTOSAVE, GetData());
+		data::JSON::Save(FILENAME_SLOTS[0], GetData());
 	}
 
 	void LoadFromAutosave()
 	{
-		data = data::JSON::Load(FILENAME_AUTOSAVE);
+		data = data::JSON::Load(FILENAME_SLOTS[0]);
 	}
 
 	bool DoesAutosaveExist()
 	{
-		return common::Utility::FileExists(FILENAME_AUTOSAVE);
+		return common::Utility::FileExists(FILENAME_SLOTS[0]);
 	}
 
 	bool DoesSlotExist(int slot)

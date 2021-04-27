@@ -219,6 +219,7 @@
     <ClCompile Include="State.Options.cpp" />
     <ClCompile Include="Common.RNG.cpp" />
     <ClCompile Include="Common.Audio.cpp" />
+    <ClCompile Include="State.SaveGame.cpp" />
     <ClCompile Include="State.Splash.cpp" />
     <ClCompile Include="Graphics.Sprites.cpp" />
     <ClCompile Include="State.Start.cpp" />
