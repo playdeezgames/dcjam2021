@@ -351,3 +351,9 @@ MigrationBackup/
 
 deploy/
 /aspirant_application/autosave.json
+/aspirant_application/slot1.json
+/aspirant_application/slot2.json
+/aspirant_application/slot3.json
+/aspirant_application/slot4.json
+/aspirant_application/slot5.json
+
