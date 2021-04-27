@@ -10,4 +10,5 @@ namespace game
 	void LoadFromAutosave();
 	bool DoesSlotExist(int);
 	void LoadFromSlot(int);
+	void SaveToSlot(int);
 }
