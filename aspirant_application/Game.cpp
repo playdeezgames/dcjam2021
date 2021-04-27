@@ -49,5 +49,13 @@ namespace game
 		return common::Utility::FileExists(FILENAME_AUTOSAVE);
 	}
 
+	bool DoesSlotExist(int)
+	{
+		return false;
+	}
 
+	void LoadFromSlot(int)
+	{
+
+	}
 }

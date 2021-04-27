@@ -83,5 +83,61 @@
                 "value": 6
             }
         ]
+    },
+    {
+        "type":"Area",
+        "area-id": "Autosave",
+        "x":0,
+        "y":32,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot1",
+        "x":0,
+        "y":48,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot2",
+        "x":0,
+        "y":64,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot3",
+        "x":0,
+        "y":80,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot4",
+        "x":0,
+        "y":96,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Slot5",
+        "x":0,
+        "y":112,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id": "Back",
+        "x":0,
+        "y":128,
+        "width":640,
+        "height":16
     }
 ]

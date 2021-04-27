@@ -14,16 +14,23 @@ namespace state::LeavePlay
 	const std::string MENU_ID = "LeavePlay";
 	const std::string AREA_CONTINUE = "Continue";
 	const std::string AREA_ABANDON = "Abandon";
+	const std::string AREA_SAVE = "Save";
 
 	enum class LeavePlayItem
 	{
 		CONTINUE,
+		SAVE,
 		ABANDON
 	};
 
 	static void GoToMainMenu()
 	{
 		::application::UIState::Write(::UIState::MAIN_MENU);
+	}
+
+	static void GoToSaveGame()
+	{
+		::application::UIState::Write(::UIState::SAVE_GAME);
 	}
 
 	static void ContinueGame()
@@ -34,6 +41,7 @@ namespace state::LeavePlay
 	const std::map<LeavePlayItem, std::function<void()>> activators =
 	{
 		{ LeavePlayItem::ABANDON, GoToMainMenu },
+		{ LeavePlayItem::SAVE, GoToSaveGame },
 		{ LeavePlayItem::CONTINUE, ContinueGame }
 	};
 
@@ -59,6 +67,7 @@ namespace state::LeavePlay
 	const std::map<std::string, LeavePlayItem> areaMenuItems =
 	{
 		{ AREA_CONTINUE,  LeavePlayItem::CONTINUE},
+		{ AREA_SAVE,  LeavePlayItem::SAVE},
 		{ AREA_ABANDON,  LeavePlayItem::ABANDON}
 	};
 
