@@ -15,6 +15,7 @@ namespace game::Creatures
 	std::optional<Instance> GetInstance(const common::XY<size_t>&);
 	bool AnyLeft();
 	std::optional<int> DoDamage(const common::XY<size_t>&, int);
+	std::optional<std::string> ChangeAttitude(const common::XY<size_t>&, int);
 	void Remove(const common::XY<size_t>&);
 	void Advance(const common::XY<size_t>&);
 }

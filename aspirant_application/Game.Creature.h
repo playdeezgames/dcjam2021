@@ -10,7 +10,11 @@ namespace game::creature
 	enum class Attitude
 	{
 		NEUTRAL,
-		UNIMPRESSED
+		UNIMPRESSED,
+		AMOROUS,
+		DISGUST,
+		HOSTILE,
+		EMBARRASSED
 	};
 	enum class Sfx
 	{

@@ -95,6 +95,25 @@ namespace game::Creatures
 		return std::nullopt;
 	}
 
+	std::optional<std::string> ChangeAttitude(const common::XY<size_t>& location, int item)
+	{
+		auto instance = Get(location);
+		if (instance)
+		{
+			auto descriptor = game::Creatures::GetInstance(location).value().descriptor;
+			auto iter = descriptor.attitudes.find(item);
+			if (iter != descriptor.attitudes.end())
+			{
+				instance.value().attitude = (int)iter->second;
+				Put(location, instance.value());
+				return descriptor.sfx[game::creature::Sfx::ATTITUDE];
+			}
+			return descriptor.sfx[game::creature::Sfx::NO_ATTITUDE];
+		}
+		return std::nullopt;
+	}
+
+
 	void Advance(const common::XY<size_t>& location)
 	{
 		auto instance = GetInstance(location);
@@ -144,7 +163,8 @@ namespace game::Creatures
 			{
 				instance.value().creature,
 				descriptor.maximumHealth-instance.value().wounds,
-				descriptor
+				descriptor,
+				(game::creature::Attitude)instance.value().attitude
 			});
 		}
 		return std::nullopt;

@@ -324,13 +324,16 @@ namespace game::avatar::Items
 
 	static std::optional<std::tuple<std::string, bool>> CombatAttitude(int item)
 	{
-		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
-		if (instance && instance.value().descriptor.attitudes.contains(item))
+		auto result = ConsumeItem(item, [item](const game::item::Descriptor& descriptor)
 		{
-			//TODO: change the attitude of the creature
-			return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::ATTITUDE], true);
+			game::Creatures::ChangeAttitude(game::Avatar::GetPosition(), item);
+			return true;
+		});
+		if (result)
+		{
+			return std::make_tuple(*result, true);
 		}
-		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::NO_ATTITUDE], false);
+		return std::nullopt;
 	}
 
 	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(int)>> combatVerbs =

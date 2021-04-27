@@ -17,7 +17,12 @@ namespace sublayout::EnemyStats
 
 	const std::map<game::creature::Attitude, std::string> attitudeTexts =
 	{
-		{ game::creature::Attitude::NEUTRAL, "" }
+		{ game::creature::Attitude::NEUTRAL, "" },
+		{ game::creature::Attitude::UNIMPRESSED, "Unimpressed" },
+		{ game::creature::Attitude::AMOROUS, "Likes what they see!" },
+		{ game::creature::Attitude::DISGUST, "Disgusted" },
+		{ game::creature::Attitude::HOSTILE, "Angry" },
+		{ game::creature::Attitude::EMBARRASSED, "*BLUSHING*" }
 	};
 
 	static void UpdateAttitude(const Uint32&)
