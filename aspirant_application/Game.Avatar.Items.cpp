@@ -17,7 +17,7 @@ namespace game::Avatar
 }
 namespace game::avatar::Items
 {
-	nlohmann::json& GetAvatarInventory()
+	static nlohmann::json& GetAvatarInventory()
 	{
 		auto& avatar = game::Avatar::GetAvatar();
 		if (avatar.count(game::data::Properties::INVENTORY) == 0)
@@ -106,15 +106,6 @@ namespace game::avatar::Items
 
 	}
 
-	const int FOOD_HUNGER_INCREASE = 5;
-	const int POTION_HEALTH_INCREASE = 30;
-	const int WINE_ATTACK = 25;
-	const int WINE_ATTACK_DURATION = 25;
-	const int BEER_ATTACK = 50;
-	const int BEER_ATTACK_DURATION = 10;
-	const int COFFEE_DEFEND_INCREASE = 10;
-	const int COFFEE_DEFEND_DURATION = 10;
-
 	void Drop(std::optional<int> item)
 	{
 		if (item)
@@ -124,12 +115,19 @@ namespace game::avatar::Items
 		}
 	}
 
-	static std::optional<std::string> ConsumeItem(int item, std::function<bool(const game::item::Descriptor&)> action)
+	enum class ConsumeItemResult
+	{
+		SUCCESS,
+		FAILURE
+	};
+
+	static std::optional<std::string> ConsumeItem(int item, std::function<ConsumeItemResult(const game::item::Descriptor&)> action)
 	{
 		auto descriptor = game::item::GetDescriptor(item);
 		if (game::avatar::Items::Read(item) > 0)
 		{
-			if (action(descriptor))
+			auto result = action(descriptor);
+			if(result==ConsumeItemResult::SUCCESS)
 			{
 				if (descriptor.dropOnUse)
 				{
@@ -156,9 +154,9 @@ namespace game::avatar::Items
 			if (game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER))
 			{
 				game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, descriptor.amount.value());
-				return true;
+				return ConsumeItemResult::SUCCESS;
 			}
-			return false;
+			return ConsumeItemResult::FAILURE;
 		});
 	}
 
@@ -169,9 +167,9 @@ namespace game::avatar::Items
 			if (game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH))
 			{
 				game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, descriptor.amount.value());
-				return true;
+				return ConsumeItemResult::SUCCESS;
 			}
-			return false;
+			return ConsumeItemResult::FAILURE;
 		});
 	}
 
@@ -181,7 +179,7 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, descriptor.duration.value());
-			return true;
+			return ConsumeItemResult::SUCCESS;
 		});
 	}
 
@@ -191,7 +189,7 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, descriptor.duration.value());
-			return true;
+			return ConsumeItemResult::SUCCESS;
 
 		});
 	}
@@ -232,7 +230,7 @@ namespace game::avatar::Items
 			LoseTeleportItems();
 			game::Avatar::SetPosition(xy);
 			game::World::SetExplored(xy);
-			return true;
+			return ConsumeItemResult::SUCCESS;
 		});
 	}
 
@@ -331,7 +329,7 @@ namespace game::avatar::Items
 		auto result = ConsumeItem(item, [item](const game::item::Descriptor& descriptor)
 		{
 			game::Creatures::ChangeAttitude(game::Avatar::GetPosition(), item);
-			return true;
+			return ConsumeItemResult::SUCCESS;
 		});
 		if (result)
 		{

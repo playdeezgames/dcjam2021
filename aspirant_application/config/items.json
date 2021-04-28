@@ -91,7 +91,6 @@
     },
     "7":{
         "name":"Booze",
-        "initial-inventory": 4,
         "non-combat":5,
         "combat":5,
         "image-id":"Booze",
