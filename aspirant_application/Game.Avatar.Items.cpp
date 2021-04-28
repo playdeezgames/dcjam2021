@@ -117,34 +117,40 @@ namespace game::avatar::Items
 
 	enum class ConsumeItemResult
 	{
-		SUCCESS,
-		FAILURE
+		CONSUMED,
+		DROPPED,
+		NOT_CONSUMED
 	};
+
+	static std::optional<std::string> ResultToSfx(const game::item::Descriptor& descriptor, ConsumeItemResult result)
+	{
+		switch (result)
+		{
+		case ConsumeItemResult::CONSUMED:
+		case ConsumeItemResult::DROPPED:
+			return descriptor.sfxSuccess;
+		}
+		return descriptor.sfxFailure;
+	}
 
 	static std::optional<std::string> ConsumeItem(int item, std::function<ConsumeItemResult(const game::item::Descriptor&)> action)
 	{
 		auto descriptor = game::item::GetDescriptor(item);
+		ConsumeItemResult result = ConsumeItemResult::NOT_CONSUMED;
 		if (game::avatar::Items::Read(item) > 0)
 		{
-			auto result = action(descriptor);
-			if(result==ConsumeItemResult::SUCCESS)
+			result = action(descriptor);
+			switch (result)
 			{
-				if (descriptor.dropOnUse)
-				{
-					Drop(item);
-				}
-				else
-				{
-					game::avatar::Items::Remove(item, 1);
-				}
-				if (descriptor.bowel)
-				{
-					game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
-				}
-				return descriptor.sfxSuccess;
+			case ConsumeItemResult::CONSUMED:
+				Remove(item, 1);
+				break;
+			case ConsumeItemResult::DROPPED:
+				Drop(item);
+				break;
 			}
 		}
-		return descriptor.sfxFailure;
+		return ResultToSfx(descriptor, result);
 	}
 
 	static std::optional<std::string> Eat(int item)
@@ -154,9 +160,13 @@ namespace game::avatar::Items
 			if (game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER))
 			{
 				game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, descriptor.amount.value());
-				return ConsumeItemResult::SUCCESS;
+				return ConsumeItemResult::CONSUMED;
 			}
-			return ConsumeItemResult::FAILURE;
+			if (descriptor.bowel)
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+			}
+			return ConsumeItemResult::NOT_CONSUMED;
 		});
 	}
 
@@ -167,9 +177,13 @@ namespace game::avatar::Items
 			if (game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH))
 			{
 				game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, descriptor.amount.value());
-				return ConsumeItemResult::SUCCESS;
+				return ConsumeItemResult::CONSUMED;
 			}
-			return ConsumeItemResult::FAILURE;
+			if (descriptor.bowel)
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+			}
+			return ConsumeItemResult::NOT_CONSUMED;
 		});
 	}
 
@@ -179,7 +193,11 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, descriptor.duration.value());
-			return ConsumeItemResult::SUCCESS;
+			if (descriptor.bowel)
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+			}
+			return ConsumeItemResult::CONSUMED;
 		});
 	}
 
@@ -189,7 +207,11 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, descriptor.duration.value());
-			return ConsumeItemResult::SUCCESS;
+			if (descriptor.bowel)
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+			}
+			return ConsumeItemResult::CONSUMED;
 
 		});
 	}
@@ -230,7 +252,7 @@ namespace game::avatar::Items
 			LoseTeleportItems();
 			game::Avatar::SetPosition(xy);
 			game::World::SetExplored(xy);
-			return ConsumeItemResult::SUCCESS;
+			return ConsumeItemResult::CONSUMED;
 		});
 	}
 
@@ -329,7 +351,7 @@ namespace game::avatar::Items
 		auto result = ConsumeItem(item, [item](const game::item::Descriptor& descriptor)
 		{
 			game::Creatures::ChangeAttitude(game::Avatar::GetPosition(), item);
-			return ConsumeItemResult::SUCCESS;
+			return ConsumeItemResult::CONSUMED;
 		});
 		if (result)
 		{
