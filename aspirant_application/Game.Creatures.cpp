@@ -95,6 +95,17 @@ namespace game::Creatures
 		return std::nullopt;
 	}
 
+	void SetAttitude(const common::XY<size_t>& location, game::creature::Attitude attitude)
+	{
+		auto instance = Get(location);
+		if (instance)
+		{
+			instance.value().attitude = (int)attitude;
+			Put(location, instance.value());
+		}
+	}
+
+
 	std::optional<std::string> ChangeAttitude(const common::XY<size_t>& location, int item)
 	{
 		auto instance = Get(location);

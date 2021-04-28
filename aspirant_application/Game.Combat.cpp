@@ -43,18 +43,27 @@ namespace game::Combat
 			}
 			else
 			{
-				auto attack = game::Creatures::GetInstance(game::Avatar::GetPosition()).value().descriptor.attack;
-				auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
-				auto damage = attack - defend;
-				game::avatar::Statistics::DoDefendTimer();
-				if (damage > 0)
+				auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition()).value();
+				if (instance.attitude == game::creature::Attitude::DISTRACTED)
 				{
-					game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
-					return CombatResult::HUNTER_HIT;
+					game::Creatures::SetAttitude(game::Avatar::GetPosition(), game::creature::Attitude::NEUTRAL);
+					return CombatResult::MONSTER_DISTRACTED;
 				}
 				else
 				{
-					return CombatResult::HUNTER_BLOCKED;
+					auto attack = instance.descriptor.attack;
+					auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
+					auto damage = attack - defend;
+					game::avatar::Statistics::DoDefendTimer();
+					if (damage > 0)
+					{
+						game::avatar::Statistics::Decrease(game::avatar::Statistic::HEALTH, damage);
+						return CombatResult::HUNTER_HIT;
+					}
+					else
+					{
+						return CombatResult::HUNTER_BLOCKED;
+					}
 				}
 			}
 		}

@@ -11,7 +11,8 @@ namespace game::Combat
 		MONSTER_BLOCKED,
 		HUNTER_HIT,
 		HUNTER_BLOCKED,
-		HUNTER_RAN
+		HUNTER_RAN,
+		MONSTER_DISTRACTED
 	};
 	CombatResult Resolve(std::optional<game::CombatDeck::Guess>);
 }

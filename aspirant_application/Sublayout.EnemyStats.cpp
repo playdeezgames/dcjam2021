@@ -19,10 +19,11 @@ namespace sublayout::EnemyStats
 	{
 		{ game::creature::Attitude::NEUTRAL, "" },
 		{ game::creature::Attitude::UNIMPRESSED, "Unimpressed" },
-		{ game::creature::Attitude::AMOROUS, "Likes what they see!" },
+		{ game::creature::Attitude::AMOROUS, "Feeling randy!" },
 		{ game::creature::Attitude::DISGUST, "Disgusted" },
 		{ game::creature::Attitude::HOSTILE, "Angry" },
-		{ game::creature::Attitude::EMBARRASSED, "*BLUSHING*" }
+		{ game::creature::Attitude::EMBARRASSED, "*BLUSHING*" },
+		{ game::creature::Attitude::DISTRACTED, "Distracted" }
 	};
 
 	static void UpdateAttitude(const Uint32&)

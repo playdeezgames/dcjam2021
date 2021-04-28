@@ -69,6 +69,7 @@ namespace state::in_play::Combat
 	const std::string COMBATRESULT_BLOCKED_HIT = "You block!";
 	const std::string COMBATRESULT_MISSED_MONSTER = "It blocked!";
 	const std::string COMBATRESULT_HUNTER_RAN = "You attempted to run!";
+	const std::string COMBATRESULT_MONSTER_DISTRACTED = "It's distracted!";
 
 	void SetCombatResultText(const std::string& text)
 	{
@@ -82,7 +83,8 @@ namespace state::in_play::Combat
 		{game::Combat::CombatResult::MONSTER_BLOCKED, COMBATRESULT_MISSED_MONSTER},
 		{game::Combat::CombatResult::HUNTER_HIT, COMBATRESULT_GOT_HIT},
 		{game::Combat::CombatResult::HUNTER_BLOCKED, COMBATRESULT_BLOCKED_HIT},
-		{game::Combat::CombatResult::HUNTER_RAN, COMBATRESULT_HUNTER_RAN}
+		{game::Combat::CombatResult::HUNTER_RAN, COMBATRESULT_HUNTER_RAN},
+		{game::Combat::CombatResult::MONSTER_DISTRACTED, COMBATRESULT_MONSTER_DISTRACTED}
 	};
 
 	const std::map<game::Combat::CombatResult, std::function<std::optional<std::string>(const std::optional<game::Creatures::Instance>&)>> sounds =
@@ -92,7 +94,8 @@ namespace state::in_play::Combat
 		{game::Combat::CombatResult::MONSTER_BLOCKED, [](const std::optional<game::Creatures::Instance>& instance) { return instance.value().descriptor.sfx.find(game::creature::Sfx::BLOCK)->second; }},
 		{game::Combat::CombatResult::HUNTER_HIT, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_HUNTER); }},
 		{game::Combat::CombatResult::HUNTER_BLOCKED, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_BLOCKED); }},
-		{game::Combat::CombatResult::HUNTER_RAN, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_HUNTER); }}
+		{game::Combat::CombatResult::HUNTER_RAN, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_HUNTER); }},
+		{game::Combat::CombatResult::MONSTER_DISTRACTED, [](const std::optional<game::Creatures::Instance>&) { return application::Sounds::Read(application::UI::Sfx::HIT_BLOCKED); }}
 	};
 
 	void ResolveCombat(std::optional<game::CombatDeck::Guess> guess)

@@ -14,7 +14,8 @@ namespace game::creature
 		AMOROUS,
 		DISGUST,
 		HOSTILE,
-		EMBARRASSED
+		EMBARRASSED,
+		DISTRACTED
 	};
 	enum class Sfx
 	{
