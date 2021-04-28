@@ -29,6 +29,7 @@
 #include "Game.Avatar.Statistics.h"
 #include "Data.Stores.h"
 #include "Application.OnEnter.h"
+#include "Game.Avatar.h"
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)

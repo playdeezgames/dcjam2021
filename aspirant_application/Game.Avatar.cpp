@@ -11,6 +11,8 @@
 #include "json.hpp"
 #include "Game.Data.Properties.h"
 #include "Game.h"
+#include "Data.Stores.h"
+#include "Game.World.Items.h"
 namespace game::Avatar
 {
 	const int HUNGER_RATE = 1;
@@ -84,6 +86,9 @@ namespace game::Avatar
 
 	static std::optional<std::string> Poop()
 	{
+		int itemId = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::POOP];
+		game::avatar::Statistics::Write(game::avatar::Statistic::BOWEL, game::avatar::Statistics::Default(game::avatar::Statistic::BOWEL));
+		game::world::Items::Add(GetPosition(), itemId, 1);
 		return application::Sounds::Read(application::UI::Sfx::HUNTER_POOPS);
 	}
 

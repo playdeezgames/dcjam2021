@@ -16,7 +16,8 @@ namespace data
 		KEYS,
 		OPTIONS,
 		STATISTICS,
-		UI_SFX
+		UI_SFX,
+		AVATAR
 	};
 }
 namespace data::Stores
