@@ -37,7 +37,8 @@
         "combat-text":"Drink Beer",
         "take-image-id":"TakeBeer",
         "take-area-id":"TakeBeer",
-        "bowel":10
+        "bowel":10,
+        "drunkenness":10
     },
     "3":{
         "name":"Wine",
@@ -51,7 +52,8 @@
         "combat-text":"Drink Wine",
         "take-image-id":"TakeWine",
         "take-area-id":"TakeWine",
-        "bowel":10
+        "bowel":10,
+        "drunkenness":10
     },
     "4":{
         "name":"Coffee",
@@ -66,7 +68,8 @@
         "combat-text":"Drink Coffee",
         "take-image-id":"TakeCoffee",
         "take-area-id":"TakeCoffee",
-        "bowel":10
+        "bowel":10,
+        "drunkenness":-5
     },
     "5":{
         "name":"Jools",
@@ -98,7 +101,8 @@
         "combat-text":"Drink Booze",
         "take-image-id":"TakeBooze",
         "take-area-id":"TakeBooze",
-        "sfx-success":"woohoo"
+        "sfx-success":"woohoo",
+        "drunkenness":20
     },
     "8":{
         "initial-inventory": 1,

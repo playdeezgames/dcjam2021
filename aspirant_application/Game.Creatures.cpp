@@ -105,7 +105,6 @@ namespace game::Creatures
 		}
 	}
 
-
 	std::optional<std::string> ChangeAttitude(const common::XY<size_t>& location, int item)
 	{
 		auto instance = Get(location);
@@ -123,7 +122,6 @@ namespace game::Creatures
 		}
 		return std::nullopt;
 	}
-
 
 	void Advance(const common::XY<size_t>& location)
 	{
