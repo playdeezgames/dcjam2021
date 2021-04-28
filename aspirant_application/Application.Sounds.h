@@ -10,9 +10,11 @@ namespace application::UI
 		EXIT,
 		HIT_HUNTER,
 		HIT_BLOCKED,
-		WOOHOO
+		WOOHOO,
+		HUNTER_POOPS
 	};
 }
+
 namespace application::Sounds
 {
 	std::optional<std::string> Read(const application::UI::Sfx&);

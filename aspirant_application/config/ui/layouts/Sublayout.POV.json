@@ -94,8 +94,8 @@
         "image-id": "Wine",
         "sprite": "ItemWine",
         "color": "White",
-        "x": 116,
-        "y": 308,
+        "x": 84,
+        "y": 292,
         "visible": false
     },
     {
@@ -103,15 +103,15 @@
         "image-id": "TakeWine",
         "sprite": "ItemTake",
         "color": "White",
-        "x": 116,
-        "y": 308,
+        "x": 84,
+        "y": 292,
         "visible": false
     },
     {
         "type": "Area",
         "area-id": "TakeWine",
-        "x": 116,
-        "y": 308,
+        "x": 84,
+        "y": 292,
         "width": 32,
         "height":32
     },
@@ -198,8 +198,8 @@
         "image-id": "Jools",
         "sprite": "ItemJools",
         "color": "White",
-        "x": 212,
-        "y": 308,
+        "x": 244,
+        "y": 292,
         "visible": false
     },
     {
@@ -207,15 +207,15 @@
         "image-id": "TakeJools",
         "sprite": "ItemTake",
         "color": "White",
-        "x": 212,
-        "y": 308,
+        "x": 244,
+        "y": 292,
         "visible": false
     },
     {
         "type": "Area",
         "area-id": "TakeJools",
-        "x": 212,
-        "y": 308,
+        "x": 244,
+        "y": 292,
         "width": 32,
         "height":32
     },
@@ -241,6 +241,32 @@
         "type": "Area",
         "area-id": "TakeTrousers",
         "x": 260,
+        "y": 324,
+        "width": 32,
+        "height":32
+    },
+    {
+        "type": "Image",
+        "image-id": "Turd",
+        "sprite": "ItemTurd",
+        "color": "White",
+        "x": 228,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakeTurd",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 228,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeTurd",
+        "x": 228,
         "y": 324,
         "width": 32,
         "height":32

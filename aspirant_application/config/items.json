@@ -99,5 +99,16 @@
         "take-image-id":"TakeBooze",
         "take-area-id":"TakeBooze",
         "sfx-success":"woohoo"
+    },
+    "8":{
+        "initial-inventory": 1,
+        "name":"Turd",
+        "combat":6,
+        "image-id":"Turd",
+        "number-appearing": 0,
+        "combat-text":"Fling Turd",
+        "take-image-id":"TakeTurd",
+        "take-area-id":"TakeTurd",
+        "sfx-success":"poop"
     }
 }

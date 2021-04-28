@@ -82,6 +82,11 @@ namespace game::Avatar
 		return std::nullopt;
 	}
 
+	static std::optional<std::string> Poop()
+	{
+		return application::Sounds::Read(application::UI::Sfx::HUNTER_POOPS);
+	}
+
 	std::optional<std::string> MoveAhead()
 	{
 		std::optional<std::string> result = std::nullopt;
@@ -112,6 +117,10 @@ namespace game::Avatar
 				else
 				{
 					avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
+				}
+				if (game::avatar::Statistics::IsMaximum(game::avatar::Statistic::BOWEL))//are you poopin'?
+				{
+					result = Poop();
 				}
 			}
 			else

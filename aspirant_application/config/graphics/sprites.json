@@ -2883,6 +2883,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemTurd":{
+        "texture": "items",
+        "x": 0,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
     "ItemTake":{
         "texture": "items",
         "x": 224,

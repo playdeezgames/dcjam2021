@@ -62,6 +62,11 @@ namespace game::avatar::Statistics
 		return Read(statistic) == Minimum(statistic);
 	}
 
+	bool IsMaximum(const ::game::avatar::Statistic& statistic)
+	{
+		return Read(statistic) == Maximum(statistic);
+	}
+
 	void Reset()
 	{
 		for (auto& item : ::data::Stores::GetStore(::data::Store::STATISTICS).items())
