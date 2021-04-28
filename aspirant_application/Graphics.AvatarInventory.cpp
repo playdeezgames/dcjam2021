@@ -59,7 +59,11 @@ namespace graphics::AvatarInventory
 	std::optional<int> GetItem()
 	{
 		auto inventory = game::avatar::Items::All();
-		if (inventoryIndex < inventory.size())
+		if (inventory.size() == 0)
+		{
+			return std::nullopt;
+		}
+		else if (inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
 			for (size_t dummy = 0; dummy < inventoryIndex; ++dummy)
@@ -70,7 +74,8 @@ namespace graphics::AvatarInventory
 		}
 		else
 		{
-			return std::nullopt;
+			inventoryIndex = 0;
+			return GetItem();
 		}
 	}
 
