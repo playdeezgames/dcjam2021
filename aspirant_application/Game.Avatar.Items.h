@@ -13,5 +13,10 @@ namespace game::avatar::Items
 	void Start(); 
 	void Drop(std::optional<int> item);
 	std::optional<std::string> Use(std::optional<int>);
-	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<int>);
+	enum class CombatUseResult
+	{
+		REFRESH,
+		SKIP
+	};
+	std::optional<std::tuple<std::string, CombatUseResult>> CombatUse(std::optional<int>);
 }

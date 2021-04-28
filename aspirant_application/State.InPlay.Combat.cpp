@@ -128,7 +128,7 @@ namespace state::in_play::Combat
 		if (result)
 		{
 			common::audio::Sfx::Play(std::get<0>(*result));
-			if (std::get<1>(*result))
+			if (std::get<1>(*result)== game::avatar::Items::CombatUseResult::REFRESH)
 			{
 				common::audio::Sfx::Play(application::UIState::EnterGame());
 			}
@@ -220,7 +220,7 @@ namespace state::in_play::Combat
 		graphics::Menus::WriteValue(LAYOUT_NAME, COMBAT_MENU_ID, (int)item);
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
 		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
 		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));

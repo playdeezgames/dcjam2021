@@ -133,7 +133,12 @@ namespace game::avatar::Items
 		return descriptor.sfxFailure;
 	}
 
-	static std::optional<std::string> ConsumeItem(int item, std::function<ConsumeItemResult(const game::item::Descriptor&)> action)
+	static std::optional<std::string> ConsumeItem
+	(
+		int item, 
+		std::function<ConsumeItemResult(const game::item::Descriptor&)> action,
+		std::function<std::optional<std::string>(const game::item::Descriptor&, ConsumeItemResult)> translator
+	)
 	{
 		auto descriptor = game::item::GetDescriptor(item);
 		ConsumeItemResult result = ConsumeItemResult::NOT_CONSUMED;
@@ -150,7 +155,23 @@ namespace game::avatar::Items
 				break;
 			}
 		}
-		return ResultToSfx(descriptor, result);
+		return translator(descriptor, result);
+	}
+
+	static ConsumeItemResult ToConsumeItemResult(const game::item::Descriptor& descriptor)
+	{
+		if (descriptor.bowel)
+		{
+			game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+		}
+		if (descriptor.dropOnUse)
+		{
+			return ConsumeItemResult::DROPPED;
+		}
+		else
+		{
+			return ConsumeItemResult::CONSUMED;
+		}
 	}
 
 	static std::optional<std::string> Eat(int item)
@@ -160,14 +181,10 @@ namespace game::avatar::Items
 			if (game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HUNGER))
 			{
 				game::avatar::Statistics::Increase(game::avatar::Statistic::HUNGER, descriptor.amount.value());
-				return ConsumeItemResult::CONSUMED;
-			}
-			if (descriptor.bowel)
-			{
-				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+				return ToConsumeItemResult(descriptor);
 			}
 			return ConsumeItemResult::NOT_CONSUMED;
-		});
+		}, ResultToSfx);
 	}
 
 	static std::optional<std::string> Heal(int item)
@@ -177,14 +194,10 @@ namespace game::avatar::Items
 			if (game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH) < game::avatar::Statistics::Maximum(game::avatar::Statistic::HEALTH))
 			{
 				game::avatar::Statistics::Increase(game::avatar::Statistic::HEALTH, descriptor.amount.value());
-				return ConsumeItemResult::CONSUMED;
-			}
-			if (descriptor.bowel)
-			{
-				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
+				return ToConsumeItemResult(descriptor);
 			}
 			return ConsumeItemResult::NOT_CONSUMED;
-		});
+		}, ResultToSfx);
 	}
 
 	static 	std::optional<std::string> BuffAttack(int item)
@@ -193,12 +206,8 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::ATTACK_TIMER, descriptor.duration.value());
-			if (descriptor.bowel)
-			{
-				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
-			}
-			return ConsumeItemResult::CONSUMED;
-		});
+			return ToConsumeItemResult(descriptor);
+		}, ResultToSfx);
 	}
 
 	static std::optional<std::string> BuffDefend(int item)
@@ -207,13 +216,8 @@ namespace game::avatar::Items
 		{
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND, descriptor.amount.value());
 			game::avatar::Statistics::Write(game::avatar::Statistic::DEFEND_TIMER, descriptor.duration.value());
-			if (descriptor.bowel)
-			{
-				game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
-			}
-			return ConsumeItemResult::CONSUMED;
-
-		});
+			return ToConsumeItemResult(descriptor);
+		}, ResultToSfx);
 	}
 
 	static void LoseTeleportItems()
@@ -252,8 +256,8 @@ namespace game::avatar::Items
 			LoseTeleportItems();
 			game::Avatar::SetPosition(xy);
 			game::World::SetExplored(xy);
-			return ConsumeItemResult::CONSUMED;
-		});
+			return ToConsumeItemResult(descriptor);
+		}, ResultToSfx);
 	}
 
 	static std::map<game::item::Usage, std::function<std::optional<std::string>(int)>> nonCombatVerbs =
@@ -280,57 +284,57 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatEat(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatEat(int item)
 	{
 		auto result = Eat(item);
 		if (result)
 		{
-			return std::make_tuple(*result, false);
+			return std::make_tuple(*result, CombatUseResult::SKIP);
 		}
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatHeal(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatHeal(int item)
 	{
 		auto result = Heal(item);
 		if (result)
 		{
-			return std::make_tuple(*result, false);
+			return std::make_tuple(*result, CombatUseResult::SKIP);
 		}
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatTeleport(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatTeleport(int item)
 	{
 		auto result = Teleport(item);
 		if (result)
 		{
-			return std::make_tuple(*result, true);
+			return std::make_tuple(*result, CombatUseResult::REFRESH);
 		}
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatBuffAttack(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatBuffAttack(int item)
 	{
 		auto result = BuffAttack(item);
 		if (result)
 		{
-			return std::make_tuple(*result, false);
+			return std::make_tuple(*result, CombatUseResult::SKIP);
 		}
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatBuffDefend(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatBuffDefend(int item)
 	{
 		auto result = BuffDefend(item);
 		if (result)
 		{
-			return std::make_tuple(*result, false);
+			return std::make_tuple(*result, CombatUseResult::SKIP);
 		}
 		return std::nullopt;
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatBribe(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatBribe(int item)
 	{
 		auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition());
 		if (instance && instance.value().descriptor.bribes.contains(item))
@@ -340,27 +344,27 @@ namespace game::avatar::Items
 			{
 				game::avatar::Items::Remove(item, (size_t)amount);
 				game::Creatures::Remove(game::Avatar::GetPosition());
-				return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::BRIBE], true);
+				return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::BRIBE], CombatUseResult::REFRESH);
 			}
 		}
-		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::NO_BRIBE], false);
+		return std::make_tuple(instance.value().descriptor.sfx[game::creature::Sfx::NO_BRIBE], CombatUseResult::SKIP);
 	}
 
-	static std::optional<std::tuple<std::string, bool>> CombatAttitude(int item)
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatAttitude(int item)
 	{
 		auto result = ConsumeItem(item, [item](const game::item::Descriptor& descriptor)
 		{
 			game::Creatures::ChangeAttitude(game::Avatar::GetPosition(), item);
-			return ConsumeItemResult::CONSUMED;
-		});
+			return ToConsumeItemResult(descriptor);
+		}, ResultToSfx);
 		if (result)
 		{
-			return std::make_tuple(*result, true);
+			return std::make_tuple(*result, CombatUseResult::REFRESH);
 		}
 		return std::nullopt;
 	}
 
-	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, bool>>(int)>> combatVerbs =
+	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, CombatUseResult>>(int)>> combatVerbs =
 	{
 		{game::item::Usage::EAT, CombatEat},
 		{game::item::Usage::HEAL, CombatHeal},
@@ -371,7 +375,7 @@ namespace game::avatar::Items
 		{game::item::Usage::ATTITUDE, CombatAttitude}
 	};
 
-	std::optional<std::tuple<std::string, bool>> CombatUse(std::optional<int> item)
+	std::optional<std::tuple<std::string, CombatUseResult>> CombatUse(std::optional<int> item)
 	{
 		if (item)
 		{
