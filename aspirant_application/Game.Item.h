@@ -34,6 +34,7 @@ namespace game
 			bool loseOnTeleport;
 			bool dropOnUse;
 			std::optional<int> bowel;
+			std::optional<int> drunkenness;
 		};
 		Descriptor GetDescriptor(int);
 		std::vector<int> All();

@@ -16,6 +16,7 @@ namespace game::data::Properties
 	const std::string CREATURES = "creatures";
 	const std::string DEFEND = "defend";
 	const std::string DROP_ON_USE = "drop-on-use";
+	const std::string DRUNKENNESS = "drunkenness";
 	const std::string DURATION = "duration";
 	const std::string EW_BORDERS = "ew-borders";
 	const std::string EXPLORED = "explored";

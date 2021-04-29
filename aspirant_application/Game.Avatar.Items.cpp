@@ -158,12 +158,31 @@ namespace game::avatar::Items
 		return translator(descriptor, result);
 	}
 
-	static ConsumeItemResult ToConsumeItemResult(const game::item::Descriptor& descriptor)
+	static void AdjustBowel(const game::item::Descriptor& descriptor)
 	{
 		if (descriptor.bowel)
 		{
 			game::avatar::Statistics::Increase(game::avatar::Statistic::BOWEL, *descriptor.bowel);
 		}
+	}
+
+	static void AdjustDrunkennessAndNausea(const game::item::Descriptor& descriptor)
+	{
+		if (descriptor.drunkenness)
+		{
+			int capacity =
+				game::avatar::Statistics::Maximum(game::avatar::Statistic::DRUNKENNESS) -
+				game::avatar::Statistics::Read(game::avatar::Statistic::DRUNKENNESS);
+			int nausea = (*descriptor.drunkenness > capacity) ? (*descriptor.drunkenness - capacity) : (0);
+			game::avatar::Statistics::Increase(game::avatar::Statistic::DRUNKENNESS, *descriptor.drunkenness);
+			game::avatar::Statistics::Increase(game::avatar::Statistic::NAUSEA, nausea);
+		}
+	}
+
+	static ConsumeItemResult ToConsumeItemResult(const game::item::Descriptor& descriptor)
+	{
+		AdjustBowel(descriptor);
+		AdjustDrunkennessAndNausea(descriptor);
 		if (descriptor.dropOnUse)
 		{
 			return ConsumeItemResult::DROPPED;
