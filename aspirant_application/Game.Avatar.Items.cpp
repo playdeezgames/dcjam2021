@@ -11,6 +11,7 @@
 #include "Game.Creatures.h"
 #include "Game.World.h"
 #include "Common.RNG.h"
+#include "Game.CombatDeck.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar();
@@ -287,7 +288,8 @@ namespace game::avatar::Items
 		{game::item::Usage::DEFEND_BUFF, BuffDefend},
 		{game::item::Usage::TELEPORT, Teleport},
 		{game::item::Usage::BRIBE, [](int) { return std::nullopt; }},
-		{game::item::Usage::ATTITUDE, [](int) { return std::nullopt; }}
+		{game::item::Usage::ATTITUDE, [](int) { return std::nullopt; }},
+		{game::item::Usage::JOKER, [](int) { return std::nullopt; }}
 	};
 
 	std::optional<std::string> Use(std::optional<int> item)
@@ -383,6 +385,21 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
+	static std::optional<std::tuple<std::string, CombatUseResult>> CombatJoker(int item)
+	{
+		auto result = ConsumeItem(item, [](const game::item::Descriptor& descriptor)
+		{
+			game::CombatDeck::Deal();
+			return ToConsumeItemResult(descriptor);
+		}, ResultToSfx);
+		if (result)
+		{
+			return std::make_tuple(*result, CombatUseResult::SKIP);
+		}
+		return std::nullopt;
+	}
+
+
 	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, CombatUseResult>>(int)>> combatVerbs =
 	{
 		{game::item::Usage::EAT, CombatEat},
@@ -391,7 +408,8 @@ namespace game::avatar::Items
 		{game::item::Usage::DEFEND_BUFF, CombatBuffDefend},
 		{game::item::Usage::TELEPORT, CombatTeleport},
 		{game::item::Usage::BRIBE, CombatBribe},
-		{game::item::Usage::ATTITUDE, CombatAttitude}
+		{game::item::Usage::ATTITUDE, CombatAttitude},
+		{game::item::Usage::JOKER, CombatJoker}
 	};
 
 	std::optional<std::tuple<std::string, CombatUseResult>> CombatUse(std::optional<int> item)

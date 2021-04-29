@@ -94,7 +94,6 @@
         "drop-on-use": true
     },
     "7":{
-        "initial-inventory":5,
         "name":"Booze",
         "non-combat":5,
         "combat":5,
@@ -117,7 +116,6 @@
         "sfx-success":"poop"
     },
     "9":{
-        "initial-inventory":1,
         "name":"Joker",
         "combat":7,
         "image-id":"Joker",
