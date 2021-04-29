@@ -39,7 +39,7 @@
         "take-image-id":"TakeBeer",
         "take-area-id":"TakeBeer",
         "bowel":10,
-        "drunkenness":10
+        "drunkenness":25
     },
     "3":{
         "name":"Wine",
@@ -54,7 +54,7 @@
         "take-image-id":"TakeWine",
         "take-area-id":"TakeWine",
         "bowel":10,
-        "drunkenness":10
+        "drunkenness":25
     },
     "4":{
         "name":"Coffee",
@@ -94,6 +94,7 @@
         "drop-on-use": true
     },
     "7":{
+        "initial-inventory":5,
         "name":"Booze",
         "non-combat":5,
         "combat":5,
@@ -103,10 +104,9 @@
         "take-image-id":"TakeBooze",
         "take-area-id":"TakeBooze",
         "sfx-success":"woohoo",
-        "drunkenness":20
+        "drunkenness":50
     },
     "8":{
-        "initial-inventory": 1,
         "name":"Turd",
         "combat":6,
         "image-id":"Turd",

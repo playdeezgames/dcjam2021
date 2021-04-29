@@ -38,6 +38,20 @@
         "drop-shadow-y": 2
     },
     {
+        "type": "Text",
+        "text-id" : "AvatarState",
+        "font": "default",
+        "color": "Yellow",
+        "text": "<status>",
+        "x": 180,
+        "y": 16,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
         "type": "Image",
         "image-id": "Potion",
         "sprite": "ItemPotion",

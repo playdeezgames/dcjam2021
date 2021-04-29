@@ -15,8 +15,6 @@
 #include "Game.World.Items.h"
 namespace game::Avatar
 {
-	const int HUNGER_RATE = 1;
-
 	nlohmann::json& GetAvatar()
 	{
 		auto& data = game::GetData();
@@ -58,15 +56,36 @@ namespace game::Avatar
 		return { (size_t)GetAvatar()[game::data::Properties::COLUMN], (size_t)GetAvatar()[game::data::Properties::ROW] };
 	}
 
+	static void ActuallyTurnLeft()
+	{
+		SetFacing(
+			(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::WEST) :
+			(GetFacing() == maze::Direction::EAST) ? (maze::Direction::NORTH) :
+			(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
+			(maze::Direction::SOUTH));
+	}
+
+	static void ActuallyTurnRight()
+	{
+		SetFacing(
+			(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::EAST) :
+			(GetFacing() == maze::Direction::EAST) ? (maze::Direction::SOUTH) :
+			(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
+			(maze::Direction::NORTH));
+	}
+
 	std::optional<std::string> TurnLeft()
 	{
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			SetFacing(
-				(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::WEST) :
-				(GetFacing() == maze::Direction::EAST) ? (maze::Direction::NORTH) :
-				(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::EAST) :
-				(maze::Direction::SOUTH));
+			if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
+			{
+				ActuallyTurnLeft();
+			}
+			else
+			{
+				ActuallyTurnRight();
+			}
 		}
 		return std::nullopt;
 	}
@@ -75,11 +94,14 @@ namespace game::Avatar
 	{
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			SetFacing(
-				(GetFacing() == maze::Direction::NORTH) ? (maze::Direction::EAST) :
-				(GetFacing() == maze::Direction::EAST) ? (maze::Direction::SOUTH) :
-				(GetFacing() == maze::Direction::SOUTH) ? (maze::Direction::WEST) :
-				(maze::Direction::NORTH));
+			if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
+			{
+				ActuallyTurnRight();
+			}
+			else
+			{
+				ActuallyTurnLeft();
+			}
 		}
 		return std::nullopt;
 	}
@@ -90,6 +112,46 @@ namespace game::Avatar
 		game::avatar::Statistics::Write(game::avatar::Statistic::BOWEL, game::avatar::Statistics::Default(game::avatar::Statistic::BOWEL));
 		game::world::Items::Add(GetPosition(), itemId, 1);
 		return application::Sounds::Read(application::UI::Sfx::HUNTER_POOPS);
+	}
+
+	static void HandleHunger()
+	{
+		int hungerRate = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::HUNGER_RATE];
+		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
+		{
+			avatar::Statistics::Decrease(avatar::Statistic::HEALTH, hungerRate);
+		}
+		else
+		{
+			avatar::Statistics::Decrease(avatar::Statistic::HUNGER, hungerRate);
+		}
+	}
+
+	static std::optional<std::string> HandleBowel()
+	{
+		if (game::avatar::Statistics::IsMaximum(game::avatar::Statistic::BOWEL))//are you poopin'?
+		{
+			return Poop();
+		}
+		return std::nullopt;
+	}
+
+	static void HandleNausea()
+	{
+		int sobrietyRate = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::SOBRIETY_RATE];
+		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
+		{
+			avatar::Statistics::Decrease(avatar::Statistic::NAUSEA, sobrietyRate);
+		}
+	}
+
+	static void HandleSobriety()
+	{
+		int sobrietyRate = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::SOBRIETY_RATE];
+		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::DRUNKENNESS))
+		{
+			avatar::Statistics::Decrease(avatar::Statistic::DRUNKENNESS, sobrietyRate);
+		}
 	}
 
 	std::optional<std::string> MoveAhead()
@@ -115,18 +177,10 @@ namespace game::Avatar
 					break;
 				}
 				game::World::SetExplored(GetPosition());
-				if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
-				{
-					avatar::Statistics::Decrease(avatar::Statistic::HEALTH, HUNGER_RATE);
-				}
-				else
-				{
-					avatar::Statistics::Decrease(avatar::Statistic::HUNGER, HUNGER_RATE);
-				}
-				if (game::avatar::Statistics::IsMaximum(game::avatar::Statistic::BOWEL))//are you poopin'?
-				{
-					result = Poop();
-				}
+				HandleHunger();
+				HandleNausea();
+				HandleSobriety();
+				result = HandleBowel();
 			}
 			else
 			{

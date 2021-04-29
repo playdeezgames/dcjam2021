@@ -22,6 +22,7 @@ namespace game::data::Properties
 	const std::string EXPLORED = "explored";
 	const std::string FACING = "facing";
 	const std::string HEALTH = "health";
+	const std::string HUNGER_RATE = "hunger-rate";
 	const std::string IMAGE_ID = "image-id";
 	const std::string INDEX = "index";
 	const std::string INITIAL_INVENTORY = "initial-inventory";
@@ -36,6 +37,7 @@ namespace game::data::Properties
 	const std::string SFX = "sfx";
 	const std::string SFX_SUCCESS = "sfx-success";
 	const std::string SFX_FAILURE = "sfx-failure";
+	const std::string SOBRIETY_RATE = "sobriety-rate";
 	const std::string STATISTICS = "statistics";
 	const std::string TAKE_AREA_ID = "take-area-id";
 	const std::string TAKE_IMAGE_ID = "take-image-id";

@@ -13,6 +13,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Game.Avatar.Items.h"
+#include "Game.Avatar.Statistics.h"
 namespace sublayout::POV
 {
 	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
@@ -21,6 +22,7 @@ namespace sublayout::POV
 	const std::string DIRECTION_TEXT_ID = "Direction";
 	const std::string POSITION_TEXT_ID = "Position";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
+	const std::string TEXT_AVATAR_STATE = "AvatarState";
 
 	const std::string AREA_TAKE_FOOD = "TakeFood";
 	const std::string IMAGE_TAKE_FOOD = "TakeFood";
@@ -84,6 +86,18 @@ namespace sublayout::POV
 		}
 	}
 
+	static void UpdateAvatarState()
+	{
+		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
+		{
+			visuals::Texts::SetText(POV_LAYOUT_NAME, TEXT_AVATAR_STATE, "*Dizzy*");
+		}
+		else
+		{
+			visuals::Texts::SetText(POV_LAYOUT_NAME, TEXT_AVATAR_STATE, "");
+		}
+	}
+
 	static void UpdatePOV(const Uint32&)
 	{
 		auto position = game::Avatar::GetPosition();
@@ -92,6 +106,7 @@ namespace sublayout::POV
 		UpdateItems(position);
 		UpdateDirection(facing);
 		UpdateCreatures(position);
+		UpdateAvatarState();
 	}
 
 	const std::vector<::UIState> states = 
