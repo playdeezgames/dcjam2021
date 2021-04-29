@@ -157,6 +157,32 @@
     },
     {
         "type": "Image",
+        "image-id": "Joker",
+        "sprite": "ItemJoker",
+        "color": "White",
+        "x": 110,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakeJoker",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 110,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeJoker",
+        "x": 110,
+        "y": 324,
+        "width": 32,
+        "height":32
+    },
+    {
+        "type": "Image",
         "image-id": "Food",
         "sprite": "ItemFood",
         "color": "White",

@@ -14,7 +14,8 @@ namespace game
 			DEFEND_BUFF,
 			BRIBE,
 			TELEPORT,
-			ATTITUDE
+			ATTITUDE,
+			JOKER
 		};
 		struct Descriptor
 		{

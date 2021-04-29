@@ -115,5 +115,16 @@
         "take-image-id":"TakeTurd",
         "take-area-id":"TakeTurd",
         "sfx-success":"poop"
+    },
+    "9":{
+        "initial-inventory":1,
+        "name":"Joker",
+        "combat":7,
+        "image-id":"Joker",
+        "number-appearing": 9,
+        "combat-text":"Play Joker",
+        "take-image-id":"TakeJoker",
+        "take-area-id":"TakeJoker",
+        "sfx-success":"play-joker"
     }
 }

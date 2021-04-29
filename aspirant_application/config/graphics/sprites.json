@@ -2890,6 +2890,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemJoker":{
+        "texture": "items",
+        "x": 32,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
     "ItemTake":{
         "texture": "items",
         "x": 224,
