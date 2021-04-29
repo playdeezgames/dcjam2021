@@ -1,9 +1,9 @@
 #include <string>
 #include <sstream>
 #include "Game.Avatar.Statistics.h"
-#include "Graphics.Texts.h"
+#include "Visuals.Texts.h"
 #include "Application.Update.h"
-#include "Graphics.Images.h"
+#include "Visuals.Images.h"
 #include <vector>
 namespace sublayout::QuickStats
 {

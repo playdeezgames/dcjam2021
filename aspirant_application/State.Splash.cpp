@@ -3,7 +3,7 @@
 #include "Application.Update.h"
 #include "Application.UIState.h"
 #include "Application.MouseButtonUp.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 namespace state::Splash
 {
 	const size_t TICKS_TOTAL = 3000;

@@ -1,5 +1,5 @@
 #include "Application.Renderer.h"
-#include "Graphics.Layouts.h"
+#include "Visuals.Layouts.h"
 #include <map>
 #include "Common.Audio.h"
 #include "Options.h"
@@ -8,13 +8,13 @@
 #include "Application.Command.h"
 #include "Application.Update.h"
 #include "Application.UIState.h"
-#include "Graphics.Menus.h"
-#include "Graphics.MenuItems.h"
+#include "Visuals.Menus.h"
+#include "Visuals.MenuItems.h"
 #include "Application.Sounds.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 #include <SDL_mixer.h>
 namespace state::Options
 {

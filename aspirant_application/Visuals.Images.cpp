@@ -1,12 +1,12 @@
-#include "Graphics.Images.h"
+#include "Visuals.Images.h"
 #include <map>
 #include "json.hpp"
 #include "Common.Data.Properties.h"
-#include "Graphics.Data.Properties.h"
-#include "Graphics.Data.Types.h"
-#include "Graphics.Layouts.h"
-#include "Graphics.Sprites.h"
-#include "Graphics.Colors.h"
+#include "Visuals.Data.Properties.h"
+#include "Visuals.Data.Types.h"
+#include "Visuals.Layouts.h"
+#include "Visuals.Sprites.h"
+#include "Visuals.Colors.h"
 namespace graphics::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);

@@ -1,13 +1,13 @@
 #include <string>
 #include <sstream>
 #include "Game.Avatar.Statistics.h"
-#include "Graphics.Texts.h"
+#include "Visuals.Texts.h"
 #include "Application.Update.h"
-#include "Graphics.Images.h"
+#include "Visuals.Images.h"
 #include <vector>
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 #include <map>
 #include "Common.Utility.h"
 namespace sublayout::UIHamburger

@@ -2,7 +2,7 @@
 #include "Application.Renderer.h"
 #include "Application.Update.h"
 #include "Application.UIState.h"
-#include "Graphics.FloorInventory.h"
+#include "Visuals.FloorInventory.h"
 #include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Game.Avatar.h"

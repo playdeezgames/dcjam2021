@@ -3,16 +3,16 @@
 #include "Application.Update.h"
 #include "Application.UIState.h"
 #include "Game.Combat.h"
-#include "Graphics.Images.h"
+#include "Visuals.Images.h"
 #include "Game.CombatDeck.h"
-#include "Graphics.CardSprites.h"
+#include "Visuals.CardSprites.h"
 #include "Common.Audio.h"
 #include "Common.Utility.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Texts.h"
-#include "Graphics.Data.Colors.h"
+#include "Visuals.Texts.h"
+#include "Visuals.Data.Colors.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";

@@ -1,12 +1,12 @@
 #include "Application.Renderer.h"
 #include "Application.Command.h"
 #include "Application.UIState.h"
-#include "Graphics.Layouts.h"
-#include "Graphics.Menus.h"
+#include "Visuals.Layouts.h"
+#include "Visuals.Menus.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 namespace state::ConfirmQuit
 {
 	const std::string LAYOUT_NAME = "State.ConfirmQuit";

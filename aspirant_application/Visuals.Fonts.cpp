@@ -1,8 +1,8 @@
-#include "Graphics.Fonts.h"
+#include "Visuals.Fonts.h"
 #include "Data.JSON.h"
-#include "Graphics.Sprites.h"
+#include "Visuals.Sprites.h"
 #include <sstream>
-#include "Graphics.Colors.h"
+#include "Visuals.Colors.h"
 #include "Data.Stores.h"
 namespace graphics::Fonts
 {

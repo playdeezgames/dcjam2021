@@ -1,8 +1,8 @@
-#include "Graphics.Colors.h"
+#include "Visuals.Colors.h"
 #include "Data.JSON.h"
 #include <map>
 #include <vector>
-#include "Graphics.Data.Properties.h"
+#include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
 namespace graphics::Colors
 {

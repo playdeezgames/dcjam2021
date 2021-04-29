@@ -2,11 +2,11 @@
 #include <string>
 #include <optional>
 #include "Application.Renderer.h"
-#include "Graphics.Colors.h"
-#include "Graphics.Textures.h"
-#include "Graphics.Sprites.h"
-#include "Graphics.Fonts.h"
-#include "Graphics.Layouts.h"
+#include "Visuals.Colors.h"
+#include "Visuals.Textures.h"
+#include "Visuals.Sprites.h"
+#include "Visuals.Fonts.h"
+#include "Visuals.Layouts.h"
 #include "Common.Audio.h"
 #include "Options.h"
 #include <map>

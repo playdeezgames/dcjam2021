@@ -1,14 +1,14 @@
 #include "Application.Renderer.h"
-#include "Graphics.Layouts.h"
+#include "Visuals.Layouts.h"
 #include "Application.Command.h"
 #include "Application.UIState.h"
-#include "Graphics.Menus.h"
+#include "Visuals.Menus.h"
 #include "Game.h"
 #include "Common.Audio.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";

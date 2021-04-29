@@ -1,6 +1,6 @@
 #include "json.hpp"
 #include <SDL.h>
-#include "Graphics.Layouts.h"
+#include "Visuals.Layouts.h"
 #include "Common.Data.Properties.h"
 namespace graphics::Sublayout
 {

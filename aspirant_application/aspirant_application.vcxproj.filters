@@ -29,22 +29,22 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Colors.cpp">
+    <ClCompile Include="Visuals.Colors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Textures.cpp">
+    <ClCompile Include="Visuals.Textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Sprites.cpp">
+    <ClCompile Include="Visuals.Sprites.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Fonts.cpp">
+    <ClCompile Include="Visuals.Fonts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Text.cpp">
+    <ClCompile Include="Visuals.Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Layouts.cpp">
+    <ClCompile Include="Visuals.Layouts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Common.Audio.cpp">
@@ -71,7 +71,7 @@
     <ClCompile Include="State.ConfirmQuit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Menu.cpp">
+    <ClCompile Include="Visuals.Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Application.MouseMotion.cpp">
@@ -95,13 +95,13 @@
     <ClCompile Include="Application.Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Menus.cpp">
+    <ClCompile Include="Visuals.Menus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.MenuItems.cpp">
+    <ClCompile Include="Visuals.MenuItems.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Texts.cpp">
+    <ClCompile Include="Visuals.Texts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Maze.cpp">
@@ -116,7 +116,7 @@
     <ClCompile Include="State.InPlay.MiniMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Images.cpp">
+    <ClCompile Include="Visuals.Images.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -128,7 +128,7 @@
     <ClCompile Include="Game.World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.WorldMap.cpp">
+    <ClCompile Include="Visuals.WorldMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.Avatar.Statistics.cpp">
@@ -140,7 +140,7 @@
     <ClCompile Include="Game.Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Sublayout.cpp">
+    <ClCompile Include="Visuals.Sublayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sublayout.POV.cpp">
@@ -161,10 +161,10 @@
     <ClCompile Include="State.InPlay.AvatarStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.FloorInventory.cpp">
+    <ClCompile Include="Visuals.FloorInventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.AvatarInventory.cpp">
+    <ClCompile Include="Visuals.AvatarInventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sublayout.QuickStats.cpp">
@@ -197,7 +197,7 @@
     <ClCompile Include="Game.World.Items.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.CardSprites.cpp">
+    <ClCompile Include="Visuals.CardSprites.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.Creature.cpp">
@@ -206,7 +206,7 @@
     <ClCompile Include="Data.Stores.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Data.Types.cpp">
+    <ClCompile Include="Visuals.Data.Types.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Application.Sounds.cpp">
@@ -218,7 +218,7 @@
     <ClCompile Include="Application.OnEnter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.Areas.cpp">
+    <ClCompile Include="Visuals.Areas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sublayout.UIHamburger.cpp">
@@ -247,22 +247,22 @@
     <ClInclude Include="Application.Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Colors.h">
+    <ClInclude Include="Visuals.Colors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Textures.h">
+    <ClInclude Include="Visuals.Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Sprites.h">
+    <ClInclude Include="Visuals.Sprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common.XY.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Fonts.h">
+    <ClInclude Include="Visuals.Fonts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Layouts.h">
+    <ClInclude Include="Visuals.Layouts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common.Audio.h">
@@ -274,10 +274,10 @@
     <ClInclude Include="Common.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Data.Properties.h">
+    <ClInclude Include="Visuals.Data.Properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Data.Types.h">
+    <ClInclude Include="Visuals.Data.Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application.MouseMotion.h">
@@ -301,13 +301,13 @@
     <ClInclude Include="Application.UIState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Menus.h">
+    <ClInclude Include="Visuals.Menus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.MenuItems.h">
+    <ClInclude Include="Visuals.MenuItems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Texts.h">
+    <ClInclude Include="Visuals.Texts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze.h">
@@ -319,7 +319,7 @@
     <ClInclude Include="Maze.Direction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Images.h">
+    <ClInclude Include="Visuals.Images.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -343,10 +343,10 @@
     <ClInclude Include="Game.Avatar.Items.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.FloorInventory.h">
+    <ClInclude Include="Visuals.FloorInventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.AvatarInventory.h">
+    <ClInclude Include="Visuals.AvatarInventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.Creature.h">
@@ -382,7 +382,7 @@
     <ClInclude Include="Sublayouts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.CardSprites.h">
+    <ClInclude Include="Visuals.CardSprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common.Application.h">
@@ -394,10 +394,10 @@
     <ClInclude Include="Application.OnEnter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Areas.h">
+    <ClInclude Include="Visuals.Areas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.Data.Colors.h">
+    <ClInclude Include="Visuals.Data.Colors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

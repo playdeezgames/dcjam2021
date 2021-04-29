@@ -1,7 +1,7 @@
-#include "Graphics.Sprites.h"
-#include "Graphics.Textures.h"
+#include "Visuals.Sprites.h"
+#include "Visuals.Textures.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Data.Properties.h"
+#include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
 namespace graphics::Sprites
 {

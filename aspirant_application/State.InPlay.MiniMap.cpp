@@ -2,8 +2,8 @@
 #include "Application.Renderer.h"
 #include "Application.Update.h"
 #include "Application.UIState.h"
-#include "Graphics.Images.h"
-#include "Graphics.Texts.h"
+#include "Visuals.Images.h"
+#include "Visuals.Texts.h"
 #include <vector>
 #include <map>
 #include "Game.Avatar.h"
@@ -15,7 +15,7 @@
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";

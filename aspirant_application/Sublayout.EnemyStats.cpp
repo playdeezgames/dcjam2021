@@ -2,7 +2,7 @@
 #include <sstream>
 #include "Application.UIState.h"
 #include "Application.Update.h"
-#include "Graphics.Texts.h"
+#include "Visuals.Texts.h"
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"

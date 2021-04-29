@@ -2,14 +2,14 @@
 #include "Game.Avatar.h"
 #include <map>
 #include "Game.World.h"
-#include "Graphics.Texts.h"
-#include "Graphics.Images.h"
+#include "Visuals.Texts.h"
+#include "Visuals.Images.h"
 #include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Application.Update.h"
 #include "Game.Creatures.h"
 #include <tuple>
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Game.Avatar.Items.h"

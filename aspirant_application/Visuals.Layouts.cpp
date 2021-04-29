@@ -1,9 +1,9 @@
-#include "Graphics.Layouts.h"
+#include "Visuals.Layouts.h"
 #include "Data.JSON.h"
 #include <algorithm>
-#include "Graphics.Data.Types.h"
+#include "Visuals.Data.Types.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Data.Properties.h"
+#include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
 namespace graphics::Menu { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
 namespace graphics::Image { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }

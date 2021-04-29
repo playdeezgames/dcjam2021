@@ -4,7 +4,7 @@
 #include "Application.UIState.h"
 #include <sstream>
 #include "Game.Avatar.Statistics.h"
-#include "Graphics.Texts.h"
+#include "Visuals.Texts.h"
 #include "Common.Utility.h"
 namespace state::in_play::AvatarStatus
 {

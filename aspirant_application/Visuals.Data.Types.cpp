@@ -1,4 +1,4 @@
-#include "Graphics.Data.Types.h"
+#include "Visuals.Data.Types.h"
 #include <map>
 namespace graphics::data::Types
 {

@@ -1,5 +1,5 @@
 #include <string>
-#include "Graphics.Menus.h"
+#include "Visuals.Menus.h"
 #include "Application.UIState.h"
 #include "Application.Command.h"
 #include "Application.Renderer.h"
@@ -7,7 +7,7 @@
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Graphics.Areas.h"
+#include "Visuals.Areas.h"
 namespace state::LeavePlay
 {
 	const std::string LAYOUT_NAME = "State.LeavePlay";

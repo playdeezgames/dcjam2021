@@ -1,25 +1,26 @@
-#include "Graphics.AvatarInventory.h"
 #include "json.hpp"
-#include "Common.Data.Properties.h"
-#include "Graphics.Data.Properties.h"
-#include "Game.Avatar.Items.h"
-#include <sstream>
-#include "Graphics.Fonts.h"
+#include <SDL.h>
 #include "Game.Item.h"
-#include "Graphics.Data.Types.h"
-#include <optional>
+#include "Game.World.Items.h"
+#include "Common.Data.Properties.h"
+#include "Game.Item.h"
+#include "Game.Avatar.h"
+#include "Visuals.Data.Properties.h"
+#include "Visuals.Fonts.h"
+#include "Visuals.Data.Types.h"
+#include <sstream>
 namespace graphics::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
-namespace graphics::AvatarInventory
+namespace graphics::FloorInventory
 {
 	template <typename TResult>
 	static TResult WithControl(const std::string& layoutName, const std::string& controlId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
 		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
 		{
-			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::AVATAR_INVENTORY)
+			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::FLOOR_INVENTORY)
 			{
 				if (thingie.count(graphics::data::Properties::CONTROL_ID) > 0 &&
 					thingie[graphics::data::Properties::CONTROL_ID] == controlId)
@@ -31,7 +32,7 @@ namespace graphics::AvatarInventory
 		return notFound();
 	}
 
-	static size_t inventoryIndex;//TODO: this is broken, and "should" be per control, but as there is ever only one on a screen and only one screen it is on.... JAWTS
+	static size_t inventoryIndex = 0;
 
 	void ResetIndex()
 	{
@@ -40,7 +41,8 @@ namespace graphics::AvatarInventory
 
 	void NextIndex()
 	{
-		auto inventory = game::avatar::Items::All();
+		auto location = game::Avatar::GetPosition();
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + 1) % inventory.size();
@@ -49,7 +51,8 @@ namespace graphics::AvatarInventory
 
 	void PreviousIndex()
 	{
-		auto inventory = game::avatar::Items::All();
+		auto location = game::Avatar::GetPosition();
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + inventory.size() - 1) % inventory.size();
@@ -58,12 +61,9 @@ namespace graphics::AvatarInventory
 
 	std::optional<int> GetItem()
 	{
-		auto inventory = game::avatar::Items::All();
-		if (inventory.size() == 0)
-		{
-			return std::nullopt;
-		}
-		else if (inventoryIndex < inventory.size())
+		auto location = game::Avatar::GetPosition();
+		auto inventory = game::world::Items::FloorInventory(location);
+		if (inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
 			for (size_t dummy = 0; dummy < inventoryIndex; ++dummy)
@@ -74,8 +74,7 @@ namespace graphics::AvatarInventory
 		}
 		else
 		{
-			inventoryIndex = 0;
-			return GetItem();
+			return std::nullopt;
 		}
 	}
 
@@ -93,7 +92,8 @@ namespace graphics::AvatarInventory
 		std::string dropShadowColor = model[graphics::data::Properties::DROP_SHADOW_COLOR];
 
 
-		auto inventory = game::avatar::Items::All();
+		auto location = game::Avatar::GetPosition();
+		auto inventory = game::world::Items::FloorInventory(location);
 		if (inventoryIndex >= inventory.size())
 		{
 			inventoryIndex = 0;
@@ -126,17 +126,18 @@ namespace graphics::AvatarInventory
 
 	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
 	{
-		WithControl<void>(layoutName, controlId, 
-			[xy](nlohmann::json& thingie) 
+		WithControl<void>(layoutName, controlId,
+			[xy](nlohmann::json& thingie)
 		{
 			int x = thingie[common::data::Properties::X];
 			int y = thingie[common::data::Properties::Y];
 			int width = thingie[common::data::Properties::WIDTH];
 			int rowHeight = thingie[graphics::data::Properties::ROW_HEIGHT];
-			if (xy.GetX() >= x && xy.GetX()<x+width && xy.GetY()>=y)
+			
+			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 			{
 				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-				auto inventory = game::avatar::Items::All();
+				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
 				if ((size_t)row < inventory.size())
 				{
 					inventoryIndex = row;
@@ -148,8 +149,8 @@ namespace graphics::AvatarInventory
 	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
 	{
 		return WithControl<std::optional<int>>(layoutName, controlId,
-			[xy, buttons](nlohmann::json& thingie) 
-		{ 
+			[xy, buttons](nlohmann::json& thingie)
+		{
 			int x = thingie[common::data::Properties::X];
 			int y = thingie[common::data::Properties::Y];
 			int width = thingie[common::data::Properties::WIDTH];
@@ -157,8 +158,8 @@ namespace graphics::AvatarInventory
 			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 			{
 				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-				auto inventory = game::avatar::Items::All();
-				if ((size_t)row < inventory.size())
+				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+				if (row < inventory.size())
 				{
 					return std::optional<int>((int)row);
 				}

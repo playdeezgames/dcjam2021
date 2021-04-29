@@ -2,7 +2,7 @@
 #include "Application.Renderer.h"
 #include "Application.Update.h"
 #include "Application.UIState.h"
-#include "Graphics.AvatarInventory.h"
+#include "Visuals.AvatarInventory.h"
 #include "Game.Avatar.Items.h"
 #include "Game.Item.h"
 #include "Game.World.Items.h"

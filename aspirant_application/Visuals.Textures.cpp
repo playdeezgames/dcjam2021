@@ -1,4 +1,4 @@
-#include "Graphics.Textures.h"
+#include "Visuals.Textures.h"
 #include "Common.Utility.h"
 #include <SDL_image.h>
 #include "Data.JSON.h"

@@ -1,7 +1,7 @@
 #include "Common.Utility.h"
-#include "Graphics.Fonts.h"
+#include "Visuals.Fonts.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Data.Properties.h"
+#include "Visuals.Data.Properties.h"
 #include "json.hpp"
 namespace graphics::Text
 {

@@ -5,7 +5,7 @@
 #include "Game.Avatar.Statistics.h"
 #include "Application.Sounds.h"
 #include "Common.Audio.h"
-#include "Graphics.Texts.h"
+#include "Visuals.Texts.h"
 namespace game::Combat
 {
 	void Advance()

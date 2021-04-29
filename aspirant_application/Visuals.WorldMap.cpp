@@ -2,12 +2,12 @@
 #include <SDL.h>
 #include "Game.World.h"
 #include "Common.Data.Properties.h"
-#include "Graphics.Data.Properties.h"
-#include "Graphics.Sprites.h"
+#include "Visuals.Data.Properties.h"
+#include "Visuals.Sprites.h"
 #include <map>
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
-#include "Graphics.Colors.h"
+#include "Visuals.Colors.h"
 namespace graphics::WorldMap 
 { 
 	const std::string MAP_CELL_BASE = "MapCellBase";
