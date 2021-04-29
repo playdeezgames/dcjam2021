@@ -4,7 +4,7 @@
 #include <vector>
 #include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
-namespace graphics::Colors
+namespace visuals::Colors
 {
 	static SDL_Color ParseDescriptor(const nlohmann::json& properties)
 	{

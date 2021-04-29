@@ -8,7 +8,7 @@
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Visuals.Colors.h"
-namespace graphics::WorldMap 
+namespace visuals::WorldMap 
 { 
 	const std::string MAP_CELL_BASE = "MapCellBase";
 	const std::string MAP_CELL_NORTH_WALL = "MapCellNorthWall";
@@ -42,7 +42,7 @@ namespace graphics::WorldMap
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
-			graphics::Sprites::Draw(wallSprites[direction], renderer, plot, graphics::Colors::Read("White"));//TODO: hard coded string
+			visuals::Sprites::Draw(wallSprites[direction], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
 		}
 	}
 
@@ -50,8 +50,8 @@ namespace graphics::WorldMap
 	{
 		int x = model[common::data::Properties::X];
 		int y = model[common::data::Properties::Y];
-		int cellWidth = model[graphics::data::Properties::CELL_WIDTH];
-		int cellHeight = model[graphics::data::Properties::CELL_WIDTH];
+		int cellWidth = model[visuals::data::Properties::CELL_WIDTH];
+		int cellHeight = model[visuals::data::Properties::CELL_WIDTH];
 		auto avatarPosition = game::Avatar::GetPosition();
 
 		auto worldSize = game::World::GetSize();
@@ -64,7 +64,7 @@ namespace graphics::WorldMap
 				if (game::World::IsExplored(cell))
 				{
 
-					graphics::Sprites::Draw(MAP_CELL_BASE, renderer, plot, graphics::Colors::Read("White"));//TODO: hard coded string
+					visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
 					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
 					DrawWall(renderer, cell, plot, maze::Direction::EAST);
 					DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
@@ -72,17 +72,17 @@ namespace graphics::WorldMap
 
 					if (cell == avatarPosition)
 					{
-						graphics::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, graphics::Colors::Read("White"));//TODO: hard coded string
+						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
 					}
 
 					if (game::Creatures::GetInstance(cell))
 					{
-						graphics::Sprites::Draw(DANGER, renderer, plot, graphics::Colors::Read("White"));//TODO: hard coded string
+						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
 					}
 				}
 				else
 				{
-					graphics::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, graphics::Colors::Read("White"));//TODO: hard coded string
+					visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
 				}
 			}
 		}

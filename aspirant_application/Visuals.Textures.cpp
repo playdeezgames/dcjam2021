@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 #include "Data.Stores.h"
-namespace graphics::Textures
+namespace visuals::Textures
 {
 	static std::map<std::string, std::shared_ptr<SDL_Texture>> textures;
 

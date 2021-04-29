@@ -1,6 +1,6 @@
 #include "Visuals.Data.Types.h"
 #include <map>
-namespace graphics::data::Types
+namespace visuals::data::Types
 {
 	const std::string AVATAR_INVENTORY = "AvatarInventory";
 	const std::string FLOOR_INVENTORY = "FloorInventory";
@@ -11,21 +11,21 @@ namespace graphics::data::Types
 	const std::string WORLD_MAP = "WorldMap";
 	const std::string AREA = "Area";
 }
-namespace graphics::data
+namespace visuals::data
 {
 	const std::map<std::string, Type> table =
 	{
-		{ graphics::data::Types::AVATAR_INVENTORY, Type::AVATAR_INVENTORY },
-		{ graphics::data::Types::FLOOR_INVENTORY, Type::FLOOR_INVENTORY },
-		{ graphics::data::Types::IMAGE, Type::IMAGE },
-		{ graphics::data::Types::LAYOUT, Type::LAYOUT },
-		{ graphics::data::Types::MENU, Type::MENU },
-		{ graphics::data::Types::TEXT, Type::TEXT },
-		{ graphics::data::Types::WORLD_MAP, Type::WORLD_MAP },
-		{ graphics::data::Types::AREA, Type::AREA }
+		{ visuals::data::Types::AVATAR_INVENTORY, Type::AVATAR_INVENTORY },
+		{ visuals::data::Types::FLOOR_INVENTORY, Type::FLOOR_INVENTORY },
+		{ visuals::data::Types::IMAGE, Type::IMAGE },
+		{ visuals::data::Types::LAYOUT, Type::LAYOUT },
+		{ visuals::data::Types::MENU, Type::MENU },
+		{ visuals::data::Types::TEXT, Type::TEXT },
+		{ visuals::data::Types::WORLD_MAP, Type::WORLD_MAP },
+		{ visuals::data::Types::AREA, Type::AREA }
 	};
 }
-namespace graphics::data::Types
+namespace visuals::data::Types
 {
 	std::optional<Type> FromString(const std::string& name)
 	{

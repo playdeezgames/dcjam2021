@@ -31,7 +31,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Courage: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK);
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK, ss.str());
 	}
 
 	static void UpdateAttackTimer(const Uint32&)
@@ -43,7 +43,7 @@ namespace state::in_play::AvatarStatus
 			ss << "Duration: ";
 			ss << value;
 		}
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK_TIMER, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK_TIMER, ss.str());
 	}
 
 	static void UpdateDefend(const Uint32&)
@@ -51,7 +51,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Alertness: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND, ss.str());
 	}
 
 	static void UpdateDefendTimer(const Uint32&)
@@ -63,7 +63,7 @@ namespace state::in_play::AvatarStatus
 			ss << "Duration: ";
 			ss << value;
 		}
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND_TIMER, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND_TIMER, ss.str());
 	}
 
 	static void UpdateBowel(const Uint32&)
@@ -71,7 +71,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Bowel: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::BOWEL);
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_BOWEL, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_BOWEL, ss.str());
 	}
 
 	static void UpdateDrunkenness(const Uint32&)
@@ -79,7 +79,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Drunkenness: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::DRUNKENNESS);
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_DRUNKENNESS, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_DRUNKENNESS, ss.str());
 	}
 
 	static void UpdateNausea(const Uint32&)
@@ -87,7 +87,7 @@ namespace state::in_play::AvatarStatus
 		std::stringstream ss;
 		ss << "Nausea: ";
 		ss << game::avatar::Statistics::Read(game::avatar::Statistic::NAUSEA);
-		graphics::Texts::SetText(LAYOUT_NAME, TEXT_NAUSEA, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_NAUSEA, ss.str());
 	}
 
 	void Start()

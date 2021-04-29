@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace graphics::data::Colors
+namespace visuals::data::Colors
 {
 	const std::string HIGHLIGHT = "Yellow";
 	const std::string NORMAL = "Gray";

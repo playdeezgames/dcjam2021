@@ -7,11 +7,11 @@
 #include "Visuals.Layouts.h"
 #include "Visuals.Sprites.h"
 #include "Visuals.Colors.h"
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
-namespace graphics::Image
+namespace visuals::Image
 {
 	const SDL_Color defaultColor = { 255, 255, 255, 255 };
 
@@ -26,22 +26,22 @@ namespace graphics::Image
 					(int)model[common::data::Properties::X],
 					(int)model[common::data::Properties::Y]),
 				(model.count(data::Properties::COLOR) > 0) ?
-				(::graphics::Colors::Read(model[data::Properties::COLOR])) :
+				(::visuals::Colors::Read(model[data::Properties::COLOR])) :
 				(defaultColor));
 		}
 	}
 }
-namespace graphics::Images
+namespace visuals::Images
 {
 	template<typename TResult>
 	static TResult WithImage(const std::string& layoutName, const std::string& imageId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
 		{
-			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::IMAGE)
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::IMAGE)
 			{
-				if (thingie.count(graphics::data::Properties::IMAGE_ID) > 0 &&
-					thingie[graphics::data::Properties::IMAGE_ID] == imageId)
+				if (thingie.count(visuals::data::Properties::IMAGE_ID) > 0 &&
+					thingie[visuals::data::Properties::IMAGE_ID] == imageId)
 				{
 					return func(thingie);
 				}
@@ -54,7 +54,7 @@ namespace graphics::Images
 	{
 		WithImage<void>(layoutName, imageId, [spriteName](auto& thingie)
 		{
-			thingie[graphics::data::Properties::SPRITE] = spriteName;
+			thingie[visuals::data::Properties::SPRITE] = spriteName;
 		}, []() {});
 	}
 
@@ -62,7 +62,7 @@ namespace graphics::Images
 	{
 		WithImage<void>(layoutName, imageId, [visible](auto& thingie) 
 		{
-			thingie[graphics::data::Properties::VISIBLE] = visible;
+			thingie[visuals::data::Properties::VISIBLE] = visible;
 		}, []() {});
 	}
 }

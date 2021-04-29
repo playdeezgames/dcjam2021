@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include <optional>
 #include <functional>
-namespace graphics::Menus
+namespace visuals::Menus
 {
 	std::optional<int> ReadIndex(const std::string&, const std::string&);
 	std::optional<int> ReadValue(const std::string&, const std::string&);

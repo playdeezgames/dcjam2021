@@ -53,7 +53,7 @@ namespace sublayout::POV
 
 	static void UpdateDirection(maze::Direction facing	)
 	{
-		::graphics::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames.find(facing)->second);
+		::visuals::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames.find(facing)->second);
 	}
 
 	static void UpdateCreatures(const common::XY<size_t> position)
@@ -64,15 +64,15 @@ namespace sublayout::POV
 			auto imageId = game::creature::GetDescriptor(creature).imageId;
 			auto instance = game::Creatures::GetInstance(position);
 			bool visible = instance && instance.value().creature == creature;
-			graphics::Images::SetVisible(POV_LAYOUT_NAME, imageId, visible);
+			visuals::Images::SetVisible(POV_LAYOUT_NAME, imageId, visible);
 		}
 	}
 
 	static void UpdateRoom(const common::XY<size_t> position, const maze::Direction& facing)
 	{
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads.find(game::World::GetBorderAhead(position, facing))->second);
-		::graphics::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides.find(game::World::GetBorderRight(position, facing))->second);
+		::visuals::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
+		::visuals::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads.find(game::World::GetBorderAhead(position, facing))->second);
+		::visuals::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides.find(game::World::GetBorderRight(position, facing))->second);
 	}
 
 	static void UpdateItems(const common::XY<size_t> position)
@@ -80,7 +80,7 @@ namespace sublayout::POV
 
 		for (auto& item : game::item::All())
 		{
-			::graphics::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(position, item));
+			::visuals::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(position, item));
 		}
 	}
 
@@ -106,18 +106,18 @@ namespace sublayout::POV
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		auto areas = graphics::Areas::Get(POV_LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(POV_LAYOUT_NAME, xy);
 		auto position = game::Avatar::GetPosition();
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
-			::graphics::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item));
+			::visuals::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item));
 		}
 	}
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
-		auto areas = graphics::Areas::Get(POV_LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(POV_LAYOUT_NAME, xy);
 		auto position = game::Avatar::GetPosition();
 		int index = 0;
 		for (auto& item : game::item::All())
@@ -130,7 +130,7 @@ namespace sublayout::POV
 				size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
 				game::avatar::Items::Add(item, amount);
 
-				::graphics::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, false);
+				::visuals::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, false);
 				return true;
 			}
 			index++;

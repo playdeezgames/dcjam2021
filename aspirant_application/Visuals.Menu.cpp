@@ -2,7 +2,7 @@
 #include "Visuals.Fonts.h"
 #include "Common.Data.Properties.h"
 #include "json.hpp"
-namespace graphics::Menu
+namespace visuals::Menu
 {
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
@@ -10,7 +10,7 @@ namespace graphics::Menu
         std::string font = model[data::Properties::FONT];
 		std::string activeColor = model[data::Properties::COLORS][data::Properties::ACTIVE];
 		std::string inactiveColor = model[data::Properties::COLORS][data::Properties::INACTIVE];
-		graphics::HorizontalAlignment horizontalAlignment = (graphics::HorizontalAlignment)(int)model[data::Properties::HORIZONTAL_ALIGNMENT];
+		visuals::HorizontalAlignment horizontalAlignment = (visuals::HorizontalAlignment)(int)model[data::Properties::HORIZONTAL_ALIGNMENT];
 		bool dropShadow = model[data::Properties::DROP_SHADOW];
 		std::string dropShadowColor = model[data::Properties::DROP_SHADOW_COLOR];
 		int dropShadowX = model[data::Properties::DROP_SHADOW_X];

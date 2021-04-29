@@ -17,14 +17,14 @@ namespace sublayout::QuickStats
 	{
 		std::stringstream ss;
 		ss << HEALTH_SPRITE_PREFIX << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH);
-		::graphics::Images::SetSprite(LAYOUT_NAME, HEALTH_IMAGE_ID, ss.str());
+		::visuals::Images::SetSprite(LAYOUT_NAME, HEALTH_IMAGE_ID, ss.str());
 	}
 
 	static void UpdateHunger(const Uint32&)
 	{
 		std::stringstream ss;
 		ss << HUNGER_SPRITE_PREFIX << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER);
-		::graphics::Images::SetSprite(LAYOUT_NAME, HUNGER_IMAGE_ID, ss.str());
+		::visuals::Images::SetSprite(LAYOUT_NAME, HUNGER_IMAGE_ID, ss.str());
 	}
 
 	const std::vector<::UIState> states =

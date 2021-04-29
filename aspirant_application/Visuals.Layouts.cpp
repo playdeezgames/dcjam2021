@@ -5,31 +5,31 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
-namespace graphics::Menu { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::Image { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::Text { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::WorldMap { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::Sublayout { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::FloorInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::AvatarInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace graphics::Layout
+namespace visuals::Menu { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::Image { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::Text { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::WorldMap { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::Sublayout { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::FloorInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::AvatarInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+namespace visuals::Layout
 {
-	static std::map<graphics::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
+	static std::map<visuals::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
 	{
-		{graphics::data::Type::IMAGE, graphics::Image::Draw},
-		{graphics::data::Type::MENU, graphics::Menu::Draw},
-		{graphics::data::Type::TEXT, graphics::Text::Draw},
-		{graphics::data::Type::WORLD_MAP, graphics::WorldMap::Draw},
-		{graphics::data::Type::LAYOUT, graphics::Sublayout::Draw},
-		{graphics::data::Type::FLOOR_INVENTORY, graphics::FloorInventory::Draw},
-		{graphics::data::Type::AVATAR_INVENTORY, graphics::AvatarInventory::Draw}
+		{visuals::data::Type::IMAGE, visuals::Image::Draw},
+		{visuals::data::Type::MENU, visuals::Menu::Draw},
+		{visuals::data::Type::TEXT, visuals::Text::Draw},
+		{visuals::data::Type::WORLD_MAP, visuals::WorldMap::Draw},
+		{visuals::data::Type::LAYOUT, visuals::Sublayout::Draw},
+		{visuals::data::Type::FLOOR_INVENTORY, visuals::FloorInventory::Draw},
+		{visuals::data::Type::AVATAR_INVENTORY, visuals::AvatarInventory::Draw}
 	};
 
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		for (auto& drawn : model)
 		{
-			auto drawnType = graphics::data::Types::FromString(drawn[common::data::Properties::TYPE]);
+			auto drawnType = visuals::data::Types::FromString(drawn[common::data::Properties::TYPE]);
 			if (drawnType)
 			{
 				auto drawer = table.find(*drawnType);
@@ -41,7 +41,7 @@ namespace graphics::Layout
 		}
 	}
 }
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	std::map<std::string, nlohmann::json> layouts;
 
@@ -62,6 +62,6 @@ namespace graphics::Layouts
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const std::string& layoutName)
 	{
 		InitializeLayout(layoutName);
-		graphics::Layout::Draw(renderer, layouts[layoutName]);
+		visuals::Layout::Draw(renderer, layouts[layoutName]);
 	}
 }

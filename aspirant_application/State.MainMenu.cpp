@@ -55,13 +55,13 @@ namespace state::MainMenu
 
 	static void ActivateItem()
 	{
-		common::Utility::Dispatch(activators, (MainMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		common::Utility::Dispatch(activators, (MainMenuItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
-		{::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
+		{::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{::Command::GREEN, ActivateItem },
 		{::Command::BACK, ConfirmQuit },
 		{::Command::RED, ConfirmQuit }
@@ -82,12 +82,12 @@ namespace state::MainMenu
 
 	static void SetCurrentMenuItem(MainMenuItem item) 
 	{ 
-		graphics::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& area : areas)
 		{
 			SetCurrentMenuItem(areaMenuItems.find(area)->second);
@@ -96,7 +96,7 @@ namespace state::MainMenu
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())
 		{
 			ActivateItem();

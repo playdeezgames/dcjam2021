@@ -4,21 +4,21 @@
 #include "Visuals.Data.Types.h"
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
-namespace graphics::Texts
+namespace visuals::Texts
 {
 	template <typename TResult>
 	static TResult WithText(const std::string& layoutName, const std::string& textId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
 		{
-			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::TEXT)
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::TEXT)
 			{
-				if (thingie.count(graphics::data::Properties::TEXT_ID) > 0 &&
-					thingie[graphics::data::Properties::TEXT_ID] == textId)
+				if (thingie.count(visuals::data::Properties::TEXT_ID) > 0 &&
+					thingie[visuals::data::Properties::TEXT_ID] == textId)
 				{
 					return func(thingie);
 				}
@@ -31,7 +31,7 @@ namespace graphics::Texts
 	{
 		WithText<void>(layoutName, textId, [text](auto& thingie) 
 		{
-			thingie[graphics::data::Properties::TEXT] = text;
+			thingie[visuals::data::Properties::TEXT] = text;
 		}, []() {});
 	}
 
@@ -39,7 +39,7 @@ namespace graphics::Texts
 	{
 		WithText<void>(layoutName, textId, [color](auto& thingie)
 		{
-			thingie[graphics::data::Properties::COLOR] = color;
+			thingie[visuals::data::Properties::COLOR] = color;
 		}, []() {});
 	}
 }

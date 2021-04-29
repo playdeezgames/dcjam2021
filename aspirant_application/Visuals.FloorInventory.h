@@ -3,7 +3,7 @@
 #include "Game.Item.h"
 #include <SDL.h>
 #include "Common.XY.h"
-namespace graphics::FloorInventory 
+namespace visuals::FloorInventory 
 { 
 	void ResetIndex();
 	void NextIndex();

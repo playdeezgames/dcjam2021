@@ -1,6 +1,6 @@
 #include "Visuals.CardSprites.h"
 #include <map>
-namespace graphics::CardSprites
+namespace visuals::CardSprites
 {
 	const std::map<common::Card, std::string> cardSprites =
 	{

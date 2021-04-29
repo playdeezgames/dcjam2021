@@ -35,7 +35,7 @@ namespace sublayout::EnemyStats
 		{
 			ss << attitudeTexts.find(creature.value().attitude)->second;
 		}
-		::graphics::Texts::SetText(LAYOUT_NAME, TEXT_ENEMY_ATTITUDE, ss.str());
+		::visuals::Texts::SetText(LAYOUT_NAME, TEXT_ENEMY_ATTITUDE, ss.str());
 	}
 
 	static void UpdateHealth(const Uint32&)
@@ -56,7 +56,7 @@ namespace sublayout::EnemyStats
 			{
 				ss << "DEAD!";
 			}
-			::graphics::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
+			::visuals::Texts::SetText(LAYOUT_NAME, HEALTH_TEXT_ID, ss.str());
 		}
 	}
 
@@ -70,7 +70,7 @@ namespace sublayout::EnemyStats
 		{
 			ss << "(" << timer << ")";
 		}
-		::graphics::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
+		::visuals::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
 	}
 
 	static void UpdateDefend(const Uint32&)
@@ -83,7 +83,7 @@ namespace sublayout::EnemyStats
 		{
 			ss << "(" << timer << ")";
 		}
-		::graphics::Texts::SetText(LAYOUT_NAME, DEFEND_TEXT_ID, ss.str());
+		::visuals::Texts::SetText(LAYOUT_NAME, DEFEND_TEXT_ID, ss.str());
 	}
 
 	const std::vector<::UIState> states =

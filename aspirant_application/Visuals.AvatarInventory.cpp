@@ -8,21 +8,21 @@
 #include "Game.Item.h"
 #include "Visuals.Data.Types.h"
 #include <optional>
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
-namespace graphics::AvatarInventory
+namespace visuals::AvatarInventory
 {
 	template <typename TResult>
 	static TResult WithControl(const std::string& layoutName, const std::string& controlId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
 		{
-			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::AVATAR_INVENTORY)
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AVATAR_INVENTORY)
 			{
-				if (thingie.count(graphics::data::Properties::CONTROL_ID) > 0 &&
-					thingie[graphics::data::Properties::CONTROL_ID] == controlId)
+				if (thingie.count(visuals::data::Properties::CONTROL_ID) > 0 &&
+					thingie[visuals::data::Properties::CONTROL_ID] == controlId)
 				{
 					return func(thingie);
 				}
@@ -83,14 +83,14 @@ namespace graphics::AvatarInventory
 	{
 		int x = model[common::data::Properties::X];
 		int y = model[common::data::Properties::Y];
-		int rowHeight = model[graphics::data::Properties::ROW_HEIGHT];
-		std::string font = model[graphics::data::Properties::FONT];
-		std::string inactiveColor = model[graphics::data::Properties::COLORS][graphics::data::Properties::INACTIVE];
-		std::string activeColor = model[graphics::data::Properties::COLORS][graphics::data::Properties::ACTIVE];
-		bool dropShadow = model[graphics::data::Properties::DROP_SHADOW];
-		int dropShadowX = model[graphics::data::Properties::DROP_SHADOW_X];
-		int dropShadowY = model[graphics::data::Properties::DROP_SHADOW_Y];
-		std::string dropShadowColor = model[graphics::data::Properties::DROP_SHADOW_COLOR];
+		int rowHeight = model[visuals::data::Properties::ROW_HEIGHT];
+		std::string font = model[visuals::data::Properties::FONT];
+		std::string inactiveColor = model[visuals::data::Properties::COLORS][visuals::data::Properties::INACTIVE];
+		std::string activeColor = model[visuals::data::Properties::COLORS][visuals::data::Properties::ACTIVE];
+		bool dropShadow = model[visuals::data::Properties::DROP_SHADOW];
+		int dropShadowX = model[visuals::data::Properties::DROP_SHADOW_X];
+		int dropShadowY = model[visuals::data::Properties::DROP_SHADOW_Y];
+		std::string dropShadowColor = model[visuals::data::Properties::DROP_SHADOW_COLOR];
 
 
 		auto inventory = game::avatar::Items::All();
@@ -107,9 +107,9 @@ namespace graphics::AvatarInventory
 			auto color = (index == inventoryIndex) ? (activeColor) : (inactiveColor);
 			if (dropShadow)
 			{
-				graphics::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, ss.str(), dropShadowColor, graphics::HorizontalAlignment::LEFT);
+				visuals::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, ss.str(), dropShadowColor, visuals::HorizontalAlignment::LEFT);
 			}
-			graphics::Fonts::WriteText(font, renderer, { x,y }, ss.str(), color, graphics::HorizontalAlignment::LEFT);
+			visuals::Fonts::WriteText(font, renderer, { x,y }, ss.str(), color, visuals::HorizontalAlignment::LEFT);
 			y += rowHeight;
 			index++;
 		}
@@ -118,9 +118,9 @@ namespace graphics::AvatarInventory
 		{
 			if (dropShadow)
 			{
-				graphics::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, "(nothing)", dropShadowColor, graphics::HorizontalAlignment::LEFT);
+				visuals::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, "(nothing)", dropShadowColor, visuals::HorizontalAlignment::LEFT);
 			}
-			graphics::Fonts::WriteText(font, renderer, { x,y }, "(nothing)", inactiveColor, graphics::HorizontalAlignment::LEFT);
+			visuals::Fonts::WriteText(font, renderer, { x,y }, "(nothing)", inactiveColor, visuals::HorizontalAlignment::LEFT);
 		}
 	}
 
@@ -132,7 +132,7 @@ namespace graphics::AvatarInventory
 			int x = thingie[common::data::Properties::X];
 			int y = thingie[common::data::Properties::Y];
 			int width = thingie[common::data::Properties::WIDTH];
-			int rowHeight = thingie[graphics::data::Properties::ROW_HEIGHT];
+			int rowHeight = thingie[visuals::data::Properties::ROW_HEIGHT];
 			if (xy.GetX() >= x && xy.GetX()<x+width && xy.GetY()>=y)
 			{
 				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
@@ -153,7 +153,7 @@ namespace graphics::AvatarInventory
 			int x = thingie[common::data::Properties::X];
 			int y = thingie[common::data::Properties::Y];
 			int width = thingie[common::data::Properties::WIDTH];
-			int rowHeight = thingie[graphics::data::Properties::ROW_HEIGHT];
+			int rowHeight = thingie[visuals::data::Properties::ROW_HEIGHT];
 			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 			{
 				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;

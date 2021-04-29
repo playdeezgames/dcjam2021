@@ -5,23 +5,23 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Visuals.MenuItems.h"
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
-namespace graphics::MenuItems
+namespace visuals::MenuItems
 {
 	template <typename TResult>
 	static TResult WithMenuItem(const std::string& layoutName, const std::string& menuItemId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
 		{
-			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::MENU)
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::MENU)
 			{
-				for (auto& menuItem : thingie[graphics::data::Properties::MENU_ITEMS])
+				for (auto& menuItem : thingie[visuals::data::Properties::MENU_ITEMS])
 				{
-					if (menuItem.count(graphics::data::Properties::MENU_ITEM_ID) > 0 &&
-						menuItem[graphics::data::Properties::MENU_ITEM_ID] == menuItemId)
+					if (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0 &&
+						menuItem[visuals::data::Properties::MENU_ITEM_ID] == menuItemId)
 					{
 						return func(menuItem);
 					}
@@ -35,7 +35,7 @@ namespace graphics::MenuItems
 	{
 		WithMenuItem<void>(layoutName, menuItemId, [text](auto& menuItem)
 		{
-			menuItem[graphics::data::Properties::TEXT] = text;
+			menuItem[visuals::data::Properties::TEXT] = text;
 		}, []() {});
 	}
 }

@@ -2,7 +2,7 @@
 #include <string>
 #include <set>
 #pragma once
-namespace graphics::Areas
+namespace visuals::Areas
 {
 	std::set<std::string> Get(const std::string&, const common::XY<int>&);
 }

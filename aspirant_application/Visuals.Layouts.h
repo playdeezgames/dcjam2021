@@ -4,7 +4,7 @@
 #include <memory>
 #include "json.hpp"
 #include <vector>
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	void Draw(std::shared_ptr<SDL_Renderer>, const std::string&);
 }

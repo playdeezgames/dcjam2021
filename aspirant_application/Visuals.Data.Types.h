@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <optional>
-namespace graphics::data
+namespace visuals::data
 {
 	enum class Type
 	{
@@ -15,7 +15,7 @@ namespace graphics::data
 		AREA
 	};
 }
-namespace graphics::data::Types
+namespace visuals::data::Types
 {
-	std::optional<graphics::data::Type> FromString(const std::string&);
+	std::optional<visuals::data::Type> FromString(const std::string&);
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace graphics::data::Properties
+namespace visuals::data::Properties
 {
 	const std::string ACTIVE = "active";
 	const std::string ALPHA = "alpha";

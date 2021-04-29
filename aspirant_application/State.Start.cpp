@@ -49,13 +49,13 @@ namespace state::Start
 
 	static void ActivateItem()
 	{
-		common::Utility::Dispatch(activators, (StartGameItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		common::Utility::Dispatch(activators, (StartGameItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
-		{ ::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
+		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{ ::Command::BACK, GoBack },
 		{ ::Command::RED, GoBack },
 		{ ::Command::GREEN, ActivateItem }
@@ -63,7 +63,7 @@ namespace state::Start
 
 	static void SetCurrentMenuItem(StartGameItem item)
 	{
-		graphics::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	const std::map<std::string, StartGameItem> areaMenuItems =
@@ -75,7 +75,7 @@ namespace state::Start
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& area : areas)
 		{
 			SetCurrentMenuItem(areaMenuItems.find(area)->second);
@@ -84,7 +84,7 @@ namespace state::Start
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (!areas.empty())
 		{
 			ActivateItem();

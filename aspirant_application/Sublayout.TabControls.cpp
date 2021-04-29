@@ -35,11 +35,11 @@ namespace sublayout::TabControls
 	{
 		if (areas.contains(areaId))
 		{
-			graphics::Texts::SetColor(LAYOUT_NAME, textId, graphics::data::Colors::HIGHLIGHT);
+			visuals::Texts::SetColor(LAYOUT_NAME, textId, visuals::data::Colors::HIGHLIGHT);
 		}
 		else
 		{
-			graphics::Texts::SetColor(LAYOUT_NAME, textId, graphics::data::Colors::NORMAL);
+			visuals::Texts::SetColor(LAYOUT_NAME, textId, visuals::data::Colors::NORMAL);
 		}
 	}
 
@@ -53,7 +53,7 @@ namespace sublayout::TabControls
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& tabControl : tabControls)
 		{
 			UpdateTabColor(areas, std::get<0>(tabControl), std::get<1>(tabControl));
@@ -70,7 +70,7 @@ namespace sublayout::TabControls
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		bool result = false;
 		for (auto& area : areas)
 		{

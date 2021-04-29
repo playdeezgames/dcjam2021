@@ -3,7 +3,7 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
-namespace graphics::Sprites
+namespace visuals::Sprites
 {
 	nlohmann::json NameToData(const std::string name)
 	{
@@ -22,7 +22,7 @@ namespace graphics::Sprites
 		auto model = NameToData(spriteName);
 		if (model.type() != nlohmann::json::value_t::null)
 		{
-			auto texture = graphics::Textures::Read(renderer, model[graphics::data::Properties::TEXTURE]);
+			auto texture = visuals::Textures::Read(renderer, model[visuals::data::Properties::TEXTURE]);
 			SDL_SetTextureColorMod
 			(
 				texture.get(),

@@ -73,7 +73,7 @@ namespace state::in_play::Combat
 
 	void SetCombatResultText(const std::string& text)
 	{
-		graphics::Texts::SetText(COMBATRESULT_LAYOUT_NAME, COMBATRESULT_RESULT_TEXT_ID, text);
+		visuals::Texts::SetText(COMBATRESULT_LAYOUT_NAME, COMBATRESULT_RESULT_TEXT_ID, text);
 	}
 
 	const std::map<game::Combat::CombatResult, std::string> resolutions =
@@ -127,7 +127,7 @@ namespace state::in_play::Combat
 
 	static void UseItem()
 	{
-		auto result = game::avatar::Items::CombatUse(graphics::AvatarInventory::GetItem());
+		auto result = game::avatar::Items::CombatUse(visuals::AvatarInventory::GetItem());
 		if (result)
 		{
 			common::audio::Sfx::Play(std::get<0>(*result));
@@ -148,22 +148,22 @@ namespace state::in_play::Combat
 
 	static void OnActivateItem()
 	{
-		common::Utility::Dispatch(activators, (CombatMenuItem)graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value());
+		common::Utility::Dispatch(activators, (CombatMenuItem)visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value());
 	}
 
 	static void NextItem()
 	{
-		if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
+		if (visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
 		{ 
-			graphics::AvatarInventory::NextIndex(); 
+			visuals::AvatarInventory::NextIndex(); 
 		}
 	}
 
 	static void PreviousItem()
 	{
-		if (graphics::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
+		if (visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
 		{ 
-			graphics::AvatarInventory::PreviousIndex(); 
+			visuals::AvatarInventory::PreviousIndex(); 
 		}
 	}
 
@@ -175,8 +175,8 @@ namespace state::in_play::Combat
 	std::map<Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, LeavePlay },
-		{ ::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, COMBAT_MENU_ID) },
-		{ ::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, COMBAT_MENU_ID) },
+		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, COMBAT_MENU_ID) },
+		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, COMBAT_MENU_ID) },
 		{ ::Command::LEFT, PreviousItem },
 		{ ::Command::RIGHT, NextItem },
 		{ ::Command::GREEN, OnActivateItem },
@@ -184,7 +184,7 @@ namespace state::in_play::Combat
 
 	static void UpdateUseItem()
 	{
-		auto item = graphics::AvatarInventory::GetItem();
+		auto item = visuals::AvatarInventory::GetItem();
 		std::stringstream ss;
 		if (item)
 		{
@@ -198,13 +198,13 @@ namespace state::in_play::Combat
 		{
 			ss << "(no items)";
 		}
-		graphics::MenuItems::SetText(LAYOUT_NAME, USE_ITEM_MENU_ITEM_ID, ss.str());
+		visuals::MenuItems::SetText(LAYOUT_NAME, USE_ITEM_MENU_ITEM_ID, ss.str());
 	}
 
 	static void OnUpdate(const Uint32& ticks)
 	{
 		auto& card = game::CombatDeck::GetCurrentCard();
-		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(card));
+		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(card));
 		UpdateUseItem();
 	}
 
@@ -220,14 +220,14 @@ namespace state::in_play::Combat
 
 	static void SetCurrentMenuItem(CombatMenuItem item)
 	{
-		graphics::Menus::WriteValue(LAYOUT_NAME, COMBAT_MENU_ID, (int)item);
+		visuals::Menus::WriteValue(LAYOUT_NAME, COMBAT_MENU_ID, (int)item);
 	}
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));
-		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (areas.contains(AREA_NEXT_ITEM)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
+		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (areas.contains(AREA_NEXT_ITEM)) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 		for (auto& area : areas)
 		{
 			SetCurrentMenuItem(areaMenuItems.find(area)->second);
@@ -236,7 +236,7 @@ namespace state::in_play::Combat
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (areas.contains(AREA_PREVIOUS_ITEM))
 		{
 			PreviousItem();

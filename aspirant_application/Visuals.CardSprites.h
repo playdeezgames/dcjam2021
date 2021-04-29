@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "Common.Card.h"
-namespace graphics::CardSprites
+namespace visuals::CardSprites
 {
 	const std::string& GetSpriteForCard(const common::Card&);
 }

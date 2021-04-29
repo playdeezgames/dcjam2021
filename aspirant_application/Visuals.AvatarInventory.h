@@ -3,7 +3,7 @@
 #include <optional>
 #include "Common.XY.h"
 #include <SDL.h>
-namespace graphics::AvatarInventory
+namespace visuals::AvatarInventory
 {
 	void ResetIndex();
 	void NextIndex();

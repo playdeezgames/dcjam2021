@@ -41,19 +41,19 @@ namespace state::in_play::CombatResult
 
 	static void OnUpdate(const Uint32& ticks)
 	{
-		graphics::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
-		graphics::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, graphics::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
+		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
+		visuals::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
-		graphics::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (areas.contains(AREA_CONTINUE)) ? (graphics::data::Colors::HIGHLIGHT) : (graphics::data::Colors::NORMAL));
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (areas.contains(AREA_CONTINUE)) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 	}
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (areas.contains(AREA_CONTINUE))
 		{
 			AdvanceCombat();

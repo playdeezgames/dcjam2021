@@ -56,7 +56,7 @@ namespace state::Options
 
 	static OptionsItem GetCurrentItem()
 	{
-		return (OptionsItem)graphics::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value();
+		return (OptionsItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value();
 	}
 
 	const std::map<OptionsItem, std::function<void(int)>> itemChangers =
@@ -102,8 +102,8 @@ namespace state::Options
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{::Command::UP, graphics::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
-		{::Command::DOWN, graphics::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
+		{::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{::Command::LEFT, DecreaseItem },
 		{::Command::RIGHT, IncreaseItem },
 		{::Command::BACK, GoToMainMenu },
@@ -118,7 +118,7 @@ namespace state::Options
 
 	static void UpdateMuteMenuItem(const Uint32&)
 	{
-		graphics::MenuItems::SetText(LAYOUT_NAME, MUTE_MENU_ITEM_ID, 
+		visuals::MenuItems::SetText(LAYOUT_NAME, MUTE_MENU_ITEM_ID, 
 			common::Audio::IsMuted() ? UNMUTE : MUTE);
 	}
 
@@ -126,19 +126,19 @@ namespace state::Options
 	{
 		std::stringstream ss;
 		ss << "< SFX Volume (" << common::Utility::ToPercentage(common::audio::Sfx::GetVolume(), MIX_MAX_VOLUME) << "%) >";
-		graphics::MenuItems::SetText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
+		visuals::MenuItems::SetText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
 	static void UpdateMuxMenuItem(const Uint32&)
 	{
 		std::stringstream ss;
 		ss << "< MUX Volume (" << common::Utility::ToPercentage(common::audio::Mux::GetVolume(), MIX_MAX_VOLUME) << "%) >";
-		graphics::MenuItems::SetText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
+		visuals::MenuItems::SetText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
 	}
 
 	static void SetCurrentMenuItem(OptionsItem item)
 	{
-		graphics::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	const std::map<std::string, OptionsItem> areaMenuItems =
@@ -153,7 +153,7 @@ namespace state::Options
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& area : areas)
 		{
 			SetCurrentMenuItem(areaMenuItems.find(area)->second);
@@ -170,7 +170,7 @@ namespace state::Options
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
-		auto areas = graphics::Areas::Get(LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& area : areas)
 		{
 			auto iter = areaClickActions.find(area);

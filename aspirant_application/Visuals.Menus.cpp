@@ -5,19 +5,19 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Visuals.Layouts.h"
-namespace graphics::Layouts
+namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
-namespace graphics::Menus
+namespace visuals::Menus
 {
 	template<typename TResult>
 	static TResult WithMenu(const std::string& layoutName, const std::string& menuId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
-		for (auto& thingie : graphics::Layouts::GetLayout(layoutName))
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
 		{
-			if (graphics::data::Types::FromString(thingie[common::data::Properties::TYPE]) == graphics::data::Type::MENU &&
-				thingie[graphics::data::Properties::MENU_ID] == menuId)
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::MENU &&
+				thingie[visuals::data::Properties::MENU_ID] == menuId)
 			{
 				return func(thingie);
 			}
@@ -29,7 +29,7 @@ namespace graphics::Menus
 	{
 		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
 		{
-			return thingie[graphics::data::Properties::INDEX];
+			return thingie[visuals::data::Properties::INDEX];
 		},
 			[]() {return std::nullopt; });
 	}
@@ -38,8 +38,8 @@ namespace graphics::Menus
 	{
 		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
 		{
-			int index = thingie[graphics::data::Properties::INDEX];
-			return (int)thingie[graphics::data::Properties::MENU_ITEMS][index][graphics::data::Properties::VALUE];
+			int index = thingie[visuals::data::Properties::INDEX];
+			return (int)thingie[visuals::data::Properties::MENU_ITEMS][index][visuals::data::Properties::VALUE];
 		},
 			[]() {return std::nullopt; });
 	}
@@ -48,7 +48,7 @@ namespace graphics::Menus
 	{
 		return WithMenu<void>(layoutName, menuId, [index](nlohmann::json& thingie)
 		{
-			thingie[graphics::data::Properties::INDEX] = index;
+			thingie[visuals::data::Properties::INDEX] = index;
 		},
 			[]() {});
 	}
@@ -57,7 +57,7 @@ namespace graphics::Menus
 	{
 		return WithMenu<size_t>(layoutName, menuId, [](auto& thingie)
 		{
-			return thingie[graphics::data::Properties::MENU_ITEMS].size();
+			return thingie[visuals::data::Properties::MENU_ITEMS].size();
 		},
 			[]() { return 0; });
 	}
@@ -67,9 +67,9 @@ namespace graphics::Menus
 		return WithMenu<std::optional<int>>(layoutName, menuId, [value](auto& thingie) 
 		{ 
 			int index = 0;
-			for (auto& menuItem : thingie[graphics::data::Properties::MENU_ITEMS])
+			for (auto& menuItem : thingie[visuals::data::Properties::MENU_ITEMS])
 			{
-				if (value == (int)menuItem[graphics::data::Properties::VALUE])
+				if (value == (int)menuItem[visuals::data::Properties::VALUE])
 				{
 					return std::optional<int>(index);
 				}
@@ -82,10 +82,10 @@ namespace graphics::Menus
 
 	bool WriteValue(const std::string& layoutName, const std::string& menuId, int value)
 	{
-		auto index = graphics::Menus::FindIndexForValue(layoutName, menuId, value);
+		auto index = visuals::Menus::FindIndexForValue(layoutName, menuId, value);
 		if (index)
 		{
-			graphics::Menus::WriteIndex(layoutName, menuId, *index);
+			visuals::Menus::WriteIndex(layoutName, menuId, *index);
 			return true;
 		}
 		return false;

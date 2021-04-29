@@ -19,7 +19,7 @@ namespace common::Application
 		auto layoutName = ::application::Renderer::renderLayouts.find(::application::UIState::Read());
 		if (layoutName != ::application::Renderer::renderLayouts.end())
 		{
-			graphics::Layouts::Draw(renderer, layoutName->second);
+			visuals::Layouts::Draw(renderer, layoutName->second);
 		}
 	}
 }

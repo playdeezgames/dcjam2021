@@ -4,7 +4,7 @@
 #include <sstream>
 #include "Visuals.Colors.h"
 #include "Data.Stores.h"
-namespace graphics::Fonts
+namespace visuals::Fonts
 {
 	static std::map<std::string, nlohmann::json> table;
 
@@ -51,7 +51,7 @@ namespace graphics::Fonts
 	static common::XY<int> WriteGlyph(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color)
 	{
 		auto sprite = GetGlyphSprite(fontname, ch);
-		Sprites::Draw(sprite.value(), renderer, xy, ::graphics::Colors::Read(color));
+		Sprites::Draw(sprite.value(), renderer, xy, ::visuals::Colors::Read(color));
 		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()).value_or(0), xy.GetY());
 	}
 

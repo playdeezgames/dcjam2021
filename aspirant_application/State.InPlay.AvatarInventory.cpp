@@ -20,29 +20,29 @@ namespace state::in_play::AvatarInventory
 
 	static void UseItem()
 	{
-		common::audio::Sfx::Play(game::avatar::Items::Use(graphics::AvatarInventory::GetItem()));
+		common::audio::Sfx::Play(game::avatar::Items::Use(visuals::AvatarInventory::GetItem()));
 	}
 
 	const std::map<Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, []() { application::UIState::Write(::UIState::LEAVE_PLAY); }},
-		{ ::Command::PREVIOUS, []() { graphics::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_FLOOR); }},
-		{ ::Command::NEXT, []() { graphics::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_STATUS); }},
-		{ ::Command::YELLOW, []() { graphics::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_STATUS); }},
-		{ ::Command::UP, graphics::AvatarInventory::PreviousIndex },
-		{ ::Command::DOWN, graphics::AvatarInventory::NextIndex },
-		{ ::Command::RED, []() { game::avatar::Items::Drop(graphics::AvatarInventory::GetItem()); }},
+		{ ::Command::PREVIOUS, []() { visuals::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_FLOOR); }},
+		{ ::Command::NEXT, []() { visuals::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_STATUS); }},
+		{ ::Command::YELLOW, []() { visuals::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_STATUS); }},
+		{ ::Command::UP, visuals::AvatarInventory::PreviousIndex },
+		{ ::Command::DOWN, visuals::AvatarInventory::NextIndex },
+		{ ::Command::RED, []() { game::avatar::Items::Drop(visuals::AvatarInventory::GetItem()); }},
 		{ ::Command::GREEN, UseItem }
 	};
 
 	void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		graphics::AvatarInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy);
+		visuals::AvatarInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy);
 	}
 
 	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
 	{
-		auto itemUsed = graphics::AvatarInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy, buttons);
+		auto itemUsed = visuals::AvatarInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy, buttons);
 		if (itemUsed.has_value())
 		{
 			UseItem();

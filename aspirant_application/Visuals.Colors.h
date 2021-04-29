@@ -2,7 +2,7 @@
 #include <string>
 #include <SDL.h>
 #include <vector>
-namespace graphics::Colors
+namespace visuals::Colors
 {
 	SDL_Color Read(const std::string&);
 }

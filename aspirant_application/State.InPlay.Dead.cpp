@@ -22,14 +22,14 @@ namespace state::in_play::Dead
 	{
 		std::stringstream ss;
 		ss << "You collected " << game::avatar::Items::Read(5) << " jools!";//TODO: hardcoded
-		graphics::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());
+		visuals::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());
 		if (game::avatar::Items::Read(6)>0)//TODO: hardcoded
 		{
-			graphics::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...at least you kept yer dignity!");
+			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...at least you kept yer dignity!");
 		}
 		else
 		{
-			graphics::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...you lost yer trousers(again)!");
+			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...you lost yer trousers(again)!");
 		}
 	}
 

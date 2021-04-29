@@ -17,7 +17,7 @@ namespace state::in_play::FloorInventory
 
 	static void PickUpItem()
 	{
-		auto item = graphics::FloorInventory::GetItem();
+		auto item = visuals::FloorInventory::GetItem();
 		if (item)
 		{
 			//TODO: this is duplicated code
@@ -30,22 +30,22 @@ namespace state::in_play::FloorInventory
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, []() {application::UIState::Write(::UIState::LEAVE_PLAY); }},
-		{ ::Command::PREVIOUS, []() {graphics::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_MAP); } },
-		{ ::Command::NEXT, []() {graphics::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_INVENTORY); } },
-		{ ::Command::YELLOW, []() {graphics::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_INVENTORY); } },
-		{ ::Command::UP, graphics::FloorInventory::PreviousIndex},
-		{ ::Command::DOWN, graphics::FloorInventory::NextIndex},
+		{ ::Command::PREVIOUS, []() {visuals::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_MAP); } },
+		{ ::Command::NEXT, []() {visuals::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_INVENTORY); } },
+		{ ::Command::YELLOW, []() {visuals::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_INVENTORY); } },
+		{ ::Command::UP, visuals::FloorInventory::PreviousIndex},
+		{ ::Command::DOWN, visuals::FloorInventory::NextIndex},
 		{ ::Command::GREEN, PickUpItem }
 	};
 
 	void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		graphics::FloorInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy);
+		visuals::FloorInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy);
 	}
 
 	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
 	{
-		auto itemUsed = graphics::FloorInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy, buttons);
+		auto itemUsed = visuals::FloorInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy, buttons);
 		if (itemUsed.has_value())
 		{
 			PickUpItem();
