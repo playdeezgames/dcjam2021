@@ -2743,6 +2743,27 @@
         "width": 256,
         "height": 360
     },
+    "LeftLockedDoor": {
+        "texture": "all_locked",
+        "x": 76,
+        "y": 76,
+        "width": 52,
+        "height": 360
+    },
+    "RightLockedDoor": {
+        "texture": "all_locked",
+        "x": 384,
+        "y": 76,
+        "width": 52,
+        "height": 360
+    },
+    "AheadLockedDoor": {
+        "texture": "all_locked",
+        "x": 128,
+        "y": 76,
+        "width": 256,
+        "height": 360
+    },
     "MapCellBase": {
         "texture": "world",
         "x": 16,
@@ -2893,6 +2914,13 @@
     "ItemJoker":{
         "texture": "items",
         "x": 32,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
+    "ItemKey":{
+        "texture": "items",
+        "x": 64,
         "y": 32,
         "width": 32,
         "height": 32

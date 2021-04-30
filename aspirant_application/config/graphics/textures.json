@@ -7,6 +7,7 @@
     "background": "assets/images/background.png",
     "all_open": "assets/images/all_open.png",
     "all_closed": "assets/images/all_closed.png",
+    "all_locked": "assets/images/all_locked.png",
     "world": "assets/images/world.png",
     "items": "assets/images/items.png",
     "map": "assets/images/treasure-map.png",
