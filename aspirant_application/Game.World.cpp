@@ -7,6 +7,7 @@
 #include <sstream>
 #include "Game.Data.Properties.h"
 #include "Data.Stores.h"
+#include "Game.Creatures.h"
 namespace game::World
 {
 	std::string XYToRoomKey(const common::XY<size_t>& xy)
@@ -261,6 +262,19 @@ namespace game::World
 				}
 			}
 		}
+	}
 
+	bool IsExitable(const common::XY<size_t>& position)
+	{
+		return
+			GetNSBorder(XYToNorthBorderIndex(position)) == game::world::Border::DOOR ||
+			GetNSBorder(XYToSouthBorderIndex(position)) == game::world::Border::DOOR ||
+			GetEWBorder(XYToEastBorderIndex(position)) == game::world::Border::DOOR ||
+			GetEWBorder(XYToWestBorderIndex(position)) == game::world::Border::DOOR;
+	}
+
+	bool CanSpawnAvatar(const common::XY<size_t>& position)
+	{
+		return !game::Creatures::GetInstance(position) && IsExitable(position);
 	}
 }

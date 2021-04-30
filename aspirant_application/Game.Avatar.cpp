@@ -209,7 +209,7 @@ namespace game::Avatar
 		{
 			SetColumn((size_t)common::RNG::FromRange(0, (int)worldSize.GetX()));
 			SetRow((size_t)common::RNG::FromRange(0, (int)worldSize.GetY()));
-		} while (game::Creatures::GetInstance(GetPosition()));
+		} while (!game::World::CanSpawnAvatar(GetPosition()));
 		game::World::SetExplored(GetPosition());
 	}
 }
