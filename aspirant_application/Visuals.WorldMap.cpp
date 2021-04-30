@@ -61,7 +61,7 @@ namespace visuals::WorldMap
 			{
 				auto cell = common::XY<size_t>(column, row);
 				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
-				if (game::World::IsExplored(cell))
+				if (true || game::World::IsExplored(cell))
 				{
 
 					visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string

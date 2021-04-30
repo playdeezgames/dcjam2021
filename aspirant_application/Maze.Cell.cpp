@@ -8,15 +8,27 @@ namespace maze
 
 	}
 
-	void Cell::SetNeighbor(Direction direction, std::shared_ptr<Cell> cell)
+	void Cell::PlaceNeighbor(Direction direction, std::shared_ptr<Cell> cell)
 	{
 		neighbors[direction] = cell;
 	}
 
-	void Cell::SetDoor(Direction direction, std::shared_ptr<Door> door)
+	void Cell::PlaceDoor(Direction direction, std::shared_ptr<Door> door)
 	{
 		exits[direction] = door;
 	}
+
+	bool Cell::SetDoor(Direction direction, Door door)
+	{
+		auto iter = exits.find(direction);
+		if (iter != exits.end())
+		{
+			(*iter->second) = door;
+			return true;
+		}
+		return false;
+	}
+
 
 	std::optional<const std::shared_ptr<Cell>> Cell::GetNeighbor(Direction direction) const
 	{

@@ -19,8 +19,9 @@ namespace maze
 		std::map<Direction, std::shared_ptr<Cell>> neighbors;
 	public:
 		Cell();
-		void SetNeighbor(Direction, std::shared_ptr<Cell>);
-		void SetDoor(Direction, std::shared_ptr<Door>);
+		void PlaceNeighbor(Direction, std::shared_ptr<Cell>);
+		void PlaceDoor(Direction, std::shared_ptr<Door>);
+		bool SetDoor(Direction, Door);
 		std::optional<const std::shared_ptr<Cell>> GetNeighbor(Direction) const;
 		std::optional<std::shared_ptr<Cell>> GetNeighbor(Direction);
 		std::optional<const std::shared_ptr<Door>> GetDoor(Direction) const;

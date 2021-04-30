@@ -19,6 +19,7 @@ namespace game::data::Properties
 	const std::string DRUNKENNESS = "drunkenness";
 	const std::string DURATION = "duration";
 	const std::string EW_BORDERS = "ew-borders";
+	const std::string EXTRA_DOORS = "extra-doors";
 	const std::string EXPLORED = "explored";
 	const std::string FACING = "facing";
 	const std::string HEALTH = "health";

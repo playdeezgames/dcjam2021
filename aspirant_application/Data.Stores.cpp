@@ -26,7 +26,8 @@ namespace data::Stores
 		{data::Store::OPTIONS, "config/options.json"},
 		{data::Store::STATISTICS, "config/statistics.json"},
 		{data::Store::UI_SFX, "config/ui/sfx.json"},
-		{data::Store::AVATAR, "config/avatar.json"}
+		{data::Store::AVATAR, "config/avatar.json"},
+		{data::Store::MAZE, "config/maze.json"}
 	};
 
 	void Start()

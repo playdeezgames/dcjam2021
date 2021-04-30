@@ -49,10 +49,10 @@ namespace maze
 					auto neighbor = GetCell(nextColumn, nextRow);
 					auto door = std::make_shared<Door>();
 					doors.push_back(door);
-					cell.value()->SetNeighbor(direction, neighbor.value());
-					cell.value()->SetDoor(direction, door);
-					neighbor.value()->SetNeighbor(Directions::Opposite(direction), cell.value());
-					neighbor.value()->SetDoor(Directions::Opposite(direction), door);
+					cell.value()->PlaceNeighbor(direction, neighbor.value());
+					cell.value()->PlaceDoor(direction, door);
+					neighbor.value()->PlaceNeighbor(Directions::Opposite(direction), cell.value());
+					neighbor.value()->PlaceDoor(Directions::Opposite(direction), door);
 				}
 			}
 		}

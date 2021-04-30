@@ -13,4 +13,8 @@ namespace common::RNG
 		return rand() % (maximum - minimum) + minimum;
 	}
 
+	size_t FromRange(size_t minimum, size_t maximum)
+	{
+		return (size_t)FromRange((int)minimum, (int)maximum);
+	}
 }

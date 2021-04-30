@@ -29,18 +29,21 @@ namespace sublayout::POV
 
 	const std::map<game::world::Border, std::string> leftSides =
 	{
+		{game::world::Border::LOCK, "LeftLockedDoor"},
 		{game::world::Border::DOOR, "LeftDoor"},
 		{game::world::Border::WALL, "LeftWall"}
 	};
 
 	const std::map<game::world::Border, std::string> rightSides =
 	{
+		{game::world::Border::LOCK, "RightLockedDoor"},
 		{game::world::Border::DOOR, "RightDoor"},
 		{game::world::Border::WALL, "RightWall"}
 	};
 
 	const std::map<game::world::Border, std::string> aheads =
 	{
+		{game::world::Border::LOCK, "AheadLockedDoor"},
 		{game::world::Border::DOOR, "AheadDoor"},
 		{game::world::Border::WALL, "AheadWall"}
 	};

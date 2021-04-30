@@ -6,6 +6,7 @@
 #include "Game.h"
 #include <sstream>
 #include "Game.Data.Properties.h"
+#include "Data.Stores.h"
 namespace game::World
 {
 	std::string XYToRoomKey(const common::XY<size_t>& xy)
@@ -188,12 +189,33 @@ namespace game::World
 		}
 	}
 
+	static void PostGenerateMaze(maze::Maze& maze)
+	{
+		auto worldSize = game::World::GetSize();
+		size_t extraDoors = ::data::Stores::GetStore(::data::Store::MAZE)[data::Properties::EXTRA_DOORS];
+		while (extraDoors > 0)
+		{
+			size_t x = common::RNG::FromRange(0u, worldSize.GetX());
+			size_t y = common::RNG::FromRange(0u, worldSize.GetY());
+			auto cell = maze.GetCell((int)x, (int)y);
+			if (cell)
+			{
+				maze::Direction direction = maze::Directions::All()[common::RNG::FromRange(0u, maze::Directions::All().size())];
+				if ((*cell).get()->SetDoor(direction, maze::Door::OPEN))
+				{
+					extraDoors--;
+				}
+			}
+		}
+	}
+
 	void Reset()
 	{
 		GetExplored().clear();
 		auto worldSize = game::World::GetSize();
 		maze::Maze maze(COLUMNS, ROWS);
 		maze.Generate();
+		PostGenerateMaze(maze);
 
 		for (auto column = 0; column < COLUMNS; ++column)
 		{
@@ -206,7 +228,15 @@ namespace game::World
 				auto northDoor = cell.value()->GetDoor(maze::Direction::NORTH);
 				if (northDoor && *northDoor.value() == maze::Door::OPEN)
 				{
-					SetNSBorder(nsBorderIndex, world::Border::DOOR);
+					auto nextCell = cell.value()->GetNeighbor(maze::Direction::NORTH);
+					if (cell.value()->IsDeadEnd() || nextCell.value()->IsDeadEnd())
+					{
+						SetNSBorder(nsBorderIndex, world::Border::LOCK);
+					}
+					else
+					{
+						SetNSBorder(nsBorderIndex, world::Border::DOOR);
+					}
 				}
 				else
 				{
@@ -215,7 +245,15 @@ namespace game::World
 				auto westDoor = cell.value()->GetDoor(maze::Direction::WEST);
 				if (westDoor && *westDoor.value() == maze::Door::OPEN)
 				{
-					SetEWBorder(ewBorderIndex, world::Border::DOOR);
+					auto nextCell = cell.value()->GetNeighbor(maze::Direction::WEST);
+					if (cell.value()->IsDeadEnd() || nextCell.value()->IsDeadEnd())
+					{
+						SetEWBorder(ewBorderIndex, world::Border::LOCK);
+					}
+					else
+					{
+						SetEWBorder(ewBorderIndex, world::Border::DOOR);
+					}
 				}
 				else
 				{

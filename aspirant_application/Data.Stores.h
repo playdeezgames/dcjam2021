@@ -17,7 +17,8 @@ namespace data
 		OPTIONS,
 		STATISTICS,
 		UI_SFX,
-		AVATAR
+		AVATAR,
+		MAZE
 	};
 }
 namespace data::Stores

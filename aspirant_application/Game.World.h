@@ -7,7 +7,8 @@ namespace game::world
 	enum class Border
 	{
 		WALL,
-		DOOR
+		DOOR,
+		LOCK
 	};
 }
 namespace game::World
