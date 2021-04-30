@@ -13,7 +13,6 @@
 #include "Game.h"
 #include "Data.Stores.h"
 #include "Game.World.Items.h"
-#include "Game.Avatar.Items.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar()
@@ -186,10 +185,9 @@ namespace game::Avatar
 			}
 			else if (border== game::world::Border::LOCK)
 			{
-				int keyItem = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY];
-				if (game::avatar::Items::Read(keyItem) > 0)
+				if (game::avatar::Statistics::Read(game::avatar::Statistic::KEYS)>0)
 				{
-					game::avatar::Items::Remove(keyItem, 1u);
+					game::avatar::Statistics::Decrease(game::avatar::Statistic::KEYS, 1);
 					game::World::SetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing(), game::world::Border::DOOR);
 					//TODO: play an unlock sound!
 				}

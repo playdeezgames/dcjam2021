@@ -87,6 +87,7 @@ namespace common::Application
 		state::in_play::MiniMap::Start,
 		state::LeavePlay::Start,
 		sublayout::POV::Start,
+		game::avatar::Statistics::Start,
 		game::avatar::Items::Start,
 		state::in_play::FloorInventory::Start,
 		state::in_play::AvatarInventory::Start,

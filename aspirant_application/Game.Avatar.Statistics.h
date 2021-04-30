@@ -13,6 +13,7 @@ namespace game::avatar
 		BOWEL,
 		NAUSEA,
 		DRUNKENNESS,
+		KEYS
 	};
 }
 namespace game::avatar::Statistics
@@ -24,6 +25,7 @@ namespace game::avatar::Statistics
 	void Decrease(const ::game::avatar::Statistic&, int);
 	void Increase(const ::game::avatar::Statistic&, int);
 	void Reset();
+	void Start();
 	void DoAttackTimer();
 	void DoDefendTimer();
 	int Maximum(const ::game::avatar::Statistic&);

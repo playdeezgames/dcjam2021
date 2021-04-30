@@ -15,7 +15,8 @@ namespace state::in_play::AvatarStatus
 	const std::string TEXT_DEFEND_TIMER = "DefendTimer";
 	const std::string TEXT_BOWEL = "Bowel";
 	const std::string TEXT_DRUNKENNESS = "Drunkenness";
-	const std::string TEXT_NAUSEA = "Nausea";
+	const std::string TEXT_NAUSEA = "Nausea";	
+	const std::string TEXT_KEYS= "Keys";
 
 
 	const std::map<Command, std::function<void()>> commandHandlers =
@@ -90,6 +91,14 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_NAUSEA, ss.str());
 	}
 
+	static void UpdateKeys(const Uint32&)
+	{
+		std::stringstream ss;
+		ss << "Keys: ";
+		ss << game::avatar::Statistics::Read(game::avatar::Statistic::KEYS);
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_KEYS, ss.str());
+	}
+
 	void Start()
 	{
 		::application::Command::SetHandlers(::UIState::IN_PLAY_STATUS, commandHandlers);
@@ -102,6 +111,7 @@ namespace state::in_play::AvatarStatus
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateBowel);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDrunkenness);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateNausea);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateKeys);
 
 	}
 }

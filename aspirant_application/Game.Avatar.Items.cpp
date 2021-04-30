@@ -12,6 +12,7 @@
 #include "Game.World.h"
 #include "Common.RNG.h"
 #include "Game.CombatDeck.h"
+#include "Data.Stores.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar();
@@ -73,8 +74,15 @@ namespace game::avatar::Items
 	{
 		if (amount > 0)
 		{
-			auto itemKey = ItemToKey(item);
-			GetAvatarInventory()[itemKey] = Read(item) + amount;
+			if (item == ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY])
+			{
+				game::avatar::Statistics::Increase(game::avatar::Statistic::KEYS, 1);
+			}
+			else
+			{
+				auto itemKey = ItemToKey(item);
+				GetAvatarInventory()[itemKey] = Read(item) + amount;
+			}
 		}
 	}
 

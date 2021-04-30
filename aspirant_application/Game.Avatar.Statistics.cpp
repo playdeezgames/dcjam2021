@@ -76,6 +76,11 @@ namespace game::avatar::Statistics
 		}
 	}
 
+	void Start()
+	{
+		Reset();
+	}
+
 	void Decrease(const ::game::avatar::Statistic& statistic, int delta)
 	{
 		Write(statistic, Read(statistic) - delta);
