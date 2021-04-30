@@ -191,6 +191,10 @@ namespace game::Avatar
 					game::World::SetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing(), game::world::Border::DOOR);
 					//TODO: play an unlock sound!
 				}
+				else
+				{
+					//TODO: failed to unlock sound!
+				}
 			}
 			else
 			{
