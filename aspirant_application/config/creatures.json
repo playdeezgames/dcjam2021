@@ -67,7 +67,8 @@
         "attitudes":{
             "6":1,
             "8":2
-        }
+        },
+        "prefer-dead-ends":true
     },
     {
         "index":3,
@@ -161,7 +162,8 @@
         "attitudes":{
             "6":5,
             "8":6
-        }
+        },
+        "prefer-dead-ends":true
     },
     {
         "index":7,
@@ -185,6 +187,7 @@
         "attitudes":{
             "6":4,
             "8":1
-        }
+        },
+        "prefer-dead-ends":true
     }
 ]

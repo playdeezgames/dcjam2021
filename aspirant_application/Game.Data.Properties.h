@@ -33,6 +33,7 @@ namespace game::data::Properties
 	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";
 	const std::string POOP = "poop";
+	const std::string PREFER_DEAD_ENDS = "prefer-dead-ends";
 	const std::string ROOM_INVENTORIES = "room-inventories";
 	const std::string ROW = "row";
 	const std::string SFX = "sfx";

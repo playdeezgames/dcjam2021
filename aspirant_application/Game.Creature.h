@@ -38,6 +38,7 @@ namespace game::creature
 		std::map<Sfx, std::string> sfx;
 		Attitude attitude;
 		std::map<int, Attitude> attitudes;
+		bool preferDeadEnds;
 	};
 
 	Descriptor GetDescriptor(int);

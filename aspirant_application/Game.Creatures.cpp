@@ -7,6 +7,7 @@
 #include "Game.Data.Properties.h"
 #include <sstream>
 #include "Game.h"
+#include <algorithm>
 namespace game::Creatures
 {
 	nlohmann::json& GetCreatures()
@@ -136,6 +137,7 @@ namespace game::Creatures
 	{
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
+		auto deadEnds = game::World::GetDeadEnds();
 		for (auto creature : game::creature::All())
 		{
 			auto descriptor = game::creature::GetDescriptor(creature);
@@ -147,11 +149,34 @@ namespace game::Creatures
 				size_t y;
 				while (!available)
 				{
-					x = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
-					y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
+					if (descriptor.preferDeadEnds)
+					{
+						if (!deadEnds.empty())
+						{
+							auto xy = deadEnds[common::RNG::FromRange(0u, deadEnds.size())];
+							x = xy.GetX();
+							y = xy.GetY();
+						}
+						else
+						{
+							x = common::RNG::FromRange(0u, worldSize.GetX());
+							y = common::RNG::FromRange(0u, worldSize.GetY());
+						}
+					}
+					else
+					{
+						x = common::RNG::FromRange(0u, worldSize.GetX());
+						y = common::RNG::FromRange(0u, worldSize.GetY());
+					}
 					available = !Get({ x,y });
 				}
-				Put({ x,y }, { creature, 0, (int)descriptor.attitude });
+				common::XY<size_t> location = { x,y };
+				Put(location, { creature, 0, (int)descriptor.attitude });
+				auto iter = std::find(deadEnds.begin(), deadEnds.end(), location);
+				if (iter != deadEnds.end())
+				{
+					deadEnds.erase(iter);
+				}
 				numberAppearing--;
 			}
 		}

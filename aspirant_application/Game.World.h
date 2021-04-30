@@ -24,5 +24,6 @@ namespace game::World
 	bool IsExplored(const common::XY<size_t>&);
 	void SetExplored(const common::XY<size_t>&);
 	bool IsExitable(const common::XY<size_t>&);
+	std::vector<common::XY<size_t>> GetDeadEnds();
 	bool CanSpawnAvatar(const common::XY<size_t>&);
 }

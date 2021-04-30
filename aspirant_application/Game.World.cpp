@@ -277,4 +277,22 @@ namespace game::World
 	{
 		return !game::Creatures::GetInstance(position) && IsExitable(position);
 	}
+
+	std::vector<common::XY<size_t>> GetDeadEnds()
+	{
+		std::vector<common::XY<size_t>> result;
+		auto worldSize = game::World::GetSize();
+		for (size_t x = 0u; x < worldSize.GetX(); ++x)
+		{
+			for (size_t y = 0u; y < worldSize.GetY(); ++y)
+			{
+				if (!IsExitable({ x,y }))
+				{
+					result.push_back({ x,y });
+				}
+			}
+		}
+		return result;
+	}
+
 }

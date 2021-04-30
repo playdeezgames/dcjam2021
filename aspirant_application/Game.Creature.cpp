@@ -45,7 +45,8 @@ namespace game::creature
 			bribes,
 			sfx,
 			creatureDescriptor[game::data::Properties::ATTITUDE],
-			attitudes
+			attitudes,
+			(creatureDescriptor.count(game::data::Properties::PREFER_DEAD_ENDS)>0) ? ((bool)creatureDescriptor[game::data::Properties::PREFER_DEAD_ENDS]) : (false)
 		};
 	}
 
