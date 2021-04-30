@@ -9,6 +9,7 @@ namespace game::avatar::Items
 	size_t Read(int);
 	void Reset();
 	void Add(int, size_t);
+	size_t Remove(int, size_t);
 	std::map<int, size_t> All();
 	void Start(); 
 	void Drop(std::optional<int> item);

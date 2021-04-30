@@ -14,6 +14,7 @@ namespace game::world
 namespace game::World
 {
 	world::Border GetBorderAhead(const common::XY<size_t>&, const maze::Direction&);
+	void SetBorderAhead(const common::XY<size_t>&, const maze::Direction&, const world::Border&);
 	world::Border GetBorderLeft(const common::XY<size_t>&, const maze::Direction&);
 	world::Border GetBorderRight(const common::XY<size_t>&, const maze::Direction&);
 	common::XY<size_t> GetSize();

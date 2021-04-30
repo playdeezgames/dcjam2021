@@ -13,6 +13,7 @@
 #include "Game.h"
 #include "Data.Stores.h"
 #include "Game.World.Items.h"
+#include "Game.Avatar.Items.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar()
@@ -159,7 +160,8 @@ namespace game::Avatar
 		std::optional<std::string> result = std::nullopt;
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			if (game::World::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing()) == game::world::Border::DOOR)
+			auto border = game::World::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing());
+			if (border == game::world::Border::DOOR)
 			{
 				switch (GetFacing())
 				{
@@ -181,6 +183,16 @@ namespace game::Avatar
 				HandleNausea();
 				HandleSobriety();
 				result = HandleBowel();
+			}
+			else if (border== game::world::Border::LOCK)
+			{
+				int keyItem = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY];
+				if (game::avatar::Items::Read(keyItem) > 0)
+				{
+					game::avatar::Items::Remove(keyItem, 1u);
+					game::World::SetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing(), game::world::Border::DOOR);
+					//TODO: play an unlock sound!
+				}
 			}
 			else
 			{

@@ -156,7 +156,26 @@ namespace game::World
 		case maze::Direction::SOUTH:
 			return GetNSBorder(XYToSouthBorderIndex(position));
 		default:
-			return GetEWBorder(position.GetX() + position.GetY() * EW_BORDER_STRIDE);
+			return GetEWBorder(XYToWestBorderIndex(position));
+		}
+	}
+
+	void SetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction, const world::Border& border)
+	{
+		switch (direction)
+		{
+		case maze::Direction::NORTH:
+			SetNSBorder(XYToNorthBorderIndex(position), border);
+			break;
+		case maze::Direction::EAST:
+			SetEWBorder(XYToEastBorderIndex(position), border);
+			break;
+		case maze::Direction::SOUTH:
+			SetNSBorder(XYToSouthBorderIndex(position), border);
+			break;
+		default:
+			SetEWBorder(XYToWestBorderIndex(position), border);
+			break;
 		}
 	}
 

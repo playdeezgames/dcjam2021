@@ -83,7 +83,7 @@ namespace game::avatar::Items
 		Reset();
 	}
 
-	static size_t Remove(int item, size_t quantity)
+	size_t Remove(int item, size_t quantity)
 	{
 		auto total = Read(item);
 		if (total >0)
