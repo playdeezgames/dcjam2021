@@ -304,9 +304,27 @@
         "visible": false
     },
     {
+        "type": "Image",
+        "image-id": "Key",
+        "sprite": "ItemKey",
+        "color": "White",
+        "x": 196,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakeKey",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 196,
+        "y": 324,
+        "visible": false
+    },
+    {
         "type": "Area",
-        "area-id": "TakeTurd",
-        "x": 228,
+        "area-id": "TakeKey",
+        "x": 196,
         "y": 324,
         "width": 32,
         "height":32

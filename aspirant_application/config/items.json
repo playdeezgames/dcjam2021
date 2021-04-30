@@ -124,5 +124,13 @@
         "take-image-id":"TakeJoker",
         "take-area-id":"TakeJoker",
         "sfx-success":"play-joker"
+    },
+    "10":{
+        "initial-inventory":1,
+        "name":"Key",
+        "image-id":"Key",
+        "number-appearing": 0,
+        "take-image-id":"TakeKey",
+        "take-area-id":"TakeKey"
     }
 }

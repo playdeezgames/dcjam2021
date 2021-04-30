@@ -7,6 +7,8 @@
 #include "Game.h"
 #include "Game.Data.Properties.h"
 #include <sstream>
+#include <algorithm>
+#include "Data.Stores.h"
 namespace game::world::Items
 {
 	static nlohmann::json& GetRoomInventories()
@@ -55,10 +57,33 @@ namespace game::world::Items
 		totalCount = totalCount;
 	}
 
+	static void PopulateKeys()
+	{
+		int keyItem = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY];
+		auto worldSize = game::World::GetSize();
+		auto deadEnds = game::World::GetDeadEnds();
+		size_t keyCount = deadEnds.size();
+		while (keyCount > 0)
+		{
+			common::XY<size_t> location =
+			{
+				common::RNG::FromRange(0u, worldSize.GetX()) , 
+				common::RNG::FromRange(0u, worldSize.GetY()) 
+			};
+			auto iter = std::find(deadEnds.begin(), deadEnds.end(), location);
+			if (iter == deadEnds.end())
+			{
+				Add(location, keyItem, 1);
+				keyCount--;
+			}
+		}
+	}
+
 	void Reset()
 	{
 		GetRoomInventories().clear();
 		PopulateItems();
+		PopulateKeys();
 	}
 
 	static std::string IntToItemKey(const int& item)
