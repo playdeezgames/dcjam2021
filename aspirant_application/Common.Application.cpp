@@ -105,6 +105,11 @@ namespace common::Application
 		Start(renderer, arguments);
 	}
 
+	static void ReportRenderTicks(Uint32 renderTicks)
+	{
+		SDL_LogDebug(0, "%u", renderTicks);
+	}
+
 	static void DoPump()
 	{
 		SDL_Event evt;
@@ -115,6 +120,7 @@ namespace common::Application
 			Update(frameTicks - currentTicks);
 			currentTicks = frameTicks;
 			Render(renderer);
+			ReportRenderTicks(SDL_GetTicks() - frameTicks);
 			SDL_RenderPresent(renderer.get());
 			while (SDL_PollEvent(&evt))
 			{
