@@ -5,24 +5,58 @@
 #include "Data.Stores.h"
 namespace visuals::Sprites
 {
-	nlohmann::json NameToData(const std::string name)
+	struct InternalSprite
 	{
-		if (::data::Stores::GetStore(::data::Store::SPRITES).count(name) > 0)
+		std::string textureName;
+		SDL_Rect destination;
+		SDL_Rect source;
+	};
+
+	static std::map<std::string, InternalSprite> internalSprites;
+
+	static void Initialize()
+	{
+		static bool initialized = false;
+		if (!initialized)
 		{
-			return ::data::Stores::GetStore(::data::Store::SPRITES)[name];
-		}
-		else
-		{
-			return nlohmann::json();
+			auto& spriteStore = ::data::Stores::GetStore(::data::Store::SPRITES);
+			for (auto& sprite : spriteStore.items())
+			{
+				auto& model = sprite.value();
+				std::string textureName = model[visuals::data::Properties::TEXTURE];
+				SDL_Rect destination = 
+				{
+					((model.count(data::Properties::OFFSET_X) > 0) ? ((int)model[data::Properties::OFFSET_X]) : (0)),
+					((model.count(data::Properties::OFFSET_Y) > 0) ? ((int)model[data::Properties::OFFSET_Y]) : (0)),
+					model[common::data::Properties::WIDTH],
+					model[common::data::Properties::HEIGHT]
+				};
+				SDL_Rect source = 
+				{
+					model[common::data::Properties::X],
+					model[common::data::Properties::Y],
+					model[common::data::Properties::WIDTH],
+					model[common::data::Properties::HEIGHT]
+				};
+				internalSprites[sprite.key()] =
+				{
+					textureName,
+					destination,
+					source
+				};
+			}
+			initialized = true;
 		}
 	}
 
 	void Draw(const std::string& spriteName, std::shared_ptr<SDL_Renderer> renderer, const ::common::XY<int>& xy, const SDL_Color& color)
 	{
-		auto model = NameToData(spriteName);
-		if (model.type() != nlohmann::json::value_t::null)
+		Initialize();
+		auto iter = internalSprites.find(spriteName);
+		if (iter != internalSprites.end())
 		{
-			auto texture = visuals::Textures::Read(renderer, model[visuals::data::Properties::TEXTURE]);
+			auto& interalSprite = iter->second;
+			auto texture = visuals::Textures::Read(renderer, interalSprite.textureName);
 			SDL_SetTextureColorMod
 			(
 				texture.get(),
@@ -35,30 +69,21 @@ namespace visuals::Sprites
 				texture.get(),
 				color.a
 			);
-			SDL_Rect rcDst =
-			{
-				xy.GetX() + ((model.count(data::Properties::OFFSET_X) > 0) ? ((int)model[data::Properties::OFFSET_X]) : (0)),
-				xy.GetY() + ((model.count(data::Properties::OFFSET_Y) > 0) ? ((int)model[data::Properties::OFFSET_Y]) : (0)),
-				model[common::data::Properties::WIDTH],
-				model[common::data::Properties::HEIGHT]
-			};
-			SDL_Rect source =
-			{
-				model[common::data::Properties::X],
-				model[common::data::Properties::Y],
-				model[common::data::Properties::WIDTH],
-				model[common::data::Properties::HEIGHT]
-			};
-			SDL_RenderCopy(renderer.get(), texture.get(), &source, &rcDst);
+			interalSprite.destination.x += xy.GetX();
+			interalSprite.destination.y += xy.GetY();
+			SDL_RenderCopy(renderer.get(), texture.get(), &interalSprite.source, &interalSprite.destination);
+			interalSprite.destination.x -= xy.GetX();
+			interalSprite.destination.y -= xy.GetY();
 		}
 	}
 
 	std::optional<int> GetWidth(const std::string& spriteName)
 	{
-		auto model = NameToData(spriteName);
-		if (model.type() != nlohmann::json::value_t::null)
+		Initialize();
+		auto iter = internalSprites.find(spriteName);
+		if (iter != internalSprites.end())
 		{
-			return model[common::data::Properties::WIDTH];
+			return iter->second.destination.w;
 		}
 		return std::nullopt;
 	}
