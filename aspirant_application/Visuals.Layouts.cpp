@@ -25,6 +25,17 @@ namespace visuals::Layout
 		{visuals::data::Type::AVATAR_INVENTORY, visuals::AvatarInventory::Draw}
 	};
 
+	std::map<visuals::data::Type, size_t> typeRenderCounts;
+	std::map<visuals::data::Type, Uint32> typeRenderTimes;
+	std::map<visuals::data::Type, Uint32> averageTypeRenderTimes;
+
+	static void LogTypeRender(visuals::data::Type visualType, Uint32 renderTime)
+	{
+		typeRenderCounts[visualType]++;
+		typeRenderTimes[visualType] += renderTime;
+		averageTypeRenderTimes[visualType] = typeRenderTimes[visualType] / typeRenderCounts[visualType];
+	}
+
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		for (auto& drawn : model)
@@ -35,7 +46,9 @@ namespace visuals::Layout
 				auto drawer = table.find(*drawnType);
 				if (drawer != table.end())
 				{
+					auto start = SDL_GetTicks();
 					drawer->second(renderer, drawn);
+					LogTypeRender(drawnType.value(), SDL_GetTicks() - start);
 				}
 			}
 		}
@@ -59,9 +72,22 @@ namespace visuals::Layouts
 		return layouts.find(layoutName)->second;
 	}
 
+	static std::map<std::string, size_t> renderCounts;
+	static std::map<std::string, Uint32> renderTimes;
+	static std::map<std::string, Uint32> averageRenderTimes;
+
+	static void LogRender(const std::string& layoutName, Uint32 renderTime)
+	{
+		renderCounts[layoutName]++;
+		renderTimes[layoutName] += renderTime;
+		averageRenderTimes[layoutName] = renderTimes[layoutName] / renderCounts[layoutName];
+	}
+
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const std::string& layoutName)
 	{
 		InitializeLayout(layoutName);
+		Uint32 start = SDL_GetTicks();
 		visuals::Layout::Draw(renderer, layouts[layoutName]);
+		LogRender(layoutName, SDL_GetTicks() - start);
 	}
 }

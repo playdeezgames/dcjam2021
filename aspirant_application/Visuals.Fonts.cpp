@@ -34,18 +34,33 @@ namespace visuals::Fonts
 		}
 	}
 
+	static std::map<std::string, std::map<char, std::optional<std::string>>> glyphSprites;
+
 	static std::optional<std::string> GetGlyphSprite(const std::string& fontname, char ch)
 	{
+		auto fontIter = glyphSprites.find(fontname);
+		if (fontIter != glyphSprites.end())
+		{
+			auto& font = fontIter->second;
+			auto charIter = font.find(ch);
+			if (charIter != font.end())
+			{
+				return charIter->second;
+			}
+		}
+		std::optional<std::string> result;
 		std::stringstream ss;
 		ss << (int)ch;
-		if (NameToData(fontname).count(ss.str()) > 0)
+		std::string key = ss.str();
+		auto& data = NameToData(fontname);
+		if (data.count(key) > 0)
 		{
-			return NameToData(fontname)[ss.str()];
+			std::string spriteName = data[key];
+			glyphSprites[fontname][ch] = std::optional<std::string>(spriteName);
+			result = spriteName;
 		}
-		else
-		{
-			return std::nullopt;
-		}
+		glyphSprites[fontname][ch] = result;
+		return result;
 	}
 
 	static common::XY<int> WriteGlyph(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color)
