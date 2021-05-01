@@ -8,13 +8,18 @@
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Visuals.Colors.h"
-namespace visuals::WorldMap 
-{ 
+namespace visuals::WorldMap
+{
 	const std::string MAP_CELL_BASE = "MapCellBase";
 	const std::string MAP_CELL_NORTH_WALL = "MapCellNorthWall";
 	const std::string MAP_CELL_EAST_WALL = "MapCellEastWall";
 	const std::string MAP_CELL_SOUTH_WALL = "MapCellSouthWall";
 	const std::string MAP_CELL_WEST_WALL = "MapCellWestWall";
+	const std::string MAP_CELL_KNOWN = "MapCellKnown";
+	const std::string MAP_CELL_KNOWN_NORTH_WALL = "MapCellKnownNorthWall";
+	const std::string MAP_CELL_KNOWN_EAST_WALL = "MapCellKnownEastWall";
+	const std::string MAP_CELL_KNOWN_SOUTH_WALL = "MapCellKnownSouthWall";
+	const std::string MAP_CELL_KNOWN_WEST_WALL = "MapCellKnownWestWall";
 	const std::string MAP_CELL_UNEXPLORED = "MapCellUnexplored";
 	const std::string AVATAR_NORTH = "AvatarNorth";
 	const std::string AVATAR_EAST = "AvatarEast";
@@ -28,6 +33,14 @@ namespace visuals::WorldMap
 		{maze::Direction::EAST, MAP_CELL_EAST_WALL},
 		{maze::Direction::SOUTH, MAP_CELL_SOUTH_WALL},
 		{maze::Direction::WEST, MAP_CELL_WEST_WALL}
+	};
+
+	static std::map<maze::Direction, std::string> knownWallSprites =
+	{
+		{maze::Direction::NORTH, MAP_CELL_KNOWN_NORTH_WALL},
+		{maze::Direction::EAST, MAP_CELL_KNOWN_EAST_WALL},
+		{maze::Direction::SOUTH, MAP_CELL_KNOWN_SOUTH_WALL},
+		{maze::Direction::WEST, MAP_CELL_KNOWN_WEST_WALL}
 	};
 
 	static std::map<maze::Direction, std::string> avatarSprites =
@@ -46,6 +59,14 @@ namespace visuals::WorldMap
 		}
 	}
 
+	static void DrawKnownWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
+	{
+		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
+		{
+			visuals::Sprites::Draw(knownWallSprites[direction], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+		}
+	}
+
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		int x = model[common::data::Properties::X];
@@ -61,7 +82,9 @@ namespace visuals::WorldMap
 			{
 				auto cell = common::XY<size_t>(column, row);
 				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
-				if (game::World::IsExplored(cell))
+				switch (game::World::IsExplored(cell))
+				{
+				case game::world::KnownState::VISITED:
 				{
 
 					visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
@@ -80,9 +103,32 @@ namespace visuals::WorldMap
 						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
 					}
 				}
-				else
+				break;
+				case game::world::KnownState::KNOWN:
+				{
+
+					visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					DrawKnownWall(renderer, cell, plot, maze::Direction::NORTH);
+					DrawKnownWall(renderer, cell, plot, maze::Direction::EAST);
+					DrawKnownWall(renderer, cell, plot, maze::Direction::SOUTH);
+					DrawKnownWall(renderer, cell, plot, maze::Direction::WEST);
+
+					if (cell == avatarPosition)
+					{
+						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					}
+
+					if (game::Creatures::GetInstance(cell))
+					{
+						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					}
+				}
+				break;
+				default:
 				{
 					visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+				}
+				break;
 				}
 			}
 		}

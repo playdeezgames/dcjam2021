@@ -8,6 +8,7 @@
 #include "Game.Data.Properties.h"
 #include "Data.Stores.h"
 #include "Game.Creatures.h"
+#include <optional>
 namespace game::World
 {
 	std::string XYToRoomKey(const common::XY<size_t>& xy)
@@ -59,24 +60,47 @@ namespace game::World
 		GetExplored()[XYToRoomKey(xy)] = value;
 	}
 
-	static size_t GetExplored(const common::XY<size_t>& xy)
+	static std::optional<size_t> GetExplored(const common::XY<size_t>& xy)
 	{
 		auto roomKey = XYToRoomKey(xy);
 		if (GetExplored().count(roomKey) > 0)
 		{
 			return GetExplored()[roomKey];
 		}
-		return 0;
+		return std::nullopt;
 	}
 
 	void SetExplored(const common::XY<size_t>& xy)
 	{
-		SetExplored(xy, GetExplored(xy) + 1);
+		auto visits = GetExplored(xy);
+		if (visits)
+		{
+			SetExplored(xy, visits.value() + 1);
+		}
+		else
+		{
+			SetExplored(xy, 1);
+		}
 	}
 
-	bool IsExplored(const common::XY<size_t>& cell)
+	void SetKnown(const common::XY<size_t>& xy)
 	{
-		return GetExplored(cell) > 0;
+		auto visits = GetExplored(xy);
+		if (!visits)
+		{
+			SetExplored(xy, 0);
+		}
+	}
+
+
+	game::world::KnownState IsExplored(const common::XY<size_t>& cell)
+	{
+		auto visits = GetExplored(cell);
+		if (visits)
+		{
+			return (visits.value() > 0) ? (game::world::KnownState::VISITED) : (game::world::KnownState::KNOWN);
+		}
+		return game::world::KnownState::UNKNOWN;
 	}
 
 	common::XY<size_t> GetSize()

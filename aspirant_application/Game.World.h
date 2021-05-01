@@ -10,6 +10,12 @@ namespace game::world
 		DOOR,
 		LOCK
 	};
+	enum class KnownState
+	{
+		UNKNOWN,
+		KNOWN,
+		VISITED
+	};
 }
 namespace game::World
 {
@@ -22,8 +28,9 @@ namespace game::World
 
 	//TODO: is this more involved with avatar or world?
 	//TODO: there will be an additional "known" state, in addition to the "visited" state
-	bool IsExplored(const common::XY<size_t>&);
+	game::world::KnownState IsExplored(const common::XY<size_t>&);
 	void SetExplored(const common::XY<size_t>&);
+	void SetKnown(const common::XY<size_t>&);
 	bool IsExitable(const common::XY<size_t>&);
 	std::vector<common::XY<size_t>> GetDeadEnds();
 	bool CanSpawnAvatar(const common::XY<size_t>&);

@@ -2764,13 +2764,6 @@
         "width": 256,
         "height": 360
     },
-    "MapCellBase": {
-        "texture": "world",
-        "x": 16,
-        "y": 0,
-        "width": 16,
-        "height": 16
-    },
     "MapCellDanger": {
         "texture": "world",
         "x": 48,
@@ -2781,6 +2774,13 @@
     "MapCellUnexplored": {
         "texture": "world",
         "x": 32,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "MapCellBase": {
+        "texture": "world",
+        "x": 16,
         "y": 0,
         "width": 16,
         "height": 16
@@ -2815,6 +2815,48 @@
         "texture": "world",
         "x": 14,
         "y": 1,
+        "width": 2,
+        "height": 14,
+        "offset-x": 14,
+        "offset-y": 1
+    },
+    "MapCellKnown": {
+        "texture": "world",
+        "x": 16,
+        "y": 32,
+        "width": 16,
+        "height": 16
+    },
+    "MapCellKnownNorthWall": {
+        "texture": "world",
+        "x": 1,
+        "y": 32,
+        "width": 14,
+        "height": 2,
+        "offset-x": 1
+    },
+    "MapCellKnownSouthWall": {
+        "texture": "world",
+        "x": 1,
+        "y": 46,
+        "width": 14,
+        "height": 2,
+        "offset-x": 1,
+        "offset-y": 14
+    },
+    "MapCellKnownWestWall": {
+        "texture": "world",
+        "x": 0,
+        "y": 33,
+        "width": 2,
+        "height": 14,
+        "offset-x": 0,
+        "offset-y": 1
+    },
+    "MapCellKnownEastWall": {
+        "texture": "world",
+        "x": 14,
+        "y": 33,
         "width": 2,
         "height": 14,
         "offset-x": 14,
