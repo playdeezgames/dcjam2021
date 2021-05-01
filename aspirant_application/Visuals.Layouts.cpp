@@ -25,17 +25,6 @@ namespace visuals::Layout
 		{visuals::data::Type::AVATAR_INVENTORY, visuals::AvatarInventory::Draw}
 	};
 
-	std::map<visuals::data::Type, size_t> typeRenderCounts;
-	std::map<visuals::data::Type, Uint32> typeRenderTimes;
-	std::map<visuals::data::Type, Uint32> averageTypeRenderTimes;
-
-	static void LogTypeRender(visuals::data::Type visualType, Uint32 renderTime)
-	{
-		typeRenderCounts[visualType]++;
-		typeRenderTimes[visualType] += renderTime;
-		averageTypeRenderTimes[visualType] = typeRenderTimes[visualType] / typeRenderCounts[visualType];
-	}
-
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		for (auto& drawn : model)
@@ -46,9 +35,7 @@ namespace visuals::Layout
 				auto drawer = table.find(*drawnType);
 				if (drawer != table.end())
 				{
-					auto start = SDL_GetTicks();
 					drawer->second(renderer, drawn);
-					LogTypeRender(drawnType.value(), SDL_GetTicks() - start);
 				}
 			}
 		}

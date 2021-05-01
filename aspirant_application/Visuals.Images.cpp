@@ -15,22 +15,10 @@ namespace visuals::Image
 {
 	const SDL_Color defaultColor = { 255, 255, 255, 255 };
 
-	static size_t drawCounts = 0;
-	static Uint32 drawTimes = 0;
-	static Uint32 averageDrawTime = 0;
-
-	static void LogDraw(Uint32 drawTime)
-	{
-		drawCounts++;
-		drawTimes += drawTime;
-		averageDrawTime = drawTimes / drawCounts;
-	}
-
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		if (model.count(data::Properties::VISIBLE) == 0 || model[data::Properties::VISIBLE] == true)
 		{
-			Uint32 start = SDL_GetTicks();
 			std::string spriteName = model[data::Properties::SPRITE];
 			int x = model[common::data::Properties::X];
 			int y = model[common::data::Properties::Y];
@@ -45,7 +33,6 @@ namespace visuals::Image
 					x,
 					y),
 				color);
-			LogDraw(SDL_GetTicks() - start);
 		}
 	}
 }
