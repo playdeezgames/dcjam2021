@@ -23,6 +23,7 @@ namespace sublayout::POV
 	const std::string POSITION_TEXT_ID = "Position";
 	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
 	const std::string TEXT_AVATAR_STATE = "AvatarState";
+	const std::string TEXT_ITEM_TOOL_TIP = "ItemToolTip";
 
 	const std::string AREA_TAKE_FOOD = "TakeFood";
 	const std::string IMAGE_TAKE_FOOD = "TakeFood";
@@ -124,13 +125,20 @@ namespace sublayout::POV
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
+		std::string itemToolTip = "";
 		auto areas = visuals::Areas::Get(POV_LAYOUT_NAME, xy);
 		auto position = game::Avatar::GetPosition();
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
-			::visuals::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item));
+			bool showItem = areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item);
+			::visuals::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, showItem);
+			if (showItem)
+			{
+				itemToolTip = descriptor.name;
+			}
 		}
+		visuals::Texts::SetText(POV_LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
 	}
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
