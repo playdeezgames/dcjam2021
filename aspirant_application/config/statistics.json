@@ -48,5 +48,10 @@
         "minimum":0,
         "maximum":144,
         "default":0
+    },
+    "10":{
+        "minimum":0,
+        "maximum":1000,
+        "default":0
     }
 }

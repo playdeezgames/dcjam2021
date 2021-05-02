@@ -23,8 +23,10 @@ namespace game::Combat
 				auto damage =
 					game::Creatures::DoDamage(
 						game::Avatar::GetPosition(),
-						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK));
+						game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK) +
+						game::avatar::Statistics::Read(game::avatar::Statistic::STREAK));
 				game::avatar::Statistics::DoAttackTimer();
+				game::avatar::Statistics::Increase(game::avatar::Statistic::STREAK, 1);
 				if (damage > 0)
 				{
 					if (game::Creatures::GetInstance(game::Avatar::GetPosition()).value().health<=0)
@@ -43,6 +45,7 @@ namespace game::Combat
 			}
 			else
 			{
+				game::avatar::Statistics::Write(game::avatar::Statistic::STREAK, 0);
 				auto instance = game::Creatures::GetInstance(game::Avatar::GetPosition()).value();
 				if (instance.attitude == game::creature::Attitude::DISTRACTED)
 				{

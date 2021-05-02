@@ -13,7 +13,8 @@ namespace game::avatar
 		BOWEL,
 		NAUSEA,
 		DRUNKENNESS,
-		KEYS
+		KEYS,
+		STREAK
 	};
 }
 namespace game::avatar::Statistics

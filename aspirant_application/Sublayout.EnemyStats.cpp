@@ -12,6 +12,7 @@ namespace sublayout::EnemyStats
 	const std::string LAYOUT_NAME = "Sublayout.EnemyStats";
 	const std::string HEALTH_TEXT_ID = "EnemyHealth";
 	const std::string ATTACK_TEXT_ID = "Attack";
+	const std::string STREAK_TEXT_ID = "Streak";
 	const std::string DEFEND_TEXT_ID = "Defend";
 	const std::string TEXT_ENEMY_ATTITUDE = "EnemyAttitude";
 
@@ -62,7 +63,7 @@ namespace sublayout::EnemyStats
 
 	static void UpdateAttack(const Uint32&)
 	{
-		auto attack = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK);
+		auto attack = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK)+ game::avatar::Statistics::Read(game::avatar::Statistic::STREAK);
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		std::stringstream ss;
 		ss << "Attack: " << attack;
@@ -71,6 +72,14 @@ namespace sublayout::EnemyStats
 			ss << "(" << timer << ")";
 		}
 		::visuals::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
+	}
+
+	static void UpdateStreak(const Uint32&)
+	{
+		auto streak = game::avatar::Statistics::Read(game::avatar::Statistic::STREAK);
+		std::stringstream ss;
+		ss << "Streak: " << streak;
+		::visuals::Texts::SetText(LAYOUT_NAME, STREAK_TEXT_ID, ss.str());
 	}
 
 	static void UpdateDefend(const Uint32&)
@@ -100,6 +109,7 @@ namespace sublayout::EnemyStats
 			::application::Update::AddHandler(state, UpdateAttack);
 			::application::Update::AddHandler(state, UpdateDefend);
 			::application::Update::AddHandler(state, UpdateAttitude);
+			::application::Update::AddHandler(state, UpdateStreak);
 		}
 	}
 }
