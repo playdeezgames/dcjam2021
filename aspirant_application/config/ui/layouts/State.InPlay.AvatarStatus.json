@@ -159,5 +159,27 @@
         "drop-shadow-color": "Cyan",
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "Brown",
+        "text-id":"Poop",
+        "text": "(Poop!)",
+        "x": 640,
+        "y": 144,
+        "horizontal-alignment": -1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type":"Area",
+        "area-id":"Poop",
+        "x":528,
+        "y":144,
+        "width":112,
+        "height":16
     }
 ]
