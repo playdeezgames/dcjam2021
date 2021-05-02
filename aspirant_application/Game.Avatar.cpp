@@ -106,7 +106,7 @@ namespace game::Avatar
 		return std::nullopt;
 	}
 
-	static std::optional<std::string> Poop()
+	std::optional<std::string> Poop()
 	{
 		int itemId = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::POOP];
 		game::avatar::Statistics::Write(game::avatar::Statistic::BOWEL, game::avatar::Statistics::Default(game::avatar::Statistic::BOWEL));
@@ -213,6 +213,12 @@ namespace game::Avatar
 		TurnRight();
 		TurnRight();
 		return result;
+	}
+
+	bool CanPoop()
+	{
+		int poopThreshold = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::POOP_THRESHOLD];
+		return (game::avatar::Statistics::Read(game::avatar::Statistic::BOWEL) >= poopThreshold);
 	}
 
 	void Reset()

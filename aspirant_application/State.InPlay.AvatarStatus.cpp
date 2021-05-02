@@ -6,6 +6,13 @@
 #include "Game.Avatar.Statistics.h"
 #include "Visuals.Texts.h"
 #include "Common.Utility.h"
+#include "Visuals.Areas.h"
+#include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
+#include "Data.Stores.h"
+#include "Game.Data.Properties.h"
+#include "Game.Avatar.h"
+#include "Common.Audio.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -17,6 +24,10 @@ namespace state::in_play::AvatarStatus
 	const std::string TEXT_DRUNKENNESS = "Drunkenness";
 	const std::string TEXT_NAUSEA = "Nausea";	
 	const std::string TEXT_KEYS= "Keys";
+	const std::string TEXT_POOP = "Poop";
+	const std::string CAN_POOP = "[Poop!]";
+	const std::string CANNOT_POOP = "";
+	const std::string AREA_POOP = "Poop";
 
 
 	const std::map<Command, std::function<void()>> commandHandlers =
@@ -99,8 +110,47 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_KEYS, ss.str());
 	}
 
+	static void UpdatePoop(const Uint32&)
+	{
+		if (!game::Avatar::CanPoop())
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, TEXT_POOP, CANNOT_POOP);
+		}
+		else
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, TEXT_POOP, CAN_POOP);
+		}
+	}
+
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		if (areas.contains(AREA_POOP))
+		{
+			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, "Cyan");//TODO: magic string
+		}
+		else
+		{
+			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, "Gray");//TODO: magic string
+		}
+
+	}
+
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	{
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		if (areas.contains(AREA_POOP) && game::Avatar::CanPoop())
+		{
+			common::audio::Sfx::Play(game::Avatar::Poop());
+			return true;
+		}
+		return false;
+	}
+
 	void Start()
 	{
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_STATUS, OnMouseButtonUp);
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_STATUS, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_STATUS, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
@@ -112,6 +162,7 @@ namespace state::in_play::AvatarStatus
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDrunkenness);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateNausea);
 		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateKeys);
+		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdatePoop);
 
 	}
 }

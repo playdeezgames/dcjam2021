@@ -14,4 +14,6 @@ namespace game::Avatar
 	common::XY<size_t> GetPosition();
 	void SetPosition(const common::XY<size_t>&);
 	nlohmann::json& GetAvatar();//TODO: this is part of the DAL
+	bool CanPoop();
+	std::optional<std::string> Poop();
 }
