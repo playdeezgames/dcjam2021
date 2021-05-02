@@ -16,17 +16,17 @@
 #include "Game.Avatar.Statistics.h"
 namespace sublayout::POV
 {
-	const std::string LEFT_SIDE_IMAGE_ID = "LeftSide";
-	const std::string AHEAD_IMAGE_ID = "Ahead";
-	const std::string RIGHT_SIDE_IMAGE_ID = "RightSide";
-	const std::string DIRECTION_TEXT_ID = "Direction";
-	const std::string POSITION_TEXT_ID = "Position";
-	const std::string POV_LAYOUT_NAME = "Sublayout.POV";
+	const std::string LAYOUT_NAME = "Sublayout.POV";
+	const std::string AREA_TAKE_FOOD = "TakeFood";
+	const std::string IMAGE_LEFT_SIDE = "LeftSide";
+	const std::string IMAGE_AHEAD = "Ahead";
+	const std::string IMAGE_RIGHT_SIDE = "RightSide";
+	const std::string IMAGE_TAKE_FOOD = "TakeFood";
+	const std::string TEXT_DIRECTION = "Direction";
+	const std::string TEXT_POSITION = "Position";
 	const std::string TEXT_AVATAR_STATE = "AvatarState";
 	const std::string TEXT_ITEM_TOOL_TIP = "ItemToolTip";
 
-	const std::string AREA_TAKE_FOOD = "TakeFood";
-	const std::string IMAGE_TAKE_FOOD = "TakeFood";
 
 	const std::map<game::world::Border, std::string> leftSides =
 	{
@@ -59,7 +59,7 @@ namespace sublayout::POV
 
 	static void UpdateDirection(maze::Direction facing	)
 	{
-		::visuals::Texts::SetText(POV_LAYOUT_NAME, DIRECTION_TEXT_ID, directionNames.find(facing)->second);
+		::visuals::Texts::SetText(LAYOUT_NAME, TEXT_DIRECTION, directionNames.find(facing)->second);
 	}
 
 	static void UpdateCreatures(const common::XY<size_t> position)
@@ -70,15 +70,15 @@ namespace sublayout::POV
 			auto imageId = game::creature::GetDescriptor(creature).imageId;
 			auto instance = game::Creatures::GetInstance(position);
 			bool visible = instance && instance.value().creature == creature;
-			visuals::Images::SetVisible(POV_LAYOUT_NAME, imageId, visible);
+			visuals::Images::SetVisible(LAYOUT_NAME, imageId, visible);
 		}
 	}
 
 	static void UpdateRoom(const common::XY<size_t> position, const maze::Direction& facing)
 	{
-		::visuals::Images::SetSprite(POV_LAYOUT_NAME, LEFT_SIDE_IMAGE_ID, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
-		::visuals::Images::SetSprite(POV_LAYOUT_NAME, AHEAD_IMAGE_ID, aheads.find(game::World::GetBorderAhead(position, facing))->second);
-		::visuals::Images::SetSprite(POV_LAYOUT_NAME, RIGHT_SIDE_IMAGE_ID, rightSides.find(game::World::GetBorderRight(position, facing))->second);
+		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_LEFT_SIDE, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
+		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_AHEAD, aheads.find(game::World::GetBorderAhead(position, facing))->second);
+		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_RIGHT_SIDE, rightSides.find(game::World::GetBorderRight(position, facing))->second);
 	}
 
 	static void UpdateItems(const common::XY<size_t> position)
@@ -86,7 +86,7 @@ namespace sublayout::POV
 
 		for (auto& item : game::item::All())
 		{
-			::visuals::Images::SetVisible(POV_LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(position, item));
+			::visuals::Images::SetVisible(LAYOUT_NAME, game::item::GetDescriptor(item).imageId, game::world::Items::IsPresent(position, item));
 		}
 	}
 
@@ -94,11 +94,11 @@ namespace sublayout::POV
 	{
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
 		{
-			visuals::Texts::SetText(POV_LAYOUT_NAME, TEXT_AVATAR_STATE, "*Dizzy*");
+			visuals::Texts::SetText(LAYOUT_NAME, TEXT_AVATAR_STATE, "*Dizzy*");
 		}
 		else
 		{
-			visuals::Texts::SetText(POV_LAYOUT_NAME, TEXT_AVATAR_STATE, "");
+			visuals::Texts::SetText(LAYOUT_NAME, TEXT_AVATAR_STATE, "");
 		}
 	}
 
@@ -126,24 +126,24 @@ namespace sublayout::POV
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
 		std::string itemToolTip = "";
-		auto areas = visuals::Areas::Get(POV_LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		auto position = game::Avatar::GetPosition();
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
 			bool showItem = areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item);
-			::visuals::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, showItem);
+			::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, showItem);
 			if (showItem)
 			{
 				itemToolTip = descriptor.name;
 			}
 		}
-		visuals::Texts::SetText(POV_LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
 	}
 
 	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
 	{
-		auto areas = visuals::Areas::Get(POV_LAYOUT_NAME, xy);
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		auto position = game::Avatar::GetPosition();
 		int index = 0;
 		for (auto& item : game::item::All())
@@ -156,7 +156,7 @@ namespace sublayout::POV
 				size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
 				game::avatar::Items::Add(item, amount);
 
-				::visuals::Images::SetVisible(POV_LAYOUT_NAME, descriptor.takeImageId, false);
+				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
 				return true;
 			}
 			index++;
