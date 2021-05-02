@@ -126,11 +126,18 @@
         "sfx-success":"play-joker"
     },
     "10":{
-        "initial-inventory":1,
         "name":"Key",
         "image-id":"Key",
         "number-appearing": 0,
         "take-image-id":"TakeKey",
         "take-area-id":"TakeKey"
+    },
+    "11":{
+        "initial-inventory":1,
+        "name":"Map Fragment",
+        "image-id":"MapFragment",
+        "number-appearing": 0,
+        "take-image-id":"TakeMapFragment",
+        "take-area-id":"TakeMapFragment"
     }
 }

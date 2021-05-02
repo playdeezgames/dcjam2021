@@ -2967,6 +2967,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemMapFragment":{
+        "texture": "items",
+        "x": 96,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
     "ItemTake":{
         "texture": "items",
         "x": 224,
