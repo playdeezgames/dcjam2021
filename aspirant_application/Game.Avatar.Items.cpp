@@ -70,13 +70,46 @@ namespace game::avatar::Items
 		}
 	}
 
+	static void AddKey()
+	{
+		game::avatar::Statistics::Increase(game::avatar::Statistic::KEYS, 1);
+	}
+
+	static void AddMapFragment()
+	{
+		auto worldSize = game::World::GetSize();
+		size_t fragmentWidth = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::MAP_FRAGMENT_WIDTH];
+		size_t fragmentHeight = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::MAP_FRAGMENT_HEIGHT];
+		size_t fragmentX = common::RNG::FromRange(0u, worldSize.GetX() - fragmentWidth);
+		size_t fragmentY = common::RNG::FromRange(0u, worldSize.GetY() - fragmentHeight);
+		for (size_t x = 0u; x < fragmentWidth; ++x)
+		{
+			for (size_t y = 0u; y < fragmentHeight; ++y)
+			{
+				game::World::SetKnown({ x + fragmentX, y + fragmentY });
+			}
+		}
+	}
+
 	void Add(int item, size_t amount)
 	{
 		if (amount > 0)
 		{
 			if (item == ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY])
 			{
-				game::avatar::Statistics::Increase(game::avatar::Statistic::KEYS, 1);
+				while (amount > 0)
+				{
+					AddKey();
+					amount--;
+				}
+			}
+			else if (item == ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::MAP_FRAGMENT])
+			{
+				while (amount > 0)
+				{
+					AddMapFragment();
+					amount--;
+				}
 			}
 			else
 			{

@@ -30,6 +30,9 @@ namespace game::data::Properties
 	const std::string INVENTORY = "inventory";
 	const std::string KEY = "key";
 	const std::string LOSE_ON_TELEPORT = "lose-on-teleport";
+	const std::string MAP_FRAGMENT = "map-fragment";
+	const std::string MAP_FRAGMENT_HEIGHT = "map-fragment-height";
+	const std::string MAP_FRAGMENT_WIDTH = "map-fragment-width";
 	const std::string NON_COMBAT = "non-combat";
 	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";
