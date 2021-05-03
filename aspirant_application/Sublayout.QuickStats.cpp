@@ -5,6 +5,9 @@
 #include "Application.Update.h"
 #include "Visuals.Images.h"
 #include <vector>
+#include "Application.MouseMotion.h"
+#include "Visuals.Areas.h"
+#include <sstream>
 namespace sublayout::QuickStats
 {
 	const std::string LAYOUT_NAME = "Sublayout.QuickStats";
@@ -12,6 +15,9 @@ namespace sublayout::QuickStats
 	const std::string HUNGER_IMAGE_ID = "HungerBar";
 	const std::string HEALTH_SPRITE_PREFIX = "HealthBarForeground";
 	const std::string HUNGER_SPRITE_PREFIX = "HungerBarForeground";
+	const std::string AREA_HEALTH = "Health";
+	const std::string AREA_HUNGER = "Hunger";
+	const std::string TEXT_TOOL_TOP = "ToolTip";
 
 	static void UpdateHealth(const Uint32&)
 	{
@@ -36,10 +42,26 @@ namespace sublayout::QuickStats
 		::UIState::IN_PLAY_COMBAT_RESULT,
 	};
 
+	static void OnMouseMotion(const common::XY<Sint32>& position)
+	{
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, position);
+		std::stringstream ss;
+		if (areas.contains(AREA_HEALTH))
+		{
+			ss << "Health: " << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH);
+		}
+		else if(areas.contains(AREA_HUNGER))
+		{
+			ss << "Hunger: " << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER);
+		}
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_TOOL_TOP, ss.str());
+	}
+
 	void Start()
 	{
 		for (auto state : states)
 		{
+			::application::MouseMotion::AddHandler(state, OnMouseMotion);
 			::application::Update::AddHandler(state, UpdateHealth);
 			::application::Update::AddHandler(state, UpdateHunger);
 		}
