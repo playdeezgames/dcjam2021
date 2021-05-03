@@ -93,7 +93,7 @@ namespace game::world::Items
 		return ss.str();
 	}
 
-	static size_t GetRoomInventory(const common::XY<size_t>& location, const int& item)
+	size_t GetRoomInventory(const common::XY<size_t>& location, const int& item)
 	{
 		auto& roomInventory = GetRoomInventory(location);
 		if (roomInventory.count(IntToItemKey(item)) > 0)

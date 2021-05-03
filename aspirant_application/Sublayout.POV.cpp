@@ -14,6 +14,7 @@
 #include "Application.MouseMotion.h"
 #include "Game.Avatar.Items.h"
 #include "Game.Avatar.Statistics.h"
+#include <sstream>
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";
@@ -135,7 +136,14 @@ namespace sublayout::POV
 			::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, showItem);
 			if (showItem)
 			{
-				itemToolTip = descriptor.name;
+				std::stringstream ss;
+				ss << descriptor.name;
+				auto count = game::world::Items::GetRoomInventory(position, item);
+				if (count > 1)
+				{
+					ss << "(" << count << ")";
+				}
+				itemToolTip = ss.str();
 			}
 		}
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
