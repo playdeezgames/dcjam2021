@@ -5,10 +5,11 @@
 #include "Data.Stores.h"
 namespace game::creature
 {
-	Descriptor GetDescriptor(int creature)
+	static std::vector<Descriptor> descriptors;
+
+	static void Add(nlohmann::json& creatureDescriptor)
 	{
 		std::map<int, size_t> bribes;
-		auto& creatureDescriptor = ::data::Stores::GetStore(::data::Store::CREATURE_DESCRIPTORS)[(int)creature];
 		if (creatureDescriptor.count(game::data::Properties::BRIBES) > 0)
 		{
 			auto& amounts = creatureDescriptor[game::data::Properties::BRIBES];
@@ -46,7 +47,7 @@ namespace game::creature
 				{
 					dropWeights[std::nullopt] = (size_t)drop.value();
 				}
-				else 
+				else
 				{
 					int itemId = common::Utility::StringToInt(drop.key());
 					auto& entry = drop.value();
@@ -57,7 +58,7 @@ namespace game::creature
 				}
 			}
 		}
-		return
+		descriptors.push_back(
 		{
 			creatureDescriptor[game::data::Properties::IMAGE_ID],
 			creatureDescriptor[game::data::Properties::HEALTH],
@@ -68,19 +69,35 @@ namespace game::creature
 			sfx,
 			creatureDescriptor[game::data::Properties::ATTITUDE],
 			attitudes,
-			(creatureDescriptor.count(game::data::Properties::PREFER_DEAD_ENDS)>0) ? ((bool)creatureDescriptor[game::data::Properties::PREFER_DEAD_ENDS]) : (false),
+			(creatureDescriptor.count(game::data::Properties::PREFER_DEAD_ENDS) > 0) ? ((bool)creatureDescriptor[game::data::Properties::PREFER_DEAD_ENDS]) : (false),
 			dropWeights,
 			dropCounts
-		};
+		});
 	}
 
-	std::vector<int> All()
+	static bool initialized = false;
+
+	static void Initialize()
 	{
-		std::vector<int> result;
-		for (auto& descriptor : ::data::Stores::GetStore(::data::Store::CREATURE_DESCRIPTORS))
+		if (!initialized)
 		{
-			result.push_back((int)descriptor[game::data::Properties::INDEX]);
+			for (auto& descriptor : ::data::Stores::GetStore(::data::Store::CREATURE_DESCRIPTORS))
+			{
+				Add(descriptor);
+			}
+			initialized = true;
 		}
-		return result;
+	}
+
+	const Descriptor& GetDescriptor(int creature)
+	{
+		Initialize();
+		return descriptors[creature];
+	}
+
+	const std::vector<Descriptor>& All()
+	{
+		Initialize();
+		return descriptors;
 	}
 }

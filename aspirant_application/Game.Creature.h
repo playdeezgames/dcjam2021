@@ -44,6 +44,6 @@ namespace game::creature
 		std::map<int, size_t> dropCounts;
 	};
 
-	Descriptor GetDescriptor(int);
-	std::vector<int> All();
+	const Descriptor& GetDescriptor(int);
+	const std::vector<Descriptor>& All();
 }

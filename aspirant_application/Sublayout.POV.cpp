@@ -65,13 +65,15 @@ namespace sublayout::POV
 
 	static void UpdateCreatures(const common::XY<size_t> position)
 	{
-		auto creatures = game::creature::All();
-		for (auto creature : creatures)
+		auto& creatures = game::creature::All();
+		int index = 0;
+		for (auto& creature : creatures)
 		{
-			auto imageId = game::creature::GetDescriptor(creature).imageId;
+			auto imageId = creature.imageId;
 			auto instance = game::Creatures::GetInstance(position);
-			bool visible = instance && instance.value().creature == creature;
+			bool visible = instance && instance.value().creature == index;
 			visuals::Images::SetVisible(LAYOUT_NAME, imageId, visible);
+			index++;
 		}
 	}
 

@@ -138,9 +138,10 @@ namespace game::Creatures
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
 		auto deadEnds = game::World::GetDeadEnds();
-		for (auto creature : game::creature::All())
+		int index = 0;
+		for (auto& creature : game::creature::All())
 		{
-			auto descriptor = game::creature::GetDescriptor(creature);
+			auto& descriptor = creature;
 			size_t numberAppearing = descriptor.numberAppearing;
 			while (numberAppearing > 0)
 			{
@@ -171,7 +172,7 @@ namespace game::Creatures
 					available = !Get({ x,y });
 				}
 				common::XY<size_t> location = { x,y };
-				Put(location, { creature, 0, (int)descriptor.attitude });
+				Put(location, { index, 0, (int)descriptor.attitude });
 				auto iter = std::find(deadEnds.begin(), deadEnds.end(), location);
 				if (iter != deadEnds.end())
 				{
@@ -179,6 +180,7 @@ namespace game::Creatures
 				}
 				numberAppearing--;
 			}
+			index++;
 		}
 	}
 
