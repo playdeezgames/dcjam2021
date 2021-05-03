@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "Game.Item.h"
+#include <optional>
 namespace game::creature
 {
 	enum class Attitude
@@ -39,6 +40,8 @@ namespace game::creature
 		Attitude attitude;
 		std::map<int, Attitude> attitudes;
 		bool preferDeadEnds;
+		std::map<std::optional<int>, size_t> dropWeights;
+		std::map<int, size_t> dropCounts;
 	};
 
 	Descriptor GetDescriptor(int);

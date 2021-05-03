@@ -35,6 +35,28 @@ namespace game::creature
 				attitudes[common::Utility::StringToInt(amount.key())] = (Attitude)(int)amount.value();
 			}
 		}
+		std::map<std::optional<int>, size_t> dropWeights;
+		std::map<int, size_t> dropCounts;
+		if (creatureDescriptor.count(game::data::Properties::DROPS) > 0)
+		{
+			auto& drops = creatureDescriptor[game::data::Properties::DROPS];
+			for (auto& drop : drops.items())
+			{
+				if (drop.key() == game::data::Properties::NONE)
+				{
+					dropWeights[std::nullopt] = (size_t)drop.value();
+				}
+				else 
+				{
+					int itemId = common::Utility::StringToInt(drop.key());
+					auto& entry = drop.value();
+					size_t weight = entry[game::data::Properties::WEIGHT];
+					size_t quantity = entry[game::data::Properties::QUANTITY];
+					dropWeights[itemId] = weight;
+					dropCounts[itemId] = quantity;
+				}
+			}
+		}
 		return
 		{
 			creatureDescriptor[game::data::Properties::IMAGE_ID],
@@ -46,7 +68,9 @@ namespace game::creature
 			sfx,
 			creatureDescriptor[game::data::Properties::ATTITUDE],
 			attitudes,
-			(creatureDescriptor.count(game::data::Properties::PREFER_DEAD_ENDS)>0) ? ((bool)creatureDescriptor[game::data::Properties::PREFER_DEAD_ENDS]) : (false)
+			(creatureDescriptor.count(game::data::Properties::PREFER_DEAD_ENDS)>0) ? ((bool)creatureDescriptor[game::data::Properties::PREFER_DEAD_ENDS]) : (false),
+			dropWeights,
+			dropCounts
 		};
 	}
 

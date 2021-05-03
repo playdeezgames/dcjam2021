@@ -16,6 +16,7 @@ namespace game::data::Properties
 	const std::string CREATURES = "creatures";
 	const std::string DEFEND = "defend";
 	const std::string DROP_ON_USE = "drop-on-use";
+	const std::string DROPS = "drops";
 	const std::string DRUNKENNESS = "drunkenness";
 	const std::string DURATION = "duration";
 	const std::string EW_BORDERS = "ew-borders";
@@ -34,11 +35,13 @@ namespace game::data::Properties
 	const std::string MAP_FRAGMENT_HEIGHT = "map-fragment-height";
 	const std::string MAP_FRAGMENT_WIDTH = "map-fragment-width";
 	const std::string NON_COMBAT = "non-combat";
+	const std::string NONE = "none";
 	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";
 	const std::string POOP = "poop";
 	const std::string POOP_THRESHOLD = "poop-threshold";
 	const std::string PREFER_DEAD_ENDS = "prefer-dead-ends";
+	const std::string QUANTITY = "quantity";
 	const std::string ROOM_INVENTORIES = "room-inventories";
 	const std::string ROW = "row";
 	const std::string SFX = "sfx";
@@ -48,5 +51,6 @@ namespace game::data::Properties
 	const std::string STATISTICS = "statistics";
 	const std::string TAKE_AREA_ID = "take-area-id";
 	const std::string TAKE_IMAGE_ID = "take-image-id";
+	const std::string WEIGHT = "weight";
 	const std::string WOUNDS = "wounds";
 }
