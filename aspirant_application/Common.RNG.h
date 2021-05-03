@@ -13,16 +13,19 @@ namespace common::RNG
 		{
 			total += entry.second;
 		}
-		size_t generated = FromRange(0u, total);
-		for (auto& entry : table)
+		if (total > 0)
 		{
-			if (generated < entry.second)
+			size_t generated = FromRange(0u, total);
+			for (auto& entry : table)
 			{
-				return entry.first;
-			}
-			else
-			{
-				generated -= entry.second;
+				if (generated < entry.second)
+				{
+					return entry.first;
+				}
+				else
+				{
+					generated -= entry.second;
+				}
 			}
 		}
 		return defaultValue;
