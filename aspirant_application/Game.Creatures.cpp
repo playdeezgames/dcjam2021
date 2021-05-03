@@ -8,6 +8,7 @@
 #include <sstream>
 #include "Game.h"
 #include <algorithm>
+#include "Game.World.Items.h"
 namespace game::Creatures
 {
 	nlohmann::json& GetCreatures()
@@ -124,11 +125,23 @@ namespace game::Creatures
 		return std::nullopt;
 	}
 
+	static void DropItems(const common::XY<size_t>& location)
+	{
+		auto instance = GetInstance(location).value();
+		auto drop = common::RNG::FromGenerator<std::optional<int>>(instance.descriptor.dropWeights, std::nullopt);
+		if (drop)
+		{
+			size_t count = instance.descriptor.dropCounts[drop.value()];
+			game::world::Items::Add(location, drop.value(), count);
+		}
+	}
+
 	void Advance(const common::XY<size_t>& location)
 	{
 		auto instance = GetInstance(location);
 		if (instance && instance.value().health<=0)
 		{
+			DropItems(location);
 			Remove(location);
 		}
 	}
