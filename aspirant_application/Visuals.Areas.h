@@ -9,6 +9,7 @@ namespace visuals
 		std::string areaId;
 		common::XY<int> xy;
 		common::XY<size_t> size;
+		bool Contains(const common::XY<int>&) const;
 	};
 }
 namespace visuals::Areas

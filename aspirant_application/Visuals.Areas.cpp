@@ -7,24 +7,61 @@ namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
 }
+namespace visuals
+{
+	bool Area::Contains(const common::XY<int>& location) const
+	{
+		int x = location.GetX() - xy.GetX();
+		int y = location.GetY() - xy.GetY();
+		return(x >= 0 && y >= 0 && x < size.GetX() && y < size.GetY());
+	}
+}
 namespace visuals::Areas
 {
+	static std::map<std::string, std::vector<visuals::Area>> areaLists;
+	static std::map<std::string, std::map<std::string, visuals::Area>> areaTable;
+
+	static void Initialize(const std::string& layoutName)
+	{
+		if (areaLists.find(layoutName) == areaLists.end())
+		{
+			areaLists[layoutName] = {};
+			for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
+			{
+				if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AREA)
+				{
+					int x = thingie[common::data::Properties::X];
+					int y = thingie[common::data::Properties::Y];
+					size_t width = thingie[common::data::Properties::WIDTH];
+					size_t height = thingie[common::data::Properties::HEIGHT];
+					std::string areaId = thingie[visuals::data::Properties::AREA_ID];
+					visuals::Area area =
+					{
+						areaId,
+						common::XY<int>(x,y),
+						common::XY<size_t>(width, height)
+					};
+					areaLists[layoutName].push_back(area);
+					areaTable[layoutName][areaId] = area;
+				}
+			}
+		}
+	}
+
+	static const std::vector<visuals::Area>& GetForLayout(const std::string& layoutName)
+	{
+		Initialize(layoutName);
+		return areaLists.find(layoutName)->second;
+	}
+
 	std::set<std::string> Get(const std::string& layoutName, const common::XY<int>& xy)
 	{
 		std::set<std::string> result;
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
+		for (auto& area : GetForLayout(layoutName))
 		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AREA)
+			if (area.Contains(xy))
 			{
-				int x = thingie[common::data::Properties::X];
-				int y = thingie[common::data::Properties::Y];
-				int width = thingie[common::data::Properties::WIDTH];
-				int height = thingie[common::data::Properties::HEIGHT];
-				if (xy.GetX() >= x && xy.GetY() >= y && xy.GetX() < x + width && xy.GetY() < y + height)
-				{
-					std::string areaId = thingie[visuals::data::Properties::AREA_ID];
-					result.insert(areaId);
-				}
+				result.insert(area.areaId);
 			}
 		}
 		return result;
@@ -32,24 +69,8 @@ namespace visuals::Areas
 
 	Area Get(const std::string& layoutName, const std::string& areaName)
 	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AREA &&
-				thingie[visuals::data::Properties::AREA_ID]==areaName)
-			{
-				int x = thingie[common::data::Properties::X];
-				int y = thingie[common::data::Properties::Y];
-				size_t width = thingie[common::data::Properties::WIDTH];
-				size_t height = thingie[common::data::Properties::HEIGHT];
-				return
-				{
-					thingie[visuals::data::Properties::AREA_ID],
-					common::XY<int>(x,y),
-					common::XY<size_t>(width, height)
-				};
-			}
-		}
-		throw "DID NOT FIND!";
+		Initialize(layoutName);
+		return areaTable.find(layoutName)->second.find(areaName)->second;
 	}
 
 }
