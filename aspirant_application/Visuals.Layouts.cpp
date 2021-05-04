@@ -5,15 +5,44 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
-namespace visuals::Menu { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace visuals::Image { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace visuals::Text { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace visuals::WorldMap { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace visuals::Sublayout { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace visuals::FloorInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
-namespace visuals::AvatarInventory { void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); }
+#include <functional>
+namespace visuals::Menu 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+}
+namespace visuals::Image 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+}
+namespace visuals::Text 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+}
+namespace visuals::WorldMap 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+}
+namespace visuals::Sublayout 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+}
+namespace visuals::FloorInventory 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+}
+namespace visuals::AvatarInventory 
+{ 
+	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+}
 namespace visuals::Layout
 {
+	struct InternalLayout
+	{
+		std::vector<std::function<void(std::shared_ptr<SDL_Renderer>)>> drawer;
+
+	};
+
 	static std::map<visuals::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
 	{
 		{visuals::data::Type::IMAGE, visuals::Image::Draw},
@@ -43,13 +72,38 @@ namespace visuals::Layout
 }
 namespace visuals::Layouts
 {
-	std::map<std::string, nlohmann::json> layouts;
+	struct InternalLayout
+	{
+		std::vector<std::function<void(std::shared_ptr<SDL_Renderer>)>> drawers;
+	};
 
-	void InitializeLayout(const std::string& layoutName)
+	static std::map<std::string, nlohmann::json> layouts;
+	static std::map<std::string, InternalLayout> internalLayouts;
+
+	static void Internalize(const std::string& layoutName, const nlohmann::json& model)
+	{
+		internalLayouts[layoutName] = {};
+		for (auto& drawn : model)
+		{
+			auto drawnType = visuals::data::Types::FromString(drawn[common::data::Properties::TYPE]);
+			if (drawnType)
+			{
+				switch (drawnType.value())
+				{
+				case visuals::data::Type::IMAGE:
+					internalLayouts[layoutName].drawers.push_back(visuals::Image::Internalize(layoutName, drawn));
+					break;
+				}
+			}
+		}
+	}
+
+	static void InitializeLayout(const std::string& layoutName)
 	{
 		if (!layouts.contains(layoutName))
 		{
 			layouts[layoutName] = ::data::JSON::Load(::data::Stores::GetStore(::data::Store::LAYOUTS)[layoutName]);
+			Internalize(layoutName, layouts[layoutName]);
 		}
 	}
 
@@ -59,22 +113,9 @@ namespace visuals::Layouts
 		return layouts.find(layoutName)->second;
 	}
 
-	static std::map<std::string, size_t> renderCounts;
-	static std::map<std::string, Uint32> renderTimes;
-	static std::map<std::string, Uint32> averageRenderTimes;
-
-	static void LogRender(const std::string& layoutName, Uint32 renderTime)
-	{
-		renderCounts[layoutName]++;
-		renderTimes[layoutName] += renderTime;
-		averageRenderTimes[layoutName] = renderTimes[layoutName] / renderCounts[layoutName];
-	}
-
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const std::string& layoutName)
 	{
 		InitializeLayout(layoutName);
-		Uint32 start = SDL_GetTicks();
 		visuals::Layout::Draw(renderer, layouts[layoutName]);
-		LogRender(layoutName, SDL_GetTicks() - start);
 	}
 }
