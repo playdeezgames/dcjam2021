@@ -16,15 +16,18 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
+#include "Game.Creatures.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
 	const std::string AREA_TURN_LEFT = "TurnLeft";
 	const std::string AREA_TURN_RIGHT = "TurnRight";
 	const std::string AREA_MOVE_AHEAD = "MoveAhead";
+	const std::string AREA_WORLD_MAP = "WorldMap";
 	const std::string IMAGE_MOVE_AHEAD = "MoveAhead";
 	const std::string IMAGE_TURN_RIGHT = "TurnRight";
 	const std::string IMAGE_TURN_LEFT = "TurnLeft";
+	const std::string TEXT_MAP_TOOL_TIP = "MapToolTip";
 
 	static void LeavePlay()
 	{
@@ -71,6 +74,35 @@ namespace state::in_play::MiniMap
 		for (auto& areaImage : areaImages)
 		{
 			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), areas.contains(std::get<0>(areaImage)));
+		}
+		if (areas.contains(AREA_WORLD_MAP))
+		{
+			auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
+			auto worldSize = game::World::GetSize();
+			size_t cellWidth = area.size.GetX() / worldSize.GetX();
+			size_t cellHeight = area.size.GetY() / worldSize.GetY();
+			common::XY<size_t> worldPosition = { (xy.GetX() - area.xy.GetX()) / cellWidth , (xy.GetY() - area.xy.GetY()) / cellHeight };
+			if (game::World::IsExplored(worldPosition) == game::world::KnownState::UNKNOWN)
+			{
+				visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "????");
+			}
+			else
+			{
+				auto creature = game::Creatures::GetInstance(worldPosition);
+				if (creature)
+				{
+					visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, creature.value().descriptor.name);
+				}
+				else
+				{
+					visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "(empty)");
+				}
+			}
+
+		}
+		else
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "");
 		}
 	}
 

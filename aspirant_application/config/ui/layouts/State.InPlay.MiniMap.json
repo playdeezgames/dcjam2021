@@ -52,6 +52,14 @@
         "drop-shadow-y": 2
     },
     {
+        "type": "Area",
+        "area-id":"WorldMap",
+        "x":388,
+        "y":76,
+        "width":192,
+        "height":192
+    },
+    {
         "type": "Layout",
         "name": "Sublayout.QuickStats"
     },

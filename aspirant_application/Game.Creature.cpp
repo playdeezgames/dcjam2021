@@ -3,6 +3,7 @@
 #include "Data.JSON.h"
 #include "Common.Utility.h"
 #include "Data.Stores.h"
+#include "Common.Data.Properties.h"
 namespace game::creature
 {
 	static std::vector<Descriptor> descriptors;
@@ -71,7 +72,8 @@ namespace game::creature
 			attitudes,
 			(creatureDescriptor.count(game::data::Properties::PREFER_DEAD_ENDS) > 0) ? ((bool)creatureDescriptor[game::data::Properties::PREFER_DEAD_ENDS]) : (false),
 			dropWeights,
-			dropCounts
+			dropCounts,
+			creatureDescriptor[common::data::Properties::NAME]
 		});
 	}
 

@@ -133,6 +133,7 @@
         "take-area-id":"TakeKey"
     },
     "11":{
+        "initial-inventory":1,
         "name":"Map Fragment",
         "image-id":"MapFragment",
         "number-appearing": 12,

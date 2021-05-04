@@ -42,6 +42,7 @@ namespace game::creature
 		bool preferDeadEnds;
 		std::map<std::optional<int>, size_t> dropWeights;
 		std::map<int, size_t> dropCounts;
+		std::string name;
 	};
 
 	const Descriptor& GetDescriptor(int);

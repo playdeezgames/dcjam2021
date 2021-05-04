@@ -29,4 +29,27 @@ namespace visuals::Areas
 		}
 		return result;
 	}
+
+	Area Get(const std::string& layoutName, const std::string& areaName)
+	{
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
+		{
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AREA &&
+				thingie[visuals::data::Properties::AREA_ID]==areaName)
+			{
+				int x = thingie[common::data::Properties::X];
+				int y = thingie[common::data::Properties::Y];
+				size_t width = thingie[common::data::Properties::WIDTH];
+				size_t height = thingie[common::data::Properties::HEIGHT];
+				return
+				{
+					thingie[visuals::data::Properties::AREA_ID],
+					common::XY<int>(x,y),
+					common::XY<size_t>(width, height)
+				};
+			}
+		}
+		throw "DID NOT FIND!";
+	}
+
 }
