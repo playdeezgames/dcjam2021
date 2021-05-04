@@ -93,7 +93,7 @@ namespace game::World
 	}
 
 
-	game::world::KnownState IsExplored(const common::XY<size_t>& cell)
+	game::world::KnownState GetKnownState(const common::XY<size_t>& cell)
 	{
 		auto visits = GetExplored(cell);
 		if (visits)

@@ -82,7 +82,7 @@ namespace visuals::WorldMap
 			{
 				auto cell = common::XY<size_t>(column, row);
 				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
-				switch (game::World::IsExplored(cell))
+				switch (game::World::GetKnownState(cell))
 				{
 				case game::world::KnownState::VISITED:
 				{

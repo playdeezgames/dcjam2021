@@ -82,7 +82,7 @@ namespace state::in_play::MiniMap
 			size_t cellWidth = area.size.GetX() / worldSize.GetX();
 			size_t cellHeight = area.size.GetY() / worldSize.GetY();
 			common::XY<size_t> worldPosition = { (xy.GetX() - area.xy.GetX()) / cellWidth , (xy.GetY() - area.xy.GetY()) / cellHeight };
-			if (game::World::IsExplored(worldPosition) == game::world::KnownState::UNKNOWN)
+			if (game::World::GetKnownState(worldPosition) == game::world::KnownState::UNKNOWN)
 			{
 				visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "????");
 			}
