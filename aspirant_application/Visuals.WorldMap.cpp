@@ -67,6 +67,101 @@ namespace visuals::WorldMap
 		}
 	}
 
+	struct InternalWorldMap
+	{
+		common::XY<int> xy;
+		common::XY<size_t> cellSize;
+	};
+
+	static std::vector<InternalWorldMap> internalWorldMaps;
+
+	static void DrawInternalWorldMap(std::shared_ptr<SDL_Renderer> renderer, size_t index)
+	{
+		auto& worldMap = internalWorldMaps[index];
+		int x = worldMap.xy.GetX();
+		int y = worldMap.xy.GetY();
+		size_t cellWidth = worldMap.cellSize.GetX();
+		size_t cellHeight = worldMap.cellSize.GetY();
+		auto avatarPosition = game::Avatar::GetPosition();
+
+		auto worldSize = game::World::GetSize();
+		for (size_t column = 0; column < worldSize.GetX(); ++column)
+		{
+			for (size_t row = 0; row < worldSize.GetY(); ++row)
+			{
+				auto cell = common::XY<size_t>(column, row);
+				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
+				switch (game::World::GetKnownState(cell))
+				{
+				case game::world::KnownState::VISITED:
+				{
+
+					visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
+					DrawWall(renderer, cell, plot, maze::Direction::EAST);
+					DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
+					DrawWall(renderer, cell, plot, maze::Direction::WEST);
+
+					if (cell == avatarPosition)
+					{
+						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					}
+
+					if (game::Creatures::GetInstance(cell))
+					{
+						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					}
+				}
+				break;
+				case game::world::KnownState::KNOWN:
+				{
+
+					visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					DrawKnownWall(renderer, cell, plot, maze::Direction::NORTH);
+					DrawKnownWall(renderer, cell, plot, maze::Direction::EAST);
+					DrawKnownWall(renderer, cell, plot, maze::Direction::SOUTH);
+					DrawKnownWall(renderer, cell, plot, maze::Direction::WEST);
+
+					if (cell == avatarPosition)
+					{
+						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					}
+
+					if (game::Creatures::GetInstance(cell))
+					{
+						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+					}
+				}
+				break;
+				default:
+				{
+					visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
+				}
+				break;
+				}
+			}
+		}
+	}
+
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	{
+		size_t index = internalWorldMaps.size();
+		internalWorldMaps.push_back(
+			{
+				common::XY<int>(
+					model[common::data::Properties::X], 
+					model[common::data::Properties::Y]),
+				common::XY<size_t>(
+					model[visuals::data::Properties::CELL_WIDTH], 
+					model[visuals::data::Properties::CELL_HEIGHT])
+			});
+		return [index](std::shared_ptr<SDL_Renderer> renderer)
+		{
+			DrawInternalWorldMap(renderer, index);
+		};
+	}
+
+
 	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
 	{
 		int x = model[common::data::Properties::X];

@@ -41,9 +41,6 @@
     <ClCompile Include="Visuals.Fonts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visuals.Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Visuals.Layouts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

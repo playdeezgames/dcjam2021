@@ -18,10 +18,12 @@ namespace visuals::Image
 namespace visuals::Text 
 { 
 	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::WorldMap 
 { 
 	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Sublayout 
 { 
@@ -92,6 +94,12 @@ namespace visuals::Layouts
 				{
 				case visuals::data::Type::IMAGE:
 					internalLayouts[layoutName].drawers.push_back(visuals::Image::Internalize(layoutName, drawn));
+					break;
+				case visuals::data::Type::TEXT:
+					internalLayouts[layoutName].drawers.push_back(visuals::Text::Internalize(layoutName, drawn));
+					break;
+				case visuals::data::Type::WORLD_MAP:
+					internalLayouts[layoutName].drawers.push_back(visuals::WorldMap::Internalize(layoutName, drawn));
 					break;
 				}
 			}

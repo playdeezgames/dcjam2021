@@ -223,7 +223,6 @@
     <ClCompile Include="State.Splash.cpp" />
     <ClCompile Include="Visuals.Sprites.cpp" />
     <ClCompile Include="State.Start.cpp" />
-    <ClCompile Include="Visuals.Text.cpp" />
     <ClCompile Include="Visuals.Textures.cpp" />
     <ClCompile Include="Common.Utility.cpp" />
     <ClCompile Include="Sublayout.EnemyStats.cpp" />
