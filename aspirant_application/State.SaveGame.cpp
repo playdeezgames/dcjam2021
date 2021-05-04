@@ -7,7 +7,6 @@
 #include "Common.Audio.h"
 #include "Common.Utility.h"
 #include "Application.OnEnter.h"
-#include "Visuals.MenuItems.h"
 #include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"

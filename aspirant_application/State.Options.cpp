@@ -9,7 +9,6 @@
 #include "Application.Update.h"
 #include "Application.UIState.h"
 #include "Visuals.Menus.h"
-#include "Visuals.MenuItems.h"
 #include "Application.Sounds.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"

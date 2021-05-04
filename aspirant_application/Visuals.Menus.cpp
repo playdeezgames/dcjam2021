@@ -5,9 +5,128 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Visuals.Layouts.h"
+#include "Common.XY.h"
+#include "Visuals.Fonts.h"
 namespace visuals::Layouts
 {
 	nlohmann::json& GetLayout(const std::string&);
+}
+namespace visuals::Menu
+{
+	struct InternalMenuItem
+	{
+		std::string text;
+		common::XY<int> xy;
+	};
+
+
+	struct InternalMenu
+	{
+		int index;
+		std::string font;
+		std::string activeColor;
+		std::string inactiveColor;
+		visuals::HorizontalAlignment alignment;
+		bool dropShadow;
+		common::XY<int> dropShadowXY;
+		std::string dropShadowColor;
+		std::vector<size_t> menuItems;
+	};
+
+	static std::vector<InternalMenuItem> internalMenuItems;
+	static std::vector<InternalMenu> internalMenus;
+
+	static void DrawInternalMenu(std::shared_ptr<SDL_Renderer> renderer, size_t index)
+	{
+		auto& menu = internalMenus[index];
+		int currentIndex = 0;
+		for (auto& menuItemIndex : menu.menuItems)
+		{
+			auto& menuItem = internalMenuItems[menuItemIndex];
+			if (menu.dropShadow)
+			{
+				Fonts::WriteText(
+					menu.font,
+					renderer,
+					menu.dropShadowXY + menuItem.xy,
+					menuItem.text,
+					menu.dropShadowColor,
+					menu.alignment);
+			}
+			std::string color = (currentIndex == index) ? (menu.activeColor) : (menu.inactiveColor);
+			Fonts::WriteText(menu.font, renderer, menuItem.xy, menuItem.text, color, menu.alignment);
+			currentIndex++;
+		}
+	}
+
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	{
+		size_t menuIndex = internalMenus.size();
+		InternalMenu internalMenu = {
+			model[data::Properties::INDEX],
+			model[data::Properties::FONT],
+			model[data::Properties::COLORS][data::Properties::ACTIVE],
+			model[data::Properties::COLORS][data::Properties::INACTIVE],
+			(visuals::HorizontalAlignment)(int)model[data::Properties::HORIZONTAL_ALIGNMENT],
+			model[data::Properties::DROP_SHADOW],
+			common::XY<int>(
+				model[data::Properties::DROP_SHADOW_X],
+				model[data::Properties::DROP_SHADOW_Y]),
+			model[data::Properties::DROP_SHADOW_COLOR],
+			std::vector<size_t>()
+		};
+		auto& menuItems = model[data::Properties::MENU_ITEMS];
+		for (auto& menuItem : menuItems)
+		{
+			size_t menuItemIndex = internalMenuItems.size();
+			internalMenu.menuItems.push_back(menuItemIndex);
+			internalMenuItems.push_back(
+				{ 
+					menuItem[data::Properties::TEXT],
+					common::XY<int>(
+						menuItem[common::data::Properties::X],
+						menuItem[common::data::Properties::Y])
+				});
+		}
+		internalMenus.push_back(internalMenu);
+		return [menuIndex](std::shared_ptr<SDL_Renderer> renderer) {
+			DrawInternalMenu(renderer, menuIndex);
+		};
+	}
+
+	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
+	{
+		int index = model[data::Properties::INDEX];
+		std::string font = model[data::Properties::FONT];
+		std::string activeColor = model[data::Properties::COLORS][data::Properties::ACTIVE];
+		std::string inactiveColor = model[data::Properties::COLORS][data::Properties::INACTIVE];
+		visuals::HorizontalAlignment horizontalAlignment = (visuals::HorizontalAlignment)(int)model[data::Properties::HORIZONTAL_ALIGNMENT];
+		bool dropShadow = model[data::Properties::DROP_SHADOW];
+		std::string dropShadowColor = model[data::Properties::DROP_SHADOW_COLOR];
+		int dropShadowX = model[data::Properties::DROP_SHADOW_X];
+		int dropShadowY = model[data::Properties::DROP_SHADOW_Y];
+		auto& menuItems = model[data::Properties::MENU_ITEMS];
+		int currentIndex = 0;
+		for (auto& menuItem : menuItems)
+		{
+			std::string text = menuItem[data::Properties::TEXT];
+			int x = menuItem[common::data::Properties::X];
+			int y = menuItem[common::data::Properties::Y];
+			if (dropShadow)
+			{
+				Fonts::WriteText(
+					font,
+					renderer,
+					common::XY<int>(x + dropShadowX, y + dropShadowY),
+					text,
+					dropShadowColor,
+					horizontalAlignment);
+			}
+			std::string color = (currentIndex == index) ? (activeColor) : (inactiveColor);
+			Fonts::WriteText(font, renderer, common::XY<int>(x, y), text, color, horizontalAlignment);
+			currentIndex++;
+		}
+	}
 }
 namespace visuals::Menus
 {
@@ -122,5 +241,35 @@ namespace visuals::Menus
 		{
 			ChangeMenuIndex(layoutName, menuId, -1);
 		};
+	}
+}
+namespace visuals::MenuItems
+{
+	template <typename TResult>
+	static TResult WithMenuItem(const std::string& layoutName, const std::string& menuItemId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
+	{
+		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
+		{
+			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::MENU)
+			{
+				for (auto& menuItem : thingie[visuals::data::Properties::MENU_ITEMS])
+				{
+					if (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0 &&
+						menuItem[visuals::data::Properties::MENU_ITEM_ID] == menuItemId)
+					{
+						return func(menuItem);
+					}
+				}
+			}
+		}
+		return notFound();
+	}
+
+	void SetText(const std::string& layoutName, const std::string& menuItemId, const std::string& text)
+	{
+		WithMenuItem<void>(layoutName, menuItemId, [text](auto& menuItem)
+		{
+			menuItem[visuals::data::Properties::TEXT] = text;
+		}, []() {});
 	}
 }

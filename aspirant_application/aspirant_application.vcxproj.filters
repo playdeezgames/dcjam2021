@@ -68,9 +68,6 @@
     <ClCompile Include="State.ConfirmQuit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visuals.Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Application.MouseMotion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,9 +90,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visuals.Menus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visuals.MenuItems.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visuals.Texts.cpp">
@@ -299,9 +293,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visuals.Menus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visuals.MenuItems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visuals.Texts.h">

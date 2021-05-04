@@ -186,8 +186,6 @@
     <ClCompile Include="Visuals.Data.Types.cpp" />
     <ClCompile Include="Visuals.FloorInventory.cpp" />
     <ClCompile Include="Visuals.Images.cpp" />
-    <ClCompile Include="Visuals.Menu.cpp" />
-    <ClCompile Include="Visuals.MenuItems.cpp" />
     <ClCompile Include="Visuals.Menus.cpp" />
     <ClCompile Include="Visuals.Sublayout.cpp" />
     <ClCompile Include="Visuals.Texts.cpp" />
@@ -265,7 +263,6 @@
     <ClInclude Include="Visuals.Data.Colors.h" />
     <ClInclude Include="Visuals.FloorInventory.h" />
     <ClInclude Include="Visuals.Images.h" />
-    <ClInclude Include="Visuals.MenuItems.h" />
     <ClInclude Include="Visuals.Menus.h" />
     <ClInclude Include="Visuals.Data.Properties.h" />
     <ClInclude Include="Visuals.Texts.h" />

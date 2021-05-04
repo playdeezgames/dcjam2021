@@ -9,6 +9,7 @@
 namespace visuals::Menu 
 { 
 	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Image 
 { 
@@ -42,7 +43,6 @@ namespace visuals::Layout
 	struct InternalLayout
 	{
 		std::vector<std::function<void(std::shared_ptr<SDL_Renderer>)>> drawer;
-
 	};
 
 	static std::map<visuals::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
@@ -100,6 +100,9 @@ namespace visuals::Layouts
 					break;
 				case visuals::data::Type::WORLD_MAP:
 					internalLayouts[layoutName].drawers.push_back(visuals::WorldMap::Internalize(layoutName, drawn));
+					break;
+				case visuals::data::Type::MENU:
+					internalLayouts[layoutName].drawers.push_back(visuals::Menu::Internalize(layoutName, drawn));
 					break;
 				}
 			}

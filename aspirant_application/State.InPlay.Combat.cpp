@@ -10,7 +10,6 @@
 #include "Common.Audio.h"
 #include "Visuals.AvatarInventory.h"
 #include <sstream>
-#include "Visuals.MenuItems.h"
 #include "Common.Audio.h"
 #include "Application.Sounds.h"
 #include "Game.Creatures.h"

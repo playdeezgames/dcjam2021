@@ -13,3 +13,7 @@ namespace visuals::Menus
 	std::function<void()> NavigateNext(const std::string&, const std::string&);
 	std::function<void()> NavigatePrevious(const std::string&, const std::string&);
 }
+namespace visuals::MenuItems
+{
+	void SetText(const std::string&, const std::string&, const std::string&);
+}
