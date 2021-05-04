@@ -15,6 +15,33 @@
 #include "Game.World.Items.h"
 namespace game::Avatar
 {
+	static bool initialized = false;
+
+	static Descriptor descriptor;
+
+	static void Initialize()
+	{
+		if (!initialized)
+		{
+			auto& store = ::data::Stores::GetStore(::data::Store::AVATAR);
+			descriptor.poopItemId = store[data::Properties::POOP];
+			descriptor.hungerRate = store[game::data::Properties::HUNGER_RATE];
+			descriptor.sobrietyRate = store[game::data::Properties::SOBRIETY_RATE];
+			descriptor.mapFragmentWidth = store[data::Properties::MAP_FRAGMENT_WIDTH];
+			descriptor.mapFragmentHeight = store[data::Properties::MAP_FRAGMENT_HEIGHT];
+			descriptor.keyItemId = store[data::Properties::KEY];
+			descriptor.mapFragmentItemId = store[data::Properties::MAP_FRAGMENT];
+			descriptor.poopThreshold = store[data::Properties::POOP_THRESHOLD];
+			initialized = true;
+		}
+	}
+
+	const Descriptor& GetDescriptor()
+	{
+		Initialize();
+		return descriptor;
+	}
+
 	nlohmann::json& GetAvatar()
 	{
 		auto& data = game::GetData();
@@ -108,7 +135,7 @@ namespace game::Avatar
 
 	std::optional<std::string> Poop()
 	{
-		int itemId = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::POOP];
+		int itemId = GetDescriptor().poopItemId;
 		game::avatar::Statistics::Write(game::avatar::Statistic::BOWEL, game::avatar::Statistics::Default(game::avatar::Statistic::BOWEL));
 		game::world::Items::Add(GetPosition(), itemId, 1);
 		return application::Sounds::Read(application::UI::Sfx::HUNTER_POOPS);
@@ -116,7 +143,7 @@ namespace game::Avatar
 
 	static void HandleHunger()
 	{
-		int hungerRate = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::HUNGER_RATE];
+		int hungerRate = GetDescriptor().hungerRate;
 		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
 		{
 			avatar::Statistics::Decrease(avatar::Statistic::HEALTH, hungerRate);
@@ -138,7 +165,7 @@ namespace game::Avatar
 
 	static void HandleNausea()
 	{
-		int sobrietyRate = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::SOBRIETY_RATE];
+		int sobrietyRate = GetDescriptor().sobrietyRate;
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
 		{
 			avatar::Statistics::Decrease(avatar::Statistic::NAUSEA, sobrietyRate);
@@ -147,7 +174,7 @@ namespace game::Avatar
 
 	static void HandleSobriety()
 	{
-		int sobrietyRate = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::SOBRIETY_RATE];
+		int sobrietyRate = GetDescriptor().sobrietyRate;
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::DRUNKENNESS))
 		{
 			avatar::Statistics::Decrease(avatar::Statistic::DRUNKENNESS, sobrietyRate);
@@ -217,7 +244,7 @@ namespace game::Avatar
 
 	bool CanPoop()
 	{
-		int poopThreshold = ::data::Stores::GetStore(::data::Store::AVATAR)[game::data::Properties::POOP_THRESHOLD];
+		int poopThreshold = game::Avatar::GetDescriptor().poopThreshold;
 		return (game::avatar::Statistics::Read(game::avatar::Statistic::BOWEL) >= poopThreshold);
 	}
 

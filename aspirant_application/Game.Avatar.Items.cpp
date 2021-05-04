@@ -12,7 +12,6 @@
 #include "Game.World.h"
 #include "Common.RNG.h"
 #include "Game.CombatDeck.h"
-#include "Data.Stores.h"
 namespace game::Avatar
 {
 	nlohmann::json& GetAvatar();
@@ -78,8 +77,8 @@ namespace game::avatar::Items
 	static void AddMapFragment()
 	{
 		auto worldSize = game::World::GetSize();
-		size_t fragmentWidth = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::MAP_FRAGMENT_WIDTH];
-		size_t fragmentHeight = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::MAP_FRAGMENT_HEIGHT];
+		size_t fragmentWidth = game::Avatar::GetDescriptor().mapFragmentWidth;
+		size_t fragmentHeight = game::Avatar::GetDescriptor().mapFragmentHeight;
 		size_t fragmentX = common::RNG::FromRange(0u, worldSize.GetX() - fragmentWidth);
 		size_t fragmentY = common::RNG::FromRange(0u, worldSize.GetY() - fragmentHeight);
 		for (size_t x = 0u; x < fragmentWidth; ++x)
@@ -95,7 +94,7 @@ namespace game::avatar::Items
 	{
 		if (amount > 0)
 		{
-			if (item == ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY])
+			if (item == game::Avatar::GetDescriptor().keyItemId)
 			{
 				while (amount > 0)
 				{
@@ -103,7 +102,7 @@ namespace game::avatar::Items
 					amount--;
 				}
 			}
-			else if (item == ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::MAP_FRAGMENT])
+			else if (item == game::Avatar::GetDescriptor().mapFragmentItemId)
 			{
 				while (amount > 0)
 				{

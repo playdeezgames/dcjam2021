@@ -6,6 +6,19 @@
 #include "json.hpp"
 namespace game::Avatar
 {
+	struct Descriptor
+	{
+		int poopItemId;
+		int hungerRate;
+		int sobrietyRate;
+		size_t mapFragmentWidth;
+		size_t mapFragmentHeight;
+		int keyItemId;
+		int mapFragmentItemId;
+		int poopThreshold;
+	};
+	const Descriptor& GetDescriptor();
+
 	std::optional<std::string> TurnLeft();
 	std::optional<std::string> TurnRight();
 	std::optional<std::string> MoveAhead();

@@ -9,6 +9,7 @@
 #include <sstream>
 #include <algorithm>
 #include "Data.Stores.h"
+#include "Game.Avatar.h"
 namespace game::world::Items
 {
 	static nlohmann::json& GetRoomInventories()
@@ -59,7 +60,7 @@ namespace game::world::Items
 
 	static void PopulateKeys()
 	{
-		int keyItem = ::data::Stores::GetStore(::data::Store::AVATAR)[data::Properties::KEY];
+		int keyItem = game::Avatar::GetDescriptor().keyItemId;
 		auto worldSize = game::World::GetSize();
 		auto deadEnds = game::World::GetDeadEnds();
 		size_t keyCount = deadEnds.size();
