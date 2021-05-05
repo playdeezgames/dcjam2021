@@ -18,6 +18,7 @@ namespace visuals::FloorInventory
 	struct InternalFloorInventory
 	{
 		common::XY<int> xy;
+		int width;
 		int rowHeight;
 		std::string font;
 		std::string inactiveColor;
@@ -28,6 +29,7 @@ namespace visuals::FloorInventory
 	};
 
 	static std::vector<InternalFloorInventory> internalFloorInventories;
+	static std::map<std::string, std::map<std::string, size_t>> floorInventoryTable;
 	static size_t inventoryIndex = 0;
 
 	static void DrawInternalFloorInventory(std::shared_ptr<SDL_Renderer> renderer, size_t floorInventoryIndex)
@@ -73,6 +75,7 @@ namespace visuals::FloorInventory
 		internalFloorInventories.push_back(
 			{
 				common::XY<int>(model[common::data::Properties::X], model[common::data::Properties::Y]),
+				model[common::data::Properties::WIDTH],
 				model[visuals::data::Properties::ROW_HEIGHT],
 				model[visuals::data::Properties::FONT],
 				model[visuals::data::Properties::COLORS][visuals::data::Properties::INACTIVE],
@@ -81,27 +84,14 @@ namespace visuals::FloorInventory
 				common::XY<int>(model[visuals::data::Properties::DROP_SHADOW_X],model[visuals::data::Properties::DROP_SHADOW_Y]),
 				model[visuals::data::Properties::DROP_SHADOW_COLOR]
 			});
+		if (model.count(visuals::data::Properties::CONTROL_ID) > 0)
+		{
+			floorInventoryTable[layoutName][model[visuals::data::Properties::CONTROL_ID]] = index;
+		}
 		return [index](std::shared_ptr<SDL_Renderer> renderer) 
 		{
 			DrawInternalFloorInventory(renderer, index);
 		};
-	}
-
-	template <typename TResult>
-	static TResult WithControl(const std::string& layoutName, const std::string& controlId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
-	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::FLOOR_INVENTORY)
-			{
-				if (thingie.count(visuals::data::Properties::CONTROL_ID) > 0 &&
-					thingie[visuals::data::Properties::CONTROL_ID] == controlId)
-				{
-					return func(thingie);
-				}
-			}
-		}
-		return notFound();
 	}
 
 	void ResetIndex()
@@ -150,45 +140,42 @@ namespace visuals::FloorInventory
 
 	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
 	{
-		WithControl<void>(layoutName, controlId,
-			[xy](nlohmann::json& thingie)
+		auto floorInventoryIndex = floorInventoryTable[layoutName][controlId];
+		auto& floorInventory = internalFloorInventories[floorInventoryIndex];
+
+		int x = floorInventory.xy.GetX();
+		int y = floorInventory.xy.GetY();
+		int width = floorInventory.width;
+		int rowHeight = floorInventory.rowHeight;
+		if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 		{
-			int x = thingie[common::data::Properties::X];
-			int y = thingie[common::data::Properties::Y];
-			int width = thingie[common::data::Properties::WIDTH];
-			int rowHeight = thingie[visuals::data::Properties::ROW_HEIGHT];
-			
-			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
+			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
+			auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+			if ((size_t)row < inventory.size())
 			{
-				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
-				if ((size_t)row < inventory.size())
-				{
-					inventoryIndex = row;
-				}
+				inventoryIndex = row;
 			}
-		}, []() {});
+		}
 	}
 
 	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
 	{
-		return WithControl<std::optional<int>>(layoutName, controlId,
-			[xy, buttons](nlohmann::json& thingie)
+
+		auto floorInventoryIndex = floorInventoryTable[layoutName][controlId];
+		auto& floorInventory = internalFloorInventories[floorInventoryIndex];
+		int x = floorInventory.xy.GetX();
+		int y = floorInventory.xy.GetY();
+		int width = floorInventory.width;
+		int rowHeight = floorInventory.rowHeight;
+		if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 		{
-			int x = thingie[common::data::Properties::X];
-			int y = thingie[common::data::Properties::Y];
-			int width = thingie[common::data::Properties::WIDTH];
-			int rowHeight = thingie[visuals::data::Properties::ROW_HEIGHT];
-			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
+			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
+			auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+			if ((size_t)row < inventory.size())
 			{
-				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
-				if (row < inventory.size())
-				{
-					return std::optional<int>((int)row);
-				}
+				return std::optional<int>((int)row);
 			}
-			return std::optional<int>();
-		}, []() { return std::optional<int>(); });
+		}
+		return std::optional<int>();
 	}
 }
