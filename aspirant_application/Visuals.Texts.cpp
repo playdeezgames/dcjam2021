@@ -5,12 +5,6 @@
 #include "Common.Data.Properties.h"
 #include "Visuals.Data.Properties.h"
 #include "Visuals.Fonts.h"
-
-namespace visuals::Layouts
-{
-	nlohmann::json& GetLayout(const std::string&);
-}
-
 namespace visuals::Text
 {
 	struct InternalText
@@ -68,74 +62,28 @@ namespace visuals::Text
 					model[visuals::data::Properties::DROP_SHADOW_X],
 					model[visuals::data::Properties::DROP_SHADOW_Y])
 			});
+		if (model.count(visuals::data::Properties::TEXT_ID) > 0)
+		{
+			textTable[layoutName][model[visuals::data::Properties::TEXT_ID]] = textIndex;
+		}
 		return [textIndex](std::shared_ptr<SDL_Renderer> renderer) 
 		{
 			DrawInternalText(renderer, textIndex);
 		};
 	}
-
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		if ((bool)model[visuals::data::Properties::DROP_SHADOW])
-		{
-			visuals::Fonts::WriteText(
-				model[visuals::data::Properties::FONT],
-				renderer,
-				common::XY<int>
-				(
-					(int)model[common::data::Properties::X] + (int)model[visuals::data::Properties::DROP_SHADOW_X],
-					(int)model[common::data::Properties::Y] + (int)model[visuals::data::Properties::DROP_SHADOW_Y]
-					),
-				model[visuals::data::Properties::TEXT],
-				model[visuals::data::Properties::DROP_SHADOW_COLOR],
-				(HorizontalAlignment)(int)model[visuals::data::Properties::HORIZONTAL_ALIGNMENT]);
-		}
-		visuals::Fonts::WriteText(
-			model[visuals::data::Properties::FONT],
-			renderer,
-			common::XY<int>
-			(
-				model[common::data::Properties::X],
-				model[common::data::Properties::Y]
-				),
-			model[visuals::data::Properties::TEXT],
-			model[visuals::data::Properties::COLOR],
-			(HorizontalAlignment)(int)model[visuals::data::Properties::HORIZONTAL_ALIGNMENT]);
-	}
 }
 
 namespace visuals::Texts
 {
-	template <typename TResult>
-	static TResult WithText(const std::string& layoutName, const std::string& textId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
-	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::TEXT)
-			{
-				if (thingie.count(visuals::data::Properties::TEXT_ID) > 0 &&
-					thingie[visuals::data::Properties::TEXT_ID] == textId)
-				{
-					return func(thingie);
-				}
-			}
-		}
-		return notFound();
-	}
-
 	void SetText(const std::string& layoutName, const std::string& textId, const std::string& text)
 	{
-		WithText<void>(layoutName, textId, [text](auto& thingie) 
-		{
-			thingie[visuals::data::Properties::TEXT] = text;
-		}, []() {});
+		auto textIndex = visuals::Text::textTable[layoutName][textId];
+		visuals::Text::internalTexts[textIndex].text = text;
 	}
 
 	void SetColor(const std::string& layoutName, const std::string& textId, const std::string& color)
 	{
-		WithText<void>(layoutName, textId, [color](auto& thingie)
-		{
-			thingie[visuals::data::Properties::COLOR] = color;
-		}, []() {});
+		auto textIndex = visuals::Text::textTable[layoutName][textId];
+		visuals::Text::internalTexts[textIndex].color = color;
 	}
 }
