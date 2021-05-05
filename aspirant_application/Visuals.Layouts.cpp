@@ -39,6 +39,7 @@ namespace visuals::FloorInventory
 namespace visuals::AvatarInventory 
 { 
 	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Layout
 {
@@ -111,6 +112,9 @@ namespace visuals::Layouts
 					break;
 				case visuals::data::Type::FLOOR_INVENTORY:
 					internalLayouts[layoutName].drawers.push_back(visuals::FloorInventory::Internalize(layoutName, drawn));
+					break;
+				case visuals::data::Type::AVATAR_INVENTORY:
+					internalLayouts[layoutName].drawers.push_back(visuals::AvatarInventory::Internalize(layoutName, drawn));
 					break;
 				}
 			}
