@@ -12,7 +12,6 @@ namespace visuals::Menu
 }
 namespace visuals::Image 
 { 
-	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
 	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Text 
@@ -49,7 +48,6 @@ namespace visuals::Layout
 
 	static std::map<visuals::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
 	{
-		{visuals::data::Type::IMAGE, visuals::Image::Draw},
 		{visuals::data::Type::TEXT, visuals::Text::Draw},
 		{visuals::data::Type::WORLD_MAP, visuals::WorldMap::Draw},
 		{visuals::data::Type::LAYOUT, visuals::Sublayout::Draw},

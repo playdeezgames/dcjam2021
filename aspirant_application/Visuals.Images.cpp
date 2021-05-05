@@ -8,10 +8,6 @@
 #include "Visuals.Sprites.h"
 #include "Visuals.Colors.h"
 #include <functional>
-namespace visuals::Layouts
-{
-	nlohmann::json& GetLayout(const std::string&);
-}
 namespace visuals::Image
 {
 	struct InternalImage
@@ -60,60 +56,18 @@ namespace visuals::Image
 			DrawInternalImage(renderer, imageIndex);
 		};
 	}
-
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		if (model.count(data::Properties::VISIBLE) == 0 || model[data::Properties::VISIBLE] == true)
-		{
-			std::string spriteName = model[data::Properties::SPRITE];
-			int x = model[common::data::Properties::X];
-			int y = model[common::data::Properties::Y];
-			SDL_Color color = (model.count(data::Properties::COLOR) > 0) ?
-				(::visuals::Colors::Read(model[data::Properties::COLOR])) :
-				(defaultColor);
-
-			Sprites::Draw(
-				spriteName,
-				renderer,
-				common::XY<int>(
-					x,
-					y),
-				color);
-		}
-	}
 }
 namespace visuals::Images
 {
-	template<typename TResult>
-	static TResult WithImage(const std::string& layoutName, const std::string& imageId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
-	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::IMAGE)
-			{
-				if (thingie.count(visuals::data::Properties::IMAGE_ID) > 0 &&
-					thingie[visuals::data::Properties::IMAGE_ID] == imageId)
-				{
-					return func(thingie);
-				}
-			}
-		}
-		return notFound();
-	}
-
 	void SetSprite(const std::string& layoutName, const std::string& imageId, const std::string& spriteName)
 	{
-		WithImage<void>(layoutName, imageId, [spriteName](auto& thingie)
-		{
-			thingie[visuals::data::Properties::SPRITE] = spriteName;
-		}, []() {});
+		auto imageIndex = visuals::Image::imageTable[layoutName][imageId];
+		visuals::Image::images[imageIndex].sprite = spriteName;
 	}
 
 	void SetVisible(const std::string& layoutName, const std::string& imageId, bool visible)
 	{
-		WithImage<void>(layoutName, imageId, [visible](auto& thingie) 
-		{
-			thingie[visuals::data::Properties::VISIBLE] = visible;
-		}, []() {});
+		auto imageIndex = visuals::Image::imageTable[layoutName][imageId];
+		visuals::Image::images[imageIndex].visible = visible;
 	}
 }

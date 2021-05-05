@@ -7,10 +7,6 @@
 #include "Visuals.Layouts.h"
 #include "Common.XY.h"
 #include "Visuals.Fonts.h"
-namespace visuals::Layouts
-{
-	nlohmann::json& GetLayout(const std::string&);
-}
 namespace visuals::Menu
 {
 	struct InternalMenuItem
