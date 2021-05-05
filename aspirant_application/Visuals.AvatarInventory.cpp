@@ -19,6 +19,7 @@ namespace visuals::AvatarInventory
 	struct InternalAvatarInventory
 	{
 		common::XY<int> xy;
+		int width;
 		int rowHeight;
 		std::string font;
 		std::string inactiveColor;
@@ -29,6 +30,7 @@ namespace visuals::AvatarInventory
 	};
 
 	static std::vector<InternalAvatarInventory> internalAvatarInventories;
+	static std::map<std::string, std::map<std::string, size_t>> avatarInventoryTable;
 
 	static void DrawInternalAvatarInventory(std::shared_ptr<SDL_Renderer> renderer, size_t avatarInventoryIndex)
 	{
@@ -73,6 +75,7 @@ namespace visuals::AvatarInventory
 		internalAvatarInventories.push_back(
 			{
 				common::XY<int>(model[common::data::Properties::X], model[common::data::Properties::Y]),
+				model[common::data::Properties::WIDTH],
 				model[visuals::data::Properties::ROW_HEIGHT],
 				model[visuals::data::Properties::FONT],
 				model[visuals::data::Properties::COLORS][visuals::data::Properties::INACTIVE],
@@ -81,27 +84,14 @@ namespace visuals::AvatarInventory
 				common::XY<int>(model[visuals::data::Properties::DROP_SHADOW_X],model[visuals::data::Properties::DROP_SHADOW_Y]),
 				model[visuals::data::Properties::DROP_SHADOW_COLOR]
 			});
+		if (model.count(visuals::data::Properties::CONTROL_ID) > 0)
+		{
+			avatarInventoryTable[layoutName][model[visuals::data::Properties::CONTROL_ID]] = index;
+		}
 		return [index](std::shared_ptr<SDL_Renderer> renderer)
 		{
 			DrawInternalAvatarInventory(renderer, index);
 		};
-	}
-
-	template <typename TResult>
-	static TResult WithControl(const std::string& layoutName, const std::string& controlId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
-	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AVATAR_INVENTORY)
-			{
-				if (thingie.count(visuals::data::Properties::CONTROL_ID) > 0 &&
-					thingie[visuals::data::Properties::CONTROL_ID] == controlId)
-				{
-					return func(thingie);
-				}
-			}
-		}
-		return notFound();
 	}
 
 	void ResetIndex()
@@ -150,91 +140,43 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		int x = model[common::data::Properties::X];
-		int y = model[common::data::Properties::Y];
-		int rowHeight = model[visuals::data::Properties::ROW_HEIGHT];
-		std::string font = model[visuals::data::Properties::FONT];
-		std::string inactiveColor = model[visuals::data::Properties::COLORS][visuals::data::Properties::INACTIVE];
-		std::string activeColor = model[visuals::data::Properties::COLORS][visuals::data::Properties::ACTIVE];
-		bool dropShadow = model[visuals::data::Properties::DROP_SHADOW];
-		int dropShadowX = model[visuals::data::Properties::DROP_SHADOW_X];
-		int dropShadowY = model[visuals::data::Properties::DROP_SHADOW_Y];
-		std::string dropShadowColor = model[visuals::data::Properties::DROP_SHADOW_COLOR];
-
-
-		auto inventory = game::avatar::Items::All();
-		if (inventoryIndex >= inventory.size())
-		{
-			inventoryIndex = 0;
-		}
-
-		size_t index = 0;
-		for (auto& entry : inventory)
-		{
-			std::stringstream ss;
-			ss << game::item::GetDescriptor(entry.first).name << " x " << entry.second;
-			auto color = (index == inventoryIndex) ? (activeColor) : (inactiveColor);
-			if (dropShadow)
-			{
-				visuals::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, ss.str(), dropShadowColor, visuals::HorizontalAlignment::LEFT);
-			}
-			visuals::Fonts::WriteText(font, renderer, { x,y }, ss.str(), color, visuals::HorizontalAlignment::LEFT);
-			y += rowHeight;
-			index++;
-		}
-
-		if (index == 0)
-		{
-			if (dropShadow)
-			{
-				visuals::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, "(nothing)", dropShadowColor, visuals::HorizontalAlignment::LEFT);
-			}
-			visuals::Fonts::WriteText(font, renderer, { x,y }, "(nothing)", inactiveColor, visuals::HorizontalAlignment::LEFT);
-		}
-	}
-
 	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
 	{
-		WithControl<void>(layoutName, controlId, 
-			[xy](nlohmann::json& thingie) 
+		auto avatarInventoryIndex = avatarInventoryTable[layoutName][controlId];
+		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
+		
+		int x = avatarInventory.xy.GetX();
+		int y = avatarInventory.xy.GetY();
+		int width = avatarInventory.width;
+		int rowHeight = avatarInventory.rowHeight;
+		if (xy.GetX() >= x && xy.GetX()<x+width && xy.GetY()>=y)
 		{
-			int x = thingie[common::data::Properties::X];
-			int y = thingie[common::data::Properties::Y];
-			int width = thingie[common::data::Properties::WIDTH];
-			int rowHeight = thingie[visuals::data::Properties::ROW_HEIGHT];
-			if (xy.GetX() >= x && xy.GetX()<x+width && xy.GetY()>=y)
+			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
+			auto inventory = game::avatar::Items::All();
+			if ((size_t)row < inventory.size())
 			{
-				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-				auto inventory = game::avatar::Items::All();
-				if ((size_t)row < inventory.size())
-				{
-					inventoryIndex = row;
-				}
+				inventoryIndex = row;
 			}
-		}, []() {});
+		}
 	}
 
 	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
 	{
-		return WithControl<std::optional<int>>(layoutName, controlId,
-			[xy, buttons](nlohmann::json& thingie) 
-		{ 
-			int x = thingie[common::data::Properties::X];
-			int y = thingie[common::data::Properties::Y];
-			int width = thingie[common::data::Properties::WIDTH];
-			int rowHeight = thingie[visuals::data::Properties::ROW_HEIGHT];
-			if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
+		auto avatarInventoryIndex = avatarInventoryTable[layoutName][controlId];
+		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
+		int x = avatarInventory.xy.GetX();
+		int y = avatarInventory.xy.GetY();
+		int width = avatarInventory.width;
+		int rowHeight = avatarInventory.rowHeight;
+		if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
+		{
+			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
+			auto inventory = game::avatar::Items::All();
+			if ((size_t)row < inventory.size())
 			{
-				size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-				auto inventory = game::avatar::Items::All();
-				if ((size_t)row < inventory.size())
-				{
-					return std::optional<int>((int)row);
-				}
+				return std::optional<int>((int)row);
 			}
-			return std::optional<int>();
-		}, []() { return std::optional<int>(); });
+		}
+		return std::optional<int>();
 	}
 }

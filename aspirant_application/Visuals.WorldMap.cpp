@@ -90,7 +90,7 @@ namespace visuals::WorldMap
 			for (size_t row = 0; row < worldSize.GetY(); ++row)
 			{
 				auto cell = common::XY<size_t>(column, row);
-				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
+				auto plot = common::XY<int>((int)column * (int)cellWidth + x, (int)row * (int)cellHeight + y);
 				switch (game::World::GetKnownState(cell))
 				{
 				case game::world::KnownState::VISITED:
@@ -159,73 +159,5 @@ namespace visuals::WorldMap
 		{
 			DrawInternalWorldMap(renderer, index);
 		};
-	}
-
-
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		int x = model[common::data::Properties::X];
-		int y = model[common::data::Properties::Y];
-		int cellWidth = model[visuals::data::Properties::CELL_WIDTH];
-		int cellHeight = model[visuals::data::Properties::CELL_WIDTH];
-		auto avatarPosition = game::Avatar::GetPosition();
-
-		auto worldSize = game::World::GetSize();
-		for (size_t column = 0; column < worldSize.GetX(); ++column)
-		{
-			for (size_t row = 0; row < worldSize.GetY(); ++row)
-			{
-				auto cell = common::XY<size_t>(column, row);
-				auto plot = common::XY<int>((int)column * cellWidth + x, (int)row * cellHeight + y);
-				switch (game::World::GetKnownState(cell))
-				{
-				case game::world::KnownState::VISITED:
-				{
-
-					visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
-					DrawWall(renderer, cell, plot, maze::Direction::EAST);
-					DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
-					DrawWall(renderer, cell, plot, maze::Direction::WEST);
-
-					if (cell == avatarPosition)
-					{
-						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-					}
-
-					if (game::Creatures::GetInstance(cell))
-					{
-						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-					}
-				}
-				break;
-				case game::world::KnownState::KNOWN:
-				{
-
-					visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-					DrawKnownWall(renderer, cell, plot, maze::Direction::NORTH);
-					DrawKnownWall(renderer, cell, plot, maze::Direction::EAST);
-					DrawKnownWall(renderer, cell, plot, maze::Direction::SOUTH);
-					DrawKnownWall(renderer, cell, plot, maze::Direction::WEST);
-
-					if (cell == avatarPosition)
-					{
-						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-					}
-
-					if (game::Creatures::GetInstance(cell))
-					{
-						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-					}
-				}
-				break;
-				default:
-				{
-					visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read("White"));//TODO: hard coded string
-				}
-				break;
-				}
-			}
-		}
 	}
 }

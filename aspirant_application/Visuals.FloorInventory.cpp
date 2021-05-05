@@ -148,52 +148,6 @@ namespace visuals::FloorInventory
 		}
 	}
 
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		int x = model[common::data::Properties::X];
-		int y = model[common::data::Properties::Y];
-		int rowHeight = model[visuals::data::Properties::ROW_HEIGHT];
-		std::string font = model[visuals::data::Properties::FONT];
-		std::string inactiveColor = model[visuals::data::Properties::COLORS][visuals::data::Properties::INACTIVE];
-		std::string activeColor = model[visuals::data::Properties::COLORS][visuals::data::Properties::ACTIVE];
-		bool dropShadow = model[visuals::data::Properties::DROP_SHADOW];
-		int dropShadowX = model[visuals::data::Properties::DROP_SHADOW_X];
-		int dropShadowY = model[visuals::data::Properties::DROP_SHADOW_Y];
-		std::string dropShadowColor = model[visuals::data::Properties::DROP_SHADOW_COLOR];
-
-
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::world::Items::FloorInventory(location);
-		if (inventoryIndex >= inventory.size())
-		{
-			inventoryIndex = 0;
-		}
-
-		size_t index = 0;
-		for (auto& entry : inventory)
-		{
-			std::stringstream ss;
-			ss << game::item::GetDescriptor(entry.first).name << " x " << entry.second;
-			auto color = (index == inventoryIndex) ? (activeColor) : (inactiveColor);
-			if (dropShadow)
-			{
-				visuals::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, ss.str(), dropShadowColor, visuals::HorizontalAlignment::LEFT);
-			}
-			visuals::Fonts::WriteText(font, renderer, { x,y }, ss.str(), color, visuals::HorizontalAlignment::LEFT);
-			y += rowHeight;
-			index++;
-		}
-
-		if (index == 0)
-		{
-			if (dropShadow)
-			{
-				visuals::Fonts::WriteText(font, renderer, { x + dropShadowX,y + dropShadowY }, "(nothing)", dropShadowColor, visuals::HorizontalAlignment::LEFT);
-			}
-			visuals::Fonts::WriteText(font, renderer, { x,y }, "(nothing)", inactiveColor, visuals::HorizontalAlignment::LEFT);
-		}
-	}
-
 	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
 	{
 		WithControl<void>(layoutName, controlId,
