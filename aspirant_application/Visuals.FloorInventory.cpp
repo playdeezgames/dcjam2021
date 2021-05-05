@@ -15,6 +15,78 @@ namespace visuals::Layouts
 }
 namespace visuals::FloorInventory
 {
+	struct InternalFloorInventory
+	{
+		common::XY<int> xy;
+		int rowHeight;
+		std::string font;
+		std::string inactiveColor;
+		std::string activeColor;
+		bool dropShadow;
+		common::XY<int> dropShadowXY;
+		std::string dropShadowColor;
+	};
+
+	static std::vector<InternalFloorInventory> internalFloorInventories;
+	static size_t inventoryIndex = 0;
+
+	static void DrawInternalFloorInventory(std::shared_ptr<SDL_Renderer> renderer, size_t floorInventoryIndex)
+	{
+		auto& floorInventory = internalFloorInventories[floorInventoryIndex];
+		auto xy = floorInventory.xy;
+
+		auto location = game::Avatar::GetPosition();
+		auto inventory = game::world::Items::FloorInventory(location);
+		if (inventoryIndex >= inventory.size())
+		{
+			inventoryIndex = 0;
+		}
+
+		size_t index = 0;
+		for (auto& entry : inventory)
+		{
+			std::stringstream ss;
+			ss << game::item::GetDescriptor(entry.first).name << " x " << entry.second;
+			auto color = (index == inventoryIndex) ? (floorInventory.activeColor) : (floorInventory.inactiveColor);
+			if (floorInventory.dropShadow)
+			{
+				visuals::Fonts::WriteText(floorInventory.font, renderer, xy + floorInventory.dropShadowXY, ss.str(), floorInventory.dropShadowColor, visuals::HorizontalAlignment::LEFT);
+			}
+			visuals::Fonts::WriteText(floorInventory.font, renderer, xy, ss.str(), color, visuals::HorizontalAlignment::LEFT);
+			xy = xy + common::XY<int>(0, floorInventory.rowHeight);
+			index++;
+		}
+
+		if (index == 0)
+		{
+			if (floorInventory.dropShadow)
+			{
+				visuals::Fonts::WriteText(floorInventory.font, renderer, floorInventory.xy + floorInventory.dropShadowXY, "(nothing)", floorInventory.dropShadowColor, visuals::HorizontalAlignment::LEFT);
+			}
+			visuals::Fonts::WriteText(floorInventory.font, renderer, floorInventory.xy, "(nothing)", floorInventory.inactiveColor, visuals::HorizontalAlignment::LEFT);
+		}
+	}
+
+	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	{
+		size_t index = internalFloorInventories.size();
+		internalFloorInventories.push_back(
+			{
+				common::XY<int>(model[common::data::Properties::X], model[common::data::Properties::Y]),
+				model[visuals::data::Properties::ROW_HEIGHT],
+				model[visuals::data::Properties::FONT],
+				model[visuals::data::Properties::COLORS][visuals::data::Properties::INACTIVE],
+				model[visuals::data::Properties::COLORS][visuals::data::Properties::ACTIVE],
+				model[visuals::data::Properties::DROP_SHADOW],
+				common::XY<int>(model[visuals::data::Properties::DROP_SHADOW_X],model[visuals::data::Properties::DROP_SHADOW_Y]),
+				model[visuals::data::Properties::DROP_SHADOW_COLOR]
+			});
+		return [index](std::shared_ptr<SDL_Renderer> renderer) 
+		{
+			DrawInternalFloorInventory(renderer, index);
+		};
+	}
+
 	template <typename TResult>
 	static TResult WithControl(const std::string& layoutName, const std::string& controlId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
 	{
@@ -31,8 +103,6 @@ namespace visuals::FloorInventory
 		}
 		return notFound();
 	}
-
-	static size_t inventoryIndex = 0;
 
 	void ResetIndex()
 	{
