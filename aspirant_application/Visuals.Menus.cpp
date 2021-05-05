@@ -36,6 +36,7 @@ namespace visuals::Menu
 	static std::vector<InternalMenuItem> internalMenuItems;
 	static std::vector<InternalMenu> internalMenus;
 	static std::map<std::string, std::map<std::string, size_t>> menuTable;
+	static std::map<std::string, std::map<std::string, size_t>> menuItemTable;
 
 	static void DrawInternalMenu(std::shared_ptr<SDL_Renderer> renderer, size_t menuIndex)
 	{
@@ -81,6 +82,10 @@ namespace visuals::Menu
 		{
 			size_t menuItemIndex = internalMenuItems.size();
 			internalMenu.menuItems.push_back(menuItemIndex);
+			if (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0)
+			{
+				menuItemTable[layoutName][menuItem[visuals::data::Properties::MENU_ITEM_ID]] = menuItemIndex;
+			}
 			internalMenuItems.push_back(
 				{ 
 					menuItem[data::Properties::TEXT],
@@ -187,31 +192,9 @@ namespace visuals::Menus
 }
 namespace visuals::MenuItems
 {
-	template <typename TResult>
-	static TResult WithMenuItem(const std::string& layoutName, const std::string& menuItemId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
-	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::MENU)
-			{
-				for (auto& menuItem : thingie[visuals::data::Properties::MENU_ITEMS])
-				{
-					if (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0 &&
-						menuItem[visuals::data::Properties::MENU_ITEM_ID] == menuItemId)
-					{
-						return func(menuItem);
-					}
-				}
-			}
-		}
-		return notFound();
-	}
-
 	void SetText(const std::string& layoutName, const std::string& menuItemId, const std::string& text)
 	{
-		WithMenuItem<void>(layoutName, menuItemId, [text](auto& menuItem)
-		{
-			menuItem[visuals::data::Properties::TEXT] = text;
-		}, []() {});
+		auto menuItemIndex = visuals::Menu::menuItemTable[layoutName][menuItemId];
+		visuals::Menu::internalMenuItems[menuItemIndex].text = text;
 	}
 }
