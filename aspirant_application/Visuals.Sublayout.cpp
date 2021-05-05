@@ -29,9 +29,4 @@ namespace visuals::Sublayout
 			DrawInternalSublayout(renderer, index);
 		};
 	}
-
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		visuals::Layouts::Draw(renderer, model[common::data::Properties::NAME]);
-	}
 }

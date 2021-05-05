@@ -24,7 +24,6 @@ namespace visuals::WorldMap
 }
 namespace visuals::Sublayout 
 { 
-	void Draw(std::shared_ptr<SDL_Renderer>, const nlohmann::json&); 
 	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::FloorInventory 
@@ -41,27 +40,6 @@ namespace visuals::Layout
 	{
 		std::vector<std::function<void(std::shared_ptr<SDL_Renderer>)>> drawer;
 	};
-
-	static std::map<visuals::data::Type, std::function<void(std::shared_ptr<SDL_Renderer>, const nlohmann::json&)>> table =
-	{
-		{visuals::data::Type::LAYOUT, visuals::Sublayout::Draw}
-	};
-
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		for (auto& drawn : model)
-		{
-			auto drawnType = visuals::data::Types::FromString(drawn[common::data::Properties::TYPE]);
-			if (drawnType)
-			{
-				auto drawer = table.find(*drawnType);
-				if (drawer != table.end())
-				{
-					drawer->second(renderer, drawn);
-				}
-			}
-		}
-	}
 }
 namespace visuals::Layouts
 {

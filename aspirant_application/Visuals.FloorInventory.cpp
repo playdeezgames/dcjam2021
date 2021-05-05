@@ -160,7 +160,6 @@ namespace visuals::FloorInventory
 
 	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
 	{
-
 		auto floorInventoryIndex = floorInventoryTable[layoutName][controlId];
 		auto& floorInventory = internalFloorInventories[floorInventoryIndex];
 		int x = floorInventory.xy.GetX();
