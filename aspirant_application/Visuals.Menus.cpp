@@ -17,8 +17,8 @@ namespace visuals::Menu
 	{
 		std::string text;
 		common::XY<int> xy;
+		int value;
 	};
-
 
 	struct InternalMenu
 	{
@@ -35,10 +35,11 @@ namespace visuals::Menu
 
 	static std::vector<InternalMenuItem> internalMenuItems;
 	static std::vector<InternalMenu> internalMenus;
+	static std::map<std::string, std::map<std::string, size_t>> menuTable;
 
-	static void DrawInternalMenu(std::shared_ptr<SDL_Renderer> renderer, size_t index)
+	static void DrawInternalMenu(std::shared_ptr<SDL_Renderer> renderer, size_t menuIndex)
 	{
-		auto& menu = internalMenus[index];
+		auto& menu = internalMenus[menuIndex];
 		int currentIndex = 0;
 		for (auto& menuItemIndex : menu.menuItems)
 		{
@@ -53,7 +54,7 @@ namespace visuals::Menu
 					menu.dropShadowColor,
 					menu.alignment);
 			}
-			std::string color = (currentIndex == index) ? (menu.activeColor) : (menu.inactiveColor);
+			std::string color = (currentIndex == menu.index) ? (menu.activeColor) : (menu.inactiveColor);
 			Fonts::WriteText(menu.font, renderer, menuItem.xy, menuItem.text, color, menu.alignment);
 			currentIndex++;
 		}
@@ -85,118 +86,59 @@ namespace visuals::Menu
 					menuItem[data::Properties::TEXT],
 					common::XY<int>(
 						menuItem[common::data::Properties::X],
-						menuItem[common::data::Properties::Y])
+						menuItem[common::data::Properties::Y]),
+					menuItem[visuals::data::Properties::VALUE]
 				});
 		}
 		internalMenus.push_back(internalMenu);
+		if (model.count(visuals::data::Properties::MENU_ID) > 0)
+		{
+			menuTable[layoutName][model[visuals::data::Properties::MENU_ID]] = menuIndex;
+		}
 		return [menuIndex](std::shared_ptr<SDL_Renderer> renderer) {
 			DrawInternalMenu(renderer, menuIndex);
 		};
 	}
-
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const nlohmann::json& model)
-	{
-		int index = model[data::Properties::INDEX];
-		std::string font = model[data::Properties::FONT];
-		std::string activeColor = model[data::Properties::COLORS][data::Properties::ACTIVE];
-		std::string inactiveColor = model[data::Properties::COLORS][data::Properties::INACTIVE];
-		visuals::HorizontalAlignment horizontalAlignment = (visuals::HorizontalAlignment)(int)model[data::Properties::HORIZONTAL_ALIGNMENT];
-		bool dropShadow = model[data::Properties::DROP_SHADOW];
-		std::string dropShadowColor = model[data::Properties::DROP_SHADOW_COLOR];
-		int dropShadowX = model[data::Properties::DROP_SHADOW_X];
-		int dropShadowY = model[data::Properties::DROP_SHADOW_Y];
-		auto& menuItems = model[data::Properties::MENU_ITEMS];
-		int currentIndex = 0;
-		for (auto& menuItem : menuItems)
-		{
-			std::string text = menuItem[data::Properties::TEXT];
-			int x = menuItem[common::data::Properties::X];
-			int y = menuItem[common::data::Properties::Y];
-			if (dropShadow)
-			{
-				Fonts::WriteText(
-					font,
-					renderer,
-					common::XY<int>(x + dropShadowX, y + dropShadowY),
-					text,
-					dropShadowColor,
-					horizontalAlignment);
-			}
-			std::string color = (currentIndex == index) ? (activeColor) : (inactiveColor);
-			Fonts::WriteText(font, renderer, common::XY<int>(x, y), text, color, horizontalAlignment);
-			currentIndex++;
-		}
-	}
 }
 namespace visuals::Menus
 {
-	template<typename TResult>
-	static TResult WithMenu(const std::string& layoutName, const std::string& menuId, std::function<TResult(nlohmann::json&)> func, std::function<TResult()> notFound)
-	{
-		for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
-		{
-			if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::MENU &&
-				thingie[visuals::data::Properties::MENU_ID] == menuId)
-			{
-				return func(thingie);
-			}
-		}
-		return notFound();
-	}
-
 	std::optional<int> ReadIndex(const std::string& layoutName, const std::string& menuId)
 	{
-		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
-		{
-			return thingie[visuals::data::Properties::INDEX];
-		},
-			[]() {return std::nullopt; });
+		return visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second].index;
 	}
 
 	std::optional<int> ReadValue(const std::string& layoutName, const std::string& menuId)
 	{
-		return WithMenu<std::optional<int>>(layoutName, menuId, [](nlohmann::json& thingie)
-		{
-			int index = thingie[visuals::data::Properties::INDEX];
-			return (int)thingie[visuals::data::Properties::MENU_ITEMS][index][visuals::data::Properties::VALUE];
-		},
-			[]() {return std::nullopt; });
+		auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+		auto& menuItem = visuals::Menu::internalMenuItems[menu.menuItems[menu.index]];
+		return menuItem.value;
 	}
 
 	void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
 	{
-		return WithMenu<void>(layoutName, menuId, [index](nlohmann::json& thingie)
-		{
-			thingie[visuals::data::Properties::INDEX] = index;
-		},
-			[]() {});
+		auto menuIndex = visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second;
+		visuals::Menu::internalMenus[menuIndex].index = index;
 	}
 
 	size_t GetCount(const std::string& layoutName, const std::string& menuId)
 	{
-		return WithMenu<size_t>(layoutName, menuId, [](auto& thingie)
-		{
-			return thingie[visuals::data::Properties::MENU_ITEMS].size();
-		},
-			[]() { return 0; });
+		return visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second].menuItems.size();
 	}
 
 	static std::optional<int> FindIndexForValue(const std::string& layoutName, const std::string& menuId, int value)
 	{
-		return WithMenu<std::optional<int>>(layoutName, menuId, [value](auto& thingie) 
-		{ 
-			int index = 0;
-			for (auto& menuItem : thingie[visuals::data::Properties::MENU_ITEMS])
+		auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+		auto& menuItems = menu.menuItems;
+		int index = 0;
+		for (auto menuItemIndex : menuItems)
+		{
+			if (visuals::Menu::internalMenuItems[menuItemIndex].value == value)
 			{
-				if (value == (int)menuItem[visuals::data::Properties::VALUE])
-				{
-					return std::optional<int>(index);
-				}
-				index++;
+				return index;
 			}
-			return std::optional<int>();
-		}, 
-			[]() { return std::nullopt;  });
+			index++;
+		}
+		return std::nullopt;
 	}
 
 	bool WriteValue(const std::string& layoutName, const std::string& menuId, int value)
