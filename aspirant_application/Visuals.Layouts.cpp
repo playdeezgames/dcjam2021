@@ -6,50 +6,61 @@
 #include "Visuals.Data.Properties.h"
 #include "Data.Stores.h"
 #include <functional>
+namespace visuals
+{
+	typedef std::function<void(std::shared_ptr<SDL_Renderer>)> DrawerFunction;
+}
 namespace visuals::Menu 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Image 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Text 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::WorldMap 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Sublayout 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::FloorInventory 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::AvatarInventory 
 { 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string&, const nlohmann::json&);
-}
-namespace visuals::Layout
-{
-	struct InternalLayout
-	{
-		std::vector<std::function<void(std::shared_ptr<SDL_Renderer>)>> drawer;
-	};
+	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
 namespace visuals::Layouts
 {
 	struct InternalLayout
 	{
-		std::vector<std::function<void(std::shared_ptr<SDL_Renderer>)>> drawers;
+		std::vector<DrawerFunction> drawers;
 	};
 
 	static std::map<std::string, nlohmann::json> layouts;
 	static std::map<std::string, InternalLayout> internalLayouts;
+
+	typedef std::function<DrawerFunction(const std::string&, const nlohmann::json&)> InternalizerFunction;
+
+	static std::map<visuals::data::Type, InternalizerFunction> internalizers =
+	{
+		{visuals::data::Type::IMAGE, visuals::Image::Internalize},
+		{visuals::data::Type::TEXT, visuals::Text::Internalize},
+		{visuals::data::Type::WORLD_MAP, visuals::WorldMap::Internalize},
+		{visuals::data::Type::MENU, visuals::Menu::Internalize},
+		{visuals::data::Type::LAYOUT, visuals::Sublayout::Internalize},
+		{visuals::data::Type::FLOOR_INVENTORY, visuals::FloorInventory::Internalize},
+		{visuals::data::Type::AVATAR_INVENTORY, visuals::AvatarInventory::Internalize},
+		{visuals::data::Type::AREA, [](const std::string&, const nlohmann::json&) { return [](std::shared_ptr<SDL_Renderer>) {};  }}
+	};
 
 	static void Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
@@ -59,30 +70,7 @@ namespace visuals::Layouts
 			auto drawnType = visuals::data::Types::FromString(drawn[common::data::Properties::TYPE]);
 			if (drawnType)
 			{
-				switch (drawnType.value())
-				{
-				case visuals::data::Type::IMAGE:
-					internalLayouts[layoutName].drawers.push_back(visuals::Image::Internalize(layoutName, drawn));
-					break;
-				case visuals::data::Type::TEXT:
-					internalLayouts[layoutName].drawers.push_back(visuals::Text::Internalize(layoutName, drawn));
-					break;
-				case visuals::data::Type::WORLD_MAP:
-					internalLayouts[layoutName].drawers.push_back(visuals::WorldMap::Internalize(layoutName, drawn));
-					break;
-				case visuals::data::Type::MENU:
-					internalLayouts[layoutName].drawers.push_back(visuals::Menu::Internalize(layoutName, drawn));
-					break;
-				case visuals::data::Type::LAYOUT:
-					internalLayouts[layoutName].drawers.push_back(visuals::Sublayout::Internalize(layoutName, drawn));
-					break;
-				case visuals::data::Type::FLOOR_INVENTORY:
-					internalLayouts[layoutName].drawers.push_back(visuals::FloorInventory::Internalize(layoutName, drawn));
-					break;
-				case visuals::data::Type::AVATAR_INVENTORY:
-					internalLayouts[layoutName].drawers.push_back(visuals::AvatarInventory::Internalize(layoutName, drawn));
-					break;
-				}
+				internalLayouts[layoutName].drawers.push_back(internalizers.find(*drawnType)->second(layoutName, drawn));
 			}
 		}
 	}
