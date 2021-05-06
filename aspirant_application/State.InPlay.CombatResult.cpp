@@ -13,6 +13,8 @@
 #include "Application.MouseMotion.h"
 #include "Visuals.Texts.h"
 #include "Visuals.Data.Colors.h"
+#include "Application.OnEnter.h"
+#include "Visuals.Layouts.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
@@ -39,8 +41,9 @@ namespace state::in_play::CombatResult
 		{ ::Command::GREEN, AdvanceCombat }
 	};
 
-	static void OnUpdate(const Uint32& ticks)
+	static void OnEnter()
 	{
+		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
 		visuals::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}
@@ -51,14 +54,20 @@ namespace state::in_play::CombatResult
 		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (areas.contains(AREA_CONTINUE)) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool HandleContinue(const std::set<std::string>& areas)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (areas.contains(AREA_CONTINUE))
 		{
 			AdvanceCombat();
+			return true;
 		}
 		return false;
+	}
+
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	{
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		return HandleContinue(areas);
 	}
 
 	void Start()
@@ -67,6 +76,6 @@ namespace state::in_play::CombatResult
 		application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT_RESULT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT_RESULT, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnUpdate);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnEnter);
 	}
 }
