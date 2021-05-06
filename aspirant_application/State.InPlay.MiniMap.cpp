@@ -28,32 +28,19 @@ namespace state::in_play::MiniMap
 	const std::string IMAGE_TURN_RIGHT = "TurnRight";
 	const std::string IMAGE_TURN_LEFT = "TurnLeft";
 	const std::string TEXT_MAP_TOOL_TIP = "MapToolTip";
-
-	static void LeavePlay()
-	{
-		application::UIState::Write(::UIState::LEAVE_PLAY);
-	}
-
-	static void GoToFloorInventory()
-	{
-		application::UIState::Write(::UIState::IN_PLAY_FLOOR);
-	}
-
-	static void GoToAvatarStatus()
-	{
-		application::UIState::Write(::UIState::IN_PLAY_STATUS);
-	}
+	const std::string CELL_UNKNOWN = "????";
+	const std::string CELL_EMPTY = "(empty)";
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::BACK, LeavePlay },
+		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
 		{ ::Command::LEFT, game::Avatar::TurnLeft },
 		{ ::Command::RIGHT, game::Avatar::TurnRight },
 		{ ::Command::UP, game::Avatar::MoveAhead },
 		{ ::Command::DOWN, game::Avatar::MoveBack },
-		{ ::Command::NEXT, GoToFloorInventory },
-		{ ::Command::YELLOW, GoToFloorInventory },
-		{ ::Command::PREVIOUS, GoToAvatarStatus }
+		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
+		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
+		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) }
 	};
 
 	static void OnCommand(const ::Command& command)
@@ -68,42 +55,43 @@ namespace state::in_play::MiniMap
 		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT}
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void UpdateArrowImages(const std::set<std::string>& areas)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& areaImage : areaImages)
 		{
 			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), areas.contains(std::get<0>(areaImage)));
 		}
+	}
+	static void UpdateMiniMapToolTip(const std::set<std::string>& areas, const common::XY<Sint32>& xy)
+	{
+		std::stringstream ss;
 		if (areas.contains(AREA_WORLD_MAP))
 		{
 			auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
 			auto worldSize = game::World::GetSize();
 			size_t cellWidth = area.size.GetX() / worldSize.GetX();
 			size_t cellHeight = area.size.GetY() / worldSize.GetY();
-			common::XY<size_t> worldPosition = { (xy.GetX() - area.xy.GetX()) / cellWidth , (xy.GetY() - area.xy.GetY()) / cellHeight };
+			size_t cellColumn = ((size_t)xy.GetX() - area.xy.GetX()) / cellWidth;
+			size_t cellRow = ((size_t)xy.GetY() - area.xy.GetY()) / cellHeight;
+			common::XY<size_t> worldPosition = { cellColumn , cellRow };
 			if (game::World::GetKnownState(worldPosition) == game::world::KnownState::UNKNOWN)
 			{
-				visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "????");
+				ss << CELL_UNKNOWN;
 			}
 			else
 			{
 				auto creature = game::Creatures::GetInstance(worldPosition);
-				if (creature)
-				{
-					visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, creature.value().descriptor.name);
-				}
-				else
-				{
-					visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "(empty)");
-				}
+				ss << ((creature.has_value()) ? (creature.value().descriptor.name) : (CELL_EMPTY));
 			}
+		}
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, ss.str());
+	}
 
-		}
-		else
-		{
-			visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, "");
-		}
+	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	{
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		UpdateArrowImages(areas);
+		UpdateMiniMapToolTip(areas, xy);
 	}
 
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
