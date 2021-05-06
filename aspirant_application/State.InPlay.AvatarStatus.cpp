@@ -13,6 +13,7 @@
 #include "Game.Data.Properties.h"
 #include "Game.Avatar.h"
 #include "Common.Audio.h"
+#include "Application.OnEnter.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -38,7 +39,7 @@ namespace state::in_play::AvatarStatus
 		{ ::Command::YELLOW, []() {application::UIState::Write(::UIState::IN_PLAY_MAP); }}
 	};
 
-	static void UpdateAttack(const Uint32&)
+	static void UpdateAttack()
 	{
 		std::stringstream ss;
 		ss << "Courage: ";
@@ -46,7 +47,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK, ss.str());
 	}
 
-	static void UpdateAttackTimer(const Uint32&)
+	static void UpdateAttackTimer()
 	{
 		auto value = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		std::stringstream ss;
@@ -58,7 +59,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ATTACK_TIMER, ss.str());
 	}
 
-	static void UpdateDefend(const Uint32&)
+	static void UpdateDefend()
 	{
 		std::stringstream ss;
 		ss << "Alertness: ";
@@ -66,7 +67,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND, ss.str());
 	}
 
-	static void UpdateDefendTimer(const Uint32&)
+	static void UpdateDefendTimer()
 	{
 		auto value = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
 		std::stringstream ss;
@@ -78,7 +79,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_DEFEND_TIMER, ss.str());
 	}
 
-	static void UpdateBowel(const Uint32&)
+	static void UpdateBowel()
 	{
 		std::stringstream ss;
 		ss << "Bowel: ";
@@ -86,7 +87,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_BOWEL, ss.str());
 	}
 
-	static void UpdateDrunkenness(const Uint32&)
+	static void UpdateDrunkenness()
 	{
 		std::stringstream ss;
 		ss << "Drunkenness: ";
@@ -94,7 +95,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_DRUNKENNESS, ss.str());
 	}
 
-	static void UpdateNausea(const Uint32&)
+	static void UpdateNausea()
 	{
 		std::stringstream ss;
 		ss << "Nausea: ";
@@ -102,7 +103,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_NAUSEA, ss.str());
 	}
 
-	static void UpdateKeys(const Uint32&)
+	static void UpdateKeys()
 	{
 		std::stringstream ss;
 		ss << "Keys: ";
@@ -110,7 +111,7 @@ namespace state::in_play::AvatarStatus
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_KEYS, ss.str());
 	}
 
-	static void UpdatePoop(const Uint32&)
+	static void UpdatePoop()
 	{
 		if (!game::Avatar::CanPoop())
 		{
@@ -142,6 +143,7 @@ namespace state::in_play::AvatarStatus
 		if (areas.contains(AREA_POOP) && game::Avatar::CanPoop())
 		{
 			common::audio::Sfx::Play(game::Avatar::Poop());
+			application::OnEnter::Handle();
 			return true;
 		}
 		return false;
@@ -151,18 +153,19 @@ namespace state::in_play::AvatarStatus
 	{
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_STATUS, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_STATUS, OnMouseMotion);
+
 		::application::Command::SetHandlers(::UIState::IN_PLAY_STATUS, commandHandlers);
+
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefendTimer);
 
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateBowel);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDrunkenness);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateNausea);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdateKeys);
-		::application::Update::AddHandler(::UIState::IN_PLAY_STATUS, UpdatePoop);
-
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefendTimer);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateBowel);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDrunkenness);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateNausea);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateKeys);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdatePoop);
 	}
 }
