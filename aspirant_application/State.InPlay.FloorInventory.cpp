@@ -1,6 +1,6 @@
 #include "Application.Command.h"
 #include "Application.Renderer.h"
-#include "Application.Update.h"
+#include "Application.OnEnter.h"
 #include "Application.UIState.h"
 #include "Visuals.FloorInventory.h"
 #include "Game.Item.h"
@@ -29,10 +29,10 @@ namespace state::in_play::FloorInventory
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::BACK, []() {application::UIState::Write(::UIState::LEAVE_PLAY); }},
-		{ ::Command::PREVIOUS, []() {visuals::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_MAP); } },
-		{ ::Command::NEXT, []() {visuals::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_INVENTORY); } },
-		{ ::Command::YELLOW, []() {visuals::FloorInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_INVENTORY); } },
+		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
+		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_MAP) },
+		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_INVENTORY) },
+		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_INVENTORY) },
 		{ ::Command::UP, visuals::FloorInventory::PreviousIndex},
 		{ ::Command::DOWN, visuals::FloorInventory::NextIndex},
 		{ ::Command::GREEN, PickUpItem }
@@ -55,6 +55,7 @@ namespace state::in_play::FloorInventory
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, visuals::FloorInventory::ResetIndex);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_FLOOR, commandHandlers);
