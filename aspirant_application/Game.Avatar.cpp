@@ -32,6 +32,8 @@ namespace game::Avatar
 			descriptor.keyItemId = store[data::Properties::KEY];
 			descriptor.mapFragmentItemId = store[data::Properties::MAP_FRAGMENT];
 			descriptor.poopThreshold = store[data::Properties::POOP_THRESHOLD];
+			descriptor.joolsItemId = store[data::Properties::JOOLS];
+			descriptor.trousersItemId = store[data::Properties::TROUSERS];
 			initialized = true;
 		}
 	}

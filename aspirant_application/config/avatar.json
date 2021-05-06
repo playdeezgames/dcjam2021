@@ -6,5 +6,7 @@
     "map-fragment":11,
     "map-fragment-width":4,
     "map-fragment-height":4,
-    "poop-threshold":70
+    "poop-threshold":70,
+    "jools": 5,
+    "trousers":6
 }

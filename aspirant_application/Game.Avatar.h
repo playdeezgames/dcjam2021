@@ -16,6 +16,8 @@ namespace game::Avatar
 		int keyItemId;
 		int mapFragmentItemId;
 		int poopThreshold;
+		int joolsItemId;
+		int trousersItemId;
 	};
 	const Descriptor& GetDescriptor();
 

@@ -29,6 +29,7 @@ namespace game::data::Properties
 	const std::string INDEX = "index";
 	const std::string INITIAL_INVENTORY = "initial-inventory";
 	const std::string INVENTORY = "inventory";
+	const std::string JOOLS = "jools";
 	const std::string KEY = "key";
 	const std::string LOSE_ON_TELEPORT = "lose-on-teleport";
 	const std::string MAP_FRAGMENT = "map-fragment";
@@ -51,6 +52,7 @@ namespace game::data::Properties
 	const std::string STATISTICS = "statistics";
 	const std::string TAKE_AREA_ID = "take-area-id";
 	const std::string TAKE_IMAGE_ID = "take-image-id";
+	const std::string TROUSERS = "trousers";
 	const std::string WEIGHT = "weight";
 	const std::string WOUNDS = "wounds";
 }
