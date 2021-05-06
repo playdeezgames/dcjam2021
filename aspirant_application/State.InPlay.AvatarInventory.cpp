@@ -13,6 +13,7 @@
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
+#include "Application.OnEnter.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
@@ -23,15 +24,20 @@ namespace state::in_play::AvatarInventory
 		common::audio::Sfx::Play(game::avatar::Items::Use(visuals::AvatarInventory::GetItem()));
 	}
 
+	static void DropItem()
+	{
+		game::avatar::Items::Drop(visuals::AvatarInventory::GetItem());
+	}
+
 	const std::map<Command, std::function<void()>> commandHandlers =
 	{
-		{ ::Command::BACK, []() { application::UIState::Write(::UIState::LEAVE_PLAY); }},
-		{ ::Command::PREVIOUS, []() { visuals::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_FLOOR); }},
-		{ ::Command::NEXT, []() { visuals::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_STATUS); }},
-		{ ::Command::YELLOW, []() { visuals::AvatarInventory::ResetIndex(); application::UIState::Write(::UIState::IN_PLAY_STATUS); }},
+		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
+		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
+		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) },
+		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) },
 		{ ::Command::UP, visuals::AvatarInventory::PreviousIndex },
 		{ ::Command::DOWN, visuals::AvatarInventory::NextIndex },
-		{ ::Command::RED, []() { game::avatar::Items::Drop(visuals::AvatarInventory::GetItem()); }},
+		{ ::Command::RED, DropItem },
 		{ ::Command::GREEN, UseItem }
 	};
 
@@ -52,6 +58,7 @@ namespace state::in_play::AvatarInventory
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, visuals::AvatarInventory::ResetIndex);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_INVENTORY, commandHandlers);
