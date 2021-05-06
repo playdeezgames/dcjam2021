@@ -20,20 +20,10 @@ namespace state::ConfirmQuit
 		YES
 	};
 
-	static void GoToMainMenu()
-	{
-		::application::UIState::Write(::UIState::MAIN_MENU);
-	}
-
-	static void Quit()
-	{
-		::application::UIState::Write(::UIState::QUIT);
-	}
-
 	const std::map<ConfirmQuitItem, std::function<void()>> activators =
 	{
-		{ ConfirmQuitItem::NO, GoToMainMenu },
-		{ ConfirmQuitItem::YES, Quit }
+		{ ConfirmQuitItem::NO, ::application::UIState::GoTo(::UIState::MAIN_MENU) },
+		{ ConfirmQuitItem::YES, ::application::UIState::GoTo(::UIState::QUIT) }
 	};
 
 	static void ActivateItem()
@@ -46,8 +36,8 @@ namespace state::ConfirmQuit
 		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
 		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{ ::Command::GREEN, ActivateItem },
-		{ ::Command::BACK, GoToMainMenu },
-		{ ::Command::RED, GoToMainMenu }
+		{ ::Command::BACK, ::application::UIState::GoTo(::UIState::MAIN_MENU) },
+		{ ::Command::RED, ::application::UIState::GoTo(::UIState::MAIN_MENU) }
 	};
 
 	static void SetCurrentMenuItem(ConfirmQuitItem item)

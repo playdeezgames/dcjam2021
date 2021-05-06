@@ -13,6 +13,15 @@ namespace application::UIState
 		uiState = state;
 	}
 
+	std::function<void()> GoTo(::UIState uiState)
+	{
+		return [uiState]() 
+		{
+			Write(uiState);
+		};
+	}
+
+
 	const ::UIState& Read()
 	{
 		return uiState;
