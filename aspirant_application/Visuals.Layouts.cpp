@@ -75,7 +75,7 @@ namespace visuals::Layouts
 		}
 	}
 
-	static void InitializeLayout(const std::string& layoutName)
+	void InitializeLayout(const std::string& layoutName)
 	{
 		if (!layouts.contains(layoutName))
 		{

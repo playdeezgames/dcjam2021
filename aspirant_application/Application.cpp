@@ -127,6 +127,7 @@ namespace common::Application
 		if (!currentState || currentState.value() != ::application::UIState::Read())
 		{
 			currentState = ::application::UIState::Read();
+			//load the layout!
 			application::OnEnter::Handle();
 		}
 		application::Update::Handle(ticks);

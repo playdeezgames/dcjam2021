@@ -25,6 +25,8 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Visuals.Data.Colors.h"
+#include "Application.OnEnter.h"
+#include "Visuals.Layouts.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -200,8 +202,9 @@ namespace state::in_play::Combat
 		visuals::MenuItems::SetText(LAYOUT_NAME, USE_ITEM_MENU_ITEM_ID, ss.str());
 	}
 
-	static void OnUpdate(const Uint32& ticks)
+	static void OnEnter()
 	{
+		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		auto& card = game::CombatDeck::GetCurrentCard();
 		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(card));
 		UpdateUseItem();
@@ -233,19 +236,30 @@ namespace state::in_play::Combat
 		}
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool ClickPreviousItem(const std::set<std::string>& areas)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (areas.contains(AREA_PREVIOUS_ITEM))
 		{
 			PreviousItem();
+			application::OnEnter::Handle();
 			return true;
 		}
+		return false;
+	}
+
+	static bool ClickNextItem(const std::set<std::string>& areas)
+	{
 		if (areas.contains(AREA_NEXT_ITEM))
 		{
 			NextItem();
+			application::OnEnter::Handle();
 			return true;
 		}
+		return false;
+	}
+
+	static bool ClickAny(const std::set<std::string>& areas)
+	{
 		if (!areas.empty())
 		{
 			OnActivateItem();
@@ -254,12 +268,18 @@ namespace state::in_play::Combat
 		return false;
 	}
 
+	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	{
+		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		return ClickPreviousItem(areas) || ClickNextItem(areas) || ClickAny(areas);
+	}
+
 	void Start()
 	{
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::IN_PLAY_COMBAT, OnUpdate);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT, OnEnter);
 	}
 }
