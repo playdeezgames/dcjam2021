@@ -9,10 +9,6 @@
 #include "Visuals.Fonts.h"
 #include "Visuals.Data.Types.h"
 #include <sstream>
-namespace visuals::Layouts
-{
-	nlohmann::json& GetLayout(const std::string&);
-}
 namespace visuals::FloorInventory
 {
 	struct InternalFloorInventory
@@ -32,13 +28,19 @@ namespace visuals::FloorInventory
 	static std::map<std::string, std::map<std::string, size_t>> floorInventoryTable;
 	static size_t inventoryIndex = 0;
 
+	static std::map<int, size_t> GetInventory()
+	{
+		auto location = game::Avatar::GetPosition();
+		return game::world::Items::FloorInventory(location);
+	}
+
 	static void DrawInternalFloorInventory(std::shared_ptr<SDL_Renderer> renderer, size_t floorInventoryIndex)
 	{
 		auto& floorInventory = internalFloorInventories[floorInventoryIndex];
 		auto xy = floorInventory.xy;
 
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::world::Items::FloorInventory(location);
+		auto inventory = GetInventory();
+
 		if (inventoryIndex >= inventory.size())
 		{
 			inventoryIndex = 0;
@@ -101,8 +103,9 @@ namespace visuals::FloorInventory
 
 	void NextIndex()
 	{
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::world::Items::FloorInventory(location);
+		//
+		auto inventory = GetInventory();
+
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + 1) % inventory.size();
@@ -111,8 +114,8 @@ namespace visuals::FloorInventory
 
 	void PreviousIndex()
 	{
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::world::Items::FloorInventory(location);
+		auto inventory = GetInventory();
+
 		if (!inventory.empty())
 		{
 			inventoryIndex = (inventoryIndex + inventory.size() - 1) % inventory.size();
@@ -121,8 +124,8 @@ namespace visuals::FloorInventory
 
 	std::optional<int> GetItem()
 	{
-		auto location = game::Avatar::GetPosition();
-		auto inventory = game::world::Items::FloorInventory(location);
+		auto inventory = GetInventory();
+
 		if (inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
@@ -150,7 +153,9 @@ namespace visuals::FloorInventory
 		if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 		{
 			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-			auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+
+			auto inventory = GetInventory();
+
 			if ((size_t)row < inventory.size())
 			{
 				inventoryIndex = row;
@@ -169,7 +174,7 @@ namespace visuals::FloorInventory
 		if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 		{
 			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-			auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+			auto inventory = GetInventory();
 			if ((size_t)row < inventory.size())
 			{
 				return std::optional<int>((int)row);
