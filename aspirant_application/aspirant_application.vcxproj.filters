@@ -152,9 +152,6 @@
     <ClCompile Include="State.InPlay.AvatarStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visuals.FloorInventory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Visuals.AvatarInventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -329,9 +326,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.Avatar.Items.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visuals.FloorInventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visuals.AvatarInventory.h">

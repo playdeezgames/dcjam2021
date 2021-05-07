@@ -6,7 +6,6 @@ namespace visuals::data
 	enum class Type
 	{
 		AVATAR_INVENTORY,
-		FLOOR_INVENTORY,
 		IMAGE,
 		LAYOUT,
 		MENU,

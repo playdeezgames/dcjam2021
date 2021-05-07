@@ -3,7 +3,6 @@
 namespace visuals::data::Types
 {
 	const std::string AVATAR_INVENTORY = "AvatarInventory";
-	const std::string FLOOR_INVENTORY = "FloorInventory";
 	const std::string IMAGE = "Image";
 	const std::string LAYOUT = "Layout";
 	const std::string MENU = "Menu";
@@ -16,7 +15,6 @@ namespace visuals::data
 	const std::map<std::string, Type> table =
 	{
 		{ visuals::data::Types::AVATAR_INVENTORY, Type::AVATAR_INVENTORY },
-		{ visuals::data::Types::FLOOR_INVENTORY, Type::FLOOR_INVENTORY },
 		{ visuals::data::Types::IMAGE, Type::IMAGE },
 		{ visuals::data::Types::LAYOUT, Type::LAYOUT },
 		{ visuals::data::Types::MENU, Type::MENU },

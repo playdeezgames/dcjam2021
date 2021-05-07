@@ -30,10 +30,6 @@ namespace visuals::Sublayout
 { 
 	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
 }
-namespace visuals::FloorInventory 
-{ 
-	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
-}
 namespace visuals::AvatarInventory 
 { 
 	DrawerFunction Internalize(const std::string&, const nlohmann::json&);
@@ -57,7 +53,6 @@ namespace visuals::Layouts
 		{visuals::data::Type::WORLD_MAP, visuals::WorldMap::Internalize},
 		{visuals::data::Type::MENU, visuals::Menu::Internalize},
 		{visuals::data::Type::LAYOUT, visuals::Sublayout::Internalize},
-		{visuals::data::Type::FLOOR_INVENTORY, visuals::FloorInventory::Internalize},
 		{visuals::data::Type::AVATAR_INVENTORY, visuals::AvatarInventory::Internalize},
 		{visuals::data::Type::AREA, [](const std::string&, const nlohmann::json&) { return [](std::shared_ptr<SDL_Renderer>) {};  }}
 	};

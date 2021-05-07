@@ -2,7 +2,7 @@
 #include "Application.Renderer.h"
 #include "Application.OnEnter.h"
 #include "Application.UIState.h"
-#include "Visuals.FloorInventory.h"
+#include "Visuals.AvatarInventory.h"
 #include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Game.Avatar.h"
@@ -10,6 +10,7 @@
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
+#include "Visuals.Layouts.h"
 namespace state::in_play::FloorInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.FloorInventory";
@@ -17,7 +18,7 @@ namespace state::in_play::FloorInventory
 
 	static void PickUpItem()
 	{
-		auto item = visuals::FloorInventory::GetItem();
+		auto item = visuals::AvatarInventory::GetItem(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY);
 		if (item)
 		{
 			//TODO: this is duplicated code
@@ -33,19 +34,19 @@ namespace state::in_play::FloorInventory
 		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_MAP) },
 		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_INVENTORY) },
 		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_INVENTORY) },
-		{ ::Command::UP, visuals::FloorInventory::PreviousIndex},
-		{ ::Command::DOWN, visuals::FloorInventory::NextIndex},
+		{ ::Command::UP, visuals::AvatarInventory::GoToPreviousIndex(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY)},
+		{ ::Command::DOWN, visuals::AvatarInventory::GoToNextIndex(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY)},
 		{ ::Command::GREEN, PickUpItem }
 	};
 
 	void OnMouseMotion(const common::XY<Sint32>& xy)
 	{
-		visuals::FloorInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy);
+		visuals::AvatarInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy);
 	}
 
 	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
 	{
-		auto itemUsed = visuals::FloorInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy, buttons);
+		auto itemUsed = visuals::AvatarInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy, buttons);
 		if (itemUsed.has_value())
 		{
 			PickUpItem();
@@ -53,9 +54,15 @@ namespace state::in_play::FloorInventory
 		return itemUsed.has_value();
 	}
 
+	static void OnEnter()
+	{
+		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
+		visuals::AvatarInventory::ResetIndex(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY);
+	}
+
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, visuals::FloorInventory::ResetIndex);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, OnEnter);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_FLOOR, commandHandlers);

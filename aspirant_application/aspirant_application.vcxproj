@@ -184,7 +184,6 @@
     <ClCompile Include="Visuals.AvatarInventory.cpp" />
     <ClCompile Include="Visuals.CardSprites.cpp" />
     <ClCompile Include="Visuals.Data.Types.cpp" />
-    <ClCompile Include="Visuals.FloorInventory.cpp" />
     <ClCompile Include="Visuals.Images.cpp" />
     <ClCompile Include="Visuals.Menus.cpp" />
     <ClCompile Include="Visuals.Sublayout.cpp" />
@@ -261,7 +260,6 @@
     <ClInclude Include="Visuals.AvatarInventory.h" />
     <ClInclude Include="Visuals.CardSprites.h" />
     <ClInclude Include="Visuals.Data.Colors.h" />
-    <ClInclude Include="Visuals.FloorInventory.h" />
     <ClInclude Include="Visuals.Images.h" />
     <ClInclude Include="Visuals.Menus.h" />
     <ClInclude Include="Visuals.Data.Properties.h" />
