@@ -27,6 +27,16 @@ namespace visuals::AvatarInventory
 	static std::vector<InternalAvatarInventory> internalAvatarInventories;
 	static std::map<std::string, std::map<std::string, size_t>> avatarInventoryTable;
 
+	static size_t GetInventoryIndex(const std::string& layoutName, const std::string& controlId)
+	{
+		return internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex;
+	}
+
+	static void SetInventoryIndex(const std::string& layoutName, const std::string& controlId, size_t value)
+	{
+		internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = value;
+	}
+
 	static void DrawInternalAvatarInventory(std::shared_ptr<SDL_Renderer> renderer, size_t avatarInventoryIndex)
 	{
 		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
@@ -91,7 +101,7 @@ namespace visuals::AvatarInventory
 
 	void ResetIndex(const std::string& layoutName, const std::string& controlId)
 	{
-		internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = 0;
+		SetInventoryIndex(layoutName, controlId, 0);
 	}
 
 	void NextIndex(const std::string& layoutName, const std::string& controlId)
@@ -99,7 +109,7 @@ namespace visuals::AvatarInventory
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
 		{
-			internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = (internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex + 1) % inventory.size();
+			SetInventoryIndex(layoutName, controlId, (GetInventoryIndex(layoutName, controlId) + 1) % inventory.size());
 		}
 	}
 
@@ -108,7 +118,7 @@ namespace visuals::AvatarInventory
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
 		{
-			internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = (internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex + inventory.size() - 1) % inventory.size();
+			SetInventoryIndex(layoutName, controlId, (GetInventoryIndex(layoutName, controlId) + inventory.size() - 1) % inventory.size());
 		}
 	}
 
@@ -119,10 +129,10 @@ namespace visuals::AvatarInventory
 		{
 			return std::nullopt;
 		}
-		else if (internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex < inventory.size())
+		else if (GetInventoryIndex(layoutName, controlId) < inventory.size())
 		{
 			auto iter = inventory.begin();
-			for (size_t dummy = 0; dummy < internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex; ++dummy)
+			for (size_t dummy = 0; dummy < GetInventoryIndex(layoutName, controlId); ++dummy)
 			{
 				iter++;
 			}
@@ -130,7 +140,7 @@ namespace visuals::AvatarInventory
 		}
 		else
 		{
-			internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = 0;
+			SetInventoryIndex(layoutName, controlId, 0);
 			return GetItem(layoutName, controlId);
 		}
 	}
@@ -150,7 +160,7 @@ namespace visuals::AvatarInventory
 			auto inventory = game::avatar::Items::All();
 			if ((size_t)row < inventory.size())
 			{
-				internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = row;
+				SetInventoryIndex(layoutName, controlId, row);
 			}
 		}
 	}
