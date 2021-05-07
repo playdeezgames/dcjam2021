@@ -5,10 +5,10 @@
 #include <SDL.h>
 namespace visuals::AvatarInventory
 {
-	void ResetIndex();
-	void NextIndex();
-	void PreviousIndex();
-	std::optional<int> GetItem();
+	void ResetIndex(const std::string&);
+	void NextIndex(const std::string&);
+	void PreviousIndex(const std::string&);
+	std::optional<int> GetItem(const std::string&);
 	void OnMouseMotion(const std::string&, const std::string&, const common::XY<Sint32>&);
 	std::optional<int> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<Sint32>&, Uint8);
 }

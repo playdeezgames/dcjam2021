@@ -8,10 +8,6 @@
 #include "Game.Item.h"
 #include "Visuals.Data.Types.h"
 #include <optional>
-namespace visuals::Layouts
-{
-	nlohmann::json& GetLayout(const std::string&);
-}
 namespace visuals::AvatarInventory
 {
 	static size_t inventoryIndex;//TODO: this is broken, and "should" be per control, but as there is ever only one on a screen and only one screen it is on.... JAWTS
@@ -94,12 +90,12 @@ namespace visuals::AvatarInventory
 		};
 	}
 
-	void ResetIndex()
+	void ResetIndex(const std::string&)
 	{
 		inventoryIndex = 0;
 	}
 
-	void NextIndex()
+	void NextIndex(const std::string&)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
@@ -108,7 +104,7 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	void PreviousIndex()
+	void PreviousIndex(const std::string&)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
@@ -117,7 +113,7 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	std::optional<int> GetItem()
+	std::optional<int> GetItem(const std::string& layoutName)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (inventory.size() == 0)
@@ -136,7 +132,7 @@ namespace visuals::AvatarInventory
 		else
 		{
 			inventoryIndex = 0;
-			return GetItem();
+			return GetItem(layoutName);
 		}
 	}
 
