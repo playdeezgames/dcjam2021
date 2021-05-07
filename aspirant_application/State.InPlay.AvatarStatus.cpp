@@ -14,6 +14,7 @@
 #include "Game.Avatar.h"
 #include "Common.Audio.h"
 #include "Application.OnEnter.h"
+#include "Visuals.Layouts.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -158,6 +159,7 @@ namespace state::in_play::AvatarStatus
 
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
 
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, []() { visuals::Layouts::InitializeLayout(LAYOUT_NAME); });
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);
