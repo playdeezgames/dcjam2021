@@ -207,6 +207,7 @@ namespace state::in_play::Combat
 	static void OnEnter()
 	{
 		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
+		visuals::Layouts::InitializeLayout(INVENTORY_LAYOUT_NAME);
 		auto& card = game::CombatDeck::GetCurrentCard();
 		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(card));
 		UpdateUseItem();

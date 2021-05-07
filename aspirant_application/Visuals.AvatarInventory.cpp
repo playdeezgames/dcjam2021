@@ -10,8 +10,6 @@
 #include <optional>
 namespace visuals::AvatarInventory
 {
-	static size_t inventoryIndex;//TODO: this is broken, and "should" be per control, but as there is ever only one on a screen and only one screen it is on.... JAWTS
-
 	struct InternalAvatarInventory
 	{
 		common::XY<int> xy;
@@ -23,6 +21,7 @@ namespace visuals::AvatarInventory
 		bool dropShadow;
 		common::XY<int> dropShadowXY;
 		std::string dropShadowColor;
+		size_t inventoryIndex;
 	};
 
 	static std::vector<InternalAvatarInventory> internalAvatarInventories;
@@ -34,9 +33,9 @@ namespace visuals::AvatarInventory
 
 		common::XY<int> xy = avatarInventory.xy;
 		auto inventory = game::avatar::Items::All();
-		if (inventoryIndex >= inventory.size())
+		if (avatarInventory.inventoryIndex >= inventory.size())
 		{
-			inventoryIndex = 0;
+			avatarInventory.inventoryIndex = 0;
 		}
 
 		size_t index = 0;
@@ -44,7 +43,7 @@ namespace visuals::AvatarInventory
 		{
 			std::stringstream ss;
 			ss << game::item::GetDescriptor(entry.first).name << " x " << entry.second;
-			auto color = (index == inventoryIndex) ? (avatarInventory.activeColor) : (avatarInventory.inactiveColor);
+			auto color = (index == avatarInventory.inventoryIndex) ? (avatarInventory.activeColor) : (avatarInventory.inactiveColor);
 			if (avatarInventory.dropShadow)
 			{
 				visuals::Fonts::WriteText(avatarInventory.font, renderer, xy + avatarInventory.dropShadowXY, ss.str(), avatarInventory.dropShadowColor, visuals::HorizontalAlignment::LEFT);
@@ -90,26 +89,26 @@ namespace visuals::AvatarInventory
 		};
 	}
 
-	void ResetIndex(const std::string&, const std::string&)
+	void ResetIndex(const std::string& layoutName, const std::string& controlId)
 	{
-		inventoryIndex = 0;
+		internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = 0;
 	}
 
-	void NextIndex(const std::string&, const std::string&)
+	void NextIndex(const std::string& layoutName, const std::string& controlId)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
 		{
-			inventoryIndex = (inventoryIndex + 1) % inventory.size();
+			internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = (internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex + 1) % inventory.size();
 		}
 	}
 
-	void PreviousIndex(const std::string&, const std::string&)
+	void PreviousIndex(const std::string& layoutName, const std::string& controlId)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
 		{
-			inventoryIndex = (inventoryIndex + inventory.size() - 1) % inventory.size();
+			internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = (internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex + inventory.size() - 1) % inventory.size();
 		}
 	}
 
@@ -120,10 +119,10 @@ namespace visuals::AvatarInventory
 		{
 			return std::nullopt;
 		}
-		else if (inventoryIndex < inventory.size())
+		else if (internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex < inventory.size())
 		{
 			auto iter = inventory.begin();
-			for (size_t dummy = 0; dummy < inventoryIndex; ++dummy)
+			for (size_t dummy = 0; dummy < internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex; ++dummy)
 			{
 				iter++;
 			}
@@ -131,7 +130,7 @@ namespace visuals::AvatarInventory
 		}
 		else
 		{
-			inventoryIndex = 0;
+			internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = 0;
 			return GetItem(layoutName, controlId);
 		}
 	}
@@ -151,7 +150,7 @@ namespace visuals::AvatarInventory
 			auto inventory = game::avatar::Items::All();
 			if ((size_t)row < inventory.size())
 			{
-				inventoryIndex = row;
+				internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = row;
 			}
 		}
 	}

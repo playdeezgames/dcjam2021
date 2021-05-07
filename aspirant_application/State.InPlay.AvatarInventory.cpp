@@ -14,6 +14,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Application.OnEnter.h"
+#include "Visuals.Layouts.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
@@ -56,9 +57,15 @@ namespace state::in_play::AvatarInventory
 		return itemUsed.has_value();
 	}
 
+	static void OnEnter()
+	{
+		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
+		visuals::AvatarInventory::ResetIndex(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
+	}
+
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, visuals::AvatarInventory::DoIndexReset(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY) );
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, OnEnter );
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_INVENTORY, commandHandlers);
