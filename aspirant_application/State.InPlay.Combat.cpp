@@ -31,6 +31,7 @@ namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
 	const std::string INVENTORY_LAYOUT_NAME = "State.InPlay.AvatarInventory";
+	const std::string CONTROL_AVATAR_INVENTORY = "AvatarInventory";
 	const std::string CURRENT_CARD_IMAGE_ID = "CurrentCard";
 	const std::string COMBAT_MENU_ID = "Combat";
 	const std::string USE_ITEM_MENU_ITEM_ID = "UseItem";
@@ -129,7 +130,7 @@ namespace state::in_play::Combat
 
 	static void UseItem()
 	{
-		auto result = game::avatar::Items::CombatUse(visuals::AvatarInventory::GetItem(INVENTORY_LAYOUT_NAME));
+		auto result = game::avatar::Items::CombatUse(visuals::AvatarInventory::GetItem(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY));
 		if (result)
 		{
 			common::audio::Sfx::Play(std::get<0>(*result));
@@ -157,7 +158,7 @@ namespace state::in_play::Combat
 	{
 		if (visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
 		{ 
-			visuals::AvatarInventory::NextIndex(INVENTORY_LAYOUT_NAME);
+			visuals::AvatarInventory::NextIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		}
 	}
 
@@ -165,7 +166,7 @@ namespace state::in_play::Combat
 	{
 		if (visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
 		{ 
-			visuals::AvatarInventory::PreviousIndex(INVENTORY_LAYOUT_NAME);
+			visuals::AvatarInventory::PreviousIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		}
 	}
 
@@ -186,7 +187,7 @@ namespace state::in_play::Combat
 
 	static void UpdateUseItem()
 	{
-		auto item = visuals::AvatarInventory::GetItem(INVENTORY_LAYOUT_NAME);
+		auto item = visuals::AvatarInventory::GetItem(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		std::stringstream ss;
 		if (item)
 		{

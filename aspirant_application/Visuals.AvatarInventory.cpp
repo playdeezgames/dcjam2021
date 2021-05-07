@@ -90,12 +90,12 @@ namespace visuals::AvatarInventory
 		};
 	}
 
-	void ResetIndex(const std::string&)
+	void ResetIndex(const std::string&, const std::string&)
 	{
 		inventoryIndex = 0;
 	}
 
-	void NextIndex(const std::string&)
+	void NextIndex(const std::string&, const std::string&)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
@@ -104,7 +104,7 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	void PreviousIndex(const std::string&)
+	void PreviousIndex(const std::string&, const std::string&)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (!inventory.empty())
@@ -113,7 +113,7 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	std::optional<int> GetItem(const std::string& layoutName)
+	std::optional<int> GetItem(const std::string& layoutName, const std::string& controlId)
 	{
 		auto inventory = game::avatar::Items::All();
 		if (inventory.size() == 0)
@@ -132,7 +132,7 @@ namespace visuals::AvatarInventory
 		else
 		{
 			inventoryIndex = 0;
-			return GetItem(layoutName);
+			return GetItem(layoutName, controlId);
 		}
 	}
 
@@ -176,27 +176,27 @@ namespace visuals::AvatarInventory
 		return std::optional<int>();
 	}
 
-	std::function<void()> DoIndexReset(const std::string& layoutName)
+	std::function<void()> DoIndexReset(const std::string& layoutName, const std::string& controlId)
 	{
-		return [layoutName]() 
+		return [layoutName, controlId]() 
 		{
-			ResetIndex(layoutName);
+			ResetIndex(layoutName, controlId);
 		};
 	}
 
-	std::function<void()> GoToNextIndex(const std::string& layoutName)
+	std::function<void()> GoToNextIndex(const std::string& layoutName, const std::string& controlId)
 	{
-		return [layoutName]()
+		return [layoutName, controlId]()
 		{
-			NextIndex(layoutName);
+			NextIndex(layoutName, controlId);
 		};
 	}
 
-	std::function<void()> GoToPreviousIndex(const std::string& layoutName)
+	std::function<void()> GoToPreviousIndex(const std::string& layoutName, const std::string& controlId)
 	{
-		return [layoutName]()
+		return [layoutName, controlId]()
 		{
-			PreviousIndex(layoutName);
+			PreviousIndex(layoutName, controlId);
 		};
 	}
 }

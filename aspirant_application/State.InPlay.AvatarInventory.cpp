@@ -21,12 +21,12 @@ namespace state::in_play::AvatarInventory
 
 	static void UseItem()
 	{
-		common::audio::Sfx::Play(game::avatar::Items::Use(visuals::AvatarInventory::GetItem(LAYOUT_NAME)));
+		common::audio::Sfx::Play(game::avatar::Items::Use(visuals::AvatarInventory::GetItem(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY)));
 	}
 
 	static void DropItem()
 	{
-		game::avatar::Items::Drop(visuals::AvatarInventory::GetItem(LAYOUT_NAME));
+		game::avatar::Items::Drop(visuals::AvatarInventory::GetItem(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY));
 	}
 
 	const std::map<Command, std::function<void()>> commandHandlers =
@@ -35,8 +35,8 @@ namespace state::in_play::AvatarInventory
 		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
 		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) },
 		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) },
-		{ ::Command::UP, visuals::AvatarInventory::GoToPreviousIndex(LAYOUT_NAME) },
-		{ ::Command::DOWN, visuals::AvatarInventory::GoToNextIndex(LAYOUT_NAME)    },
+		{ ::Command::UP, visuals::AvatarInventory::GoToPreviousIndex(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY) },
+		{ ::Command::DOWN, visuals::AvatarInventory::GoToNextIndex(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY)    },
 		{ ::Command::RED, DropItem },
 		{ ::Command::GREEN, UseItem }
 	};
@@ -58,7 +58,7 @@ namespace state::in_play::AvatarInventory
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, visuals::AvatarInventory::DoIndexReset(LAYOUT_NAME) );
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, visuals::AvatarInventory::DoIndexReset(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY) );
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_INVENTORY, commandHandlers);
