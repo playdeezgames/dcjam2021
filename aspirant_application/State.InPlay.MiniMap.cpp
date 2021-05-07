@@ -17,6 +17,9 @@
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
 #include "Game.Creatures.h"
+#include "Application.OnEnter.h"
+#include "Visuals.Layouts.h"
+#include "Common.Audio.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
@@ -30,14 +33,39 @@ namespace state::in_play::MiniMap
 	const std::string TEXT_MAP_TOOL_TIP = "MapToolTip";
 	const std::string CELL_UNKNOWN = "????";
 	const std::string CELL_EMPTY = "(empty)";
+	const std::string TEXT_KEYS = "Keys";
+
+	static void MoveAhead()
+	{
+		common::audio::Sfx::Play(game::Avatar::MoveAhead());
+		::application::OnEnter::Handle();
+	}
+
+	static void MoveBack()
+	{
+		common::audio::Sfx::Play(game::Avatar::MoveBack());
+		::application::OnEnter::Handle();
+	}
+
+	static void TurnLeft()
+	{
+		common::audio::Sfx::Play(game::Avatar::TurnLeft());
+		::application::OnEnter::Handle();
+	}
+
+	static void TurnRight()
+	{
+		common::audio::Sfx::Play(game::Avatar::TurnRight());
+		::application::OnEnter::Handle();
+	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
-		{ ::Command::LEFT, game::Avatar::TurnLeft },
-		{ ::Command::RIGHT, game::Avatar::TurnRight },
-		{ ::Command::UP, game::Avatar::MoveAhead },
-		{ ::Command::DOWN, game::Avatar::MoveBack },
+		{ ::Command::LEFT, TurnLeft },
+		{ ::Command::RIGHT, TurnRight },
+		{ ::Command::UP, MoveAhead },
+		{ ::Command::DOWN, MoveBack },
 		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
 		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
 		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) }
@@ -112,8 +140,27 @@ namespace state::in_play::MiniMap
 		return result;
 	}
 
+	static void UpdateKeys()
+	{
+		std::stringstream ss;
+		auto keyCount = game::avatar::Statistics::Read(game::avatar::Statistic::KEYS);
+		if (keyCount > 0)
+		{
+			ss << "Keys: ";
+			ss << keyCount;
+		}
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_KEYS, ss.str());
+	}
+
+	static void OnEnter()
+	{
+		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
+		UpdateKeys();
+	}
+
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, OnEnter);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
