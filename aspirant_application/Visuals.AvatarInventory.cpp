@@ -175,4 +175,28 @@ namespace visuals::AvatarInventory
 		}
 		return std::optional<int>();
 	}
+
+	std::function<void()> DoIndexReset(const std::string& layoutName)
+	{
+		return [layoutName]() 
+		{
+			ResetIndex(layoutName);
+		};
+	}
+
+	std::function<void()> GoToNextIndex(const std::string& layoutName)
+	{
+		return [layoutName]()
+		{
+			NextIndex(layoutName);
+		};
+	}
+
+	std::function<void()> GoToPreviousIndex(const std::string& layoutName)
+	{
+		return [layoutName]()
+		{
+			PreviousIndex(layoutName);
+		};
+	}
 }
