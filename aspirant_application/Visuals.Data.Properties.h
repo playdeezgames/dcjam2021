@@ -29,6 +29,7 @@ namespace visuals::data::Properties
 	const std::string RED = "red";
 	const std::string ROW_HEIGHT = "row-height";
 	const std::string SPRITE = "sprite";
+	const std::string SOURCE = "source";
 	const std::string TEXT = "text";
 	const std::string TEXT_ID = "text-id";
 	const std::string TEXTURE = "texture";

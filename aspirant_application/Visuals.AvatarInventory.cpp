@@ -8,6 +8,8 @@
 #include "Game.Item.h"
 #include "Visuals.Data.Types.h"
 #include <optional>
+#include "Game.World.Items.h"
+#include "Game.Avatar.h"
 namespace visuals::AvatarInventory
 {
 	enum class InventorySource
@@ -44,9 +46,13 @@ namespace visuals::AvatarInventory
 		internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].inventoryIndex = value;
 	}
 
-	static std::map<int, size_t> GetInventory()
+	static std::map<int, size_t> GetInventory(InventorySource source)
 	{
-		return game::avatar::Items::All();
+		if (source == InventorySource::AVATAR)
+		{
+			return game::avatar::Items::All();
+		}
+		return game::world::Items::FloorInventory(game::Avatar::GetPosition());
 	}
 
 	static void DrawInternalAvatarInventory(std::shared_ptr<SDL_Renderer> renderer, size_t avatarInventoryIndex)
@@ -54,7 +60,7 @@ namespace visuals::AvatarInventory
 		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
 
 		common::XY<int> xy = avatarInventory.xy;
-		auto inventory = GetInventory();
+		auto inventory = GetInventory(avatarInventory.source);
 		if (avatarInventory.inventoryIndex >= inventory.size())
 		{
 			avatarInventory.inventoryIndex = 0;
@@ -101,7 +107,7 @@ namespace visuals::AvatarInventory
 				common::XY<int>(model[visuals::data::Properties::DROP_SHADOW_X],model[visuals::data::Properties::DROP_SHADOW_Y]),
 				model[visuals::data::Properties::DROP_SHADOW_COLOR],
 				0u,
-				InventorySource::AVATAR
+				(InventorySource)(int)model[visuals::data::Properties::SOURCE]
 			});
 		if (model.count(visuals::data::Properties::CONTROL_ID) > 0)
 		{
@@ -118,9 +124,14 @@ namespace visuals::AvatarInventory
 		SetInventoryIndex(layoutName, controlId, 0);
 	}
 
+	static std::map<int, size_t> GetInventory(const std::string& layoutName, const std::string& controlId)
+	{
+		return GetInventory(internalAvatarInventories[avatarInventoryTable.find(layoutName)->second.find(controlId)->second].source);
+	}
+
 	void NextIndex(const std::string& layoutName, const std::string& controlId)
 	{
-		auto inventory = GetInventory();
+		auto inventory = GetInventory(layoutName, controlId);
 		if (!inventory.empty())
 		{
 			SetInventoryIndex(layoutName, controlId, (GetInventoryIndex(layoutName, controlId) + 1) % inventory.size());
@@ -129,7 +140,7 @@ namespace visuals::AvatarInventory
 
 	void PreviousIndex(const std::string& layoutName, const std::string& controlId)
 	{
-		auto inventory = GetInventory();
+		auto inventory = GetInventory(layoutName, controlId);
 		if (!inventory.empty())
 		{
 			SetInventoryIndex(layoutName, controlId, (GetInventoryIndex(layoutName, controlId) + inventory.size() - 1) % inventory.size());
@@ -138,7 +149,7 @@ namespace visuals::AvatarInventory
 
 	std::optional<int> GetItem(const std::string& layoutName, const std::string& controlId)
 	{
-		auto inventory = GetInventory();
+		auto inventory = GetInventory(layoutName, controlId);
 		if (inventory.size() == 0)
 		{
 			return std::nullopt;
@@ -171,7 +182,7 @@ namespace visuals::AvatarInventory
 		if (xy.GetX() >= x && xy.GetX()<x+width && xy.GetY()>=y)
 		{
 			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-			auto inventory = GetInventory();
+			auto inventory = GetInventory(layoutName, controlId);
 			if ((size_t)row < inventory.size())
 			{
 				SetInventoryIndex(layoutName, controlId, row);
@@ -190,7 +201,7 @@ namespace visuals::AvatarInventory
 		if (xy.GetX() >= x && xy.GetX() < x + width && xy.GetY() >= y)
 		{
 			size_t row = ((size_t)xy.GetY() - (size_t)y) / (size_t)rowHeight;
-			auto inventory = GetInventory();
+			auto inventory = GetInventory(layoutName, controlId);
 			if ((size_t)row < inventory.size())
 			{
 				return std::optional<int>((int)row);

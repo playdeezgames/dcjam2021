@@ -26,6 +26,7 @@
     {
         "type": "AvatarInventory",
         "control-id": "AvatarInventory",
+        "source":0,
         "x": 360,
         "y": 48,
         "width": 280,
