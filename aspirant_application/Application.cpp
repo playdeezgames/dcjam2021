@@ -103,6 +103,7 @@ namespace common::Application
 		game::CombatDeck::Deal,
 		state::LoadGame::Start,
 		state::SaveGame::Start,
+		state::ConfirmAbandon::Start,
 		Options::Initialize,
 		visuals::Layouts::Start
 	};

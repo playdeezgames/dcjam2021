@@ -23,9 +23,9 @@ namespace state::LeavePlay
 		ABANDON
 	};
 
-	static void GoToMainMenu()
+	static void GoToConfirmAbandon()
 	{
-		::application::UIState::Write(::UIState::MAIN_MENU);
+		::application::UIState::Write(::UIState::CONFIRM_ABANDON);
 	}
 
 	static void GoToSaveGame()
@@ -40,7 +40,7 @@ namespace state::LeavePlay
 
 	const std::map<LeavePlayItem, std::function<void()>> activators =
 	{
-		{ LeavePlayItem::ABANDON, GoToMainMenu },
+		{ LeavePlayItem::ABANDON, GoToConfirmAbandon },
 		{ LeavePlayItem::SAVE, GoToSaveGame },
 		{ LeavePlayItem::CONTINUE, ContinueGame }
 	};

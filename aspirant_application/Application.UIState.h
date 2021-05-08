@@ -22,7 +22,8 @@ enum class UIState
 	LEAVE_PLAY,
 	IN_PLAY_EXIT,
 	LOAD_GAME,
-	SAVE_GAME
+	SAVE_GAME,
+	CONFIRM_ABANDON
 };
 namespace application::UIState
 {
