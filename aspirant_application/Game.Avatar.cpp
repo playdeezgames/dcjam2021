@@ -13,6 +13,7 @@
 #include "Game.h"
 #include "Data.Stores.h"
 #include "Game.World.Items.h"
+#include "Game.Avatar.Items.h"
 namespace game::Avatar
 {
 	static bool initialized = false;
@@ -34,6 +35,7 @@ namespace game::Avatar
 			descriptor.poopThreshold = store[data::Properties::POOP_THRESHOLD];
 			descriptor.joolsItemId = store[data::Properties::JOOLS];
 			descriptor.trousersItemId = store[data::Properties::TROUSERS];
+			descriptor.soiledTrousersItemId = store[data::Properties::SOILED_TROUSERS];
 			initialized = true;
 		}
 	}
@@ -135,10 +137,19 @@ namespace game::Avatar
 		return std::nullopt;
 	}
 
-	std::optional<std::string> Poop()
+	std::optional<std::string> Poop(bool accidental)
 	{
 		int itemId = GetDescriptor().poopItemId;
 		game::avatar::Statistics::Write(game::avatar::Statistic::BOWEL, game::avatar::Statistics::Default(game::avatar::Statistic::BOWEL));
+		if (accidental)
+		{
+			auto& descriptor = GetDescriptor();
+			if (game::avatar::Items::Read(descriptor.trousersItemId) > 0)
+			{
+				game::avatar::Items::Remove(descriptor.trousersItemId, 1);
+				game::avatar::Items::Add(descriptor.soiledTrousersItemId, 1);
+			}
+		}
 		game::world::Items::Add(GetPosition(), itemId, 1);
 		return application::Sounds::Read(application::UI::Sfx::HUNTER_POOPS);
 	}
@@ -158,9 +169,9 @@ namespace game::Avatar
 
 	static std::optional<std::string> HandleBowel()
 	{
-		if (game::avatar::Statistics::IsMaximum(game::avatar::Statistic::BOWEL))//are you poopin'?
+		if (game::avatar::Statistics::IsMaximum(game::avatar::Statistic::BOWEL))
 		{
-			return Poop();
+			return Poop(true);
 		}
 		return std::nullopt;
 	}

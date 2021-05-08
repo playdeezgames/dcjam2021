@@ -25,6 +25,10 @@ namespace state::in_play::Dead
 		{
 			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...at least you kept yer dignity!");
 		}
+		else if (game::avatar::Items::Read(game::Avatar::GetDescriptor().soiledTrousersItemId) > 0)
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...and you pooped yer pants!");
+		}
 		else
 		{
 			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...you lost yer trousers(again)!");

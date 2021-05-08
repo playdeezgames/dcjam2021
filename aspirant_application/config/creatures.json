@@ -21,7 +21,8 @@
         "attitude":0,
         "attitudes":{
             "6":3,
-            "8":3
+            "8":3,
+            "12":3
         },
         "drops":{
             "none": 1,
@@ -53,7 +54,8 @@
         "attitude":0,
         "attitudes":{
             "6":3,
-            "8":3
+            "8":3,
+            "12":3
         },
         "drops":{
             "none": 1,
@@ -84,7 +86,8 @@
         "attitude":0,
         "attitudes":{
             "6":1,
-            "8":2
+            "8":2,
+            "12":3
         },
         "prefer-dead-ends":true
     },
@@ -110,7 +113,8 @@
         "attitude":0,
         "attitudes":{
             "6":2,
-            "8":3
+            "8":3,
+            "12":3
         },
         "drops":{
             "none": 1,
@@ -145,7 +149,8 @@
         "attitude":0,
         "attitudes":{
             "6":1,
-            "8":1
+            "8":1,
+            "12":3
         }
     },
     {
@@ -170,7 +175,8 @@
         "attitude":0,
         "attitudes":{
             "6":3,
-            "8":4
+            "8":4,
+            "12":3
         },
         "drops":{
             "none": 1,
@@ -201,7 +207,8 @@
         "attitude":0,
         "attitudes":{
             "6":5,
-            "8":6
+            "8":6,
+            "12":3
         },
         "prefer-dead-ends":true,
         "drops":{
@@ -233,7 +240,8 @@
         "attitude":0,
         "attitudes":{
             "6":4,
-            "8":1
+            "8":1,
+            "12":3
         },
         "prefer-dead-ends":true,
         "drops":{

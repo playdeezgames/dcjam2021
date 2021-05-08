@@ -143,7 +143,7 @@ namespace state::in_play::AvatarStatus
 		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		if (areas.contains(AREA_POOP) && game::Avatar::CanPoop())
 		{
-			common::audio::Sfx::Play(game::Avatar::Poop());
+			common::audio::Sfx::Play(game::Avatar::Poop(false));
 			application::OnEnter::Handle();
 			return true;
 		}

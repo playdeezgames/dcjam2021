@@ -10,7 +10,7 @@
         "combat-text":"Food Bribe",
         "take-image-id":"TakeFood",
         "take-area-id":"TakeFood",
-        "bowel":10,
+        "bowel":25,
         "drunkenness":-10
     },
     "1":{

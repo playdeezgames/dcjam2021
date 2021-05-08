@@ -24,6 +24,10 @@ namespace state::in_play::Exit
 		{
 			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...you managed to keep yer trousers!");
 		}
+		else if (game::avatar::Items::Read(game::Avatar::GetDescriptor().soiledTrousersItemId) > 0)
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...and you pooped yer pants!");
+		}
 		else
 		{
 			visuals::Texts::SetText(LAYOUT_NAME, TROUSERS_TEXT_ID, "...you lost yer trousers(again)!");

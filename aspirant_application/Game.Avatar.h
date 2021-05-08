@@ -18,6 +18,7 @@ namespace game::Avatar
 		int poopThreshold;
 		int joolsItemId;
 		int trousersItemId;
+		int soiledTrousersItemId;
 	};
 	const Descriptor& GetDescriptor();
 
@@ -30,5 +31,5 @@ namespace game::Avatar
 	void SetPosition(const common::XY<size_t>&);
 	nlohmann::json& GetAvatar();//TODO: this is part of the DAL
 	bool CanPoop();
-	std::optional<std::string> Poop();
+	std::optional<std::string> Poop(bool);
 }
