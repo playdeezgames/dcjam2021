@@ -90,22 +90,32 @@ namespace state::MainMenu
 		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (!areas.empty())
+		ActivateItem();
+		return true;
+	}
+
+	std::function<bool(const common::XY<Sint32>&, Uint8)> HandleMouseButtonUp(const std::string& layoutName, std::function<bool(const std::string&)> areaHandler)
+	{
+		return [layoutName, areaHandler](const common::XY<Sint32>& xy, Uint8)
 		{
-			ActivateItem();
-			return true;
-		}
-		return false;
+			auto areas = visuals::Areas::Get(layoutName, xy);
+			for (auto& area : areas)
+			{
+				if (areaHandler(area))
+				{
+					return true;
+				}
+			}
+			return false;
+		};
 	}
 
 	void Start()
 	{
 		::application::MouseMotion::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
-
-		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, OnMouseButtonUp);
+		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);
 	}

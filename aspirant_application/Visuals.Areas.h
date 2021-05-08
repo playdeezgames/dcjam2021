@@ -18,5 +18,5 @@ namespace visuals::Areas
 {
 	std::set<std::string> Get(const std::string&, const common::XY<int>&);
 	Area Get(const std::string&, const std::string&);
-	std::function<void(const common::XY<Sint32>& xy)> HandleMouseMotion(const std::string&, std::function<void(const std::string&)>);
+	std::function<void(const common::XY<Sint32>&)> HandleMouseMotion(const std::string&, std::function<void(const std::string&)>);
 }
