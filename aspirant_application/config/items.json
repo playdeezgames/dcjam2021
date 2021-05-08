@@ -141,7 +141,6 @@
     },
     "12":{
         "name":"Soiled Trousers",
-        "initial-inventory": 1,
         "image-id":"SoiledTrousers",
         "number-appearing": 0,
         "combat":6,
@@ -150,5 +149,15 @@
         "take-area-id":"TakeSoiledTrousers",
         "lose-on-teleport": true,
         "drop-on-use": true
+    },
+    "13":{
+        "initial-inventory":1,
+        "name":"Pr0n Scroll",
+        "combat":4,
+        "image-id":"Pr0n",
+        "number-appearing": 18,
+        "combat-text":"Give Pr0n",
+        "take-image-id":"TakePr0n",
+        "take-area-id":"TakePr0n"
     }
 }

@@ -2981,6 +2981,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemPr0n":{
+        "texture": "items",
+        "x": 160,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
     "ItemTake":{
         "texture": "items",
         "x": 224,

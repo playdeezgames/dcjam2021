@@ -9,7 +9,8 @@
         "number-appearing":18,
         "bribes":{
             "0":2,
-            "5":2
+            "5":2,
+            "13":1
         },
         "sfx":{
             "0":"hitmonster",
@@ -55,7 +56,8 @@
         "attitudes":{
             "6":3,
             "8":3,
-            "12":3
+            "12":3,
+            "13":1
         },
         "drops":{
             "none": 1,
@@ -101,7 +103,8 @@
         "number-appearing":9,
         "bribes":{
             "0":5,
-            "5":5
+            "5":5,
+            "13":1
         },
         "sfx":{
             "0":"hitmonster",
@@ -163,7 +166,8 @@
         "number-appearing":9,
         "bribes":{
             "0":1,
-            "5":1
+            "5":1,
+            "13":1
         },
         "sfx":{
             "0":"hitmonster",

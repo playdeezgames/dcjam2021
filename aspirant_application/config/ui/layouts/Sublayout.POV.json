@@ -183,6 +183,32 @@
     },
     {
         "type": "Image",
+        "image-id": "Pr0n",
+        "sprite": "ItemPr0n",
+        "color": "White",
+        "x": 142,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakePr0n",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 142,
+        "y": 324,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakePr0n",
+        "x": 142,
+        "y": 324,
+        "width": 32,
+        "height":32
+    },
+    {
+        "type": "Image",
         "image-id": "Food",
         "sprite": "ItemFood",
         "color": "White",
