@@ -1,12 +1,10 @@
-#include "Application.Renderer.h"
-#include "Visuals.Layouts.h"
 #include "Application.Command.h"
-#include "Application.UIState.h"
-#include "Visuals.Menus.h"
-#include "Common.Utility.h"
-#include "Application.MouseMotion.h"
 #include "Application.MouseButtonUp.h"
+#include "Application.MouseMotion.h"
+#include "Application.Renderer.h"
+#include "Common.Utility.h"
 #include "Visuals.Areas.h"
+#include "Visuals.Menus.h"
 namespace state::MainMenu
 {
 	const std::string LAYOUT_NAME = "State.MainMenu";
@@ -24,33 +22,18 @@ namespace state::MainMenu
 		QUIT
 	};
 
-	static void StartGame()
-	{
-		::application::UIState::Write(::UIState::START_GAME);
-	}
-
-	static void GoToOptions()
-	{
-		::application::UIState::Write(::UIState::OPTIONS);
-	}
-
 	static void GoToAbout()
 	{
 		SDL_SetClipboardText("https://thegrumpygamedev.itch.io/"); 
 		::application::UIState::Write(::UIState::ABOUT);
 	}
 
-	static void ConfirmQuit()
-	{
-		::application::UIState::Write(::UIState::CONFIRM_QUIT);
-	}
-
 	const std::map<MainMenuItem, std::function<void()>> activators =
 	{
-		{ MainMenuItem::START, StartGame },
-		{ MainMenuItem::OPTIONS, GoToOptions },
+		{ MainMenuItem::START, ::application::UIState::GoTo(::UIState::START_GAME) },
+		{ MainMenuItem::OPTIONS, ::application::UIState::GoTo(::UIState::OPTIONS)  },
 		{ MainMenuItem::ABOUT, GoToAbout },
-		{ MainMenuItem::QUIT, ConfirmQuit },
+		{ MainMenuItem::QUIT, ::application::UIState::GoTo(::UIState::CONFIRM_QUIT)  },
 	};
 
 	static void ActivateItem()
@@ -63,13 +46,14 @@ namespace state::MainMenu
 		{::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
 		{::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{::Command::GREEN, ActivateItem },
-		{::Command::BACK, ConfirmQuit },
-		{::Command::RED, ConfirmQuit }
+		{::Command::BACK, ::application::UIState::GoTo(::UIState::CONFIRM_QUIT) },
+		{::Command::RED, ::application::UIState::GoTo(::UIState::CONFIRM_QUIT) }
 	};
 
-	static void OnCommand(const ::Command& command)
+	static bool OnMouseButtonUpInArea(const std::string&)
 	{
-		common::Utility::Dispatch(commandHandlers, command);
+		ActivateItem();
+		return true;
 	}
 
 	const std::map<std::string, MainMenuItem> areaMenuItems =
@@ -88,12 +72,6 @@ namespace state::MainMenu
 	static void OnMouseMotionInArea(const std::string& area)
 	{
 		SetCurrentMenuItem(areaMenuItems.find(area)->second);
-	}
-
-	static bool OnMouseButtonUpInArea(const std::string& area)
-	{
-		ActivateItem();
-		return true;
 	}
 
 	void Start()
