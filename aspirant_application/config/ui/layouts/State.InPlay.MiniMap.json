@@ -42,7 +42,7 @@
         "text-id":"MapToolTip",
         "font": "default",
         "color": "Gray",
-        "text": "<tooltip>",
+        "text": "",
         "x": 640,
         "y": 268,
         "horizontal-alignment": -1,
