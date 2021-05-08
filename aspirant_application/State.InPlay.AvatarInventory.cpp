@@ -59,7 +59,6 @@ namespace state::in_play::AvatarInventory
 
 	static void OnEnter()
 	{
-		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		visuals::AvatarInventory::ResetIndex(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 	}
 

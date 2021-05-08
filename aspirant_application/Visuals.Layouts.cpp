@@ -70,12 +70,21 @@ namespace visuals::Layouts
 		}
 	}
 
-	void InitializeLayout(const std::string& layoutName)
+	static void InitializeLayout(const std::string& layoutName)
 	{
 		if (!layouts.contains(layoutName))
 		{
 			layouts[layoutName] = ::data::JSON::Load(::data::Stores::GetStore(::data::Store::LAYOUTS)[layoutName]);
 			Internalize(layoutName, layouts[layoutName]);
+		}
+	}
+
+	void Start()
+	{
+		auto& store = ::data::Stores::GetStore(::data::Store::LAYOUTS);
+		for (auto& entry : store.items())
+		{
+			InitializeLayout(entry.key());
 		}
 	}
 

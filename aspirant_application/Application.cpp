@@ -103,7 +103,8 @@ namespace common::Application
 		game::CombatDeck::Deal,
 		state::LoadGame::Start,
 		state::SaveGame::Start,
-		Options::Initialize
+		Options::Initialize,
+		visuals::Layouts::Start
 	};
 
 	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)

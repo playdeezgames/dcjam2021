@@ -17,7 +17,6 @@ namespace state::in_play::Dead
 
 	static void OnEnter()
 	{
-		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		std::stringstream ss;
 		ss << "You collected " << game::avatar::Items::Read(game::Avatar::GetDescriptor().joolsItemId) << " jools!";
 		visuals::Texts::SetText(LAYOUT_NAME, JOOLS_TEXT_ID, ss.str());

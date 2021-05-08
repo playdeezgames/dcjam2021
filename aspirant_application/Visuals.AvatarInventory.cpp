@@ -173,7 +173,6 @@ namespace visuals::AvatarInventory
 
 	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
 	{
-		visuals::Layouts::InitializeLayout(layoutName);//TODO: this is a bandaid
 		auto avatarInventoryIndex = avatarInventoryTable[layoutName][controlId];
 		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
 		

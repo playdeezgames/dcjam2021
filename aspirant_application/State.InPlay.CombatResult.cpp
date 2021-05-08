@@ -43,7 +43,6 @@ namespace state::in_play::CombatResult
 
 	static void OnEnter()
 	{
-		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetCurrentCard()));
 		visuals::Images::SetSprite(LAYOUT_NAME, NEXT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}

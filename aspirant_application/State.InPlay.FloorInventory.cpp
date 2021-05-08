@@ -56,7 +56,6 @@ namespace state::in_play::FloorInventory
 
 	static void OnEnter()
 	{
-		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		visuals::AvatarInventory::ResetIndex(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY);
 	}
 

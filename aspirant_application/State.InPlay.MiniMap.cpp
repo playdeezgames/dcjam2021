@@ -154,7 +154,6 @@ namespace state::in_play::MiniMap
 
 	static void OnEnter()
 	{
-		visuals::Layouts::InitializeLayout(LAYOUT_NAME);
 		UpdateKeys();
 	}
 
