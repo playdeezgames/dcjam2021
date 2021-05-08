@@ -21,11 +21,6 @@ namespace state::ConfirmAbandon
 		YES
 	};
 
-	static void ConfirmAbandon()
-	{
-		::application::UIState::Write(::UIState::MAIN_MENU);
-	}
-
 	static void CancelAbandon()
 	{
 		common::audio::Sfx::Play(application::UIState::EnterGame());
@@ -34,7 +29,7 @@ namespace state::ConfirmAbandon
 	const std::map<ConfirmAbandonItem, std::function<void()>> activators =
 	{
 		{ ConfirmAbandonItem::NO, CancelAbandon },
-		{ ConfirmAbandonItem::YES, ConfirmAbandon }
+		{ ConfirmAbandonItem::YES, ::application::UIState::GoTo(::UIState::MAIN_MENU) }
 	};
 
 	static void ActivateItem()
