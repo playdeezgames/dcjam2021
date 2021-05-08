@@ -138,5 +138,17 @@
         "number-appearing": 12,
         "take-image-id":"TakeMapFragment",
         "take-area-id":"TakeMapFragment"
+    },
+    "12":{
+        "name":"Soiled Trousers",
+        "initial-inventory": 1,
+        "image-id":"SoiledTrousers",
+        "number-appearing": 0,
+        "combat":6,
+        "combat-text":"Drop Trousers",
+        "take-image-id":"TakeSoiledTrousers",
+        "take-area-id":"TakeSoiledTrousers",
+        "lose-on-teleport": true,
+        "drop-on-use": true
     }
 }

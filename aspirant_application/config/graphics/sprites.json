@@ -2974,6 +2974,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemSoiledTrousers":{
+        "texture": "items",
+        "x": 128,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
     "ItemTake":{
         "texture": "items",
         "x": 224,
