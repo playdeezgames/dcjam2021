@@ -96,26 +96,10 @@ namespace state::MainMenu
 		return true;
 	}
 
-	std::function<bool(const common::XY<Sint32>&, Uint8)> HandleMouseButtonUp(const std::string& layoutName, std::function<bool(const std::string&)> areaHandler)
-	{
-		return [layoutName, areaHandler](const common::XY<Sint32>& xy, Uint8)
-		{
-			auto areas = visuals::Areas::Get(layoutName, xy);
-			for (auto& area : areas)
-			{
-				if (areaHandler(area))
-				{
-					return true;
-				}
-			}
-			return false;
-		};
-	}
-
 	void Start()
 	{
 		::application::MouseMotion::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
-		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::MAIN_MENU, LAYOUT_NAME);
 	}

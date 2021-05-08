@@ -85,4 +85,20 @@ namespace visuals::Areas
 			}
 		};
 	}
+
+	std::function<bool(const common::XY<Sint32>&, Uint8)> HandleMouseButtonUp(const std::string& layoutName, std::function<bool(const std::string&)> areaHandler)
+	{
+		return [layoutName, areaHandler](const common::XY<Sint32>& xy, Uint8)
+		{
+			auto areas = visuals::Areas::Get(layoutName, xy);
+			for (auto& area : areas)
+			{
+				if (areaHandler(area))
+				{
+					return true;
+				}
+			}
+			return false;
+		};
+	}
 }
