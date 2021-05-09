@@ -151,7 +151,6 @@
         "drop-on-use": true
     },
     "13":{
-        "initial-inventory":1,
         "name":"Pr0n Scroll",
         "combat":4,
         "image-id":"Pr0n",

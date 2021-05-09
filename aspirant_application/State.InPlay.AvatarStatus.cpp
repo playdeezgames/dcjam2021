@@ -1,20 +1,14 @@
 #include "Application.Command.h"
 #include "Application.Renderer.h"
-#include "Application.Update.h"
-#include "Application.UIState.h"
 #include <sstream>
 #include "Game.Avatar.Statistics.h"
 #include "Visuals.Texts.h"
-#include "Common.Utility.h"
 #include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Data.Stores.h"
-#include "Game.Data.Properties.h"
 #include "Game.Avatar.h"
 #include "Common.Audio.h"
 #include "Application.OnEnter.h"
-#include "Visuals.Layouts.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -124,10 +118,9 @@ namespace state::in_play::AvatarStatus
 		}
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void OnMouseMotionInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (areas.contains(AREA_POOP))
+		if (area == AREA_POOP)
 		{
 			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, "Cyan");//TODO: magic string
 		}
@@ -135,13 +128,11 @@ namespace state::in_play::AvatarStatus
 		{
 			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, "Gray");//TODO: magic string
 		}
-
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (areas.contains(AREA_POOP) && game::Avatar::CanPoop())
+		if (area == AREA_POOP && game::Avatar::CanPoop())
 		{
 			common::audio::Sfx::Play(game::Avatar::Poop(false));
 			application::OnEnter::Handle();
@@ -152,8 +143,8 @@ namespace state::in_play::AvatarStatus
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_STATUS, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_STATUS, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_STATUS, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_STATUS, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 
 		::application::Command::SetHandlers(::UIState::IN_PLAY_STATUS, commandHandlers);
 
