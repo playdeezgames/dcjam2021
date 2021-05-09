@@ -1,7 +1,5 @@
 #include "Application.Renderer.h"
 #include "Application.Command.h"
-#include "Application.UIState.h"
-#include "Visuals.Layouts.h"
 #include "Visuals.Menus.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
