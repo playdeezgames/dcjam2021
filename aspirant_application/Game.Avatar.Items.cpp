@@ -439,7 +439,6 @@ namespace game::avatar::Items
 		return std::nullopt;
 	}
 
-
 	static std::map<game::item::Usage, std::function<std::optional<std::tuple<std::string, CombatUseResult>>(int)>> combatVerbs =
 	{
 		{game::item::Usage::EAT, CombatEat},

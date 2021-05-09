@@ -9,6 +9,7 @@
 #include "Game.Avatar.h"
 #include "Common.Audio.h"
 #include "Application.OnEnter.h"
+#include "Visuals.Data.Colors.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -122,11 +123,11 @@ namespace state::in_play::AvatarStatus
 	{
 		if (area == AREA_POOP)
 		{
-			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, "Cyan");//TODO: magic string
+			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, visuals::data::Colors::HIGHLIGHT);
 		}
 		else
 		{
-			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, "Gray");//TODO: magic string
+			visuals::Texts::SetColor(LAYOUT_NAME, TEXT_POOP, visuals::data::Colors::NORMAL);
 		}
 	}
 

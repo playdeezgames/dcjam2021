@@ -1,13 +1,10 @@
 #include "Application.Command.h"
 #include "Application.Renderer.h"
-#include "Application.Update.h"
-#include "Application.UIState.h"
 #include "Game.Combat.h"
 #include "Visuals.Images.h"
 #include "Visuals.Menus.h"
 #include "Game.Avatar.h"
 #include "Common.RNG.h"
-#include "Common.Audio.h"
 #include "Visuals.AvatarInventory.h"
 #include <sstream>
 #include "Common.Audio.h"
@@ -17,16 +14,13 @@
 #include "Game.CombatDeck.h"
 #include "Visuals.Texts.h"
 #include "Visuals.CardSprites.h"
-#include "Game.Avatar.Items.h"
 #include "Game.Item.h"
 #include "Common.Utility.h"
-#include "Game.Creatures.h"
 #include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Visuals.Data.Colors.h"
 #include "Application.OnEnter.h"
-#include "Visuals.Layouts.h"
 namespace state::in_play::Combat
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
@@ -230,20 +224,9 @@ namespace state::in_play::Combat
 		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_COMBAT, (int)item);
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static bool ClickPreviousItem(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (areas.contains(AREA_PREVIOUS_ITEM)) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
-		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (areas.contains(AREA_NEXT_ITEM)) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
-	}
-
-	static bool ClickPreviousItem(const std::set<std::string>& areas)
-	{
-		if (areas.contains(AREA_PREVIOUS_ITEM))
+		if (area == AREA_PREVIOUS_ITEM)
 		{
 			PreviousItem();
 			application::OnEnter::Handle();
@@ -252,9 +235,9 @@ namespace state::in_play::Combat
 		return false;
 	}
 
-	static bool ClickNextItem(const std::set<std::string>& areas)
+	static bool ClickNextItem(const std::string& area)
 	{
-		if (areas.contains(AREA_NEXT_ITEM))
+		if (area == AREA_NEXT_ITEM)
 		{
 			NextItem();
 			application::OnEnter::Handle();
@@ -263,26 +246,28 @@ namespace state::in_play::Combat
 		return false;
 	}
 
-	static bool ClickAny(const std::set<std::string>& areas)
+	static bool ClickAny(const std::string& area)
 	{
-		if (!areas.empty())
-		{
-			OnActivateItem();
-			return true;
-		}
-		return false;
+		OnActivateItem();
+		return true;
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		return ClickPreviousItem(areas) || ClickNextItem(areas) || ClickAny(areas);
+		return ClickPreviousItem(area) || ClickNextItem(area) || ClickAny(area);
+	}
+
+	static void OnMouseMotionInArea(const std::string& area)
+	{
+		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (area == AREA_PREVIOUS_ITEM) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
+		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (area == AREA_NEXT_ITEM) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT, LAYOUT_NAME);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT, OnEnter);
