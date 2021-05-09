@@ -116,6 +116,7 @@
         "sfx-success":"poop"
     },
     "9":{
+        "initial-inventory":1,
         "name":"Joker",
         "combat":7,
         "image-id":"Joker",

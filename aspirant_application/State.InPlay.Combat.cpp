@@ -32,10 +32,9 @@ namespace state::in_play::Combat
 	const std::string LAYOUT_NAME = "State.InPlay.Combat";
 	const std::string INVENTORY_LAYOUT_NAME = "State.InPlay.AvatarInventory";
 	const std::string CONTROL_AVATAR_INVENTORY = "AvatarInventory";
-	const std::string CURRENT_CARD_IMAGE_ID = "CurrentCard";
-	const std::string COMBAT_MENU_ID = "Combat";
-	const std::string USE_ITEM_MENU_ITEM_ID = "UseItem";
-
+	const std::string IMAGE_CURRENT_CARD = "CurrentCard";
+	const std::string MENU_COMBAT = "Combat";
+	const std::string MENU_ITEM_USE_ITEM = "UseItem";
 	const std::string AREA_GUESS_HIGHER = "GuessHigher";
 	const std::string AREA_GUESS_LOWER = "GuessLower";
 	const std::string AREA_USE_ITEM = "UseItem";
@@ -128,6 +127,14 @@ namespace state::in_play::Combat
 		Flee();
 	}
 
+	static void UpdateUseItem();
+	static void OnEnter()
+	{
+		auto& card = game::CombatDeck::GetCurrentCard();
+		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_CURRENT_CARD, visuals::CardSprites::GetSpriteForCard(card));
+		UpdateUseItem();
+	}
+
 	static void UseItem()
 	{
 		auto result = game::avatar::Items::CombatUse(visuals::AvatarInventory::GetItem(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY));
@@ -137,6 +144,10 @@ namespace state::in_play::Combat
 			if (std::get<1>(*result)== game::avatar::Items::CombatUseResult::REFRESH)
 			{
 				common::audio::Sfx::Play(application::UIState::EnterGame());
+			}
+			else
+			{
+				OnEnter();
 			}
 		}
 	}
@@ -151,12 +162,12 @@ namespace state::in_play::Combat
 
 	static void OnActivateItem()
 	{
-		common::Utility::Dispatch(activators, (CombatMenuItem)visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value());
+		common::Utility::Dispatch(activators, (CombatMenuItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_COMBAT).value());
 	}
 
 	static void NextItem()
 	{
-		if (visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
+		if (visuals::Menus::ReadValue(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM) 
 		{ 
 			visuals::AvatarInventory::NextIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		}
@@ -164,7 +175,7 @@ namespace state::in_play::Combat
 
 	static void PreviousItem()
 	{
-		if (visuals::Menus::ReadValue(LAYOUT_NAME, COMBAT_MENU_ID).value() == (int)CombatMenuItem::USE_ITEM) 
+		if (visuals::Menus::ReadValue(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM) 
 		{ 
 			visuals::AvatarInventory::PreviousIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		}
@@ -178,8 +189,8 @@ namespace state::in_play::Combat
 	std::map<Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, LeavePlay },
-		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, COMBAT_MENU_ID) },
-		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, COMBAT_MENU_ID) },
+		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_COMBAT) },
+		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_COMBAT) },
 		{ ::Command::LEFT, PreviousItem },
 		{ ::Command::RIGHT, NextItem },
 		{ ::Command::GREEN, OnActivateItem },
@@ -201,14 +212,7 @@ namespace state::in_play::Combat
 		{
 			ss << "(no items)";
 		}
-		visuals::MenuItems::SetText(LAYOUT_NAME, USE_ITEM_MENU_ITEM_ID, ss.str());
-	}
-
-	static void OnEnter()
-	{
-		auto& card = game::CombatDeck::GetCurrentCard();
-		visuals::Images::SetSprite(LAYOUT_NAME, CURRENT_CARD_IMAGE_ID, visuals::CardSprites::GetSpriteForCard(card));
-		UpdateUseItem();
+		visuals::MenuItems::SetText(LAYOUT_NAME, MENU_ITEM_USE_ITEM, ss.str());
 	}
 
 	const std::map<std::string, CombatMenuItem> areaMenuItems =
@@ -223,7 +227,7 @@ namespace state::in_play::Combat
 
 	static void SetCurrentMenuItem(CombatMenuItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, COMBAT_MENU_ID, (int)item);
+		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_COMBAT, (int)item);
 	}
 
 	static void OnMouseMotion(const common::XY<Sint32>& xy)
