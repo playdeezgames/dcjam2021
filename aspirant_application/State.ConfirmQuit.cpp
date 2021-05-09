@@ -1,7 +1,5 @@
 #include "Application.Renderer.h"
 #include "Application.Command.h"
-#include "Application.UIState.h"
-#include "Visuals.Layouts.h"
 #include "Visuals.Menus.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
@@ -51,30 +49,21 @@ namespace state::ConfirmQuit
 		{ AREA_YES,  ConfirmQuitItem::YES}
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static bool OnMouseButtonUpInArea(const std::string&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
+		ActivateItem();
+		return true;
 	}
 
-	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static void OnMouseMotionInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (!areas.empty())
-		{
-			ActivateItem();
-			return true;
-		}
-		return false;
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::CONFIRM_QUIT, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::CONFIRM_QUIT, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::CONFIRM_QUIT, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::CONFIRM_QUIT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::CONFIRM_QUIT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::CONFIRM_QUIT, LAYOUT_NAME);
 	}
