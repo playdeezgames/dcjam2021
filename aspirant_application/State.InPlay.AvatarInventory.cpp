@@ -1,20 +1,11 @@
 #include "Application.Command.h"
 #include "Application.Renderer.h"
-#include "Application.Update.h"
-#include "Application.UIState.h"
 #include "Visuals.AvatarInventory.h"
 #include "Game.Avatar.Items.h"
-#include "Game.Item.h"
-#include "Game.World.Items.h"
-#include "Game.Avatar.h"
-#include "Game.Avatar.Statistics.h"
 #include "Common.Audio.h"
-#include "Application.Sounds.h"
-#include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Application.OnEnter.h"
-#include "Visuals.Layouts.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
