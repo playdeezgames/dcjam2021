@@ -1,10 +1,7 @@
 #include "Application.Renderer.h"
-#include "Visuals.Layouts.h"
 #include "Application.Command.h"
-#include "Application.UIState.h"
 #include "Visuals.Menus.h"
 #include "Game.h"
-#include "Common.Audio.h"
 #include "Common.Utility.h"
 #include "Application.OnEnter.h"
 #include "Visuals.Areas.h"
@@ -46,11 +43,6 @@ namespace state::SaveGame
 		BACK
 	};
 
-	static void GoBack()
-	{
-		::application::UIState::Write(::UIState::LEAVE_PLAY);
-	}
-
 	static void SaveToAutosave()
 	{
 		game::AutoSave();
@@ -74,7 +66,7 @@ namespace state::SaveGame
 		{ SaveGameItem::SLOT_3, SlotSaver(3) },
 		{ SaveGameItem::SLOT_4, SlotSaver(4) },
 		{ SaveGameItem::SLOT_5, SlotSaver(5) },
-		{ SaveGameItem::BACK, GoBack }
+		{ SaveGameItem::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) }
 	};
 
 	static void ActivateItem()
@@ -86,21 +78,14 @@ namespace state::SaveGame
 	{
 		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
 		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
-		{ ::Command::BACK, GoBack },
-		{ ::Command::RED, GoBack },
+		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
+		{ ::Command::RED, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
 		{ ::Command::GREEN, ActivateItem }
 	};
 
 	static void UpdateMenuItem(bool shown, const std::string& menuItem, const std::string& textWhenShown)
 	{
-		if (shown)
-		{
-			visuals::MenuItems::SetText(LAYOUT_NAME, menuItem, textWhenShown);
-		}
-		else
-		{
-			visuals::MenuItems::SetText(LAYOUT_NAME, menuItem, NOT_PRESENT);
-		}
+		visuals::MenuItems::SetText(LAYOUT_NAME, menuItem, (shown) ? (textWhenShown) : (NOT_PRESENT));
 	}
 
 	static void OnEnter()
@@ -129,30 +114,21 @@ namespace state::SaveGame
 		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (!areas.empty())
-		{
-			ActivateItem();
-			return true;
-		}
-		return false;
+		ActivateItem();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::SAVE_GAME, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::SAVE_GAME, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::SAVE_GAME, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::SAVE_GAME, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::SAVE_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::SAVE_GAME, LAYOUT_NAME);
 		::application::OnEnter::AddHandler(::UIState::SAVE_GAME, OnEnter);
