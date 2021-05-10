@@ -1,7 +1,5 @@
 #include "Application.Renderer.h"
-#include "Visuals.Layouts.h"
 #include "Application.Command.h"
-#include "Application.UIState.h"
 #include "Visuals.Menus.h"
 #include "Game.h"
 #include "Common.Audio.h"
@@ -30,21 +28,11 @@ namespace state::Start
 		common::audio::Sfx::Play(application::UIState::EnterGame());
 	}
 
-	static void ContinueGame()
-	{
-		::application::UIState::Write(::UIState::LOAD_GAME);
-	}
-
-	static void GoBack()
-	{
-		::application::UIState::Write(::UIState::MAIN_MENU);
-	}
-
 	const std::map<StartGameItem, std::function<void()>> activators =
 	{
 		{ StartGameItem::NEW_GAME, NewGame },
-		{ StartGameItem::CONTINUE_GAME, ContinueGame },
-		{ StartGameItem::BACK, GoBack }
+		{ StartGameItem::CONTINUE_GAME, ::application::UIState::GoTo(::UIState::LOAD_GAME) },
+		{ StartGameItem::BACK, ::application::UIState::GoTo(::UIState::MAIN_MENU) }
 	};
 
 	static void ActivateItem()
@@ -56,8 +44,8 @@ namespace state::Start
 	{
 		{ ::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
 		{ ::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
-		{ ::Command::BACK, GoBack },
-		{ ::Command::RED, GoBack },
+		{ ::Command::BACK, ::application::UIState::GoTo(::UIState::MAIN_MENU) },
+		{ ::Command::RED, ::application::UIState::GoTo(::UIState::MAIN_MENU) },
 		{ ::Command::GREEN, ActivateItem }
 	};
 
@@ -73,30 +61,21 @@ namespace state::Start
 		{ AREA_BACK,  StartGameItem::BACK}
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (!areas.empty())
-		{
-			ActivateItem();
-			return true;
-		}
-		return false;
+		ActivateItem();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::START_GAME, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::START_GAME, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::START_GAME, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::START_GAME, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::START_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::START_GAME, LAYOUT_NAME);
 	}
