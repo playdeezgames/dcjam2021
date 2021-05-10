@@ -1,25 +1,18 @@
 #include "Application.Command.h"
 #include "Application.Renderer.h"
-#include "Application.Update.h"
-#include "Application.UIState.h"
 #include "Visuals.Images.h"
 #include "Visuals.Texts.h"
-#include <vector>
-#include <map>
 #include "Game.Avatar.h"
 #include "Game.World.h"
 #include "Game.Avatar.Statistics.h"
-#include "Game.Item.h"
 #include <sstream>
-#include "States.h"
 #include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Visuals.Areas.h"
 #include "Game.Creatures.h"
 #include "Application.OnEnter.h"
-#include "Visuals.Layouts.h"
 #include "Common.Audio.h"
+#include "Visuals.Areas.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
@@ -129,15 +122,9 @@ namespace state::in_play::MiniMap
 		{ AREA_TURN_RIGHT, []() {game::Avatar::TurnRight(); return true; }}
 	};
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		bool result = false;
-		for (auto& area : areas)
-		{
-			result = result || common::Utility::Dispatch(mouseUpHandlers, area, false);
-		}
-		return result;
+		return common::Utility::Dispatch(mouseUpHandlers, area, false);
 	}
 
 	static void UpdateKeys()
@@ -152,15 +139,10 @@ namespace state::in_play::MiniMap
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_KEYS, ss.str());
 	}
 
-	static void OnEnter()
-	{
-		UpdateKeys();
-	}
-
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, OnEnter);
-		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, UpdateKeys);
+		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
