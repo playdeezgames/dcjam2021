@@ -1,14 +1,10 @@
-#include <string>
 #include "Game.Avatar.h"
-#include <map>
 #include "Game.World.h"
 #include "Visuals.Texts.h"
 #include "Visuals.Images.h"
-#include "Game.Item.h"
 #include "Game.World.Items.h"
-#include "Application.Update.h"
+#include "Application.Update.h"//TODO: replace with OnEnter
 #include "Game.Creatures.h"
-#include <tuple>
 #include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
@@ -27,6 +23,7 @@ namespace sublayout::POV
 	const std::string TEXT_POSITION = "Position";
 	const std::string TEXT_AVATAR_STATE = "AvatarState";
 	const std::string TEXT_ITEM_TOOL_TIP = "ItemToolTip";
+	const std::string EMPTY_TOOLTIP = "";
 
 
 	const std::map<game::world::Border, std::string> leftSides =
@@ -126,15 +123,14 @@ namespace sublayout::POV
 		::UIState::IN_PLAY_COMBAT_RESULT
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
 		std::string itemToolTip = "";
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		auto position = game::Avatar::GetPosition();
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
-			bool showItem = areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item);
+			bool showItem = area == descriptor.takeAreaId && game::world::Items::IsPresent(position, item);
 			::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, showItem);
 			if (showItem)
 			{
@@ -151,22 +147,26 @@ namespace sublayout::POV
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
+	}
+
+	static bool OnMouseButtonUpInArea(const std::string& area)
+	{
 		auto position = game::Avatar::GetPosition();
 		int index = 0;
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
-			if (areas.contains(descriptor.takeAreaId) && game::world::Items::IsPresent(position, item))
+			if (area == descriptor.takeAreaId && game::world::Items::IsPresent(position, item))
 			{
-				//TODO: this is duplicated code
 				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
 				size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
 				game::avatar::Items::Add(item, amount);
 
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
+				visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
 				return true;
 			}
 			index++;
@@ -176,8 +176,8 @@ namespace sublayout::POV
 
 	void Start()
 	{
-		application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
-		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, OnMouseButtonUp);
+		application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));
+		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		for (auto state : states)
 		{
 			::application::Update::AddHandler(state, UpdatePOV);
