@@ -1,12 +1,9 @@
-#include <string>
 #include <sstream>
-#include "Application.UIState.h"
-#include "Application.Update.h"
+#include "Application.OnEnter.h"
 #include "Visuals.Texts.h"
 #include "Game.Avatar.h"
 #include "Game.Creatures.h"
 #include "Game.Avatar.Statistics.h"
-#include <vector>
 namespace sublayout::EnemyStats
 {
 	const std::string LAYOUT_NAME = "Sublayout.EnemyStats";
@@ -27,7 +24,7 @@ namespace sublayout::EnemyStats
 		{ game::creature::Attitude::DISTRACTED, "Distracted" }
 	};
 
-	static void UpdateAttitude(const Uint32&)
+	static void UpdateAttitude()
 	{
 		std::stringstream ss;
 		auto position = game::Avatar::GetPosition();
@@ -39,7 +36,7 @@ namespace sublayout::EnemyStats
 		::visuals::Texts::SetText(LAYOUT_NAME, TEXT_ENEMY_ATTITUDE, ss.str());
 	}
 
-	static void UpdateHealth(const Uint32&)
+	static void UpdateHealth()
 	{
 		std::stringstream ss;
 		ss << "Enemy: ";
@@ -61,9 +58,9 @@ namespace sublayout::EnemyStats
 		}
 	}
 
-	static void UpdateAttack(const Uint32&)
+	static void UpdateAttack()
 	{
-		auto attack = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK)+ game::avatar::Statistics::Read(game::avatar::Statistic::STREAK);
+		auto attack = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK) + game::avatar::Statistics::Read(game::avatar::Statistic::STREAK);
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		std::stringstream ss;
 		ss << "Attack: " << attack;
@@ -74,7 +71,7 @@ namespace sublayout::EnemyStats
 		::visuals::Texts::SetText(LAYOUT_NAME, ATTACK_TEXT_ID, ss.str());
 	}
 
-	static void UpdateStreak(const Uint32&)
+	static void UpdateStreak()
 	{
 		auto streak = game::avatar::Statistics::Read(game::avatar::Statistic::STREAK);
 		std::stringstream ss;
@@ -82,7 +79,7 @@ namespace sublayout::EnemyStats
 		::visuals::Texts::SetText(LAYOUT_NAME, STREAK_TEXT_ID, ss.str());
 	}
 
-	static void UpdateDefend(const Uint32&)
+	static void UpdateDefend()
 	{
 		auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
@@ -105,11 +102,11 @@ namespace sublayout::EnemyStats
 	{
 		for (auto state : states)
 		{
-			::application::Update::AddHandler(state, UpdateHealth);
-			::application::Update::AddHandler(state, UpdateAttack);
-			::application::Update::AddHandler(state, UpdateDefend);
-			::application::Update::AddHandler(state, UpdateAttitude);
-			::application::Update::AddHandler(state, UpdateStreak);
+			::application::OnEnter::AddHandler(state, UpdateHealth);
+			::application::OnEnter::AddHandler(state, UpdateAttack);
+			::application::OnEnter::AddHandler(state, UpdateDefend);
+			::application::OnEnter::AddHandler(state, UpdateAttitude);
+			::application::OnEnter::AddHandler(state, UpdateStreak);
 		}
 	}
 }
