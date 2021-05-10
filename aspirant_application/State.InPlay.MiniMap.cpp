@@ -27,6 +27,8 @@ namespace state::in_play::MiniMap
 	const std::string CELL_UNKNOWN = "????";
 	const std::string CELL_EMPTY = "(empty)";
 	const std::string TEXT_KEYS = "Keys";
+	const std::string EMPTY_TOOL_TIP = "";
+	const std::string NO_ARROW = "";
 
 	static void MoveAhead()
 	{
@@ -113,6 +115,11 @@ namespace state::in_play::MiniMap
 		UpdateArrowImages(area);
 		UpdateMiniMapToolTip(area, xy);
 	}
+	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	{
+		UpdateArrowImages(NO_ARROW);
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, EMPTY_TOOL_TIP);
+	}
 
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
 	{
@@ -142,7 +149,7 @@ namespace state::in_play::MiniMap
 	{
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, UpdateKeys);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
-		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
 	}
