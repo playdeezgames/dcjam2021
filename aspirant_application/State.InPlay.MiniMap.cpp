@@ -76,24 +76,24 @@ namespace state::in_play::MiniMap
 		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT}
 	};
 
-	static void UpdateArrowImages(const std::set<std::string>& areas)
+	static void UpdateArrowImages(const std::string& area)
 	{
 		for (auto& areaImage : areaImages)
 		{
-			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), areas.contains(std::get<0>(areaImage)));
+			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), area == std::get<0>(areaImage));
 		}
 	}
-	static void UpdateMiniMapToolTip(const std::set<std::string>& areas, const common::XY<Sint32>& xy)
+	static void UpdateMiniMapToolTip(const std::string& area, const common::XY<Sint32>& xy)
 	{
 		std::stringstream ss;
-		if (areas.contains(AREA_WORLD_MAP))
+		if (area == AREA_WORLD_MAP)
 		{
 			auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
 			auto worldSize = game::World::GetSize();
 			size_t cellWidth = area.size.GetX() / worldSize.GetX();
 			size_t cellHeight = area.size.GetY() / worldSize.GetY();
-			size_t cellColumn = ((size_t)xy.GetX() - area.xy.GetX()) / cellWidth;
-			size_t cellRow = ((size_t)xy.GetY() - area.xy.GetY()) / cellHeight;
+			size_t cellColumn = ((size_t)xy.GetX()) / cellWidth;
+			size_t cellRow = ((size_t)xy.GetY()) / cellHeight;
 			common::XY<size_t> worldPosition = { cellColumn , cellRow };
 			if (game::World::GetKnownState(worldPosition) == game::world::KnownState::UNKNOWN)
 			{
@@ -108,11 +108,10 @@ namespace state::in_play::MiniMap
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, ss.str());
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>& xy)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		UpdateArrowImages(areas);
-		UpdateMiniMapToolTip(areas, xy);
+		UpdateArrowImages(area);
+		UpdateMiniMapToolTip(area, xy);
 	}
 
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
@@ -143,7 +142,7 @@ namespace state::in_play::MiniMap
 	{
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, UpdateKeys);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
-		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, OnMouseMotion);
+		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_MAP, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_MAP, LAYOUT_NAME);
 	}
