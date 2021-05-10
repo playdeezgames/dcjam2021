@@ -1,15 +1,12 @@
 #include "Application.Renderer.h"
-#include "Visuals.Layouts.h"
 #include "Application.Command.h"
-#include "Application.UIState.h"
 #include "Visuals.Menus.h"
 #include "Game.h"
-#include "Common.Audio.h"
 #include "Common.Utility.h"
 #include "Application.OnEnter.h"
-#include "Visuals.Areas.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
+#include "Visuals.Areas.h"
 namespace state::LoadGame
 {
 	const std::string LAYOUT_NAME = "State.LoadGame";
@@ -135,30 +132,21 @@ namespace state::LoadGame
 		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (!areas.empty())
-		{
-			ActivateItem();
-			return true;
-		}
-		return false;
+		ActivateItem();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::LOAD_GAME, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::LOAD_GAME, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::LOAD_GAME, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::LOAD_GAME, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::LOAD_GAME, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::LOAD_GAME, LAYOUT_NAME);
 		::application::OnEnter::AddHandler(::UIState::LOAD_GAME, OnEnter);
