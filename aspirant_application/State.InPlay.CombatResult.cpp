@@ -47,6 +47,11 @@ namespace state::in_play::CombatResult
 		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (area == AREA_CONTINUE) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 	}
 
+	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	{
+		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, visuals::data::Colors::NORMAL);
+	}
+
 	static bool HandleContinue(const std::string& area)
 	{
 		if (area == AREA_CONTINUE)
@@ -65,7 +70,7 @@ namespace state::in_play::CombatResult
 	void Start()
 	{
 		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInAreaa));
-		application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
+		application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT_RESULT, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_COMBAT_RESULT, LAYOUT_NAME);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, OnEnter);
