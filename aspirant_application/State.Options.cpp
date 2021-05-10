@@ -1,13 +1,9 @@
 #include "Application.Renderer.h"
-#include "Visuals.Layouts.h"
-#include <map>
 #include "Common.Audio.h"
 #include "Options.h"
 #include <sstream>
-#include "Common.Utility.h"
 #include "Application.Command.h"
 #include "Application.OnEnter.h"
-#include "Application.UIState.h"
 #include "Visuals.Menus.h"
 #include "Application.Sounds.h"
 #include "Common.Utility.h"
@@ -85,20 +81,22 @@ namespace state::Options
 		application::OnEnter::Handle();
 	}
 
+	static void ToggleMute()
+	{
+		common::Audio::SetMuted(!common::Audio::IsMuted()); 
+		::Options::Save(); 
+		application::OnEnter::Handle();
+	}
+
 	const std::map<OptionsItem, std::function<void()>> activators =
 	{
-		{ OptionsItem::TOGGLE_MUTE, []() { common::Audio::SetMuted(!common::Audio::IsMuted()); ::Options::Save(); application::OnEnter::Handle(); }},
-		{ OptionsItem::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
+		{ OptionsItem::TOGGLE_MUTE, ToggleMute },
+		{ OptionsItem::BACK, ::application::UIState::GoTo(::UIState::MAIN_MENU) }
 	};
 
 	static void ActivateItem()
 	{
 		common::Utility::Dispatch(activators, GetCurrentItem());
-	}
-
-	static void GoToMainMenu()
-	{
-		::application::UIState::Write(::UIState::MAIN_MENU);
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
@@ -107,8 +105,8 @@ namespace state::Options
 		{::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
 		{::Command::LEFT, DecreaseItem },
 		{::Command::RIGHT, IncreaseItem },
-		{::Command::BACK, GoToMainMenu },
-		{::Command::RED, GoToMainMenu },
+		{::Command::BACK, ::application::UIState::GoTo(::UIState::MAIN_MENU) },
+		{::Command::RED, ::application::UIState::GoTo(::UIState::MAIN_MENU) },
 		{ ::Command::GREEN, ActivateItem }
 	};
 
@@ -152,13 +150,9 @@ namespace state::Options
 		{ AREA_BACK, OptionsItem::BACK }
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
 	const std::map<std::string, std::function<void()>> areaClickActions =
@@ -169,17 +163,13 @@ namespace state::Options
 		{AREA_SFX_INCREASE, IncreaseItem}
 	};
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
+		auto iter = areaClickActions.find(area);
+		if (iter != areaClickActions.end())
 		{
-			auto iter = areaClickActions.find(area);
-			if (iter != areaClickActions.end())
-			{
-				iter->second();
-				return true;
-			}
+			iter->second();
+			return true;
 		}
 		ActivateItem();
 		return true;
@@ -187,8 +177,8 @@ namespace state::Options
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::OPTIONS, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::OPTIONS, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::OPTIONS, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::OPTIONS, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::OPTIONS, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::OPTIONS, LAYOUT_NAME);
 		::application::OnEnter::AddHandler(::UIState::OPTIONS, UpdateMuteMenuItem);
