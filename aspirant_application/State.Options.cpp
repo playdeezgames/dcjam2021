@@ -6,7 +6,7 @@
 #include <sstream>
 #include "Common.Utility.h"
 #include "Application.Command.h"
-#include "Application.Update.h"
+#include "Application.OnEnter.h"
 #include "Application.UIState.h"
 #include "Visuals.Menus.h"
 #include "Application.Sounds.h"
@@ -19,9 +19,9 @@ namespace state::Options
 {
 	const std::string LAYOUT_NAME = "State.Options";
 	const std::string MENU_ID = "Options";
-	const std::string MUTE_MENU_ITEM_ID = "Mute";
-	const std::string SFX_VOLUME_MENU_ITEM_ID = "SfxVolume";
-	const std::string MUX_VOLUME_MENU_ITEM_ID = "MuxVolume";
+	const std::string MENU_ITEM_MUTE = "Mute";
+	const std::string MENU_ITEM_SFX_VOLUME = "SfxVolume";
+	const std::string MENU_ITEM_MUX_VOLUME = "MuxVolume";
 	const std::string MUTE = "Mute";
 	const std::string UNMUTE = "Unmute";
 	const std::string AREA_MUTE = "Mute";
@@ -76,16 +76,18 @@ namespace state::Options
 	static void IncreaseItem()
 	{
 		ChangeItem(VOLUME_DELTA);
+		application::OnEnter::Handle();
 	}
 
 	static void DecreaseItem()
 	{
 		ChangeItem(-VOLUME_DELTA);
+		application::OnEnter::Handle();
 	}
 
 	const std::map<OptionsItem, std::function<void()>> activators =
 	{
-		{ OptionsItem::TOGGLE_MUTE, []() { common::Audio::SetMuted(!common::Audio::IsMuted()); ::Options::Save(); }},
+		{ OptionsItem::TOGGLE_MUTE, []() { common::Audio::SetMuted(!common::Audio::IsMuted()); ::Options::Save(); application::OnEnter::Handle(); }},
 		{ OptionsItem::BACK, []() { ::application::UIState::Write(::UIState::MAIN_MENU); }}
 	};
 
@@ -115,24 +117,24 @@ namespace state::Options
 		common::Utility::Dispatch(commandHandlers, command);
 	}
 
-	static void UpdateMuteMenuItem(const Uint32&)
+	static void UpdateMuteMenuItem()
 	{
-		visuals::MenuItems::SetText(LAYOUT_NAME, MUTE_MENU_ITEM_ID, 
+		visuals::MenuItems::SetText(LAYOUT_NAME, MENU_ITEM_MUTE, 
 			common::Audio::IsMuted() ? UNMUTE : MUTE);
 	}
 
-	static void UpdateSfxMenuItem(const Uint32&)
+	static void UpdateSfxMenuItem()
 	{
 		std::stringstream ss;
 		ss << "< SFX Volume (" << common::Utility::ToPercentage(common::audio::Sfx::GetVolume(), MIX_MAX_VOLUME) << "%) >";
-		visuals::MenuItems::SetText(LAYOUT_NAME, SFX_VOLUME_MENU_ITEM_ID, ss.str());
+		visuals::MenuItems::SetText(LAYOUT_NAME, MENU_ITEM_SFX_VOLUME, ss.str());
 	}
 
-	static void UpdateMuxMenuItem(const Uint32&)
+	static void UpdateMuxMenuItem()
 	{
 		std::stringstream ss;
 		ss << "< MUX Volume (" << common::Utility::ToPercentage(common::audio::Mux::GetVolume(), MIX_MAX_VOLUME) << "%) >";
-		visuals::MenuItems::SetText(LAYOUT_NAME, MUX_VOLUME_MENU_ITEM_ID, ss.str());
+		visuals::MenuItems::SetText(LAYOUT_NAME, MENU_ITEM_MUX_VOLUME, ss.str());
 	}
 
 	static void SetCurrentMenuItem(OptionsItem item)
@@ -189,8 +191,8 @@ namespace state::Options
 		::application::MouseMotion::AddHandler(::UIState::OPTIONS, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::OPTIONS, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::OPTIONS, LAYOUT_NAME);
-		::application::Update::AddHandler(::UIState::OPTIONS, UpdateMuteMenuItem);
-		::application::Update::AddHandler(::UIState::OPTIONS, UpdateSfxMenuItem);
-		::application::Update::AddHandler(::UIState::OPTIONS, UpdateMuxMenuItem);
+		::application::OnEnter::AddHandler(::UIState::OPTIONS, UpdateMuteMenuItem);
+		::application::OnEnter::AddHandler(::UIState::OPTIONS, UpdateSfxMenuItem);
+		::application::OnEnter::AddHandler(::UIState::OPTIONS, UpdateMuxMenuItem);
 	}
 }
