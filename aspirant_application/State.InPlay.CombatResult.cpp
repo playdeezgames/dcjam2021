@@ -42,7 +42,7 @@ namespace state::in_play::CombatResult
 		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_NEXT_CARD, visuals::CardSprites::GetSpriteForCard(game::CombatDeck::GetNextCard()));
 	}
 
-	static void OnMouseMotionInArea(const std::string& area)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
 		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_CONTINUE, (area == AREA_CONTINUE) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 	}

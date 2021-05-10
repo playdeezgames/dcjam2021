@@ -69,7 +69,7 @@ namespace state::MainMenu
 		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
-	static void OnMouseMotionInArea(const std::string& area)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
 		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}

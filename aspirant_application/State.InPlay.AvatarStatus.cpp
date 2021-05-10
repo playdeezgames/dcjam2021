@@ -119,7 +119,7 @@ namespace state::in_play::AvatarStatus
 		}
 	}
 
-	static void OnMouseMotionInArea(const std::string& area)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
 		if (area == AREA_POOP)
 		{

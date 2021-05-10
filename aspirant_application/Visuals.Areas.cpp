@@ -73,7 +73,7 @@ namespace visuals::Areas
 		return areaTable.find(layoutName)->second.find(areaName)->second;
 	}
 
-	std::function<void(const common::XY<Sint32>& xy)> HandleMouseMotion(const std::string& layoutName, std::function<void(const std::string&)> areaHandler)
+	std::function<void(const common::XY<Sint32>& xy)> HandleMouseMotion(const std::string& layoutName, std::function<void(const std::string&, const common::XY<Sint32>&)> areaHandler)
 	{
 		Initialize(layoutName);
 		return [layoutName, areaHandler](const common::XY<Sint32>& xy)
@@ -81,7 +81,8 @@ namespace visuals::Areas
 			auto areas = visuals::Areas::Get(layoutName, xy);
 			for (auto& area : areas)
 			{
-				areaHandler(area);
+				auto a = Get(layoutName, area);
+				areaHandler(area, xy - a.xy);
 			}
 		};
 	}
