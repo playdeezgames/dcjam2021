@@ -1,6 +1,4 @@
-#include <string>
 #include "Visuals.Menus.h"
-#include "Application.UIState.h"
 #include "Application.Command.h"
 #include "Application.Renderer.h"
 #include "Common.Audio.h"
@@ -71,30 +69,21 @@ namespace state::LeavePlay
 		{ AREA_ABANDON,  LeavePlayItem::ABANDON}
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)//TODO: make an MouseMotionArea handler?
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		for (auto& area : areas)
-		{
-			SetCurrentMenuItem(areaMenuItems.find(area)->second);
-		}
+		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)//TODO: duplicated code with other menus
+	static bool OnMouseButtonUpInArea(const std::string&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (!areas.empty())
-		{
-			ActivateItem();
-			return true;
-		}
-		return false;
+		ActivateItem();
+		return true;
 	}
 
 	void Start()
 	{
-		::application::MouseButtonUp::AddHandler(::UIState::LEAVE_PLAY, OnMouseButtonUp);
-		::application::MouseMotion::AddHandler(::UIState::LEAVE_PLAY, OnMouseMotion);
+		::application::MouseButtonUp::AddHandler(::UIState::LEAVE_PLAY, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+		::application::MouseMotion::AddHandler(::UIState::LEAVE_PLAY, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::LEAVE_PLAY, commandHandlers);
 		::application::Renderer::SetRenderLayout(::UIState::LEAVE_PLAY, LAYOUT_NAME);
 	}
