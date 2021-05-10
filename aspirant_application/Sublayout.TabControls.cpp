@@ -1,14 +1,7 @@
-#include <string>
-#include <sstream>
-#include "Game.Avatar.Statistics.h"
 #include "Visuals.Texts.h"
-#include "Application.Update.h"
-#include "Visuals.Images.h"
-#include <vector>
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
-#include <map>
 #include "Common.Utility.h"
 #include "Visuals.Data.Colors.h"
 namespace sublayout::TabControls
@@ -22,6 +15,7 @@ namespace sublayout::TabControls
 	const std::string TEXT_FLR = "Flr";
 	const std::string TEXT_INV = "Inv";
 	const std::string TEXT_STA = "Sta";
+	const std::string NO_TAB = "";
 
 	const std::vector<::UIState> states =
 	{
@@ -31,16 +25,9 @@ namespace sublayout::TabControls
 		::UIState::IN_PLAY_STATUS
 	};
 
-	static void UpdateTabColor(const std::set<std::string>& areas, const std::string& areaId, const std::string textId)
+	static void UpdateTabColor(const std::string& area, const std::string& areaId, const std::string textId)
 	{
-		if (areas.contains(areaId))
-		{
-			visuals::Texts::SetColor(LAYOUT_NAME, textId, visuals::data::Colors::HIGHLIGHT);
-		}
-		else
-		{
-			visuals::Texts::SetColor(LAYOUT_NAME, textId, visuals::data::Colors::NORMAL);
-		}
+		visuals::Texts::SetColor(LAYOUT_NAME, textId, (area == areaId) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 	}
 
 	const std::vector<std::tuple<std::string, std::string>> tabControls =
@@ -51,40 +38,47 @@ namespace sublayout::TabControls
 		{ AREA_STA, TEXT_STA }
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void UpdateTabColors(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
 		for (auto& tabControl : tabControls)
 		{
-			UpdateTabColor(areas, std::get<0>(tabControl), std::get<1>(tabControl));
+			UpdateTabColor(area, std::get<0>(tabControl), std::get<1>(tabControl));
 		}
+	}
+
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	{
+		UpdateTabColors(area);
+	}
+	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	{
+		UpdateTabColors(NO_TAB);
+	}
+
+	static std::function<bool()> GoToStateAndReturnTrue(::UIState state)
+	{
+		return [state]() {application::UIState::Write(state); return true; };
 	}
 
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
 	{
-		{AREA_MAP, []() {application::UIState::Write(::UIState::IN_PLAY_MAP); return true; }},
-		{AREA_FLR, []() {application::UIState::Write(::UIState::IN_PLAY_FLOOR); return true; }},
-		{AREA_INV, []() {application::UIState::Write(::UIState::IN_PLAY_INVENTORY); return true; }},
-		{AREA_STA, []() {application::UIState::Write(::UIState::IN_PLAY_STATUS); return true; }}
+		{AREA_MAP, GoToStateAndReturnTrue(::UIState::IN_PLAY_MAP)},
+		{AREA_FLR, GoToStateAndReturnTrue(::UIState::IN_PLAY_FLOOR)},
+		{AREA_INV, GoToStateAndReturnTrue(::UIState::IN_PLAY_INVENTORY)},
+		{AREA_STA, GoToStateAndReturnTrue(::UIState::IN_PLAY_STATUS)}
 	};
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		bool result = false;
-		for (auto& area : areas)
-		{
-			result = result || common::Utility::Dispatch(mouseUpHandlers, area, false);
-		}
-		return false;
+		return common::Utility::Dispatch(mouseUpHandlers, area, false);
 	}
 
 	void Start()
 	{
 		for (auto state : states)
 		{
-			::application::MouseButtonUp::AddHandler(state, OnMouseButtonUp);
-			::application::MouseMotion::AddHandler(state, OnMouseMotion);
+			::application::MouseButtonUp::AddHandler(state, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+			::application::MouseMotion::AddHandler(state, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));
 		}
 	}
 }
