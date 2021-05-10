@@ -1,16 +1,12 @@
 #include "Application.Command.h"
 #include "Application.Renderer.h"
 #include "Application.OnEnter.h"
-#include "Application.UIState.h"
 #include "Visuals.AvatarInventory.h"
-#include "Game.Item.h"
 #include "Game.World.Items.h"
 #include "Game.Avatar.h"
 #include "Game.Avatar.Items.h"
-#include "Common.Utility.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Visuals.Layouts.h"
 namespace state::in_play::FloorInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.FloorInventory";
