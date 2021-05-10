@@ -39,6 +39,7 @@ namespace sublayout::TabControls
 	};
 
 	static void UpdateTabColors(const std::string& area)
+
 	{
 		for (auto& tabControl : tabControls)
 		{
