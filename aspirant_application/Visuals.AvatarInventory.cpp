@@ -56,7 +56,7 @@ namespace visuals::AvatarInventory
 		return game::world::Items::FloorInventory(game::Avatar::GetPosition());
 	}
 
-	static void DrawInternalAvatarInventory(std::shared_ptr<SDL_Renderer> renderer, size_t avatarInventoryIndex)
+	static void DrawInternalAvatarInventory(const std::shared_ptr<SDL_Renderer>& renderer, size_t avatarInventoryIndex)
 	{
 		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
 
@@ -93,7 +93,7 @@ namespace visuals::AvatarInventory
 
 	}
 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	std::function<void(const std::shared_ptr<SDL_Renderer>&)> Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
 		size_t index = internalAvatarInventories.size();
 		internalAvatarInventories.push_back(
@@ -114,7 +114,7 @@ namespace visuals::AvatarInventory
 		{
 			avatarInventoryTable[layoutName][model[visuals::data::Properties::CONTROL_ID]] = index;
 		}
-		return [index](std::shared_ptr<SDL_Renderer> renderer)
+		return [index](const std::shared_ptr<SDL_Renderer>& renderer)
 		{
 			DrawInternalAvatarInventory(renderer, index);
 		};

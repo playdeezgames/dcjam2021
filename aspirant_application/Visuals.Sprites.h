@@ -6,6 +6,6 @@
 #include <memory>
 namespace visuals::Sprites
 {
-	void Draw(const std::string&, std::shared_ptr<SDL_Renderer>, const ::common::XY<int>&, const SDL_Color&);
+	void Draw(const std::string&, const std::shared_ptr<SDL_Renderer>&, const ::common::XY<int>&, const SDL_Color&);
 	std::optional<int> GetWidth(const std::string&);
 }

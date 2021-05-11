@@ -108,7 +108,7 @@ namespace common::Application
 		visuals::Layouts::Start
 	};
 
-	void Start(std::shared_ptr<SDL_Renderer> renderer, const std::vector<std::string>& arguments)
+	void Start(const std::shared_ptr<SDL_Renderer>&, const std::vector<std::string>& arguments)//TODO: unused parameter
 	{
 		for (auto& starter : starters)
 		{

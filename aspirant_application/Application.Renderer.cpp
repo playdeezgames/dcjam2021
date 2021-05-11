@@ -14,7 +14,7 @@ namespace application::Renderer
 }
 namespace common::Application
 {
-	void Render(std::shared_ptr<SDL_Renderer> renderer)
+	void Render(const std::shared_ptr<SDL_Renderer>& renderer)
 	{
 		auto layoutName = ::application::Renderer::renderLayouts.find(::application::UIState::Read());
 		if (layoutName != ::application::Renderer::renderLayouts.end())

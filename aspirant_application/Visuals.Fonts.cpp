@@ -63,14 +63,14 @@ namespace visuals::Fonts
 		return result;
 	}
 
-	static common::XY<int> WriteGlyph(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, char ch, const std::string& color)
+	static common::XY<int> WriteGlyph(const std::string& fontname, const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& xy, char ch, const std::string& color)
 	{
 		auto sprite = GetGlyphSprite(fontname, ch);
 		Sprites::Draw(sprite.value(), renderer, xy, ::visuals::Colors::Read(color));
 		return common::XY(xy.GetX() + Sprites::GetWidth(sprite.value()).value_or(0), xy.GetY());
 	}
 
-	void WriteTextLeft(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
+	void WriteTextLeft(const std::string& fontname, const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
 	{
 		common::XY<int> temp = xy;
 		for (auto ch : text)
@@ -90,19 +90,19 @@ namespace visuals::Fonts
 		return width;
 	}
 
-	static void WriteTextCentered(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
+	static void WriteTextCentered(const std::string& fontname, const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
 	{
 		auto adjustedXY = common::XY<int>(xy.GetX() - GetTextWidth(fontname, text) / 2, xy.GetY());
 		WriteTextLeft(fontname, renderer, adjustedXY, text, color);
 	}
 
-	static void WriteTextRight(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
+	static void WriteTextRight(const std::string& fontname, const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& xy, const std::string& text, const std::string& color)
 	{
 		auto adjustedXY = common::XY<int>(xy.GetX() - GetTextWidth(fontname, text), xy.GetY());
 		WriteTextLeft(fontname, renderer, adjustedXY, text, color);
 	}
 
-	typedef std::function<void(const std::string&, std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string&, const std::string&)> WriteFunction;
+	typedef std::function<void(const std::string&, const std::shared_ptr<SDL_Renderer>&, const common::XY<int>&, const std::string&, const std::string&)> WriteFunction;
 
 	const std::map<HorizontalAlignment, WriteFunction> writers =
 	{
@@ -111,7 +111,7 @@ namespace visuals::Fonts
 		{HorizontalAlignment::CENTER, WriteTextCentered}
 	};
 
-	void WriteText(const std::string& fontname, std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& xy, const std::string& text, const std::string& color, const HorizontalAlignment& alignment)
+	void WriteText(const std::string& fontname, const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& xy, const std::string& text, const std::string& color, const HorizontalAlignment& alignment)
 	{
 		writers.find(alignment)->second(fontname, renderer, xy, text, color);
 	}

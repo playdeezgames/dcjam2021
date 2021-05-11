@@ -5,6 +5,6 @@
 #include <memory>
 namespace visuals::Textures
 {
-	std::shared_ptr<SDL_Texture> Read(std::shared_ptr<SDL_Renderer>, const std::string&);
+	std::shared_ptr<SDL_Texture> Read(const std::shared_ptr<SDL_Renderer>&, const std::string&);
 }
 

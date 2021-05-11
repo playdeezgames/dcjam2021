@@ -3,5 +3,5 @@
 #include <memory>
 namespace common::Application
 {
-	void Render(std::shared_ptr<SDL_Renderer> renderer);
+	void Render(const std::shared_ptr<SDL_Renderer>& renderer);
 }

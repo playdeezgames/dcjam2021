@@ -49,7 +49,7 @@ namespace visuals::Sprites
 		}
 	}
 
-	void Draw(const std::string& spriteName, std::shared_ptr<SDL_Renderer> renderer, const ::common::XY<int>& xy, const SDL_Color& color)
+	void Draw(const std::string& spriteName, const std::shared_ptr<SDL_Renderer>& renderer, const ::common::XY<int>& xy, const SDL_Color& color)
 	{
 		Initialize();
 		auto iter = internalSprites.find(spriteName);

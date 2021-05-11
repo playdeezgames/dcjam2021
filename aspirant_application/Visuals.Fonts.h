@@ -14,5 +14,5 @@ namespace visuals
 }
 namespace visuals::Fonts
 {
-	void WriteText(const std::string&, std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const std::string& text, const std::string& color, const HorizontalAlignment& alignment);
+	void WriteText(const std::string&, const std::shared_ptr<SDL_Renderer>&, const common::XY<int>&, const std::string& text, const std::string& color, const HorizontalAlignment& alignment);
 }

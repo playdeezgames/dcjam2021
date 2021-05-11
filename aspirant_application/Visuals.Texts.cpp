@@ -22,7 +22,7 @@ namespace visuals::Text
 	static std::vector<InternalText> internalTexts;
 	static std::map<std::string, std::map<std::string, size_t>> textTable;
 
-	static void DrawInternalText(std::shared_ptr<SDL_Renderer> renderer, size_t textIndex)
+	static void DrawInternalText(const std::shared_ptr<SDL_Renderer>& renderer, size_t textIndex)
 	{
 		auto& text = internalTexts[textIndex];
 		if (text.dropShadow)
@@ -44,7 +44,7 @@ namespace visuals::Text
 			text.alignment);
 	}
 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	std::function<void(const std::shared_ptr<SDL_Renderer>&)> Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
 		size_t textIndex = internalTexts.size();
 		internalTexts.push_back(
@@ -66,7 +66,7 @@ namespace visuals::Text
 		{
 			textTable[layoutName][model[visuals::data::Properties::TEXT_ID]] = textIndex;
 		}
-		return [textIndex](std::shared_ptr<SDL_Renderer> renderer) 
+		return [textIndex](const std::shared_ptr<SDL_Renderer>& renderer) 
 		{
 			DrawInternalText(renderer, textIndex);
 		};

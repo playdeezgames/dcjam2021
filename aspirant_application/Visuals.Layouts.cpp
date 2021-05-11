@@ -8,7 +8,7 @@
 #include <functional>
 namespace visuals
 {
-	typedef std::function<void(std::shared_ptr<SDL_Renderer>)> DrawerFunction;
+	typedef std::function<void(const std::shared_ptr<SDL_Renderer>&)> DrawerFunction;
 }
 namespace visuals::Menu 
 { 
@@ -54,7 +54,7 @@ namespace visuals::Layouts
 		{visuals::data::Type::MENU, visuals::Menu::Internalize},
 		{visuals::data::Type::LAYOUT, visuals::Sublayout::Internalize},
 		{visuals::data::Type::AVATAR_INVENTORY, visuals::AvatarInventory::Internalize},
-		{visuals::data::Type::AREA, [](const std::string&, const nlohmann::json&) { return [](std::shared_ptr<SDL_Renderer>) {};  }}
+		{visuals::data::Type::AREA, [](const std::string&, const nlohmann::json&) { return [](const std::shared_ptr<SDL_Renderer>&) {};  }}
 	};
 
 	static void Internalize(const std::string& layoutName, const nlohmann::json& model)
@@ -94,7 +94,7 @@ namespace visuals::Layouts
 		return layouts.find(layoutName)->second;
 	}
 
-	void Draw(std::shared_ptr<SDL_Renderer> renderer, const std::string& layoutName)
+	void Draw(const std::shared_ptr<SDL_Renderer>& renderer, const std::string& layoutName)
 	{
 		InitializeLayout(layoutName);
 		auto& internalLayout = internalLayouts[layoutName];

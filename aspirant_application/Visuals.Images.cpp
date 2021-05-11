@@ -23,7 +23,7 @@ namespace visuals::Image
 
 	const SDL_Color defaultColor = { 255, 255, 255, 255 };
 
-	static void DrawInternalImage(std::shared_ptr<SDL_Renderer> renderer, size_t imageIndex)
+	static void DrawInternalImage(const std::shared_ptr<SDL_Renderer>& renderer, size_t imageIndex)
 	{
 		auto& image = images[imageIndex];
 		if (image.visible)
@@ -36,7 +36,7 @@ namespace visuals::Image
 		}
 	}
 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	std::function<void(const std::shared_ptr<SDL_Renderer>&)> Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
 		auto imageIndex = images.size();
 		images.push_back(
@@ -51,7 +51,7 @@ namespace visuals::Image
 			std::string imageId = model[visuals::data::Properties::IMAGE_ID];
 			imageTable[layoutName][imageId] = imageIndex;
 		}
-		return [imageIndex](std::shared_ptr<SDL_Renderer> renderer)
+		return [imageIndex](const std::shared_ptr<SDL_Renderer>& renderer)
 		{
 			DrawInternalImage(renderer, imageIndex);
 		};

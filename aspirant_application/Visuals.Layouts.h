@@ -6,6 +6,6 @@
 #include <vector>
 namespace visuals::Layouts
 {
-	void Draw(std::shared_ptr<SDL_Renderer>, const std::string&);
+	void Draw(const std::shared_ptr<SDL_Renderer>&, const std::string&);
 	void Start();
 }

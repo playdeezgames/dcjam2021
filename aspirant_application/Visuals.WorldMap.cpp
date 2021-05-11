@@ -76,7 +76,7 @@ namespace visuals::WorldMap
 		{maze::Direction::WEST, AVATAR_WEST}
 	};
 
-	static void DrawWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
+	static void DrawWall(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
@@ -84,7 +84,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawLocked(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
+	static void DrawLocked(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
 		{
@@ -92,7 +92,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawKnownWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
+	static void DrawKnownWall(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
@@ -100,7 +100,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawKnownLocked(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
+	static void DrawKnownLocked(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
 		{
@@ -117,7 +117,7 @@ namespace visuals::WorldMap
 	static std::vector<InternalWorldMap> internalWorldMaps;
 
 
-	static void DrawDanger(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	static void DrawDanger(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
 	{
 		if (game::Creatures::GetInstance(cell))
 		{
@@ -125,9 +125,9 @@ namespace visuals::WorldMap
 		}
 	}
 
-	typedef std::function<void(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const common::XY<size_t>&, const maze::Direction&)> CellDirectionDrawer;
+	typedef std::function<void(const std::shared_ptr<SDL_Renderer>&, const common::XY<int>&, const common::XY<size_t>&, const maze::Direction&)> CellDirectionDrawer;
 
-	static void DrawDirections(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const std::vector<CellDirectionDrawer>& cellDirectionDrawers)
+	static void DrawDirections(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const std::vector<CellDirectionDrawer>& cellDirectionDrawers)
 	{
 		for (auto direction : maze::Directions::All())
 		{
@@ -138,7 +138,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawAvatar(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	static void DrawAvatar(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
 	{
 		if (cell == game::Avatar::GetPosition())
 		{
@@ -146,7 +146,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawVisited(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	static void DrawVisited(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
 	{
 		visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		DrawDirections(renderer, plot, cell, { DrawWall , DrawLocked });
@@ -154,19 +154,19 @@ namespace visuals::WorldMap
 		DrawDanger(renderer, plot, cell);
 	}
 
-	static void DrawKnown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	static void DrawKnown(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
 	{
 		visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		DrawDirections(renderer, plot, cell, { DrawKnownWall , DrawKnownLocked });
 		DrawDanger(renderer, plot, cell);
 	}
 
-	static void DrawUnknown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>&)
+	static void DrawUnknown(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>&)
 	{
 		visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 	}
 
-	typedef std::function<void(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const common::XY<size_t>&)> CellDrawer;
+	typedef std::function<void(const std::shared_ptr<SDL_Renderer>&, const common::XY<int>&, const common::XY<size_t>&)> CellDrawer;
 
 	static std::map<game::world::KnownState, CellDrawer> knownStateDrawers =
 	{
@@ -175,7 +175,7 @@ namespace visuals::WorldMap
 		{game::world::KnownState::UNKNOWN, DrawUnknown}
 	};
 
-	static void DrawInternalWorldMap(std::shared_ptr<SDL_Renderer> renderer, size_t index)
+	static void DrawInternalWorldMap(const std::shared_ptr<SDL_Renderer>& renderer, size_t index)
 	{
 		auto& worldMap = internalWorldMaps[index];
 		int x = worldMap.xy.GetX();
@@ -196,7 +196,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	std::function<void(std::shared_ptr<SDL_Renderer>)> Internalize(const std::string& layoutName, const nlohmann::json& model)
+	std::function<void(const std::shared_ptr<SDL_Renderer>&)> Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
 		size_t index = internalWorldMaps.size();
 		internalWorldMaps.push_back(
@@ -208,7 +208,7 @@ namespace visuals::WorldMap
 					model[visuals::data::Properties::CELL_WIDTH], 
 					model[visuals::data::Properties::CELL_HEIGHT])
 			});
-		return [index](std::shared_ptr<SDL_Renderer> renderer)
+		return [index](const std::shared_ptr<SDL_Renderer>& renderer)
 		{
 			DrawInternalWorldMap(renderer, index);
 		};

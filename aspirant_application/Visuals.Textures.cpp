@@ -16,7 +16,7 @@ namespace visuals::Textures
 
 	static bool initialized = false;
 
-	static void Initialize(std::shared_ptr<SDL_Renderer> renderer)
+	static void Initialize(const std::shared_ptr<SDL_Renderer>& renderer)
 	{
 		if (!initialized)
 		{
@@ -30,7 +30,7 @@ namespace visuals::Textures
 		}
 	}
 
-	std::shared_ptr<SDL_Texture> Read(std::shared_ptr<SDL_Renderer> renderer, const std::string& name)
+	std::shared_ptr<SDL_Texture> Read(const std::shared_ptr<SDL_Renderer>& renderer, const std::string& name)
 	{
 		Initialize(renderer);
 		auto iter = textures.find(name);

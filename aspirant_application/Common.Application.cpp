@@ -18,7 +18,7 @@ namespace common::Application
 	static std::shared_ptr<SDL_Window> window = nullptr;
 	static std::shared_ptr<SDL_Renderer> renderer = nullptr;
 
-	extern void Start(std::shared_ptr<SDL_Renderer>, const std::vector<std::string>&);
+	extern void Start(const std::shared_ptr<SDL_Renderer>&, const std::vector<std::string>&);//TODO: unused parameter
 	extern bool IsRunning();
 	extern void Update(Uint32);
 	extern void HandleEvent(const SDL_Event&);
