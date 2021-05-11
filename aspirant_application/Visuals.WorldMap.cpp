@@ -116,6 +116,64 @@ namespace visuals::WorldMap
 
 	static std::vector<InternalWorldMap> internalWorldMaps;
 
+	static void DrawVisited(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
+		visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		DrawWall(renderer, cell, plot, maze::Direction::NORTH);
+		DrawWall(renderer, cell, plot, maze::Direction::EAST);
+		DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
+		DrawWall(renderer, cell, plot, maze::Direction::WEST);
+		DrawLocked(renderer, cell, plot, maze::Direction::NORTH);
+		DrawLocked(renderer, cell, plot, maze::Direction::EAST);
+		DrawLocked(renderer, cell, plot, maze::Direction::SOUTH);
+		DrawLocked(renderer, cell, plot, maze::Direction::WEST);
+
+		if (cell == game::Avatar::GetPosition())
+		{
+			visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		}
+
+		if (game::Creatures::GetInstance(cell))
+		{
+			visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		}
+	}
+
+	static void DrawKnown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
+		visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		DrawKnownWall(renderer, cell, plot, maze::Direction::NORTH);
+		DrawKnownWall(renderer, cell, plot, maze::Direction::EAST);
+		DrawKnownWall(renderer, cell, plot, maze::Direction::SOUTH);
+		DrawKnownWall(renderer, cell, plot, maze::Direction::WEST);
+		DrawKnownLocked(renderer, cell, plot, maze::Direction::NORTH);
+		DrawKnownLocked(renderer, cell, plot, maze::Direction::EAST);
+		DrawKnownLocked(renderer, cell, plot, maze::Direction::SOUTH);
+		DrawKnownLocked(renderer, cell, plot, maze::Direction::WEST);
+
+		if (cell == game::Avatar::GetPosition())
+		{
+			visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		}
+
+		if (game::Creatures::GetInstance(cell))
+		{
+			visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		}
+	}
+
+	static void DrawUnknown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>&)
+	{
+		visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+	}
+
+	static std::map<game::world::KnownState, std::function<void(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const common::XY<size_t>&)>> knownStateDrawers =
+	{
+		{game::world::KnownState::VISITED, DrawVisited},
+		{game::world::KnownState::KNOWN, DrawKnown},
+		{game::world::KnownState::UNKNOWN, DrawUnknown}
+	};
+
 	static void DrawInternalWorldMap(std::shared_ptr<SDL_Renderer> renderer, size_t index)
 	{
 		auto& worldMap = internalWorldMaps[index];
@@ -126,68 +184,13 @@ namespace visuals::WorldMap
 		auto avatarPosition = game::Avatar::GetPosition();
 
 		auto worldSize = game::World::GetSize();
-		for (size_t column = 0; column < worldSize.GetX(); ++column)
+		for (size_t column = 0u; column < worldSize.GetX(); ++column)
 		{
-			for (size_t row = 0; row < worldSize.GetY(); ++row)
+			for (size_t row = 0u; row < worldSize.GetY(); ++row)
 			{
 				auto cell = common::XY<size_t>(column, row);
 				auto plot = common::XY<int>((int)column * (int)cellWidth + x, (int)row * (int)cellHeight + y);
-				switch (game::World::GetKnownState(cell))
-				{
-				case game::world::KnownState::VISITED:
-				{
-
-					visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-					DrawWall(renderer, cell, plot, maze::Direction::NORTH);
-					DrawWall(renderer, cell, plot, maze::Direction::EAST);
-					DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
-					DrawWall(renderer, cell, plot, maze::Direction::WEST);
-					DrawLocked(renderer, cell, plot, maze::Direction::NORTH);
-					DrawLocked(renderer, cell, plot, maze::Direction::EAST);
-					DrawLocked(renderer, cell, plot, maze::Direction::SOUTH);
-					DrawLocked(renderer, cell, plot, maze::Direction::WEST);
-
-					if (cell == avatarPosition)
-					{
-						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-					}
-
-					if (game::Creatures::GetInstance(cell))
-					{
-						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-					}
-				}
-				break;
-				case game::world::KnownState::KNOWN:
-				{
-
-					visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-					DrawKnownWall(renderer, cell, plot, maze::Direction::NORTH);
-					DrawKnownWall(renderer, cell, plot, maze::Direction::EAST);
-					DrawKnownWall(renderer, cell, plot, maze::Direction::SOUTH);
-					DrawKnownWall(renderer, cell, plot, maze::Direction::WEST);
-					DrawKnownLocked(renderer, cell, plot, maze::Direction::NORTH);
-					DrawKnownLocked(renderer, cell, plot, maze::Direction::EAST);
-					DrawKnownLocked(renderer, cell, plot, maze::Direction::SOUTH);
-					DrawKnownLocked(renderer, cell, plot, maze::Direction::WEST);
-
-					if (cell == avatarPosition)
-					{
-						visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-					}
-
-					if (game::Creatures::GetInstance(cell))
-					{
-						visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-					}
-				}
-				break;
-				default:
-				{
-					visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-				}
-				break;
-				}
+				knownStateDrawers[game::World::GetKnownState(cell)](renderer, plot, cell);
 			}
 		}
 	}
