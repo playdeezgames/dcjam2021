@@ -123,7 +123,7 @@ namespace state::in_play::MiniMap
 
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
 	{
-		{ AREA_MOVE_AHEAD, []() {game::Avatar::MoveAhead(); return true; }},
+		{ AREA_MOVE_AHEAD, []() {game::Avatar::MoveAhead(); application::OnEnter::Handle(); return true; }},
 		{ AREA_TURN_LEFT, []() {game::Avatar::TurnLeft(); return true; }},
 		{ AREA_TURN_RIGHT, []() {game::Avatar::TurnRight(); return true; }}
 	};
