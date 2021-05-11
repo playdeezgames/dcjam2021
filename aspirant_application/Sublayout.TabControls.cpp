@@ -39,7 +39,6 @@ namespace sublayout::TabControls
 	};
 
 	static void UpdateTabColors(const std::string& area)
-
 	{
 		for (auto& tabControl : tabControls)
 		{
@@ -51,6 +50,7 @@ namespace sublayout::TabControls
 	{
 		UpdateTabColors(area);
 	}
+
 	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
 	{
 		UpdateTabColors(NO_TAB);

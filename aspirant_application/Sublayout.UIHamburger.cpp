@@ -1,14 +1,7 @@
-#include <string>
-#include <sstream>
-#include "Game.Avatar.Statistics.h"
-#include "Visuals.Texts.h"
-#include "Application.Update.h"
 #include "Visuals.Images.h"
-#include <vector>
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
-#include <map>
 #include "Common.Utility.h"
 namespace sublayout::UIHamburger
 {
@@ -28,17 +21,14 @@ namespace sublayout::UIHamburger
 		::UIState::IN_PLAY_COMBAT_RESULT
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& xy)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		if (areas.contains(AREA_UI_HAMBURGER))
-		{
-			visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_HOVER);
-		}
-		else
-		{
-			visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_NORMAL);
-		}
+		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_HOVER);
+	}
+
+	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	{
+		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_NORMAL);
 	}
 
 	static bool LeavePlay()
@@ -52,23 +42,17 @@ namespace sublayout::UIHamburger
 		{AREA_UI_HAMBURGER, LeavePlay }
 	};
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8)
+	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		auto areas = visuals::Areas::Get(LAYOUT_NAME, xy);
-		bool result = false;
-		for (auto& area : areas)
-		{
-			result = result || common::Utility::Dispatch(mouseUpHandlers, area, false);
-		}
-		return false;
+		return common::Utility::Dispatch(mouseUpHandlers, area, false);
 	}
 
 	void Start()
 	{
 		for (auto state : states)
 		{
-			::application::MouseButtonUp::AddHandler(state, OnMouseButtonUp);
-			::application::MouseMotion::AddHandler(state, OnMouseMotion);
+			::application::MouseButtonUp::AddHandler(state, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
+			::application::MouseMotion::AddHandler(state, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));
 		}
 	}
 }
