@@ -103,7 +103,7 @@ namespace sublayout::POV
 		}
 	}
 
-	static void UpdatePOV(const Uint32&)
+	static void UpdatePOV()
 	{
 		auto position = game::Avatar::GetPosition();
 		auto facing = game::Avatar::GetFacing();
@@ -193,7 +193,7 @@ namespace sublayout::POV
 		for (auto state : states)
 		{
 			::application::OnEnter::AddHandler(state, ClearTakeImagesAndItemToolTip);
-			::application::Update::AddHandler(state, UpdatePOV);
+			::application::OnEnter::AddHandler(state, UpdatePOV);
 		}
 	}
 }
