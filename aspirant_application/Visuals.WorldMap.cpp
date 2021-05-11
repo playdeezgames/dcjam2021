@@ -76,7 +76,7 @@ namespace visuals::WorldMap
 		{maze::Direction::WEST, AVATAR_WEST}
 	};
 
-	static void DrawWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
+	static void DrawWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
@@ -84,7 +84,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawLocked(std::shared_ptr<SDL_Renderer> renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
+	static void DrawLocked(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
 		{
@@ -92,7 +92,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawKnownWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
+	static void DrawKnownWall(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
@@ -100,7 +100,7 @@ namespace visuals::WorldMap
 		}
 	}
 
-	static void DrawKnownLocked(std::shared_ptr<SDL_Renderer> renderer, const common::XY<size_t>& cell, const common::XY<int>& plot, const maze::Direction& direction)
+	static void DrawKnownLocked(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
 		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
 		{
@@ -116,50 +116,49 @@ namespace visuals::WorldMap
 
 	static std::vector<InternalWorldMap> internalWorldMaps;
 
-	static void DrawVisited(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+
+	static void DrawDanger(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
 	{
-		visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-		DrawWall(renderer, cell, plot, maze::Direction::NORTH);
-		DrawWall(renderer, cell, plot, maze::Direction::EAST);
-		DrawWall(renderer, cell, plot, maze::Direction::SOUTH);
-		DrawWall(renderer, cell, plot, maze::Direction::WEST);
-		DrawLocked(renderer, cell, plot, maze::Direction::NORTH);
-		DrawLocked(renderer, cell, plot, maze::Direction::EAST);
-		DrawLocked(renderer, cell, plot, maze::Direction::SOUTH);
-		DrawLocked(renderer, cell, plot, maze::Direction::WEST);
-
-		if (cell == game::Avatar::GetPosition())
-		{
-			visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-		}
-
 		if (game::Creatures::GetInstance(cell))
 		{
 			visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		}
 	}
 
-	static void DrawKnown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
-	{
-		visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-		DrawKnownWall(renderer, cell, plot, maze::Direction::NORTH);
-		DrawKnownWall(renderer, cell, plot, maze::Direction::EAST);
-		DrawKnownWall(renderer, cell, plot, maze::Direction::SOUTH);
-		DrawKnownWall(renderer, cell, plot, maze::Direction::WEST);
-		DrawKnownLocked(renderer, cell, plot, maze::Direction::NORTH);
-		DrawKnownLocked(renderer, cell, plot, maze::Direction::EAST);
-		DrawKnownLocked(renderer, cell, plot, maze::Direction::SOUTH);
-		DrawKnownLocked(renderer, cell, plot, maze::Direction::WEST);
+	typedef std::function<void(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const common::XY<size_t>&, const maze::Direction&)> CellDirectionDrawer;
 
+	static void DrawDirections(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const std::vector<CellDirectionDrawer>& cellDirectionDrawers)
+	{
+		for (auto direction : maze::Directions::All())
+		{
+			for (auto& cellDrawer : cellDirectionDrawers)
+			{
+				cellDrawer(renderer, plot, cell, direction);
+			}
+		}
+	}
+
+	static void DrawAvatar(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
 		if (cell == game::Avatar::GetPosition())
 		{
 			visuals::Sprites::Draw(avatarSprites[game::Avatar::GetFacing()], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		}
+	}
 
-		if (game::Creatures::GetInstance(cell))
-		{
-			visuals::Sprites::Draw(DANGER, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
-		}
+	static void DrawVisited(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
+		visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		DrawDirections(renderer, plot, cell, { DrawWall , DrawLocked });
+		DrawAvatar(renderer, plot, cell);
+		DrawDanger(renderer, plot, cell);
+	}
+
+	static void DrawKnown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
+		visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		DrawDirections(renderer, plot, cell, { DrawKnownWall , DrawKnownLocked });
+		DrawDanger(renderer, plot, cell);
 	}
 
 	static void DrawUnknown(std::shared_ptr<SDL_Renderer> renderer, const common::XY<int>& plot, const common::XY<size_t>&)
@@ -167,7 +166,9 @@ namespace visuals::WorldMap
 		visuals::Sprites::Draw(MAP_CELL_UNEXPLORED, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 	}
 
-	static std::map<game::world::KnownState, std::function<void(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const common::XY<size_t>&)>> knownStateDrawers =
+	typedef std::function<void(std::shared_ptr<SDL_Renderer>, const common::XY<int>&, const common::XY<size_t>&)> CellDrawer;
+
+	static std::map<game::world::KnownState, CellDrawer> knownStateDrawers =
 	{
 		{game::world::KnownState::VISITED, DrawVisited},
 		{game::world::KnownState::KNOWN, DrawKnown},
