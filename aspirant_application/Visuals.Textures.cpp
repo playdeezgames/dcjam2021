@@ -9,7 +9,7 @@ namespace visuals::Textures
 {
 	static std::map<std::string, std::shared_ptr<SDL_Texture>> textures;
 
-	static void Add(const std::string& name, std::shared_ptr<SDL_Texture> texture)
+	static void Add(const std::string& name, const std::shared_ptr<SDL_Texture>& texture)
 	{
 		textures[name] = texture;
 	}
@@ -30,14 +30,9 @@ namespace visuals::Textures
 		}
 	}
 
-	std::shared_ptr<SDL_Texture> Read(const std::shared_ptr<SDL_Renderer>& renderer, const std::string& name)
+	const std::shared_ptr<SDL_Texture>& Read(const std::shared_ptr<SDL_Renderer>& renderer, const std::string& name)
 	{
 		Initialize(renderer);
-		auto iter = textures.find(name);
-		if (iter != textures.end())
-		{
-			return iter->second;
-		}
-		return nullptr;
+		return textures.find(name)->second;
 	}
 }
