@@ -149,6 +149,11 @@ namespace sublayout::POV
 
 	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
 	{
+		for (auto& item : game::item::All())
+		{
+			auto descriptor = game::item::GetDescriptor(item);
+			::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
+		}
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
 	}
 
