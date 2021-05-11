@@ -11,6 +11,7 @@
 #include "Game.Avatar.Items.h"
 #include "Game.Avatar.Statistics.h"
 #include <sstream>
+#include "Application.OnEnter.h"
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";
@@ -172,6 +173,7 @@ namespace sublayout::POV
 
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
 				visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
+				application::OnEnter::Handle();
 				return true;
 			}
 			index++;
