@@ -148,7 +148,7 @@ namespace sublayout::POV
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
 	}
 
-	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	static void ClearTakeImagesAndItemToolTip()
 	{
 		for (auto& item : game::item::All())
 		{
@@ -156,6 +156,11 @@ namespace sublayout::POV
 			::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
 		}
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
+	}
+
+	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	{
+		ClearTakeImagesAndItemToolTip();
 	}
 
 	static bool OnMouseButtonUpInArea(const std::string& area)
@@ -187,6 +192,7 @@ namespace sublayout::POV
 		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		for (auto state : states)
 		{
+			::application::OnEnter::AddHandler(state, ClearTakeImagesAndItemToolTip);
 			::application::Update::AddHandler(state, UpdatePOV);
 		}
 	}
