@@ -24,7 +24,7 @@ namespace state::Start
 
 	static void NewGame()
 	{
-		game::Reset();
+		game::Reset(game::Difficulty::NORMAL);
 		common::audio::Sfx::Play(application::UIState::EnterGame());
 	}
 

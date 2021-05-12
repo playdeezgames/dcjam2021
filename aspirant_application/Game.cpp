@@ -28,7 +28,7 @@ namespace game
 		return data;
 	}
 
-	void Reset()
+	void Reset(const Difficulty& difficulty)
 	{
 		game::World::Reset();
 		game::world::Items::Reset();
@@ -40,7 +40,7 @@ namespace game
 
 	void Start()
 	{
-		Reset();
+		Reset(Difficulty::NORMAL);
 	}
 
 	void AutoSave()

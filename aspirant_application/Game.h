@@ -2,8 +2,14 @@
 #include "json.hpp"
 namespace game
 {
+	enum class Difficulty
+	{
+		EASY,
+		NORMAL,
+		HARD
+	};
 	void Start();
-	void Reset();
+	void Reset(const Difficulty&);
 	nlohmann::json& GetData();
 	void AutoSave();
 	bool DoesAutosaveExist();
