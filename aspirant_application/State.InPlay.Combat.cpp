@@ -138,12 +138,10 @@ namespace state::in_play::Combat
 			if (std::get<1>(*result)== game::avatar::Items::CombatUseResult::REFRESH)
 			{
 				common::audio::Sfx::Play(application::UIState::EnterGame());
-			}
-			else
-			{
-				OnEnter();
+				return;
 			}
 		}
+		application::OnEnter::Handle();
 	}
 
 	const std::map<CombatMenuItem, std::function<void()>> activators =

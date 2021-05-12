@@ -30,37 +30,21 @@ namespace state::in_play::MiniMap
 	const std::string EMPTY_TOOL_TIP = "";
 	const std::string NO_ARROW = "";
 
-	static void MoveAhead()
+	static std::function<void()> DoSomethingAndRefresh(std::function<std::optional<std::string>()> action)
 	{
-		common::audio::Sfx::Play(game::Avatar::MoveAhead());
-		::application::OnEnter::Handle();
-	}
-
-	static void MoveBack()
-	{
-		common::audio::Sfx::Play(game::Avatar::MoveBack());
-		::application::OnEnter::Handle();
-	}
-
-	static void TurnLeft()
-	{
-		common::audio::Sfx::Play(game::Avatar::TurnLeft());
-		::application::OnEnter::Handle();
-	}
-
-	static void TurnRight()
-	{
-		common::audio::Sfx::Play(game::Avatar::TurnRight());
-		::application::OnEnter::Handle();
+		return [action]() {
+			common::audio::Sfx::Play(action());
+			application::OnEnter::Handle();
+		};
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
-		{ ::Command::LEFT, TurnLeft },
-		{ ::Command::RIGHT, TurnRight },
-		{ ::Command::UP, MoveAhead },
-		{ ::Command::DOWN, MoveBack },
+		{ ::Command::LEFT, DoSomethingAndRefresh(game::Avatar::TurnLeft) },
+		{ ::Command::RIGHT, DoSomethingAndRefresh(game::Avatar::TurnRight) },
+		{ ::Command::UP, DoSomethingAndRefresh(game::Avatar::MoveAhead) },
+		{ ::Command::DOWN, DoSomethingAndRefresh(game::Avatar::MoveBack) },
 		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
 		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
 		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) }
@@ -121,11 +105,20 @@ namespace state::in_play::MiniMap
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, EMPTY_TOOL_TIP);
 	}
 
+	static std::function<bool()> DoSomethingAndReturnTrue(std::function<std::optional<std::string>()> action)
+	{
+		return [action]() {
+			common::audio::Sfx::Play(action());
+			application::OnEnter::Handle(); 
+			return true;
+		};
+	}
+
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
 	{
-		{ AREA_MOVE_AHEAD, []() {game::Avatar::MoveAhead(); application::OnEnter::Handle(); return true; }},
-		{ AREA_TURN_LEFT, []() {game::Avatar::TurnLeft(); return true; }},
-		{ AREA_TURN_RIGHT, []() {game::Avatar::TurnRight(); return true; }}
+		{ AREA_MOVE_AHEAD, DoSomethingAndReturnTrue(game::Avatar::MoveAhead)},
+		{ AREA_TURN_LEFT, DoSomethingAndReturnTrue(game::Avatar::TurnLeft)},
+		{ AREA_TURN_RIGHT, DoSomethingAndReturnTrue(game::Avatar::TurnRight)}
 	};
 
 	static bool OnMouseButtonUpInArea(const std::string& area)
