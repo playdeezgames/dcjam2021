@@ -14,7 +14,7 @@ namespace state::ConfirmOverwrite
 	const std::string AREA_NO = "No";
 	const std::string AREA_YES = "Yes";
 
-	enum class ConfirmAbandonItem
+	enum class ConfirmOverwriteItem
 	{
 		NO,
 		YES
@@ -36,15 +36,15 @@ namespace state::ConfirmOverwrite
 		application::UIState::EnterGame();
 	}
 
-	const std::map<ConfirmAbandonItem, std::function<void()>> activators =
+	const std::map<ConfirmOverwriteItem, std::function<void()>> activators =
 	{
-		{ ConfirmAbandonItem::NO, application::UIState::GoTo(::UIState::SAVE_GAME) },
-		{ ConfirmAbandonItem::YES, ConfirmOverwrite }
+		{ ConfirmOverwriteItem::NO, application::UIState::GoTo(::UIState::SAVE_GAME) },
+		{ ConfirmOverwriteItem::YES, ConfirmOverwrite }
 	};
 
 	static void ActivateItem()
 	{
-		common::Utility::Dispatch(activators, (ConfirmAbandonItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		common::Utility::Dispatch(activators, (ConfirmOverwriteItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<Command, std::function<void()>> commandHandlers =
@@ -56,15 +56,15 @@ namespace state::ConfirmOverwrite
 		{ ::Command::RED, ::application::UIState::GoTo(::UIState::MAIN_MENU) }
 	};
 
-	static void SetCurrentMenuItem(ConfirmAbandonItem item)
+	static void SetCurrentMenuItem(ConfirmOverwriteItem item)
 	{
 		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
-	const std::map<std::string, ConfirmAbandonItem> areaMenuItems =
+	const std::map<std::string, ConfirmOverwriteItem> areaMenuItems =
 	{
-		{ AREA_NO,  ConfirmAbandonItem::NO},
-		{ AREA_YES,  ConfirmAbandonItem::YES}
+		{ AREA_NO,  ConfirmOverwriteItem::NO},
+		{ AREA_YES,  ConfirmOverwriteItem::YES}
 	};
 
 	static bool OnMouseButtonUpInArea(const std::string&)
