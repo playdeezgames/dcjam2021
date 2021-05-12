@@ -3,7 +3,7 @@
 #include "Data.JSON.h"
 #include "Common.Utility.h"
 #include <vector>
-namespace game::World { void Reset(); }
+namespace game::World { void Reset(const game::Difficulty&); }
 namespace game::Avatar { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
 namespace game::world::Items { void Reset(); }
@@ -30,7 +30,7 @@ namespace game
 
 	void Reset(const Difficulty& difficulty)
 	{
-		game::World::Reset();
+		game::World::Reset(difficulty);
 		game::world::Items::Reset();
 		game::avatar::Statistics::Reset();
 		game::avatar::Items::Reset();

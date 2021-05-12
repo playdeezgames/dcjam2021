@@ -233,10 +233,10 @@ namespace game::World
 		}
 	}
 
-	static void PostGenerateMaze(maze::Maze& maze)
+	static void PostGenerateMaze(maze::Maze& maze, const game::Difficulty& difficulty)
 	{
 		auto worldSize = game::World::GetSize();
-		size_t extraDoors = ::data::Stores::GetStore(::data::Store::MAZE)[data::Properties::EXTRA_DOORS];
+		size_t extraDoors = ::data::Stores::GetStore(::data::Store::MAZE)[data::Properties::EXTRA_DOORS][(int)difficulty];
 		while (extraDoors > 0)
 		{
 			size_t x = common::RNG::FromRange(0u, worldSize.GetX());
@@ -253,13 +253,13 @@ namespace game::World
 		}
 	}
 
-	void Reset()
+	void Reset(const game::Difficulty& difficulty)
 	{
 		GetExplored().clear();
 		auto worldSize = game::World::GetSize();
 		maze::Maze maze(COLUMNS, ROWS);
 		maze.Generate();
-		PostGenerateMaze(maze);
+		PostGenerateMaze(maze, difficulty);
 
 		for (auto column = 0; column < COLUMNS; ++column)
 		{
