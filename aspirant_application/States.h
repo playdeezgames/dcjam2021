@@ -17,3 +17,4 @@ namespace state::in_play::Exit { void Start(); }
 namespace state::LoadGame { void Start(); }
 namespace state::SaveGame { void Start(); }
 namespace state::ConfirmAbandon { void Start(); }
+namespace state::ConfirmOverwrite { void Start(); }

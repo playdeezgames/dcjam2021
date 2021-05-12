@@ -104,6 +104,7 @@ namespace common::Application
 		state::LoadGame::Start,
 		state::SaveGame::Start,
 		state::ConfirmAbandon::Start,
+		state::ConfirmOverwrite::Start,
 		Options::Initialize,
 		visuals::Layouts::Start
 	};

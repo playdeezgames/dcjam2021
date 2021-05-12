@@ -49,23 +49,30 @@ namespace state::SaveGame
 		application::UIState::EnterGame();
 	}
 
-	static std::function<void()> SlotSaver(int slot)
+	static std::function<void()> SlotSaver(int slot, ::UIState confirmState)
 	{
-		return [slot]()
+		return [slot, confirmState]()
 		{
-			game::SaveToSlot(slot);
-			application::UIState::EnterGame();
+			if (game::DoesSlotExist(slot))
+			{
+				application::UIState::Write(confirmState);
+			}
+			else
+			{
+				game::SaveToSlot(slot);
+				application::UIState::EnterGame();
+			}
 		};
 	}
 
 	const std::map<SaveGameItem, std::function<void()>> activators =
 	{
 		{ SaveGameItem::AUTOSAVE, SaveToAutosave },
-		{ SaveGameItem::SLOT_1, SlotSaver(1) },
-		{ SaveGameItem::SLOT_2, SlotSaver(2) },
-		{ SaveGameItem::SLOT_3, SlotSaver(3) },
-		{ SaveGameItem::SLOT_4, SlotSaver(4) },
-		{ SaveGameItem::SLOT_5, SlotSaver(5) },
+		{ SaveGameItem::SLOT_1, SlotSaver(1, ::UIState::CONFIRM_OVERWRITE_SLOT1) },
+		{ SaveGameItem::SLOT_2, SlotSaver(2, ::UIState::CONFIRM_OVERWRITE_SLOT2) },
+		{ SaveGameItem::SLOT_3, SlotSaver(3, ::UIState::CONFIRM_OVERWRITE_SLOT3) },
+		{ SaveGameItem::SLOT_4, SlotSaver(4, ::UIState::CONFIRM_OVERWRITE_SLOT4) },
+		{ SaveGameItem::SLOT_5, SlotSaver(5, ::UIState::CONFIRM_OVERWRITE_SLOT5) },
 		{ SaveGameItem::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) }
 	};
 
