@@ -30,7 +30,7 @@ namespace game
 			std::optional<std::string> sfxFailure;
 			std::optional<size_t> initialInventory;
 			std::optional<Usage> combatUsage;
-			size_t numberAppearing;
+			std::vector<size_t> numberAppearing;
 			std::optional<std::string> combatText;
 			bool loseOnTeleport;
 			bool dropOnUse;

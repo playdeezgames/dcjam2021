@@ -41,13 +41,13 @@ namespace game::world::Items
 		Add({column, row}, item, 1);
 	}
 
-	static void PopulateItems()
+	static void PopulateItems(const game::Difficulty& difficulty)
 	{
 		size_t totalCount = 0;
 		for (auto item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
-			auto count = descriptor.numberAppearing;
+			auto count = descriptor.numberAppearing[(int)difficulty];
 			while (count > 0)
 			{
 				totalCount++;
@@ -80,10 +80,10 @@ namespace game::world::Items
 		}
 	}
 
-	void Reset()
+	void Reset(const game::Difficulty& difficulty)
 	{
 		GetRoomInventories().clear();
-		PopulateItems();
+		PopulateItems(difficulty);
 		PopulateKeys();
 	}
 

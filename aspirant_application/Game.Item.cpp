@@ -33,6 +33,14 @@ namespace game::item
 	Descriptor GetDescriptor(int item)
 	{
 		auto& descriptor = ::data::Stores::GetStore(::data::Store::ITEM_DESCRIPTORS)[ItemToItemKey(item)];
+		std::vector<size_t> numberAppearing;
+		if (descriptor.count(game::data::Properties::NUMBER_APPEARING) > 0)
+		{
+			for (auto value : descriptor[game::data::Properties::NUMBER_APPEARING])
+			{
+				numberAppearing.push_back(value);
+			}
+		}
 		return
 		{
 			descriptor[common::data::Properties::NAME],
@@ -46,7 +54,7 @@ namespace game::item
 			(descriptor.count(game::data::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_FAILURE])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::INITIAL_INVENTORY) > 0) ? (std::optional<size_t>((size_t)descriptor[game::data::Properties::INITIAL_INVENTORY])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::COMBAT])) : (std::nullopt),
-			(descriptor.count(game::data::Properties::NUMBER_APPEARING) > 0) ? ((size_t)descriptor[game::data::Properties::NUMBER_APPEARING]) : (0),
+			numberAppearing,
 			(descriptor.count(game::data::Properties::COMBAT_TEXT) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::COMBAT_TEXT])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::LOSE_ON_TELEPORT) > 0) ? ((bool)descriptor[game::data::Properties::LOSE_ON_TELEPORT]) : (false),
 			(descriptor.count(game::data::Properties::DROP_ON_USE) > 0) ? ((bool)descriptor[game::data::Properties::DROP_ON_USE]) : (false),
