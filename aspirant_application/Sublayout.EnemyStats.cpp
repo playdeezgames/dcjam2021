@@ -63,7 +63,7 @@ namespace sublayout::EnemyStats
 		auto attack = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK) + game::avatar::Statistics::Read(game::avatar::Statistic::STREAK);
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::ATTACK_TIMER);
 		std::stringstream ss;
-		ss << "Attack: " << attack;
+		ss << "Courage: " << attack;
 		if (timer > 0)
 		{
 			ss << "(" << timer << ")";
@@ -84,7 +84,7 @@ namespace sublayout::EnemyStats
 		auto defend = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND);
 		auto timer = game::avatar::Statistics::Read(game::avatar::Statistic::DEFEND_TIMER);
 		std::stringstream ss;
-		ss << "Defend: " << defend;
+		ss << "Alertness: " << defend;
 		if (timer > 0)
 		{
 			ss << "(" << timer << ")";
