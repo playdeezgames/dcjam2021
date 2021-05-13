@@ -337,5 +337,4 @@ namespace game::World
 		}
 		return result;
 	}
-
 }
