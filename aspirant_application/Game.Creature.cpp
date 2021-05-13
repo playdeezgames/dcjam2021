@@ -59,13 +59,22 @@ namespace game::creature
 				}
 			}
 		}
+		std::vector<size_t> numberAppearing;
+		if (creatureDescriptor.count(game::data::Properties::NUMBER_APPEARING) > 0)
+		{
+			auto& amounts = creatureDescriptor[game::data::Properties::NUMBER_APPEARING];
+			for (auto& amount : amounts)
+			{
+				numberAppearing.push_back(amount);
+			}
+		}
 		descriptors.push_back(
 		{
 			creatureDescriptor[game::data::Properties::IMAGE_ID],
 			creatureDescriptor[game::data::Properties::HEALTH],
 			creatureDescriptor[game::data::Properties::ATTACK],
 			creatureDescriptor[game::data::Properties::DEFEND],
-			creatureDescriptor[game::data::Properties::NUMBER_APPEARING],
+			numberAppearing,
 			bribes,
 			sfx,
 			creatureDescriptor[game::data::Properties::ATTITUDE],

@@ -6,7 +6,7 @@
         "health":25,
         "attack":5,
         "defend":0,
-        "number-appearing":18,
+        "number-appearing":[18,18,18],
         "bribes":{
             "0":2,
             "5":2,
@@ -40,7 +40,7 @@
         "health":75,
         "attack":10,
         "defend":5,
-        "number-appearing":9,
+        "number-appearing":[9,9,9],
         "bribes":{
             "0":3,
             "5":3
@@ -78,7 +78,7 @@
         "health":300,
         "attack":25,
         "defend":0,
-        "number-appearing":6,
+        "number-appearing":[6,6,6],
         "sfx":{
             "0":"hitmonster",
             "1":"deadmonster",
@@ -100,7 +100,7 @@
         "health":100,
         "attack":15,
         "defend":5,
-        "number-appearing":9,
+        "number-appearing":[9,9,9],
         "bribes":{
             "0":5,
             "5":5,
@@ -138,7 +138,7 @@
         "health":10,
         "attack":5,
         "defend":0,
-        "number-appearing":18,
+        "number-appearing":[18,18,18],
         "bribes":{
             "0":1
         },
@@ -163,7 +163,7 @@
         "health":50,
         "attack":10,
         "defend":0,
-        "number-appearing":9,
+        "number-appearing":[9,9,9],
         "bribes":{
             "0":1,
             "5":1,
@@ -201,7 +201,7 @@
         "health":250,
         "attack":25,
         "defend":10,
-        "number-appearing":2,
+        "number-appearing":[2,2,2],
         "sfx":{
             "0":"hitmonster",
             "1":"deadmonster",
@@ -230,7 +230,7 @@
         "health":500,
         "attack":25,
         "defend":15,
-        "number-appearing":1,
+        "number-appearing":[1,1,1],
         "bribes":{
             "5":100
         },

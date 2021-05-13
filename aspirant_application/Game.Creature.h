@@ -34,7 +34,7 @@ namespace game::creature
 		int maximumHealth;
 		int attack;
 		int defend;
-		size_t numberAppearing;
+		std::vector<size_t> numberAppearing;
 		std::map<int, size_t> bribes;
 		std::map<Sfx, std::string> sfx;
 		Attitude attitude;

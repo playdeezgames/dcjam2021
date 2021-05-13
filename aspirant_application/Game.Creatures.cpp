@@ -21,7 +21,6 @@ namespace game::Creatures
 		return data[game::data::Properties::CREATURES];
 	}
 
-
 	struct CreatureInstance
 	{
 		int creature;
@@ -146,7 +145,7 @@ namespace game::Creatures
 		}
 	}
 
-	void Reset()
+	void Reset(const game::Difficulty& difficulty)
 	{
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
@@ -155,7 +154,7 @@ namespace game::Creatures
 		for (auto& creature : game::creature::All())
 		{
 			auto& descriptor = creature;
-			size_t numberAppearing = descriptor.numberAppearing;
+			size_t numberAppearing = descriptor.numberAppearing[(int)difficulty];
 			while (numberAppearing > 0)
 			{
 				bool available = false;
