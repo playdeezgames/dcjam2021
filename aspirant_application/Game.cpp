@@ -7,7 +7,7 @@ namespace game::World { void Reset(const game::Difficulty&); }
 namespace game::Avatar { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
 namespace game::world::Items { void Reset(const game::Difficulty&); }
-namespace game::avatar::Items { void Reset(); }
+namespace game::avatar::Items { void Reset(const game::Difficulty&); }
 namespace game::Creatures { void Reset(); }
 namespace game
 {
@@ -33,7 +33,7 @@ namespace game
 		game::World::Reset(difficulty);
 		game::world::Items::Reset(difficulty);
 		game::avatar::Statistics::Reset();
-		game::avatar::Items::Reset();
+		game::avatar::Items::Reset(difficulty);
 		game::Creatures::Reset();
 		game::Avatar::Reset();
 	}

@@ -56,7 +56,7 @@ namespace game::avatar::Items
 		return result;
 	}
 
-	void Reset()
+	void Reset(const game::Difficulty& difficulty)
 	{
 		GetAvatarInventory().clear();
 		for (auto item : game::item::All())
@@ -64,7 +64,7 @@ namespace game::avatar::Items
 			auto descriptor = game::item::GetDescriptor(item);
 			if (descriptor.initialInventory)
 			{
-				Add(item, descriptor.initialInventory.value());
+				Add(item, descriptor.initialInventory.value()[(int)difficulty]);
 			}
 		}
 	}
@@ -120,7 +120,7 @@ namespace game::avatar::Items
 
 	void Start()
 	{
-		Reset();
+		game::avatar::Items::Reset(game::Difficulty::NORMAL);
 	}
 
 	size_t Remove(int item, size_t quantity)

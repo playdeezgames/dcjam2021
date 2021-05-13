@@ -28,7 +28,7 @@ namespace game
 			std::optional<int> duration;
 			std::optional<std::string> sfxSuccess;
 			std::optional<std::string> sfxFailure;
-			std::optional<size_t> initialInventory;
+			std::optional<std::vector<size_t>> initialInventory;
 			std::optional<Usage> combatUsage;
 			std::vector<size_t> numberAppearing;
 			std::optional<std::string> combatText;

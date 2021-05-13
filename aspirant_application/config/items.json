@@ -1,7 +1,7 @@
 {
     "0":{
         "name":"Food",
-        "initial-inventory": 5,
+        "initial-inventory": [5,5,5],
         "non-combat": 0,
         "combat": 4,
         "amount": 5,
@@ -15,7 +15,7 @@
     },
     "1":{
         "name":"Potion",
-        "initial-inventory": 2,
+        "initial-inventory": [2,2,2],
         "non-combat":1,
         "combat":1,
         "amount": 30,
@@ -83,7 +83,7 @@
     },
     "6":{
         "name":"Trousers",
-        "initial-inventory": 1,
+        "initial-inventory": [1,1,1],
         "image-id":"Trousers",
         "number-appearing": [0,0,0],
         "combat":6,

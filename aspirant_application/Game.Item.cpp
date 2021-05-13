@@ -41,18 +41,28 @@ namespace game::item
 				numberAppearing.push_back(value);
 			}
 		}
+		std::optional<std::vector<size_t>> initialInventory;
+		if (descriptor.count(game::data::Properties::INITIAL_INVENTORY) > 0)
+		{
+			std::vector<size_t> counts;
+			for (auto value : descriptor[game::data::Properties::INITIAL_INVENTORY])
+			{
+				counts.push_back(value);
+			}
+			initialInventory = counts;
+		}
 		return
 		{
 			descriptor[common::data::Properties::NAME],
 			descriptor[game::data::Properties::IMAGE_ID],
 			descriptor[game::data::Properties::TAKE_IMAGE_ID],
 			descriptor[game::data::Properties::TAKE_AREA_ID],
-			(descriptor.count(game::data::Properties::NON_COMBAT)>0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::NON_COMBAT])) : (std::nullopt),
+			(descriptor.count(game::data::Properties::NON_COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::NON_COMBAT])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::AMOUNT])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DURATION])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::SFX_SUCCESS) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_SUCCESS])) : (std::nullopt),
 			(descriptor.count(game::data::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_FAILURE])) : (std::nullopt),
-			(descriptor.count(game::data::Properties::INITIAL_INVENTORY) > 0) ? (std::optional<size_t>((size_t)descriptor[game::data::Properties::INITIAL_INVENTORY])) : (std::nullopt),
+			initialInventory,
 			(descriptor.count(game::data::Properties::COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::COMBAT])) : (std::nullopt),
 			numberAppearing,
 			(descriptor.count(game::data::Properties::COMBAT_TEXT) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::COMBAT_TEXT])) : (std::nullopt),
@@ -62,5 +72,4 @@ namespace game::item
 			(descriptor.count(game::data::Properties::DRUNKENNESS) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DRUNKENNESS])) : (std::nullopt)
 		};
 	}
-
 }
