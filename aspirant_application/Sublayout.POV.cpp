@@ -12,6 +12,7 @@
 #include "Game.Avatar.Statistics.h"
 #include <sstream>
 #include "Application.OnEnter.h"
+#include "Game.Shoppes.h"
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";
@@ -75,6 +76,20 @@ namespace sublayout::POV
 		}
 	}
 
+	static void UpdateShoppes(const common::XY<size_t> position)
+	{
+		auto& shoppes = game::shoppe::All();
+		int index = 0;
+		auto instance = game::Shoppes::Read(position);
+		for (auto& shoppe : shoppes)
+		{
+			auto& imageId = shoppe.imageId;
+			bool visible = instance && instance.value() == index;
+			visuals::Images::SetVisible(LAYOUT_NAME, imageId, visible);
+			index++;
+		}
+	}
+
 	static void UpdateRoom(const common::XY<size_t> position, const maze::Direction& facing)
 	{
 		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_LEFT_SIDE, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
@@ -111,6 +126,7 @@ namespace sublayout::POV
 		UpdateItems(position);
 		UpdateDirection(facing);
 		UpdateCreatures(position);
+		UpdateShoppes(position);
 		UpdateAvatarState();
 	}
 
