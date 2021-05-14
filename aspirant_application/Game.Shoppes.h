@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <optional>
+#include "Common.XY.h"
 namespace game::shoppe
 {
 	struct TradeDescriptor
@@ -20,6 +22,7 @@ namespace game::shoppe
 	const Descriptor& GetDescriptor(int);
 	const std::vector<Descriptor>& All();
 }
-namespace game::shoppes
+namespace game::Shoppes
 {
+	std::optional<size_t> Read(const common::XY<size_t>&);
 }

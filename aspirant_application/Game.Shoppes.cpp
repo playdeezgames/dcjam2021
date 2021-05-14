@@ -3,6 +3,10 @@
 #include "Common.Data.Properties.h"
 #include "Game.Data.Properties.h"
 #include "Common.Utility.h"
+#include "Game.h"
+#include <sstream>
+#include "Game.World.h"
+#include "Common.RNG.h"
 namespace game::shoppe
 {
 	static std::vector<Descriptor> descriptors;
@@ -60,5 +64,71 @@ namespace game::shoppe
 	{
 		Initialize();
 		return descriptors;
+	}
+}
+namespace game::Shoppes
+{
+	static nlohmann::json& GetShoppes()
+	{
+		auto& data = game::GetData();
+		if (data.count(game::data::Properties::SHOPPES) == 0)
+		{
+			data[game::data::Properties::SHOPPES] = nlohmann::json();
+		}
+		return data[game::data::Properties::SHOPPES];
+	}
+
+	static std::string XYToString(const common::XY<size_t>& location)
+	{
+		std::stringstream ss;
+		ss << "(" << location.GetX() << "," << location.GetY() << ")";
+		return ss.str();
+	}
+
+	static std::optional<size_t> Get(const common::XY<size_t>& location)
+	{
+		auto place = XYToString(location);
+		auto& shoppes = GetShoppes();
+		if (shoppes.count(place) > 0)
+		{
+			auto& shoppe = GetShoppes()[place];
+			return std::optional<int>(shoppe);
+		}
+		return std::nullopt;
+	}
+
+	void Put(const common::XY<size_t>& location, size_t instance)
+	{
+		auto place = XYToString(location);
+		auto& shoppes = GetShoppes();
+		if (shoppes.count(place) == 0)
+		{
+			shoppes[place] = instance;
+		}
+	}
+
+	std::optional<size_t> Read(const common::XY<size_t>& location)
+	{
+		return Get(location);
+	}
+	void Reset()
+	{
+		auto worldSize = game::World::GetSize();
+		GetShoppes().clear();
+		auto deadEnds = game::World::GetDeadEnds();
+		for (size_t index = 0; index < game::shoppe::All().size(); ++index)
+		{
+			bool available = false;
+			size_t x;
+			size_t y;
+			while (!available)
+			{
+				size_t deadEndIndex = common::RNG::FromRange(0u, deadEnds.size());
+				x = deadEnds[deadEndIndex].GetX();
+				y = deadEnds[deadEndIndex].GetY();
+				available = !Get({ x,y });
+			}
+			Put({ x,y }, index);
+		}
 	}
 }

@@ -9,6 +9,7 @@
 #include "Game.h"
 #include <algorithm>
 #include "Game.World.Items.h"
+#include "Game.Shoppes.h"
 namespace game::Creatures
 {
 	nlohmann::json& GetCreatures()
@@ -181,7 +182,7 @@ namespace game::Creatures
 						x = common::RNG::FromRange(0u, worldSize.GetX());
 						y = common::RNG::FromRange(0u, worldSize.GetY());
 					}
-					available = !Get({ x,y });
+					available = !Get({ x,y }) && !game::Shoppes::Read({ x,y });
 				}
 				common::XY<size_t> location = { x,y };
 				Put(location, { index, 0, (int)descriptor.attitude });

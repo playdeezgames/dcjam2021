@@ -5,6 +5,7 @@
 #include <vector>
 namespace game::World { void Reset(const game::Difficulty&); }
 namespace game::Avatar { void Reset(); }
+namespace game::Shoppes { void Reset(); }
 namespace game::avatar::Statistics { void Reset(); }
 namespace game::world::Items { void Reset(const game::Difficulty&); }
 namespace game::avatar::Items { void Reset(const game::Difficulty&); }
@@ -34,6 +35,7 @@ namespace game
 		game::world::Items::Reset(difficulty);
 		game::avatar::Statistics::Reset();
 		game::avatar::Items::Reset(difficulty);
+		game::Shoppes::Reset();
 		game::Creatures::Reset(difficulty);
 		game::Avatar::Reset();
 	}

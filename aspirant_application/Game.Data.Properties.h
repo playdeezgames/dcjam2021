@@ -50,6 +50,7 @@ namespace game::data::Properties
 	const std::string SFX = "sfx";
 	const std::string SFX_SUCCESS = "sfx-success";
 	const std::string SFX_FAILURE = "sfx-failure";
+	const std::string SHOPPES = "shoppes";
 	const std::string SOBRIETY_RATE = "sobriety-rate";
 	const std::string SOILED_TROUSERS = "soiled-trousers";
 	const std::string STATISTICS = "statistics";

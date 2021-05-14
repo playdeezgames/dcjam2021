@@ -1,7 +1,7 @@
 [
     {
         "name":"Bog Shoppe",
-        "imageId":"ShoppeToilet",
+        "image-id":"ShoppeToilet",
         "trades":[
             {
                 "name": "Flush turd",
