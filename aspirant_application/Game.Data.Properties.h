@@ -28,6 +28,7 @@ namespace game::data::Properties
 	const std::string IMAGE_ID = "image-id";
 	const std::string INDEX = "index";
 	const std::string INITIAL_INVENTORY = "initial-inventory";
+	const std::string INPUTS = "inputs";
 	const std::string INVENTORY = "inventory";
 	const std::string JOOLS = "jools";
 	const std::string KEY = "key";
@@ -39,6 +40,7 @@ namespace game::data::Properties
 	const std::string NONE = "none";
 	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";
+	const std::string OUTPUTS = "outputs";
 	const std::string POOP = "poop";
 	const std::string POOP_THRESHOLD = "poop-threshold";
 	const std::string PREFER_DEAD_ENDS = "prefer-dead-ends";
@@ -53,6 +55,7 @@ namespace game::data::Properties
 	const std::string STATISTICS = "statistics";
 	const std::string TAKE_AREA_ID = "take-area-id";
 	const std::string TAKE_IMAGE_ID = "take-image-id";
+	const std::string TRADES = "trades";
 	const std::string TROUSERS = "trousers";
 	const std::string WEIGHT = "weight";
 	const std::string WOUNDS = "wounds";
