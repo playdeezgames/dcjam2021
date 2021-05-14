@@ -147,6 +147,14 @@
         "x":52,
         "y":0,
         "width":256,
-        "height":292
+        "height":200
+    },
+    {
+        "type": "Area",
+        "area-id":"Trade",
+        "x":52,
+        "y":200,
+        "width":256,
+        "height":922
     }
 ]

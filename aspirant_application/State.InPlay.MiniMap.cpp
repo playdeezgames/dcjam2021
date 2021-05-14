@@ -20,6 +20,7 @@ namespace state::in_play::MiniMap
 	const std::string AREA_TURN_RIGHT = "TurnRight";
 	const std::string AREA_MOVE_AHEAD = "MoveAhead";
 	const std::string AREA_WORLD_MAP = "WorldMap";
+	const std::string AREA_TRADE = "Trade";
 	const std::string IMAGE_MOVE_AHEAD = "MoveAhead";
 	const std::string IMAGE_TURN_RIGHT = "TurnRight";
 	const std::string IMAGE_TURN_LEFT = "TurnLeft";
