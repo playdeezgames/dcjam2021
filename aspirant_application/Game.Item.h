@@ -37,8 +37,8 @@ namespace game
 			std::optional<int> bowel;
 			std::optional<int> drunkenness;
 		};
-		Descriptor GetDescriptor(int);
-		std::vector<int> All();
+		const Descriptor& GetDescriptor(int);
+		const std::vector<int>& All();
 	}
 }
 
