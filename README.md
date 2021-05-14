@@ -27,7 +27,8 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/lucasms/trousers.html
 * https://game-icons.net/1x1/delapouite/booze.html
 * https://game-icons.net/1x1/lorc/key.html
-* https://game-icons.net/1x1/lorc/padlock.html#download
+* https://game-icons.net/1x1/lorc/padlock.html
+* https://game-icons.net/1x1/darkzaitzev/cauldron.html
 
 # Music Credits
 * https://freemusicarchive.org/music/Komiku/
