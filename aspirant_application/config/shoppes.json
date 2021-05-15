@@ -4,7 +4,7 @@
         "image-id":"ShoppeToilet",
         "trades":[
             {
-                "name": "Flush turd",
+                "name": "Flush turd to receive Joker",
                 "sfx":"FlushToilet",
                 "inputs":{
                     "8":1

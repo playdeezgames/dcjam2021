@@ -33,11 +33,73 @@
         "y": 0
     },
     {
+        "type": "Menu",
+        "menu-id": "Trade",
+        "index": 0,
+        "font": "default",
+        "colors": {
+            "active": "Cyan",
+            "inactive": "Gray"
+        },
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2,
+        "menu-items": [
+            {
+                "menu-item-id": "Trade1",
+                "text": "<trade 1>",
+                "x": 320,
+                "y": 32,
+                "value": 0
+            },
+            {
+                "menu-item-id": "Trade2",
+                "text": "<trade 2>",
+                "x": 320,
+                "y": 48,
+                "value": 1
+            },
+            {
+                "menu-item-id": "Trade3",
+                "text": "<trade 3>",
+                "x": 320,
+                "y": 64,
+                "value": 2
+            }
+        ]
+    },
+    {
         "type":"Area",
         "area-id":"UIClose",
         "x":0,
         "y":0,
         "width":16,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Trade1",
+        "x":0,
+        "y":32,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Trade2",
+        "x":0,
+        "y":48,
+        "width":640,
+        "height":16
+    },
+    {
+        "type":"Area",
+        "area-id":"Trade3",
+        "x":0,
+        "y":64,
+        "width":640,
         "height":16
     }
 ]
