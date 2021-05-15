@@ -59,13 +59,10 @@ namespace state::in_play::Trade
 		for (size_t index = 0; index < MENU_ITEM_COUNT; index++)
 		{
 			const std::string menuItemId = menuItemIds[index];
+			visuals::MenuItems::SetEnabled(LAYOUT_NAME, menuItemId, trades.size() > index);
 			if (trades.size() > index)
 			{
 				visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, trades[index].name);
-			}
-			else
-			{
-				visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, "");
 			}
 		}
 	}

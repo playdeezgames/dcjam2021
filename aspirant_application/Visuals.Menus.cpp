@@ -42,18 +42,21 @@ namespace visuals::Menu
 		for (auto& menuItemIndex : menu.menuItems)
 		{
 			auto& menuItem = internalMenuItems[menuItemIndex];
-			if (menu.dropShadow)
+			if (menuItem.enabled)
 			{
-				Fonts::WriteText(
-					menu.font,
-					renderer,
-					menu.dropShadowXY + menuItem.xy,
-					menuItem.text,
-					menu.dropShadowColor,
-					menu.alignment);
+				if (menu.dropShadow)
+				{
+					Fonts::WriteText(
+						menu.font,
+						renderer,
+						menu.dropShadowXY + menuItem.xy,
+						menuItem.text,
+						menu.dropShadowColor,
+						menu.alignment);
+				}
+				std::string color = (currentIndex == menu.index) ? (menu.activeColor) : (menu.inactiveColor);
+				Fonts::WriteText(menu.font, renderer, menuItem.xy, menuItem.text, color, menu.alignment);
 			}
-			std::string color = (currentIndex == menu.index) ? (menu.activeColor) : (menu.inactiveColor);
-			Fonts::WriteText(menu.font, renderer, menuItem.xy, menuItem.text, color, menu.alignment);
 			currentIndex++;
 		}
 	}
@@ -83,7 +86,7 @@ namespace visuals::Menu
 			{
 				menuItemTable[layoutName][menuItem[visuals::data::Properties::MENU_ITEM_ID]] = menuItemIndex;
 			}
-			bool enabled = (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0) ? (menuItem[visuals::data::Properties::MENU_ITEM_ID]) : (true);
+			bool enabled = (menuItem.count(visuals::data::Properties::ENABLED) > 0) ? ((bool)menuItem[visuals::data::Properties::ENABLED]) : (true);
 			internalMenuItems.push_back(
 				{ 
 					menuItem[data::Properties::TEXT],
@@ -121,7 +124,11 @@ namespace visuals::Menus
 	void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
 	{
 		auto menuIndex = visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second;
-		visuals::Menu::internalMenus[menuIndex].index = index;
+		size_t menuItemId = visuals::Menu::internalMenus[menuIndex].menuItems[index];
+		if (visuals::Menu::internalMenuItems[menuItemId].enabled)
+		{
+			visuals::Menu::internalMenus[menuIndex].index = index;
+		}
 	}
 
 	size_t GetCount(const std::string& layoutName, const std::string& menuId)
