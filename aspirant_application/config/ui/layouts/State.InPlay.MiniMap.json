@@ -126,6 +126,15 @@
         "visible":false
     },
     {
+        "type": "Image",
+        "sprite": "Trade",
+        "image-id": "Trade",
+        "color": "White",
+        "x": 148,
+        "y": 240,
+        "visible":false
+    },
+    {
         "type": "Area",
         "area-id":"TurnLeft",
         "x":0,
@@ -155,6 +164,6 @@
         "x":52,
         "y":200,
         "width":256,
-        "height":922
+        "height":92
     }
 ]

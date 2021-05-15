@@ -4989,6 +4989,13 @@
         "y": 0,
         "width": 360,
         "height": 360
+    },
+    "Trade":{
+        "texture": "trade",
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
     }
     
 }

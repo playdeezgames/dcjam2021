@@ -24,6 +24,7 @@ namespace state::in_play::MiniMap
 	const std::string IMAGE_MOVE_AHEAD = "MoveAhead";
 	const std::string IMAGE_TURN_RIGHT = "TurnRight";
 	const std::string IMAGE_TURN_LEFT = "TurnLeft";
+	const std::string IMAGE_TRADE = "Trade";
 	const std::string TEXT_MAP_TOOL_TIP = "MapToolTip";
 	const std::string CELL_UNKNOWN = "????";
 	const std::string CELL_EMPTY = "(empty)";
@@ -60,7 +61,8 @@ namespace state::in_play::MiniMap
 	{
 		{AREA_MOVE_AHEAD, IMAGE_MOVE_AHEAD},
 		{AREA_TURN_LEFT, IMAGE_TURN_LEFT},
-		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT}
+		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT},
+		{AREA_TRADE, IMAGE_TRADE}
 	};
 
 	static void UpdateArrowImages(const std::string& area)
@@ -115,11 +117,17 @@ namespace state::in_play::MiniMap
 		};
 	}
 
+	static bool StartTrade()
+	{
+		return true;
+	}
+
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
 	{
 		{ AREA_MOVE_AHEAD, DoSomethingAndReturnTrue(game::Avatar::MoveAhead)},
 		{ AREA_TURN_LEFT, DoSomethingAndReturnTrue(game::Avatar::TurnLeft)},
-		{ AREA_TURN_RIGHT, DoSomethingAndReturnTrue(game::Avatar::TurnRight)}
+		{ AREA_TURN_RIGHT, DoSomethingAndReturnTrue(game::Avatar::TurnRight)},
+		{ AREA_TRADE, StartTrade}
 	};
 
 	static bool OnMouseButtonUpInArea(const std::string& area)
