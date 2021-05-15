@@ -4962,6 +4962,20 @@
         "width": 16,
         "height": 16
     },
+    "UICloseNormal": {
+        "texture": "ui-close",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
+    "UICloseHover": {
+        "texture": "ui-close",
+        "x": 16,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
     "TurnLeft":{
         "texture": "movement",
         "x": 0,

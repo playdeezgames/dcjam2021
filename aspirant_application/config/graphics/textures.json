@@ -27,6 +27,7 @@
     "health-bar": "assets/images/health-bar.png",
     "hunger-bar": "assets/images/hunger-bar.png",
     "ui-hamburger": "assets/images/ui-hamburger.png",
+    "ui-close": "assets/images/ui-close.png",
     "movement": "assets/images/movement.png",
     "cauldron": "assets/images/shoppes/cauldron.png",
     "trade":"assets/images/trade.png"

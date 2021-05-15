@@ -10,7 +10,7 @@
 #include "Game.Creatures.h"
 #include <optional>
 
-//#include "Game.Shoppes.h"
+#include "Game.Shoppes.h"
 namespace game::World
 {
 	std::string XYToRoomKey(const common::XY<size_t>& xy)
@@ -320,8 +320,8 @@ namespace game::World
 
 	bool CanSpawnAvatar(const common::XY<size_t>& position)
 	{
-		//return game::Shoppes::Read(position).has_value();
-		return !game::Creatures::GetInstance(position) && IsExitable(position);
+		return game::Shoppes::Read(position).has_value();
+		//return !game::Creatures::GetInstance(position) && IsExitable(position);
 	}
 
 	std::vector<common::XY<size_t>> GetDeadEnds()

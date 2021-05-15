@@ -54,7 +54,7 @@ namespace game::shoppe
 		}
 	}
 
-	const Descriptor& GetDescriptor(int index)
+	const Descriptor& GetDescriptor(size_t index)
 	{
 		Initialize();
 		return descriptors[index];

@@ -14,6 +14,7 @@ namespace state::in_play::Combat { void Start(); }
 namespace state::in_play::CombatResult { void Start(); }
 namespace state::in_play::Dead { void Start(); }
 namespace state::in_play::Exit { void Start(); }
+namespace state::in_play::Trade { void Start(); }
 namespace state::LoadGame { void Start(); }
 namespace state::SaveGame { void Start(); }
 namespace state::ConfirmAbandon { void Start(); }

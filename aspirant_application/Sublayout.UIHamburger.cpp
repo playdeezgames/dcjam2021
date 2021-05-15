@@ -18,7 +18,8 @@ namespace sublayout::UIHamburger
 		::UIState::IN_PLAY_FLOOR,
 		::UIState::IN_PLAY_STATUS,
 		::UIState::IN_PLAY_COMBAT,
-		::UIState::IN_PLAY_COMBAT_RESULT
+		::UIState::IN_PLAY_COMBAT_RESULT,
+		::UIState::IN_PLAY_TRADE
 	};
 
 	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)

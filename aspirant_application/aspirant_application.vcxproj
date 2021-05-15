@@ -183,6 +183,7 @@
     <ClCompile Include="Game.World.Items.cpp" />
     <ClCompile Include="State.ConfirmAbandon.cpp" />
     <ClCompile Include="State.ConfirmOverwrite.cpp" />
+    <ClCompile Include="State.InPlay.Trade.cpp" />
     <ClCompile Include="Visuals.Areas.cpp" />
     <ClCompile Include="Visuals.AvatarInventory.cpp" />
     <ClCompile Include="Visuals.CardSprites.cpp" />

@@ -227,6 +227,9 @@
     <ClCompile Include="Game.Shoppes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="State.InPlay.Trade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.RNG.h">

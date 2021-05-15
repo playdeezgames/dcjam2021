@@ -19,7 +19,7 @@ namespace game::shoppe
 		std::string imageId;
 		std::vector<TradeDescriptor> trades;
 	};
-	const Descriptor& GetDescriptor(int);
+	const Descriptor& GetDescriptor(size_t);
 	const std::vector<Descriptor>& All();
 }
 namespace game::Shoppes

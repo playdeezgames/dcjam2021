@@ -119,6 +119,7 @@ namespace state::in_play::MiniMap
 
 	static bool StartTrade()
 	{
+		application::UIState::Write(::UIState::IN_PLAY_TRADE);
 		return true;
 	}
 

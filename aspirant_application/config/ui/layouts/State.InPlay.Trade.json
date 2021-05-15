@@ -1,0 +1,43 @@
+[
+    {
+        "type": "Image",
+        "sprite": "Background",
+        "color": "DarkGray",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Text",
+        "font": "default",
+        "color": "LightGreen",
+        "text-id":"Title",
+        "text": "<title>",
+        "x": 320,
+        "y": 0,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.UIHamburger"
+    },
+    {
+        "type": "Image",
+        "image-id": "ui-close",
+        "sprite": "UICloseNormal",
+        "color": "White",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type":"Area",
+        "area-id":"UIClose",
+        "x":0,
+        "y":0,
+        "width":16,
+        "height":16
+    }
+]

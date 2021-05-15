@@ -92,6 +92,7 @@ namespace common::Application
 		state::in_play::FloorInventory::Start,
 		state::in_play::AvatarInventory::Start,
 		state::in_play::AvatarStatus::Start,
+		state::in_play::Trade::Start,
 		sublayout::QuickStats::Start,
 		sublayout::EnemyStats::Start,
 		game::Start,
