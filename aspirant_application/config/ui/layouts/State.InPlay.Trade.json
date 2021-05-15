@@ -52,21 +52,24 @@
                 "text": "<trade 1>",
                 "x": 320,
                 "y": 32,
-                "value": 0
+                "value": 0,
+                "enabled": false
             },
             {
                 "menu-item-id": "Trade2",
                 "text": "<trade 2>",
                 "x": 320,
                 "y": 48,
-                "value": 1
+                "value": 1,
+                "enabled": false
             },
             {
                 "menu-item-id": "Trade3",
                 "text": "<trade 3>",
                 "x": 320,
                 "y": 64,
-                "value": 2
+                "value": 2,
+                "enabled": false
             }
         ]
     },

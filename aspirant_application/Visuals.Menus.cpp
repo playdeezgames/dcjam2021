@@ -14,6 +14,7 @@ namespace visuals::Menu
 		std::string text;
 		common::XY<int> xy;
 		int value;
+		bool enabled;
 	};
 
 	struct InternalMenu
@@ -82,13 +83,15 @@ namespace visuals::Menu
 			{
 				menuItemTable[layoutName][menuItem[visuals::data::Properties::MENU_ITEM_ID]] = menuItemIndex;
 			}
+			bool enabled = (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0) ? (menuItem[visuals::data::Properties::MENU_ITEM_ID]) : (true);
 			internalMenuItems.push_back(
 				{ 
 					menuItem[data::Properties::TEXT],
 					common::XY<int>(
 						menuItem[common::data::Properties::X],
 						menuItem[common::data::Properties::Y]),
-					menuItem[visuals::data::Properties::VALUE]
+					menuItem[visuals::data::Properties::VALUE],
+					enabled
 				});
 		}
 		internalMenus.push_back(internalMenu);
@@ -192,5 +195,10 @@ namespace visuals::MenuItems
 	{
 		auto menuItemIndex = visuals::Menu::menuItemTable[layoutName][menuItemId];
 		visuals::Menu::internalMenuItems[menuItemIndex].text = text;
+	}
+	void SetEnabled(const std::string& layoutName, const std::string& menuItemId, bool enabled)
+	{
+		auto menuItemIndex = visuals::Menu::menuItemTable[layoutName][menuItemId];
+		visuals::Menu::internalMenuItems[menuItemIndex].enabled = enabled;
 	}
 }

@@ -16,4 +16,5 @@ namespace visuals::Menus
 namespace visuals::MenuItems
 {
 	void SetText(const std::string&, const std::string&, const std::string&);
+	void SetEnabled(const std::string&, const std::string&, bool);
 }

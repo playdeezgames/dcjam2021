@@ -15,6 +15,7 @@ namespace visuals::data::Properties
 	const std::string DROP_SHADOW_COLOR = "drop-shadow-color";
 	const std::string DROP_SHADOW_X = "drop-shadow-x";
 	const std::string DROP_SHADOW_Y = "drop-shadow-y";
+	const std::string ENABLED = "enabled";
 	const std::string FONT = "font";
 	const std::string GREEN = "green";
 	const std::string HORIZONTAL_ALIGNMENT = "horizontal-alignment";
