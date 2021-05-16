@@ -463,4 +463,30 @@ namespace game::avatar::Items
 		}
 		return std::nullopt;
 	}
+
+	bool HasItems(const std::map<int, size_t>& items)
+	{
+		bool result = true;
+		for (auto& item : items)
+		{
+			result = result && Read(item.first) >= item.second;
+		}
+		return result;
+	}
+
+	void RemoveItems(const std::map<int, size_t>& items)
+	{
+		for (auto& item : items)
+		{
+			Remove(item.first, item.second);
+		}
+	}
+
+	void ReceiveItems(const std::map<int, size_t>& items)
+	{
+		for (auto& item : items)
+		{
+			Add(item.first, item.second);
+		}
+	}
 }

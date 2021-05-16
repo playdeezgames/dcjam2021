@@ -24,5 +24,6 @@ namespace game::shoppe
 }
 namespace game::Shoppes
 {
+	std::optional<std::string> AttemptTrade(const common::XY<size_t>&, size_t);
 	std::optional<size_t> Read(const common::XY<size_t>&);
 }

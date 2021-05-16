@@ -7,6 +7,7 @@
 #include <sstream>
 #include "Game.World.h"
 #include "Common.RNG.h"
+#include "Game.Avatar.Items.h"
 namespace game::shoppe
 {
 	static std::vector<Descriptor> descriptors;
@@ -29,9 +30,9 @@ namespace game::shoppe
 						inputs[common::Utility::StringToInt(input.key())] = input.value();
 					}
 					std::map<int, size_t> outputs;
-					for (auto& input : entry[game::data::Properties::INPUTS].items())
+					for (auto& output : entry[game::data::Properties::OUTPUTS].items())
 					{
-						inputs[common::Utility::StringToInt(input.key())] = input.value();
+						outputs[common::Utility::StringToInt(output.key())] = output.value();
 					}
 					trades.push_back(
 						{
@@ -110,6 +111,25 @@ namespace game::Shoppes
 	std::optional<size_t> Read(const common::XY<size_t>& location)
 	{
 		return Get(location);
+	}
+
+	std::optional<std::string> AttemptTrade(const common::XY<size_t>& location, size_t tradeIndex)
+	{
+		auto shoppe = Read(location);
+		if (shoppe)
+		{
+			auto& descriptor = game::shoppe::GetDescriptor(*shoppe);
+			if (tradeIndex < descriptor.trades.size())
+			{
+				auto& trade = descriptor.trades[tradeIndex];
+				if (game::avatar::Items::HasItems(trade.inputs))
+				{
+					game::avatar::Items::RemoveItems(trade.inputs);
+					game::avatar::Items::ReceiveItems(trade.outputs);
+				}
+			}
+		}
+		return std::nullopt;
 	}
 	void Reset()
 	{

@@ -9,6 +9,7 @@
 #include "Visuals.Areas.h"
 #include "Visuals.Images.h"
 #include "Visuals.Menus.h"
+#include "Common.Audio.h"
 namespace state::in_play::Trade
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Trade";
@@ -38,13 +39,36 @@ namespace state::in_play::Trade
 		{ ::Command::BACK, application::UIState::GoTo(::UIState::IN_PLAY_MAP) }
 	};
 
+	static bool CloseTrade()
+	{
+		application::UIState::Write(::UIState::IN_PLAY_MAP);
+		return true;
+	}
+
+	static std::function<bool()> DoTrade(size_t index)
+	{
+		return [index]() {
+			common::audio::Sfx::Play(game::Shoppes::AttemptTrade(game::Avatar::GetPosition(), index));
+			return true;
+		};
+	}
+
+	const std::map<std::string, std::function<bool()>> mouseButtonUpAreaHandlers =
+	{
+		{AREA_UI_CLOSE, CloseTrade},
+		{AREA_TRADE_1, DoTrade(0u)},
+		{AREA_TRADE_2, DoTrade(1u)},
+		{AREA_TRADE_3, DoTrade(2u)}
+	};
+
 	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
-		if (area == AREA_UI_CLOSE)
+		auto iter = mouseButtonUpAreaHandlers.find(area);
+		if (iter != mouseButtonUpAreaHandlers.end())
 		{
-			application::UIState::Write(::UIState::IN_PLAY_MAP);
+			return iter->second();
 		}
-		return true;
+		return false;
 	}
 
 	const std::vector<std::string> menuItemIds =

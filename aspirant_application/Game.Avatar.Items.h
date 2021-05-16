@@ -21,4 +21,7 @@ namespace game::avatar::Items
 		SKIP
 	};
 	std::optional<std::tuple<std::string, CombatUseResult>> CombatUse(std::optional<int>);
+	bool HasItems(const std::map<int, size_t>&);
+	void RemoveItems(const std::map<int, size_t>&);
+	void ReceiveItems(const std::map<int, size_t>&);
 }
