@@ -15,5 +15,44 @@
                 }
             }
         ]
+    },
+    {
+        "name":"Lawn Gnome",
+        "image-id":"ShoppeGnome",
+        "trades":[
+            {
+                "name": "Trade Food for Map",
+                "not-available": "Not enough Food!",
+                "sfx":"MapFragment",
+                "inputs":{
+                    "0":5
+                },
+                "outputs":{
+                    "11":1
+                }
+            },
+            {
+                "name": "Trade Jools for Map",
+                "not-available": "Not enough Jools!",
+                "sfx":"MapFragment",
+                "inputs":{
+                    "5":10
+                },
+                "outputs":{
+                    "11":1
+                }
+            },
+            {
+                "name": "Trade Booze for Map",
+                "not-available": "You haven't any booze!",
+                "sfx":"MapFragment",
+                "inputs":{
+                    "7":1
+                },
+                "outputs":{
+                    "11":1
+                }
+            }
+        ]
     }
 ]

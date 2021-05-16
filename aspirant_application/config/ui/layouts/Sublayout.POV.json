@@ -442,6 +442,16 @@
     {
         
         "type": "Image",
+        "image-id": "ShoppeGnome",
+        "sprite": "ShoppeGnome",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
         "image-id": "Troglodyte",
         "sprite": "CreatureTroglodyte",
         "color": "White",

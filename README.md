@@ -30,6 +30,7 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
 * https://game-icons.net/1x1/lorc/padlock.html
 * https://game-icons.net/1x1/darkzaitzev/cauldron.html
 * https://game-icons.net/1x1/lorc/trade.html
+* https://game-icons.net/1x1/cathelineau/bad-gnome.html
 
 # Music Credits
 * https://freemusicarchive.org/music/Komiku/

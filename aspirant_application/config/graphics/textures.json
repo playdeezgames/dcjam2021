@@ -30,5 +30,6 @@
     "ui-close": "assets/images/ui-close.png",
     "movement": "assets/images/movement.png",
     "cauldron": "assets/images/shoppes/cauldron.png",
+    "bad-gnome": "assets/images/shoppes/bad-gnome.png",
     "trade":"assets/images/trade.png"
 }
