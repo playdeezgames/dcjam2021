@@ -38,49 +38,42 @@
                 "menu-item-id":"Autosave",
                 "text": "Autosave",
                 "x": 320,
-                "y": 32,
-                "value": 0
+                "y": 32
             },
             {
                 "menu-item-id":"Slot1",
                 "text": "Slot 1",
                 "x": 320,
-                "y": 48,
-                "value": 1
+                "y": 48
             },
             {
                 "menu-item-id":"Slot2",
                 "text": "Slot 2",
                 "x": 320,
-                "y": 64,
-                "value": 2
+                "y": 64
             },
             {
                 "menu-item-id":"Slot3",
                 "text": "Slot 3",
                 "x": 320,
-                "y": 80,
-                "value": 3
+                "y": 80
             },
             {
                 "menu-item-id":"Slot4",
                 "text": "Slot 4",
                 "x": 320,
-                "y": 96,
-                "value": 4
+                "y": 96
             },
             {
                 "menu-item-id":"Slot5",
                 "text": "Slot 5",
                 "x": 320,
-                "y": 112,
-                "value": 5
+                "y": 112
             },
             {
                 "text": "Back",
                 "x": 320,
-                "y": 128,
-                "value": 6
+                "y": 128
             }
         ]
     },

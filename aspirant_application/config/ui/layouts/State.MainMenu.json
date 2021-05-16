@@ -44,26 +44,22 @@
             {
                 "text": "Start",
                 "x": 320,
-                "y": 32,
-                "value": 0
+                "y": 32
             },
             {
                 "text": "About",
                 "x": 320,
-                "y": 48,
-                "value": 1
+                "y": 48
             },
             {
                 "text": "Options",
                 "x": 320,
-                "y": 64,
-                "value": 2
+                "y": 64
             },
             {
                 "text": "Quit",
                 "x": 320,
-                "y": 80,
-                "value": 3
+                "y": 80
             }
         ]
     },

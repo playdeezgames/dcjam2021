@@ -38,28 +38,24 @@
                 "menu-item-id": "Mute",
                 "text": "<mute state>",
                 "x": 320,
-                "y": 32,
-                "value": 0
+                "y": 32
             },
             {
                 "menu-item-id": "SfxVolume",
                 "text": "<sfx volume>",
                 "x": 320,
-                "y": 48,
-                "value": 1
+                "y": 48
             },
             {
                 "menu-item-id": "MuxVolume",
                 "text": "<mux volume>",
                 "x": 320,
-                "y": 64,
-                "value": 2
+                "y": 64
             },
             {
                 "text": "Back",
                 "x": 320,
-                "y": 80,
-                "value": 3
+                "y": 80
             }
         ]
     },
