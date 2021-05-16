@@ -37,7 +37,7 @@ namespace state::Start
 
 	static void ActivateItem()
 	{
-		common::Utility::Dispatch(activators, (StartGameItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		common::Utility::Dispatch(activators, (StartGameItem)visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
@@ -51,7 +51,7 @@ namespace state::Start
 
 	static void SetCurrentMenuItem(StartGameItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	const std::map<std::string, StartGameItem> areaMenuItems =

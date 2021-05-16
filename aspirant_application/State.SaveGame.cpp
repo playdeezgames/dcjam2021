@@ -78,7 +78,7 @@ namespace state::SaveGame
 
 	static void ActivateItem()
 	{
-		common::Utility::Dispatch(activators, (SaveGameItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		common::Utility::Dispatch(activators, (SaveGameItem)visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<::Command, std::function<void()>> commandHandlers =
@@ -118,7 +118,7 @@ namespace state::SaveGame
 
 	static void SetCurrentMenuItem(SaveGameItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)

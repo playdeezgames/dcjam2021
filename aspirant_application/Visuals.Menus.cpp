@@ -13,7 +13,6 @@ namespace visuals::Menu
 	{
 		std::string text;
 		common::XY<int> xy;
-		int value;
 		bool enabled;
 	};
 
@@ -75,7 +74,6 @@ namespace visuals::Menu
 				common::XY<int>(
 					menuItem[common::data::Properties::X],
 					menuItem[common::data::Properties::Y]),
-				menuItem[visuals::data::Properties::VALUE],
 				enabled
 			});
 		return menuItemIndex;
@@ -125,13 +123,6 @@ namespace visuals::Menus
 		return visuals::Menu::GetMenuByLayoutAndId(layoutName, menuId).index;
 	}
 
-	std::optional<int> ReadValue(const std::string& layoutName, const std::string& menuId)
-	{
-		auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
-		auto& menuItem = visuals::Menu::internalMenuItems[menu.menuItems[menu.index]];
-		return menuItem.value;
-	}
-
 	static void WriteIndex(const std::string& layoutName, const std::string& menuId, int index, bool force)
 	{
 		auto menuIndex = visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second;
@@ -142,7 +133,7 @@ namespace visuals::Menus
 		}
 	}
 
-	static void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
+	void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
 	{
 		WriteIndex(layoutName, menuId, index, false);
 	}
@@ -150,33 +141,6 @@ namespace visuals::Menus
 	size_t GetCount(const std::string& layoutName, const std::string& menuId)
 	{
 		return visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second].menuItems.size();
-	}
-
-	static std::optional<int> FindIndexForValue(const std::string& layoutName, const std::string& menuId, int value)
-	{
-		auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
-		auto& menuItems = menu.menuItems;
-		int index = 0;
-		for (auto menuItemIndex : menuItems)
-		{
-			if (visuals::Menu::internalMenuItems[menuItemIndex].value == value)
-			{
-				return index;
-			}
-			index++;
-		}
-		return std::nullopt;
-	}
-
-	bool WriteValue(const std::string& layoutName, const std::string& menuId, int value)
-	{
-		auto index = visuals::Menus::FindIndexForValue(layoutName, menuId, value);
-		if (index)
-		{
-			visuals::Menus::WriteIndex(layoutName, menuId, *index);
-			return true;
-		}
-		return false;
 	}
 
 	static bool HasEnabledIndices(const std::string& layoutName, const std::string& menuId)

@@ -154,12 +154,12 @@ namespace state::in_play::Combat
 
 	static void OnActivateItem()
 	{
-		common::Utility::Dispatch(activators, (CombatMenuItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_COMBAT).value());
+		common::Utility::Dispatch(activators, (CombatMenuItem)visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_COMBAT).value());
 	}
 
 	static void NextItem()
 	{
-		if (visuals::Menus::ReadValue(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM) 
+		if (visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM)
 		{ 
 			visuals::AvatarInventory::NextIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		}
@@ -167,7 +167,7 @@ namespace state::in_play::Combat
 
 	static void PreviousItem()
 	{
-		if (visuals::Menus::ReadValue(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM) 
+		if (visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM)
 		{ 
 			visuals::AvatarInventory::PreviousIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
 		}
@@ -219,7 +219,7 @@ namespace state::in_play::Combat
 
 	static void SetCurrentMenuItem(CombatMenuItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_COMBAT, (int)item);
+		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_COMBAT, (int)item);
 	}
 
 	static bool ClickPreviousItem(const std::string& area)

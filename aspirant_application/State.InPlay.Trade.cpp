@@ -91,7 +91,7 @@ namespace state::in_play::Trade
 
 	static void SetCurrentMenuItem(TradeItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	static void MouseMotionInArea(const std::string& area, const common::XY<Sint32>&)

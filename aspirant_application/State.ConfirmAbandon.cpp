@@ -32,7 +32,7 @@ namespace state::ConfirmAbandon
 
 	static void ActivateItem()
 	{
-		common::Utility::Dispatch(activators, (ConfirmAbandonItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value());
+		common::Utility::Dispatch(activators, (ConfirmAbandonItem)visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value());
 	}
 
 	const std::map<Command, std::function<void()>> commandHandlers =
@@ -46,7 +46,7 @@ namespace state::ConfirmAbandon
 
 	static void SetCurrentMenuItem(ConfirmAbandonItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	const std::map<std::string, ConfirmAbandonItem> areaMenuItems =

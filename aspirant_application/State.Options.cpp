@@ -51,7 +51,7 @@ namespace state::Options
 
 	static OptionsItem GetCurrentItem()
 	{
-		return (OptionsItem)visuals::Menus::ReadValue(LAYOUT_NAME, MENU_ID).value();
+		return (OptionsItem)visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value();
 	}
 
 	const std::map<OptionsItem, std::function<void(int)>> itemChangers =
@@ -137,7 +137,7 @@ namespace state::Options
 
 	static void SetCurrentMenuItem(OptionsItem item)
 	{
-		visuals::Menus::WriteValue(LAYOUT_NAME, MENU_ID, (int)item);
+		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
 	const std::map<std::string, OptionsItem> areaMenuItems =
