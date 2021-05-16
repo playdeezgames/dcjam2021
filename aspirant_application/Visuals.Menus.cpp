@@ -112,12 +112,17 @@ namespace visuals::Menu
 
 	static const size_t GetMenuIndex(const std::string& layoutName, const std::string& menuId)
 	{
-		return visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second;
+		return menuTable.find(layoutName)->second.find(menuId)->second;
 	}
 
 	static const InternalMenu& GetMenu(const std::string& layoutName, const std::string& menuId)
 	{
-		return visuals::Menu::internalMenus[GetMenuIndex(layoutName, menuId)];
+		return internalMenus[GetMenuIndex(layoutName, menuId)];
+	}
+
+	static size_t GetMenuItemIndex(const std::string& layoutName, const std::string& menuItemId)
+	{
+		return menuItemTable.find(layoutName)->second.find(menuItemId)->second;
 	}
 }
 namespace visuals::Menus
@@ -230,12 +235,12 @@ namespace visuals::MenuItems
 {
 	void SetText(const std::string& layoutName, const std::string& menuItemId, const std::string& text)
 	{
-		auto menuItemIndex = visuals::Menu::menuItemTable[layoutName][menuItemId];
+		auto menuItemIndex = Menu::GetMenuItemIndex(layoutName, menuItemId);
 		visuals::Menu::internalMenuItems[menuItemIndex].text = text;
 	}
 	void SetEnabled(const std::string& layoutName, const std::string& menuItemId, bool enabled)
 	{
-		auto menuItemIndex = visuals::Menu::menuItemTable[layoutName][menuItemId];
+		auto menuItemIndex = Menu::GetMenuItemIndex(layoutName, menuItemId);
 		visuals::Menu::internalMenuItems[menuItemIndex].enabled = enabled;
 	}
 }
