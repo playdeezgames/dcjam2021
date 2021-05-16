@@ -61,6 +61,26 @@ namespace visuals::Menu
 		}
 	}
 
+	static size_t InternalizeMenuItem(const std::string& layoutName, const nlohmann::json& menuItem)
+	{
+		size_t menuItemIndex = internalMenuItems.size();
+		if (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0)
+		{
+			menuItemTable[layoutName][menuItem[visuals::data::Properties::MENU_ITEM_ID]] = menuItemIndex;
+		}
+		bool enabled = (menuItem.count(visuals::data::Properties::ENABLED) > 0) ? ((bool)menuItem[visuals::data::Properties::ENABLED]) : (true);
+		internalMenuItems.push_back(
+			{
+				menuItem[data::Properties::TEXT],
+				common::XY<int>(
+					menuItem[common::data::Properties::X],
+					menuItem[common::data::Properties::Y]),
+				menuItem[visuals::data::Properties::VALUE],
+				enabled
+			});
+		return menuItemIndex;
+	}
+
 	std::function<void(const std::shared_ptr<SDL_Renderer>&)> Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
 		size_t menuIndex = internalMenus.size();
@@ -80,22 +100,7 @@ namespace visuals::Menu
 		auto& menuItems = model[data::Properties::MENU_ITEMS];
 		for (auto& menuItem : menuItems)
 		{
-			size_t menuItemIndex = internalMenuItems.size();
-			internalMenu.menuItems.push_back(menuItemIndex);
-			if (menuItem.count(visuals::data::Properties::MENU_ITEM_ID) > 0)
-			{
-				menuItemTable[layoutName][menuItem[visuals::data::Properties::MENU_ITEM_ID]] = menuItemIndex;
-			}
-			bool enabled = (menuItem.count(visuals::data::Properties::ENABLED) > 0) ? ((bool)menuItem[visuals::data::Properties::ENABLED]) : (true);
-			internalMenuItems.push_back(
-				{ 
-					menuItem[data::Properties::TEXT],
-					common::XY<int>(
-						menuItem[common::data::Properties::X],
-						menuItem[common::data::Properties::Y]),
-					menuItem[visuals::data::Properties::VALUE],
-					enabled
-				});
+			internalMenu.menuItems.push_back(InternalizeMenuItem(layoutName, menuItem));
 		}
 		internalMenus.push_back(internalMenu);
 		if (model.count(visuals::data::Properties::MENU_ID) > 0)
@@ -106,12 +111,18 @@ namespace visuals::Menu
 			DrawInternalMenu(renderer, menuIndex);
 		};
 	}
+
+	static const InternalMenu& GetMenuByLayoutAndId(const std::string& layoutName, const std::string& menuId)
+	{
+		return visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+	}
 }
 namespace visuals::Menus
 {
+
 	std::optional<int> ReadIndex(const std::string& layoutName, const std::string& menuId)
 	{
-		return visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second].index;
+		return visuals::Menu::GetMenuByLayoutAndId(layoutName, menuId).index;
 	}
 
 	std::optional<int> ReadValue(const std::string& layoutName, const std::string& menuId)
