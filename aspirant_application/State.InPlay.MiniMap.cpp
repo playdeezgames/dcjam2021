@@ -13,6 +13,7 @@
 #include "Application.OnEnter.h"
 #include "Common.Audio.h"
 #include "Visuals.Areas.h"
+#include "Game.Shoppes.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
@@ -57,19 +58,29 @@ namespace state::in_play::MiniMap
 		common::Utility::Dispatch(commandHandlers, command);
 	}
 
-	const std::vector<std::tuple<std::string, std::string>> areaImages =
+	static bool AlwaysShow()
 	{
-		{AREA_MOVE_AHEAD, IMAGE_MOVE_AHEAD},
-		{AREA_TURN_LEFT, IMAGE_TURN_LEFT},
-		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT},
-		{AREA_TRADE, IMAGE_TRADE}
+		return true;
+	}
+
+	static bool ShowWhenShoppePresent()
+	{
+		return game::Shoppes::Read(game::Avatar::GetPosition()).has_value();
+	}
+
+	const std::vector<std::tuple<std::string, std::string, std::function<bool()>>> areaImages =
+	{
+		{AREA_MOVE_AHEAD, IMAGE_MOVE_AHEAD, AlwaysShow},
+		{AREA_TURN_LEFT, IMAGE_TURN_LEFT, AlwaysShow},
+		{AREA_TURN_RIGHT, IMAGE_TURN_RIGHT, AlwaysShow},
+		{AREA_TRADE, IMAGE_TRADE, ShowWhenShoppePresent}
 	};
 
 	static void UpdateArrowImages(const std::string& area)
 	{
 		for (auto& areaImage : areaImages)
 		{
-			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), area == std::get<0>(areaImage));
+			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), area == std::get<0>(areaImage) && std::get<2>(areaImage)());
 		}
 	}
 	static void UpdateMiniMapToolTip(const std::string& area, const common::XY<Sint32>& xy)

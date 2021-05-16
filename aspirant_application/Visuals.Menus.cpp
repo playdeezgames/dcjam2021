@@ -121,7 +121,7 @@ namespace visuals::Menus
 		return menuItem.value;
 	}
 
-	void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
+	static void WriteIndex(const std::string& layoutName, const std::string& menuId, int index, bool force)
 	{
 		auto menuIndex = visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second;
 		size_t menuItemId = visuals::Menu::internalMenus[menuIndex].menuItems[index];
@@ -129,6 +129,11 @@ namespace visuals::Menus
 		{
 			visuals::Menu::internalMenus[menuIndex].index = index;
 		}
+	}
+
+	static void WriteIndex(const std::string& layoutName, const std::string& menuId, int index)
+	{
+		WriteIndex(layoutName, menuId, index, false);
 	}
 
 	size_t GetCount(const std::string& layoutName, const std::string& menuId)
@@ -163,20 +168,45 @@ namespace visuals::Menus
 		return false;
 	}
 
+	static bool HasEnabledIndices(const std::string& layoutName, const std::string& menuId)
+	{
+		auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+		auto& menuItems = menu.menuItems;
+		for (auto menuItem : menuItems)
+		{
+			if (visuals::Menu::internalMenuItems[menuItem].enabled)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	static bool IsEnabledIndex(const std::string& layoutName, const std::string& menuId, size_t index)
+	{
+		if (index < GetCount(layoutName, menuId))
+		{
+			auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+			auto& menuItem = menu.menuItems[index];
+			return visuals::Menu::internalMenuItems[menuItem].enabled;
+		}
+		return false;
+	}
+
 	static void ChangeMenuIndex(const std::string& layoutName, const std::string& menuId, int delta)
 	{
-		auto index = ReadIndex(layoutName, menuId);
-		if (index)
+		if (HasEnabledIndices(layoutName, menuId))
 		{
 			auto itemCount = GetCount(layoutName, menuId);
-			if (itemCount > 0)
+			do
 			{
-				WriteIndex(layoutName, menuId, ((*index) + (int)itemCount + delta) % itemCount);
-			}
-			else
-			{
-				WriteIndex(layoutName, menuId, 0);
-			}
+				auto index = ReadIndex(layoutName, menuId);
+				WriteIndex(layoutName, menuId, ((*index) + (int)itemCount + delta) % itemCount, true);
+			} while (!IsEnabledIndex(layoutName, menuId, *ReadIndex(layoutName, menuId)));
+		}
+		else 
+		{
+			WriteIndex(layoutName, menuId, 0, true);
 		}
 	}
 
