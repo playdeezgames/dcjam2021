@@ -120,7 +120,7 @@ namespace visuals::Menus
 
 	std::optional<int> ReadIndex(const std::string& layoutName, const std::string& menuId)
 	{
-		return visuals::Menu::GetMenuByLayoutAndId(layoutName, menuId).index;
+		return Menu::GetMenuByLayoutAndId(layoutName, menuId).index;
 	}
 
 	static void WriteIndex(const std::string& layoutName, const std::string& menuId, int index, bool force)
@@ -140,12 +140,12 @@ namespace visuals::Menus
 
 	size_t GetCount(const std::string& layoutName, const std::string& menuId)
 	{
-		return visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second].menuItems.size();
+		return Menu::GetMenuByLayoutAndId(layoutName, menuId).menuItems.size();
 	}
 
 	static bool HasEnabledIndices(const std::string& layoutName, const std::string& menuId)
 	{
-		auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+		auto& menu = Menu::GetMenuByLayoutAndId(layoutName, menuId);
 		auto& menuItems = menu.menuItems;
 		for (auto menuItem : menuItems)
 		{
@@ -161,7 +161,7 @@ namespace visuals::Menus
 	{
 		if (index < GetCount(layoutName, menuId))
 		{
-			auto& menu = visuals::Menu::internalMenus[visuals::Menu::menuTable.find(layoutName)->second.find(menuId)->second];
+			auto& menu = Menu::GetMenuByLayoutAndId(layoutName, menuId);
 			auto& menuItem = menu.menuItems[index];
 			return visuals::Menu::internalMenuItems[menuItem].enabled;
 		}
