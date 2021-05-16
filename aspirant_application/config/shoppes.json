@@ -5,6 +5,7 @@
         "trades":[
             {
                 "name": "Flush turd to receive Joker",
+                "not-available": "Yer out of turds!",
                 "sfx":"FlushToilet",
                 "inputs":{
                     "8":1

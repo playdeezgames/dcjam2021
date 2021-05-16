@@ -37,6 +37,7 @@ namespace game::shoppe
 					trades.push_back(
 						{
 							entry[common::data::Properties::NAME],
+							entry[common::data::Properties::NOT_AVAILABLE],
 							entry[game::data::Properties::SFX],
 							inputs,
 							outputs
@@ -126,6 +127,7 @@ namespace game::Shoppes
 				{
 					game::avatar::Items::RemoveItems(trade.inputs);
 					game::avatar::Items::ReceiveItems(trade.outputs);
+					return trade.sfx;
 				}
 			}
 		}

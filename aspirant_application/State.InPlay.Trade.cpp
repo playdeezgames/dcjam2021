@@ -10,6 +10,7 @@
 #include "Visuals.Images.h"
 #include "Visuals.Menus.h"
 #include "Common.Audio.h"
+#include "Game.Avatar.Items.h"
 namespace state::in_play::Trade
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Trade";
@@ -49,6 +50,7 @@ namespace state::in_play::Trade
 	{
 		return [index]() {
 			common::audio::Sfx::Play(game::Shoppes::AttemptTrade(game::Avatar::GetPosition(), index));
+			application::OnEnter::Handle();
 			return true;
 		};
 	}
@@ -78,15 +80,23 @@ namespace state::in_play::Trade
 		MENU_ITEM_TRADE_3
 	};
 
-	static void UpdateTradeMenuItemTexts(const std::vector<game::shoppe::TradeDescriptor>& trades)
+	static void UpdateTradeMenuItemTexts(const std::vector<game::shoppe::TradeDescriptor>& descriptors)
 	{
 		for (size_t index = 0; index < MENU_ITEM_COUNT; index++)
 		{
 			const std::string menuItemId = menuItemIds[index];
-			visuals::MenuItems::SetEnabled(LAYOUT_NAME, menuItemId, trades.size() > index);
-			if (trades.size() > index)
+			visuals::MenuItems::SetEnabled(LAYOUT_NAME, menuItemId, descriptors.size() > index);
+			if (descriptors.size() > index)
 			{
-				visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, trades[index].name);
+				auto& descriptor = descriptors[index];
+				if (game::avatar::Items::HasItems(descriptor.inputs))
+				{
+					visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[index].name);
+				}
+				else
+				{
+					visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[index].notAvailable);
+				}
 			}
 		}
 	}
