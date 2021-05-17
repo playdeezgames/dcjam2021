@@ -15,19 +15,24 @@
 #include "Game.Shoppes.h"
 namespace game::world::Borders
 {
+	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;
+	const size_t NS_BORDER_STRIDE = game::World::COLUMNS;
+	const size_t EW_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::ROWS;
+	const size_t EW_BORDER_STRIDE = game::World::COLUMNS + 1;
+
 	static size_t XYToNorthBorderIndex(const common::XY<size_t> position)
 	{
-		return position.GetX() + position.GetY() * game::World::NS_BORDER_STRIDE;
+		return position.GetX() + position.GetY() * NS_BORDER_STRIDE;
 	}
 
 	static size_t XYToSouthBorderIndex(const common::XY<size_t> position)
 	{
-		return XYToNorthBorderIndex(position) + game::World::NS_BORDER_STRIDE;
+		return XYToNorthBorderIndex(position) + NS_BORDER_STRIDE;
 	}
 
 	static size_t XYToWestBorderIndex(const common::XY<size_t> position)
 	{
-		return position.GetX() + position.GetY() * game::World::EW_BORDER_STRIDE;
+		return position.GetX() + position.GetY() * EW_BORDER_STRIDE;
 	}
 
 	static size_t XYToEastBorderIndex(const common::XY<size_t> position)
@@ -146,8 +151,8 @@ namespace game::world::Borders
 		{
 			for (auto row = 0; row < maze.GetRows(); ++row)
 			{
-				size_t nsBorderIndex = column + row * game::World::NS_BORDER_STRIDE;
-				size_t ewBorderIndex = column + row * game::World::EW_BORDER_STRIDE;
+				size_t nsBorderIndex = column + row * NS_BORDER_STRIDE;
+				size_t ewBorderIndex = column + row * EW_BORDER_STRIDE;
 
 				auto cell = maze.GetCell((int)column, (int)row);
 				auto northDoor = cell.value()->GetDoor(maze::Direction::NORTH);
