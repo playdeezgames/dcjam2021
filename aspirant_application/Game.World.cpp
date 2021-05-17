@@ -4,56 +4,17 @@
 #include "Common.RNG.h"
 #include "Maze.Direction.h"
 #include "Game.h"
-#include <sstream>
 #include "Game.Data.Properties.h"
+#include <sstream>
 #include "Data.Stores.h"
 #include "Game.Creatures.h"
 #include <optional>
 #include "Game.World.Borders.h"
+#include "Game.World.Data.h"
 
 #include "Game.Shoppes.h"
-namespace game::world::Data
-{
-	std::string XYToRoomKey(const common::XY<size_t>& xy)
-	{
-		std::stringstream ss;
-		ss << "(" << xy.GetX() << "," << xy.GetY() << ")";
-		return ss.str();
-	}
-
-	nlohmann::json& GetNSBorders()
-	{
-		auto& data = game::GetData();
-		if (data.count(game::data::Properties::NS_BORDERS) == 0)
-		{
-			data[game::data::Properties::NS_BORDERS] = nlohmann::json();
-		}
-		return data[game::data::Properties::NS_BORDERS];
-	}
-
-	nlohmann::json& GetEWBorders()
-	{
-		auto& data = game::GetData();
-		if (data.count(game::data::Properties::EW_BORDERS) == 0)
-		{
-			data[game::data::Properties::EW_BORDERS] = nlohmann::json();
-		}
-		return data[game::data::Properties::EW_BORDERS];
-	}
-
-	static nlohmann::json& GetExplored()
-	{
-		auto& data = game::GetData();
-		if (data.count(game::data::Properties::EXPLORED) == 0)
-		{
-			data[game::data::Properties::EXPLORED] = nlohmann::json();
-		}
-		return data[game::data::Properties::EXPLORED];
-	}
-}
 namespace game::World
 {
-
 	static void SetExplored(const common::XY<size_t>& xy, size_t value)
 	{
 		game::world::Data::GetExplored()[game::world::Data::XYToRoomKey(xy)] = value;
@@ -132,14 +93,9 @@ namespace game::World
 		}
 	}
 
-	static void ClearExplored()
-	{
-		game::world::Data::GetExplored().clear();
-	}
-
 	void Reset(const game::Difficulty& difficulty)
 	{
-		ClearExplored();
+		game::world::Data::ClearExplored();
 		auto worldSize = game::World::GetSize();
 		maze::Maze maze(worldSize.GetX(), worldSize.GetY());
 		maze.Generate();

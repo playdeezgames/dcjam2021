@@ -11,6 +11,7 @@
 #include "Data.Stores.h"
 #include "Game.Avatar.h"
 #include "Game.World.Borders.h"
+#include "Game.World.Data.h"
 namespace game::world::Items
 {
 	static nlohmann::json& GetRoomInventories()
