@@ -1,24 +1,22 @@
-#include "Game.World.h"
-#include <vector>
-#include "Maze.h"
-#include "Common.RNG.h"
-#include "Maze.Direction.h"
-#include "Game.h"
-#include <sstream>
-#include "Game.Data.Properties.h"
-#include "Data.Stores.h"
-#include "Game.Creatures.h"
-#include <optional>
 #include "Game.World.Borders.h"
+#include "Game.World.h"
+#include <sstream>
+#include "Game.Creatures.h"
 #include "Game.World.Data.h"
-
-#include "Game.Shoppes.h"
 namespace game::world::Borders
 {
 	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;
 	const size_t NS_BORDER_STRIDE = game::World::COLUMNS;
 	const size_t EW_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::ROWS;
 	const size_t EW_BORDER_STRIDE = game::World::COLUMNS + 1;
+
+	enum class IndexPlotter
+	{
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST
+	};
 
 	static size_t XYToNorthBorderIndex(const common::XY<size_t> position)
 	{
