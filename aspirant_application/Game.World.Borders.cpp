@@ -3,6 +3,8 @@
 #include <sstream>
 #include "Game.Creatures.h"
 #include "Game.World.Data.h"
+#include <map>
+#include <functional>
 namespace game::world::Borders
 {
 	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;
@@ -18,37 +20,19 @@ namespace game::world::Borders
 		WEST
 	};
 
-	static size_t XYToNorthBorderIndex(const common::XY<size_t> position)
+	const std::map<IndexPlotter, std::function<size_t(const common::XY<size_t>&)>> indexPlotters =
 	{
-		return position.GetX() + position.GetY() * NS_BORDER_STRIDE;
-	}
-
-	static size_t XYToSouthBorderIndex(const common::XY<size_t> position)
-	{
-		return XYToNorthBorderIndex(position) + NS_BORDER_STRIDE;
-	}
-
-	static size_t XYToWestBorderIndex(const common::XY<size_t> position)
-	{
-		return position.GetX() + position.GetY() * EW_BORDER_STRIDE;
-	}
-
-	static size_t XYToEastBorderIndex(const common::XY<size_t> position)
-	{
-		return XYToWestBorderIndex(position) + 1;
-	}
+		{IndexPlotter::NORTH, [](const common::XY<size_t>& position) {return position.GetX() + position.GetY() * NS_BORDER_STRIDE; }},
+		{IndexPlotter::SOUTH, [](const common::XY<size_t>& position) {return position.GetX() + position.GetY() * NS_BORDER_STRIDE + NS_BORDER_STRIDE; }},
+		{IndexPlotter::EAST, [](const common::XY<size_t>& position) {return position.GetX() + position.GetY() * EW_BORDER_STRIDE + 1; }},
+		{IndexPlotter::WEST, [](const common::XY<size_t>& position) {return position.GetX() + position.GetY() * EW_BORDER_STRIDE; }}
+	};
 
 	static std::string IndexToString(size_t index)
 	{
 		std::stringstream ss;
 		ss << index;
 		return ss.str();
-	}
-
-	static void SetNSBorder(size_t index, world::Border border)
-	{
-		auto& borders = game::world::Data::GetNSBorders();
-		borders[IndexToString(index)] = (int)border;
 	}
 
 	static world::Border GetNSBorder(size_t index)
@@ -62,12 +46,6 @@ namespace game::world::Borders
 		return world::Border::WALL;
 	}
 
-	static void SetEWBorder(size_t index, world::Border border)
-	{
-		auto& borders = game::world::Data::GetEWBorders();
-		borders[IndexToString(index)] = (int)border;
-	}
-
 	static world::Border GetEWBorder(size_t index)
 	{
 		auto key = IndexToString(index);
@@ -79,18 +57,30 @@ namespace game::world::Borders
 		return world::Border::WALL;
 	}
 
+	static void SetNSBorder(size_t index, world::Border border)
+	{
+		auto& borders = game::world::Data::GetNSBorders();
+		borders[IndexToString(index)] = (int)border;
+	}
+
+	static void SetEWBorder(size_t index, world::Border border)
+	{
+		auto& borders = game::world::Data::GetEWBorders();
+		borders[IndexToString(index)] = (int)border;
+	}
+
 	world::Border GetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			return GetNSBorder(XYToNorthBorderIndex(position));
+			return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position));
 		case maze::Direction::EAST:
-			return GetEWBorder(XYToEastBorderIndex(position));
+			return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
 		case maze::Direction::SOUTH:
-			return GetNSBorder(XYToSouthBorderIndex(position));
+			return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
 		default:
-			return GetEWBorder(XYToWestBorderIndex(position));
+			return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
 		}
 	}
 
@@ -99,16 +89,16 @@ namespace game::world::Borders
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			SetNSBorder(XYToNorthBorderIndex(position), border);
+			SetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position), border);
 			break;
 		case maze::Direction::EAST:
-			SetEWBorder(XYToEastBorderIndex(position), border);
+			SetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position), border);
 			break;
 		case maze::Direction::SOUTH:
-			SetNSBorder(XYToSouthBorderIndex(position), border);
+			SetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position), border);
 			break;
 		default:
-			SetEWBorder(XYToWestBorderIndex(position), border);
+			SetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position), border);
 			break;
 		}
 	}
@@ -118,13 +108,13 @@ namespace game::world::Borders
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			return GetEWBorder(XYToWestBorderIndex(position));
+			return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
 		case maze::Direction::EAST:
-			return GetNSBorder(XYToNorthBorderIndex(position));
+			return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position));
 		case maze::Direction::SOUTH:
-			return GetEWBorder(XYToEastBorderIndex(position));
+			return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
 		default:
-			return GetNSBorder(XYToSouthBorderIndex(position));
+			return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
 		}
 	}
 
@@ -133,13 +123,13 @@ namespace game::world::Borders
 		switch (direction)
 		{
 		case maze::Direction::NORTH:
-			return GetEWBorder(XYToEastBorderIndex(position));
+			return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
 		case maze::Direction::EAST:
-			return GetNSBorder(XYToSouthBorderIndex(position));
+			return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
 		case maze::Direction::SOUTH:
-			return GetEWBorder(XYToWestBorderIndex(position));
+			return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
 		default:
-			return GetNSBorder(XYToNorthBorderIndex(position));
+			return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position));
 		}
 	}
 
@@ -194,10 +184,10 @@ namespace game::world::Borders
 	bool IsExitable(const common::XY<size_t>& position)
 	{
 		return
-			GetNSBorder(XYToNorthBorderIndex(position)) == game::world::Border::DOOR ||
-			GetNSBorder(XYToSouthBorderIndex(position)) == game::world::Border::DOOR ||
-			GetEWBorder(XYToEastBorderIndex(position)) == game::world::Border::DOOR ||
-			GetEWBorder(XYToWestBorderIndex(position)) == game::world::Border::DOOR;
+			GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position)) == game::world::Border::DOOR ||
+			GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position)) == game::world::Border::DOOR ||
+			GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position)) == game::world::Border::DOOR ||
+			GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position)) == game::world::Border::DOOR;
 	}
 
 	bool CanSpawnAvatar(const common::XY<size_t>& position)
