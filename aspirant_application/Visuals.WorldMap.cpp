@@ -78,7 +78,7 @@ namespace visuals::WorldMap
 
 	static void DrawWall(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
-		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
+		if (game::world::Borders::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
 			visuals::Sprites::Draw(wallSprites[direction], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		}
@@ -86,7 +86,7 @@ namespace visuals::WorldMap
 
 	static void DrawLocked(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
-		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
+		if (game::world::Borders::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
 		{
 			visuals::Sprites::Draw(lockedSprites[direction], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		}
@@ -94,7 +94,7 @@ namespace visuals::WorldMap
 
 	static void DrawKnownWall(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
-		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::WALL)
+		if (game::world::Borders::GetBorderAhead(cell, direction) == game::world::Border::WALL)
 		{
 			visuals::Sprites::Draw(knownWallSprites[direction], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		}
@@ -102,7 +102,7 @@ namespace visuals::WorldMap
 
 	static void DrawKnownLocked(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const maze::Direction& direction)
 	{
-		if (game::World::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
+		if (game::world::Borders::GetBorderAhead(cell, direction) == game::world::Border::LOCK)
 		{
 			visuals::Sprites::Draw(knownLockedSprites[direction], renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		}

@@ -92,9 +92,9 @@ namespace sublayout::POV
 
 	static void UpdateRoom(const common::XY<size_t> position, const maze::Direction& facing)
 	{
-		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_LEFT_SIDE, leftSides.find(game::World::GetBorderLeft(position, facing))->second);
-		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_AHEAD, aheads.find(game::World::GetBorderAhead(position, facing))->second);
-		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_RIGHT_SIDE, rightSides.find(game::World::GetBorderRight(position, facing))->second);
+		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_LEFT_SIDE, leftSides.find(game::world::Borders::GetBorderLeft(position, facing))->second);
+		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_AHEAD, aheads.find(game::world::Borders::GetBorderAhead(position, facing))->second);
+		::visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_RIGHT_SIDE, rightSides.find(game::world::Borders::GetBorderRight(position, facing))->second);
 	}
 
 	static void UpdateItems(const common::XY<size_t> position)

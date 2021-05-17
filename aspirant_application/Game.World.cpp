@@ -11,7 +11,7 @@
 #include <optional>
 
 #include "Game.Shoppes.h"
-namespace game::World
+namespace game::world::Data
 {
 	std::string XYToRoomKey(const common::XY<size_t>& xy)
 	{
@@ -49,80 +49,31 @@ namespace game::World
 		}
 		return data[game::data::Properties::EXPLORED];
 	}
-
+}
+namespace game::World
+{
 	const size_t COLUMNS = 12;
 	const size_t ROWS = 12;
 	const size_t NS_BORDER_COUNT = ROWS * COLUMNS + COLUMNS;
 	const size_t NS_BORDER_STRIDE = COLUMNS;
 	const size_t EW_BORDER_COUNT = ROWS * COLUMNS + ROWS;
 	const size_t EW_BORDER_STRIDE = COLUMNS + 1;
-
-	static void SetExplored(const common::XY<size_t>& xy, size_t value)
-	{
-		GetExplored()[XYToRoomKey(xy)] = value;
-	}
-
-	static std::optional<size_t> GetExplored(const common::XY<size_t>& xy)
-	{
-		auto roomKey = XYToRoomKey(xy);
-		if (GetExplored().count(roomKey) > 0)
-		{
-			return GetExplored()[roomKey];
-		}
-		return std::nullopt;
-	}
-
-	void SetExplored(const common::XY<size_t>& xy)
-	{
-		auto visits = GetExplored(xy);
-		if (visits)
-		{
-			SetExplored(xy, visits.value() + 1);
-		}
-		else
-		{
-			SetExplored(xy, 1);
-		}
-	}
-
-	void SetKnown(const common::XY<size_t>& xy)
-	{
-		auto visits = GetExplored(xy);
-		if (!visits)
-		{
-			SetExplored(xy, 0);
-		}
-	}
-
-
-	game::world::KnownState GetKnownState(const common::XY<size_t>& cell)
-	{
-		auto visits = GetExplored(cell);
-		if (visits)
-		{
-			return (visits.value() > 0) ? (game::world::KnownState::VISITED) : (game::world::KnownState::KNOWN);
-		}
-		return game::world::KnownState::UNKNOWN;
-	}
-
-	common::XY<size_t> GetSize()
-	{
-		return common::XY<size_t>(COLUMNS, ROWS);
-	}
-
+}
+namespace game::world::Borders
+{
 	static size_t XYToNorthBorderIndex(const common::XY<size_t> position)
 	{
-		return position.GetX() + position.GetY() * NS_BORDER_STRIDE;
+		return position.GetX() + position.GetY() * game::World::NS_BORDER_STRIDE;
 	}
 
 	static size_t XYToSouthBorderIndex(const common::XY<size_t> position)
 	{
-		return XYToNorthBorderIndex(position) + NS_BORDER_STRIDE;
+		return XYToNorthBorderIndex(position) + game::World::NS_BORDER_STRIDE;
 	}
 
 	static size_t XYToWestBorderIndex(const common::XY<size_t> position)
 	{
-		return position.GetX() + position.GetY() * EW_BORDER_STRIDE;
+		return position.GetX() + position.GetY() * game::World::EW_BORDER_STRIDE;
 	}
 
 	static size_t XYToEastBorderIndex(const common::XY<size_t> position)
@@ -139,14 +90,14 @@ namespace game::World
 
 	static void SetNSBorder(size_t index, world::Border border)
 	{
-		auto& borders = GetNSBorders();
+		auto& borders = game::world::Data::GetNSBorders();
 		borders[IndexToString(index)] = (int)border;
 	}
 
 	static world::Border GetNSBorder(size_t index)
 	{
 		auto key = IndexToString(index);
-		auto& borders = GetNSBorders();
+		auto& borders = game::world::Data::GetNSBorders();
 		if (borders.count(key) > 0)
 		{
 			return (world::Border)(int)borders[key];
@@ -156,14 +107,14 @@ namespace game::World
 
 	static void SetEWBorder(size_t index, world::Border border)
 	{
-		auto& borders = GetEWBorders();
+		auto& borders = game::world::Data::GetEWBorders();
 		borders[IndexToString(index)] = (int)border;
 	}
 
 	static world::Border GetEWBorder(size_t index)
 	{
 		auto key = IndexToString(index);
-		auto& borders = GetEWBorders();
+		auto& borders = game::world::Data::GetEWBorders();
 		if (borders.count(key) > 0)
 		{
 			return (world::Border)(int)borders[key];
@@ -235,40 +186,14 @@ namespace game::World
 		}
 	}
 
-	static void PostGenerateMaze(maze::Maze& maze, const game::Difficulty& difficulty)
+	static void UpdateBorders(const maze::Maze& maze)
 	{
-		auto worldSize = game::World::GetSize();
-		size_t extraDoors = ::data::Stores::GetStore(::data::Store::MAZE)[data::Properties::EXTRA_DOORS][(int)difficulty];
-		while (extraDoors > 0)
+		for (auto column = 0; column < maze.GetColumns(); ++column)
 		{
-			size_t x = common::RNG::FromRange(0u, worldSize.GetX());
-			size_t y = common::RNG::FromRange(0u, worldSize.GetY());
-			auto cell = maze.GetCell((int)x, (int)y);
-			if (cell)
+			for (auto row = 0; row < maze.GetRows(); ++row)
 			{
-				maze::Direction direction = maze::Directions::All()[common::RNG::FromRange(0u, maze::Directions::All().size())];
-				if ((*cell).get()->SetDoor(direction, maze::Door::OPEN))
-				{
-					extraDoors--;
-				}
-			}
-		}
-	}
-
-	void Reset(const game::Difficulty& difficulty)
-	{
-		GetExplored().clear();
-		auto worldSize = game::World::GetSize();
-		maze::Maze maze(COLUMNS, ROWS);
-		maze.Generate();
-		PostGenerateMaze(maze, difficulty);
-
-		for (auto column = 0; column < COLUMNS; ++column)
-		{
-			for (auto row = 0; row < ROWS; ++row)
-			{
-				size_t nsBorderIndex = column + row * NS_BORDER_STRIDE;
-				size_t ewBorderIndex = column + row * EW_BORDER_STRIDE;
+				size_t nsBorderIndex = column + row * game::World::NS_BORDER_STRIDE;
+				size_t ewBorderIndex = column + row * game::World::EW_BORDER_STRIDE;
 
 				auto cell = maze.GetCell((int)column, (int)row);
 				auto northDoor = cell.value()->GetDoor(maze::Direction::NORTH);
@@ -340,4 +265,101 @@ namespace game::World
 		}
 		return result;
 	}
+}
+namespace game::World
+{
+
+	static void SetExplored(const common::XY<size_t>& xy, size_t value)
+	{
+		game::world::Data::GetExplored()[game::world::Data::XYToRoomKey(xy)] = value;
+	}
+
+	static std::optional<size_t> GetExplored(const common::XY<size_t>& xy)
+	{
+		auto roomKey = game::world::Data::XYToRoomKey(xy);
+		if (game::world::Data::GetExplored().count(roomKey) > 0)
+		{
+			return game::world::Data::GetExplored()[roomKey];
+		}
+		return std::nullopt;
+	}
+
+	void SetExplored(const common::XY<size_t>& xy)
+	{
+		auto visits = GetExplored(xy);
+		if (visits)
+		{
+			SetExplored(xy, visits.value() + 1);
+		}
+		else
+		{
+			SetExplored(xy, 1);
+		}
+	}
+
+	void SetKnown(const common::XY<size_t>& xy)
+	{
+		auto visits = GetExplored(xy);
+		if (!visits)
+		{
+			SetExplored(xy, 0);
+		}
+	}
+
+
+	game::world::KnownState GetKnownState(const common::XY<size_t>& cell)
+	{
+		auto visits = GetExplored(cell);
+		if (visits)
+		{
+			return (visits.value() > 0) ? (game::world::KnownState::VISITED) : (game::world::KnownState::KNOWN);
+		}
+		return game::world::KnownState::UNKNOWN;
+	}
+
+	common::XY<size_t> GetSize()
+	{
+		return common::XY<size_t>(COLUMNS, ROWS);
+	}
+
+	static size_t GetExtraDoorCount(const game::Difficulty& difficulty)
+	{
+		return ::data::Stores::GetStore(::data::Store::MAZE)[data::Properties::EXTRA_DOORS][(int)difficulty];
+	}
+
+	static void PostGenerateMaze(maze::Maze& maze, const game::Difficulty& difficulty)
+	{
+		auto worldSize = game::World::GetSize();
+		size_t extraDoors = GetExtraDoorCount(difficulty);
+		while (extraDoors > 0)
+		{
+			size_t x = common::RNG::FromRange(0u, worldSize.GetX());
+			size_t y = common::RNG::FromRange(0u, worldSize.GetY());
+			auto cell = maze.GetCell((int)x, (int)y);
+			if (cell)
+			{
+				maze::Direction direction = maze::Directions::All()[common::RNG::FromRange(0u, maze::Directions::All().size())];
+				if ((*cell).get()->SetDoor(direction, maze::Door::OPEN))
+				{
+					extraDoors--;
+				}
+			}
+		}
+	}
+
+	static void ClearExplored()
+	{
+		game::world::Data::GetExplored().clear();
+	}
+
+	void Reset(const game::Difficulty& difficulty)
+	{
+		ClearExplored();
+		auto worldSize = game::World::GetSize();
+		maze::Maze maze(worldSize.GetX(), worldSize.GetY());
+		maze.Generate();
+		PostGenerateMaze(maze, difficulty);
+		game::world::Borders::UpdateBorders(maze);
+	}
+
 }

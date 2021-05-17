@@ -199,7 +199,7 @@ namespace game::Avatar
 		std::optional<std::string> result = std::nullopt;
 		if (!game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HEALTH))
 		{
-			auto border = game::World::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing());
+			auto border = game::world::Borders::GetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing());
 			if (border == game::world::Border::DOOR)
 			{
 				switch (GetFacing())
@@ -228,7 +228,7 @@ namespace game::Avatar
 				if (game::avatar::Statistics::Read(game::avatar::Statistic::KEYS)>0)
 				{
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::KEYS, 1);
-					game::World::SetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing(), game::world::Border::DOOR);
+					game::world::Borders::SetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing(), game::world::Border::DOOR);
 					//TODO: play an unlock sound!
 				}
 				else
@@ -269,7 +269,7 @@ namespace game::Avatar
 		{
 			SetColumn((size_t)common::RNG::FromRange(0, (int)worldSize.GetX()));
 			SetRow((size_t)common::RNG::FromRange(0, (int)worldSize.GetY()));
-		} while (!game::World::CanSpawnAvatar(GetPosition()));
+		} while (!game::world::Borders::CanSpawnAvatar(GetPosition()));
 		game::World::SetExplored(GetPosition());
 	}
 }

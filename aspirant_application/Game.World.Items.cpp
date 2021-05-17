@@ -24,7 +24,7 @@ namespace game::world::Items
 
 	static nlohmann::json& GetRoomInventory(const common::XY<size_t>& xy)
 	{
-		auto roomKey = game::World::XYToRoomKey(xy);
+		auto roomKey = game::world::Data::XYToRoomKey(xy);
 		auto& inventories = GetRoomInventories();
 		if (inventories.count(roomKey) == 0)
 		{
@@ -62,7 +62,7 @@ namespace game::world::Items
 	{
 		int keyItem = game::Avatar::GetDescriptor().keyItemId;
 		auto worldSize = game::World::GetSize();
-		auto deadEnds = game::World::GetDeadEnds();
+		auto deadEnds = game::world::Borders::GetDeadEnds();
 		size_t keyCount = deadEnds.size();
 		while (keyCount > 0)
 		{

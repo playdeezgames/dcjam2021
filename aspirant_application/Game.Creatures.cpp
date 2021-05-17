@@ -150,7 +150,7 @@ namespace game::Creatures
 	{
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
-		auto deadEnds = game::World::GetDeadEnds();
+		auto deadEnds = game::world::Borders::GetDeadEnds();
 		int index = 0;
 		for (auto& creature : game::creature::All())
 		{
