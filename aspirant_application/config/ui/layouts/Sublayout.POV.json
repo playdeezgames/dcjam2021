@@ -416,20 +416,6 @@
         "height":32
     },
     {
-        "type": "Text",
-        "text-id" : "ItemToolTip",
-        "font": "default",
-        "color": "Gray",
-        "text": "",
-        "x": 180,
-        "y": 276,
-        "horizontal-alignment": 0,
-        "drop-shadow": false,
-        "drop-shadow-color": "Black",
-        "drop-shadow-x": 2,
-        "drop-shadow-y": 2
-    },
-    {
         
         "type": "Image",
         "image-id": "ShoppeToilet",
@@ -448,6 +434,20 @@
         "x": 0,
         "y": 0,
         "visible": false
+    },
+    {
+        "type": "Text",
+        "text-id" : "ItemToolTip",
+        "font": "default",
+        "color": "Gray",
+        "text": "",
+        "x": 180,
+        "y": 276,
+        "horizontal-alignment": 0,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 2,
+        "drop-shadow-y": 2
     },
     {
         

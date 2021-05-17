@@ -35,22 +35,22 @@ namespace state::in_play::Trade
 		TRADE_3
 	};
 
-	const std::map<::Command, std::function<void()>> commandHandlers =
-	{
-		{ ::Command::BACK, application::UIState::GoTo(::UIState::IN_PLAY_MAP) }
-	};
-
 	static bool CloseTrade()
 	{
 		application::UIState::Write(::UIState::IN_PLAY_MAP);
 		return true;
 	}
 
+	static void CompleteTrade(size_t index)
+	{
+		common::audio::Sfx::Play(game::Shoppes::AttemptTrade(game::Avatar::GetPosition(), index));
+		application::OnEnter::Handle();
+	}
+
 	static std::function<bool()> DoTrade(size_t index)
 	{
 		return [index]() {
-			common::audio::Sfx::Play(game::Shoppes::AttemptTrade(game::Avatar::GetPosition(), index));
-			application::OnEnter::Handle();
+			CompleteTrade(index);
 			return true;
 		};
 	}
@@ -146,6 +146,21 @@ namespace state::in_play::Trade
 	{
 		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_CLOSE, SPRITE_NORMAL);
 	}
+
+	static void ActivateItem()
+	{
+		auto index = visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID);
+		CompleteTrade((size_t)*index);
+	}
+
+	const std::map<::Command, std::function<void()>> commandHandlers =
+	{
+		{::Command::UP, visuals::Menus::NavigatePrevious(LAYOUT_NAME, MENU_ID) },
+		{::Command::DOWN, visuals::Menus::NavigateNext(LAYOUT_NAME, MENU_ID) },
+		{::Command::GREEN, ActivateItem },
+		{::Command::BACK, ::application::UIState::GoTo(::UIState::IN_PLAY_MAP) },
+		{::Command::RED, ::application::UIState::GoTo(::UIState::IN_PLAY_MAP) }
+	};
 
 	void Start()
 	{

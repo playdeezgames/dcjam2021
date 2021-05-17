@@ -41,6 +41,14 @@ namespace state::in_play::MiniMap
 		};
 	}
 
+	static void EnterTrade()
+	{
+		if (game::Shoppes::Read(game::Avatar::GetPosition()))
+		{
+			application::UIState::Write(::UIState::IN_PLAY_TRADE);
+		}
+	}
+
 	const std::map<::Command, std::function<void()>> commandHandlers =
 	{
 		{ ::Command::BACK, application::UIState::GoTo(::UIState::LEAVE_PLAY) },
@@ -49,6 +57,7 @@ namespace state::in_play::MiniMap
 		{ ::Command::UP, DoSomethingAndRefresh(game::Avatar::MoveAhead) },
 		{ ::Command::DOWN, DoSomethingAndRefresh(game::Avatar::MoveBack) },
 		{ ::Command::NEXT, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
+		{ ::Command::BLUE, EnterTrade },
 		{ ::Command::YELLOW, application::UIState::GoTo(::UIState::IN_PLAY_FLOOR) },
 		{ ::Command::PREVIOUS, application::UIState::GoTo(::UIState::IN_PLAY_STATUS) }
 	};
@@ -130,7 +139,7 @@ namespace state::in_play::MiniMap
 
 	static bool StartTrade()
 	{
-		application::UIState::Write(::UIState::IN_PLAY_TRADE);
+		EnterTrade();
 		return true;
 	}
 
