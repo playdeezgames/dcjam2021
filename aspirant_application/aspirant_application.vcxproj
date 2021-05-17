@@ -179,6 +179,7 @@
     <ClCompile Include="Game.Creatures.cpp" />
     <ClCompile Include="Game.Item.cpp" />
     <ClCompile Include="Game.Shoppes.cpp" />
+    <ClCompile Include="Game.World.Borders.cpp" />
     <ClCompile Include="Game.World.cpp" />
     <ClCompile Include="Game.World.Items.cpp" />
     <ClCompile Include="State.ConfirmAbandon.cpp" />
