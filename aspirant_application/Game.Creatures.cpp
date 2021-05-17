@@ -10,6 +10,7 @@
 #include <algorithm>
 #include "Game.World.Items.h"
 #include "Game.Shoppes.h"
+#include "Game.World.Borders.h"
 namespace game::Creatures
 {
 	nlohmann::json& GetCreatures()

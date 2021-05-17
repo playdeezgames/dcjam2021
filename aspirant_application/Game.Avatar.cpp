@@ -14,6 +14,7 @@
 #include "Data.Stores.h"
 #include "Game.World.Items.h"
 #include "Game.Avatar.Items.h"
+#include "Game.World.Borders.h"
 namespace game::Avatar
 {
 	static bool initialized = false;

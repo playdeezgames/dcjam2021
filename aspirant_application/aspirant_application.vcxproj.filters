@@ -400,5 +400,8 @@
     <ClInclude Include="Game.Shoppes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.World.Borders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

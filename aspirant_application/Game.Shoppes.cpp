@@ -8,6 +8,7 @@
 #include "Game.World.h"
 #include "Common.RNG.h"
 #include "Game.Avatar.Items.h"
+#include "Game.World.Borders.h"
 namespace game::shoppe
 {
 	static std::vector<Descriptor> descriptors;

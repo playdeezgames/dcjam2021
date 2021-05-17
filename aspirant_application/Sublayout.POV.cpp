@@ -13,6 +13,7 @@
 #include <sstream>
 #include "Application.OnEnter.h"
 #include "Game.Shoppes.h"
+#include "Game.World.Borders.h"
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";

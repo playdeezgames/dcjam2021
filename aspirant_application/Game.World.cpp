@@ -9,6 +9,7 @@
 #include "Data.Stores.h"
 #include "Game.Creatures.h"
 #include <optional>
+#include "Game.World.Borders.h"
 
 #include "Game.Shoppes.h"
 namespace game::world::Data

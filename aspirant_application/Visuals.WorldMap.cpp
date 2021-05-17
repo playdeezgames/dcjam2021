@@ -9,6 +9,7 @@
 #include "Game.Creatures.h"
 #include "Visuals.Colors.h"
 #include "Visuals.Data.Colors.h"
+#include "Game.World.Borders.h"
 namespace visuals::WorldMap
 {
 	const std::string MAP_CELL_BASE = "MapCellBase";
