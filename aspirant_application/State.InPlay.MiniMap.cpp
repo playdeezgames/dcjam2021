@@ -118,14 +118,17 @@ namespace state::in_play::MiniMap
 
 	static void UpdateMiniMapToolTip(const std::string& areaName, const common::XY<Sint32>& xy)
 	{
-		auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
-		auto worldSize = game::World::GetSize();
-		size_t cellWidth = area.size.GetX() / worldSize.GetX();
-		size_t cellHeight = area.size.GetY() / worldSize.GetY();
-		size_t cellColumn = ((size_t)xy.GetX()) / cellWidth;
-		size_t cellRow = ((size_t)xy.GetY()) / cellHeight;
-		common::XY<size_t> worldPosition = { cellColumn , cellRow };
-		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, DetermineToolTip(worldPosition));
+		if (areaName == AREA_WORLD_MAP)
+		{
+			auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
+			auto worldSize = game::World::GetSize();
+			size_t cellWidth = area.size.GetX() / worldSize.GetX();
+			size_t cellHeight = area.size.GetY() / worldSize.GetY();
+			size_t cellColumn = ((size_t)xy.GetX()) / cellWidth;
+			size_t cellRow = ((size_t)xy.GetY()) / cellHeight;
+			common::XY<size_t> worldPosition = { cellColumn , cellRow };
+			visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, DetermineToolTip(worldPosition));
+		}
 	}
 
 	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>& xy)

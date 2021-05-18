@@ -51,6 +51,7 @@
         "drop-shadow-x": 2,
         "drop-shadow-y": 2
     },
+
     {
         "type": "Image",
         "image-id": "Potion",
@@ -77,6 +78,7 @@
         "width": 32,
         "height":32
     },
+
     {
         "type": "Image",
         "image-id": "Beer",
@@ -103,6 +105,7 @@
         "width": 32,
         "height":32
     },
+
     {
         "type": "Image",
         "image-id": "Wine",
@@ -394,8 +397,8 @@
         "image-id": "MapFragment",
         "sprite": "ItemMapFragment",
         "color": "White",
-        "x": 164,
-        "y": 324,
+        "x": 116,
+        "y": 292,
         "visible": false
     },
     {
@@ -403,15 +406,15 @@
         "image-id": "TakeMapFragment",
         "sprite": "ItemTake",
         "color": "White",
-        "x": 164,
-        "y": 324,
+        "x": 116,
+        "y": 292,
         "visible": false
     },
     {
         "type": "Area",
         "area-id": "TakeMapFragment",
-        "x": 164,
-        "y": 324,
+        "x": 116,
+        "y": 292,
         "width": 32,
         "height":32
     },
