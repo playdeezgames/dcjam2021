@@ -161,9 +161,9 @@ namespace visuals::WorldMap
 	{
 		visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		DrawDirections(renderer, plot, cell, { DrawWall , DrawLocked });
-		DrawAvatar(renderer, plot, cell);
 		DrawDanger(renderer, plot, cell);
 		DrawTrade(renderer, plot, cell);
+		DrawAvatar(renderer, plot, cell);
 	}
 
 	static void DrawKnown(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
