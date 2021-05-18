@@ -109,6 +109,17 @@ namespace game::world::Borders
 		return std::get<AHEAD>(borderGetters.find(direction)->second)(position);
 	}
 
+	world::Border GetBorderLeft(const common::XY<size_t>& position, const maze::Direction& direction)
+	{
+		return std::get<LEFT>(borderGetters.find(direction)->second)(position);
+	}
+
+	world::Border GetBorderRight(const common::XY<size_t>& position, const maze::Direction& direction)
+	{
+		return std::get<RIGHT>(borderGetters.find(direction)->second)(position);
+	}
+
+
 	void SetNorthBorder(const common::XY<size_t>& position, world::Border border)
 	{
 		SetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position), border);
@@ -140,16 +151,6 @@ namespace game::world::Borders
 	void SetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction, const world::Border& border)
 	{
 		borderSetters.find(direction)->second(position, border);
-	}
-
-	world::Border GetBorderLeft(const common::XY<size_t>& position, const maze::Direction& direction)
-	{
-		return std::get<LEFT>(borderGetters.find(direction)->second)(position);
-	}
-
-	world::Border GetBorderRight(const common::XY<size_t>& position, const maze::Direction& direction)
-	{
-		return std::get<RIGHT>(borderGetters.find(direction)->second)(position);
 	}
 
 	static world::Border DetermineBorder(const std::shared_ptr<maze::Cell>& cell, const maze::Direction& direction)
