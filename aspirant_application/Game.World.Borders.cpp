@@ -92,7 +92,7 @@ namespace game::world::Borders
 
 	typedef std::function<world::Border(const common::XY<size_t>&)> BorderGetter;
 
-	const std::map<maze::Direction, std::tuple<BorderGetter, BorderGetter, BorderGetter>> borderGetter =
+	const std::map<maze::Direction, std::tuple<BorderGetter, BorderGetter, BorderGetter>> borderGetters =
 	{
 		{maze::Direction::NORTH, {GetWestBorder,GetNorthBorder,GetEastBorder}},
 		{maze::Direction::EAST, {GetNorthBorder,GetEastBorder,GetSouthBorder}},
@@ -100,33 +100,13 @@ namespace game::world::Borders
 		{maze::Direction::WEST, {GetSouthBorder,GetWestBorder,GetNorthBorder}},
 	};
 
-	const std::map<maze::Direction, BorderGetter> aheadBorderGetter =
-	{
-		{maze::Direction::NORTH, GetNorthBorder},
-		{maze::Direction::EAST, GetEastBorder},
-		{maze::Direction::SOUTH, GetSouthBorder},
-		{maze::Direction::WEST, GetWestBorder},
-	};
-
-	const std::map<maze::Direction, BorderGetter> leftBorderGetter =
-	{
-		{maze::Direction::NORTH, GetWestBorder},
-		{maze::Direction::EAST, GetNorthBorder},
-		{maze::Direction::SOUTH, GetEastBorder},
-		{maze::Direction::WEST, GetSouthBorder},
-	};
-
-	const std::map<maze::Direction, BorderGetter> rightBorderGetter =
-	{
-		{maze::Direction::NORTH, GetEastBorder},
-		{maze::Direction::EAST, GetSouthBorder},
-		{maze::Direction::SOUTH, GetWestBorder},
-		{maze::Direction::WEST, GetNorthBorder},
-	};
+	const int LEFT = 0;
+	const int AHEAD = 1;
+	const int RIGHT = 2;
 
 	world::Border GetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		return aheadBorderGetter.find(direction)->second(position);
+		return std::get<AHEAD>(borderGetters.find(direction)->second)(position);
 	}
 
 	void SetNorthBorder(const common::XY<size_t>& position, world::Border border)
@@ -149,7 +129,7 @@ namespace game::world::Borders
 		SetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position), border);
 	}
 
-	const std::map<maze::Direction, std::function<void(const common::XY<size_t>&, world::Border)>> aheadBorderSetter =
+	const std::map<maze::Direction, std::function<void(const common::XY<size_t>&, world::Border)>> borderSetters =
 	{
 		{maze::Direction::NORTH, SetNorthBorder},
 		{maze::Direction::EAST, SetEastBorder},
@@ -159,17 +139,17 @@ namespace game::world::Borders
 
 	void SetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction, const world::Border& border)
 	{
-		aheadBorderSetter.find(direction)->second(position, border);
+		borderSetters.find(direction)->second(position, border);
 	}
 
 	world::Border GetBorderLeft(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		return leftBorderGetter.find(direction)->second(position);
+		return std::get<LEFT>(borderGetters.find(direction)->second)(position);
 	}
 
 	world::Border GetBorderRight(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		return rightBorderGetter.find(direction)->second(position);
+		return std::get<RIGHT>(borderGetters.find(direction)->second)(position);
 	}
 
 	static world::Border DetermineBorder(const std::shared_ptr<maze::Cell>& cell, const maze::Direction& direction)
