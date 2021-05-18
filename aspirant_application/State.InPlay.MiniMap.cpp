@@ -1,19 +1,19 @@
-#include "Application.Command.h"
-#include "Application.Renderer.h"
-#include "Visuals.Images.h"
-#include "Visuals.Texts.h"
-#include "Game.Avatar.h"
-#include "Game.World.h"
-#include "Game.Avatar.Statistics.h"
 #include <sstream>
-#include "Common.Utility.h"
+#include "Application.Command.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
-#include "Game.Creatures.h"
 #include "Application.OnEnter.h"
+#include "Application.Renderer.h"
 #include "Common.Audio.h"
-#include "Visuals.Areas.h"
+#include "Common.Utility.h"
+#include "Game.Avatar.h"
+#include "Game.Avatar.Statistics.h"
+#include "Game.Creatures.h"
 #include "Game.Shoppes.h"
+#include "Game.World.h"
+#include "Visuals.Areas.h"
+#include "Visuals.Images.h"
+#include "Visuals.Texts.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
@@ -92,45 +92,40 @@ namespace state::in_play::MiniMap
 			visuals::Images::SetVisible(LAYOUT_NAME, std::get<1>(areaImage), area == std::get<0>(areaImage) && std::get<2>(areaImage)());
 		}
 	}
-	static void UpdateMiniMapToolTip(const std::string& area, const common::XY<Sint32>& xy)
+
+	static std::string DetermineToolTip(const common::XY<size_t> worldPosition)
 	{
-		std::stringstream ss;
-		if (area == AREA_WORLD_MAP)
+		if (game::World::GetKnownState(worldPosition) == game::world::KnownState::UNKNOWN)
 		{
-			auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
-			auto worldSize = game::World::GetSize();
-			size_t cellWidth = area.size.GetX() / worldSize.GetX();
-			size_t cellHeight = area.size.GetY() / worldSize.GetY();
-			size_t cellColumn = ((size_t)xy.GetX()) / cellWidth;
-			size_t cellRow = ((size_t)xy.GetY()) / cellHeight;
-			common::XY<size_t> worldPosition = { cellColumn , cellRow };
-			if (game::World::GetKnownState(worldPosition) == game::world::KnownState::UNKNOWN)
-			{
-				ss << CELL_UNKNOWN;
-			}
-			else
-			{
-				auto creature = game::Creatures::GetInstance(worldPosition);
-				if (creature)
-				{
-					ss << creature.value().descriptor.name;
-				}
-				else
-				{
-					auto shoppe = game::Shoppes::Read(worldPosition);
-					if (shoppe)
-					{
-						auto& descriptor = game::shoppe::GetDescriptor(shoppe.value());
-						ss << descriptor.name;
-					}
-					else
-					{
-						ss << CELL_EMPTY;
-					}
-				}
-			}
+			return CELL_UNKNOWN;
 		}
-		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, ss.str());
+
+		auto creature = game::Creatures::GetInstance(worldPosition);
+		if (creature)
+		{
+			return creature.value().descriptor.name;
+		}
+
+		auto shoppe = game::Shoppes::Read(worldPosition);
+		if (shoppe)
+		{
+			auto& descriptor = game::shoppe::GetDescriptor(shoppe.value());
+			return descriptor.name;
+		}
+
+		return CELL_EMPTY;
+	}
+
+	static void UpdateMiniMapToolTip(const std::string& areaName, const common::XY<Sint32>& xy)
+	{
+		auto area = visuals::Areas::Get(LAYOUT_NAME, AREA_WORLD_MAP);
+		auto worldSize = game::World::GetSize();
+		size_t cellWidth = area.size.GetX() / worldSize.GetX();
+		size_t cellHeight = area.size.GetY() / worldSize.GetY();
+		size_t cellColumn = ((size_t)xy.GetX()) / cellWidth;
+		size_t cellRow = ((size_t)xy.GetY()) / cellHeight;
+		common::XY<size_t> worldPosition = { cellColumn , cellRow };
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, DetermineToolTip(worldPosition));
 	}
 
 	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>& xy)
