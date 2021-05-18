@@ -5,6 +5,7 @@
 #include "Game.World.Data.h"
 #include <map>
 #include <functional>
+#include <tuple>
 namespace game::world::Borders
 {
 	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;
@@ -69,67 +70,126 @@ namespace game::world::Borders
 		borders[IndexToString(index)] = (int)border;
 	}
 
+	world::Border GetNorthBorder(const common::XY<size_t>& position) 
+	{ 
+		return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position)); 
+	}
+
+	world::Border GetSouthBorder(const common::XY<size_t>& position)
+	{
+		return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
+	}
+
+	world::Border GetEastBorder(const common::XY<size_t>& position)
+	{
+		return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
+	}
+
+	world::Border GetWestBorder(const common::XY<size_t>& position)
+	{
+		return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
+	}
+
+	typedef std::function<world::Border(const common::XY<size_t>&)> BorderGetter;
+
+	const std::map<maze::Direction, std::tuple<BorderGetter, BorderGetter, BorderGetter>> borderGetter =
+	{
+		{maze::Direction::NORTH, {GetWestBorder,GetNorthBorder,GetEastBorder}},
+		{maze::Direction::EAST, {GetNorthBorder,GetEastBorder,GetSouthBorder}},
+		{maze::Direction::SOUTH, {GetEastBorder,GetSouthBorder,GetWestBorder}},
+		{maze::Direction::WEST, {GetSouthBorder,GetWestBorder,GetNorthBorder}},
+	};
+
+	const std::map<maze::Direction, BorderGetter> aheadBorderGetter =
+	{
+		{maze::Direction::NORTH, GetNorthBorder},
+		{maze::Direction::EAST, GetEastBorder},
+		{maze::Direction::SOUTH, GetSouthBorder},
+		{maze::Direction::WEST, GetWestBorder},
+	};
+
+	const std::map<maze::Direction, BorderGetter> leftBorderGetter =
+	{
+		{maze::Direction::NORTH, GetWestBorder},
+		{maze::Direction::EAST, GetNorthBorder},
+		{maze::Direction::SOUTH, GetEastBorder},
+		{maze::Direction::WEST, GetSouthBorder},
+	};
+
+	const std::map<maze::Direction, BorderGetter> rightBorderGetter =
+	{
+		{maze::Direction::NORTH, GetEastBorder},
+		{maze::Direction::EAST, GetSouthBorder},
+		{maze::Direction::SOUTH, GetWestBorder},
+		{maze::Direction::WEST, GetNorthBorder},
+	};
+
 	world::Border GetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		switch (direction)
-		{
-		case maze::Direction::NORTH:
-			return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position));
-		case maze::Direction::EAST:
-			return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
-		case maze::Direction::SOUTH:
-			return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
-		default:
-			return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
-		}
+		return aheadBorderGetter.find(direction)->second(position);
 	}
+
+	void SetNorthBorder(const common::XY<size_t>& position, world::Border border)
+	{
+		SetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position), border);
+	}
+
+	void SetSouthBorder(const common::XY<size_t>& position, world::Border border)
+	{
+		SetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position), border);
+	}
+
+	void SetEastBorder(const common::XY<size_t>& position, world::Border border)
+	{
+		SetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position), border);
+	}
+
+	void SetWestBorder(const common::XY<size_t>& position, world::Border border)
+	{
+		SetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position), border);
+	}
+
+	const std::map<maze::Direction, std::function<void(const common::XY<size_t>&, world::Border)>> aheadBorderSetter =
+	{
+		{maze::Direction::NORTH, SetNorthBorder},
+		{maze::Direction::EAST, SetEastBorder},
+		{maze::Direction::SOUTH, SetSouthBorder},
+		{maze::Direction::WEST, SetWestBorder},
+	};
 
 	void SetBorderAhead(const common::XY<size_t>& position, const maze::Direction& direction, const world::Border& border)
 	{
-		switch (direction)
-		{
-		case maze::Direction::NORTH:
-			SetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position), border);
-			break;
-		case maze::Direction::EAST:
-			SetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position), border);
-			break;
-		case maze::Direction::SOUTH:
-			SetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position), border);
-			break;
-		default:
-			SetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position), border);
-			break;
-		}
+		aheadBorderSetter.find(direction)->second(position, border);
 	}
 
 	world::Border GetBorderLeft(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		switch (direction)
-		{
-		case maze::Direction::NORTH:
-			return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
-		case maze::Direction::EAST:
-			return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position));
-		case maze::Direction::SOUTH:
-			return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
-		default:
-			return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
-		}
+		return leftBorderGetter.find(direction)->second(position);
 	}
 
 	world::Border GetBorderRight(const common::XY<size_t>& position, const maze::Direction& direction)
 	{
-		switch (direction)
+		return rightBorderGetter.find(direction)->second(position);
+	}
+
+	static world::Border DetermineBorder(const std::shared_ptr<maze::Cell>& cell, const maze::Direction& direction)
+	{
+		auto mazeDoor = cell->GetDoor(direction);
+		if (mazeDoor && *mazeDoor.value() == maze::Door::OPEN)
 		{
-		case maze::Direction::NORTH:
-			return GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position));
-		case maze::Direction::EAST:
-			return GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position));
-		case maze::Direction::SOUTH:
-			return GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position));
-		default:
-			return GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position));
+			auto nextCell = cell->GetNeighbor(direction);
+			if (cell->IsDeadEnd() || nextCell.value()->IsDeadEnd())
+			{
+				return world::Border::LOCK;
+			}
+			else
+			{
+				return world::Border::DOOR;
+			}
+		}
+		else
+		{
+			return world::Border::WALL;
 		}
 	}
 
@@ -139,44 +199,11 @@ namespace game::world::Borders
 		{
 			for (auto row = 0; row < maze.GetRows(); ++row)
 			{
-				size_t nsBorderIndex = column + row * NS_BORDER_STRIDE;
-				size_t ewBorderIndex = column + row * EW_BORDER_STRIDE;
-
+				common::XY<size_t> position = { (size_t)column, (size_t)row };
 				auto cell = maze.GetCell((int)column, (int)row);
-				auto northDoor = cell.value()->GetDoor(maze::Direction::NORTH);
-				if (northDoor && *northDoor.value() == maze::Door::OPEN)
-				{
-					auto nextCell = cell.value()->GetNeighbor(maze::Direction::NORTH);
-					if (cell.value()->IsDeadEnd() || nextCell.value()->IsDeadEnd())
-					{
-						SetNSBorder(nsBorderIndex, world::Border::LOCK);
-					}
-					else
-					{
-						SetNSBorder(nsBorderIndex, world::Border::DOOR);
-					}
-				}
-				else
-				{
-					SetNSBorder(nsBorderIndex, world::Border::WALL);
-				}
-				auto westDoor = cell.value()->GetDoor(maze::Direction::WEST);
-				if (westDoor && *westDoor.value() == maze::Door::OPEN)
-				{
-					auto nextCell = cell.value()->GetNeighbor(maze::Direction::WEST);
-					if (cell.value()->IsDeadEnd() || nextCell.value()->IsDeadEnd())
-					{
-						SetEWBorder(ewBorderIndex, world::Border::LOCK);
-					}
-					else
-					{
-						SetEWBorder(ewBorderIndex, world::Border::DOOR);
-					}
-				}
-				else
-				{
-					SetEWBorder(ewBorderIndex, world::Border::WALL);
-				}
+
+				SetNorthBorder(position, DetermineBorder(cell.value(), maze::Direction::NORTH));
+				SetWestBorder(position, DetermineBorder(cell.value(), maze::Direction::WEST));
 			}
 		}
 	}
@@ -184,10 +211,10 @@ namespace game::world::Borders
 	bool IsExitable(const common::XY<size_t>& position)
 	{
 		return
-			GetNSBorder(indexPlotters.find(IndexPlotter::NORTH)->second(position)) == game::world::Border::DOOR ||
-			GetNSBorder(indexPlotters.find(IndexPlotter::SOUTH)->second(position)) == game::world::Border::DOOR ||
-			GetEWBorder(indexPlotters.find(IndexPlotter::EAST)->second(position)) == game::world::Border::DOOR ||
-			GetEWBorder(indexPlotters.find(IndexPlotter::WEST)->second(position)) == game::world::Border::DOOR;
+			GetNorthBorder(position) == game::world::Border::DOOR ||
+			GetEastBorder(position) == game::world::Border::DOOR ||
+			GetSouthBorder(position) == game::world::Border::DOOR ||
+			GetWestBorder(position) == game::world::Border::DOOR;
 	}
 
 	bool CanSpawnAvatar(const common::XY<size_t>& position)
