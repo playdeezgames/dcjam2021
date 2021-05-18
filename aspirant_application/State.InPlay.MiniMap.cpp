@@ -111,7 +111,23 @@ namespace state::in_play::MiniMap
 			else
 			{
 				auto creature = game::Creatures::GetInstance(worldPosition);
-				ss << ((creature.has_value()) ? (creature.value().descriptor.name) : (CELL_EMPTY));
+				if (creature)
+				{
+					ss << creature.value().descriptor.name;
+				}
+				else
+				{
+					auto shoppe = game::Shoppes::Read(worldPosition);
+					if (shoppe)
+					{
+						auto& descriptor = game::shoppe::GetDescriptor(shoppe.value());
+						ss << descriptor.name;
+					}
+					else
+					{
+						ss << CELL_EMPTY;
+					}
+				}
 			}
 		}
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, ss.str());

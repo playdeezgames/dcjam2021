@@ -2771,6 +2771,13 @@
         "width": 16,
         "height": 16
     },
+    "MapCellTrade": {
+        "texture": "world",
+        "x": 80,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
     "MapCellUnexplored": {
         "texture": "world",
         "x": 32,

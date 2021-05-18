@@ -10,6 +10,7 @@
 #include "Visuals.Colors.h"
 #include "Visuals.Data.Colors.h"
 #include "Game.World.Borders.h"
+#include "Game.Shoppes.h"
 namespace visuals::WorldMap
 {
 	const std::string MAP_CELL_BASE = "MapCellBase";
@@ -36,6 +37,7 @@ namespace visuals::WorldMap
 	const std::string AVATAR_SOUTH = "AvatarSouth";
 	const std::string AVATAR_WEST = "AvatarWest";
 	const std::string DANGER = "MapCellDanger";
+	const std::string TRADE = "MapCellTrade";
 
 	static std::map<maze::Direction, std::string> wallSprites =
 	{
@@ -126,6 +128,14 @@ namespace visuals::WorldMap
 		}
 	}
 
+	static void DrawTrade(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
+		if (game::Shoppes::Read(cell))
+		{
+			visuals::Sprites::Draw(TRADE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		}
+	}
+
 	typedef std::function<void(const std::shared_ptr<SDL_Renderer>&, const common::XY<int>&, const common::XY<size_t>&, const maze::Direction&)> CellDirectionDrawer;
 
 	static void DrawDirections(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell, const std::vector<CellDirectionDrawer>& cellDirectionDrawers)
@@ -153,6 +163,7 @@ namespace visuals::WorldMap
 		DrawDirections(renderer, plot, cell, { DrawWall , DrawLocked });
 		DrawAvatar(renderer, plot, cell);
 		DrawDanger(renderer, plot, cell);
+		DrawTrade(renderer, plot, cell);
 	}
 
 	static void DrawKnown(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
@@ -160,6 +171,7 @@ namespace visuals::WorldMap
 		visuals::Sprites::Draw(MAP_CELL_KNOWN, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		DrawDirections(renderer, plot, cell, { DrawKnownWall , DrawKnownLocked });
 		DrawDanger(renderer, plot, cell);
+		DrawTrade(renderer, plot, cell);
 	}
 
 	static void DrawUnknown(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>&)
