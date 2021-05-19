@@ -31,5 +31,9 @@
     "movement": "assets/images/movement.png",
     "cauldron": "assets/images/shoppes/cauldron.png",
     "bad-gnome": "assets/images/shoppes/bad-gnome.png",
+    "shop": "assets/images/shoppes/shop.png",
+    "hut": "assets/images/shoppes/hut.png",
+    "saloon": "assets/images/shoppes/saloon.png",
+    "food-truck": "assets/images/shoppes/food-truck.png",
     "trade":"assets/images/trade.png"
 }

@@ -17,6 +17,34 @@
         ]
     },
     {
+        "name":"Food Truck",
+        "image-id":"ShoppeFoodTruck",
+        "trades":[
+            {
+                "name": "Buy Food",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyFood",
+                "inputs":{
+                    "5":1
+                },
+                "outputs":{
+                    "0":5
+                }
+            },
+            {
+                "name": "Buy Coffee",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyFood",
+                "inputs":{
+                    "5":5
+                },
+                "outputs":{
+                    "4":1
+                }
+            }
+        ]
+    },
+    {
         "name":"Lawn Gnome",
         "image-id":"ShoppeGnome",
         "trades":[
