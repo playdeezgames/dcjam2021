@@ -485,6 +485,16 @@
         "visible": false
     },
     {
+        
+        "type": "Image",
+        "image-id": "ShoppeHut",
+        "sprite": "ShoppeHut",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
         "type": "Text",
         "text-id" : "ItemToolTip",
         "font": "default",

@@ -45,6 +45,34 @@
         ]
     },
     {
+        "name":"Hut",
+        "image-id":"ShoppeHut",
+        "trades":[
+            {
+                "name": "Buy Potion",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyPotion",
+                "inputs":{
+                    "5":10
+                },
+                "outputs":{
+                    "1":5
+                }
+            },
+            {
+                "name": "Buy Pr0n Scroll",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyScroll",
+                "inputs":{
+                    "5":3
+                },
+                "outputs":{
+                    "4":1
+                }
+            }
+        ]
+    },
+    {
         "name":"Saloon",
         "image-id":"ShoppeSaloon",
         "trades":[
