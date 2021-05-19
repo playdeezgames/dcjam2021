@@ -15,7 +15,8 @@ namespace game
 			BRIBE,
 			TELEPORT,
 			ATTITUDE,
-			JOKER
+			JOKER,
+			SOAP
 		};
 		struct Descriptor
 		{

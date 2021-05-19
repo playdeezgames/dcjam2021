@@ -280,6 +280,21 @@ namespace game::avatar::Items
 		}, ResultToSfx);
 	}
 
+	static std::optional<std::string> UseSoap(int item)
+	{
+		return ConsumeItem(item, [](const game::item::Descriptor& descriptor)
+		{
+			auto count = game::avatar::Items::Read(game::Avatar::GetDescriptor().soiledTrousersItemId);
+			if (count > 0)
+			{
+				game::avatar::Items::Remove(game::Avatar::GetDescriptor().soiledTrousersItemId, 1);
+				game::avatar::Items::Add(game::Avatar::GetDescriptor().trousersItemId, 1);
+				return ToConsumeItemResult(descriptor);
+			}
+			return ConsumeItemResult::NOT_CONSUMED;
+		}, ResultToSfx);
+	}
+
 	static void LoseTeleportItems()
 	{
 		auto worldSize = game::World::GetSize();
@@ -329,7 +344,8 @@ namespace game::avatar::Items
 		{game::item::Usage::TELEPORT, Teleport},
 		{game::item::Usage::BRIBE, [](int) { return std::nullopt; }},
 		{game::item::Usage::ATTITUDE, [](int) { return std::nullopt; }},
-		{game::item::Usage::JOKER, [](int) { return std::nullopt; }}
+		{game::item::Usage::JOKER, [](int) { return std::nullopt; }},
+		{game::item::Usage::SOAP, UseSoap}
 	};
 
 	std::optional<std::string> Use(std::optional<int> item)

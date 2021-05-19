@@ -161,9 +161,9 @@
         "take-area-id":"TakePr0n"
     },
     "14":{
-        "initial-inventory":[1,1,1],
         "name":"Soap",
-        "combat":4,
+        "non-combat":8,
+        "combat":6,
         "image-id":"Soap",
         "number-appearing": [6,6,6],
         "combat-text":"Drop Soap",
