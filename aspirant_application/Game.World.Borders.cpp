@@ -6,6 +6,8 @@
 #include <map>
 #include <functional>
 #include <tuple>
+
+#include "Game.Shoppes.h"
 namespace game::world::Borders
 {
 	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;

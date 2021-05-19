@@ -73,6 +73,7 @@
         "drunkenness":-5
     },
     "5":{
+        "initial-inventory":[10,10,10],
         "name":"Jools",
         "combat":4,
         "image-id":"Jools",

@@ -465,6 +465,16 @@
         "visible": false
     },
     {
+        
+        "type": "Image",
+        "image-id": "ShoppeFoodTruck",
+        "sprite": "ShoppeFoodTruck",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
         "type": "Text",
         "text-id" : "ItemToolTip",
         "font": "default",
