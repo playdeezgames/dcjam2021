@@ -106,7 +106,6 @@
         "drunkenness":50
     },
     "8":{
-        "initial-inventory":[1,1,1],
         "name":"Turd",
         "combat":6,
         "image-id":"Turd",

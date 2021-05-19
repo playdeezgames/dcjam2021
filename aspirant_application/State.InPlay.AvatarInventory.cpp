@@ -44,7 +44,14 @@ namespace state::in_play::AvatarInventory
 		auto itemUsed = visuals::AvatarInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy, buttons);
 		if (itemUsed.has_value())
 		{
-			UseItem();
+			if (buttons == SDL_BUTTON_RIGHT)
+			{
+				DropItem();
+			}
+			else
+			{
+				UseItem();
+			}
 		}
 		return itemUsed.has_value();
 	}
