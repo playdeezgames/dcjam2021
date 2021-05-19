@@ -419,6 +419,32 @@
         "height":32
     },
     {
+        "type": "Image",
+        "image-id": "Soap",
+        "sprite": "ItemSoap",
+        "color": "White",
+        "x": 148,
+        "y": 292,
+        "visible": false
+    },
+    {
+        "type": "Image",
+        "image-id": "TakeSoap",
+        "sprite": "ItemTake",
+        "color": "White",
+        "x": 148,
+        "y": 292,
+        "visible": false
+    },
+    {
+        "type": "Area",
+        "area-id": "TakeSoap",
+        "x": 148,
+        "y": 292,
+        "width": 32,
+        "height":32
+    },
+    {
         
         "type": "Image",
         "image-id": "ShoppeToilet",

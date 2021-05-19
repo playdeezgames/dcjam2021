@@ -3065,6 +3065,13 @@
         "width": 32,
         "height": 32
     },
+    "ItemSoap":{
+        "texture": "items",
+        "x": 192,
+        "y": 32,
+        "width": 32,
+        "height": 32
+    },
     "ItemTake":{
         "texture": "items",
         "x": 224,

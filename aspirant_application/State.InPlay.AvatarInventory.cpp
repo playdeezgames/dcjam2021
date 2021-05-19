@@ -19,6 +19,7 @@ namespace state::in_play::AvatarInventory
 	static void DropItem()
 	{
 		game::avatar::Items::Drop(visuals::AvatarInventory::GetItem(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY));
+		application::OnEnter::Handle();
 	}
 
 	const std::map<Command, std::function<void()>> commandHandlers =

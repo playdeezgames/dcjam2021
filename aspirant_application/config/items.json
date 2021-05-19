@@ -159,5 +159,15 @@
         "combat-text":"Give Pr0n",
         "take-image-id":"TakePr0n",
         "take-area-id":"TakePr0n"
+    },
+    "14":{
+        "initial-inventory":[1,1,1],
+        "name":"Soap",
+        "combat":4,
+        "image-id":"Soap",
+        "number-appearing": [6,6,6],
+        "combat-text":"Drop Soap",
+        "take-image-id":"TakeSoap",
+        "take-area-id":"TakeSoap"
     }
 }
