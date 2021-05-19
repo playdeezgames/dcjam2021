@@ -45,6 +45,45 @@
         ]
     },
     {
+        "name":"Saloon",
+        "image-id":"ShoppeSaloon",
+        "trades":[
+            {
+                "name": "Buy Beer",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyBeer",
+                "inputs":{
+                    "5":20
+                },
+                "outputs":{
+                    "2":1
+                }
+            },
+            {
+                "name": "Buy Wine",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyWine",
+                "inputs":{
+                    "5":10
+                },
+                "outputs":{
+                    "3":1
+                }
+            },
+            {
+                "name": "Buy Booze",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuyBooze",
+                "inputs":{
+                    "5":25
+                },
+                "outputs":{
+                    "7":1
+                }
+            }
+        ]
+    },
+    {
         "name":"Lawn Gnome",
         "image-id":"ShoppeGnome",
         "trades":[
