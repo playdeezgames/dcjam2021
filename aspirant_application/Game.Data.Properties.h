@@ -45,7 +45,6 @@ namespace game::data::Properties
 	const std::string POOP_THRESHOLD = "poop-threshold";
 	const std::string PREFER_DEAD_ENDS = "prefer-dead-ends";
 	const std::string QUANTITY = "quantity";
-	const std::string ROOM_INVENTORIES = "room-inventories";
 	const std::string ROW = "row";
 	const std::string SFX = "sfx";
 	const std::string SFX_SUCCESS = "sfx-success";

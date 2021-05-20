@@ -1,40 +1,45 @@
-#include "Game.World.Items.h"
-#include <map>
-#include <vector>
-#include "Common.RNG.h"
-#include "Game.World.h"
-#include "Game.Item.h"
-#include "Game.h"
-#include "Game.Data.Properties.h"
 #include <sstream>
-#include <algorithm>
-#include "Data.Stores.h"
+#include "Common.RNG.h"
+#include "Game.h"
 #include "Game.Avatar.h"
+#include "Game.Data.Properties.h"
+#include "Game.Shoppes.h"
+#include "Game.World.h"
 #include "Game.World.Borders.h"
 #include "Game.World.Data.h"
-#include "Game.Shoppes.h"
-namespace game::world::Items
+#include "Game.World.Items.h"
+namespace game::world::items::Data
 {
-	static nlohmann::json& GetRoomInventories()
+	const std::string ROOM_INVENTORIES = "room-inventories";
+
+	static nlohmann::json& RoomInventories()
 	{
 		auto& data = game::GetData();
-		if (data.count(game::data::Properties::ROOM_INVENTORIES) == 0)
+		if (data.count(ROOM_INVENTORIES) == 0)
 		{
-			data[game::data::Properties::ROOM_INVENTORIES] = nlohmann::json();
+			data[ROOM_INVENTORIES] = nlohmann::json();
 		}
-		return data[game::data::Properties::ROOM_INVENTORIES];
+		return data[ROOM_INVENTORIES];
 	}
 
-	static nlohmann::json& GetRoomInventory(const common::XY<size_t>& xy)
+	static nlohmann::json& RoomInventory(const common::XY<size_t>& xy)
 	{
 		auto roomKey = game::world::Data::XYToRoomKey(xy);
-		auto& inventories = GetRoomInventories();
+		auto& inventories = RoomInventories();
 		if (inventories.count(roomKey) == 0)
 		{
 			inventories[roomKey] = nlohmann::json();
 		}
 		return inventories[roomKey];
 	}
+
+	static void Clear()
+	{
+		RoomInventories().clear();
+	}
+}
+namespace game::world::Items
+{
 
 	static bool TryPopulateItem(int item)
 	{
@@ -88,7 +93,7 @@ namespace game::world::Items
 
 	void Reset(const game::Difficulty& difficulty)
 	{
-		GetRoomInventories().clear();
+		items::Data::Clear();
 		PopulateItems(difficulty);
 		PopulateKeys();
 	}
@@ -102,7 +107,7 @@ namespace game::world::Items
 
 	size_t GetRoomInventory(const common::XY<size_t>& location, const int& item)
 	{
-		auto& roomInventory = GetRoomInventory(location);
+		auto& roomInventory = items::Data::RoomInventory(location);
 		if (roomInventory.count(IntToItemKey(item)) > 0)
 		{
 			return roomInventory[IntToItemKey(item)];
@@ -112,8 +117,9 @@ namespace game::world::Items
 
 	static void SetRoomInventory(const common::XY<size_t>& location, const int& item, size_t amount)
 	{
-		auto& roomInventory = GetRoomInventory(location);
-		roomInventory[IntToItemKey(item)] = amount;
+		auto itemKey = IntToItemKey(item);
+		auto& roomInventory = items::Data::RoomInventory(location);
+		roomInventory[itemKey] = amount;
 	}
 
 	bool IsPresent(const common::XY<size_t>& location, const int& item)
