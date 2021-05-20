@@ -1,7 +1,7 @@
 {
     "0":{
         "name":"Food",
-        "initial-inventory": [5,5,5],
+        "initial-inventory": [10,5,5],
         "non-combat": 0,
         "combat": 4,
         "amount": 5,
@@ -15,7 +15,7 @@
     },
     "1":{
         "name":"Potion",
-        "initial-inventory": [2,2,2],
+        "initial-inventory": [5,2,2],
         "non-combat":1,
         "combat":1,
         "amount": 30,
@@ -34,7 +34,7 @@
         "duration": 10,
         "image-id":"Beer",
         "sfx-success":"beer",
-        "number-appearing": [9,9,9],
+        "number-appearing": [18,9,9],
         "combat-text":"Drink Beer",
         "take-image-id":"TakeBeer",
         "take-area-id":"TakeBeer",
@@ -49,7 +49,7 @@
         "duration": 25,
         "image-id":"Wine",
         "sfx-success":"wine",
-        "number-appearing": [9,9,9],
+        "number-appearing": [18,9,9],
         "combat-text":"Drink Wine",
         "take-image-id":"TakeWine",
         "take-area-id":"TakeWine",
@@ -65,7 +65,7 @@
         "amount-stacks":true,
         "image-id":"Coffee",
         "sfx-success":"coffee",
-        "number-appearing": [9,9,9],
+        "number-appearing": [18,9,9],
         "combat-text":"Drink Coffee",
         "take-image-id":"TakeCoffee",
         "take-area-id":"TakeCoffee",
@@ -73,7 +73,6 @@
         "drunkenness":-5
     },
     "5":{
-        "initial-inventory":[10,10,10],
         "name":"Jools",
         "combat":4,
         "image-id":"Jools",
@@ -99,7 +98,7 @@
         "non-combat":5,
         "combat":5,
         "image-id":"Booze",
-        "number-appearing": [9,9,9],
+        "number-appearing": [18,9,9],
         "combat-text":"Drink Booze",
         "take-image-id":"TakeBooze",
         "take-area-id":"TakeBooze",
@@ -120,7 +119,7 @@
         "name":"Joker",
         "combat":7,
         "image-id":"Joker",
-        "number-appearing": [9,9,9],
+        "number-appearing": [18,9,9],
         "combat-text":"Play Joker",
         "take-image-id":"TakeJoker",
         "take-area-id":"TakeJoker",
@@ -136,7 +135,7 @@
     "11":{
         "name":"Map Fragment",
         "image-id":"MapFragment",
-        "number-appearing": [12,12,12],
+        "number-appearing": [24,12,12],
         "take-image-id":"TakeMapFragment",
         "take-area-id":"TakeMapFragment"
     },
@@ -155,7 +154,7 @@
         "name":"Pr0n Scroll",
         "combat":4,
         "image-id":"Pr0n",
-        "number-appearing": [18,18,18],
+        "number-appearing": [36,18,18],
         "combat-text":"Give Pr0n",
         "take-image-id":"TakePr0n",
         "take-area-id":"TakePr0n"
@@ -165,7 +164,7 @@
         "non-combat":8,
         "combat":6,
         "image-id":"Soap",
-        "number-appearing": [6,6,6],
+        "number-appearing": [12,6,6],
         "combat-text":"Drop Soap",
         "take-image-id":"TakeSoap",
         "take-area-id":"TakeSoap"

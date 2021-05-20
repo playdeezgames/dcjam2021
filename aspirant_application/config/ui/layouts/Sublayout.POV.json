@@ -541,7 +541,27 @@
     {
         
         "type": "Image",
-        "image-id": "Wyvern",
+        "image-id": "Wyvern1",
+        "sprite": "CreatureWyvern",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "Wyvern2",
+        "sprite": "CreatureWyvern",
+        "color": "White",
+        "x": 0,
+        "y": 0,
+        "visible": false
+    },
+    {
+        
+        "type": "Image",
+        "image-id": "Wyvern3",
         "sprite": "CreatureWyvern",
         "color": "White",
         "x": 0,

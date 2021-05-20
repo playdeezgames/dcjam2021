@@ -11,26 +11,35 @@ namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";
 	const std::string MENU_ID = "Start";
-	const std::string AREA_NEW_GAME = "NewGame";
+	const std::string AREA_NEW_GAME_EASY = "NewGameEasy";
+	const std::string AREA_NEW_GAME_NORMAL = "NewGameNormal";
+	const std::string AREA_NEW_GAME_HARD = "NewGameHard";
 	const std::string AREA_CONTINUE_GAME = "ContinueGame";
 	const std::string AREA_BACK = "Back";
 
 	enum class StartGameItem
 	{
-		NEW_GAME,
 		CONTINUE_GAME,
+		NEW_GAME_EASY,
+		NEW_GAME_NORMAL,
+		NEW_GAME_HARD,
 		BACK
 	};
 
-	static void NewGame()
+	static std::function<void()> NewGame(const game::Difficulty& difficulty)
 	{
-		game::Reset(game::Difficulty::NORMAL);
-		common::audio::Sfx::Play(application::UIState::EnterGame());
+		return [difficulty]()
+		{
+			game::Reset(difficulty);
+			common::audio::Sfx::Play(application::UIState::EnterGame());
+		};
 	}
 
 	const std::map<StartGameItem, std::function<void()>> activators =
 	{
-		{ StartGameItem::NEW_GAME, NewGame },
+		{ StartGameItem::NEW_GAME_EASY, NewGame(game::Difficulty::EASY) },
+		{ StartGameItem::NEW_GAME_NORMAL, NewGame(game::Difficulty::NORMAL) },
+		{ StartGameItem::NEW_GAME_HARD, NewGame(game::Difficulty::HARD) },
 		{ StartGameItem::CONTINUE_GAME, ::application::UIState::GoTo(::UIState::LOAD_GAME) },
 		{ StartGameItem::BACK, ::application::UIState::GoTo(::UIState::MAIN_MENU) }
 	};
@@ -56,7 +65,9 @@ namespace state::Start
 
 	const std::map<std::string, StartGameItem> areaMenuItems =
 	{
-		{ AREA_NEW_GAME,  StartGameItem::NEW_GAME},
+		{ AREA_NEW_GAME_EASY,  StartGameItem::NEW_GAME_EASY},
+		{ AREA_NEW_GAME_NORMAL,  StartGameItem::NEW_GAME_NORMAL},
+		{ AREA_NEW_GAME_HARD,  StartGameItem::NEW_GAME_HARD},
 		{ AREA_CONTINUE_GAME,  StartGameItem::CONTINUE_GAME},
 		{ AREA_BACK,  StartGameItem::BACK}
 	};
