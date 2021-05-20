@@ -32,10 +32,10 @@ namespace game
 	void Reset(const Difficulty& difficulty)
 	{
 		game::World::Reset(difficulty);
-		game::world::Items::Reset(difficulty);
 		game::avatar::Statistics::Reset();
 		game::avatar::Items::Reset(difficulty);
 		game::Shoppes::Reset();
+		game::world::Items::Reset(difficulty);
 		game::Creatures::Reset(difficulty);
 		game::Avatar::Reset();
 	}

@@ -12,6 +12,7 @@
 #include "Game.Avatar.h"
 #include "Game.World.Borders.h"
 #include "Game.World.Data.h"
+#include "Game.Shoppes.h"
 namespace game::world::Items
 {
 	static nlohmann::json& GetRoomInventories()
@@ -35,29 +36,32 @@ namespace game::world::Items
 		return inventories[roomKey];
 	}
 
-	static void PopulateItem(int item)
+	static bool TryPopulateItem(int item)
 	{
 		auto worldSize = game::World::GetSize();
-		size_t column = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
-		size_t row = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
-		Add({column, row}, item, 1);
+		common::XY<size_t> position = { common::RNG::FromRange(0u, worldSize.GetX()), common::RNG::FromRange(0u, worldSize.GetY()) };
+		if (!game::Shoppes::Read(position))
+		{
+			Add(position, item, 1);
+			return true;
+		}
+		return false;
 	}
 
 	static void PopulateItems(const game::Difficulty& difficulty)
 	{
-		size_t totalCount = 0;
 		for (auto item : game::item::All())
 		{
-			auto descriptor = game::item::GetDescriptor(item);
+			auto& descriptor = game::item::GetDescriptor(item);
 			auto count = descriptor.numberAppearing[(int)difficulty];
 			while (count > 0)
 			{
-				totalCount++;
-				PopulateItem(item);
-				count--;
+				if (TryPopulateItem(item))
+				{
+					count--;
+				}
 			}
 		}
-		totalCount = totalCount;
 	}
 
 	static void PopulateKeys()
