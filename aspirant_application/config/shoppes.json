@@ -73,6 +73,35 @@
         ]
     },
     {
+        "name":"Dry Cleaners",
+        "image-id":"ShoppeDryCleaner",
+        "trades":[
+            {
+                "name": "Buy Soap",
+                "not-available": "Not enough Jools!",
+                "sfx":"BuySoap",
+                "inputs":{
+                    "5":3
+                },
+                "outputs":{
+                    "14":1
+                }
+            },
+            {
+                "name": "Clean Trousers",
+                "not-available": "Not dirty or not enough Jools!",
+                "sfx":"CleanTrousers",
+                "inputs":{
+                    "5":2,
+                    "12":1
+                },
+                "outputs":{
+                    "6":1
+                }
+            }
+        ]
+    },
+    {
         "name":"Saloon",
         "image-id":"ShoppeSaloon",
         "trades":[
