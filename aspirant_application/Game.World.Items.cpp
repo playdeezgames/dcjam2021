@@ -73,7 +73,7 @@ namespace game::world::Items
 	{
 		int keyItem = game::Avatar::GetDescriptor().keyItemId;
 		auto worldSize = game::World::GetSize();
-		auto deadEnds = game::world::Borders::GetDeadEnds();
+		auto deadEnds = game::world::Borders::GetDeadEnds([](const common::XY<size_t>&) { return true; });
 		size_t keyCount = deadEnds.size();
 		while (keyCount > 0)
 		{

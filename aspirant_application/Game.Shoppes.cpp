@@ -138,7 +138,7 @@ namespace game::Shoppes
 	{
 		auto worldSize = game::World::GetSize();
 		GetShoppes().clear();
-		auto deadEnds = game::world::Borders::GetDeadEnds();
+		auto deadEnds = game::world::Borders::GetDeadEnds([](const common::XY<size_t>&) { return true; });
 		for (size_t index = 0; index < game::shoppe::All().size(); ++index)
 		{
 			bool available = false;

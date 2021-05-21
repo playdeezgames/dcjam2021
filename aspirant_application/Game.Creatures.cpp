@@ -151,7 +151,7 @@ namespace game::Creatures
 	{
 		auto worldSize = game::World::GetSize();
 		GetCreatures().clear();
-		auto deadEnds = game::world::Borders::GetDeadEnds();
+		auto deadEnds = game::world::Borders::GetDeadEnds([](const common::XY<size_t>& position) { return !game::Shoppes::Read(position); });
 		int index = 0;
 		for (auto& creature : game::creature::All())
 		{

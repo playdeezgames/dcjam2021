@@ -6,7 +6,6 @@
 #include <map>
 #include <functional>
 #include <tuple>
-#include "Game.Shoppes.h"
 namespace game::world::Borders
 {
 	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;
@@ -204,7 +203,7 @@ namespace game::world::Borders
 		return !game::Creatures::GetInstance(position) && IsExitable(position);
 	}
 
-	std::vector<common::XY<size_t>> GetDeadEnds()
+	std::vector<common::XY<size_t>> GetDeadEnds(std::function<bool(const common::XY<size_t>&)> filter)
 	{
 		std::vector<common::XY<size_t>> result;
 		auto worldSize = game::World::GetSize();
@@ -212,7 +211,7 @@ namespace game::world::Borders
 		{
 			for (size_t y = 0u; y < worldSize.GetY(); ++y)
 			{
-				if (!IsExitable({ x,y }) && !game::Shoppes::Read({ x,y }))
+				if (!IsExitable({ x,y }) && filter({ x,y }))
 				{
 					result.push_back({ x,y });
 				}
