@@ -1,6 +1,152 @@
 [
     {
-        "index":0,
+        "name":"Werewolf",
+        "image-id":"Werewolf",
+        "health":250,
+        "attack":25,
+        "defend":10,
+        "number-appearing":[2,4,6],
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":5,
+            "8":6,
+            "12":3,
+            "14":1
+        },
+        "prefer-dead-ends":true,
+        "drops":{
+            "none": 1,
+            "5":{
+                "weight": 1,
+                "quantity": 50
+            }
+        }
+    },
+    {
+        "name":"Wyvern",
+        "image-id":"Wyvern1",
+        "health":375,
+        "attack":25,
+        "defend":15,
+        "number-appearing":[1,0,0],
+        "bribes":{
+            "5":100
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":4,
+            "8":1,
+            "12":3,
+            "14":1
+        },
+        "prefer-dead-ends":true,
+        "drops":{
+            "5":{
+                "weight": 1,
+                "quantity": 100
+            }
+        }
+    },
+    {
+        "name":"Wyvern",
+        "image-id":"Wyvern2",
+        "health":500,
+        "attack":25,
+        "defend":15,
+        "number-appearing":[0,1,0],
+        "bribes":{
+            "5":100
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":4,
+            "8":1,
+            "12":3,
+            "14":1
+        },
+        "prefer-dead-ends":true,
+        "drops":{
+            "5":{
+                "weight": 1,
+                "quantity": 100
+            }
+        }
+    },
+    {
+        "name":"Wyvern",
+        "image-id":"Wyvern3",
+        "health":750,
+        "attack":25,
+        "defend":15,
+        "number-appearing":[0,0,1],
+        "bribes":{
+            "5":100
+        },
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "3":"woohoo",
+            "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":4,
+            "8":1,
+            "12":3,
+            "14":1
+        },
+        "prefer-dead-ends":true,
+        "drops":{
+            "5":{
+                "weight": 1,
+                "quantity": 100
+            }
+        }
+    },
+    {
+        "name":"Brain Tentacle",
+        "image-id":"BrainTentacle",
+        "health":300,
+        "attack":25,
+        "defend":0,
+        "number-appearing":[6,8,10],
+        "sfx":{
+            "0":"hitmonster",
+            "1":"deadmonster",
+            "2":"hitblocked",
+            "4":"shucks"
+        },
+        "attitude":0,
+        "attitudes":{
+            "6":1,
+            "8":2,
+            "12":3,
+            "14":1
+        },
+        "prefer-dead-ends":true
+    },
+    {
         "name":"Imp",
         "image-id":"Imp",
         "health":25,
@@ -35,7 +181,6 @@
         }
     },
     {
-        "index":1,
         "name":"Troglodyte",
         "image-id":"Troglodyte",
         "health":75,
@@ -74,30 +219,6 @@
         }
     },
     {
-        "index":2,
-        "name":"Brain Tentacle",
-        "image-id":"BrainTentacle",
-        "health":300,
-        "attack":25,
-        "defend":0,
-        "number-appearing":[6,8,10],
-        "sfx":{
-            "0":"hitmonster",
-            "1":"deadmonster",
-            "2":"hitblocked",
-            "4":"shucks"
-        },
-        "attitude":0,
-        "attitudes":{
-            "6":1,
-            "8":2,
-            "12":3,
-            "14":1
-        },
-        "prefer-dead-ends":true
-    },
-    {
-        "index":3,
         "name":"Bully Minion",
         "image-id":"BullyMinion",
         "health":100,
@@ -136,7 +257,6 @@
         }
     },
     {
-        "index":4,
         "name":"Evil Bat",
         "image-id":"EvilBat",
         "health":10,
@@ -162,7 +282,6 @@
         }
     },
     {
-        "index":5,
         "name":"Evil Minion",
         "image-id":"EvilMinion",
         "health":50,
@@ -197,135 +316,6 @@
             "5":{
                 "weight": 1,
                 "quantity": 5
-            }
-        }
-    },
-    {
-        "index":6,
-        "name":"Werewolf",
-        "image-id":"Werewolf",
-        "health":250,
-        "attack":25,
-        "defend":10,
-        "number-appearing":[2,4,6],
-        "sfx":{
-            "0":"hitmonster",
-            "1":"deadmonster",
-            "2":"hitblocked",
-            "4":"shucks"
-        },
-        "attitude":0,
-        "attitudes":{
-            "6":5,
-            "8":6,
-            "12":3,
-            "14":1
-        },
-        "prefer-dead-ends":true,
-        "drops":{
-            "none": 1,
-            "5":{
-                "weight": 1,
-                "quantity": 50
-            }
-        }
-    },
-    {
-        "index":7,
-        "name":"Wyvern",
-        "image-id":"Wyvern1",
-        "health":375,
-        "attack":25,
-        "defend":15,
-        "number-appearing":[1,0,0],
-        "bribes":{
-            "5":100
-        },
-        "sfx":{
-            "0":"hitmonster",
-            "1":"deadmonster",
-            "2":"hitblocked",
-            "3":"woohoo",
-            "4":"shucks"
-        },
-        "attitude":0,
-        "attitudes":{
-            "6":4,
-            "8":1,
-            "12":3,
-            "14":1
-        },
-        "prefer-dead-ends":true,
-        "drops":{
-            "5":{
-                "weight": 1,
-                "quantity": 100
-            }
-        }
-    },
-    {
-        "index":8,
-        "name":"Wyvern",
-        "image-id":"Wyvern2",
-        "health":500,
-        "attack":25,
-        "defend":15,
-        "number-appearing":[0,1,0],
-        "bribes":{
-            "5":100
-        },
-        "sfx":{
-            "0":"hitmonster",
-            "1":"deadmonster",
-            "2":"hitblocked",
-            "3":"woohoo",
-            "4":"shucks"
-        },
-        "attitude":0,
-        "attitudes":{
-            "6":4,
-            "8":1,
-            "12":3,
-            "14":1
-        },
-        "prefer-dead-ends":true,
-        "drops":{
-            "5":{
-                "weight": 1,
-                "quantity": 100
-            }
-        }
-    },
-    {
-        "index":9,
-        "name":"Wyvern",
-        "image-id":"Wyvern3",
-        "health":750,
-        "attack":25,
-        "defend":15,
-        "number-appearing":[0,0,1],
-        "bribes":{
-            "5":100
-        },
-        "sfx":{
-            "0":"hitmonster",
-            "1":"deadmonster",
-            "2":"hitblocked",
-            "3":"woohoo",
-            "4":"shucks"
-        },
-        "attitude":0,
-        "attitudes":{
-            "6":4,
-            "8":1,
-            "12":3,
-            "14":1
-        },
-        "prefer-dead-ends":true,
-        "drops":{
-            "5":{
-                "weight": 1,
-                "quantity": 100
             }
         }
     }
