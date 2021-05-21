@@ -306,7 +306,6 @@ namespace game::avatar::Items
 			{
 				while (Read(item.first)>0)
 				{
-					Drop(item.first);
 					size_t x = (size_t)common::RNG::FromRange(0, (int)worldSize.GetX());
 					size_t y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
 					auto xy = common::XY<size_t>(x, y);
