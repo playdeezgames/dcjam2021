@@ -17,7 +17,6 @@
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";
-	const std::string AREA_TAKE_FOOD = "TakeFood";
 	const std::string IMAGE_LEFT_SIDE = "LeftSide";
 	const std::string IMAGE_AHEAD = "Ahead";
 	const std::string IMAGE_RIGHT_SIDE = "RightSide";
@@ -27,6 +26,7 @@ namespace sublayout::POV
 	const std::string TEXT_AVATAR_STATE = "AvatarState";
 	const std::string TEXT_ITEM_TOOL_TIP = "ItemToolTip";
 	const std::string EMPTY_TOOLTIP = "";
+	const std::string AREA_TAKE_ALL = "TakeAll";
 
 
 	const std::map<game::world::Border, std::string> leftSides =
@@ -145,10 +145,12 @@ namespace sublayout::POV
 	{
 		std::string itemToolTip = "";
 		auto position = game::Avatar::GetPosition();
+		bool itemsOnFloor = false;
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
 			bool showItem = area == descriptor.takeAreaId && game::world::Items::IsPresent(position, item);
+			itemsOnFloor = itemsOnFloor || game::world::Items::IsPresent(position, item);
 			::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, showItem);
 			if (showItem)
 			{
@@ -161,6 +163,10 @@ namespace sublayout::POV
 				}
 				itemToolTip = ss.str();
 			}
+		}
+		if (area == AREA_TAKE_ALL && itemsOnFloor)
+		{
+			itemToolTip = "*Take All*";
 		}
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, itemToolTip);
 	}
@@ -184,10 +190,11 @@ namespace sublayout::POV
 	{
 		auto position = game::Avatar::GetPosition();
 		int index = 0;
+		bool takeAll = area == AREA_TAKE_ALL;
 		for (auto& item : game::item::All())
 		{
 			auto descriptor = game::item::GetDescriptor(item);
-			if (area == descriptor.takeAreaId && game::world::Items::IsPresent(position, item))
+			if ((takeAll || area == descriptor.takeAreaId) && game::world::Items::IsPresent(position, item))
 			{
 				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
 				size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
@@ -196,11 +203,11 @@ namespace sublayout::POV
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
 				visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
 				application::OnEnter::Handle();
-				return true;
+				if (!takeAll) { return true; }
 			}
 			index++;
 		}
-		return false;
+		return takeAll;
 	}
 
 	void Start()

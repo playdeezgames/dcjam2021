@@ -519,6 +519,14 @@
         "drop-shadow-y": 2
     },
     {
+        "type": "Area",
+        "area-id": "TakeAll",
+        "x": 90,
+        "y": 276,
+        "width": 180,
+        "height":16
+    },
+    {
         
         "type": "Image",
         "image-id": "Troglodyte",

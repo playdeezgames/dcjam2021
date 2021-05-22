@@ -41,9 +41,14 @@ namespace state::in_play::MiniMap
 		};
 	}
 
+	static bool HasShoppe()
+	{
+		return game::Shoppes::Read(game::Avatar::GetPosition()).has_value();
+	}
+
 	static void EnterTrade()
 	{
-		if (game::Shoppes::Read(game::Avatar::GetPosition()))
+		if (HasShoppe())
 		{
 			application::UIState::Write(::UIState::IN_PLAY_TRADE);
 		}
@@ -154,7 +159,7 @@ namespace state::in_play::MiniMap
 	static bool StartTrade()
 	{
 		EnterTrade();
-		return true;
+		return HasShoppe();
 	}
 
 	const std::map<std::string, std::function<bool()>> mouseUpHandlers =
