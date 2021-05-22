@@ -40,6 +40,7 @@ namespace game::data::Properties
 	const std::string NONE = "none";
 	const std::string NS_BORDERS = "ns-borders";
 	const std::string NUMBER_APPEARING = "number-appearing";
+	const std::string OUT_OF_STOCK = "out-of-stock";
 	const std::string OUTPUTS = "outputs";
 	const std::string POOP = "poop";
 	const std::string POOP_THRESHOLD = "poop-threshold";

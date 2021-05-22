@@ -12,6 +12,8 @@ namespace game::shoppe
 		std::string sfx;
 		std::map<int, size_t> inputs;
 		std::map<int, size_t> outputs;
+		std::string outOfStock;
+		std::vector<size_t> quantity;
 	};
 	struct Descriptor
 	{

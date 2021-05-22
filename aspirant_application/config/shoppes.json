@@ -4,8 +4,9 @@
         "image-id":"ShoppeToilet",
         "trades":[
             {
+                "quantity":[999,999,999],
                 "name": "Flush turd to receive Joker",
-                "not-available": "Yer out of turds!",
+                "out-of-stock": "It's full!",
                 "sfx":"FlushToilet",
                 "inputs":{
                     "8":1
@@ -21,8 +22,9 @@
         "image-id":"ShoppeFoodTruck",
         "trades":[
             {
+                "quantity":[999,999,999],
                 "name": "Buy Food",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of food!",
                 "sfx":"BuyFood",
                 "inputs":{
                     "5":1
@@ -32,8 +34,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Buy Coffee",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of coffee!",
                 "sfx":"BuyFood",
                 "inputs":{
                     "5":5
@@ -49,8 +52,9 @@
         "image-id":"ShoppeHut",
         "trades":[
             {
+                "quantity":[999,999,999],
                 "name": "Buy Potion",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of potions!",
                 "sfx":"BuyPotion",
                 "inputs":{
                     "5":10
@@ -60,8 +64,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Buy Pr0n Scroll",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of scrolls!",
                 "sfx":"BuyScroll",
                 "inputs":{
                     "5":3
@@ -77,8 +82,9 @@
         "image-id":"ShoppeDryCleaner",
         "trades":[
             {
+                "quantity":[999,999,999],
                 "name": "Buy Soap",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of soap!",
                 "sfx":"BuySoap",
                 "inputs":{
                     "5":3
@@ -88,8 +94,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Clean Trousers",
-                "not-available": "Not dirty or not enough Jools!",
+                "out-of-stock": "Out of stock!",
                 "sfx":"CleanTrousers",
                 "inputs":{
                     "5":2,
@@ -106,8 +113,9 @@
         "image-id":"ShoppeSaloon",
         "trades":[
             {
+                "quantity":[999,999,999],
                 "name": "Buy Beer",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of beer!",
                 "sfx":"BuyBeer",
                 "inputs":{
                     "5":20
@@ -117,8 +125,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Buy Wine",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of wine!",
                 "sfx":"BuyWine",
                 "inputs":{
                     "5":10
@@ -128,8 +137,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Buy Booze",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "Out of booze!",
                 "sfx":"BuyBooze",
                 "inputs":{
                     "5":25
@@ -145,8 +155,9 @@
         "image-id":"ShoppeGnome",
         "trades":[
             {
+                "quantity":[999,999,999],
                 "name": "Trade Food for Map",
-                "not-available": "Not enough Food!",
+                "out-of-stock": "Not hungry!",
                 "sfx":"MapFragment",
                 "inputs":{
                     "0":5
@@ -156,8 +167,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Trade Jools for Map",
-                "not-available": "Not enough Jools!",
+                "out-of-stock": "No more!",
                 "sfx":"MapFragment",
                 "inputs":{
                     "5":10
@@ -167,8 +179,9 @@
                 }
             },
             {
+                "quantity":[999,999,999],
                 "name": "Trade Booze for Map",
-                "not-available": "You haven't any booze!",
+                "out-of-stock": "Drunk enough!",
                 "sfx":"MapFragment",
                 "inputs":{
                     "7":1

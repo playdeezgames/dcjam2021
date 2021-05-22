@@ -35,12 +35,19 @@ namespace game::shoppe
 					{
 						outputs[common::Utility::StringToInt(output.key())] = output.value();
 					}
+					std::vector<size_t> quantities;
+					for (auto& quantity : entry[game::data::Properties::QUANTITY])
+					{
+						quantities.push_back((size_t)quantity);
+					}
 					trades.push_back(
 						{
 							entry[common::data::Properties::NAME],
 							entry[game::data::Properties::SFX],
 							inputs,
-							outputs
+							outputs,
+							entry[game::data::Properties::OUT_OF_STOCK],
+							quantities
 						});
 				}
 				descriptors.push_back

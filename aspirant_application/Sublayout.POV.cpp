@@ -186,6 +186,13 @@ namespace sublayout::POV
 		ClearTakeImagesAndItemToolTip();
 	}
 
+	static void PickUpItem(const int& item)
+	{
+		auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
+		size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
+		game::avatar::Items::Add(item, amount);
+	}
+
 	static bool OnMouseButtonUpInArea(const std::string& area)
 	{
 		auto position = game::Avatar::GetPosition();
@@ -196,17 +203,15 @@ namespace sublayout::POV
 			auto descriptor = game::item::GetDescriptor(item);
 			if ((takeAll || area == descriptor.takeAreaId) && game::world::Items::IsPresent(position, item))
 			{
-				auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
-				size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
-				game::avatar::Items::Add(item, amount);
+				PickUpItem(item);
 
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
 				visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
-				application::OnEnter::Handle();
 				if (!takeAll) { return true; }
 			}
 			index++;
 		}
+		application::OnEnter::Handle();
 		return takeAll;
 	}
 
