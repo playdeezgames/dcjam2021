@@ -64,16 +64,6 @@ namespace state::in_play::Trade
 		{AREA_TRADE_3, DoTrade(2u)}
 	};
 
-	static bool OnMouseButtonUpInArea(const std::string& area)
-	{
-		auto iter = mouseButtonUpAreaHandlers.find(area);
-		if (iter != mouseButtonUpAreaHandlers.end())
-		{
-			return iter->second();
-		}
-		return false;
-	}
-
 	const std::vector<std::string> menuItemIds =
 	{
 		MENU_ITEM_TRADE_1,
@@ -162,6 +152,18 @@ namespace state::in_play::Trade
 			visuals::Texts::SetText(LAYOUT_NAME, *iter, "");
 			++iter;
 		}
+	}
+
+	static bool OnMouseButtonUpInArea(const std::string& area)
+	{
+		auto iter = mouseButtonUpAreaHandlers.find(area);
+		if (iter != mouseButtonUpAreaHandlers.end())
+		{
+			UpdateCosts();
+			UpdateBenefits();
+			return iter->second();
+		}
+		return false;
 	}
 
 	static void UpdateTitle()
