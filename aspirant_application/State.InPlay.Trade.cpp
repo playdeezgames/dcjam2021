@@ -11,6 +11,7 @@
 #include "Visuals.Menus.h"
 #include "Common.Audio.h"
 #include "Game.Avatar.Items.h"
+#include <sstream>
 namespace state::in_play::Trade
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Trade";
@@ -80,8 +81,9 @@ namespace state::in_play::Trade
 		MENU_ITEM_TRADE_3
 	};
 
-	static void UpdateTradeMenuItemTexts(const std::vector<game::shoppe::TradeDescriptor>& descriptors)
+	static void UpdateTradeMenuItemTexts()
 	{
+		auto& descriptors = game::shoppe::GetDescriptor(*game::Shoppes::Read(game::Avatar::GetPosition())).trades;
 		for (size_t index = 0; index < MENU_ITEM_COUNT; index++)
 		{
 			const std::string menuItemId = menuItemIds[index];
@@ -89,29 +91,94 @@ namespace state::in_play::Trade
 			if (descriptors.size() > index)
 			{
 				auto& descriptor = descriptors[index];
-				if (game::avatar::Items::HasItems(descriptor.inputs))
-				{
-					visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[index].name);
-				}
-				else
-				{
-					visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[index].notAvailable);
-				}
+				visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[index].name);
 			}
 		}
+	}
+
+	const std::vector<std::string> costTextIds =
+	{
+		"Cost1",
+		"Cost2",
+		"Cost3"
+	};
+
+	static void UpdateCosts()
+	{
+		auto& inputs = game::shoppe::GetDescriptor(*game::Shoppes::Read(game::Avatar::GetPosition())).trades[visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value_or(0)].inputs;
+		auto iter = costTextIds.begin();
+		for (auto& input : inputs)
+		{
+			std::stringstream ss;
+			auto& itemDescriptor = game::item::GetDescriptor(input.first);
+			ss << itemDescriptor.name << " x" << input.second;
+			visuals::Texts::SetText(LAYOUT_NAME, *iter, ss.str());
+			if (game::avatar::Items::Read(input.first) >= input.second)
+			{
+				visuals::Texts::SetColor(LAYOUT_NAME, *iter, "Gray");
+			}
+			else
+			{
+				visuals::Texts::SetColor(LAYOUT_NAME, *iter, "Red");
+			}
+			iter++;
+			if (iter == costTextIds.end())
+			{
+				break;
+			}
+		}
+		while (iter != costTextIds.end())
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, *iter, "");
+			++iter;
+		}
+	}
+
+	const std::vector<std::string> benefitTextIds =
+	{
+		"Benefit1",
+		"Benefit2",
+		"Benefit3"
+	};
+
+	static void UpdateBenefits()
+	{
+		auto& outputs = game::shoppe::GetDescriptor(*game::Shoppes::Read(game::Avatar::GetPosition())).trades[visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value_or(0)].outputs;
+		auto iter = benefitTextIds.begin();
+		for (auto& output : outputs)
+		{
+			std::stringstream ss;
+			auto& itemDescriptor = game::item::GetDescriptor(output.first);
+			ss << itemDescriptor.name << " x" << output.second;
+			visuals::Texts::SetText(LAYOUT_NAME, *iter, ss.str());
+			iter++;
+			if (iter == benefitTextIds.end())
+			{
+				break;
+			}
+		}
+		while (iter != benefitTextIds.end())
+		{
+			visuals::Texts::SetText(LAYOUT_NAME, *iter, "");
+			++iter;
+		}
+	}
+
+	static void UpdateTitle()
+	{
+		auto& descriptor = game::shoppe::GetDescriptor(*game::Shoppes::Read(game::Avatar::GetPosition()));
+		visuals::Texts::SetText(LAYOUT_NAME, TEXT_TITLE, descriptor.name);
 	}
 
 	static void OnEnter()
 	{
 		auto position = game::Avatar::GetPosition();
-		auto shoppe = game::Shoppes::Read(position);
-		if (shoppe)
+		if (game::Shoppes::Read(position))
 		{
-			auto& descriptor = game::shoppe::GetDescriptor(*shoppe);
-			visuals::Texts::SetText(LAYOUT_NAME, TEXT_TITLE, descriptor.name);
-
-			UpdateTradeMenuItemTexts(descriptor.trades);
-
+			UpdateTitle();
+			UpdateTradeMenuItemTexts();
+			UpdateCosts();
+			UpdateBenefits();
 		}
 	}
 
@@ -126,6 +193,8 @@ namespace state::in_play::Trade
 	static void SetCurrentMenuItem(TradeItem item)
 	{
 		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
+		UpdateCosts();
+		UpdateBenefits();
 	}
 
 	static void MouseMotionInArea(const std::string& area, const common::XY<Sint32>&)

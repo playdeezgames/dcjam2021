@@ -9,7 +9,6 @@ namespace game::shoppe
 	struct TradeDescriptor
 	{
 		std::string name;
-		std::string notAvailable;
 		std::string sfx;
 		std::map<int, size_t> inputs;
 		std::map<int, size_t> outputs;

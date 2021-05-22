@@ -7,7 +7,6 @@ namespace common::data::Properties
 	const std::string MAXIMUM = "maximum";
 	const std::string MINIMUM = "minimum";
 	const std::string NAME = "name";
-	const std::string NOT_AVAILABLE = "not-available";
 	const std::string TYPE = "type";
 	const std::string WIDTH = "width";
 	const std::string X = "x";

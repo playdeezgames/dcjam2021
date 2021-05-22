@@ -6,6 +6,7 @@
 #include <map>
 #include <functional>
 #include <tuple>
+#include "Game.Shoppes.h"
 namespace game::world::Borders
 {
 	const size_t NS_BORDER_COUNT = game::World::ROWS * game::World::COLUMNS + game::World::COLUMNS;
@@ -200,7 +201,8 @@ namespace game::world::Borders
 
 	bool CanSpawnAvatar(const common::XY<size_t>& position)
 	{
-		return !game::Creatures::GetInstance(position) && IsExitable(position);
+		return game::Shoppes::Read(position).has_value();
+		//return !game::Creatures::GetInstance(position) && IsExitable(position);
 	}
 
 	std::vector<common::XY<size_t>> GetDeadEnds(std::function<bool(const common::XY<size_t>&)> filter)
