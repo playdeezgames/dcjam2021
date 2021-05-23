@@ -169,9 +169,9 @@ namespace game::avatar::Items
 		{
 		case ConsumeItemResult::CONSUMED:
 		case ConsumeItemResult::DROPPED:
-			return descriptor.sfxSuccess;
+			return descriptor.GetSfx(game::item::ItemSfx::USE);
 		}
-		return descriptor.sfxFailure;
+		return std::nullopt;
 	}
 
 	static std::optional<std::string> ConsumeItem

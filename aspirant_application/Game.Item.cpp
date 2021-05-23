@@ -13,7 +13,7 @@
 #include "Data.Stores.h"
 namespace game::item
 {
-	std::optional<std::string> Descriptor::GetSfx(const ItemSfx& itemSfx)
+	std::optional<std::string> Descriptor::GetSfx(const ItemSfx& itemSfx) const
 	{
 		auto iter = sfx.find(itemSfx);
 		if (iter != sfx.end())
@@ -80,8 +80,6 @@ namespace game::item
 					(descriptor.count(game::data::Properties::NON_COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::NON_COMBAT])) : (std::nullopt),
 					(descriptor.count(game::data::Properties::AMOUNT) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::AMOUNT])) : (std::nullopt),
 					(descriptor.count(game::data::Properties::DURATION) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DURATION])) : (std::nullopt),
-					(descriptor.count(game::data::Properties::SFX_SUCCESS) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_SUCCESS])) : (std::nullopt),
-					(descriptor.count(game::data::Properties::SFX_FAILURE) > 0) ? (std::optional<std::string>(descriptor[game::data::Properties::SFX_FAILURE])) : (std::nullopt),
 					initialInventory,
 					(descriptor.count(game::data::Properties::COMBAT) > 0) ? (std::optional<Usage>((Usage)(int)descriptor[game::data::Properties::COMBAT])) : (std::nullopt),
 					numberAppearing,

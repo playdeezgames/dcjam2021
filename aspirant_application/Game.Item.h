@@ -30,8 +30,6 @@ namespace game::item
 		std::optional<Usage> usage;
 		std::optional<int> amount;
 		std::optional<int> duration;
-		std::optional<std::string> sfxSuccess;
-		std::optional<std::string> sfxFailure;
 		std::optional<std::vector<size_t>> initialInventory;
 		std::optional<Usage> combatUsage;
 		std::vector<size_t> numberAppearing;
@@ -42,7 +40,7 @@ namespace game::item
 		std::optional<int> drunkenness;
 		std::map<ItemSfx, std::string> sfx;
 
-		std::optional<std::string> GetSfx(const ItemSfx&);
+		std::optional<std::string> GetSfx(const ItemSfx&) const;
 	};
 	const Descriptor& GetDescriptor(int);
 	const std::vector<int>& All();
