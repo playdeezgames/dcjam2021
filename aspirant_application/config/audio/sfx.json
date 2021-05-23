@@ -13,5 +13,7 @@
   "wine":"assets/audio/sfx/wine.wav",
   "drinkpotion":"assets/audio/sfx/drinkpotion.wav",
   "shucks":"assets/audio/sfx/shucks.wav",
-  "exit":"assets/audio/sfx/exit.wav"
+  "exit":"assets/audio/sfx/exit.wav",
+  "doorlocked":"assets/audio/sfx/doorlocked.wav",
+  "unlock":"assets/audio/sfx/unlock.wav"
 }

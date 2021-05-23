@@ -230,11 +230,11 @@ namespace game::Avatar
 				{
 					game::avatar::Statistics::Decrease(game::avatar::Statistic::KEYS, 1);
 					game::world::Borders::SetBorderAhead(game::Avatar::GetPosition(), game::Avatar::GetFacing(), game::world::Border::DOOR);
-					//TODO: play an unlock sound!
+					result = application::Sounds::Read(application::UI::Sfx::UNLOCK);
 				}
 				else
 				{
-					//TODO: failed to unlock sound!
+					result = application::Sounds::Read(application::UI::Sfx::LOCKED);
 				}
 			}
 			else

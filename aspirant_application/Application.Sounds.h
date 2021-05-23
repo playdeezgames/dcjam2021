@@ -11,7 +11,9 @@ namespace application::UI
 		HIT_HUNTER,
 		HIT_BLOCKED,
 		WOOHOO,
-		HUNTER_POOPS
+		HUNTER_POOPS,
+		LOCKED,
+		UNLOCK
 	};
 }
 
