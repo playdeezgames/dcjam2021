@@ -23,6 +23,7 @@ namespace game::shoppe
 	};
 	const Descriptor& GetDescriptor(size_t);
 	const std::vector<Descriptor>& All();
+	bool HasStock(size_t, size_t);
 }
 namespace game::Shoppes
 {

@@ -12,6 +12,7 @@
 namespace game::shoppe
 {
 	static std::vector<Descriptor> descriptors;
+	static std::map<size_t,std::map<size_t, size_t>> quantities;
 
 	static void Initialize()
 	{
@@ -74,6 +75,28 @@ namespace game::shoppe
 		Initialize();
 		return descriptors;
 	}
+
+	static void ResetQuantities(size_t index, const game::Difficulty& difficulty)
+	{
+		auto& descriptor = GetDescriptor(index);
+		size_t tradeIndex = 0u;
+		for (auto& trade : descriptor.trades)
+		{
+			quantities[index][tradeIndex] = trade.quantity[(size_t)difficulty];
+			tradeIndex++;
+		}
+	}
+
+	bool HasStock(size_t index, size_t tradeIndex)
+	{
+		return quantities.find(index)->second.find(tradeIndex)->second;
+	}
+
+	static void ReduceStock(size_t index, size_t tradeIndex)
+	{
+		quantities[index][tradeIndex] = quantities[index][tradeIndex] - 1u;
+	}
+
 }
 namespace game::Shoppes
 {
@@ -124,7 +147,7 @@ namespace game::Shoppes
 	std::optional<std::string> AttemptTrade(const common::XY<size_t>& location, size_t tradeIndex)
 	{
 		auto shoppe = Read(location);
-		if (shoppe)
+		if (shoppe && game::shoppe::HasStock(*shoppe, tradeIndex))
 		{
 			auto& descriptor = game::shoppe::GetDescriptor(*shoppe);
 			if (tradeIndex < descriptor.trades.size())
@@ -134,13 +157,15 @@ namespace game::Shoppes
 				{
 					game::avatar::Items::RemoveItems(trade.inputs);
 					game::avatar::Items::ReceiveItems(trade.outputs);
+					game::shoppe::ReduceStock(*shoppe, tradeIndex);
 					return trade.sfx;
 				}
 			}
 		}
 		return std::nullopt;
 	}
-	void Reset()
+
+	void Reset(const game::Difficulty& difficulty)
 	{
 		auto worldSize = game::World::GetSize();
 		GetShoppes().clear();
@@ -158,6 +183,7 @@ namespace game::Shoppes
 				available = !Get({ x,y });
 			}
 			Put({ x,y }, index);
+			game::shoppe::ResetQuantities(index, difficulty);
 		}
 	}
 }

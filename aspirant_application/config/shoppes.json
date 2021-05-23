@@ -4,7 +4,7 @@
         "image-id":"ShoppeToilet",
         "trades":[
             {
-                "quantity":[999,999,999],
+                "quantity":[20,10,10],
                 "name": "Flush turd to receive Joker",
                 "out-of-stock": "It's full!",
                 "sfx":"FlushToilet",
@@ -22,7 +22,7 @@
         "image-id":"ShoppeFoodTruck",
         "trades":[
             {
-                "quantity":[999,999,999],
+                "quantity":[50,25,25],
                 "name": "Buy Food",
                 "out-of-stock": "Out of food!",
                 "sfx":"BuyFood",
@@ -34,7 +34,7 @@
                 }
             },
             {
-                "quantity":[999,999,999],
+                "quantity":[10,5,5],
                 "name": "Buy Coffee",
                 "out-of-stock": "Out of coffee!",
                 "sfx":"BuyFood",
@@ -52,7 +52,7 @@
         "image-id":"ShoppeHut",
         "trades":[
             {
-                "quantity":[999,999,999],
+                "quantity":[20,10,10],
                 "name": "Buy Potion",
                 "out-of-stock": "Out of potions!",
                 "sfx":"BuyPotion",
@@ -64,7 +64,7 @@
                 }
             },
             {
-                "quantity":[999,999,999],
+                "quantity":[100,50,50],
                 "name": "Buy Pr0n Scroll",
                 "out-of-stock": "Out of scrolls!",
                 "sfx":"BuyScroll",
@@ -82,7 +82,7 @@
         "image-id":"ShoppeDryCleaner",
         "trades":[
             {
-                "quantity":[999,999,999],
+                "quantity":[10,5,5],
                 "name": "Buy Soap",
                 "out-of-stock": "Out of soap!",
                 "sfx":"BuySoap",
@@ -113,7 +113,7 @@
         "image-id":"ShoppeSaloon",
         "trades":[
             {
-                "quantity":[999,999,999],
+                "quantity":[10,5,5],
                 "name": "Buy Beer",
                 "out-of-stock": "Out of beer!",
                 "sfx":"BuyBeer",
@@ -125,7 +125,7 @@
                 }
             },
             {
-                "quantity":[999,999,999],
+                "quantity":[12,6,6],
                 "name": "Buy Wine",
                 "out-of-stock": "Out of wine!",
                 "sfx":"BuyWine",
@@ -137,7 +137,7 @@
                 }
             },
             {
-                "quantity":[999,999,999],
+                "quantity":[6,3,3],
                 "name": "Buy Booze",
                 "out-of-stock": "Out of booze!",
                 "sfx":"BuyBooze",
@@ -155,7 +155,7 @@
         "image-id":"ShoppeGnome",
         "trades":[
             {
-                "quantity":[999,999,999],
+                "quantity":[10,5,5],
                 "name": "Trade Food for Map",
                 "out-of-stock": "Not hungry!",
                 "sfx":"MapFragment",

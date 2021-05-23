@@ -73,15 +73,23 @@ namespace state::in_play::Trade
 
 	static void UpdateTradeMenuItemTexts()
 	{
-		auto& descriptors = game::shoppe::GetDescriptor(*game::Shoppes::Read(game::Avatar::GetPosition())).trades;
-		for (size_t index = 0; index < MENU_ITEM_COUNT; index++)
+		auto shoppeIndex = *game::Shoppes::Read(game::Avatar::GetPosition());
+		auto& descriptors = game::shoppe::GetDescriptor(shoppeIndex).trades;
+		for (size_t tradeIndex = 0; tradeIndex < MENU_ITEM_COUNT; tradeIndex++)
 		{
-			const std::string menuItemId = menuItemIds[index];
-			visuals::MenuItems::SetEnabled(LAYOUT_NAME, menuItemId, descriptors.size() > index);
-			if (descriptors.size() > index)
+			const std::string menuItemId = menuItemIds[tradeIndex];
+			visuals::MenuItems::SetEnabled(LAYOUT_NAME, menuItemId, descriptors.size() > tradeIndex);
+			if (descriptors.size() > tradeIndex)
 			{
-				auto& descriptor = descriptors[index];
-				visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[index].name);
+				auto& descriptor = descriptors[tradeIndex];
+				if (game::shoppe::HasStock(shoppeIndex, tradeIndex))
+				{
+					visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[tradeIndex].name);
+				}
+				else
+				{
+					visuals::MenuItems::SetText(LAYOUT_NAME, menuItemId, descriptors[tradeIndex].outOfStock);
+				}
 			}
 		}
 	}
@@ -133,13 +141,23 @@ namespace state::in_play::Trade
 
 	static void UpdateBenefits()
 	{
-		auto& outputs = game::shoppe::GetDescriptor(*game::Shoppes::Read(game::Avatar::GetPosition())).trades[visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value_or(0)].outputs;
+		auto shoppeIndex = *game::Shoppes::Read(game::Avatar::GetPosition());
+		auto tradeIndex = visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_ID).value_or(0);
+		auto& outputs = game::shoppe::GetDescriptor(shoppeIndex).trades[tradeIndex].outputs;
 		auto iter = benefitTextIds.begin();
 		for (auto& output : outputs)
 		{
 			std::stringstream ss;
 			auto& itemDescriptor = game::item::GetDescriptor(output.first);
 			ss << itemDescriptor.name << " x" << output.second;
+			if (game::shoppe::HasStock(shoppeIndex, tradeIndex))
+			{
+				visuals::Texts::SetColor(LAYOUT_NAME, *iter, "Gray");
+			}
+			else
+			{
+				visuals::Texts::SetColor(LAYOUT_NAME, *iter, "Red");
+			}
 			visuals::Texts::SetText(LAYOUT_NAME, *iter, ss.str());
 			iter++;
 			if (iter == benefitTextIds.end())
