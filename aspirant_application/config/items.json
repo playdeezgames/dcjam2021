@@ -12,7 +12,9 @@
         "take-area-id":"TakeFood",
         "bowel":25,
         "drunkenness":-10,
-        "sfx":{}
+        "sfx":{
+            "use":"eat"
+        }
     },
     "1":{
         "name":"Potion",

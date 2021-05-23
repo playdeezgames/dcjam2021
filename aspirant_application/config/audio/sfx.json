@@ -16,5 +16,6 @@
   "exit":"assets/audio/sfx/exit.wav",
   "doorlocked":"assets/audio/sfx/doorlocked.wav",
   "unlock":"assets/audio/sfx/unlock.wav",
-  "poop":"assets/audio/sfx/poop.wav"
+  "poop":"assets/audio/sfx/poop.wav",
+  "eat":"assets/audio/sfx/eat.wav"
 }
