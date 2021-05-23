@@ -21,7 +21,6 @@
         "combat":1,
         "amount": 30,
         "image-id":"Potion",
-        "sfx-success":"drinkpotion",
         "number-appearing": [18,18,18],
         "combat-text":"Drink Potion",
         "take-image-id":"TakePotion",
@@ -37,7 +36,6 @@
         "amount": 50,
         "duration": 10,
         "image-id":"Beer",
-        "sfx-success":"beer",
         "number-appearing": [18,9,9],
         "combat-text":"Drink Beer",
         "take-image-id":"TakeBeer",
@@ -55,7 +53,6 @@
         "amount": 25,
         "duration": 25,
         "image-id":"Wine",
-        "sfx-success":"wine",
         "number-appearing": [18,9,9],
         "combat-text":"Drink Wine",
         "take-image-id":"TakeWine",
@@ -74,7 +71,6 @@
         "duration": 10,
         "amount-stacks":true,
         "image-id":"Coffee",
-        "sfx-success":"coffee",
         "number-appearing": [18,9,9],
         "combat-text":"Drink Coffee",
         "take-image-id":"TakeCoffee",
@@ -118,7 +114,6 @@
         "combat-text":"Drink Booze",
         "take-image-id":"TakeBooze",
         "take-area-id":"TakeBooze",
-        "sfx-success":"woohoo",
         "drunkenness":50,
         "sfx":{
             "0":"woohoo"
@@ -132,7 +127,6 @@
         "combat-text":"Fling Turd",
         "take-image-id":"TakeTurd",
         "take-area-id":"TakeTurd",
-        "sfx-success":"poop",
         "sfx":{
             "0":"poop"
         }
@@ -145,7 +139,6 @@
         "combat-text":"Play Joker",
         "take-image-id":"TakeJoker",
         "take-area-id":"TakeJoker",
-        "sfx-success":"playjoker",
         "sfx":{
             "0":"playjoker"
         }
