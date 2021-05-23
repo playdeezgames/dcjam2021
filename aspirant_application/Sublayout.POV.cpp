@@ -206,6 +206,7 @@ namespace sublayout::POV
 				PickUpItem(item);
 
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
+				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.imageId, false);
 				visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
 				if (!takeAll) { return true; }
 			}
