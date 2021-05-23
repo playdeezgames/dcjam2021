@@ -13,6 +13,16 @@
 #include "Data.Stores.h"
 namespace game::item
 {
+	std::optional<std::string> Descriptor::GetSfx(const ItemSfx& itemSfx)
+	{
+		auto iter = sfx.find(itemSfx);
+		if (iter != sfx.end())
+		{
+			return iter->second;
+		}
+		return std::nullopt;
+	}
+
 	static std::string ItemToItemKey(const int& item)
 	{
 		std::stringstream ss;
@@ -37,7 +47,7 @@ namespace game::item
 				std::vector<size_t> numberAppearing;
 				if (descriptor.count(game::data::Properties::NUMBER_APPEARING) > 0)
 				{
-					for (auto value : descriptor[game::data::Properties::NUMBER_APPEARING])
+					for (auto& value : descriptor[game::data::Properties::NUMBER_APPEARING])
 					{
 						numberAppearing.push_back(value);
 					}
@@ -46,11 +56,19 @@ namespace game::item
 				if (descriptor.count(game::data::Properties::INITIAL_INVENTORY) > 0)
 				{
 					std::vector<size_t> counts;
-					for (auto value : descriptor[game::data::Properties::INITIAL_INVENTORY])
+					for (auto& value : descriptor[game::data::Properties::INITIAL_INVENTORY])
 					{
 						counts.push_back(value);
 					}
 					initialInventory = counts;
+				}
+				std::map<ItemSfx, std::string> sfx;
+				if (descriptor.count(game::data::Properties::SFX) > 0)
+				{
+					for (auto& item : descriptor[game::data::Properties::SFX].items())
+					{
+						sfx[(ItemSfx)common::Utility::StringToInt(item.key())] = item.value();
+					}
 				}
 				descriptorIndices[itemId] = descriptors.size();
 				descriptors.push_back(
@@ -71,7 +89,8 @@ namespace game::item
 					(descriptor.count(game::data::Properties::LOSE_ON_TELEPORT) > 0) ? ((bool)descriptor[game::data::Properties::LOSE_ON_TELEPORT]) : (false),
 					(descriptor.count(game::data::Properties::DROP_ON_USE) > 0) ? ((bool)descriptor[game::data::Properties::DROP_ON_USE]) : (false),
 					(descriptor.count(game::data::Properties::BOWEL) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::BOWEL])) : (std::nullopt),
-					(descriptor.count(game::data::Properties::DRUNKENNESS) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DRUNKENNESS])) : (std::nullopt)
+					(descriptor.count(game::data::Properties::DRUNKENNESS) > 0) ? (std::optional<int>((int)descriptor[game::data::Properties::DRUNKENNESS])) : (std::nullopt),
+					sfx
 				});
 			}
 			initialized = true;
