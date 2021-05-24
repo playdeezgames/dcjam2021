@@ -117,11 +117,11 @@ namespace game::Creatures
 			auto iter = descriptor.attitudes.find(item);
 			if (iter != descriptor.attitudes.end())
 			{
-				instance.value().attitude = (int)iter->second;
+				instance.value().attitude = (int)iter->second.attitude;
 				Put(location, instance.value());
-				return descriptor.sfx[game::creature::Sfx::ATTITUDE];
+				return iter->second.sfx;
 			}
-			return descriptor.sfx[game::creature::Sfx::NO_ATTITUDE];
+			return std::nullopt;
 		}
 		return std::nullopt;
 	}

@@ -28,6 +28,11 @@ namespace game::creature
 		ATTITUDE,
 		NO_ATTITUDE
 	};
+	struct AttitudeDescriptor
+	{
+		Attitude attitude;
+		std::string sfx;
+	};
 	struct Descriptor
 	{
 		std::string imageId;
@@ -38,7 +43,7 @@ namespace game::creature
 		std::map<int, size_t> bribes;
 		std::map<Sfx, std::string> sfx;
 		Attitude attitude;
-		std::map<int, Attitude> attitudes;
+		std::map<int, AttitudeDescriptor> attitudes;
 		bool preferDeadEnds;
 		std::map<std::optional<int>, size_t> dropWeights;
 		std::map<int, size_t> dropCounts;

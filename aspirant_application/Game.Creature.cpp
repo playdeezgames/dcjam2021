@@ -28,13 +28,19 @@ namespace game::creature
 				sfx[(Sfx)common::Utility::StringToInt(amount.key())] = amount.value();
 			}
 		}
-		std::map<int, Attitude> attitudes;
+		std::map<int, AttitudeDescriptor> attitudes;
 		if (creatureDescriptor.count(game::data::Properties::ATTITUDES) > 0)
 		{
 			auto& amounts = creatureDescriptor[game::data::Properties::ATTITUDES];
 			for (auto& amount : amounts.items())
 			{
-				attitudes[common::Utility::StringToInt(amount.key())] = (Attitude)(int)amount.value();
+				auto& key = amount.key();
+				auto& item = amount.value();
+				attitudes[common::Utility::StringToInt(key)] = 
+				{ 
+					(Attitude)(int)item[game::data::Properties::ATTITUDE], 
+					(std::string)item[game::data::Properties::SFX] 
+				};
 			}
 		}
 		std::map<std::optional<int>, size_t> dropWeights;
