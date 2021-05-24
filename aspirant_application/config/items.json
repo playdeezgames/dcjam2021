@@ -84,7 +84,6 @@
         }
     },
     "5":{
-        "initial-inventory":[20,20,20],
         "name":"Jools",
         "combat":4,
         "image-id":"Jools",

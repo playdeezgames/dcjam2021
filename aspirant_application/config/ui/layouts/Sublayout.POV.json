@@ -319,8 +319,8 @@
         "image-id": "SoiledTrousers",
         "sprite": "ItemSoiledTrousers",
         "color": "White",
-        "x": 260,
-        "y": 324,
+        "x": 164,
+        "y": 292,
         "visible": false
     },
     {
@@ -328,15 +328,15 @@
         "image-id": "TakeSoiledTrousers",
         "sprite": "ItemTake",
         "color": "White",
-        "x": 260,
-        "y": 324,
+        "x": 164,
+        "y": 292,
         "visible": false
     },
     {
         "type": "Area",
         "area-id": "TakeSoiledTrousers",
-        "x": 260,
-        "y": 324,
+        "x": 164,
+        "y": 292,
         "width": 32,
         "height":32
     },
