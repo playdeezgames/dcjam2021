@@ -20,19 +20,19 @@
         "attitudes": {
             "6": {
                 "attitude": 5,
-                "sfx": ""
+                "sfx": "gorsh"
             },
             "8": {
                 "attitude": 6,
-                "sfx": ""
+                "sfx": "distract"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "prefer-dead-ends": true,
@@ -69,19 +69,19 @@
         "attitudes": {
             "6": {
                 "attitude": 4,
-                "sfx": ""
+                "sfx": "hostile"
             },
             "8": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "prefer-dead-ends": true,
@@ -117,19 +117,19 @@
         "attitudes": {
             "6": {
                 "attitude": 4,
-                "sfx": ""
+                "sfx": "hostile"
             },
             "8": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "prefer-dead-ends": true,
@@ -165,19 +165,19 @@
         "attitudes": {
             "6": {
                 "attitude": 4,
-                "sfx": ""
+                "sfx": "hostile"
             },
             "8": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "prefer-dead-ends": true,
@@ -209,19 +209,19 @@
         "attitudes": {
             "6": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "8": {
                 "attitude": 2,
-                "sfx": ""
+                "sfx": "amorous"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "prefer-dead-ends": true
@@ -253,19 +253,19 @@
         "attitudes": {
             "6": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "8": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "drops": {
@@ -302,23 +302,23 @@
         "attitudes": {
             "6": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "8": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "13": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "drops": {
@@ -360,19 +360,19 @@
         "attitudes": {
             "6": {
                 "attitude": 2,
-                "sfx": ""
+                "sfx": "amorous"
             },
             "8": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 2,
-                "sfx": ""
+                "sfx": "amorous"
             }
         },
         "drops": {
@@ -412,19 +412,19 @@
         "attitudes": {
             "6": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "8": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         }
     },
@@ -455,7 +455,7 @@
         "attitudes": {
             "6": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "8": {
                 "attitude": 4,
@@ -463,11 +463,11 @@
             },
             "12": {
                 "attitude": 3,
-                "sfx": ""
+                "sfx": "disgust"
             },
             "14": {
                 "attitude": 1,
-                "sfx": ""
+                "sfx": "meh"
             }
         },
         "drops": {

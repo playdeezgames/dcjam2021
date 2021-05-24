@@ -43,3 +43,6 @@ My entry for dcjam2021 - https://itch.io/jam/dcjam2021
   * Komiku - Ancient Heavy Tech Donjon
   * Komiku - Remember this shadow
   * Komiku - Fight, run, breath deeply
+
+# Audio Credits
+* distract.wav by SurlyDev
