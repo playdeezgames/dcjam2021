@@ -24,9 +24,7 @@ namespace game::creature
 		DEATH,
 		BLOCK,
 		BRIBE,
-		NO_BRIBE,
-		ATTITUDE,
-		NO_ATTITUDE
+		NO_BRIBE
 	};
 	struct AttitudeDescriptor
 	{
