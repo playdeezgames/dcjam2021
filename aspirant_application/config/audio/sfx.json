@@ -18,5 +18,9 @@
   "unlock":"assets/audio/sfx/unlock.wav",
   "poop":"assets/audio/sfx/poop.wav",
   "eat":"assets/audio/sfx/eat.wav",
-  "yoink":"assets/audio/sfx/yoink.wav"
+  "yoink":"assets/audio/sfx/yoink.wav",
+  "playjoker":"assets/audio/sfx/playjoker.wav",
+  "getkey":"assets/audio/sfx/getkey.wav",
+  "badoosh":"assets/audio/sfx/badoosh.wav",
+  "amorous":"assets/audio/sfx/amorous.wav"
 }

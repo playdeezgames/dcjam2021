@@ -1,208 +1,291 @@
 {
-    "0":{
-        "name":"Food",
-        "initial-inventory": [10,5,5],
+    "0": {
+        "name": "Food",
+        "initial-inventory": [
+            10,
+            5,
+            5
+        ],
         "non-combat": 0,
         "combat": 4,
         "amount": 5,
-        "image-id":"Food",
-        "number-appearing": [72,72,72],
-        "combat-text":"Food Bribe",
-        "take-image-id":"TakeFood",
-        "take-area-id":"TakeFood",
-        "bowel":25,
-        "drunkenness":-10,
-        "sfx":{
-            "0":"eat",
-            "1":"yoink"
+        "image-id": "Food",
+        "number-appearing": [
+            72,
+            72,
+            72
+        ],
+        "combat-text": "Food Bribe",
+        "take-image-id": "TakeFood",
+        "take-area-id": "TakeFood",
+        "bowel": 25,
+        "drunkenness": -10,
+        "sfx": {
+            "0": "eat",
+            "1": "yoink"
         }
     },
-    "1":{
-        "name":"Potion",
-        "initial-inventory": [5,2,2],
-        "non-combat":1,
-        "combat":1,
+    "1": {
+        "name": "Potion",
+        "initial-inventory": [
+            5,
+            2,
+            2
+        ],
+        "non-combat": 1,
+        "combat": 1,
         "amount": 30,
-        "image-id":"Potion",
-        "number-appearing": [18,18,18],
-        "combat-text":"Drink Potion",
-        "take-image-id":"TakePotion",
-        "take-area-id":"TakePotion",
-        "sfx":{
+        "image-id": "Potion",
+        "number-appearing": [
+            18,
+            18,
+            18
+        ],
+        "combat-text": "Drink Potion",
+        "take-image-id": "TakePotion",
+        "take-area-id": "TakePotion",
+        "sfx": {
             "0": "drinkpotion",
-            "1":"yoink"
+            "1": "getpotion"
         }
     },
-    "2":{
-        "name":"Beer",
-        "non-combat":2,
-        "combat":2,
+    "2": {
+        "name": "Beer",
+        "non-combat": 2,
+        "combat": 2,
         "amount": 50,
         "duration": 10,
-        "image-id":"Beer",
-        "number-appearing": [18,9,9],
-        "combat-text":"Drink Beer",
-        "take-image-id":"TakeBeer",
-        "take-area-id":"TakeBeer",
-        "bowel":10,
-        "drunkenness":25,
-        "sfx":{
-            "0":"beer",
-            "1":"yoink"
+        "image-id": "Beer",
+        "number-appearing": [
+            18,
+            9,
+            9
+        ],
+        "combat-text": "Drink Beer",
+        "take-image-id": "TakeBeer",
+        "take-area-id": "TakeBeer",
+        "bowel": 10,
+        "drunkenness": 25,
+        "sfx": {
+            "0": "beer",
+            "1": "yoink"
         }
     },
-    "3":{
-        "name":"Wine",
-        "non-combat":2,
-        "combat":2,
+    "3": {
+        "name": "Wine",
+        "non-combat": 2,
+        "combat": 2,
         "amount": 25,
         "duration": 25,
-        "image-id":"Wine",
-        "number-appearing": [18,9,9],
-        "combat-text":"Drink Wine",
-        "take-image-id":"TakeWine",
-        "take-area-id":"TakeWine",
-        "bowel":10,
-        "drunkenness":25,
-        "sfx":{
-            "0":"wine",
-            "1":"yoink"
+        "image-id": "Wine",
+        "number-appearing": [
+            18,
+            9,
+            9
+        ],
+        "combat-text": "Drink Wine",
+        "take-image-id": "TakeWine",
+        "take-area-id": "TakeWine",
+        "bowel": 10,
+        "drunkenness": 25,
+        "sfx": {
+            "0": "wine",
+            "1": "yoink"
         }
     },
-    "4":{
-        "name":"Coffee",
-        "non-combat":3,
-        "combat":3,
+    "4": {
+        "name": "Coffee",
+        "non-combat": 3,
+        "combat": 3,
         "amount": 10,
         "duration": 10,
-        "amount-stacks":true,
-        "image-id":"Coffee",
-        "number-appearing": [18,9,9],
-        "combat-text":"Drink Coffee",
-        "take-image-id":"TakeCoffee",
-        "take-area-id":"TakeCoffee",
-        "bowel":10,
-        "drunkenness":-5,
-        "sfx":{
-            "0":"coffee",
-            "1":"yoink"
+        "amount-stacks": true,
+        "image-id": "Coffee",
+        "number-appearing": [
+            18,
+            9,
+            9
+        ],
+        "combat-text": "Drink Coffee",
+        "take-image-id": "TakeCoffee",
+        "take-area-id": "TakeCoffee",
+        "bowel": 10,
+        "drunkenness": -5,
+        "sfx": {
+            "0": "coffee",
+            "1": "yoink"
         }
     },
-    "5":{
-        "name":"Jools",
-        "combat":4,
-        "image-id":"Jools",
-        "number-appearing": [144,144,144],
-        "combat-text":"Money Bribe",
-        "take-image-id":"TakeJools",
-        "take-area-id":"TakeJools",
-        "sfx":{
-            "1":"yoink"
+    "5": {
+        "name": "Jools",
+        "combat": 4,
+        "image-id": "Jools",
+        "number-appearing": [
+            144,
+            144,
+            144
+        ],
+        "combat-text": "Money Bribe",
+        "take-image-id": "TakeJools",
+        "take-area-id": "TakeJools",
+        "sfx": {
+            "1": "yoink"
         }
     },
-    "6":{
-        "name":"Trousers",
-        "initial-inventory": [1,1,1],
-        "image-id":"Trousers",
-        "number-appearing": [0,0,0],
-        "combat":6,
-        "combat-text":"Drop Trousers",
-        "take-image-id":"TakeTrousers",
-        "take-area-id":"TakeTrousers",
+    "6": {
+        "name": "Trousers",
+        "initial-inventory": [
+            1,
+            1,
+            1
+        ],
+        "image-id": "Trousers",
+        "number-appearing": [
+            0,
+            0,
+            0
+        ],
+        "combat": 6,
+        "combat-text": "Drop Trousers",
+        "take-image-id": "TakeTrousers",
+        "take-area-id": "TakeTrousers",
         "lose-on-teleport": true,
         "drop-on-use": true,
-        "sfx":{
-            "1":"yoink"
+        "sfx": {
+            "1": "yoink"
         }
     },
-    "7":{
-        "name":"Booze",
-        "non-combat":5,
-        "combat":5,
-        "image-id":"Booze",
-        "number-appearing": [18,9,9],
-        "combat-text":"Drink Booze",
-        "take-image-id":"TakeBooze",
-        "take-area-id":"TakeBooze",
-        "drunkenness":50,
-        "sfx":{
-            "0":"woohoo",
-            "1":"yoink"
+    "7": {
+        "name": "Booze",
+        "non-combat": 5,
+        "combat": 5,
+        "image-id": "Booze",
+        "number-appearing": [
+            18,
+            9,
+            9
+        ],
+        "combat-text": "Drink Booze",
+        "take-image-id": "TakeBooze",
+        "take-area-id": "TakeBooze",
+        "drunkenness": 50,
+        "sfx": {
+            "0": "woohoo",
+            "1": "yoink"
         }
     },
-    "8":{
-        "name":"Turd",
-        "combat":6,
-        "image-id":"Turd",
-        "number-appearing": [0,0,0],
-        "combat-text":"Fling Turd",
-        "take-image-id":"TakeTurd",
-        "take-area-id":"TakeTurd",
-        "sfx":{
-            "0":"poop",
-            "1":"yoink"
+    "8": {
+        "name": "Turd",
+        "combat": 6,
+        "image-id": "Turd",
+        "number-appearing": [
+            0,
+            0,
+            0
+        ],
+        "combat-text": "Fling Turd",
+        "take-image-id": "TakeTurd",
+        "take-area-id": "TakeTurd",
+        "sfx": {
+            "0": "poop",
+            "1": "yoink"
         }
     },
-    "9":{
-        "name":"Joker",
-        "combat":7,
-        "image-id":"Joker",
-        "number-appearing": [18,9,9],
-        "combat-text":"Play Joker",
-        "take-image-id":"TakeJoker",
-        "take-area-id":"TakeJoker",
-        "sfx":{
-            "0":"playjoker",
-            "1":"yoink"
+    "9": {
+        "name": "Joker",
+        "combat": 7,
+        "image-id": "Joker",
+        "number-appearing": [
+            18,
+            9,
+            9
+        ],
+        "combat-text": "Play Joker",
+        "take-image-id": "TakeJoker",
+        "take-area-id": "TakeJoker",
+        "sfx": {
+            "0": "playjoker",
+            "1": "yoink"
         }
     },
-    "10":{
-        "name":"Key",
-        "image-id":"Key",
-        "number-appearing": [0,0,0],
-        "take-image-id":"TakeKey",
-        "take-area-id":"TakeKey",
-        "sfx":{"1":"yoink"}
+    "10": {
+        "name": "Key",
+        "image-id": "Key",
+        "number-appearing": [
+            0,
+            0,
+            0
+        ],
+        "take-image-id": "TakeKey",
+        "take-area-id": "TakeKey",
+        "sfx": {
+            "1": "getkey"
+        }
     },
-    "11":{
-        "name":"Map Fragment",
-        "image-id":"MapFragment",
-        "number-appearing": [24,12,12],
-        "take-image-id":"TakeMapFragment",
-        "take-area-id":"TakeMapFragment",
-        "sfx":{"1":"yoink"}
+    "11": {
+        "name": "Map Fragment",
+        "image-id": "MapFragment",
+        "number-appearing": [
+            24,
+            12,
+            12
+        ],
+        "take-image-id": "TakeMapFragment",
+        "take-area-id": "TakeMapFragment",
+        "sfx": {
+            "1": "yoink"
+        }
     },
-    "12":{
-        "name":"Soiled Trousers",
-        "image-id":"SoiledTrousers",
-        "number-appearing": [0,0,0],
-        "combat":6,
-        "combat-text":"Drop Trousers",
-        "take-image-id":"TakeSoiledTrousers",
-        "take-area-id":"TakeSoiledTrousers",
+    "12": {
+        "name": "Soiled Trousers",
+        "image-id": "SoiledTrousers",
+        "number-appearing": [
+            0,
+            0,
+            0
+        ],
+        "combat": 6,
+        "combat-text": "Drop Trousers",
+        "take-image-id": "TakeSoiledTrousers",
+        "take-area-id": "TakeSoiledTrousers",
         "lose-on-teleport": true,
         "drop-on-use": true,
-        "sfx":{"1":"yoink"}
+        "sfx": {
+            "0": "badoosh",
+            "1": "yoink"
+        }
     },
-    "13":{
-        "name":"Pr0n Scroll",
-        "combat":4,
-        "image-id":"Pr0n",
-        "number-appearing": [36,18,18],
-        "combat-text":"Give Pr0n",
-        "take-image-id":"TakePr0n",
-        "take-area-id":"TakePr0n",
-        "sfx":{"1":"yoink"}
+    "13": {
+        "name": "Pr0n Scroll",
+        "combat": 4,
+        "image-id": "Pr0n",
+        "number-appearing": [
+            36,
+            18,
+            18
+        ],
+        "combat-text": "Give Pr0n",
+        "take-image-id": "TakePr0n",
+        "take-area-id": "TakePr0n",
+        "sfx": {
+            "1": "amorous"
+        }
     },
-    "14":{
-        "name":"Soap",
-        "non-combat":8,
-        "combat":6,
-        "image-id":"Soap",
-        "number-appearing": [0,0,0],
-        "combat-text":"Drop Soap",
-        "take-image-id":"TakeSoap",
-        "take-area-id":"TakeSoap",
-        "sfx":{"1":"yoink"}
+    "14": {
+        "name": "Soap",
+        "non-combat": 8,
+        "combat": 6,
+        "image-id": "Soap",
+        "number-appearing": [
+            0,
+            0,
+            0
+        ],
+        "combat-text": "Drop Soap",
+        "take-image-id": "TakeSoap",
+        "take-area-id": "TakeSoap",
+        "sfx": {
+            "1": "yoink"
+        }
     }
 }

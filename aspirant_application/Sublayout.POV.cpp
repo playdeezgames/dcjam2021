@@ -222,6 +222,10 @@ namespace sublayout::POV
 			index++;
 		}
 		application::OnEnter::Handle();
+		if (takeAll)
+		{
+			//TODO: play a sound representing taking everything
+		}
 		return takeAll;
 	}
 
