@@ -19,7 +19,8 @@ namespace game::item
 	};
 	enum class ItemSfx
 	{
-		USE
+		USE,
+		PICK_UP
 	};
 	struct Descriptor
 	{

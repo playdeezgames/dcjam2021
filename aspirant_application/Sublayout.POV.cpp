@@ -14,6 +14,7 @@
 #include "Application.OnEnter.h"
 #include "Game.Shoppes.h"
 #include "Game.World.Borders.h"
+#include "Common.Audio.h"
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";
@@ -208,7 +209,15 @@ namespace sublayout::POV
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.takeImageId, false);
 				::visuals::Images::SetVisible(LAYOUT_NAME, descriptor.imageId, false);
 				visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
-				if (!takeAll) { return true; }
+				if (!takeAll) 
+				{ 
+					auto sfx = descriptor.GetSfx(game::item::ItemSfx::PICK_UP);
+					if (sfx)
+					{
+						common::audio::Sfx::Play(sfx.value());
+					}
+					return true; 
+				}
 			}
 			index++;
 		}

@@ -13,7 +13,8 @@
         "bowel":25,
         "drunkenness":-10,
         "sfx":{
-            "use":"eat"
+            "0":"eat",
+            "1":"yoink"
         }
     },
     "1":{
@@ -28,7 +29,8 @@
         "take-image-id":"TakePotion",
         "take-area-id":"TakePotion",
         "sfx":{
-            "0": "drinkpotion"
+            "0": "drinkpotion",
+            "1":"yoink"
         }
     },
     "2":{
@@ -45,7 +47,8 @@
         "bowel":10,
         "drunkenness":25,
         "sfx":{
-            "0":"beer"
+            "0":"beer",
+            "1":"yoink"
         }
     },
     "3":{
@@ -62,7 +65,8 @@
         "bowel":10,
         "drunkenness":25,
         "sfx":{
-            "0":"wine"
+            "0":"wine",
+            "1":"yoink"
         }
     },
     "4":{
@@ -80,7 +84,8 @@
         "bowel":10,
         "drunkenness":-5,
         "sfx":{
-            "0":"coffee"
+            "0":"coffee",
+            "1":"yoink"
         }
     },
     "5":{
@@ -91,7 +96,9 @@
         "combat-text":"Money Bribe",
         "take-image-id":"TakeJools",
         "take-area-id":"TakeJools",
-        "sfx":{}
+        "sfx":{
+            "1":"yoink"
+        }
     },
     "6":{
         "name":"Trousers",
@@ -104,7 +111,9 @@
         "take-area-id":"TakeTrousers",
         "lose-on-teleport": true,
         "drop-on-use": true,
-        "sfx":{}
+        "sfx":{
+            "1":"yoink"
+        }
     },
     "7":{
         "name":"Booze",
@@ -117,7 +126,8 @@
         "take-area-id":"TakeBooze",
         "drunkenness":50,
         "sfx":{
-            "0":"woohoo"
+            "0":"woohoo",
+            "1":"yoink"
         }
     },
     "8":{
@@ -129,7 +139,8 @@
         "take-image-id":"TakeTurd",
         "take-area-id":"TakeTurd",
         "sfx":{
-            "0":"poop"
+            "0":"poop",
+            "1":"yoink"
         }
     },
     "9":{
@@ -141,7 +152,8 @@
         "take-image-id":"TakeJoker",
         "take-area-id":"TakeJoker",
         "sfx":{
-            "0":"playjoker"
+            "0":"playjoker",
+            "1":"yoink"
         }
     },
     "10":{
@@ -150,7 +162,7 @@
         "number-appearing": [0,0,0],
         "take-image-id":"TakeKey",
         "take-area-id":"TakeKey",
-        "sfx":{}
+        "sfx":{"1":"yoink"}
     },
     "11":{
         "name":"Map Fragment",
@@ -158,7 +170,7 @@
         "number-appearing": [24,12,12],
         "take-image-id":"TakeMapFragment",
         "take-area-id":"TakeMapFragment",
-        "sfx":{}
+        "sfx":{"1":"yoink"}
     },
     "12":{
         "name":"Soiled Trousers",
@@ -170,7 +182,7 @@
         "take-area-id":"TakeSoiledTrousers",
         "lose-on-teleport": true,
         "drop-on-use": true,
-        "sfx":{}
+        "sfx":{"1":"yoink"}
     },
     "13":{
         "name":"Pr0n Scroll",
@@ -180,17 +192,17 @@
         "combat-text":"Give Pr0n",
         "take-image-id":"TakePr0n",
         "take-area-id":"TakePr0n",
-        "sfx":{}
+        "sfx":{"1":"yoink"}
     },
     "14":{
         "name":"Soap",
         "non-combat":8,
         "combat":6,
         "image-id":"Soap",
-        "number-appearing": [12,6,6],
+        "number-appearing": [0,0,0],
         "combat-text":"Drop Soap",
         "take-image-id":"TakeSoap",
         "take-area-id":"TakeSoap",
-        "sfx":{}
+        "sfx":{"1":"yoink"}
     }
 }
