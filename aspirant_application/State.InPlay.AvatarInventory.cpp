@@ -6,6 +6,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Application.OnEnter.h"
+#include "Game.Audio.Mux.h"
 namespace state::in_play::AvatarInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarInventory";
@@ -63,7 +64,7 @@ namespace state::in_play::AvatarInventory
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, OnEnter );
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseMotion);

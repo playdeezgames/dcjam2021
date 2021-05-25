@@ -61,23 +61,17 @@ namespace common::audio
 			}
 		}
 
-		const std::map<Theme, std::string> themeTable =
-		{
-			{Theme::MAIN, "main"},
-			{Theme::BATTLE, "battle"}
-		};
+		static std::optional<std::string> currentSong = std::nullopt;
 
-		static std::optional<Theme> currentTheme = std::nullopt;
-
-		void Play(const Theme& theme)
+		void Play(const std::string& song)
 		{
 			Initialize();
 			if (!common::Audio::IsMuted())
 			{
-				if (!currentTheme.has_value() || currentTheme.value() != theme)
+				if (!currentSong.has_value() || currentSong.value() != song)
 				{
-					currentTheme = theme;
-					const auto& item = music.find(themeTable.find(theme)->second);
+					currentSong = song;
+					const auto& item = music.find(song);
 					Mix_FadeInMusic(item->second.get(), LOOP_FOREVER, 1000);
 				}
 			}
@@ -95,10 +89,6 @@ namespace common::audio
 			return muxVolume;
 		}
 
-		std::function<void()> GoToTheme(const Theme& theme)
-		{
-			return [theme]() { common::audio::Mux::Play(theme); };
-		}
 	}
 
 	namespace Sfx
@@ -190,4 +180,3 @@ namespace common::Audio
 		return muted;
 	}
 }
-

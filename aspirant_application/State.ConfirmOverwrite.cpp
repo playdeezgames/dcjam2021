@@ -8,6 +8,7 @@
 #include "Common.Audio.h"
 #include "Game.h"
 #include "Application.OnEnter.h"
+#include "Game.Audio.Mux.h"
 namespace state::ConfirmOverwrite
 {
 	const std::string LAYOUT_NAME = "State.ConfirmOverwrite";
@@ -92,7 +93,7 @@ namespace state::ConfirmOverwrite
 	{
 		for (auto state : states)
 		{
-			::application::OnEnter::AddHandler(state, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+			::application::OnEnter::AddHandler(state, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 
 			::application::MouseButtonUp::AddHandler(state, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 			::application::MouseMotion::AddHandler(state, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));

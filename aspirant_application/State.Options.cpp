@@ -11,6 +11,7 @@
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
 #include <SDL_mixer.h>
+#include "Game.Audio.Mux.h"
 namespace state::Options
 {
 	const std::string LAYOUT_NAME = "State.Options";
@@ -177,7 +178,7 @@ namespace state::Options
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::OPTIONS, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::OPTIONS, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::OPTIONS, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::OPTIONS, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::OPTIONS, commandHandlers);

@@ -169,6 +169,7 @@
     <ClCompile Include="Application.Update.cpp" />
     <ClCompile Include="Application.OnEnter.cpp" />
     <ClCompile Include="Data.Stores.cpp" />
+    <ClCompile Include="Game.Audio.Mux.cpp" />
     <ClCompile Include="Game.Avatar.cpp" />
     <ClCompile Include="Game.Avatar.Items.cpp" />
     <ClCompile Include="Game.Avatar.Statistics.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="Common.Deck.h" />
     <ClInclude Include="Common.Data.Properties.h" />
     <ClInclude Include="Data.Stores.h" />
+    <ClInclude Include="Game.Audio.Mux.h" />
     <ClInclude Include="Game.Avatar.h" />
     <ClInclude Include="Game.Avatar.Items.h" />
     <ClInclude Include="Game.Avatar.Statistics.h" />

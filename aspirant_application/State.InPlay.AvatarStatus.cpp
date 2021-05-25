@@ -10,6 +10,7 @@
 #include "Common.Audio.h"
 #include "Application.OnEnter.h"
 #include "Visuals.Data.Colors.h"
+#include "Game.Audio.Mux.h"
 namespace state::in_play::AvatarStatus
 {
 	const std::string LAYOUT_NAME = "State.InPlay.AvatarStatus";
@@ -151,7 +152,7 @@ namespace state::in_play::AvatarStatus
 
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
 
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);

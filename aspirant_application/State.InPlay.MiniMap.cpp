@@ -14,6 +14,7 @@
 #include "Visuals.Areas.h"
 #include "Visuals.Images.h"
 #include "Visuals.Texts.h"
+#include "Game.Audio.Mux.h"
 namespace state::in_play::MiniMap
 {
 	const std::string LAYOUT_NAME = "State.InPlay.MiniMap";
@@ -189,7 +190,7 @@ namespace state::in_play::MiniMap
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_MAP, UpdateKeys);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_MAP, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));

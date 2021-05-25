@@ -8,7 +8,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Game.Avatar.h"
 #include "Visuals.Layouts.h"
-#include "Common.Audio.h"
+#include "Game.Audio.Mux.h"
 namespace state::in_play::Exit
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Exit";
@@ -42,7 +42,7 @@ namespace state::in_play::Exit
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::ABOUT, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::ABOUT, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_EXIT, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::IN_PLAY_EXIT, ::application::UIState::GoTo(::UIState::MAIN_MENU));
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_EXIT, LAYOUT_NAME);

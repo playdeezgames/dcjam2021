@@ -10,6 +10,7 @@
 #include "Visuals.Data.Colors.h"
 #include "Application.OnEnter.h"
 #include "Visuals.Areas.h"
+#include "Game.Audio.Mux.h"
 namespace state::in_play::CombatResult
 {
 	const std::string LAYOUT_NAME = "State.InPlay.CombatResult";
@@ -69,7 +70,7 @@ namespace state::in_play::CombatResult
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::BATTLE));
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::BATTLE));
 		application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInAreaa));
 		application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT_RESULT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea, OnMouseMotionOutsideAreas));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT_RESULT, commandHandlers);

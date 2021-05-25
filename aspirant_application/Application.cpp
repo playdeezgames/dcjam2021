@@ -30,6 +30,7 @@
 #include "Data.Stores.h"
 #include "Application.OnEnter.h"
 #include "Game.Avatar.h"
+#include "Game.Audio.Mux.h"
 namespace Application
 {
 	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
@@ -116,7 +117,7 @@ namespace common::Application
 		{
 			starter();
 		}
-		common::audio::Mux::Play(common::audio::Mux::Theme::MAIN);
+		game::audio::Mux::Play(game::audio::Mux::Theme::MAIN);
 	}
 
 	bool IsRunning()

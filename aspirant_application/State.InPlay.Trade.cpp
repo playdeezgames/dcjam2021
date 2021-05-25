@@ -12,6 +12,7 @@
 #include "Common.Audio.h"
 #include "Game.Avatar.Items.h"
 #include <sstream>
+#include "Game.Audio.Mux.h"
 namespace state::in_play::Trade
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Trade";
@@ -253,7 +254,7 @@ namespace state::in_play::Trade
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_TRADE, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_TRADE, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_TRADE, OnEnter);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_TRADE, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_TRADE, commandHandlers);

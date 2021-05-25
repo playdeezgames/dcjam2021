@@ -7,6 +7,7 @@
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
 #include "Application.OnEnter.h"
+#include "Game.Audio.Mux.h"
 namespace state::LeavePlay
 {
 	const std::string LAYOUT_NAME = "State.LeavePlay";
@@ -83,7 +84,7 @@ namespace state::LeavePlay
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::LEAVE_PLAY, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::LEAVE_PLAY, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::LEAVE_PLAY, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::LEAVE_PLAY, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::LEAVE_PLAY, commandHandlers);

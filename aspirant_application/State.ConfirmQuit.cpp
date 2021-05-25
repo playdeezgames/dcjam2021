@@ -6,7 +6,7 @@
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
 #include "Application.OnEnter.h"
-#include "Common.Audio.h"
+#include "Game.Audio.Mux.h"
 namespace state::ConfirmQuit
 {
 	const std::string LAYOUT_NAME = "State.ConfirmQuit";
@@ -64,7 +64,7 @@ namespace state::ConfirmQuit
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::CONFIRM_QUIT, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::CONFIRM_QUIT, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::CONFIRM_QUIT, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::CONFIRM_QUIT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::CONFIRM_QUIT, commandHandlers);
