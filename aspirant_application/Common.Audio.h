@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <optional>
+#include <functional>
 namespace common::audio
 {
 	namespace Sfx
@@ -14,9 +15,15 @@ namespace common::audio
 
 	namespace Mux
 	{
-		void Play(const std::string&);
+		enum class Theme
+		{
+			MAIN,
+			BATTLE
+		};
+		void Play(const Theme&);
 		void SetVolume(int);
 		int GetVolume();
+		std::function<void()> GoToTheme(const Theme&);
 	}
 }
 namespace common::Audio

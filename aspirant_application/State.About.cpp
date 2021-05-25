@@ -1,6 +1,8 @@
 #include "Application.Renderer.h"
 #include "Application.Command.h"
 #include "Application.MouseButtonUp.h"
+#include "Application.OnEnter.h"
+#include "Common.Audio.h"
 namespace state::About
 {
 	const std::string LAYOUT_NAME = "State.About";
@@ -13,6 +15,7 @@ namespace state::About
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::ABOUT, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::ABOUT, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::ABOUT, ::application::UIState::GoTo(::UIState::MAIN_MENU));
 		::application::Renderer::SetRenderLayout(::UIState::ABOUT, LAYOUT_NAME);

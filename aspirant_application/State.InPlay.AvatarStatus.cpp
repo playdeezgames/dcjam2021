@@ -151,6 +151,7 @@ namespace state::in_play::AvatarStatus
 
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_STATUS, LAYOUT_NAME);
 
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttack);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateAttackTimer);
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_STATUS, UpdateDefend);

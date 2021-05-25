@@ -7,6 +7,7 @@
 #include "Game.Avatar.Items.h"
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
+#include "Common.Audio.h"
 namespace state::in_play::FloorInventory
 {
 	const std::string LAYOUT_NAME = "State.InPlay.FloorInventory";
@@ -57,7 +58,8 @@ namespace state::in_play::FloorInventory
 
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, OnEnter);
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_FLOOR, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_FLOOR, OnEnter);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_FLOOR, OnMouseMotion);
 		::application::Command::SetHandlers(::UIState::IN_PLAY_FLOOR, commandHandlers);

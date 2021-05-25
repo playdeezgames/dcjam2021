@@ -7,6 +7,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
+#include "Application.OnEnter.h"
 namespace state::Start
 {
 	const std::string LAYOUT_NAME = "State.Start";
@@ -85,6 +86,7 @@ namespace state::Start
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::START_GAME, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::START_GAME, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::START_GAME, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::START_GAME, commandHandlers);

@@ -116,7 +116,7 @@ namespace common::Application
 		{
 			starter();
 		}
-		common::audio::Mux::Play("songs");//TODO: nekkid string
+		common::audio::Mux::Play(common::audio::Mux::Theme::MAIN);
 	}
 
 	bool IsRunning()

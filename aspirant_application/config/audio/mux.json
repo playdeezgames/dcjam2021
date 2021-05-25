@@ -1,3 +1,4 @@
 {
-    "songs":"assets/audio/mux/FreebooterOfSploorMainThemeOrchestra.ogg"
+    "main":"assets/audio/mux/FreebooterOfSploorMainThemeOrchestra.ogg",
+    "battle":"assets/audio/mux/Freebooter_of_SPLORR_Battle_Theme_Orchestral.ogg"
 }

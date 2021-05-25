@@ -63,6 +63,7 @@ namespace state::in_play::AvatarInventory
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_INVENTORY, OnEnter );
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseButtonUp);
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_INVENTORY, OnMouseMotion);

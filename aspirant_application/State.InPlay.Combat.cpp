@@ -264,6 +264,7 @@ namespace state::in_play::Combat
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_COMBAT, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::BATTLE));
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_COMBAT, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::IN_PLAY_COMBAT, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_COMBAT, commandHandlers);

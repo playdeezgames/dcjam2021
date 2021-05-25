@@ -6,6 +6,7 @@
 #include "Application.MouseMotion.h"
 #include "Visuals.Areas.h"
 #include "Common.Audio.h"
+#include "Application.OnEnter.h"
 namespace state::ConfirmAbandon
 {
 	const std::string LAYOUT_NAME = "State.ConfirmAbandon";
@@ -68,6 +69,7 @@ namespace state::ConfirmAbandon
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::CONFIRM_ABANDON, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::CONFIRM_ABANDON, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::MouseMotion::AddHandler(::UIState::CONFIRM_ABANDON, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::Command::SetHandlers(::UIState::CONFIRM_ABANDON, commandHandlers);

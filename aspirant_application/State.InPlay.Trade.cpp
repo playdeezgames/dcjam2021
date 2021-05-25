@@ -253,6 +253,7 @@ namespace state::in_play::Trade
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_TRADE, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::OnEnter::AddHandler(::UIState::IN_PLAY_TRADE, OnEnter);
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_TRADE, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::Command::SetHandlers(::UIState::IN_PLAY_TRADE, commandHandlers);

@@ -5,6 +5,8 @@
 #include "Common.Utility.h"
 #include "Visuals.Areas.h"
 #include "Visuals.Menus.h"
+#include "Application.OnEnter.h"
+#include "Common.Audio.h"
 namespace state::MainMenu
 {
 	const std::string LAYOUT_NAME = "State.MainMenu";
@@ -76,6 +78,7 @@ namespace state::MainMenu
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::MAIN_MENU, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::MouseMotion::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);

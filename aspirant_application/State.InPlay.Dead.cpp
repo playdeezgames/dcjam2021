@@ -9,6 +9,7 @@
 #include "Application.MouseButtonUp.h"
 #include "Visuals.Layouts.h"
 #include "Game.Avatar.h"
+#include "Common.Audio.h"
 namespace state::in_play::Dead
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Dead";
@@ -42,6 +43,7 @@ namespace state::in_play::Dead
 
 	void Start()
 	{
+		::application::OnEnter::AddHandler(::UIState::IN_PLAY_DEAD, common::audio::Mux::GoToTheme(common::audio::Mux::Theme::MAIN));
 		::application::MouseButtonUp::AddHandler(::UIState::IN_PLAY_DEAD, OnMouseButtonUp);
 		::application::Command::SetHandler(::UIState::IN_PLAY_DEAD, ::application::UIState::GoTo(::UIState::MAIN_MENU));
 		::application::Renderer::SetRenderLayout(::UIState::IN_PLAY_DEAD, LAYOUT_NAME);
