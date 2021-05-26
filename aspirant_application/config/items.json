@@ -188,7 +188,7 @@
         "take-area-id": "TakeTurd",
         "sfx": {
             "0": "poop",
-            "1": "yoink"
+            "1": "eww"
         }
     },
     "9": {
@@ -252,7 +252,7 @@
         "drop-on-use": true,
         "sfx": {
             "0": "badoosh",
-            "1": "yoink"
+            "1": "getsoiledtrousers"
         }
     },
     "13": {
