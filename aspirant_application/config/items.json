@@ -171,7 +171,7 @@
         "drunkenness": 50,
         "sfx": {
             "0": "woohoo",
-            "1": "yoink"
+            "1": "getpotion"
         }
     },
     "8": {
@@ -285,7 +285,7 @@
         "take-image-id": "TakeSoap",
         "take-area-id": "TakeSoap",
         "sfx": {
-            "1": "yoink"
+            "1": "pop"
         }
     }
 }
