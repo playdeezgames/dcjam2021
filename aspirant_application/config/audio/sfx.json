@@ -13,6 +13,7 @@
   "eat":"assets/audio/sfx/eat.wav",
   "exit":"assets/audio/sfx/exit.wav",
   "getbeer":"assets/audio/sfx/getbeer.wav",
+  "getcoffee":"assets/audio/sfx/getcoffee.wav",
   "getkey":"assets/audio/sfx/getkey.wav",
   "getpotion":"assets/audio/sfx/getpotion.wav",
   "gorsh":"assets/audio/sfx/gorsh.wav",

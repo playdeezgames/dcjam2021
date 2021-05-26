@@ -113,7 +113,7 @@
         "drunkenness": -5,
         "sfx": {
             "0": "coffee",
-            "1": "yoink"
+            "1": "getcoffee"
         }
     },
     "5": {
