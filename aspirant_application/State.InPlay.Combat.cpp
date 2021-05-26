@@ -139,7 +139,6 @@ namespace state::in_play::Combat
 			if (std::get<1>(*result)== game::avatar::Items::CombatUseResult::REFRESH)
 			{
 				common::audio::Sfx::Play(application::UIState::EnterGame());
-				return;
 			}
 		}
 		application::OnEnter::Handle();
@@ -163,6 +162,7 @@ namespace state::in_play::Combat
 		if (visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM)
 		{ 
 			visuals::AvatarInventory::NextIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
+			application::OnEnter::Handle();
 		}
 	}
 
@@ -171,6 +171,7 @@ namespace state::in_play::Combat
 		if (visuals::Menus::ReadIndex(LAYOUT_NAME, MENU_COMBAT).value() == (int)CombatMenuItem::USE_ITEM)
 		{ 
 			visuals::AvatarInventory::PreviousIndex(INVENTORY_LAYOUT_NAME, CONTROL_AVATAR_INVENTORY);
+			application::OnEnter::Handle();
 		}
 	}
 

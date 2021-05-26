@@ -428,11 +428,16 @@ namespace game::avatar::Items
 
 	static std::optional<std::tuple<std::string, CombatUseResult>> CombatAttitude(int item)
 	{
-		auto result = ConsumeItem(item, [item](const game::item::Descriptor& descriptor)
+		std::optional<std::string> sfx;
+		auto result = ConsumeItem(item, [&sfx, item](const game::item::Descriptor& descriptor)
 		{
-			game::Creatures::ChangeAttitude(game::Avatar::GetPosition(), item);
+			sfx = game::Creatures::ChangeAttitude(game::Avatar::GetPosition(), item);
 			return ToConsumeItemResult(descriptor);
-		}, ResultToSfx);
+			}, 
+			[&sfx](const game::item::Descriptor&, ConsumeItemResult) 
+			{
+				return sfx; 
+			});
 		if (result)
 		{
 			return std::make_tuple(*result, CombatUseResult::REFRESH);
