@@ -68,7 +68,7 @@
         "drunkenness": 25,
         "sfx": {
             "0": "beer",
-            "1": "yoink"
+            "1": "getbeer"
         }
     },
     "3": {
@@ -90,7 +90,7 @@
         "drunkenness": 25,
         "sfx": {
             "0": "wine",
-            "1": "yoink"
+            "1": "swanky"
         }
     },
     "4": {
