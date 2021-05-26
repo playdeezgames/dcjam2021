@@ -205,7 +205,7 @@
         "take-area-id": "TakeJoker",
         "sfx": {
             "0": "playjoker",
-            "1": "yoink"
+            "1": "getjoker"
         }
     },
     "10": {
@@ -233,7 +233,7 @@
         "take-image-id": "TakeMapFragment",
         "take-area-id": "TakeMapFragment",
         "sfx": {
-            "1": "yoink"
+            "1": "getmap"
         }
     },
     "12": {
