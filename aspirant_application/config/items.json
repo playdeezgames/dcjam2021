@@ -152,7 +152,7 @@
         "lose-on-teleport": true,
         "drop-on-use": true,
         "sfx": {
-            "1": "yoink"
+            "1": "foundem"
         }
     },
     "7": {

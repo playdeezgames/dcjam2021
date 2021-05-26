@@ -12,6 +12,7 @@
   "drinkpotion":"assets/audio/sfx/drinkpotion.wav",
   "eat":"assets/audio/sfx/eat.wav",
   "exit":"assets/audio/sfx/exit.wav",
+  "foundem":"assets/audio/sfx/foundem.wav",
   "getbeer":"assets/audio/sfx/getbeer.wav",
   "getcoffee":"assets/audio/sfx/getcoffee.wav",
   "getkey":"assets/audio/sfx/getkey.wav",
