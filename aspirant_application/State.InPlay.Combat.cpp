@@ -257,7 +257,7 @@ namespace state::in_play::Combat
 		return ClickPreviousItem(area) || ClickNextItem(area) || ClickAny(area);
 	}
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_PREVIOUS_ITEM, (area == AREA_PREVIOUS_ITEM) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));
 		visuals::Texts::SetColor(LAYOUT_NAME, TEXT_NEXT_ITEM, (area == AREA_NEXT_ITEM) ? (visuals::data::Colors::HIGHLIGHT) : (visuals::data::Colors::NORMAL));

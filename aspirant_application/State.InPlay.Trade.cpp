@@ -218,7 +218,7 @@ namespace state::in_play::Trade
 		UpdateBenefits();
 	}
 
-	static void MouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void MouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		auto& menuItem = areaMenuItems.find(area)->second;
 		if (menuItem)
@@ -232,7 +232,7 @@ namespace state::in_play::Trade
 		}
 	}
 
-	static void MouseMotionOutsideAreas(const common::XY<Sint32>&)
+	static void MouseMotionOutsideAreas(const common::XY<int>&)
 	{
 		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_CLOSE, SPRITE_NORMAL);
 	}

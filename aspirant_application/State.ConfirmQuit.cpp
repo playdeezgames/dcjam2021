@@ -57,7 +57,7 @@ namespace state::ConfirmQuit
 		return true;
 	}
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}

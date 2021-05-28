@@ -15,7 +15,7 @@ namespace application::Update
 		handlers[state].push_back(handler);
 	}
 
-	void Handle(Uint32 ticks)
+	void Handle(unsigned int ticks)
 	{
 		application::Handlers::WithCurrent(handlers, [ticks](const std::vector<Handler>& updaters) 
 		{

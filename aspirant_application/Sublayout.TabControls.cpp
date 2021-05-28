@@ -46,12 +46,12 @@ namespace sublayout::TabControls
 		}
 	}
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		UpdateTabColors(area);
 	}
 
-	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	static void OnMouseMotionOutsideAreas(const common::XY<int>&)
 	{
 		UpdateTabColors(NO_TAB);
 	}

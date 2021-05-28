@@ -22,12 +22,12 @@ namespace sublayout::UIHamburger
 		::UIState::IN_PLAY_TRADE
 	};
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_HOVER);
 	}
 
-	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	static void OnMouseMotionOutsideAreas(const common::XY<int>&)
 	{
 		visuals::Images::SetSprite(LAYOUT_NAME, IMAGE_UI_HAMBURGER, SPRITE_UI_HAMBURGER_NORMAL);
 	}

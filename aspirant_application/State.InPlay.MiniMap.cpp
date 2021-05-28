@@ -122,7 +122,7 @@ namespace state::in_play::MiniMap
 		return CELL_EMPTY;
 	}
 
-	static void UpdateMiniMapToolTip(const std::string& areaName, const common::XY<Sint32>& xy)
+	static void UpdateMiniMapToolTip(const std::string& areaName, const common::XY<int>& xy)
 	{
 		if (areaName == AREA_WORLD_MAP)
 		{
@@ -137,12 +137,12 @@ namespace state::in_play::MiniMap
 		}
 	}
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>& xy)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>& xy)
 	{
 		UpdateArrowImages(area);
 		UpdateMiniMapToolTip(area, xy);
 	}
-	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	static void OnMouseMotionOutsideAreas(const common::XY<int>&)
 	{
 		UpdateArrowImages(NO_ARROW);
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_MAP_TOOL_TIP, EMPTY_TOOL_TIP);

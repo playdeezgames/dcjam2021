@@ -142,7 +142,7 @@ namespace sublayout::POV
 		::UIState::IN_PLAY_COMBAT_RESULT
 	};
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		std::string itemToolTip = "";
 		auto position = game::Avatar::GetPosition();
@@ -182,7 +182,7 @@ namespace sublayout::POV
 		visuals::Texts::SetText(LAYOUT_NAME, TEXT_ITEM_TOOL_TIP, EMPTY_TOOLTIP);
 	}
 
-	static void OnMouseMotionOutsideAreas(const common::XY<Sint32>&)
+	static void OnMouseMotionOutsideAreas(const common::XY<int>&)
 	{
 		ClearTakeImagesAndItemToolTip();
 	}

@@ -19,14 +19,14 @@ namespace sublayout::QuickStats
 	const std::string AREA_HUNGER = "Hunger";
 	const std::string TEXT_TOOL_TOP = "ToolTip";
 
-	static void UpdateHealth(const Uint32&)
+	static void UpdateHealth(const unsigned int&)
 	{
 		std::stringstream ss;
 		ss << HEALTH_SPRITE_PREFIX << game::avatar::Statistics::Read(game::avatar::Statistic::HEALTH);
 		::visuals::Images::SetSprite(LAYOUT_NAME, HEALTH_IMAGE_ID, ss.str());
 	}
 
-	static void UpdateHunger(const Uint32&)
+	static void UpdateHunger(const unsigned int&)
 	{
 		std::stringstream ss;
 		ss << HUNGER_SPRITE_PREFIX << game::avatar::Statistics::Read(game::avatar::Statistic::HUNGER);
@@ -42,7 +42,7 @@ namespace sublayout::QuickStats
 		::UIState::IN_PLAY_COMBAT_RESULT,
 	};
 
-	static void OnMouseMotion(const common::XY<Sint32>& position)
+	static void OnMouseMotion(const common::XY<int>& position)
 	{
 		auto areas = visuals::Areas::Get(LAYOUT_NAME, position);
 		std::stringstream ss;

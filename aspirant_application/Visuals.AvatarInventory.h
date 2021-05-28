@@ -13,6 +13,6 @@ namespace visuals::AvatarInventory
 	std::function<void()> GoToNextIndex(const std::string&, const std::string&);
 	std::function<void()> GoToPreviousIndex(const std::string&, const std::string&);
 	std::optional<int> GetItem(const std::string&, const std::string&);
-	void OnMouseMotion(const std::string&, const std::string&, const common::XY<Sint32>&);
-	std::optional<int> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<Sint32>&, Uint8);
+	void OnMouseMotion(const std::string&, const std::string&, const common::XY<int>&);
+	std::optional<int> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<int>&, Uint8);
 }

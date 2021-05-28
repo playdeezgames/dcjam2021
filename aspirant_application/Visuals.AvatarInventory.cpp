@@ -171,7 +171,7 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy)
+	void OnMouseMotion(const std::string& layoutName, const std::string& controlId, const common::XY<int>& xy)
 	{
 		auto avatarInventoryIndex = avatarInventoryTable[layoutName][controlId];
 		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];
@@ -191,7 +191,7 @@ namespace visuals::AvatarInventory
 		}
 	}
 
-	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<Sint32>& xy, Uint8 buttons)
+	std::optional<int> OnMouseButtonUp(const std::string& layoutName, const std::string& controlId, const common::XY<int>& xy, Uint8 buttons)
 	{
 		auto avatarInventoryIndex = avatarInventoryTable[layoutName][controlId];
 		auto& avatarInventory = internalAvatarInventories[avatarInventoryIndex];

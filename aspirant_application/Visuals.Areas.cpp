@@ -73,15 +73,15 @@ namespace visuals::Areas
 		return areaTable.find(layoutName)->second.find(areaName)->second;
 	}
 
-	std::function<void(const common::XY<Sint32>& xy)> 
+	std::function<void(const common::XY<int>& xy)> 
 		HandleMouseMotion(
 			const std::string& layoutName, 
-			std::function<void(const std::string&, const common::XY<Sint32>&)> areaHandler,
-			std::function<void(const common::XY<Sint32>&)> noAreaHandler
+			std::function<void(const std::string&, const common::XY<int>&)> areaHandler,
+			std::function<void(const common::XY<int>&)> noAreaHandler
 		)
 	{
 		Initialize(layoutName);
-		return [layoutName, areaHandler, noAreaHandler](const common::XY<Sint32>& xy)
+		return [layoutName, areaHandler, noAreaHandler](const common::XY<int>& xy)
 		{
 			auto areas = visuals::Areas::Get(layoutName, xy);
 			if (areas.empty())
@@ -99,19 +99,19 @@ namespace visuals::Areas
 		};
 	}
 
-	std::function<void(const common::XY<Sint32>& xy)>
+	std::function<void(const common::XY<int>& xy)>
 		HandleMouseMotion(
 			const std::string& layoutName,
-			std::function<void(const std::string&, const common::XY<Sint32>&)> areaHandler
+			std::function<void(const std::string&, const common::XY<int>&)> areaHandler
 		)
 	{
-		return HandleMouseMotion(layoutName, areaHandler, [](const common::XY<Sint32>&) {});
+		return HandleMouseMotion(layoutName, areaHandler, [](const common::XY<int>&) {});
 	}
 
 
-	std::function<bool(const common::XY<Sint32>&, Uint8)> HandleMouseButtonUp(const std::string& layoutName, std::function<bool(const std::string&)> areaHandler)
+	std::function<bool(const common::XY<int>&, unsigned char)> HandleMouseButtonUp(const std::string& layoutName, std::function<bool(const std::string&)> areaHandler)
 	{
-		return [layoutName, areaHandler](const common::XY<Sint32>& xy, Uint8)
+		return [layoutName, areaHandler](const common::XY<int>& xy, unsigned char)
 		{
 			auto areas = visuals::Areas::Get(layoutName, xy);
 			for (auto& area : areas)

@@ -126,7 +126,7 @@ namespace common::Application
 
 	static std::optional<::UIState> currentState = std::nullopt;
 
-	void Update(Uint32 ticks)
+	void Update(unsigned int ticks)
 	{
 		if (!currentState || currentState.value() != ::application::UIState::Read())
 		{
@@ -137,7 +137,7 @@ namespace common::Application
 		application::Update::Handle(ticks);
 	}
 
-	std::map<Uint32, std::function<void(const SDL_Event&)>> eventHandlers =
+	std::map<unsigned int, std::function<void(const SDL_Event&)>> eventHandlers =
 	{
 		{ SDL_QUIT,                 [](const SDL_Event&    ) { ::application::UIState::Write(::UIState::QUIT); }},
 		{ SDL_KEYDOWN,              [](const SDL_Event& evt) { ::Application::HandleKeyDown(evt.key); }},

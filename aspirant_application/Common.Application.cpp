@@ -20,7 +20,7 @@ namespace common::Application
 
 	extern void Start(const std::shared_ptr<SDL_Renderer>&, const std::vector<std::string>&);//TODO: unused parameter
 	extern bool IsRunning();
-	extern void Update(Uint32);
+	extern void Update(unsigned int);
 	extern void HandleEvent(const SDL_Event&);
 
 	static std::map<int, SDL_GameController*> controllers;
@@ -105,7 +105,7 @@ namespace common::Application
 		Start(renderer, arguments);
 	}
 
-	static void ReportRenderTicks(Uint32 renderTicks)
+	static void ReportRenderTicks(unsigned int renderTicks)
 	{
 		SDL_LogDebug(0, "%u", renderTicks);
 	}

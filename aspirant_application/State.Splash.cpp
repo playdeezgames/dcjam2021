@@ -16,7 +16,7 @@ namespace state::Splash
 		ticksLeft = 0;
 	}
 
-	static void OnUpdate(const Uint32& ticks)
+	static void OnUpdate(const unsigned int& ticks)
 	{
 		ticksLeft = (ticksLeft > ticks) ? (ticksLeft - ticks) : (0);
 		if (ticksLeft == 0)
@@ -26,7 +26,7 @@ namespace state::Splash
 		}
 	}
 
-	static bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	static bool OnMouseButtonUp(const common::XY<int>& xy, Uint8 buttons)
 	{
 		RunOutTimer();
 		return true;

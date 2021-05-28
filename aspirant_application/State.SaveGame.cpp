@@ -123,7 +123,7 @@ namespace state::SaveGame
 		visuals::Menus::WriteIndex(LAYOUT_NAME, MENU_ID, (int)item);
 	}
 
-	static void OnMouseMotionInArea(const std::string& area, const common::XY<Sint32>&)
+	static void OnMouseMotionInArea(const std::string& area, const common::XY<int>&)
 	{
 		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}

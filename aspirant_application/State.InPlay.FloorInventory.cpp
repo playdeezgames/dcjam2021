@@ -36,12 +36,12 @@ namespace state::in_play::FloorInventory
 		{ ::Command::GREEN, PickUpItem }
 	};
 
-	void OnMouseMotion(const common::XY<Sint32>& xy)
+	void OnMouseMotion(const common::XY<int>& xy)
 	{
 		visuals::AvatarInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy);
 	}
 
-	bool OnMouseButtonUp(const common::XY<Sint32>& xy, Uint8 buttons)
+	bool OnMouseButtonUp(const common::XY<int>& xy, Uint8 buttons)
 	{
 		auto itemUsed = visuals::AvatarInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_FLOOR_INVENTORY, xy, buttons);
 		if (itemUsed.has_value())
