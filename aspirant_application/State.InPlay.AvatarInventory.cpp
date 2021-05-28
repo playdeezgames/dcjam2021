@@ -40,7 +40,7 @@ namespace state::in_play::AvatarInventory
 		visuals::AvatarInventory::OnMouseMotion(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy);
 	}
 
-	bool OnMouseButtonUp(const common::XY<int>& xy, Uint8 buttons)
+	bool OnMouseButtonUp(const common::XY<int>& xy, unsigned char buttons)
 	{
 		auto itemUsed = visuals::AvatarInventory::OnMouseButtonUp(LAYOUT_NAME, CONTROL_AVATAR_INVENTORY, xy, buttons);
 		if (itemUsed.has_value())

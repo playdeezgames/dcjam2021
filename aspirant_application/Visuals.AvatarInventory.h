@@ -2,7 +2,6 @@
 #include "Game.Item.h"
 #include <optional>
 #include "Common.XY.h"
-#include <SDL.h>
 #include <functional>
 namespace visuals::AvatarInventory
 {
@@ -14,5 +13,5 @@ namespace visuals::AvatarInventory
 	std::function<void()> GoToPreviousIndex(const std::string&, const std::string&);
 	std::optional<int> GetItem(const std::string&, const std::string&);
 	void OnMouseMotion(const std::string&, const std::string&, const common::XY<int>&);
-	std::optional<int> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<int>&, Uint8);
+	std::optional<int> OnMouseButtonUp(const std::string&, const std::string&, const common::XY<int>&, unsigned char);
 }

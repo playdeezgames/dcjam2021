@@ -26,7 +26,7 @@ namespace state::Splash
 		}
 	}
 
-	static bool OnMouseButtonUp(const common::XY<int>& xy, Uint8 buttons)
+	static bool OnMouseButtonUp(const common::XY<int>& xy, unsigned char buttons)
 	{
 		RunOutTimer();
 		return true;

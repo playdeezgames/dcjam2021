@@ -34,7 +34,7 @@ namespace state::in_play::Exit
 		}
 	}
 
-	bool OnMouseButtonUp(const common::XY<int>& xy, Uint8 buttons)
+	bool OnMouseButtonUp(const common::XY<int>& xy, unsigned char buttons)
 	{
 		::application::UIState::Write(::UIState::MAIN_MENU);
 		return true;

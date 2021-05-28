@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <SDL.h>
 #include <optional>
 #include <functional>
 namespace visuals::Menus
