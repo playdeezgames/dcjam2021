@@ -1,5 +1,4 @@
 #pragma once
-#include <SDL.h>
 #include "Application.UIState.h"
 #include <functional>
 namespace application::OnEnter
