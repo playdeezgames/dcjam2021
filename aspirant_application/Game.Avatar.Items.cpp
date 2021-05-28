@@ -310,6 +310,7 @@ namespace game::avatar::Items
 					size_t y = (size_t)common::RNG::FromRange(0, (int)worldSize.GetY());
 					auto xy = common::XY<size_t>(x, y);
 					game::world::Items::Add(xy, item.first, 1);
+					Remove(item.first, 1u);
 				}
 			}
 		}
