@@ -10,15 +10,15 @@ namespace application::MouseButtonUp
 		mouseUpHandlers[state].push_back(handler);
 	}
 
-	void Handle(const SDL_MouseButtonEvent& evt)
+	void Handle(const int& x, const int& y, const unsigned char& button)
 	{
 		application::Handlers::WithCurrent(
 			mouseUpHandlers,
-			[evt](const std::vector<Handler>& handlers)
+			[x,y,button](const std::vector<Handler>& handlers)
 		{ 
 			for (auto& handler : handlers)
 			{
-				if (handler(common::XY<Sint32>(evt.x, evt.y), evt.button))
+				if (handler(common::XY<int>(x, y), button))
 				{
 					return true;
 				}

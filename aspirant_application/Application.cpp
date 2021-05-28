@@ -1,3 +1,4 @@
+#include <SDL.h>
 #include <string>
 #include <optional>
 #include "Application.Renderer.h"
@@ -144,7 +145,7 @@ namespace common::Application
 		{ SDL_TEXTINPUT,            [](const SDL_Event& evt) { ::application::TextInput::Handle(evt.text); }},
 		{ SDL_CONTROLLERBUTTONDOWN, [](const SDL_Event& evt) { ::Application::HandleControllerButtonDown(evt.cbutton); }},
 		{ SDL_MOUSEMOTION,          [](const SDL_Event& evt) { ::application::MouseMotion::Handle(evt.motion); }},
-		{ SDL_MOUSEBUTTONUP,        [](const SDL_Event& evt) { ::application::MouseButtonUp::Handle(evt.button); }}
+		{ SDL_MOUSEBUTTONUP,        [](const SDL_Event& evt) { ::application::MouseButtonUp::Handle(evt.button.x, evt.button.y, evt.button.button); }}
 	};
 
 	void HandleEvent(const SDL_Event& evt)
