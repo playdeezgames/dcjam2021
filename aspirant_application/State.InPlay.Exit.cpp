@@ -13,7 +13,7 @@ namespace state::in_play::Exit
 {
 	const std::string LAYOUT_NAME = "State.InPlay.Exit";
 	const std::string JOOLS_TEXT_ID = "Jools";
-	const std::string TROUSERS_TEXT_ID = "Jools";
+	const std::string TROUSERS_TEXT_ID = "Trousers";
 
 	static void OnEnter()
 	{

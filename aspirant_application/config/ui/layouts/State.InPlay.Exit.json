@@ -44,7 +44,7 @@
         "type": "Text",
         "text-id":"Trousers",
         "font": "default",
-        "color": "LightRed",
+        "color": "LightGreen",
         "text": "<trousers>",
         "x": 320,
         "y": 222,
