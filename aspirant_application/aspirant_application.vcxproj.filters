@@ -74,9 +74,6 @@
     <ClCompile Include="Application.Command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Application.TextInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Application.Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -293,9 +290,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application.Command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.TextInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application.Update.h">

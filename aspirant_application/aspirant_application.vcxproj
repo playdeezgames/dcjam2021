@@ -164,7 +164,6 @@
     <ClCompile Include="Application.MouseMotion.cpp" />
     <ClCompile Include="Application.Renderer.cpp" />
     <ClCompile Include="Application.Sounds.cpp" />
-    <ClCompile Include="Application.TextInput.cpp" />
     <ClCompile Include="Application.UIState.cpp" />
     <ClCompile Include="Application.Update.cpp" />
     <ClCompile Include="Application.OnEnter.cpp" />
@@ -243,7 +242,6 @@
     <ClInclude Include="Application.MouseMotion.h" />
     <ClInclude Include="Application.OnEnter.h" />
     <ClInclude Include="Application.Sounds.h" />
-    <ClInclude Include="Application.TextInput.h" />
     <ClInclude Include="Application.UIState.h" />
     <ClInclude Include="Application.Update.h" />
     <ClInclude Include="Common.Application.h" />
