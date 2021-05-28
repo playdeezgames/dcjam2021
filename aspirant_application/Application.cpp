@@ -1,4 +1,3 @@
-#include <SDL.h>
 #include <string>
 #include <optional>
 #include "Application.Renderer.h"
@@ -33,14 +32,14 @@
 #include "Game.Audio.Mux.h"
 namespace Application
 {
-	static std::optional<::Command> KeyCodeToCommand(SDL_KeyCode code)
+	static std::optional<::Command> KeyCodeToCommand(int code)
 	{
 		return application::Keyboard::ToCommand(code);
 	}
 
 	static void HandleKeyDown(const SDL_KeyboardEvent& evt)
 	{
-		auto command = application::Keyboard::ToCommand((SDL_KeyCode)evt.keysym.sym);
+		auto command = application::Keyboard::ToCommand((int)evt.keysym.sym);
 		if (command)
 		{
 			application::Command::Handle(command.value());

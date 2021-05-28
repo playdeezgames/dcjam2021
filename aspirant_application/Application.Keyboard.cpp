@@ -1,5 +1,4 @@
 #include <map>
-#include <SDL.h>
 #include "json.hpp"
 #include "Common.Utility.h"
 #include "Data.JSON.h"
@@ -8,7 +7,7 @@
 #pragma warning (disable: 26812)
 namespace application::Keyboard
 {
-	static std::map<SDL_KeyCode, ::Command> keyboardCommands;
+	static std::map<int, ::Command> keyboardCommands;
 
 	static bool initialized = false;
 
@@ -19,7 +18,7 @@ namespace application::Keyboard
 			auto& config = data::Stores::GetStore(data::Store::KEYS);
 			for (auto& item : config.items())
 			{
-				SDL_KeyCode code = (SDL_KeyCode)common::Utility::StringToInt(item.key());
+				int code = common::Utility::StringToInt(item.key());
 				::Command command = (::Command)(int)item.value();
 				keyboardCommands[code] = command;
 			}
@@ -27,7 +26,7 @@ namespace application::Keyboard
 		}
 	}
 
-	std::optional<::Command> ToCommand(SDL_KeyCode keycode)
+	std::optional<::Command> ToCommand(int keycode)
 	{
 		Initialize();
 		auto iter = keyboardCommands.find(keycode);
