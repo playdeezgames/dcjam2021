@@ -13,7 +13,8 @@ namespace application::UI
 		WOOHOO,
 		HUNTER_POOPS,
 		LOCKED,
-		UNLOCK
+		UNLOCK,
+		TURN
 	};
 }
 

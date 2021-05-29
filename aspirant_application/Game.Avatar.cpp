@@ -113,10 +113,12 @@ namespace game::Avatar
 			if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
 			{
 				ActuallyTurnLeft();
+				return application::Sounds::Read(application::UI::Sfx::TURN);
 			}
 			else
 			{
 				ActuallyTurnRight();
+				return application::Sounds::Read(application::UI::Sfx::TURN);
 			}
 		}
 		return std::nullopt;
@@ -129,10 +131,12 @@ namespace game::Avatar
 			if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::NAUSEA))
 			{
 				ActuallyTurnRight();
+				return application::Sounds::Read(application::UI::Sfx::TURN);
 			}
 			else
 			{
 				ActuallyTurnLeft();
+				return application::Sounds::Read(application::UI::Sfx::TURN);
 			}
 		}
 		return std::nullopt;
