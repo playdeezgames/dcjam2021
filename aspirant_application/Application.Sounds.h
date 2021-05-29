@@ -15,7 +15,8 @@ namespace application::UI
 		LOCKED,
 		UNLOCK,
 		TURN,
-		STOMACH
+		STOMACH,
+		TAKE_ALL
 	};
 }
 

@@ -31,6 +31,7 @@
   "hostile":"assets/audio/sfx/hostile.wav",
   "jools":"assets/audio/sfx/jools.wav",
   "meh":"assets/audio/sfx/meh.wav",
+  "mine":"assets/audio/sfx/mine.wav",
   "playjoker":"assets/audio/sfx/playjoker.wav",
   "poop":"assets/audio/sfx/poop.wav",
   "pop":"assets/audio/sfx/pop.wav",

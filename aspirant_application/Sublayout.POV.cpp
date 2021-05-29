@@ -15,6 +15,7 @@
 #include "Game.Shoppes.h"
 #include "Game.World.Borders.h"
 #include "Common.Audio.h"
+#include "Application.Sounds.h"
 namespace sublayout::POV
 {
 	const std::string LAYOUT_NAME = "Sublayout.POV";
@@ -224,7 +225,7 @@ namespace sublayout::POV
 		application::OnEnter::Handle();
 		if (takeAll)
 		{
-			//TODO: play a sound representing taking everything
+			common::audio::Sfx::Play(application::Sounds::Read(application::UI::Sfx::TAKE_ALL));
 		}
 		return takeAll;
 	}
