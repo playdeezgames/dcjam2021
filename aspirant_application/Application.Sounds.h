@@ -14,7 +14,8 @@ namespace application::UI
 		HUNTER_POOPS,
 		LOCKED,
 		UNLOCK,
-		TURN
+		TURN,
+		STOMACH
 	};
 }
 

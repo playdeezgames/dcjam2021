@@ -159,26 +159,28 @@ namespace game::Avatar
 		return application::Sounds::Read(application::UI::Sfx::HUNTER_POOPS);
 	}
 
-	static void HandleHunger()
+	static std::optional<std::string> HandleHunger()
 	{
 		int hungerRate = GetDescriptor().hungerRate;
 		if (game::avatar::Statistics::IsMinimum(game::avatar::Statistic::HUNGER))
 		{
 			avatar::Statistics::Decrease(avatar::Statistic::HEALTH, hungerRate);
+			return application::Sounds::Read(application::UI::Sfx::STOMACH);
 		}
 		else
 		{
 			avatar::Statistics::Decrease(avatar::Statistic::HUNGER, hungerRate);
+			return std::nullopt;
 		}
 	}
 
-	static std::optional<std::string> HandleBowel()
+	static std::optional<std::string> HandleBowel(std::optional<std::string> sfx)
 	{
 		if (game::avatar::Statistics::IsMaximum(game::avatar::Statistic::BOWEL))
 		{
 			return Poop(true);
 		}
-		return std::nullopt;
+		return sfx;
 	}
 
 	static void HandleNausea()
@@ -223,10 +225,10 @@ namespace game::Avatar
 					break;
 				}
 				game::World::SetExplored(GetPosition());
-				HandleHunger();
+				result = HandleHunger();
 				HandleNausea();
 				HandleSobriety();
-				result = HandleBowel();
+				result = HandleBowel(result);
 			}
 			else if (border== game::world::Border::LOCK)
 			{
