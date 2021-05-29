@@ -193,6 +193,7 @@ namespace sublayout::POV
 		auto inventory = game::world::Items::FloorInventory(game::Avatar::GetPosition());
 		size_t amount = game::world::Items::Remove(game::Avatar::GetPosition(), item, inventory[item]);
 		game::avatar::Items::Add(item, amount);
+		application::OnEnter::Handle();
 	}
 
 	static bool OnMouseButtonUpInArea(const std::string& area)
