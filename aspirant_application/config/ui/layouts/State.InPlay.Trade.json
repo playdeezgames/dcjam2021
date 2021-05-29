@@ -73,7 +73,7 @@
     {
         "type": "Text",
         "font": "default",
-        "color": "Gray",
+        "color": "Blue",
         "text": "Cost:",
         "x": 160,
         "y": 96,
@@ -128,7 +128,7 @@
     {
         "type": "Text",
         "font": "default",
-        "color": "Gray",
+        "color": "Blue",
         "text": "Benefit:",
         "x": 480,
         "y": 96,
