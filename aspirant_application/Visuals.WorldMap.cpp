@@ -11,6 +11,7 @@
 #include "Visuals.Data.Colors.h"
 #include "Game.World.Borders.h"
 #include "Game.Shoppes.h"
+#include "Game.World.Items.h"
 namespace visuals::WorldMap
 {
 	const std::string MAP_CELL_BASE = "MapCellBase";
@@ -38,6 +39,7 @@ namespace visuals::WorldMap
 	const std::string AVATAR_WEST = "AvatarWest";
 	const std::string DANGER = "MapCellDanger";
 	const std::string TRADE = "MapCellTrade";
+	const std::string ITEM = "MapCellItem";
 
 	static std::map<maze::Direction, std::string> wallSprites =
 	{
@@ -119,6 +121,13 @@ namespace visuals::WorldMap
 
 	static std::vector<InternalWorldMap> internalWorldMaps;
 
+	static void DrawItem(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
+	{
+		if (game::world::Items::AnyPresent(cell))
+		{
+			visuals::Sprites::Draw(ITEM, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
+		}
+	}
 
 	static void DrawDanger(const std::shared_ptr<SDL_Renderer>& renderer, const common::XY<int>& plot, const common::XY<size_t>& cell)
 	{
@@ -161,6 +170,7 @@ namespace visuals::WorldMap
 	{
 		visuals::Sprites::Draw(MAP_CELL_BASE, renderer, plot, visuals::Colors::Read(visuals::data::Colors::DEFAULT));
 		DrawDirections(renderer, plot, cell, { DrawWall , DrawLocked });
+		DrawItem(renderer, plot, cell);
 		DrawDanger(renderer, plot, cell);
 		DrawTrade(renderer, plot, cell);
 		DrawAvatar(renderer, plot, cell);

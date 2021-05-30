@@ -9,4 +9,5 @@ namespace game::world::Items
 	size_t GetRoomInventory(const common::XY<size_t>&, const int&);
 	size_t Remove(const common::XY<size_t>&,const int&, size_t);
 	void Add(const common::XY<size_t>&,const int&, size_t);
+	bool AnyPresent(const common::XY<size_t>&);
 }

@@ -122,6 +122,20 @@ namespace game::world::Items
 		roomInventory[itemKey] = amount;
 	}
 
+	bool AnyPresent(const common::XY<size_t>& location)
+	{
+		auto& roomInventory = items::Data::RoomInventory(location);
+		for (auto& entry : roomInventory.items())
+		{
+			int count = entry.value();
+			if (count > 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	bool IsPresent(const common::XY<size_t>& location, const int& item)
 	{
 		return GetRoomInventory(location, item) > 0;

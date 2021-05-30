@@ -2778,6 +2778,13 @@
         "width": 16,
         "height": 16
     },
+    "MapCellItem": {
+        "texture": "world",
+        "x": 96,
+        "y": 0,
+        "width": 16,
+        "height": 16
+    },
     "MapCellUnexplored": {
         "texture": "world",
         "x": 32,
