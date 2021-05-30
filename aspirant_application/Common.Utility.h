@@ -28,5 +28,6 @@ namespace common::Utility
 		return defaultResult;
 	}
 	bool FileExists(const std::string&);
+	unsigned char GetFileCheckSum(const std::string&);
 }
 
