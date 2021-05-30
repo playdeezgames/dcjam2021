@@ -19,11 +19,11 @@ namespace maze
 		void Clear();
 		void PopulateCells();
 		void InitializeCells();
-		void InitializeCell(int, int);
+		void InitializeCell(size_t, size_t);
 	public:
 		Maze(size_t, size_t, const std::vector<Direction>&, std::function<Direction(const Direction&)>);
-		std::optional<std::shared_ptr<Cell<Direction, Door>>> GetCell(int, int);
-		std::optional<const std::shared_ptr<Cell<Direction, Door>>> GetCell(int, int) const;
+		std::optional<std::shared_ptr<Cell<Direction, Door>>> GetCell(size_t, size_t);
+		std::optional<const std::shared_ptr<Cell<Direction, Door>>> GetCell(size_t, size_t) const;
 		void Generate();
 		size_t GetColumns() const;
 		size_t GetRows() const;

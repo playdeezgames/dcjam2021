@@ -37,15 +37,15 @@ namespace maze
 	}
 
 
-	void Maze::InitializeCell(int column, int row)
+	void Maze::InitializeCell(size_t column, size_t row)
 	{
 		auto cell = GetCell(column, row);
 		for (auto direction : allDirections)
 		{
 			if (!cell.value()->GetNeighbor(direction))
 			{
-				int nextColumn = Directions::NextColumn(column, row, direction);
-				int nextRow = Directions::NextRow(column, row, direction);
+				size_t nextColumn = Directions::NextColumn(column, row, direction);
+				size_t nextRow = Directions::NextRow(column, row, direction);
 				if (nextColumn >= 0 && nextColumn < columns && nextRow >= 0 && nextRow < rows)
 				{
 					auto neighbor = GetCell(nextColumn, nextRow);
@@ -60,7 +60,7 @@ namespace maze
 		}
 	}
 
-	std::optional<std::shared_ptr<Cell<Direction, Door>>> Maze::GetCell(int column, int row)
+	std::optional<std::shared_ptr<Cell<Direction, Door>>> Maze::GetCell(size_t column, size_t row)
 	{
 		if (column >= 0 && column < columns && row >= 0 && row < rows)
 		{
@@ -69,7 +69,7 @@ namespace maze
 		return std::nullopt;
 	}
 
-	std::optional<const std::shared_ptr<Cell<Direction, Door>>> Maze::GetCell(int column, int row) const
+	std::optional<const std::shared_ptr<Cell<Direction, Door>>> Maze::GetCell(size_t column, size_t row) const
 	{
 		if (column >= 0 && column < columns && row >= 0 && row < rows)
 		{

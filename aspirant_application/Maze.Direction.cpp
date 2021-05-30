@@ -32,7 +32,7 @@ namespace maze
 		}
 	}
 
-	int Directions::NextColumn(int column, int row, const Direction& direction)
+	size_t Directions::NextColumn(size_t column, size_t row, const Direction& direction)
 	{
 		switch (direction)
 		{
@@ -49,7 +49,7 @@ namespace maze
 		}
 	}
 
-	int Directions::NextRow(int column, int row, const Direction& direction)
+	size_t Directions::NextRow(size_t column, size_t row, const Direction& direction)
 	{
 		switch (direction)
 		{
