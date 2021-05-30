@@ -97,7 +97,7 @@ namespace game::World
 	{
 		game::world::Data::ClearExplored();
 		auto worldSize = game::World::GetSize();
-		maze::Maze maze(worldSize.GetX(), worldSize.GetY(), maze::Directions::All());
+		maze::Maze maze(worldSize.GetX(), worldSize.GetY(), maze::Directions::All(), maze::Directions::Opposite);
 		maze.Generate();
 		PostGenerateMaze(maze, difficulty);
 		game::world::Borders::UpdateBorders(maze);

@@ -3,12 +3,13 @@
 #include "Common.RNG.h"
 namespace maze
 {
-	Maze::Maze(size_t columns, size_t rows, const std::vector<Direction>& allDirections)
+	Maze::Maze(size_t columns, size_t rows, const std::vector<Direction>& allDirections, std::function<Direction(const Direction&)> opposer)
 		: cells()
 		, doors()
 		, columns(columns)
 		, rows(rows)
 		, allDirections(allDirections)
+		, opposer(opposer)
 	{
 		PopulateCells();
 		InitializeCells();
@@ -52,8 +53,8 @@ namespace maze
 					doors.push_back(door);
 					cell.value()->PlaceNeighbor(direction, neighbor.value());
 					cell.value()->PlaceDoor(direction, door);
-					neighbor.value()->PlaceNeighbor(Directions::Opposite(direction), cell.value());
-					neighbor.value()->PlaceDoor(Directions::Opposite(direction), door);
+					neighbor.value()->PlaceNeighbor(opposer(direction), cell.value());
+					neighbor.value()->PlaceDoor(opposer(direction), door);
 				}
 			}
 		}
