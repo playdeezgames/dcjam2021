@@ -1,17 +1,12 @@
 [
     {
-        "type": "Image",
+        "type": ["Image","Area"],
         "image-id": "ui-hamburger",
+        "area-id":"UIHamburger",
         "sprite": "UIHamburgerNormal",
         "color": "White",
         "x": 624,
-        "y": 0
-    },
-    {
-        "type":"Area",
-        "area-id":"UIHamburger",
-        "x":624,
-        "y":0,
+        "y": 0,
         "width":16,
         "height":16
     }

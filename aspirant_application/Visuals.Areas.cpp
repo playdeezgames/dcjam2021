@@ -21,6 +21,23 @@ namespace visuals::Areas
 	static std::map<std::string, std::vector<visuals::Area>> areaLists;
 	static std::map<std::string, std::map<std::string, visuals::Area>> areaTable;
 
+	static void InitializeArea(const std::string& layoutName, nlohmann::json& thingie)
+	{
+		int x = thingie[common::data::Properties::X];
+		int y = thingie[common::data::Properties::Y];
+		size_t width = thingie[common::data::Properties::WIDTH];
+		size_t height = thingie[common::data::Properties::HEIGHT];
+		std::string areaId = thingie[visuals::data::Properties::AREA_ID];
+		visuals::Area area =
+		{
+			areaId,
+			common::XY<int>(x,y),
+			common::XY<size_t>(width, height)
+		};
+		areaLists[layoutName].push_back(area);
+		areaTable[layoutName][areaId] = area;
+	}
+
 	static void Initialize(const std::string& layoutName)
 	{
 		if (areaLists.find(layoutName) == areaLists.end())
@@ -28,21 +45,19 @@ namespace visuals::Areas
 			areaLists[layoutName] = {};
 			for (auto& thingie : visuals::Layouts::GetLayout(layoutName))
 			{
-				if (visuals::data::Types::FromString(thingie[common::data::Properties::TYPE]) == visuals::data::Type::AREA)
+				auto& types = thingie[common::data::Properties::TYPE];
+				if (types.is_string() && visuals::data::Types::FromString(types) == visuals::data::Type::AREA)
 				{
-					int x = thingie[common::data::Properties::X];
-					int y = thingie[common::data::Properties::Y];
-					size_t width = thingie[common::data::Properties::WIDTH];
-					size_t height = thingie[common::data::Properties::HEIGHT];
-					std::string areaId = thingie[visuals::data::Properties::AREA_ID];
-					visuals::Area area =
+					InitializeArea(layoutName, thingie);
+					continue;
+				}
+				for (auto& type : types)
+				{
+					if (type.is_string() && visuals::data::Types::FromString(type) == visuals::data::Type::AREA)
 					{
-						areaId,
-						common::XY<int>(x,y),
-						common::XY<size_t>(width, height)
-					};
-					areaLists[layoutName].push_back(area);
-					areaTable[layoutName][areaId] = area;
+						InitializeArea(layoutName, thingie);
+						break;
+					}
 				}
 			}
 		}
