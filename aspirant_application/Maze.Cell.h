@@ -4,14 +4,9 @@
 #include <optional>
 #include <memory>
 #include <functional>
+#include "Maze.Door.h"
 namespace maze
 {
-	enum class Door
-	{
-		CLOSED,
-		OPEN
-	};
-
 	template<typename TDirection>
 	class Cell
 	{

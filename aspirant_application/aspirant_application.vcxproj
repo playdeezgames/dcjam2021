@@ -265,6 +265,7 @@
     <ClInclude Include="Game.World.Data.h" />
     <ClInclude Include="Game.World.h" />
     <ClInclude Include="Game.World.Items.h" />
+    <ClInclude Include="Maze.Door.h" />
     <ClInclude Include="Visuals.Areas.h" />
     <ClInclude Include="Visuals.AvatarInventory.h" />
     <ClInclude Include="Visuals.CardSprites.h" />
