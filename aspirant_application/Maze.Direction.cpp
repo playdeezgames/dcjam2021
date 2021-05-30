@@ -15,7 +15,7 @@ namespace maze
 		return allDirections;
 	}
 
-	Direction Directions::Opposite(Direction direction)
+	Direction Directions::Opposite(const Direction& direction)
 	{
 		switch (direction)
 		{
@@ -32,7 +32,7 @@ namespace maze
 		}
 	}
 
-	int Directions::NextColumn(int column, int row, Direction direction)
+	int Directions::NextColumn(int column, int row, const Direction& direction)
 	{
 		switch (direction)
 		{
@@ -49,7 +49,7 @@ namespace maze
 		}
 	}
 
-	int Directions::NextRow(int column, int row, Direction direction)
+	int Directions::NextRow(int column, int row, const Direction& direction)
 	{
 		switch (direction)
 		{

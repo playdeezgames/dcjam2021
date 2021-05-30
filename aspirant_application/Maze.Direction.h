@@ -11,9 +11,9 @@ namespace maze
 	};
 	namespace Directions
 	{
-		int NextColumn(int, int, Direction);
-		int NextRow(int, int, Direction);
+		int NextColumn(int, int, const Direction&);
+		int NextRow(int, int, const Direction&);
 		const std::vector<Direction>& All();
-		Direction Opposite(Direction);
+		Direction Opposite(const Direction&);
 	}
 }
