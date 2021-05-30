@@ -57,16 +57,40 @@ namespace visuals::Layouts
 		{visuals::data::Type::AREA, [](const std::string&, const nlohmann::json&) { return [](const std::shared_ptr<SDL_Renderer>&) {};  }}
 	};
 
+	static void InternalizeTypedDrawn(const std::string layoutName, visuals::data::Type drawnType, const nlohmann::json& drawn)
+	{
+		internalLayouts[layoutName].drawers.push_back(internalizers.find(drawnType)->second(layoutName, drawn));
+	}
+
+	static void DoStuff(const std::string layoutName, const nlohmann::json& type, const nlohmann::json& drawn)
+	{
+		auto drawnType = visuals::data::Types::FromString(type);
+		if (drawnType)
+		{
+			InternalizeTypedDrawn(layoutName, *drawnType, drawn);
+		}
+	}
+
+	static void InternalizeDrawn(const std::string layoutName, const nlohmann::json& drawn)
+	{
+		auto& types = drawn[common::data::Properties::TYPE];
+		if (types.is_array())
+		{
+			for (auto& type : types)
+			{
+				DoStuff(layoutName, type, drawn);
+			}
+			return;
+		}
+		DoStuff(layoutName, types, drawn);
+	}
+
 	static void Internalize(const std::string& layoutName, const nlohmann::json& model)
 	{
 		internalLayouts[layoutName] = {};
 		for (auto& drawn : model)
 		{
-			auto drawnType = visuals::data::Types::FromString(drawn[common::data::Properties::TYPE]);
-			if (drawnType)
-			{
-				internalLayouts[layoutName].drawers.push_back(internalizers.find(*drawnType)->second(layoutName, drawn));
-			}
+			InternalizeDrawn(layoutName, drawn);
 		}
 	}
 
