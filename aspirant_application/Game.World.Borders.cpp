@@ -157,13 +157,18 @@ namespace game::world::Borders
 		borderSetters.find(direction)->second(position, border);
 	}
 
+	static bool IsCellDeadEnd(const std::shared_ptr<maze::Cell<maze::Direction>>& cell)
+	{
+		return cell.get()->CountDoorsThat([](const maze::Door& door) { return door == maze::Door::OPEN; }) == 1;
+	}
+
 	static world::Border DetermineBorder(const std::shared_ptr<maze::Cell<maze::Direction>>& cell, const maze::Direction& direction)
 	{
 		auto mazeDoor = cell->GetDoor(direction);
 		if (mazeDoor && *mazeDoor.value() == maze::Door::OPEN)
 		{
 			auto nextCell = cell->GetNeighbor(direction);
-			if (cell->IsDeadEnd() || nextCell.value()->IsDeadEnd())
+			if (IsCellDeadEnd(cell) || IsCellDeadEnd(nextCell.value()))
 			{
 				return world::Border::LOCK;
 			}

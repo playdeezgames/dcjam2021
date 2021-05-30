@@ -1,9 +1,9 @@
 #pragma once
-//#include "Maze.Direction.h"
 #include <map>
 #include <vector>
 #include <optional>
 #include <memory>
+#include <functional>
 namespace maze
 {
 	enum class Door
@@ -75,17 +75,17 @@ namespace maze
 				(std::optional<std::shared_ptr<Door>>(door->second)) :
 				(std::nullopt);
 		}
-		bool IsDeadEnd() const
+		size_t CountDoorsThat(std::function<bool(const Door&)> condition) const
 		{
-			int count = 0;
+			size_t count = 0u;
 			for (auto& entry : exits)
 			{
-				if (*entry.second == Door::OPEN)
+				if(condition(*entry.second))
 				{
 					count++;
 				}
 			}
-			return count == 1;
+			return count;
 		}
 	};
 }
