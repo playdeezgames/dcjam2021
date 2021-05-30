@@ -14,12 +14,13 @@ namespace maze
 		size_t rows;
 		std::vector<std::shared_ptr<Cell<Direction, Door>>> cells;
 		std::vector<std::shared_ptr<Door>> doors;
+		const std::vector<Direction>& allDirections;
 		void Clear();
 		void PopulateCells();
 		void InitializeCells();
 		void InitializeCell(int, int);
 	public:
-		Maze(size_t, size_t);
+		Maze(size_t, size_t, const std::vector<Direction>&);
 		std::optional<std::shared_ptr<Cell<Direction, Door>>> GetCell(int, int);
 		std::optional<const std::shared_ptr<Cell<Direction, Door>>> GetCell(int, int) const;
 		void Generate();

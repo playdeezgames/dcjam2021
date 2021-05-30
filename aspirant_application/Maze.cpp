@@ -3,11 +3,12 @@
 #include "Common.RNG.h"
 namespace maze
 {
-	Maze::Maze(size_t columns, size_t rows)
+	Maze::Maze(size_t columns, size_t rows, const std::vector<Direction>& allDirections)
 		: cells()
 		, doors()
 		, columns(columns)
 		, rows(rows)
+		, allDirections(allDirections)
 	{
 		PopulateCells();
 		InitializeCells();
@@ -38,7 +39,7 @@ namespace maze
 	void Maze::InitializeCell(int column, int row)
 	{
 		auto cell = GetCell(column, row);
-		for (auto direction : Directions::All())
+		for (auto direction : allDirections)
 		{
 			if (!cell.value()->GetNeighbor(direction))
 			{
@@ -93,7 +94,7 @@ namespace maze
 		auto cell = cells[common::RNG::FromRange(0, (int)cells.size())];
 		outside.erase(cell);
 		inside.insert(cell);
-		for (auto direction : Directions::All())
+		for (auto direction : allDirections)
 		{
 			auto neighbor = cell->GetNeighbor(direction);
 			if (neighbor)
@@ -109,7 +110,7 @@ namespace maze
 			frontier[index] = frontier[frontier.size() - 1];
 			frontier.pop_back();
 			std::vector<Direction> candidates;
-			for (auto direction : Directions::All())
+			for (auto direction : allDirections)
 			{
 				auto neighbor = cell->GetNeighbor(direction);
 				if (neighbor)
@@ -123,7 +124,7 @@ namespace maze
 			Direction direction = candidates[common::RNG::FromRange(0, (int)candidates.size())];
 			*(cell->GetDoor(direction).value()) = Door::OPEN;
 			inside.insert(cell);
-			for (auto direction : Directions::All())
+			for (auto direction : allDirections)
 			{
 				auto neighbor = cell->GetNeighbor(direction);
 				if (neighbor)
