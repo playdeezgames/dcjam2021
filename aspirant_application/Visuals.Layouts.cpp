@@ -62,7 +62,7 @@ namespace visuals::Layouts
 		internalLayouts[layoutName].drawers.push_back(internalizers.find(drawnType)->second(layoutName, drawn));
 	}
 
-	static void DoStuff(const std::string layoutName, const nlohmann::json& type, const nlohmann::json& drawn)
+	static void InternalizeTypedDrawnFromString(const std::string layoutName, const nlohmann::json& type, const nlohmann::json& drawn)
 	{
 		auto drawnType = visuals::data::Types::FromString(type);
 		if (drawnType)
@@ -78,11 +78,11 @@ namespace visuals::Layouts
 		{
 			for (auto& type : types)
 			{
-				DoStuff(layoutName, type, drawn);
+				InternalizeTypedDrawnFromString(layoutName, type, drawn);
 			}
 			return;
 		}
-		DoStuff(layoutName, types, drawn);
+		InternalizeTypedDrawnFromString(layoutName, types, drawn);
 	}
 
 	static void Internalize(const std::string& layoutName, const nlohmann::json& model)

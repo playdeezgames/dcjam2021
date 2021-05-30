@@ -18,7 +18,7 @@ namespace maze
 
 		while (cells.size() < columns * rows)
 		{
-			cells.push_back(std::make_shared<Cell>());
+			cells.push_back(std::make_shared<Cell<Direction>>());
 		}
 	}
 
@@ -58,7 +58,7 @@ namespace maze
 		}
 	}
 
-	std::optional<std::shared_ptr<Cell>> Maze::GetCell(int column, int row)
+	std::optional<std::shared_ptr<Cell<Direction>>> Maze::GetCell(int column, int row)
 	{
 		if (column >= 0 && column < columns && row >= 0 && row < rows)
 		{
@@ -67,7 +67,7 @@ namespace maze
 		return std::nullopt;
 	}
 
-	std::optional<const std::shared_ptr<Cell>> Maze::GetCell(int column, int row) const
+	std::optional<const std::shared_ptr<Cell<Direction>>> Maze::GetCell(int column, int row) const
 	{
 		if (column >= 0 && column < columns && row >= 0 && row < rows)
 		{
@@ -87,9 +87,9 @@ namespace maze
 	void Maze::Generate()
 	{
 		Clear();
-		std::set<std::shared_ptr<Cell>> outside(cells.begin(), cells.end());
-		std::vector<std::shared_ptr<Cell>> frontier;
-		std::set<std::shared_ptr<Cell>> inside;
+		std::set<std::shared_ptr<Cell<Direction>>> outside(cells.begin(), cells.end());
+		std::vector<std::shared_ptr<Cell<Direction>>> frontier;
+		std::set<std::shared_ptr<Cell<Direction>>> inside;
 		auto cell = cells[common::RNG::FromRange(0, (int)cells.size())];
 		outside.erase(cell);
 		inside.insert(cell);

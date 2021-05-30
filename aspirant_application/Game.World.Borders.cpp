@@ -157,7 +157,7 @@ namespace game::world::Borders
 		borderSetters.find(direction)->second(position, border);
 	}
 
-	static world::Border DetermineBorder(const std::shared_ptr<maze::Cell>& cell, const maze::Direction& direction)
+	static world::Border DetermineBorder(const std::shared_ptr<maze::Cell<maze::Direction>>& cell, const maze::Direction& direction)
 	{
 		auto mazeDoor = cell->GetDoor(direction);
 		if (mazeDoor && *mazeDoor.value() == maze::Door::OPEN)
