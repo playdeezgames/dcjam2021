@@ -3,16 +3,21 @@
 #include "Common.RNG.h"
 namespace maze
 {
-	Maze::Maze(size_t columns, size_t rows, const std::vector<Direction>& allDirections, std::function<Direction(const Direction&)> opposer)
+	Maze::Maze(
+		size_t columns, 
+		size_t rows, 
+		const std::vector<Direction>& allDirections, 
+		std::function<Direction(const Direction&)> opposer,
+		std::function<size_t(size_t, size_t, const Direction&)> columnStepper,
+		std::function<size_t(size_t, size_t, const Direction&)> rowStepper)
 		: cells()
 		, doors()
 		, columns(columns)
 		, rows(rows)
 		, allDirections(allDirections)
-		, opposer(opposer)
 	{
 		PopulateCells();
-		InitializeCells();
+		InitializeCells(opposer, columnStepper, rowStepper);
 	}
 
 	void Maze::PopulateCells()
@@ -25,27 +30,30 @@ namespace maze
 	}
 
 
-	void Maze::InitializeCells()
+	void Maze::InitializeCells(std::function<Direction(const Direction&)> opposer,
+		std::function<size_t(size_t, size_t, const Direction&)> columnStepper,
+		std::function<size_t(size_t, size_t, const Direction&)> rowStepper)
 	{
 		for (int column = 0; column < columns; ++column)
 		{
 			for (int row = 0; row < rows; ++row)
 			{
-				InitializeCell(column, row);
+				InitializeCell(column, row, opposer, columnStepper, rowStepper);
 			}
 		}
 	}
 
-
-	void Maze::InitializeCell(size_t column, size_t row)
+	void Maze::InitializeCell(size_t column, size_t row, std::function<Direction(const Direction&)> opposer,
+		std::function<size_t(size_t, size_t, const Direction&)> columnStepper,
+		std::function<size_t(size_t, size_t, const Direction&)> rowStepper)
 	{
 		auto cell = GetCell(column, row);
 		for (auto direction : allDirections)
 		{
 			if (!cell.value()->GetNeighbor(direction))
 			{
-				size_t nextColumn = Directions::NextColumn(column, row, direction);
-				size_t nextRow = Directions::NextRow(column, row, direction);
+				size_t nextColumn = columnStepper(column, row, direction);
+				size_t nextRow = rowStepper(column, row, direction);
 				if (nextColumn >= 0 && nextColumn < columns && nextRow >= 0 && nextRow < rows)
 				{
 					auto neighbor = GetCell(nextColumn, nextRow);
