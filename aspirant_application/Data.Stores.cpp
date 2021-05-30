@@ -4,6 +4,8 @@
 #include "Data.JSON.h"
 #include "Common.Utility.h"
 #include <optional>
+#include "Visuals.Texts.h"
+
 namespace data::Stores
 {
 	static std::map<data::Store, nlohmann::json> stores;
@@ -22,8 +24,6 @@ namespace data::Stores
 
 	const std::map<data::Store, storeFile> storeFiles =
 	{
-		{data::Store::CREATURE_DESCRIPTORS, {"config/creatures.json",237}},
-		{data::Store::ITEM_DESCRIPTORS, {"config/items.json",163}},
 		{data::Store::COLORS, {"config/graphics/colors.json",std::nullopt}},
 		{data::Store::SOUND_EFFECTS, {"config/audio/sfx.json",std::nullopt}},
 		{data::Store::MUSIC_THEMES, {"config/audio/mux.json",std::nullopt}},
@@ -33,8 +33,10 @@ namespace data::Stores
 		{data::Store::LAYOUTS, {"config/ui/layouts.json",std::nullopt}},
 		{data::Store::KEYS, {"config/keyboard.json",std::nullopt}},
 		{data::Store::OPTIONS, {"config/options.json",std::nullopt}},
-		{data::Store::STATISTICS, {"config/statistics.json",17}},
 		{data::Store::UI_SFX, {"config/ui/sfx.json",std::nullopt}},
+		{data::Store::STATISTICS, {"config/statistics.json",17}},
+		{data::Store::CREATURE_DESCRIPTORS, {"config/creatures.json",237}},
+		{data::Store::ITEM_DESCRIPTORS, {"config/items.json",163}},
 		{data::Store::AVATAR, {"config/avatar.json",194}},
 		{data::Store::MAZE, {"config/maze.json",104}},
 		{data::Store::SHOPPES, {"config/shoppes.json",70}}

@@ -1,0 +1,16 @@
+[
+    {
+        "type": "Text",
+        "text-id": "modded",
+        "font": "font5x7",
+        "color": "Red",
+        "text": "",
+        "x": 0,
+        "y": 0,
+        "horizontal-alignment": 1,
+        "drop-shadow": true,
+        "drop-shadow-color": "Black",
+        "drop-shadow-x": 1,
+        "drop-shadow-y": 1
+    }
+]

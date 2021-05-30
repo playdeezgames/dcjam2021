@@ -22,6 +22,7 @@
     "State.LoadGame": "config/ui/layouts/State.LoadGame.json",
     "State.SaveGame": "config/ui/layouts/State.SaveGame.json",
     "Sublayout.UIHamburger":"config/ui/layouts/Sublayout.UIHamburger.json",
+    "Sublayout.Modded":"config/ui/layouts/Sublayout.Modded.json",
     "Sublayout.TabControls":"config/ui/layouts/Sublayout.TabControls.json",
     "State.InPlay.Trade":"config/ui/layouts/State.InPlay.Trade.json"
 }

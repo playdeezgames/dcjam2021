@@ -132,5 +132,9 @@
         "y":128,
         "width":640,
         "height":16
+    },
+    {
+        "type": "Layout",
+        "name": "Sublayout.Modded"
     }
 ]

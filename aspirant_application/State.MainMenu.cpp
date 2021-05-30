@@ -8,6 +8,8 @@
 #include "Application.OnEnter.h"
 #include "Common.Audio.h"
 #include "Game.Audio.Mux.h"
+#include "Visuals.Texts.h"
+#include "Data.Stores.h"
 namespace state::MainMenu
 {
 	const std::string LAYOUT_NAME = "State.MainMenu";
@@ -77,9 +79,18 @@ namespace state::MainMenu
 		SetCurrentMenuItem(areaMenuItems.find(area)->second);
 	}
 
+	static void OnEnter()
+	{
+		if (data::Stores::IsModded())
+		{
+			visuals::Texts::SetText("Sublayout.Modded", "modded", "Modded");
+		}
+		game::audio::Mux::Play(game::audio::Mux::Theme::MAIN);
+	}
+
 	void Start()
 	{
-		::application::OnEnter::AddHandler(::UIState::MAIN_MENU, game::audio::Mux::GoToTheme(game::audio::Mux::Theme::MAIN));
+		::application::OnEnter::AddHandler(::UIState::MAIN_MENU, OnEnter);
 		::application::MouseMotion::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseMotion(LAYOUT_NAME, OnMouseMotionInArea));
 		::application::MouseButtonUp::AddHandler(::UIState::MAIN_MENU, visuals::Areas::HandleMouseButtonUp(LAYOUT_NAME, OnMouseButtonUpInArea));
 		::application::Command::SetHandlers(::UIState::MAIN_MENU, commandHandlers);
