@@ -90,6 +90,13 @@ namespace maze
 		std::function<size_t(size_t, size_t, const TDirection&)> columnStepper;
 		std::function<size_t(size_t, size_t, const TDirection&)> rowStepper;
 	};
+	template<typename TDoor>
+	struct Generator
+	{
+		const TDoor& closed;
+		const TDoor& open; 
+		std::function<size_t(size_t, size_t)> rng;
+	};
 	template<typename TDirection, typename TDoor>
 	class Maze
 	{
@@ -176,13 +183,13 @@ namespace maze
 			}
 			return std::nullopt;
 		}
-		void Generate(const TDoor& closed, const TDoor& open, std::function<size_t(size_t,size_t)> rng)
+		void Generate(const Generator<TDoor>& generator)
 		{
-			Clear(closed);
+			Clear(generator.closed);
 			std::set<std::shared_ptr<Cell<TDirection, TDoor>>> outside(cells.begin(), cells.end());
 			std::vector<std::shared_ptr<Cell<TDirection, TDoor>>> frontier;
 			std::set<std::shared_ptr<Cell<TDirection, TDoor>>> inside;
-			auto cell = cells[rng(0, (int)cells.size())];
+			auto cell = cells[generator.rng(0, (int)cells.size())];
 			outside.erase(cell);
 			inside.insert(cell);
 			for (auto direction : allDirections)
@@ -196,7 +203,7 @@ namespace maze
 			}
 			while (!frontier.empty())
 			{
-				size_t index = rng(0, (int)frontier.size());
+				size_t index = generator.rng(0, (int)frontier.size());
 				cell = frontier[index];
 				frontier[index] = frontier[frontier.size() - 1];
 				frontier.pop_back();
@@ -212,8 +219,8 @@ namespace maze
 						}
 					}
 				}
-				TDirection direction = candidates[rng(0, (int)candidates.size())];
-				*(cell->GetDoor(direction).value()) = open;
+				TDirection direction = candidates[generator.rng(0, (int)candidates.size())];
+				*(cell->GetDoor(direction).value()) = generator.open;
 				inside.insert(cell);
 				for (auto direction : allDirections)
 				{

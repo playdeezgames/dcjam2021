@@ -106,7 +106,7 @@ namespace game::World
 				maze::Directions::NextColumn,
 				maze::Directions::NextRow
 			});
-		maze.Generate(maze::Door::CLOSED, maze::Door::OPEN, [](size_t min, size_t max) { return common::RNG::FromRange(min, max); });
+		maze.Generate({ maze::Door::CLOSED, maze::Door::OPEN, [](size_t min, size_t max) { return common::RNG::FromRange(min, max); } });
 		PostGenerateMaze(maze, difficulty);
 		game::world::Borders::UpdateBorders(maze);
 	}
