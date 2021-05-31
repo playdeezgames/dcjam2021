@@ -5,7 +5,7 @@
 #include <memory>
 #include <optional>
 #include <set>
-#include "Common.RNG.h"
+#include <functional>
 namespace maze
 {
 	template<typename TDoor>
@@ -101,13 +101,13 @@ namespace maze
 			}
 			return std::nullopt;
 		}
-		void Generate(const TDoor& closed, const TDoor& open)
+		void Generate(const TDoor& closed, const TDoor& open, std::function<size_t(size_t,size_t)> rng)
 		{
 			Clear(closed);
 			std::set<std::shared_ptr<Cell<Direction, TDoor>>> outside(cells.begin(), cells.end());
 			std::vector<std::shared_ptr<Cell<Direction, TDoor>>> frontier;
 			std::set<std::shared_ptr<Cell<Direction, TDoor>>> inside;
-			auto cell = cells[common::RNG::FromRange(0, (int)cells.size())];
+			auto cell = cells[rng(0, (int)cells.size())];
 			outside.erase(cell);
 			inside.insert(cell);
 			for (auto direction : allDirections)
@@ -121,7 +121,7 @@ namespace maze
 			}
 			while (!frontier.empty())
 			{
-				size_t index = common::RNG::FromRange(0, (int)frontier.size());
+				size_t index = rng(0, (int)frontier.size());
 				cell = frontier[index];
 				frontier[index] = frontier[frontier.size() - 1];
 				frontier.pop_back();
@@ -137,7 +137,7 @@ namespace maze
 						}
 					}
 				}
-				Direction direction = candidates[common::RNG::FromRange(0, (int)candidates.size())];
+				Direction direction = candidates[rng(0, (int)candidates.size())];
 				*(cell->GetDoor(direction).value()) = open;
 				inside.insert(cell);
 				for (auto direction : allDirections)
