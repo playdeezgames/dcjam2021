@@ -8,15 +8,15 @@
 #include <functional>
 namespace maze
 {
-	template<typename TDoor>
+	template<typename TDirection, typename TDoor>
 	class Maze
 	{
 	private:
 		size_t columns;
 		size_t rows;
-		std::vector<std::shared_ptr<Cell<Direction, TDoor>>> cells;
+		std::vector<std::shared_ptr<Cell<TDirection, TDoor>>> cells;
 		std::vector<std::shared_ptr<TDoor>> doors;
-		const std::vector<Direction>& allDirections;
+		const std::vector<TDirection>& allDirections;
 		void Clear(const TDoor& closed)
 		{
 			for (auto& door : doors)
@@ -29,12 +29,12 @@ namespace maze
 
 			while (cells.size() < columns * rows)
 			{
-				cells.push_back(std::make_shared<Cell<Direction, TDoor>>());
+				cells.push_back(std::make_shared<Cell<TDirection, TDoor>>());
 			}
 		}
-		void InitializeCells(std::function<Direction(const Direction&)> opposer,
-			std::function<size_t(size_t, size_t, const Direction&)> columnStepper,
-			std::function<size_t(size_t, size_t, const Direction&)> rowStepper)
+		void InitializeCells(std::function<TDirection(const TDirection&)> opposer,
+			std::function<size_t(size_t, size_t, const TDirection&)> columnStepper,
+			std::function<size_t(size_t, size_t, const TDirection&)> rowStepper)
 		{
 			for (int column = 0; column < columns; ++column)
 			{
@@ -44,9 +44,9 @@ namespace maze
 				}
 			}
 		}
-		void InitializeCell(size_t column, size_t row, std::function<Direction(const Direction&)> opposer,
-			std::function<size_t(size_t, size_t, const Direction&)> columnStepper,
-			std::function<size_t(size_t, size_t, const Direction&)> rowStepper)
+		void InitializeCell(size_t column, size_t row, std::function<TDirection(const TDirection&)> opposer,
+			std::function<size_t(size_t, size_t, const TDirection&)> columnStepper,
+			std::function<size_t(size_t, size_t, const TDirection&)> rowStepper)
 		{
 			auto cell = GetCell(column, row);
 			for (auto direction : allDirections)
@@ -72,10 +72,10 @@ namespace maze
 		Maze(
 			size_t columns, 
 			size_t rows, 
-			const std::vector<Direction>& allDirections, 
-			std::function<Direction(const Direction&)> opposer, 
-			std::function<size_t(size_t, size_t, const Direction&)> columnStepper, 
-			std::function<size_t(size_t, size_t, const Direction&)> rowStepper)
+			const std::vector<TDirection>& allDirections,
+			std::function<TDirection(const TDirection&)> opposer,
+			std::function<size_t(size_t, size_t, const TDirection&)> columnStepper,
+			std::function<size_t(size_t, size_t, const TDirection&)> rowStepper)
 			: cells()
 			, doors()
 			, columns(columns)
@@ -85,7 +85,7 @@ namespace maze
 			PopulateCells();
 			InitializeCells(opposer, columnStepper, rowStepper);
 		}
-		std::optional<std::shared_ptr<Cell<Direction, TDoor>>> GetCell(size_t column, size_t row)
+		std::optional<std::shared_ptr<Cell<TDirection, TDoor>>> GetCell(size_t column, size_t row)
 		{
 			if (column >= 0 && column < columns && row >= 0 && row < rows)
 			{
@@ -93,7 +93,7 @@ namespace maze
 			}
 			return std::nullopt;
 		}
-		std::optional<const std::shared_ptr<Cell<Direction, TDoor>>> GetCell(size_t column, size_t row) const
+		std::optional<const std::shared_ptr<Cell<TDirection, TDoor>>> GetCell(size_t column, size_t row) const
 		{
 			if (column >= 0 && column < columns && row >= 0 && row < rows)
 			{
@@ -104,9 +104,9 @@ namespace maze
 		void Generate(const TDoor& closed, const TDoor& open, std::function<size_t(size_t,size_t)> rng)
 		{
 			Clear(closed);
-			std::set<std::shared_ptr<Cell<Direction, TDoor>>> outside(cells.begin(), cells.end());
-			std::vector<std::shared_ptr<Cell<Direction, TDoor>>> frontier;
-			std::set<std::shared_ptr<Cell<Direction, TDoor>>> inside;
+			std::set<std::shared_ptr<Cell<TDirection, TDoor>>> outside(cells.begin(), cells.end());
+			std::vector<std::shared_ptr<Cell<TDirection, TDoor>>> frontier;
+			std::set<std::shared_ptr<Cell<TDirection, TDoor>>> inside;
 			auto cell = cells[rng(0, (int)cells.size())];
 			outside.erase(cell);
 			inside.insert(cell);
@@ -125,7 +125,7 @@ namespace maze
 				cell = frontier[index];
 				frontier[index] = frontier[frontier.size() - 1];
 				frontier.pop_back();
-				std::vector<Direction> candidates;
+				std::vector<TDirection> candidates;
 				for (auto direction : allDirections)
 				{
 					auto neighbor = cell->GetNeighbor(direction);
@@ -137,7 +137,7 @@ namespace maze
 						}
 					}
 				}
-				Direction direction = candidates[rng(0, (int)candidates.size())];
+				TDirection direction = candidates[rng(0, (int)candidates.size())];
 				*(cell->GetDoor(direction).value()) = open;
 				inside.insert(cell);
 				for (auto direction : allDirections)

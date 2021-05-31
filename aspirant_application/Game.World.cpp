@@ -73,7 +73,7 @@ namespace game::World
 		return ::data::Stores::GetStore(::data::Store::MAZE)[data::Properties::EXTRA_DOORS][(int)difficulty];
 	}
 
-	static void PostGenerateMaze(maze::Maze<maze::Door>& maze, const game::Difficulty& difficulty)
+	static void PostGenerateMaze(maze::Maze<maze::Direction, maze::Door>& maze, const game::Difficulty& difficulty)
 	{
 		auto worldSize = game::World::GetSize();
 		size_t extraDoors = GetExtraDoorCount(difficulty);
@@ -97,7 +97,7 @@ namespace game::World
 	{
 		game::world::Data::ClearExplored();
 		auto worldSize = game::World::GetSize();
-		maze::Maze<maze::Door> maze(
+		maze::Maze<maze::Direction, maze::Door> maze(
 			worldSize.GetX(), 
 			worldSize.GetY(), 
 			maze::Directions::All(), 

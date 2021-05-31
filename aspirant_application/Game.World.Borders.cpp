@@ -183,7 +183,7 @@ namespace game::world::Borders
 		}
 	}
 
-	void UpdateBorders(const maze::Maze<maze::Door>& maze)
+	void UpdateBorders(const maze::Maze<maze::Direction, maze::Door>& maze)
 	{
 		for (auto column = 0; column < maze.GetColumns(); ++column)
 		{

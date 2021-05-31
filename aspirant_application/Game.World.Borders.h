@@ -3,6 +3,7 @@
 #include "Maze.h"
 #include <functional>
 #include "Maze.Door.h"
+#include "Maze.Direction.h"
 namespace game::world
 {
 	enum class Border
@@ -21,5 +22,5 @@ namespace game::world::Borders
 	bool IsExitable(const common::XY<size_t>&);
 	std::vector<common::XY<size_t>> GetDeadEnds(std::function<bool(const common::XY<size_t>&)>);
 	bool CanSpawnAvatar(const common::XY<size_t>&);
-	void UpdateBorders(const maze::Maze<maze::Door>& maze);
+	void UpdateBorders(const maze::Maze<maze::Direction, maze::Door>& maze);
 }
