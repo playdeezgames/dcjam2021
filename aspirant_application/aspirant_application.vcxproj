@@ -279,7 +279,7 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Data.JSON.h" />
     <ClInclude Include="Visuals.Layouts.h" />
-    <ClInclude Include="Maze.h" />
+    <ClInclude Include="Maze.hpp" />
     <ClInclude Include="Maze.Direction.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Common.RNG.h" />

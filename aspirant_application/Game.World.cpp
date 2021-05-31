@@ -1,6 +1,6 @@
 #include "Game.World.h"
 #include <vector>
-#include "Maze.h"
+#include "Maze.hpp"
 #include "Common.RNG.h"
 #include "Maze.Direction.h"
 #include "Game.h"
@@ -101,9 +101,11 @@ namespace game::World
 			worldSize.GetX(), 
 			worldSize.GetY(), 
 			maze::Directions::All(), 
-			maze::Directions::Opposite, 
-			maze::Directions::NextColumn, 
-			maze::Directions::NextRow);
+			{
+				maze::Directions::Opposite,
+				maze::Directions::NextColumn,
+				maze::Directions::NextRow
+			});
 		maze.Generate(maze::Door::CLOSED, maze::Door::OPEN, [](size_t min, size_t max) { return common::RNG::FromRange(min, max); });
 		PostGenerateMaze(maze, difficulty);
 		game::world::Borders::UpdateBorders(maze);

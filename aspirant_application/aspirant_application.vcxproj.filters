@@ -304,7 +304,7 @@
     <ClInclude Include="Visuals.Texts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Maze.h">
+    <ClInclude Include="Maze.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze.Direction.h">

@@ -1,6 +1,6 @@
 #pragma once
 #include "Common.XY.h"
-#include "Maze.h"
+#include "Maze.hpp"
 #include <functional>
 #include "Maze.Door.h"
 #include "Maze.Direction.h"
