@@ -92,12 +92,6 @@
     <ClCompile Include="Visuals.Texts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Maze.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Maze.Cell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Maze.Direction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -311,9 +305,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Maze.Cell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze.Direction.h">
